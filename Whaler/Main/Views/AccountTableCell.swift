@@ -72,8 +72,8 @@ class AccountTableCell: UITableViewCell {
     let valuesToShow = [\Account.name,
                         \Account.contactsCount,
                         \Account.industry,
-                        \Account.city,
-                        \Account.state]
+                        \Account.billingCity,
+                        \Account.billingState]
     valuesToShow.forEach { path in
       if let text = account[keyPath: path] as? String {
         stackView.addArrangedSubview(makeColumn(text: text))
@@ -94,6 +94,7 @@ class AccountTableCell: UITableViewCell {
     let label = UILabel()
     label.textColor = .black
     label.text = text
+    label.font = UIFont.systemFont(ofSize: 17)
     return label
   }
 }

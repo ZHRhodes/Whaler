@@ -16,9 +16,15 @@ final class Account: NSObject, Codable {
   let industry: String?
   let employees: String?
   let annualRevenue: String?
-  let city: String?
-  let state: String?
+  let billingCity: String?
+  let billingState: String?
   let contactsCount: String?
+  let phone: String?
+  let website: String?
+  let type: String?
+  let accountDescription: String?
+  
+  var state: WorkState
   
   init(dictionary: Dictionary<String, String>) {
     id = dictionary["Account ID"] ?? ""
@@ -27,9 +33,14 @@ final class Account: NSObject, Codable {
     industry = dictionary["Industry"]
     employees = dictionary["Employees"]
     annualRevenue = dictionary["Annual Revenue"]
-    city = dictionary["Billing City"]
-    state = dictionary["Billing State/Province"]
+    billingCity = dictionary["Billing City"]
+    billingState = dictionary["Billing State/Province"]
     contactsCount = String(Int.random(in: Range(uncheckedBounds: (5, 25))))
+    phone = dictionary["Phone"]
+    website = dictionary["Website"]
+    type = dictionary["Type"]
+    accountDescription = dictionary["Description"]
+    state = WorkState.allCases.randomElement()!
   }
 }
 

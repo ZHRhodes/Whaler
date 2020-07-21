@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftUI
 
 extension UIColor {
   static let inProgress = UIColor(named: "InProgress")!

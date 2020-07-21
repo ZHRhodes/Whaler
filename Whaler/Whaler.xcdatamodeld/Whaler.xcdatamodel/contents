@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17162" systemVersion="19E287" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="AccountEntity" representedClassName="AccountEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="annualRevenue" optional="YES" attributeType="String"/>
+        <attribute name="billingCity" optional="YES" attributeType="String"/>
+        <attribute name="billingState" optional="YES" attributeType="String"/>
+        <attribute name="contactsCount" optional="YES" attributeType="String"/>
+        <attribute name="employees" optional="YES" attributeType="String"/>
+        <attribute name="id" optional="YES" attributeType="String"/>
+        <attribute name="industry" optional="YES" attributeType="String"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="owner" optional="YES" attributeType="String"/>
+        <attribute name="phone" optional="YES" attributeType="String"/>
+    </entity>
+    <elements>
+        <element name="AccountEntity" positionX="-63" positionY="-18" width="128" height="193"/>
+    </elements>
+</model>

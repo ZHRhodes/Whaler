@@ -8,16 +8,44 @@
 
 import Foundation
 import UIKit
+import SwiftUI
+
+class WeakRef<T> where T: AnyObject {
+  private(set) weak var value: T?
+
+  init(value: T?) {
+      self.value = value
+  }
+}
+
+extension WeakRef: Hashable {
+  static func == (lhs: WeakRef<T>, rhs: WeakRef<T>) -> Bool {
+    return lhs === rhs
+  }
+  
+  func hash(into hasher: inout Hasher) {
+    guard let value = value else { return }
+    hasher.combine(Unmanaged.passUnretained(value).toOpaque())
+  }
+}
 
 class MainViewController: UIViewController {
   let interactor = MainInteractor()
   var noDataStackView: UIStackView?
   let tableView = UITableView(frame: .zero, style: .plain)
   
+  private var sectionHeaders = Set<WeakRef<UIView>>()
+  
   override func viewDidLoad() {
     super.viewDidLoad()
+    title = "Accounts"
     view.backgroundColor = .white
     configureNoDataViews()
+  }
+  
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    navigationController?.setNavigationBarHidden(true, animated: false)
   }
   
   private func configureNoDataViews() {
@@ -85,6 +113,7 @@ class MainViewController: UIViewController {
     tableView.separatorStyle = .none
     tableView.tableFooterView = UIView(frame: .zero)
     tableView.register(AccountTableCell.self, forCellReuseIdentifier: AccountTableCell.id)
+    tableView.register(MainTableSectionHeader.self, forHeaderFooterViewReuseIdentifier: MainTableSectionHeader.id)
     view.addSubview(tableView)
     
     let constraints = [
@@ -128,14 +157,16 @@ extension MainViewController: UIDropInteractionDelegate {
 
 extension MainViewController: UITableViewDelegate, UITableViewDataSource {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return interactor.accounts.count
+    let state = interactor.accountStates[section]
+    return interactor.accounts[state]!.count
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     guard let cell = tableView.dequeueReusableCell(withIdentifier: AccountTableCell.id) as? AccountTableCell else {
       return UITableViewCell()
     }
-    let account = interactor.accounts[indexPath.row]
+    let state = interactor.accountStates[indexPath.section]
+    let account = interactor.accounts[state]![indexPath.row]
     cell.configure(with: account)
     return cell
   }
@@ -148,19 +179,35 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     return interactor.accountStates.count
   }
   
-  func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-    return interactor.accountStates[section].rawValue
+  func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: MainTableSectionHeader.id) as? MainTableSectionHeader
+    let state = interactor.accountStates[section]
+    let values = ["Account", "Contacts", "Industry", "City", "State"]
+    header?.configure(state: state, values: values)
+    return header
   }
   
-  func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-    let state = interactor.accountStates[section]
-    return MainTableSectionHeader(state: state)
+  func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+    sectionHeaders.remove(WeakRef(value: view))
+  }
+  
+  func tableView(_ tableView: UITableView, didEndDisplayingHeaderView view: UIView, forSection section: Int) {
+    sectionHeaders.insert(WeakRef(value: view))
+  }
+  
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    let accountState = interactor.accountStates[indexPath.section]
+    let account = interactor.accounts[accountState]![indexPath.row]
+    let view = AccountDetailsView(account: account)
+    let viewController = UIHostingController(rootView: view)
+    navigationController?.pushViewController(viewController, animated: true)
   }
 }
 
 extension MainViewController: UITableViewDragDelegate, UITableViewDropDelegate {
   func tableView(_ tableView: UITableView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
-    let account = interactor.accounts[indexPath.row]
+    let state = interactor.accountStates[indexPath.section]
+    let account = interactor.accounts[state]![indexPath.row]
     let itemProvider = NSItemProvider(object: account)
     let dragItem = UIDragItem(itemProvider: itemProvider)
     return [dragItem]
@@ -181,12 +228,10 @@ extension MainViewController: UITableViewDragDelegate, UITableViewDropDelegate {
     }
     
     for item in coordinator.items {
-      guard let sourceIndexPathRow = item.sourceIndexPath?.row else { continue }
+      guard let sourceIndexPath = item.sourceIndexPath else { continue }
       item.dragItem.itemProvider.loadObject(ofClass: Account.self) { (object, error) in
         DispatchQueue.main.async {
-          guard let account = object as? Account else { return }
-          self.interactor.accounts.remove(at: sourceIndexPathRow)
-          self.interactor.accounts.insert(account, at: insertionIndex.row)
+          self.interactor.moveAccount(from: sourceIndexPath, to: insertionIndex)
           self.tableView.reloadData()
         }
       }
