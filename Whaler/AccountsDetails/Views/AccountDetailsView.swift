@@ -15,7 +15,7 @@ struct AccountDetailsView: View {
     VStack {
       CompanyInfoView(account: account)
       HStack {
-        ContactsTableView()
+        ContactsTableView(contacts: account.contacts)
         NotesView(text: "")
       }
     }

@@ -19,7 +19,7 @@ struct ContactRowView: View {
     HStack {
       Image(uiImage: UIImage(named: "moveDots")!)
       Spacer().frame(width: 20)
-      Text(contact.name).font(Font.custom(regularFontName, size: 17))
+      Text(contact.fullName).font(Font.custom(regularFontName, size: 17))
       Spacer()
       Text(contact.title).font(Font.custom(regularFontName, size: 17))
       Spacer()

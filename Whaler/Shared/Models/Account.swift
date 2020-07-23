@@ -26,6 +26,26 @@ final class Account: NSObject, Codable {
   
   var state: WorkState
   
+  var contacts = [Contact]()
+  
+  override init() {
+    id = ""
+    owner = ""
+    name = ""
+    industry = ""
+    employees = ""
+    annualRevenue = ""
+    billingCity = ""
+    billingState = ""
+    contactsCount = ""
+    phone = ""
+    website = ""
+    type = ""
+    accountDescription = ""
+    state = .inProgress
+    super.init()
+  }
+  
   init(dictionary: Dictionary<String, String>) {
     id = dictionary["Account ID"] ?? ""
     owner = dictionary["Account Owner"] ?? ""
@@ -36,10 +56,10 @@ final class Account: NSObject, Codable {
     billingCity = dictionary["Billing City"]
     billingState = dictionary["Billing State/Province"]
     contactsCount = String(Int.random(in: Range(uncheckedBounds: (5, 25))))
-    phone = dictionary["AccountPhone"]
+    phone = dictionary["Account: Phone"]
     website = dictionary["Website"]
     type = dictionary["Type"]
-    accountDescription = dictionary["Description"]
+    accountDescription = dictionary["Account Description"]
     state = WorkState.allCases.randomElement()!
   }
 }

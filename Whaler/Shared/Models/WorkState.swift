@@ -26,12 +26,3 @@ enum WorkState: String, CaseIterable, Codable {
 extension WorkState: Identifiable {
   var id: String { rawValue }
 }
-
-struct Contact {
-  let id = UUID().uuidString
-  let name: String
-  let title: String
-  let state: WorkState
-}
-
-extension Contact: Identifiable {}

@@ -13,9 +13,9 @@ class MainInteractor {
   lazy var accountStates = WorkState.allCases
   
   func parseAccounts(from url: URL) {
-    guard let accountsDicts = CSVParser.parseCSV(fileUrl: url, encoding: .utf8) else { return }
-    for dict in accountsDicts {
-      let account = Account(dictionary: dict)
+    guard let csv = CSVParser.parseCSV(fileUrl: url, encoding: .utf8) else { return }
+    let (parsedAccounts, _) = CSVParser.parseAccountsAndContacts(from: csv)
+    for account in parsedAccounts {
       accounts[account.state]?.append(account)
     }
   }

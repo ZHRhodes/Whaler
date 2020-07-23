@@ -9,7 +9,9 @@
 import Foundation
 
 struct CSVParser {
-  static func parseCSV(fileUrl: URL, encoding: String.Encoding) -> [[String: String]]? {
+  typealias CSV = [[String: String]]
+  
+  static func parseCSV(fileUrl: URL, encoding: String.Encoding) -> CSV? {
     // Load the CSV file and parse it
     let delimiter = ","
 
@@ -68,5 +70,28 @@ struct CSVParser {
       }
     }
     return items
+  }
+  
+  static func parseAccountsAndContacts(from csv: CSV) -> ([Account], [Contact]) {
+    var accounts = [Account]()
+    var contacts = [Contact]()
+    var parsedAccounts = Set<String>()
+    for row in csv {
+      let accountID = row["Account ID"] ?? ""
+      let contact = Contact(dictionary: row)
+      contacts.append(contact)
+      
+      let account: Account
+      if !parsedAccounts.contains(accountID) {
+        parsedAccounts.insert(accountID)
+        account = Account(dictionary: row)
+        account.contacts = [contact]
+        accounts.append(account)
+      } else {
+        account = accounts.first(where: { $0.id == accountID }) ?? Account()
+        account.contacts.append(contact)
+      }
+    }
+    return (accounts, contacts)
   }
 }

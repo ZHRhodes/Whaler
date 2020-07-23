@@ -8,22 +8,9 @@
 
 import SwiftUI
 
-var mockContacts: [Contact] = [
-  Contact(name: "Rita Book", title: "Design Director", state: WorkState.inProgress),
-  Contact(name: "Stanley Knife", title: "VP of Design", state: WorkState.inProgress),
-  Contact(name: "Rita Book", title: "Design Director", state: WorkState.ready),
-  Contact(name: "Stanley Knife", title: "VP of Design", state: WorkState.ready),
-  Contact(name: "Rita Book", title: "Design Director", state: WorkState.worked),
-  Contact(name: "Box Shepherd", title: "VP of Design", state: WorkState.worked),
-  Contact(name: "Dita Dernbern", title: "Design Director", state: WorkState.inProgress),
-  Contact(name: "Carlton Smockles", title: "VP of Design", state: WorkState.inProgress),
-  Contact(name: "Brian Bilshford", title: "Design Director", state: WorkState.ready),
-  Contact(name: "Jose Romirez", title: "VP of Design", state: WorkState.ready),
-  Contact(name: "John Johnson", title: "Design Director", state: WorkState.worked),
-  Contact(name: "Ryan Rickles", title: "VP of Design", state: WorkState.worked),
-]
-
 struct ContactsTableView: View {
+  let contacts: [Contact]
+  
   var body: some View {
     VStack(alignment: .leading, spacing: 2) {
       Text("CONTACTS").padding().font(Font.custom(boldFontName, size: 17))
@@ -37,7 +24,7 @@ struct ContactsTableView: View {
                     },
                   footer: Rectangle().fill(Color.white)
           ) {
-            ForEach(mockContacts.filter { $0.state == state}) { contact in
+            ForEach(contacts.filter { $0.state == state}) { contact in
               ContactRowView(contact: contact).background(Color.white)
             }
             .onMove(perform: onMove)
@@ -54,7 +41,11 @@ struct ContactsTableView: View {
 
 struct ContactsTableView_Previews: PreviewProvider {
   static var previews: some View {
-    ContactsTableView()
+    ContactsTableView(contacts: mockContacts)
       .frame(width: 800, height: 900.0)
   }
 }
+
+let mockContacts = [
+  Contact(dictionary: ["name": "Rita Book", "title": "Director of Design"])
+]
