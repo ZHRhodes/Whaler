@@ -15,6 +15,7 @@ struct NotesView: View {
     VStack(alignment: .leading) {
       Text("NOTES")
         .padding(EdgeInsets(top: 0, leading: 10, bottom: 10, trailing: 10))
+        .font(Font.custom(boldFontName, size: 17))
       ZStack {
         VStack {
           TextField("", text: $text)

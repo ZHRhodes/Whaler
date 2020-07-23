@@ -36,7 +36,7 @@ final class Account: NSObject, Codable {
     billingCity = dictionary["Billing City"]
     billingState = dictionary["Billing State/Province"]
     contactsCount = String(Int.random(in: Range(uncheckedBounds: (5, 25))))
-    phone = dictionary["Phone"]
+    phone = dictionary["AccountPhone"]
     website = dictionary["Website"]
     type = dictionary["Type"]
     accountDescription = dictionary["Description"]
