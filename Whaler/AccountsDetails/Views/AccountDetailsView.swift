@@ -12,11 +12,18 @@ struct AccountDetailsView: View {
   let account: Account
   
   var body: some View {
-    VStack {
-      CompanyInfoView(account: account)
+    GeometryReader { metrics in
       HStack {
+        VStack {
+          CompanyInfoView(account: account)
+            .frame(height: metrics.size.height * 0.3)
+          NotesView(text: "")
+        }
+          .frame(width: metrics.size.width * 0.6)
+        Rectangle()
+          .fill(Color(red: 0, green: 0, blue: 0, opacity: 0.2))
+          .frame(width: 1)
         ContactsTableView(contacts: account.contacts)
-        NotesView(text: "")
       }
     }
   }

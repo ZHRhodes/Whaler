@@ -32,6 +32,7 @@ struct ContactsTableView: View {
         }
       }
     }
+    .padding(EdgeInsets(top: 40, leading: 10, bottom: 40, trailing: 40))
   }
   
   private func onMove(source: IndexSet, destination: Int) {

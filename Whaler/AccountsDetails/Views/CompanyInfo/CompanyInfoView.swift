@@ -16,7 +16,7 @@ struct CompanyInfoView: View {
       CompanyInfoHeaderView(account: account)
       CompanyInfoValuesView(account: account)
     }
-    .padding()
+    .padding(EdgeInsets(top: 40, leading: 40, bottom: 10, trailing: 40))
   }
 }
 

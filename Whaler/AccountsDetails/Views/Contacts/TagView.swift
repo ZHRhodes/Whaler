@@ -15,7 +15,7 @@ struct TagView: View {
   var body: some View {
     Text(text)
       .font(Font.custom(boldFontName, size: 17))
-      .padding(EdgeInsets(top: 10, leading: 14, bottom: 10, trailing: 14))
+      .padding(EdgeInsets(top: 7, leading: 7, bottom: 7, trailing: 7))
       .background(color)
       .foregroundColor(.white)
       .cornerRadius(2)

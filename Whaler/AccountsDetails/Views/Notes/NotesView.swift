@@ -29,7 +29,7 @@ struct NotesView: View {
                             radius: 6, x: 0, y: 2))
     }
     .foregroundColor(Color.black)
-    .padding()
+    .padding(EdgeInsets(top: 10, leading: 40, bottom: 40, trailing: 40))
   }
 }
 

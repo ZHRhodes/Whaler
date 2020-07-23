@@ -28,6 +28,5 @@ struct TitleValueView: View {
 struct TitleValueView_Previews: PreviewProvider {
     static var previews: some View {
       TitleValueView(title: "Industry", value: "Marketing")
-        
     }
 }

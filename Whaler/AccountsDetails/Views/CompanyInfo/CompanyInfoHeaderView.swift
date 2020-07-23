@@ -13,12 +13,10 @@ struct CompanyInfoHeaderView: View {
   
   var body: some View {
     VStack(alignment: .leading, spacing: 10) {
-      Text("COMPANY INFO")
+      Text(account.name.uppercased()).font(Font.custom(boldFontName, size: 25))
         .foregroundColor(Color.black)
         .font(Font.custom(boldFontName, size: 17))
       HStack(spacing: 10) {
-        Text(account.name).font(Font.custom(regularFontName, size: 17))
-        Text("|")
         Text(account.website ?? "").font(Font.custom(regularFontName, size: 17))
         Text("|")
         Text(account.phone ?? "").font(Font.custom(regularFontName, size: 17))

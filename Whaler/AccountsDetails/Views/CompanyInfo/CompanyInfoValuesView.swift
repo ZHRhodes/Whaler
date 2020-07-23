@@ -21,9 +21,9 @@ struct CompanyInfoValuesView: View {
           Spacer()
           TitleValueView(title: "REVENUE", value: account.annualRevenue ?? "N/A")
           Spacer()
-          TitleValueView(title: "CITY", value: "2009")
+          TitleValueView(title: "CITY", value: account.billingCity ?? "N/A")
           Spacer()
-          TitleValueView(title: "State", value: account.billingState ?? "N/A")
+          TitleValueView(title: "STATE", value: account.billingState ?? "N/A")
         }
       }
       TitleValueView(title: "DESCRIPTION", value: account.accountDescription ?? "N/A")
