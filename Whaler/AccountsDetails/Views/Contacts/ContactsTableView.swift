@@ -24,10 +24,10 @@ struct ContactsTableView: View {
                     },
                   footer: Rectangle().fill(Color.white)
           ) {
-            ForEach(contacts.filter { $0.state == state}) { contact in
+            ForEach(self.contacts.filter { $0.state == state}) { contact in
               ContactRowView(contact: contact).background(Color.white)
             }
-            .onMove(perform: onMove)
+            .onMove(perform: self.onMove)
           }
         }
       }

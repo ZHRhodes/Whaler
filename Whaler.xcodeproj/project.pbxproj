@@ -134,6 +134,7 @@
 			children = (
 				14EF4DE624CD4F0700ED5461 /* Account */,
 				14EF4DE724CD4F1C00ED5461 /* Contact */,
+				14EF4DE824CD4F3100ED5461 /* ObjectManager.swift */,
 				140AE79F24A9B58300F7705E /* WorkState.swift */,
 			);
 			path = Models;
@@ -297,7 +298,6 @@
 			isa = PBXGroup;
 			children = (
 				140AE79824A9AA5C00F7705E /* Account.swift */,
-				14EF4DE824CD4F3100ED5461 /* ObjectManager.swift */,
 			);
 			path = Account;
 			sourceTree = "<group>";
@@ -616,7 +616,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = A34Z338JKJ;
 				INFOPLIST_FILE = Whaler/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
 				"IPHONEOS_DEPLOYMENT_TARGET[sdk=macosx*]" = 13.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -638,7 +638,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = A34Z338JKJ;
 				INFOPLIST_FILE = Whaler/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
 				"IPHONEOS_DEPLOYMENT_TARGET[sdk=macosx*]" = 13.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

@@ -174,7 +174,7 @@ class MainViewController: UIViewController {
     let picker = DocumentPickerViewController(
         supportedTypes: ["public.comma-separated-values-text"],
         onPick: { url in
-          self.interactor.parseAccounts(from: url)
+          self.interactor.parseAccountsAndContacts(from: url)
           self.removeNoDataViews()
           self.configureTableView()
           self.configureDeleteButton()

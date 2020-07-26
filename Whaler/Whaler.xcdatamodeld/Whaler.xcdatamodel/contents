@@ -15,7 +15,17 @@
         <attribute name="type" optional="YES" attributeType="String"/>
         <attribute name="website" optional="YES" attributeType="String"/>
     </entity>
+    <entity name="ContactEntity" representedClassName="ContactEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="accountID" optional="YES" attributeType="String"/>
+        <attribute name="email" optional="YES" attributeType="String"/>
+        <attribute name="firstName" optional="YES" attributeType="String"/>
+        <attribute name="id" optional="YES" attributeType="String"/>
+        <attribute name="lastName" optional="YES" attributeType="String"/>
+        <attribute name="phone" optional="YES" attributeType="String"/>
+        <attribute name="title" optional="YES" attributeType="String"/>
+    </entity>
     <elements>
         <element name="AccountEntity" positionX="-63" positionY="-18" width="128" height="28"/>
+        <element name="ContactEntity" positionX="-63" positionY="-27" width="128" height="28"/>
     </elements>
 </model>

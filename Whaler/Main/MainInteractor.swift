@@ -20,12 +20,17 @@ class MainInteractor {
     retrieveAccounts()
   }
   
-  func parseAccounts(from url: URL) {
+  func parseAccountsAndContacts(from url: URL) {
     guard let csv = CSVParser.parseCSV(fileUrl: url, encoding: .utf8) else { return }
-    let (parsedAccounts, _) = CSVParser.parseAccountsAndContacts(from: csv)
-    for account in parsedAccounts {
+    let (parsedAccounts, parsedContacts) = CSVParser.parseAccountsAndContacts(from: csv)
+    
+    parsedAccounts.forEach { account in
       accounts[account.state]?.append(account)
       ObjectManager.save(account)
+    }
+    
+    parsedContacts.forEach { contact in
+      ObjectManager.save(contact)
     }
   }
   
@@ -40,9 +45,28 @@ class MainInteractor {
   
   func retrieveAccounts() {
     let retrievedAccounts = ObjectManager.retrieveAll(ofType: Account.self)
-    for account in retrievedAccounts {
+    retrievedAccounts.forEach { account in
       accounts[account.state]?.append(account)
     }
+    
+    retrieveAndAssignContacts()
+  }
+  
+  private func retrieveAndAssignContacts() {
+    let retrievedContacts = ObjectManager.retrieveAll(ofType: Contact.self)
+    let accountsMap = createAccountsMap()
+    retrievedContacts.forEach { contact in
+      accountsMap[contact.accountID]?.contacts.append(contact)
+    }
+  }
+  
+  private func createAccountsMap() -> [String: Account] {
+    var map = [String: Account]()
+    accounts.values.flatMap { $0 }.forEach { account in
+      map[account.id] = account
+    }
+    
+    return map
   }
   
   func deleteAccounts() {

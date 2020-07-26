@@ -15,7 +15,7 @@ struct AccountDetailsView: View {
     GeometryReader { metrics in
       HStack {
         VStack {
-          CompanyInfoView(account: account)
+          CompanyInfoView(account: self.account)
             .frame(height: metrics.size.height * 0.3)
           NotesView(text: "")
         }
@@ -23,7 +23,7 @@ struct AccountDetailsView: View {
         Rectangle()
           .fill(Color(red: 0, green: 0, blue: 0, opacity: 0.2))
           .frame(width: 1)
-        ContactsTableView(contacts: account.contacts)
+        ContactsTableView(contacts: self.account.contacts)
       }
     }
   }
