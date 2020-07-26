@@ -32,7 +32,8 @@ extension WeakRef: Hashable {
 class MainViewController: UIViewController {
   let interactor = MainInteractor()
   var noDataStackView: UIStackView?
-  let tableView = UITableView(frame: .zero, style: .plain)
+  var tableView: UITableView!
+  var deleteButton: UIButton!
   
   private var sectionHeaders = Set<WeakRef<UIView>>()
   
@@ -40,7 +41,13 @@ class MainViewController: UIViewController {
     super.viewDidLoad()
     title = "Accounts"
     view.backgroundColor = .white
-    configureNoDataViews()
+    if interactor.hasNoAccounts {
+      configureNoDataViews()
+    } else {
+      self.removeNoDataViews()
+      self.configureTableView()
+      self.configureDeleteButton()
+    }
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -103,6 +110,7 @@ class MainViewController: UIViewController {
   }
   
   private func configureTableView() {
+    tableView = UITableView(frame: .zero, style: .plain)
     tableView.delegate = self
     tableView.dataSource = self
     tableView.dragInteractionEnabled = true
@@ -125,6 +133,41 @@ class MainViewController: UIViewController {
     
     NSLayoutConstraint.activate(constraints)
   }
+  
+  private func removeTableView() {
+    tableView.removeFromSuperview()
+    tableView = nil
+  }
+  
+  private func removeDeleteButton() {
+    deleteButton.removeFromSuperview()
+    deleteButton = nil
+  }
+  
+  private func configureDeleteButton() {
+    deleteButton = UIButton()
+    deleteButton.setImage(UIImage(named: "delete"), for: .normal)
+    deleteButton.addTarget(self, action: #selector(deleteTapped), for: .touchUpInside)
+    deleteButton.translatesAutoresizingMaskIntoConstraints = false
+    view.addSubview(deleteButton)
+    
+    let constraints = [
+      deleteButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -12),
+      deleteButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 12),
+      deleteButton.heightAnchor.constraint(equalToConstant: 50),
+      deleteButton.widthAnchor.constraint(equalToConstant: 60)
+    ]
+    
+    NSLayoutConstraint.activate(constraints)
+  }
+  
+  @objc
+  private func deleteTapped() {
+    interactor.deleteAccounts()
+    removeTableView()
+    removeDeleteButton()
+    configureNoDataViews()
+  }
 
   @objc
   private func importTapped() {
@@ -134,6 +177,7 @@ class MainViewController: UIViewController {
           self.interactor.parseAccounts(from: url)
           self.removeNoDataViews()
           self.configureTableView()
+          self.configureDeleteButton()
         },
         onDismiss: {}
     )

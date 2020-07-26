@@ -18,9 +18,8 @@ struct NotesView: View {
         .font(Font.custom(boldFontName, size: 17))
       ZStack {
         VStack {
-          TextField("", text: $text)
+          RichTextEditorRepresentable()
             .padding()
-          Spacer()
         }
       }
       .background(Color.white)

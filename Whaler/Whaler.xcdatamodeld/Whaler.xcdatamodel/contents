@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17162" systemVersion="19E287" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17175" systemVersion="19E287" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="AccountEntity" representedClassName="AccountEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="accountDescription" optional="YES" attributeType="String"/>
         <attribute name="annualRevenue" optional="YES" attributeType="String"/>
         <attribute name="billingCity" optional="YES" attributeType="String"/>
         <attribute name="billingState" optional="YES" attributeType="String"/>
@@ -11,8 +12,10 @@
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="owner" optional="YES" attributeType="String"/>
         <attribute name="phone" optional="YES" attributeType="String"/>
+        <attribute name="type" optional="YES" attributeType="String"/>
+        <attribute name="website" optional="YES" attributeType="String"/>
     </entity>
     <elements>
-        <element name="AccountEntity" positionX="-63" positionY="-18" width="128" height="193"/>
+        <element name="AccountEntity" positionX="-63" positionY="-18" width="128" height="28"/>
     </elements>
 </model>

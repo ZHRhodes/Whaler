@@ -36,6 +36,10 @@
 		14D9CA5924B599230030B17A /* AccountStateTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D9CA5824B599230030B17A /* AccountStateTagView.swift */; };
 		14D9CA5B24B599300030B17A /* AccountRowValuesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D9CA5A24B599300030B17A /* AccountRowValuesView.swift */; };
 		14E63ED124B9109C003EAF22 /* Whaler.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 14E63ECF24B9109C003EAF22 /* Whaler.xcdatamodeld */; };
+		14ECDB2124CA9288006B4550 /* NoteEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14ECDB2024CA9288006B4550 /* NoteEditor.swift */; };
+		14ECDD1524CAB819006B4550 /* trix-master in Resources */ = {isa = PBXBuildFile; fileRef = 14ECDD1424CAB819006B4550 /* trix-master */; };
+		14ECDD2124CABC7D006B4550 /* RichTextEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14ECDD2024CABC7D006B4550 /* RichTextEditor.swift */; };
+		14EF4DE924CD4F3100ED5461 /* ObjectManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EF4DE824CD4F3100ED5461 /* ObjectManager.swift */; };
 		14F4090424C6A09E00F405BC /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 14F4090324C6A09E00F405BC /* OpenSans-Regular.ttf */; };
 		14F4090624C6A0C300F405BC /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 14F4090524C6A0C300F405BC /* OpenSans-Bold.ttf */; };
 		14F4090824C6A2D100F405BC /* UIFont+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F4090724C6A2D100F405BC /* UIFont+Extensions.swift */; };
@@ -87,6 +91,10 @@
 		14D9CA5824B599230030B17A /* AccountStateTagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountStateTagView.swift; sourceTree = "<group>"; };
 		14D9CA5A24B599300030B17A /* AccountRowValuesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountRowValuesView.swift; sourceTree = "<group>"; };
 		14E63ED024B9109C003EAF22 /* Whaler.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Whaler.xcdatamodel; sourceTree = "<group>"; };
+		14ECDB2024CA9288006B4550 /* NoteEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteEditor.swift; sourceTree = "<group>"; };
+		14ECDD1424CAB819006B4550 /* trix-master */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "trix-master"; sourceTree = "<group>"; };
+		14ECDD2024CABC7D006B4550 /* RichTextEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RichTextEditor.swift; sourceTree = "<group>"; };
+		14EF4DE824CD4F3100ED5461 /* ObjectManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectManager.swift; sourceTree = "<group>"; };
 		14F4090324C6A09E00F405BC /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Regular.ttf"; sourceTree = "<group>"; };
 		14F4090524C6A0C300F405BC /* OpenSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Bold.ttf"; sourceTree = "<group>"; };
 		14F4090724C6A2D100F405BC /* UIFont+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extensions.swift"; sourceTree = "<group>"; };
@@ -124,9 +132,9 @@
 		140AE79724A9AA4B00F7705E /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				140AE79824A9AA5C00F7705E /* Account.swift */,
+				14EF4DE624CD4F0700ED5461 /* Account */,
+				14EF4DE724CD4F1C00ED5461 /* Contact */,
 				140AE79F24A9B58300F7705E /* WorkState.swift */,
-				1440A20324C947FA00E36853 /* Contact.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -170,6 +178,9 @@
 			isa = PBXGroup;
 			children = (
 				145A376924C588DF0081F9DB /* NotesView.swift */,
+				14ECDB2024CA9288006B4550 /* NoteEditor.swift */,
+				14ECDD2024CABC7D006B4550 /* RichTextEditor.swift */,
+				14ECDB2824CAB2D4006B4550 /* TrixEditor */,
 			);
 			path = Notes;
 			sourceTree = "<group>";
@@ -274,6 +285,31 @@
 			path = MainTableSectionHeader;
 			sourceTree = "<group>";
 		};
+		14ECDB2824CAB2D4006B4550 /* TrixEditor */ = {
+			isa = PBXGroup;
+			children = (
+				14ECDD1424CAB819006B4550 /* trix-master */,
+			);
+			path = TrixEditor;
+			sourceTree = "<group>";
+		};
+		14EF4DE624CD4F0700ED5461 /* Account */ = {
+			isa = PBXGroup;
+			children = (
+				140AE79824A9AA5C00F7705E /* Account.swift */,
+				14EF4DE824CD4F3100ED5461 /* ObjectManager.swift */,
+			);
+			path = Account;
+			sourceTree = "<group>";
+		};
+		14EF4DE724CD4F1C00ED5461 /* Contact */ = {
+			isa = PBXGroup;
+			children = (
+				1440A20324C947FA00E36853 /* Contact.swift */,
+			);
+			path = Contact;
+			sourceTree = "<group>";
+		};
 		14F4090224C6A04D00F405BC /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
@@ -367,6 +403,7 @@
 				14F4090424C6A09E00F405BC /* OpenSans-Regular.ttf in Resources */,
 				14861EE1249F3DE400D2FA92 /* LaunchScreen.storyboard in Resources */,
 				14F4090624C6A0C300F405BC /* OpenSans-Bold.ttf in Resources */,
+				14ECDD1524CAB819006B4550 /* trix-master in Resources */,
 				140AE79B24A9B48000F7705E /* Colors.xcassets in Resources */,
 				14861EDE249F3DE400D2FA92 /* Assets.xcassets in Resources */,
 				14861EDC249F3DE100D2FA92 /* Main.storyboard in Resources */,
@@ -388,6 +425,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				1440A20424C947FA00E36853 /* Contact.swift in Sources */,
+				14ECDD2124CABC7D006B4550 /* RichTextEditor.swift in Sources */,
+				14ECDB2124CA9288006B4550 /* NoteEditor.swift in Sources */,
 				146C35DB24C56A0100DBCA23 /* ContactsTableView.swift in Sources */,
 				14861ED9249F3DE100D2FA92 /* MainViewController.swift in Sources */,
 				146C35D924C5689B00DBCA23 /* ContactRowView.swift in Sources */,
@@ -412,6 +451,7 @@
 				14D9CA5B24B599300030B17A /* AccountRowValuesView.swift in Sources */,
 				140AE7A924A9DF3300F7705E /* Button.swift in Sources */,
 				14E63ED124B9109C003EAF22 /* Whaler.xcdatamodeld in Sources */,
+				14EF4DE924CD4F3100ED5461 /* ObjectManager.swift in Sources */,
 				140AE7A324A9BA6500F7705E /* MainTableSectionHeader.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
