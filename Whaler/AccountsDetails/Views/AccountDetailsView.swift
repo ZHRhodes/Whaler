@@ -11,6 +11,17 @@ import SwiftUI
 struct AccountDetailsView: View {
   let account: Account
   
+//  let tempContacts: [ContactCellItem] = [
+//    ContactCellItem(state: WorkState.inProgress),
+//    ContactCellItem(contact: Contact(dictionary: ["name": "Rita Book11", "title": "Director of Design"])),
+//    ContactCellItem(contact: Contact(dictionary: ["name": "Rita Book22", "title": "Director of Design"])),
+//                    ContactCellItem(contact: Contact(dictionary: ["name": "Rita Book99", "title": "Director of Design"])),
+//    ContactCellItem(state: WorkState.ready),
+//    ContactCellItem(contact: Contact(dictionary: ["name": "Rita Book33", "title": "Director of Design"])),
+//    ContactCellItem(contact: Contact(dictionary: ["name": "Rita Book44", "title": "Director of Design"])),
+//    ContactCellItem(contact: Contact(dictionary: ["name": "Rita Book88", "title": "Director of Design"])),
+//  ]
+  
   @Environment(\.presentationMode) var presentation
   
   var body: some View {
