@@ -33,6 +33,7 @@
 		14861EEC249F3DE400D2FA92 /* WhalerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14861EEB249F3DE400D2FA92 /* WhalerTests.swift */; };
 		14861EF7249F401300D2FA92 /* CSVParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14861EF6249F401300D2FA92 /* CSVParser.swift */; };
 		14861EFC249F49DE00D2FA92 /* DocumentPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14861EFB249F49DE00D2FA92 /* DocumentPickerViewController.swift */; };
+		14AB262E24D137E800AC280D /* ContactsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14AB262D24D137E800AC280D /* ContactsTableViewController.swift */; };
 		14D9CA5924B599230030B17A /* AccountStateTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D9CA5824B599230030B17A /* AccountStateTagView.swift */; };
 		14D9CA5B24B599300030B17A /* AccountRowValuesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D9CA5A24B599300030B17A /* AccountRowValuesView.swift */; };
 		14E63ED124B9109C003EAF22 /* Whaler.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 14E63ECF24B9109C003EAF22 /* Whaler.xcdatamodeld */; };
@@ -88,6 +89,7 @@
 		14861EF6249F401300D2FA92 /* CSVParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSVParser.swift; sourceTree = "<group>"; };
 		14861EF8249F439600D2FA92 /* Whaler.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Whaler.entitlements; sourceTree = "<group>"; };
 		14861EFB249F49DE00D2FA92 /* DocumentPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentPickerViewController.swift; sourceTree = "<group>"; };
+		14AB262D24D137E800AC280D /* ContactsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsTableViewController.swift; sourceTree = "<group>"; };
 		14D9CA5824B599230030B17A /* AccountStateTagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountStateTagView.swift; sourceTree = "<group>"; };
 		14D9CA5A24B599300030B17A /* AccountRowValuesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountRowValuesView.swift; sourceTree = "<group>"; };
 		14E63ED024B9109C003EAF22 /* Whaler.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Whaler.xcdatamodel; sourceTree = "<group>"; };
@@ -222,6 +224,7 @@
 				146C35DA24C56A0100DBCA23 /* ContactsTableView.swift */,
 				146C35D824C5689B00DBCA23 /* ContactRowView.swift */,
 				14FE635224C575CD00F7D30B /* TagView.swift */,
+				14AB262D24D137E800AC280D /* ContactsTableViewController.swift */,
 			);
 			path = Contacts;
 			sourceTree = "<group>";
@@ -426,6 +429,7 @@
 			files = (
 				1440A20424C947FA00E36853 /* Contact.swift in Sources */,
 				14ECDD2124CABC7D006B4550 /* RichTextEditor.swift in Sources */,
+				14AB262E24D137E800AC280D /* ContactsTableViewController.swift in Sources */,
 				14ECDB2124CA9288006B4550 /* NoteEditor.swift in Sources */,
 				146C35DB24C56A0100DBCA23 /* ContactsTableView.swift in Sources */,
 				14861ED9249F3DE100D2FA92 /* MainViewController.swift in Sources */,
