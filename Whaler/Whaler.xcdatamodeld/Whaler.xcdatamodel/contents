@@ -10,8 +10,10 @@
         <attribute name="id" optional="YES" attributeType="String"/>
         <attribute name="industry" optional="YES" attributeType="String"/>
         <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="notes" optional="YES" attributeType="String"/>
         <attribute name="owner" optional="YES" attributeType="String"/>
         <attribute name="phone" optional="YES" attributeType="String"/>
+        <attribute name="state" optional="YES" attributeType="String"/>
         <attribute name="type" optional="YES" attributeType="String"/>
         <attribute name="website" optional="YES" attributeType="String"/>
     </entity>
@@ -22,10 +24,11 @@
         <attribute name="id" optional="YES" attributeType="String"/>
         <attribute name="lastName" optional="YES" attributeType="String"/>
         <attribute name="phone" optional="YES" attributeType="String"/>
+        <attribute name="state" optional="YES" attributeType="String"/>
         <attribute name="title" optional="YES" attributeType="String"/>
     </entity>
     <elements>
-        <element name="AccountEntity" positionX="-63" positionY="-18" width="128" height="28"/>
-        <element name="ContactEntity" positionX="-63" positionY="-27" width="128" height="28"/>
+        <element name="AccountEntity" positionX="-63" positionY="-18" width="128" height="268"/>
+        <element name="ContactEntity" positionX="-63" positionY="-27" width="128" height="163"/>
     </elements>
 </model>

@@ -77,7 +77,9 @@ struct CSVParser {
     var contacts = [Contact]()
     var parsedAccounts = Set<String>()
     for row in csv {
-      let accountID = row["Account ID"] ?? ""
+      guard let accountID = row["Account ID"],
+            row["Account Name"] != nil,
+            row["Account Owner"] != nil else { continue }
       let contact = Contact(dictionary: row)
       contacts.append(contact)
       

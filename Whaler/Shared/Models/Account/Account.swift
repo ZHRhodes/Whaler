@@ -114,7 +114,8 @@ extension Account: ManagedObject {
     let website = managedObject.value(forKey: CodingKeys.website.rawValue) as? String
     let type = managedObject.value(forKey: CodingKeys.type.rawValue) as? String
     let accountDescription = managedObject.value(forKey: CodingKeys.accountDescription.rawValue) as? String
-    let state = WorkState.allCases.randomElement()!//managedObject.value(forKey: CodingKeys.state.rawValue) as? WorkState ?? .inProgress
+    let stateString = managedObject.value(forKey: CodingKeys.state.rawValue) as? String ?? ""
+    let state = WorkState(rawValue: stateString) ?? .ready
     let contacts = [Contact]()//managedObject.value(forKey: CodingKeys.contacts.rawValue) as? [Contact] ?? [Contact]()
     self.init(id: id, owner: owner, name: name, industry: industry, employees: employees, annualRevenue: annualRevenue, billingCity: billingCity, billingState: billingState, contactsCount: contactsCount, phone: phone, website: website, type: type, accountDescription: accountDescription, state: state, contacts: contacts)
   }
@@ -133,7 +134,7 @@ extension Account: ManagedObject {
     managedObject.setValue(website, forKey: CodingKeys.website.rawValue)
     managedObject.setValue(type, forKey: CodingKeys.type.rawValue)
     managedObject.setValue(accountDescription, forKey: CodingKeys.accountDescription.rawValue)
-//    managedObject.setValue(state, forKey: CodingKeys.state.rawValue)
+    managedObject.setValue(state.rawValue, forKey: CodingKeys.state.rawValue)
 //    managedObject.setValue(contacts, forKey: CodingKeys.contacts.rawValue)
   }
 }

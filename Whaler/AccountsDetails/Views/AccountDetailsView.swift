@@ -11,13 +11,15 @@ import SwiftUI
 struct AccountDetailsView: View {
   let account: Account
   
+  @Environment(\.presentationMode) var presentation
+  
   var body: some View {
     GeometryReader { metrics in
       HStack {
         VStack {
           CompanyInfoView(account: self.account)
             .frame(height: metrics.size.height * 0.3)
-          NotesView(text: "")
+          NotesView(initialState: "")
         }
           .frame(width: metrics.size.width * 0.6)
         Rectangle()
@@ -25,6 +27,13 @@ struct AccountDetailsView: View {
           .frame(width: 1)
         ContactsTableView(contacts: self.account.contacts)
       }
+//      .navigationBarItems(leading: backButton)
+    }
+  }
+  
+  var backButton: some View {
+    Button("<") {
+      presentation.wrappedValue.dismiss()
     }
   }
 }

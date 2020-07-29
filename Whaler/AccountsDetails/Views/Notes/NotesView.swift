@@ -9,7 +9,14 @@
 import SwiftUI
 
 struct NotesView: View {
-  @State var text: String
+  let initialState: String
+  private let editor = RichTextEditor()
+  private(set) var editorView: RichTextEditorRepresentable!
+  
+  init(initialState: String) {
+    self.initialState = #"{"document":[{"text":[{"type":"string","attributes":{},"string":"test"},{"type":"string","attributes":{"blockBreak":true},"string":"\\n"}],"attributes":["heading1"]}],"selectedRange":[0,4]}"#
+    editorView = RichTextEditorRepresentable(editor: editor)
+  }
   
   var body: some View {
     VStack(alignment: .leading) {
@@ -18,8 +25,13 @@ struct NotesView: View {
         .font(Font.custom(boldFontName, size: 17))
       ZStack {
         VStack {
-          RichTextEditorRepresentable()
+          editorView
             .padding()
+            .onAppear(perform: {
+              Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false, block: { (_) in
+                editor.restoreEditor(to: initialState)
+              })
+            })
         }
       }
       .background(Color.white)
@@ -34,7 +46,7 @@ struct NotesView: View {
 
 struct NotesView_Previews: PreviewProvider {
   static var previews: some View {
-    NotesView(text: "This is a test")
+    NotesView(initialState: "")
       .frame(width: 600, height: 400)
   }
 }

@@ -7,9 +7,10 @@
 //
 
 import Foundation
+import MobileCoreServices
 import CoreData
 
-struct Contact: Codable {
+final class Contact: NSObject, Codable {
   private enum CodingKeys: String, CodingKey {
     case id, accountID, firstName, lastName, title, phone, email, state
   }
@@ -59,16 +60,17 @@ extension Contact: ManagedObject {
     return "ContactEntity"
   }
   
-  init(managedObject: NSManagedObject) {
-    self.id = managedObject.value(forKey: CodingKeys.id.rawValue) as? String ?? ""
-    self.accountID = managedObject.value(forKey: CodingKeys.accountID.rawValue) as? String ?? ""
-    self.firstName = managedObject.value(forKey: CodingKeys.firstName.rawValue) as? String ?? ""
-    self.lastName = managedObject.value(forKey: CodingKeys.lastName.rawValue) as? String ?? ""
-    self.title = managedObject.value(forKey: CodingKeys.title.rawValue) as? String ?? ""
-    self.phone = managedObject.value(forKey: CodingKeys.phone.rawValue) as? String
-    self.email = managedObject.value(forKey: CodingKeys.email.rawValue) as? String
-    self.state = WorkState.allCases.randomElement()!
-//    self.state = managedObject.value(forKey: CodingKeys.state.rawValue) as? String ?? ""
+  convenience init(managedObject: NSManagedObject) {
+    let id = managedObject.value(forKey: CodingKeys.id.rawValue) as? String ?? ""
+    let accountID = managedObject.value(forKey: CodingKeys.accountID.rawValue) as? String ?? ""
+    let firstName = managedObject.value(forKey: CodingKeys.firstName.rawValue) as? String ?? ""
+    let lastName = managedObject.value(forKey: CodingKeys.lastName.rawValue) as? String ?? ""
+    let title = managedObject.value(forKey: CodingKeys.title.rawValue) as? String ?? ""
+    let phone = managedObject.value(forKey: CodingKeys.phone.rawValue) as? String
+    let email = managedObject.value(forKey: CodingKeys.email.rawValue) as? String
+    let stateString = managedObject.value(forKey: CodingKeys.state.rawValue) as? String ?? ""
+    let state = WorkState(rawValue: stateString) ?? .ready
+    self.init(id: id, accountID: accountID, firstName: firstName, lastName: lastName, title: title, phone: phone, email: email, state: state)
   }
   
   func setProperties(in managedObject: NSManagedObject) {
@@ -79,6 +81,40 @@ extension Contact: ManagedObject {
     managedObject.setValue(title, forKey: CodingKeys.title.rawValue)
     managedObject.setValue(phone, forKey: CodingKeys.phone.rawValue)
     managedObject.setValue(email, forKey: CodingKeys.email.rawValue)
-//    managedObject.setValue(state, forKey: CodingKeys.state.rawValue)
+    managedObject.setValue(state.rawValue, forKey: CodingKeys.state.rawValue)
+  }
+}
+
+extension Contact: NSItemProviderWriting {
+  static var writableTypeIdentifiersForItemProvider: [String] {
+    return [(kUTTypeUTF8PlainText) as String]
+  }
+  
+  func loadData(withTypeIdentifier typeIdentifier: String, forItemProviderCompletionHandler completionHandler: @escaping (Data?, Error?) -> Void) -> Progress? {
+    let progress = Progress(totalUnitCount: 100)
+    do {
+      let data = try JSONEncoder().encode(self)
+      progress.completedUnitCount = 100
+      completionHandler(data, nil)
+    } catch let error {
+      completionHandler(nil, error)
+    }
+    return progress
+  }
+}
+
+extension Contact: NSItemProviderReading {
+  static var readableTypeIdentifiersForItemProvider: [String] {
+    return [(kUTTypeUTF8PlainText) as String]
+  }
+  
+  public static func object(withItemProviderData data: Data, typeIdentifier: String) throws -> Contact {
+    let decoder = JSONDecoder()
+    do {
+      let contact = try decoder.decode(Contact.self, from: data)
+      return contact
+    } catch let error {
+      throw error
+    }
   }
 }

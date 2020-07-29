@@ -8,7 +8,9 @@
 
 import UIKit
 
-class Button: UIButton {
+      
+//rename button to something else -- it's conflicting with the swiftui Button
+class CommonButton: UIButton {
   private let style: ButtonStyle
   
   init(style: ButtonStyle) {

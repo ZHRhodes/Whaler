@@ -18,8 +18,9 @@ class AccountTableCell: UITableViewCell {
   
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
-    selectionStyle = .none
-    contentView.backgroundColor = .white
+    let background = UIView()
+    background.backgroundColor = UIColor(red: 235/255, green: 235/255, blue: 235/255, alpha: 1.0)
+    selectedBackgroundView = background
   }
   
   required init?(coder: NSCoder) {

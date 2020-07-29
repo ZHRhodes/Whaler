@@ -7,6 +7,16 @@
     </head>
     <body>
       <input id="x" value="" type="hidden" name="content">
-      <trix-editor input="x"></trix-editor>
+      <trix-editor id="editor" input="x"></trix-editor>
+      <script>
+        function serializeEditor() {
+          var editor = document.querySelector("trix-editor").editor
+          return JSON.stringify(editor)
+        }
+        function restoreEditor(state) {
+          var editor = document.querySelector("trix-editor").editor
+          editor.loadJSON(JSON.parse(state))
+        }
+      </script>
     </body>
 </html>

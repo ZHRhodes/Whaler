@@ -89,7 +89,7 @@ class MainViewController: UIViewController {
   }
   
   private func makeAddCSVButton() -> UIView {
-    let button = Button(style: .outline)
+    let button = CommonButton(style: .outline)
     button.translatesAutoresizingMaskIntoConstraints = false
     button.layer.borderColor = UIColor(red: 0.2, green: 0.77, blue: 0.83, alpha: 1.0).cgColor
     button.layer.borderWidth = 2.0
@@ -240,11 +240,12 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
   }
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    tableView.deselectRow(at: indexPath, animated: true)
     let accountState = interactor.accountStates[indexPath.section]
     let account = interactor.accounts[accountState]![indexPath.row]
     let view = AccountDetailsView(account: account)
     let viewController = UIHostingController(rootView: view)
-    navigationController?.pushViewController(viewController, animated: true)
+    navigationController?.pushViewController(viewController, animated: false)
   }
 }
 

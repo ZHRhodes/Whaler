@@ -15,6 +15,25 @@ struct ContactsTableView: View {
     VStack(alignment: .leading, spacing: 2) {
       Text("CONTACTS").padding().font(Font.custom(boldFontName, size: 17))
       List {
+//        VStack {
+//          TagView(text: WorkState.worked.rawValue,
+//                  color: Color(WorkState.inProgress.color))
+//          Spacer().frame(height: 10)
+//        }
+//        ForEach(self.contacts) { contact in
+//          ContactRowView(contact: contact).background(Color.white)
+//        }
+//        .onMove(perform: self.onMove)
+//        
+//        VStack {
+//          TagView(text: WorkState.worked.rawValue,
+//                  color: Color(WorkState.inProgress.color))
+//          Spacer().frame(height: 10)
+//        }
+//        ForEach(self.contacts) { contact in
+//          ContactRowView(contact: contact).background(Color.white)
+//        }
+//        .onMove(perform: self.onMove)
         ForEach(WorkState.allCases) { state in
           Section(header:
                     VStack {
@@ -25,12 +44,17 @@ struct ContactsTableView: View {
                   footer: Rectangle().fill(Color.white)
           ) {
             ForEach(self.contacts.filter { $0.state == state}) { contact in
-              ContactRowView(contact: contact).background(Color.white)
+              if #available(macCatalyst 13.4, *) {
+                ContactRowView(contact: contact).background(Color.white)
+                  .onDrag { return NSItemProvider(object: contact) }
+              } else {
+                ContactRowView(contact: contact).background(Color.white)
+              }
             }
             .onMove(perform: self.onMove)
           }
         }
-      }
+      }.onDrop(of: <#T##[UTType]#>, delegate: <#T##DropDelegate#>)
     }
     .padding(EdgeInsets(top: 40, leading: 10, bottom: 40, trailing: 40))
   }
