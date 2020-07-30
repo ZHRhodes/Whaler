@@ -56,7 +56,7 @@ class MainInteractor {
     let retrievedContacts = ObjectManager.retrieveAll(ofType: Contact.self)
     let accountsMap = createAccountsMap()
     retrievedContacts.forEach { contact in
-      accountsMap[contact.accountID]?.contacts.append(contact)
+      accountsMap[contact.accountID]?.contacts[contact.state]?.append(contact)
     }
   }
   

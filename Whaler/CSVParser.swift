@@ -78,20 +78,19 @@ struct CSVParser {
     var parsedAccounts = Set<String>()
     for row in csv {
       guard let accountID = row["Account ID"],
-            row["Account Name"] != nil,
-            row["Account Owner"] != nil else { continue }
+            row["Account Name"] != nil else { continue }
       let contact = Contact(dictionary: row)
       contacts.append(contact)
       
-      let account: Account
+      var account: Account
       if !parsedAccounts.contains(accountID) {
         parsedAccounts.insert(accountID)
         account = Account(dictionary: row)
-        account.contacts = [contact]
+        account.contacts[contact.state]?.append(contact)
         accounts.append(account)
       } else {
         account = accounts.first(where: { $0.id == accountID }) ?? Account()
-        account.contacts.append(contact)
+        account.contacts[contact.state]?.append(contact)
       }
     }
     return (accounts, contacts)

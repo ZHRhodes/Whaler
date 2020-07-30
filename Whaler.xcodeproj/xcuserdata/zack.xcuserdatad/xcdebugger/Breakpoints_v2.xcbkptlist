@@ -63,5 +63,85 @@
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "BEDC8C6B-6FE6-4ADE-892A-41774E61D293"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Whaler/CSVParser.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "92"
+            endingLineNumber = "92"
+            landmarkName = "parseAccountsAndContacts(from:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "BEDC8C6B-6FE6-4ADE-892A-41774E61D293 - 95df955bd6312cf2"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "static Whaler.CSVParser.parseAccountsAndContacts(from: Swift.Array&lt;Swift.Dictionary&lt;Swift.String, Swift.String&gt;&gt;) -&gt; (Swift.Array&lt;Whaler.Account&gt;, Swift.Array&lt;Whaler.Contact&gt;)"
+                  moduleName = "Whaler"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/zack/Documents/Development/WhalerNew/Whaler/Whaler/CSVParser.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "92"
+                  endingLineNumber = "92"
+                  offsetFromSymbolStart = "1924">
+               </Location>
+               <Location
+                  uuid = "BEDC8C6B-6FE6-4ADE-892A-41774E61D293 - b05e1260ac311e06"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Whaler.Account) -&gt; Swift.Bool in static Whaler.CSVParser.parseAccountsAndContacts(from: Swift.Array&lt;Swift.Dictionary&lt;Swift.String, Swift.String&gt;&gt;) -&gt; (Swift.Array&lt;Whaler.Account&gt;, Swift.Array&lt;Whaler.Contact&gt;)"
+                  moduleName = "Whaler"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/zack/Documents/Development/WhalerNew/Whaler/Whaler/CSVParser.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "92"
+                  endingLineNumber = "92"
+                  offsetFromSymbolStart = "35">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "F893CAD6-85C5-46F9-9E3C-616968BB41B7"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Whaler/CSVParser.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "90"
+            endingLineNumber = "90"
+            landmarkName = "parseAccountsAndContacts(from:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "E6757045-0F93-45C5-AA2A-655DF58D713C"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Whaler/AccountsDetails/Views/Contacts/ContactsTableViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "31"
+            endingLineNumber = "31"
+            landmarkName = "init(contacts:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

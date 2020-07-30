@@ -31,7 +31,7 @@ final class Account: NSObject, Codable {
   
   var state: WorkState
   
-  var contacts = [Contact]()
+  var contacts: [WorkState: [Contact]] = .init(uniqueKeysWithValues: WorkState.allCases.map { ($0, []) })
   
   override init() {
     id = ""
@@ -51,7 +51,7 @@ final class Account: NSObject, Codable {
     super.init()
   }
   
-  init(id: String, owner: String, name: String, industry: String?, employees: String?, annualRevenue: String?, billingCity: String?, billingState: String?, contactsCount: String?, phone: String?, website: String?, type: String?, accountDescription: String?, state: WorkState, contacts: [Contact]) {
+  init(id: String, owner: String, name: String, industry: String?, employees: String?, annualRevenue: String?, billingCity: String?, billingState: String?, contactsCount: String?, phone: String?, website: String?, type: String?, accountDescription: String?, state: WorkState, contacts: [WorkState: [Contact]]? = nil) {
     self.id = id
     self.owner = owner
     self.name = name
@@ -66,8 +66,8 @@ final class Account: NSObject, Codable {
     self.type = type
     self.accountDescription = accountDescription
     self.state = state
-    self.contacts = contacts
     super.init()
+    contacts.map { self.contacts = $0 }
   }
   
   init(dictionary: Dictionary<String, String>) {
@@ -116,8 +116,7 @@ extension Account: ManagedObject {
     let accountDescription = managedObject.value(forKey: CodingKeys.accountDescription.rawValue) as? String
     let stateString = managedObject.value(forKey: CodingKeys.state.rawValue) as? String ?? ""
     let state = WorkState(rawValue: stateString) ?? .ready
-    let contacts = [Contact]()//managedObject.value(forKey: CodingKeys.contacts.rawValue) as? [Contact] ?? [Contact]()
-    self.init(id: id, owner: owner, name: name, industry: industry, employees: employees, annualRevenue: annualRevenue, billingCity: billingCity, billingState: billingState, contactsCount: contactsCount, phone: phone, website: website, type: type, accountDescription: accountDescription, state: state, contacts: contacts)
+    self.init(id: id, owner: owner, name: name, industry: industry, employees: employees, annualRevenue: annualRevenue, billingCity: billingCity, billingState: billingState, contactsCount: contactsCount, phone: phone, website: website, type: type, accountDescription: accountDescription, state: state)
   }
   
   func setProperties(in managedObject: NSManagedObject) {
@@ -135,7 +134,6 @@ extension Account: ManagedObject {
     managedObject.setValue(type, forKey: CodingKeys.type.rawValue)
     managedObject.setValue(accountDescription, forKey: CodingKeys.accountDescription.rawValue)
     managedObject.setValue(state.rawValue, forKey: CodingKeys.state.rawValue)
-//    managedObject.setValue(contacts, forKey: CodingKeys.contacts.rawValue)
   }
 }
 
