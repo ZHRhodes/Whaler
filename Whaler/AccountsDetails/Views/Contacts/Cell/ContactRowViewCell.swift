@@ -14,6 +14,21 @@ class ContactRowViewCell: UITableViewCell {
   static let id = "ContactRowViewCellID"
   var cellView: UIHostingController<ContactRowView>!
   
+  override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+    super.init(style: style, reuseIdentifier: reuseIdentifier)
+    configure()
+
+  }
+  
+  required init?(coder: NSCoder) {
+    super.init(coder: coder)
+    configure()
+  }
+  
+  private func configure() {
+    selectionStyle = .none
+  }
+  
   func configure(withContact contact: Contact) {
     if cellView == nil {
       configureCellView(with: contact)

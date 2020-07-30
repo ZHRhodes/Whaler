@@ -13,3 +13,15 @@ editor.addEventListener("input", function() {
 document.addEventListener("selectionchange", function() {
     window.webkit.messageHandlers.heightDidChange.postMessage(document.body.offsetHeight);
 }, false);
+
+function restoreState() {
+  var editor = document.querySelector("trix-editor").editor
+  editor.loadJSON(JSON.parse('{"document":[{"text":[{"type":"string","attributes":{},"string":"test"},{"type":"string","attributes":{"blockBreak":true},"string":"\\n"}],"attributes":["heading1"]}],"selectedRange":[0,4]}'))
+}
+
+function restoreEditor(state) {
+  console.log("restoring!!-----------------------------------------")
+  var editor = document.querySelector("trix-editor").editor
+  editor.loadJSON(JSON.parse(state))
+  console.log(state)
+}

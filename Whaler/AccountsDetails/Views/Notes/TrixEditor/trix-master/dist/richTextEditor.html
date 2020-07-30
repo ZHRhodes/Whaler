@@ -4,18 +4,16 @@
         <meta name="viewport" content="initial-scale=1.0" />
         <link rel="stylesheet" type="text/css" href="trix.css">
         <script type="text/javascript" src="trix.js"></script>
+        <script type="text/javascript" src="richTextEditor.js"></script>
     </head>
     <body>
       <input id="x" value="" type="hidden" name="content">
+        <input type="button" value="hello" onClick="restoreState()">
       <trix-editor id="editor" input="x"></trix-editor>
       <script>
         function serializeEditor() {
           var editor = document.querySelector("trix-editor").editor
           return JSON.stringify(editor)
-        }
-        function restoreEditor(state) {
-          var editor = document.querySelector("trix-editor").editor
-          editor.loadJSON(JSON.parse(state))
         }
       </script>
     </body>
