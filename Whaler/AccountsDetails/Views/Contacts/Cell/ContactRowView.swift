@@ -9,11 +9,7 @@
 import SwiftUI
 
 struct ContactRowView: View {
-  let contact: Contact
-  
-  init(contact: Contact) {
-    self.contact = contact
-  }
+  @ObservedObject<Contact> var contact: Contact
   
   var body: some View {
     HStack {

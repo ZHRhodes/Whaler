@@ -12,7 +12,7 @@ import SwiftUI
 class AccountStateTagView: UIView {
   static let height: CGFloat = 70
   
-  init(state: WorkState) {
+  init(state: WorkState, sidePadding: CGFloat = 24) {
     super.init(frame: .zero)
     let backgroundView = makeBackgroundView(with: state.color)
     let label = makeLabel(with: state.rawValue)
@@ -21,7 +21,7 @@ class AccountStateTagView: UIView {
     label.centerXAnchor.constraint(equalTo: backgroundView.centerXAnchor).isActive = true
     label.centerYAnchor.constraint(equalTo: backgroundView.centerYAnchor).isActive = true
     
-    backgroundView.widthAnchor.constraint(equalTo: label.widthAnchor, constant: 48).isActive = true
+    backgroundView.widthAnchor.constraint(equalTo: label.widthAnchor, constant: sidePadding*2).isActive = true
     
     heightAnchor.constraint(equalTo: backgroundView.heightAnchor, constant: (2/7) * AccountStateTagView.height).isActive = true
     backgroundColor = .white

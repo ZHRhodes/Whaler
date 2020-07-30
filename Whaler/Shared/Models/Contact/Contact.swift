@@ -118,3 +118,5 @@ extension Contact: NSItemProviderReading {
     }
   }
 }
+
+extension Contact: ObservableObject {}

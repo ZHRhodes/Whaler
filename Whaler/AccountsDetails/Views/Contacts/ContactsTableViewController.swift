@@ -24,7 +24,11 @@ struct ContactsTableViewControllerRepresentable: UIViewControllerRepresentable {
 
 class ContactsTableViewController: UIViewController {
   private let tableView = UITableView()
-  private var contacts: [WorkState: [Contact]]
+  private var contacts: [WorkState: [Contact]] {
+    didSet {
+      print(contacts)
+    }
+  }
   
   init(contacts: [WorkState: [Contact]]) {
     self.contacts = contacts
@@ -37,15 +41,17 @@ class ContactsTableViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    view.backgroundColor = .red
     configureTableView()
   }
   
   private func configureTableView() {
-    tableView.backgroundColor = .blue
     tableView.delegate = self
     tableView.dataSource = self
     tableView.translatesAutoresizingMaskIntoConstraints = false
+    tableView.dragDelegate = self
+    tableView.dropDelegate = self
+    tableView.dragInteractionEnabled = true
+    tableView.register(ContactRowViewCell.self, forCellReuseIdentifier: ContactRowViewCell.id)
     
     view.addSubview(tableView)
     let constraints = [
@@ -56,11 +62,38 @@ class ContactsTableViewController: UIViewController {
     ]
     NSLayoutConstraint.activate(constraints)
   }
+  
+  func moveContact(from fromPath: IndexPath, to toPath: IndexPath) {
+    let fromState = WorkState.allCases[fromPath.section]
+    guard let contactBeingMoved = contacts[fromState]?.remove(at: fromPath.row) else { return }
+
+    let toState = WorkState.allCases[toPath.section]
+    contactBeingMoved.state = toState
+    contacts[toState]?.insert(contactBeingMoved, at: toPath.row)
+  }
 }
 
 extension ContactsTableViewController: UITableViewDataSource, UITableViewDelegate {
   func numberOfSections(in tableView: UITableView) -> Int {
     return WorkState.allCases.count
+  }
+  
+  func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    let state = WorkState.allCases[section]
+    let view = AccountStateTagView(state: state, sidePadding: 16)
+    return view
+  }
+  
+  func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    return 55
+  }
+  
+  func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+    return UIView()
+  }
+  
+  func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+    return 20
   }
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -70,14 +103,49 @@ extension ContactsTableViewController: UITableViewDataSource, UITableViewDelegat
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let cell = UITableViewCell()
     let state = WorkState.allCases[indexPath.section]
-    cell.textLabel?.text = contacts[state]?[indexPath.row].fullName
+    guard let contact = contacts[state]?[indexPath.row],
+          let cell = tableView.dequeueReusableCell(withIdentifier: ContactRowViewCell.id) as? ContactRowViewCell else {
+      return UITableViewCell()
+    }
+    cell.configure(withContact: contact)
     return cell
   }
+}
+
+extension ContactsTableViewController: UITableViewDragDelegate, UITableViewDropDelegate {
+  func tableView(_ tableView: UITableView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
+    let state = WorkState.allCases[indexPath.section]
+    let contact = contacts[state]![indexPath.row]
+    let itemProvider = NSItemProvider(object: contact)
+    let dragItem = UIDragItem(itemProvider: itemProvider)
+    return [dragItem]
+  }
   
-  func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-    return 100
+  func tableView(_ tableView: UITableView, dropSessionDidUpdate session: UIDropSession, withDestinationIndexPath destinationIndexPath: IndexPath?) -> UITableViewDropProposal {
+    return UITableViewDropProposal(operation: .move, intent: .insertAtDestinationIndexPath)
+  }
+  
+  func tableView(_ tableView: UITableView, performDropWith coordinator: UITableViewDropCoordinator) {
+    let insertionIndex: IndexPath
+    if let indexPath = coordinator.destinationIndexPath {
+      insertionIndex = indexPath
+    } else {
+      let section = tableView.numberOfSections - 1
+      let row = tableView.numberOfRows(inSection: section)
+      insertionIndex = IndexPath(row: row, section: section)
+    }
+    
+    for item in coordinator.items {
+      guard let sourceIndexPath = item.sourceIndexPath else { continue }
+      item.dragItem.itemProvider.loadObject(ofClass: Contact.self) { (object, error) in
+        DispatchQueue.main.async {
+          self.moveContact(from: sourceIndexPath, to: insertionIndex)
+          self.tableView.reloadData()
+        }
+      }
+    }
   }
 }
+
 
