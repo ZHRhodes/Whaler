@@ -12,7 +12,7 @@ import CoreData
 
 final class Account: NSObject, Codable {
   private enum CodingKeys: String, CodingKey {
-    case id, owner, name, industry, employees, annualRevenue, billingCity, billingState, contactsCount, phone, website, type, accountDescription, state, contacts
+    case id, owner, name, industry, employees, annualRevenue, billingCity, billingState, contactsCount, phone, website, type, accountDescription, state, contacts, notes
   }
   
   let id: String
@@ -33,6 +33,8 @@ final class Account: NSObject, Codable {
   
   var contacts: [WorkState: [Contact]] = .init(uniqueKeysWithValues: WorkState.allCases.map { ($0, []) })
   
+  var notes: String
+  
   override init() {
     id = ""
     owner = ""
@@ -48,10 +50,11 @@ final class Account: NSObject, Codable {
     type = ""
     accountDescription = ""
     state = .inProgress
+    notes = ""
     super.init()
   }
   
-  init(id: String, owner: String, name: String, industry: String?, employees: String?, annualRevenue: String?, billingCity: String?, billingState: String?, contactsCount: String?, phone: String?, website: String?, type: String?, accountDescription: String?, state: WorkState, contacts: [WorkState: [Contact]]? = nil) {
+  init(id: String, owner: String, name: String, industry: String?, employees: String?, annualRevenue: String?, billingCity: String?, billingState: String?, contactsCount: String?, phone: String?, website: String?, type: String?, accountDescription: String?, state: WorkState, contacts: [WorkState: [Contact]]? = nil, notes: String = "") {
     self.id = id
     self.owner = owner
     self.name = name
@@ -66,6 +69,7 @@ final class Account: NSObject, Codable {
     self.type = type
     self.accountDescription = accountDescription
     self.state = state
+    self.notes = notes
     super.init()
     contacts.map { self.contacts = $0 }
   }
@@ -85,6 +89,7 @@ final class Account: NSObject, Codable {
     type = dictionary["Type"]
     accountDescription = dictionary["Account Description"]
     state = WorkState.allCases.randomElement()!
+    notes = ""
   }
 }
 

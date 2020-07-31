@@ -177,9 +177,14 @@ final class RichTextEditor: UIView, WKNavigationDelegate, UIScrollViewDelegate {
   
   func serializeEditor(success: @escaping (String) -> Void, failure: @escaping (Error?) -> Void) {
     editorView.evaluateJavaScript("serializeEditor()") { (response, error) in
-      guard error == nil else { return failure(error) }
-      let responseString = String(describing: response)
+      guard error == nil,
+            var responseString = response as? String else { return failure(error) }
+      responseString = responseString.replacingOccurrences(of: #"\n"#, with: #"\\n"#)
       success(responseString)
+//      let utf16array = Array(responseString.utf16)
+//      let string = String(utf16CodeUnits: utf16array, count: utf16array.count)
+//      string.replace
+//      success(string)
     }
   }
   

@@ -70,6 +70,8 @@ class ContactsTableViewController: UIViewController {
     let toState = WorkState.allCases[toPath.section]
     contactBeingMoved.state = toState
     contacts[toState]?.insert(contactBeingMoved, at: toPath.row)
+    
+    ObjectManager.save(contactBeingMoved) //Move, or make this async, or both
   }
 }
 

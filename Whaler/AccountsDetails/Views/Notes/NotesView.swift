@@ -10,11 +10,11 @@ import SwiftUI
 
 struct NotesView: View {
   let initialState: String
-  private let editor = RichTextEditor()
+  let editor = RichTextEditor()
   private(set) var editorView: RichTextEditorRepresentable!
   
   init(initialState: String) {
-    self.initialState = #"{"document":[{"text":[{"type":"string","attributes":{},"string":"test"},{"type":"string","attributes":{"blockBreak":true},"string":"\\n"}],"attributes":["heading1"]}],"selectedRange":[0,4]}"#
+    self.initialState = initialState
     editorView = RichTextEditorRepresentable(editor: editor)
   }
   
@@ -46,7 +46,7 @@ struct NotesView: View {
 
 struct NotesView_Previews: PreviewProvider {
   static var previews: some View {
-    NotesView(initialState: "")
+    NotesView(initialState: #"{"document":[{"text":[{"type":"string","attributes":{},"string":"test"},{"type":"string","attributes":{"blockBreak":true},"string":"\\n"}],"attributes":["heading1"]}],"selectedRange":[0,4]}"#)
       .frame(width: 600, height: 400)
   }
 }

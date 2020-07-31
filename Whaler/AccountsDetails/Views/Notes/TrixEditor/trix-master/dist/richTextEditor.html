@@ -8,12 +8,13 @@
     </head>
     <body>
       <input id="x" value="" type="hidden" name="content">
-        <input type="button" value="hello" onClick="restoreState()">
       <trix-editor id="editor" input="x"></trix-editor>
       <script>
         function serializeEditor() {
           var editor = document.querySelector("trix-editor").editor
-          return JSON.stringify(editor)
+          var serializedContent = JSON.stringify(editor)
+          console.log(serializedContent)
+          return serializedContent
         }
       </script>
     </body>

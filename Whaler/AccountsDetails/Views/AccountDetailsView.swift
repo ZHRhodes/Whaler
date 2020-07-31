@@ -10,6 +10,12 @@ import SwiftUI
 
 struct AccountDetailsView: View {
   let account: Account
+  let notesView: NotesView
+  
+  init(account: Account) {
+    self.account = account
+    self.notesView = NotesView(initialState: account.notes)
+  }
   
 //  let tempContacts: [ContactCellItem] = [
 //    ContactCellItem(state: WorkState.inProgress),
@@ -30,7 +36,7 @@ struct AccountDetailsView: View {
         VStack {
           CompanyInfoView(account: self.account)
             .frame(height: metrics.size.height * 0.3)
-          NotesView(initialState: "")
+          notesView
         }
           .frame(width: metrics.size.width * 0.6)
         Rectangle()
@@ -38,13 +44,19 @@ struct AccountDetailsView: View {
           .frame(width: 1)
         ContactsTableView(contacts: self.account.contacts)
       }
-//      .navigationBarItems(leading: backButton)
+      .navigationBarItems(leading: backButton)
     }
   }
   
   var backButton: some View {
     Button("<") {
       presentation.wrappedValue.dismiss()
+      notesView.editorView.editor?.serializeEditor(success: { notes in
+        account.notes = notes
+        ObjectManager.save(account)
+      }, failure: { error in
+        print(error)
+      })
     }
   }
 }
