@@ -82,7 +82,7 @@ extension ContactsTableViewController: UITableViewDataSource, UITableViewDelegat
   
   func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
     let state = WorkState.allCases[section]
-    let view = AccountStateTagView(state: state, sidePadding: 16)
+    let view = AccountStateTagView(state: state, sidePadding: 16, fontSize: 17.0)
     return view
   }
   

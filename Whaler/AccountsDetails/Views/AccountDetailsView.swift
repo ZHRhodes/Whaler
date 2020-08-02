@@ -49,7 +49,7 @@ struct AccountDetailsView: View {
   }
   
   var backButton: some View {
-    Button("<") {
+    Button(action: {
       presentation.wrappedValue.dismiss()
       notesView.editorView.editor?.serializeEditor(success: { notes in
         account.notes = notes
@@ -57,6 +57,8 @@ struct AccountDetailsView: View {
       }, failure: { error in
         print(error)
       })
+    }) {
+      Image("backArrow").resizable()
     }
   }
 }

@@ -12,7 +12,7 @@ import CoreData
 
 final class Account: NSObject, Codable {
   private enum CodingKeys: String, CodingKey {
-    case id, owner, name, industry, employees, annualRevenue, billingCity, billingState, contactsCount, phone, website, type, accountDescription, state, contacts, notes
+    case id, owner, name, industry, employees, annualRevenue, billingCity, billingState, phone, website, type, accountDescription, state, contacts, notes
   }
   
   let id: String
@@ -23,7 +23,9 @@ final class Account: NSObject, Codable {
   let annualRevenue: String?
   let billingCity: String?
   let billingState: String?
-  let contactsCount: String?
+  var contactsCount: String {
+    return String(contacts.values.reduce(0, { $0 + $1.count}))
+  }
   let phone: String?
   let website: String?
   let type: String?
@@ -44,7 +46,6 @@ final class Account: NSObject, Codable {
     annualRevenue = ""
     billingCity = ""
     billingState = ""
-    contactsCount = ""
     phone = ""
     website = ""
     type = ""
@@ -54,7 +55,7 @@ final class Account: NSObject, Codable {
     super.init()
   }
   
-  init(id: String, owner: String, name: String, industry: String?, employees: String?, annualRevenue: String?, billingCity: String?, billingState: String?, contactsCount: String?, phone: String?, website: String?, type: String?, accountDescription: String?, state: WorkState, contacts: [WorkState: [Contact]]? = nil, notes: String = "") {
+  init(id: String, owner: String, name: String, industry: String?, employees: String?, annualRevenue: String?, billingCity: String?, billingState: String?, phone: String?, website: String?, type: String?, accountDescription: String?, state: WorkState, contacts: [WorkState: [Contact]]? = nil, notes: String = "") {
     self.id = id
     self.owner = owner
     self.name = name
@@ -63,7 +64,6 @@ final class Account: NSObject, Codable {
     self.annualRevenue = annualRevenue
     self.billingCity = billingCity
     self.billingState = billingState
-    self.contactsCount = contactsCount
     self.phone = phone
     self.website = website
     self.type = type
@@ -83,7 +83,6 @@ final class Account: NSObject, Codable {
     annualRevenue = dictionary["Annual Revenue"]
     billingCity = dictionary["Billing City"]
     billingState = dictionary["Billing State/Province"]
-    contactsCount = String(Int.random(in: Range(uncheckedBounds: (5, 25))))
     phone = dictionary["Account: Phone"]
     website = dictionary["Website"]
     type = dictionary["Type"]
@@ -114,14 +113,14 @@ extension Account: ManagedObject {
     let annualRevenue = managedObject.value(forKey: CodingKeys.annualRevenue.rawValue) as? String
     let billingCity = managedObject.value(forKey: CodingKeys.billingCity.rawValue) as? String
     let billingState = managedObject.value(forKey: CodingKeys.billingState.rawValue) as? String
-    let contactsCount = managedObject.value(forKey: CodingKeys.contactsCount.rawValue) as? String
     let phone = managedObject.value(forKey: CodingKeys.phone.rawValue) as? String
     let website = managedObject.value(forKey: CodingKeys.website.rawValue) as? String
     let type = managedObject.value(forKey: CodingKeys.type.rawValue) as? String
     let accountDescription = managedObject.value(forKey: CodingKeys.accountDescription.rawValue) as? String
     let stateString = managedObject.value(forKey: CodingKeys.state.rawValue) as? String ?? ""
     let state = WorkState(rawValue: stateString) ?? .ready
-    self.init(id: id, owner: owner, name: name, industry: industry, employees: employees, annualRevenue: annualRevenue, billingCity: billingCity, billingState: billingState, contactsCount: contactsCount, phone: phone, website: website, type: type, accountDescription: accountDescription, state: state)
+    let notes = managedObject.value(forKey: CodingKeys.notes.rawValue) as? String ?? ""
+    self.init(id: id, owner: owner, name: name, industry: industry, employees: employees, annualRevenue: annualRevenue, billingCity: billingCity, billingState: billingState, phone: phone, website: website, type: type, accountDescription: accountDescription, state: state, notes: notes)
   }
   
   func setProperties(in managedObject: NSManagedObject) {
@@ -133,12 +132,12 @@ extension Account: ManagedObject {
     managedObject.setValue(annualRevenue, forKey: CodingKeys.annualRevenue.rawValue)
     managedObject.setValue(billingCity, forKey: CodingKeys.billingCity.rawValue)
     managedObject.setValue(billingState, forKey: CodingKeys.billingState.rawValue)
-    managedObject.setValue(contactsCount, forKey: CodingKeys.contactsCount.rawValue)
     managedObject.setValue(phone, forKey: CodingKeys.phone.rawValue)
     managedObject.setValue(website, forKey: CodingKeys.website.rawValue)
     managedObject.setValue(type, forKey: CodingKeys.type.rawValue)
     managedObject.setValue(accountDescription, forKey: CodingKeys.accountDescription.rawValue)
     managedObject.setValue(state.rawValue, forKey: CodingKeys.state.rawValue)
+    managedObject.setValue(notes, forKey: CodingKeys.notes.rawValue)
   }
 }
 
