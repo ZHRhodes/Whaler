@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		14025FCA24D6BF5D00408379 /* AuthenticationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14025FC924D6BF5D00408379 /* AuthenticationViewController.swift */; };
 		140AE79624A9AA0B00F7705E /* MainInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140AE79524A9AA0B00F7705E /* MainInteractor.swift */; };
 		140AE79924A9AA5C00F7705E /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140AE79824A9AA5C00F7705E /* Account.swift */; };
 		140AE79B24A9B48000F7705E /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 140AE79A24A9B48000F7705E /* Colors.xcassets */; };
@@ -15,6 +16,7 @@
 		140AE7A324A9BA6500F7705E /* MainTableSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140AE7A224A9BA6500F7705E /* MainTableSectionHeader.swift */; };
 		140AE7A524A9BEC300F7705E /* AccountTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140AE7A424A9BEC300F7705E /* AccountTableCell.swift */; };
 		140AE7A924A9DF3300F7705E /* CommonButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140AE7A824A9DF3300F7705E /* CommonButton.swift */; };
+		142EC6A824D6AE01004F7A28 /* AuthenticationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142EC6A724D6AE01004F7A28 /* AuthenticationView.swift */; };
 		1440A20424C947FA00E36853 /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1440A20324C947FA00E36853 /* Contact.swift */; };
 		144AECDA24D26658009625BE /* ContactRowViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144AECD924D26658009625BE /* ContactRowViewCell.swift */; };
 		144FA6BD24C2C0C500506F15 /* CompanyInfoHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144FA6BC24C2C0C500506F15 /* CompanyInfoHeaderView.swift */; };
@@ -59,6 +61,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		14025FC924D6BF5D00408379 /* AuthenticationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationViewController.swift; sourceTree = "<group>"; };
 		140AE79524A9AA0B00F7705E /* MainInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainInteractor.swift; sourceTree = "<group>"; };
 		140AE79824A9AA5C00F7705E /* Account.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
 		140AE79A24A9B48000F7705E /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
@@ -67,6 +70,7 @@
 		140AE7A224A9BA6500F7705E /* MainTableSectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableSectionHeader.swift; sourceTree = "<group>"; };
 		140AE7A424A9BEC300F7705E /* AccountTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountTableCell.swift; sourceTree = "<group>"; };
 		140AE7A824A9DF3300F7705E /* CommonButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonButton.swift; sourceTree = "<group>"; };
+		142EC6A724D6AE01004F7A28 /* AuthenticationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationView.swift; sourceTree = "<group>"; };
 		1440A20324C947FA00E36853 /* Contact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contact.swift; sourceTree = "<group>"; };
 		144AECD924D26658009625BE /* ContactRowViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactRowViewCell.swift; sourceTree = "<group>"; };
 		144FA6BC24C2C0C500506F15 /* CompanyInfoHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyInfoHeaderView.swift; sourceTree = "<group>"; };
@@ -179,6 +183,15 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		142EC6A624D6ADDD004F7A28 /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+				142EC6A724D6AE01004F7A28 /* AuthenticationView.swift */,
+				14025FC924D6BF5D00408379 /* AuthenticationViewController.swift */,
+			);
+			path = Authentication;
+			sourceTree = "<group>";
+		};
 		144AECD824D26646009625BE /* Cell */ = {
 			isa = PBXGroup;
 			children = (
@@ -265,6 +278,7 @@
 				14861ED4249F3DE100D2FA92 /* AppDelegate.swift */,
 				14861ED6249F3DE100D2FA92 /* SceneDelegate.swift */,
 				140AE7A624A9DF0B00F7705E /* Shared */,
+				142EC6A624D6ADDD004F7A28 /* Authentication */,
 				140AE79424A9A9FE00F7705E /* Main */,
 				146C35D024C5575E00DBCA23 /* AccountsDetails */,
 				140AE79C24A9B4F700F7705E /* Extensions */,
@@ -452,6 +466,7 @@
 				14861EF7249F401300D2FA92 /* CSVParser.swift in Sources */,
 				14FE635324C575CD00F7D30B /* TagView.swift in Sources */,
 				14D9CA5924B599230030B17A /* AccountStateTagView.swift in Sources */,
+				142EC6A824D6AE01004F7A28 /* AuthenticationView.swift in Sources */,
 				140AE79924A9AA5C00F7705E /* Account.swift in Sources */,
 				140AE79624A9AA0B00F7705E /* MainInteractor.swift in Sources */,
 				145A376C24C58D440081F9DB /* AccountDetailsView.swift in Sources */,
@@ -465,6 +480,7 @@
 				146C35D524C5635D00DBCA23 /* CompanyInfoView.swift in Sources */,
 				14861EFC249F49DE00D2FA92 /* DocumentPickerViewController.swift in Sources */,
 				14D9CA5B24B599300030B17A /* AccountRowValuesView.swift in Sources */,
+				14025FCA24D6BF5D00408379 /* AuthenticationViewController.swift in Sources */,
 				140AE7A924A9DF3300F7705E /* CommonButton.swift in Sources */,
 				14E63ED124B9109C003EAF22 /* Whaler.xcdatamodeld in Sources */,
 				14EF4DE924CD4F3100ED5461 /* ObjectManager.swift in Sources */,
