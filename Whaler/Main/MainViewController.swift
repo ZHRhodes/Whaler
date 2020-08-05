@@ -29,7 +29,22 @@ extension WeakRef: Hashable {
   }
 }
 
+struct MainViewControllerRepresentable: UIViewControllerRepresentable {
+  typealias UIViewControllerType = AuthenticationViewController
+  
+  func makeUIViewController(context: Context) -> AuthenticationViewController {
+    return AuthenticationViewController()
+  }
+  
+  func updateUIViewController(_ uiViewController: AuthenticationViewController, context: Context) {
+    
+  }
+}
+
 class MainViewController: UIViewController {
+  static let minSize = CGSize(width: 500, height: 500)
+  static let maxSize = CGSize(width: .max, height: .max)
+  
   let interactor = MainInteractor()
   var noDataStackView: UIStackView?
   var tableView: UITableView!
