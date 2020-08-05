@@ -14,4 +14,5 @@ extension UIColor {
   static let ready = UIColor(named: "Ready")!
   static let worked = UIColor(named: "Worked")!
   static let accent1 = UIColor(named: "Accent1")!
+  static let textInactive = UIColor(named: "textInactive")!
 }

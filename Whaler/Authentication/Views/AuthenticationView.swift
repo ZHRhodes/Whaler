@@ -34,9 +34,9 @@ struct AuthenticationView: View {
                 Spacer().frame(height: 26)
                 Text("SIGN IN").font(Font.custom(boldFontName, size: 25))
                 Spacer().frame(height: 26)
-                Text("Email")
+                CommonTextFieldRepresentable(initialText: "EMAIL").frame(height: 72)
                 Spacer().frame(height: 50)
-                Text("Password")
+                CommonTextFieldRepresentable(initialText: "PASSWORD").frame(height: 72)
                 Spacer().frame(height: 60)
                 Button(action: {
                   delegate?.signInTapped(email: "", password: "")
