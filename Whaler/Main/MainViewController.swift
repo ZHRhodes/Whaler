@@ -71,9 +71,12 @@ class MainViewController: UIViewController {
   }
   
   private func configureNoDataViews() {
-    noDataStackView = UIStackView(arrangedSubviews: [makeNoDataLabel(), makeAddCSVButton()])
+    noDataStackView = UIStackView(arrangedSubviews: [makeNoDataLabel(),
+                                                     makeAddCSVButton(),
+                                                     makeConnectToSalesforceButton()])
     noDataStackView!.spacing = 37
     noDataStackView!.axis = .vertical
+    noDataStackView?.distribution = .fillEqually
     noDataStackView?.translatesAutoresizingMaskIntoConstraints = false
     view.addSubview(noDataStackView!)
     
@@ -81,7 +84,7 @@ class MainViewController: UIViewController {
       noDataStackView!.centerXAnchor.constraint(equalTo: view.centerXAnchor),
       noDataStackView!.centerYAnchor.constraint(equalTo: view.centerYAnchor),
       noDataStackView!.widthAnchor.constraint(equalToConstant: 320),
-      noDataStackView!.heightAnchor.constraint(equalToConstant: 170)
+      noDataStackView!.heightAnchor.constraint(equalToConstant: 250)
     ]
     
     NSLayoutConstraint.activate(constraints)
@@ -106,15 +109,28 @@ class MainViewController: UIViewController {
   private func makeAddCSVButton() -> UIView {
     let button = CommonButton(style: .outline)
     button.translatesAutoresizingMaskIntoConstraints = false
-    button.layer.borderColor = UIColor(red: 0.2, green: 0.77, blue: 0.83, alpha: 1.0).cgColor
-    button.layer.borderWidth = 2.0
-    button.layer.cornerRadius = 4.0
     button.setTitle("ADD .CSV", for: .normal)
-    button.setTitleColor(.black, for: .normal)
     button.addTarget(self, action: #selector(importTapped), for: .touchUpInside)
     
     button.heightAnchor.constraint(equalToConstant: 65).isActive = true
     button.widthAnchor.constraint(equalToConstant: 156).isActive = true
+    
+    let containerView = UIView()
+    containerView.addSubview(button)
+    button.centerXAnchor.constraint(equalTo: containerView.centerXAnchor).isActive = true
+    button.centerYAnchor.constraint(equalTo: containerView.centerYAnchor).isActive = true
+    
+    return containerView
+  }
+  
+  private func makeConnectToSalesforceButton() -> UIView {
+    let button = CommonButton(style: .outline)
+    button.translatesAutoresizingMaskIntoConstraints = false
+    button.setTitle("Connect to Salesforce", for: .normal)
+    button.addTarget(self, action: #selector(connectToSalesforceTapped), for: .touchUpInside)
+    
+    button.heightAnchor.constraint(equalToConstant: 65).isActive = true
+    button.widthAnchor.constraint(equalToConstant: 300).isActive = true
     
     let containerView = UIView()
     containerView.addSubview(button)
@@ -197,6 +213,11 @@ class MainViewController: UIViewController {
         onDismiss: {}
     )
     UIApplication.shared.windows.first?.rootViewController?.present(picker, animated: true)
+  }
+  
+  @objc
+  private func connectToSalesforceTapped() {
+    
   }
 }
 

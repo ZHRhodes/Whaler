@@ -21,7 +21,7 @@ class CommonButton: UIButton {
     layer.cornerRadius = 4.0
     
     backgroundColor = style.fillColor
-    titleLabel?.textColor = style.textColor
+    setTitleColor(style.textColor, for: .normal)
     
     let hover = UIHoverGestureRecognizer(target: self, action: #selector(hovering(_:)))
     addGestureRecognizer(hover)
