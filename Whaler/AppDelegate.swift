@@ -38,6 +38,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // Saves changes in the application's managed object context before the application terminates.
     self.saveContext()
   }
+  
+  func application(_ app: UIApplication,
+                   open url: URL,
+                   options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+
+    let notification = Notification(name: Notification.Name("LaunchedWithURL"),
+                                    object:nil,
+                                    userInfo:[UIApplication.LaunchOptionsKey.url:url])
+    NotificationCenter.default.post(notification)
+    return true
+  }
 
   // MARK: - Core Data stack
 

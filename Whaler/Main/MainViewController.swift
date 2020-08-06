@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import SwiftUI
+import AuthenticationServices
 
 class WeakRef<T> where T: AnyObject {
   private(set) weak var value: T?
@@ -217,7 +218,53 @@ class MainViewController: UIViewController {
   
   @objc
   private func connectToSalesforceTapped() {
+    /*
+     https://login.salesforce.com/services/oauth2/authorize?response_type=token&
+     client_id=3MVG9lKcPoNINVBIPJjdw1J9LLJbP_pqwoJYyuisjQhr_LLurNDv7AgQvDTZwCoZuDZrXcPCmBv4o.8ds.5iE&
+     redirect_uri=https://www.customercontactinfo.com/user_callback.jspk&
+     state=mystate
+     */
     
+    //http://www.getwhaler.io/salesforce_connect_callback
+    
+    /*
+     https://login.salesforce.com/services/oauth2/authorize?response_type=token&client_id=3MVG9Kip4IKAZQEVUyT0t2bh34B.GSy._2rVDX_MVJ7a3GyUtHsAGG2GZU843.Gajp7AusaDdCEero1UuAJwK&redirect_uri=https://www.getwhaler.io/salesforce_connect_callback
+     */
+    
+    //move all this
+    
+    let urlString = #"https://login.salesforce.com/services/oauth2/authorize?response_type=token&client_id=3MVG9Kip4IKAZQEVUyT0t2bh34B.GSy._2rVDX_MVJ7a3GyUtHsAGG2GZU843.Gajp7AusaDdCEero1UuAJwK&redirect_uri=getwhaler://salesforce_connect"#
+    guard let url = URL(string: urlString) else { return }
+    let session = ASWebAuthenticationSession(url: url, callbackURLScheme: "getwhaler") { [weak self] (url, error) in
+      if let error = error {
+        print(error)
+      }
+      let accessToken = url?.fragmentValueOf("access_token") ?? ""
+      let refreshToken = url?.fragmentValueOf("refresh_token") ?? ""
+      self?.storeTokens(accessToken: accessToken, refreshToken: refreshToken)
+    }
+    session.presentationContextProvider = self
+    session.start()
+  }
+  
+  //move
+  private func storeTokens(accessToken: String, refreshToken: String) {
+    print(accessToken)
+    print(refreshToken)
+  }
+}
+
+extension URL {
+  func fragmentValueOf(_ name: String) -> String? {
+    var components = URLComponents()
+    components.query = fragment
+    return components.queryItems?.first(where: { $0.name == name })?.value
+  }
+}
+
+extension MainViewController: ASWebAuthenticationPresentationContextProviding {
+  func presentationAnchor(for session: ASWebAuthenticationSession) -> ASPresentationAnchor {
+    return view.window!
   }
 }
 
