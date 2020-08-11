@@ -87,7 +87,7 @@ final class Account: NSObject, Codable {
     website = dictionary["Website"]
     type = dictionary["Type"]
     accountDescription = dictionary["Account Description"]
-    state = WorkState.allCases.randomElement()!
+    state = .ready
     notes = ""
   }
 }

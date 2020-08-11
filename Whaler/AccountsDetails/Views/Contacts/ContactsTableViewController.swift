@@ -24,11 +24,7 @@ struct ContactsTableViewControllerRepresentable: UIViewControllerRepresentable {
 
 class ContactsTableViewController: UIViewController {
   private let tableView = UITableView()
-  private var contacts: [WorkState: [Contact]] {
-    didSet {
-      print(contacts)
-    }
-  }
+  private var contacts: [WorkState: [Contact]]
   
   init(contacts: [WorkState: [Contact]]) {
     self.contacts = contacts

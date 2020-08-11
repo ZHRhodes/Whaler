@@ -24,7 +24,14 @@ class RootContainerViewController: UIViewController {
 //    unauthorizedUserCancellable = interactor.unauthorizedUserPublisher.sink { [weak self] _ in
 //      self?.configureAuthenticationView()
 //    }
-    configureAuthenticationView()
+//    configureAuthenticationView()
+    super.viewDidLoad()
+//    configureMainView()
+  }
+  
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
+    configureMainView()
   }
   
   private func configureAuthenticationView() {
@@ -52,18 +59,24 @@ class RootContainerViewController: UIViewController {
   
   private func configureMainView() {
     mainViewController = MainViewController()
-    guard let mainView = mainViewController.view else { return }
-    view.addSubview(mainView)
+    let navigationController = UINavigationController(rootViewController: mainViewController)
+    navigationController.navigationBar.isHidden = true
+    navigationController.modalPresentationStyle = .fullScreen
     
-    mainView.translatesAutoresizingMaskIntoConstraints = false
-    let constraints = [
-      mainView.leftAnchor.constraint(equalTo: view.leftAnchor),
-      mainView.rightAnchor.constraint(equalTo: view.rightAnchor),
-      mainView.topAnchor.constraint(equalTo: view.topAnchor),
-      mainView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-    ]
+    present(navigationController, animated: false, completion: nil)
     
-    NSLayoutConstraint.activate(constraints)
+//    guard let mainView = mainViewController.view else { return }
+//    view.addSubview(mainView)
+//
+//    mainView.translatesAutoresizingMaskIntoConstraints = false
+//    let constraints = [
+//      mainView.leftAnchor.constraint(equalTo: view.leftAnchor),
+//      mainView.rightAnchor.constraint(equalTo: view.rightAnchor),
+//      mainView.topAnchor.constraint(equalTo: view.topAnchor),
+//      mainView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+//    ]
+//
+//    NSLayoutConstraint.activate(constraints)
     
     UIApplication.shared.connectedScenes.compactMap { $0 as? UIWindowScene }.forEach { windowScene in
       windowScene.sizeRestrictions?.minimumSize = MainViewController.minSize

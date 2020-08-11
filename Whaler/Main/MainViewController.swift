@@ -249,8 +249,35 @@ class MainViewController: UIViewController {
   
   //move
   private func storeTokens(accessToken: String, refreshToken: String) {
-    print(accessToken)
-    print(refreshToken)
+    let r1: OSStatus?
+    if let data = accessToken.data(using: .utf8) {
+      r1 = Keychain.save(key: .accessToken, data: data)
+    }
+    
+    let r2: OSStatus?
+    if let data = refreshToken.data(using: .utf8) {
+      r2 = Keychain.save(key: .refreshToken, data: data)
+    }
+  
+    
+    print("Access Token: \(accessToken)")
+    print("Refresh Token: \(refreshToken)")
+    
+    var at: String?
+    if let data = Keychain.load(key: .accessToken) {
+      at = String(data: data, encoding: .utf8)
+    }
+    
+    var rt: String?
+    if let data = Keychain.load(key: .refreshToken) {
+      rt = String(data: data, encoding: .utf8)
+    }
+    
+    print("AT: \(at)")
+    print("RT: \(rt)")
+    
+    Salesforce.accessToken = accessToken
+    Salesforce.refreshToken = refreshToken
   }
 }
 
@@ -326,6 +353,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     tableView.deselectRow(at: indexPath, animated: true)
     let accountState = interactor.accountStates[indexPath.section]
     let account = interactor.accounts[accountState]![indexPath.row]
+    interactor.retrieveAndAssignContacts(for: account)
     let view = AccountDetailsView(account: account)
     let viewController = UIHostingController(rootView: view)
     navigationController?.pushViewController(viewController, animated: false)

@@ -49,7 +49,7 @@ final class Contact: NSObject, Codable {
     title = dictionary["Title"] ?? ""
     phone = dictionary["Phone"]
     email = dictionary["Email"]
-    state = WorkState.allCases.randomElement()!
+    state = .ready
   }
 }
 

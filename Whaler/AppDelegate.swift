@@ -16,6 +16,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     UITableViewCell.appearance().backgroundColor = .white
     UITableViewHeaderFooterView.appearance().tintColor = .white
     UITableView.appearance().separatorStyle = .none
+//    print("Documents Directory: ", FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).last ?? "Not Found!")
+    if let directoryLocation = FileManager.default.urls(for: .libraryDirectory, in: .userDomainMask).last {
+      print("Documents Directory: \(directoryLocation)Application Support")
+    }
     return true
   }
 

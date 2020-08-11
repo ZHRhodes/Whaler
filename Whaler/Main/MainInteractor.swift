@@ -41,6 +41,8 @@ class MainInteractor {
     let toState = accountStates[toPath.section]
     accountBeingMoved.state = toState
     accounts[toState]?.insert(accountBeingMoved, at: toPath.row)
+    
+    ObjectManager.save(accountBeingMoved) //Move, or make this async, or both
   }
   
   func retrieveAccounts() {
@@ -49,7 +51,18 @@ class MainInteractor {
       accounts[account.state]?.append(account)
     }
     
+    //store contact count to Account so that this isn't
+    //required in order to show correct number of contacts on the accounts page
     retrieveAndAssignContacts()
+  }
+  
+  func retrieveAndAssignContacts(for account: Account) {
+    let predicate = NSPredicate(format: "accountID == %@", account.id)
+    let retrievedContacts = ObjectManager.retrieveAll(ofType: Contact.self, with: predicate)
+    account.contacts = .init(uniqueKeysWithValues: WorkState.allCases.map { ($0, []) })
+    retrievedContacts.forEach { contact in
+      account.contacts[contact.state]?.append(contact)
+    }
   }
   
   private func retrieveAndAssignContacts() {

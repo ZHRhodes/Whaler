@@ -33,10 +33,11 @@ enum ObjectManager {
     }
   }
   
-  static func retrieveAll<T: ManagedObject>(ofType type: T.Type) -> [T] {
+  static func retrieveAll<T: ManagedObject>(ofType type: T.Type, with predicate: NSPredicate? = nil) -> [T] {
     guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return [] }
     let managedContext = appDelegate.persistentContainer.viewContext
     let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: T.entityName)
+    predicate.map { fetchRequest.predicate = $0 }
     
     do {
       return try managedContext.fetch(fetchRequest).map(T.init)
