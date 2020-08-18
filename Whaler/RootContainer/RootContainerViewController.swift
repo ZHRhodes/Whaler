@@ -24,14 +24,10 @@ class RootContainerViewController: UIViewController {
 //    unauthorizedUserCancellable = interactor.unauthorizedUserPublisher.sink { [weak self] _ in
 //      self?.configureAuthenticationView()
 //    }
-//    configureAuthenticationView()
+ 
     super.viewDidLoad()
+    configureAuthenticationView()
 //    configureMainView()
-  }
-  
-  override func viewDidAppear(_ animated: Bool) {
-    super.viewDidAppear(animated)
-    configureMainView()
   }
   
   private func configureAuthenticationView() {

@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -25,11 +25,16 @@
 		145A376C24C58D440081F9DB /* AccountDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145A376B24C58D440081F9DB /* AccountDetailsView.swift */; };
 		146834FC24DA76CE0075B639 /* RootContainerInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146834FB24DA76CE0075B639 /* RootContainerInteractor.swift */; };
 		146834FF24DA99810075B639 /* CommonTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146834FE24DA99810075B639 /* CommonTextField.swift */; };
+		146C344624EA53690009C68C /* UserDefaultsManaged.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146C344524EA53690009C68C /* UserDefaultsManaged.swift */; };
 		146C35CF24C2CA9700DBCA23 /* TitleValueView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146C35CE24C2CA9700DBCA23 /* TitleValueView.swift */; };
 		146C35D324C557C800DBCA23 /* CompanyInfoValuesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146C35D224C557C800DBCA23 /* CompanyInfoValuesView.swift */; };
 		146C35D524C5635D00DBCA23 /* CompanyInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146C35D424C5635D00DBCA23 /* CompanyInfoView.swift */; };
 		146C35D924C5689B00DBCA23 /* ContactRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146C35D824C5689B00DBCA23 /* ContactRowView.swift */; };
 		146C35DB24C56A0100DBCA23 /* ContactsTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146C35DA24C56A0100DBCA23 /* ContactsTableView.swift */; };
+		1480800924EA4AE8007EB6D1 /* Networker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1480800824EA4AE8007EB6D1 /* Networker.swift */; };
+		1480800B24EA4B32007EB6D1 /* NetworkInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1480800A24EA4B32007EB6D1 /* NetworkInterface.swift */; };
+		1480800E24EA4BDA007EB6D1 /* Just in Frameworks */ = {isa = PBXBuildFile; productRef = 1480800D24EA4BDA007EB6D1 /* Just */; };
+		1480801024EA4BE7007EB6D1 /* JustNetworker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1480800F24EA4BE7007EB6D1 /* JustNetworker.swift */; };
 		14861ED5249F3DE100D2FA92 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14861ED4249F3DE100D2FA92 /* AppDelegate.swift */; };
 		14861ED7249F3DE100D2FA92 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14861ED6249F3DE100D2FA92 /* SceneDelegate.swift */; };
 		14861ED9249F3DE100D2FA92 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14861ED8249F3DE100D2FA92 /* MainViewController.swift */; };
@@ -84,11 +89,15 @@
 		145A376B24C58D440081F9DB /* AccountDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDetailsView.swift; sourceTree = "<group>"; };
 		146834FB24DA76CE0075B639 /* RootContainerInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootContainerInteractor.swift; sourceTree = "<group>"; };
 		146834FE24DA99810075B639 /* CommonTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonTextField.swift; sourceTree = "<group>"; };
+		146C344524EA53690009C68C /* UserDefaultsManaged.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManaged.swift; sourceTree = "<group>"; };
 		146C35CE24C2CA9700DBCA23 /* TitleValueView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleValueView.swift; sourceTree = "<group>"; };
 		146C35D224C557C800DBCA23 /* CompanyInfoValuesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyInfoValuesView.swift; sourceTree = "<group>"; };
 		146C35D424C5635D00DBCA23 /* CompanyInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyInfoView.swift; sourceTree = "<group>"; };
 		146C35D824C5689B00DBCA23 /* ContactRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactRowView.swift; sourceTree = "<group>"; };
 		146C35DA24C56A0100DBCA23 /* ContactsTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsTableView.swift; sourceTree = "<group>"; };
+		1480800824EA4AE8007EB6D1 /* Networker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networker.swift; sourceTree = "<group>"; };
+		1480800A24EA4B32007EB6D1 /* NetworkInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkInterface.swift; sourceTree = "<group>"; };
+		1480800F24EA4BE7007EB6D1 /* JustNetworker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JustNetworker.swift; sourceTree = "<group>"; };
 		14861ED1249F3DE100D2FA92 /* Whaler.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Whaler.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		14861ED4249F3DE100D2FA92 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		14861ED6249F3DE100D2FA92 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -124,6 +133,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1480800E24EA4BDA007EB6D1 /* Just in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -183,6 +193,7 @@
 				140AE79724A9AA4B00F7705E /* Models */,
 				14D97D7824DBEC4B00058B09 /* Keychain.swift */,
 				14A2834624DE510D0016BA82 /* Salesforce.swift */,
+				146C344524EA53690009C68C /* UserDefaultsManaged.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -283,6 +294,16 @@
 			path = Contacts;
 			sourceTree = "<group>";
 		};
+		1480800724EA4AD2007EB6D1 /* NetworkLayer */ = {
+			isa = PBXGroup;
+			children = (
+				1480800824EA4AE8007EB6D1 /* Networker.swift */,
+				1480800A24EA4B32007EB6D1 /* NetworkInterface.swift */,
+				1480800F24EA4BE7007EB6D1 /* JustNetworker.swift */,
+			);
+			path = NetworkLayer;
+			sourceTree = "<group>";
+		};
 		14861EC8249F3DE100D2FA92 = {
 			isa = PBXGroup;
 			children = (
@@ -304,6 +325,7 @@
 		14861ED3249F3DE100D2FA92 /* Whaler */ = {
 			isa = PBXGroup;
 			children = (
+				1480800724EA4AD2007EB6D1 /* NetworkLayer */,
 				14861EF8249F439600D2FA92 /* Whaler.entitlements */,
 				14861ED4249F3DE100D2FA92 /* AppDelegate.swift */,
 				14861ED6249F3DE100D2FA92 /* SceneDelegate.swift */,
@@ -394,6 +416,9 @@
 			dependencies = (
 			);
 			name = Whaler;
+			packageProductDependencies = (
+				1480800D24EA4BDA007EB6D1 /* Just */,
+			);
 			productName = Whaler;
 			productReference = 14861ED1249F3DE100D2FA92 /* Whaler.app */;
 			productType = "com.apple.product-type.application";
@@ -444,6 +469,9 @@
 				Base,
 			);
 			mainGroup = 14861EC8249F3DE100D2FA92;
+			packageReferences = (
+				1480800C24EA4BDA007EB6D1 /* XCRemoteSwiftPackageReference "Just" */,
+			);
 			productRefGroup = 14861ED2249F3DE100D2FA92 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -497,6 +525,7 @@
 				14861ED5249F3DE100D2FA92 /* AppDelegate.swift in Sources */,
 				14861ED7249F3DE100D2FA92 /* SceneDelegate.swift in Sources */,
 				14861EF7249F401300D2FA92 /* CSVParser.swift in Sources */,
+				146C344624EA53690009C68C /* UserDefaultsManaged.swift in Sources */,
 				14FE635324C575CD00F7D30B /* TagView.swift in Sources */,
 				14D9CA5924B599230030B17A /* AccountStateTagView.swift in Sources */,
 				142EC6A824D6AE01004F7A28 /* AuthenticationView.swift in Sources */,
@@ -511,6 +540,7 @@
 				146C35D324C557C800DBCA23 /* CompanyInfoValuesView.swift in Sources */,
 				14D97D7924DBEC4B00058B09 /* Keychain.swift in Sources */,
 				140AE79E24A9B50900F7705E /* UIColor+Extensions.swift in Sources */,
+				1480800B24EA4B32007EB6D1 /* NetworkInterface.swift in Sources */,
 				146C35D524C5635D00DBCA23 /* CompanyInfoView.swift in Sources */,
 				14861EFC249F49DE00D2FA92 /* DocumentPickerViewController.swift in Sources */,
 				14D9CA5B24B599300030B17A /* AccountRowValuesView.swift in Sources */,
@@ -521,6 +551,8 @@
 				14E63ED124B9109C003EAF22 /* Whaler.xcdatamodeld in Sources */,
 				14EF4DE924CD4F3100ED5461 /* ObjectManager.swift in Sources */,
 				140AE7A324A9BA6500F7705E /* MainTableSectionHeader.swift in Sources */,
+				1480801024EA4BE7007EB6D1 /* JustNetworker.swift in Sources */,
+				1480800924EA4AE8007EB6D1 /* Networker.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -795,6 +827,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		1480800C24EA4BDA007EB6D1 /* XCRemoteSwiftPackageReference "Just" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/dduan/Just";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.8.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		1480800D24EA4BDA007EB6D1 /* Just */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1480800C24EA4BDA007EB6D1 /* XCRemoteSwiftPackageReference "Just" */;
+			productName = Just;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		14E63ECF24B9109C003EAF22 /* Whaler.xcdatamodeld */ = {

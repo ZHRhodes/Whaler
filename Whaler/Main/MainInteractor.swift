@@ -86,4 +86,9 @@ class MainInteractor {
     accounts = .init(uniqueKeysWithValues: self.accountStates.map { ($0, []) })
     ObjectManager.deleteAll(ofType: Account.self)
   }
+  
+  func fetchAccountsFromSalesforce() {
+    let accounts = Salesforce.fetchAllAccountsNotStartingWith("Customer")
+    print(accounts)
+  }
 }

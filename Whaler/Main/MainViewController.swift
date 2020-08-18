@@ -242,6 +242,7 @@ class MainViewController: UIViewController {
       let accessToken = url?.fragmentValueOf("access_token") ?? ""
       let refreshToken = url?.fragmentValueOf("refresh_token") ?? ""
       self?.storeTokens(accessToken: accessToken, refreshToken: refreshToken)
+      self?.interactor.fetchAccountsFromSalesforce()
     }
     session.presentationContextProvider = self
     session.start()
@@ -249,35 +250,35 @@ class MainViewController: UIViewController {
   
   //move
   private func storeTokens(accessToken: String, refreshToken: String) {
-    let r1: OSStatus?
-    if let data = accessToken.data(using: .utf8) {
-      r1 = Keychain.save(key: .accessToken, data: data)
-    }
+//    let r1: OSStatus?
+//    if let data = accessToken.data(using: .utf8) {
+//      r1 = Keychain.save(key: .accessToken, data: data)
+//    }
+//
+//    let r2: OSStatus?
+//    if let data = refreshToken.data(using: .utf8) {
+//      r2 = Keychain.save(key: .refreshToken, data: data)
+//    }
+//
+//
+    print("Access Token: \(accessToken.removingPercentEncoding)")
+    print("Refresh Token: \(refreshToken.removingPercentEncoding)")
+
+//    var at: String?
+//    if let data = Keychain.load(key: .accessToken) {
+//      at = String(data: data, encoding: .utf8)
+//    }
+//
+//    var rt: String?
+//    if let data = Keychain.load(key: .refreshToken) {
+//      rt = String(data: data, encoding: .utf8)
+//    }
+//
+//    print("AT: \(at)")
+//    print("RT: \(rt)")
     
-    let r2: OSStatus?
-    if let data = refreshToken.data(using: .utf8) {
-      r2 = Keychain.save(key: .refreshToken, data: data)
-    }
-  
-    
-    print("Access Token: \(accessToken)")
-    print("Refresh Token: \(refreshToken)")
-    
-    var at: String?
-    if let data = Keychain.load(key: .accessToken) {
-      at = String(data: data, encoding: .utf8)
-    }
-    
-    var rt: String?
-    if let data = Keychain.load(key: .refreshToken) {
-      rt = String(data: data, encoding: .utf8)
-    }
-    
-    print("AT: \(at)")
-    print("RT: \(rt)")
-    
-    Salesforce.accessToken = accessToken
-    Salesforce.refreshToken = refreshToken
+    Salesforce.accessToken = accessToken.removingPercentEncoding ?? ""
+    Salesforce.refreshToken = refreshToken.removingPercentEncoding ?? ""
   }
 }
 
