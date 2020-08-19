@@ -277,8 +277,8 @@ class MainViewController: UIViewController {
 //    print("AT: \(at)")
 //    print("RT: \(rt)")
     
-    Salesforce.accessToken = accessToken.removingPercentEncoding ?? ""
-    Salesforce.refreshToken = refreshToken.removingPercentEncoding ?? ""
+    SF.accessToken = accessToken.removingPercentEncoding ?? ""
+    SF.refreshToken = refreshToken.removingPercentEncoding ?? ""
   }
 }
 

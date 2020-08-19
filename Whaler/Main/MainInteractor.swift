@@ -88,7 +88,7 @@ class MainInteractor {
   }
   
   func fetchAccountsFromSalesforce() {
-    let accounts = Salesforce.fetchAllAccountsNotStartingWith("Customer")
+    let accounts: [SF.Account] = try! SF.query("SELECT name,type from Account WHERE (NOT type like 'Customer%')")
     print(accounts)
   }
 }

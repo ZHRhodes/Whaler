@@ -44,7 +44,7 @@
 		14861EEC249F3DE400D2FA92 /* WhalerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14861EEB249F3DE400D2FA92 /* WhalerTests.swift */; };
 		14861EF7249F401300D2FA92 /* CSVParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14861EF6249F401300D2FA92 /* CSVParser.swift */; };
 		14861EFC249F49DE00D2FA92 /* DocumentPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14861EFB249F49DE00D2FA92 /* DocumentPickerViewController.swift */; };
-		14A2834724DE510D0016BA82 /* Salesforce.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A2834624DE510D0016BA82 /* Salesforce.swift */; };
+		14A2834724DE510D0016BA82 /* SF.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A2834624DE510D0016BA82 /* SF.swift */; };
 		14AB262E24D137E800AC280D /* ContactsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14AB262D24D137E800AC280D /* ContactsTableViewController.swift */; };
 		14D97D7924DBEC4B00058B09 /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D97D7824DBEC4B00058B09 /* Keychain.swift */; };
 		14D9CA5924B599230030B17A /* AccountStateTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D9CA5824B599230030B17A /* AccountStateTagView.swift */; };
@@ -112,7 +112,7 @@
 		14861EF6249F401300D2FA92 /* CSVParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSVParser.swift; sourceTree = "<group>"; };
 		14861EF8249F439600D2FA92 /* Whaler.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Whaler.entitlements; sourceTree = "<group>"; };
 		14861EFB249F49DE00D2FA92 /* DocumentPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentPickerViewController.swift; sourceTree = "<group>"; };
-		14A2834624DE510D0016BA82 /* Salesforce.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Salesforce.swift; sourceTree = "<group>"; };
+		14A2834624DE510D0016BA82 /* SF.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SF.swift; sourceTree = "<group>"; };
 		14AB262D24D137E800AC280D /* ContactsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsTableViewController.swift; sourceTree = "<group>"; };
 		14D97D7824DBEC4B00058B09 /* Keychain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keychain.swift; sourceTree = "<group>"; };
 		14D9CA5824B599230030B17A /* AccountStateTagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountStateTagView.swift; sourceTree = "<group>"; };
@@ -192,7 +192,7 @@
 				140AE7A724A9DF1800F7705E /* Views */,
 				140AE79724A9AA4B00F7705E /* Models */,
 				14D97D7824DBEC4B00058B09 /* Keychain.swift */,
-				14A2834624DE510D0016BA82 /* Salesforce.swift */,
+				14A2834624DE510D0016BA82 /* SF.swift */,
 				146C344524EA53690009C68C /* UserDefaultsManaged.swift */,
 			);
 			path = Shared;
@@ -517,7 +517,7 @@
 				14ECDB2124CA9288006B4550 /* NoteEditor.swift in Sources */,
 				146C35DB24C56A0100DBCA23 /* ContactsTableView.swift in Sources */,
 				14861ED9249F3DE100D2FA92 /* MainViewController.swift in Sources */,
-				14A2834724DE510D0016BA82 /* Salesforce.swift in Sources */,
+				14A2834724DE510D0016BA82 /* SF.swift in Sources */,
 				146834FF24DA99810075B639 /* CommonTextField.swift in Sources */,
 				146C35D924C5689B00DBCA23 /* ContactRowView.swift in Sources */,
 				140AE7A024A9B58400F7705E /* WorkState.swift in Sources */,
