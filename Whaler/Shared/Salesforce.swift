@@ -15,13 +15,12 @@ class Salesforce {
   static private let networker: Networker.Type = JustNetworker.self
   
   static func fetchAllAccountsNotStartingWith(_ word: String) -> [Salesforce.QueryResponse<Salesforce.Account>] {
-    let query = "SELECT name,type from Account WHERE (NOT type like '\(word)%')"
-    let salesforceQuery = Salesforce.query(from: query)
+    let soql = "SELECT name,type from Account WHERE (NOT type like '\(word)%')"
     
     let request = NetworkRequest<Account>(method: .get,
                                  path: "https://na111.salesforce.com/services/data/v37.0/query",
                                  headers: ["Authorization": "Bearer \(Salesforce.accessToken)"],
-                                 params: ["q": salesforceQuery],
+                                 params: ["q": soql],
                                  body: nil)
     let result = Salesforce.networker.execute(request: request)
     guard let data = result.data,
@@ -32,8 +31,8 @@ class Salesforce {
   }
   
   static func query(from query: String) -> String {
-    let query = query.replacingOccurrences(of: " ", with: "+")
-    return query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
+//    return query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
+    return query
   }
   
   struct QueryResponse<T: Decodable>: Decodable {
