@@ -90,6 +90,23 @@ final class Account: NSObject, Codable {
     state = .ready
     notes = ""
   }
+  
+  init(sfAccount: SF.Account) {
+    id = sfAccount.Id ?? ""
+    owner = sfAccount.OwnerId ?? ""
+    name = sfAccount.Name ?? ""
+    industry = sfAccount.Industry
+    employees = String(sfAccount.NumberOfEmployees ?? 0)
+    annualRevenue = String(sfAccount.AnnualRevenue ?? 0)
+    billingCity = sfAccount.BillingCity
+    billingState = sfAccount.BillingState
+    phone = sfAccount.Phone
+    website = sfAccount.Website
+    type = sfAccount.Type
+    accountDescription = sfAccount.Description
+    state = .ready
+    notes = ""
+  }
 }
 
 protocol ManagedObject {

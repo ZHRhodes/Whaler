@@ -243,6 +243,11 @@ class MainViewController: UIViewController {
       let refreshToken = url?.fragmentValueOf("refresh_token") ?? ""
       self?.storeTokens(accessToken: accessToken, refreshToken: refreshToken)
       self?.interactor.fetchAccountsFromSalesforce()
+      DispatchQueue.main.sync {
+        self?.removeNoDataViews()
+        self?.configureTableView()
+        self?.configureDeleteButton()
+      }
     }
     session.presentationContextProvider = self
     session.start()

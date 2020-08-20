@@ -34,22 +34,5 @@ class SF {
     
     return resultAsResponse.records ?? [T]()
   }
-  
-  struct QueryResponse<T: Decodable>: Decodable {
-    let totalSize: Int?
-    let done: Bool?
-    let records: [T]?
-  }
-  
-  struct Account: Codable {
-    let Name: String?
-    let `Type`: String?
-    let attributes: Attributes?
-    
-    class Attributes: Codable {
-      let type: String?
-      let url: String?
-    }
-  }
 }
 

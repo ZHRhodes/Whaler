@@ -17,7 +17,7 @@ class MainInteractor {
   }
   
   init() {
-    retrieveAccounts()
+//    retrieveAccounts()
   }
   
   func parseAccountsAndContacts(from url: URL) {
@@ -47,13 +47,18 @@ class MainInteractor {
   
   func retrieveAccounts() {
     let retrievedAccounts = ObjectManager.retrieveAll(ofType: Account.self)
-    retrievedAccounts.forEach { account in
-      accounts[account.state]?.append(account)
-    }
+    setAccounts(retrievedAccounts)
     
     //store contact count to Account so that this isn't
     //required in order to show correct number of contacts on the accounts page
     retrieveAndAssignContacts()
+  }
+  
+  func setAccounts(_ newAccounts: [Account]) {
+    accounts = .init(uniqueKeysWithValues: self.accountStates.map { ($0, []) })
+    newAccounts.forEach { account in
+      accounts[account.state]?.append(account)
+    }
   }
   
   func retrieveAndAssignContacts(for account: Account) {
@@ -88,7 +93,13 @@ class MainInteractor {
   }
   
   func fetchAccountsFromSalesforce() {
-    let accounts: [SF.Account] = try! SF.query("SELECT name,type from Account WHERE (NOT type like 'Customer%')")
+    let soql = "SELECT id, name, type, industry, annualRevenue, billingCity, billingState, phone, website, numberOfEmployees, ownerId, description from Account WHERE (NOT type like 'Customer%')"
+    let sfAccounts: [SF.Account] = try! SF.query(soql)
+    print(accounts)
+    print()
+    
+    let accounts = sfAccounts.map(Account.init)
+    setAccounts(accounts)
     print(accounts)
   }
 }

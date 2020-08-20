@@ -57,6 +57,8 @@
 		14F4090424C6A09E00F405BC /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 14F4090324C6A09E00F405BC /* OpenSans-Regular.ttf */; };
 		14F4090624C6A0C300F405BC /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 14F4090524C6A0C300F405BC /* OpenSans-Bold.ttf */; };
 		14F4090824C6A2D100F405BC /* UIFont+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F4090724C6A2D100F405BC /* UIFont+Extensions.swift */; };
+		14F7DD9F24EE527600D43055 /* SFQueryResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F7DD9E24EE527600D43055 /* SFQueryResponse.swift */; };
+		14F7DDA124EE529300D43055 /* SFAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F7DDA024EE529300D43055 /* SFAccount.swift */; };
 		14FE635324C575CD00F7D30B /* TagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14FE635224C575CD00F7D30B /* TagView.swift */; };
 /* End PBXBuildFile section */
 
@@ -125,6 +127,8 @@
 		14F4090324C6A09E00F405BC /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Regular.ttf"; sourceTree = "<group>"; };
 		14F4090524C6A0C300F405BC /* OpenSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Bold.ttf"; sourceTree = "<group>"; };
 		14F4090724C6A2D100F405BC /* UIFont+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extensions.swift"; sourceTree = "<group>"; };
+		14F7DD9E24EE527600D43055 /* SFQueryResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFQueryResponse.swift; sourceTree = "<group>"; };
+		14F7DDA024EE529300D43055 /* SFAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFAccount.swift; sourceTree = "<group>"; };
 		14FE635224C575CD00F7D30B /* TagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -192,7 +196,7 @@
 				140AE7A724A9DF1800F7705E /* Views */,
 				140AE79724A9AA4B00F7705E /* Models */,
 				14D97D7824DBEC4B00058B09 /* Keychain.swift */,
-				14A2834624DE510D0016BA82 /* SF.swift */,
+				14F7DD9D24EE526200D43055 /* Salesforce */,
 				146C344524EA53690009C68C /* UserDefaultsManaged.swift */,
 			);
 			path = Shared;
@@ -400,6 +404,16 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
+		14F7DD9D24EE526200D43055 /* Salesforce */ = {
+			isa = PBXGroup;
+			children = (
+				14A2834624DE510D0016BA82 /* SF.swift */,
+				14F7DD9E24EE527600D43055 /* SFQueryResponse.swift */,
+				14F7DDA024EE529300D43055 /* SFAccount.swift */,
+			);
+			path = Salesforce;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -512,6 +526,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1440A20424C947FA00E36853 /* Contact.swift in Sources */,
+				14F7DDA124EE529300D43055 /* SFAccount.swift in Sources */,
 				14ECDD2124CABC7D006B4550 /* RichTextEditor.swift in Sources */,
 				14AB262E24D137E800AC280D /* ContactsTableViewController.swift in Sources */,
 				14ECDB2124CA9288006B4550 /* NoteEditor.swift in Sources */,
@@ -538,6 +553,7 @@
 				145A376A24C588DF0081F9DB /* NotesView.swift in Sources */,
 				146C35CF24C2CA9700DBCA23 /* TitleValueView.swift in Sources */,
 				146C35D324C557C800DBCA23 /* CompanyInfoValuesView.swift in Sources */,
+				14F7DD9F24EE527600D43055 /* SFQueryResponse.swift in Sources */,
 				14D97D7924DBEC4B00058B09 /* Keychain.swift in Sources */,
 				140AE79E24A9B50900F7705E /* UIColor+Extensions.swift in Sources */,
 				1480800B24EA4B32007EB6D1 /* NetworkInterface.swift in Sources */,
