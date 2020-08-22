@@ -20,6 +20,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     if let directoryLocation = FileManager.default.urls(for: .libraryDirectory, in: .userDomainMask).last {
       print("Documents Directory: \(directoryLocation)Application Support")
     }
+    resetAllRecords(of: "AccountEntity")
+    resetAllRecords(of: "ContactEntity")
     return true
   }
 

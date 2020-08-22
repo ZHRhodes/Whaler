@@ -62,9 +62,15 @@ class MainInteractor {
   }
   
   func retrieveAndAssignContacts(for account: Account) {
-    let predicate = NSPredicate(format: "accountID == %@", account.id)
-    let retrievedContacts = ObjectManager.retrieveAll(ofType: Contact.self, with: predicate)
-    account.contacts = .init(uniqueKeysWithValues: WorkState.allCases.map { ($0, []) })
+//    let predicate = NSPredicate(format: "accountID == %@", account.id)
+//    let retrievedContacts = ObjectManager.retrieveAll(ofType: Contact.self, with: predicate)
+//    account.contacts = .init(uniqueKeysWithValues: WorkState.allCases.map { ($0, []) })
+//    retrievedContacts.forEach { contact in
+//      account.contacts[contact.state]?.append(contact)
+//    }
+    
+    account.resetContacts()
+    let retrievedContacts = SFHelper.queryContacts(accountId: account.id, accountName: account.name)
     retrievedContacts.forEach { contact in
       account.contacts[contact.state]?.append(contact)
     }

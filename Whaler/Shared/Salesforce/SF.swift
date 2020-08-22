@@ -35,4 +35,3 @@ class SF {
     return resultAsResponse.records ?? [T]()
   }
 }
-

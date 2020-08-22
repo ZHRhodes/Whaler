@@ -107,6 +107,10 @@ final class Account: NSObject, Codable {
     state = .ready
     notes = ""
   }
+  
+  func resetContacts() {
+    contacts = .init(uniqueKeysWithValues: WorkState.allCases.map { ($0, []) })
+  }
 }
 
 protocol ManagedObject {

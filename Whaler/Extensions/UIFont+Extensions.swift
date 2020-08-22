@@ -16,7 +16,7 @@ enum FontWeight {
 }
 
 extension UIFont {
-  func openSans(weight: FontWeight, size: CGFloat) -> UIFont {
+  static func openSans(weight: FontWeight, size: CGFloat) -> UIFont {
     switch weight {
     case .regular:
       return UIFont(name: regularFontName, size: size)!

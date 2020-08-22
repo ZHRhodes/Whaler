@@ -53,6 +53,9 @@
 		14ECDB2124CA9288006B4550 /* NoteEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14ECDB2024CA9288006B4550 /* NoteEditor.swift */; };
 		14ECDD1524CAB819006B4550 /* trix-master in Resources */ = {isa = PBXBuildFile; fileRef = 14ECDD1424CAB819006B4550 /* trix-master */; };
 		14ECDD2124CABC7D006B4550 /* RichTextEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14ECDD2024CABC7D006B4550 /* RichTextEditor.swift */; };
+		14EED67A24F0E48C00660BD1 /* SFContact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EED67924F0E48C00660BD1 /* SFContact.swift */; };
+		14EED67C24F0E5E400660BD1 /* SFLead.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EED67B24F0E5E400660BD1 /* SFLead.swift */; };
+		14EED67E24F0EB7300660BD1 /* SFHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EED67D24F0EB7300660BD1 /* SFHelper.swift */; };
 		14EF4DE924CD4F3100ED5461 /* ObjectManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EF4DE824CD4F3100ED5461 /* ObjectManager.swift */; };
 		14F4090424C6A09E00F405BC /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 14F4090324C6A09E00F405BC /* OpenSans-Regular.ttf */; };
 		14F4090624C6A0C300F405BC /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 14F4090524C6A0C300F405BC /* OpenSans-Bold.ttf */; };
@@ -123,6 +126,9 @@
 		14ECDB2024CA9288006B4550 /* NoteEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteEditor.swift; sourceTree = "<group>"; };
 		14ECDD1424CAB819006B4550 /* trix-master */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "trix-master"; sourceTree = "<group>"; };
 		14ECDD2024CABC7D006B4550 /* RichTextEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RichTextEditor.swift; sourceTree = "<group>"; };
+		14EED67924F0E48C00660BD1 /* SFContact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFContact.swift; sourceTree = "<group>"; };
+		14EED67B24F0E5E400660BD1 /* SFLead.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFLead.swift; sourceTree = "<group>"; };
+		14EED67D24F0EB7300660BD1 /* SFHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFHelper.swift; sourceTree = "<group>"; };
 		14EF4DE824CD4F3100ED5461 /* ObjectManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectManager.swift; sourceTree = "<group>"; };
 		14F4090324C6A09E00F405BC /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Regular.ttf"; sourceTree = "<group>"; };
 		14F4090524C6A0C300F405BC /* OpenSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Bold.ttf"; sourceTree = "<group>"; };
@@ -196,8 +202,9 @@
 				140AE7A724A9DF1800F7705E /* Views */,
 				140AE79724A9AA4B00F7705E /* Models */,
 				14D97D7824DBEC4B00058B09 /* Keychain.swift */,
-				14F7DD9D24EE526200D43055 /* Salesforce */,
 				146C344524EA53690009C68C /* UserDefaultsManaged.swift */,
+				14EED67D24F0EB7300660BD1 /* SFHelper.swift */,
+				14F7DD9D24EE526200D43055 /* Salesforce */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -410,6 +417,8 @@
 				14A2834624DE510D0016BA82 /* SF.swift */,
 				14F7DD9E24EE527600D43055 /* SFQueryResponse.swift */,
 				14F7DDA024EE529300D43055 /* SFAccount.swift */,
+				14EED67924F0E48C00660BD1 /* SFContact.swift */,
+				14EED67B24F0E5E400660BD1 /* SFLead.swift */,
 			);
 			path = Salesforce;
 			sourceTree = "<group>";
@@ -537,6 +546,7 @@
 				146C35D924C5689B00DBCA23 /* ContactRowView.swift in Sources */,
 				140AE7A024A9B58400F7705E /* WorkState.swift in Sources */,
 				140AE7A524A9BEC300F7705E /* AccountTableCell.swift in Sources */,
+				14EED67C24F0E5E400660BD1 /* SFLead.swift in Sources */,
 				14861ED5249F3DE100D2FA92 /* AppDelegate.swift in Sources */,
 				14861ED7249F3DE100D2FA92 /* SceneDelegate.swift in Sources */,
 				14861EF7249F401300D2FA92 /* CSVParser.swift in Sources */,
@@ -547,6 +557,8 @@
 				140AE79924A9AA5C00F7705E /* Account.swift in Sources */,
 				140AE79624A9AA0B00F7705E /* MainInteractor.swift in Sources */,
 				145A376C24C58D440081F9DB /* AccountDetailsView.swift in Sources */,
+				14EED67A24F0E48C00660BD1 /* SFContact.swift in Sources */,
+				14EED67E24F0EB7300660BD1 /* SFHelper.swift in Sources */,
 				14F4090824C6A2D100F405BC /* UIFont+Extensions.swift in Sources */,
 				144FA6BD24C2C0C500506F15 /* CompanyInfoHeaderView.swift in Sources */,
 				144AECDA24D26658009625BE /* ContactRowViewCell.swift in Sources */,

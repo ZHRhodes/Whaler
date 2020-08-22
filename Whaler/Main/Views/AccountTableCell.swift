@@ -76,9 +76,8 @@ class AccountTableCell: UITableViewCell {
                         \Account.billingCity,
                         \Account.billingState]
     valuesToShow.forEach { path in
-      if let text = account[keyPath: path] as? String {
-        stackView.addArrangedSubview(makeColumn(text: text))
-      }
+      let text = account[keyPath: path] as? String
+      stackView.addArrangedSubview(makeColumn(text: text))
     }
     shadowView.addSubview(stackView)
     
@@ -91,11 +90,17 @@ class AccountTableCell: UITableViewCell {
     stackView.bottomAnchor.constraint(equalTo: shadowView.bottomAnchor).isActive = true
   }
   
-  private func makeColumn(text: String) -> UIView {
+  private func makeColumn(text: String?) -> UIView {
     let label = UILabel()
-    label.textColor = .black
-    label.text = text
-    label.font = UIFont.systemFont(ofSize: 17)
+    label.font = UIFont.openSans(weight: .regular, size: 17)
+    if let text = text {
+      label.text = text
+      label.textColor = .black
+    } else {
+      label.text = "—"
+      label.textColor = .textInactive
+    }
+
     return label
   }
 }

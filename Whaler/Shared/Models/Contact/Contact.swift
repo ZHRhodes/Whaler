@@ -16,7 +16,7 @@ final class Contact: NSObject, Codable {
   }
   
   let id: String
-  let accountID: String
+  var accountID: String
   let firstName: String
   let lastName: String
   let title: String
@@ -49,6 +49,28 @@ final class Contact: NSObject, Codable {
     title = dictionary["Title"] ?? ""
     phone = dictionary["Phone"]
     email = dictionary["Email"]
+    state = .ready
+  }
+  
+  init(sfContact: SF.Contact) {
+    id = sfContact.Id ?? ""
+    accountID = sfContact.AccountId ?? ""
+    firstName = sfContact.FirstName ?? ""
+    lastName = sfContact.LastName ?? ""
+    title = sfContact.Title ?? ""
+    phone = sfContact.Phone
+    email = sfContact.Email
+    state = .ready
+  }
+  
+  init(sfLead: SF.Lead, accountId: String) {
+    id = sfLead.Id ?? ""
+    accountID = accountId
+    firstName = sfLead.FirstName ?? ""
+    lastName = sfLead.LastName ?? ""
+    title = sfLead.Title ?? ""
+    phone = sfLead.Phone
+    email = sfLead.Email
     state = .ready
   }
 }
