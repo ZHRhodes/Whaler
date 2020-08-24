@@ -284,6 +284,12 @@ class MainViewController: UIViewController {
     
     SF.accessToken = accessToken.removingPercentEncoding ?? ""
     SF.refreshToken = refreshToken.removingPercentEncoding ?? ""
+    
+    do {
+      try SF.refreshAccessToken()
+    } catch let error {
+      print(error)
+    }
   }
 }
 

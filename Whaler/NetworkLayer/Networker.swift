@@ -14,7 +14,7 @@ enum HTTPRequestMethod {
 }
 
 protocol Networker {
-  static func execute<T: Encodable>(request: NetworkRequest<T>) -> NetworkResult
+  static func execute(request: NetworkRequest) -> NetworkResult
 }
 
 struct NetworkResult {
@@ -25,23 +25,38 @@ struct NetworkResult {
 
 typealias NetworkResultPublisher = Just<NetworkResult>
 
-struct NetworkRequest<T: Encodable> {
+struct NetworkRequest {
   let method: HTTPRequestMethod
   var path: String
   let headers: [String: String]
   let params: [String: String]
-  let body: T?
+  let formBody: [String: String]
+  let jsonBody: Any?
   
   init(method: HTTPRequestMethod,
        path: String,
        headers: [String: String],
        params: [String: String],
-       body: T?) {
+       jsonBody: Any?) {
     self.method = method
     self.path = path
     self.headers = headers
     self.params = params
-    self.body = body
+    self.formBody = [:]
+    self.jsonBody = jsonBody
+  }
+  
+  init(method: HTTPRequestMethod,
+       path: String,
+       headers: [String: String],
+       params: [String: String],
+       formBody: [String: String] = [:]) {
+    self.method = method
+    self.path = path
+    self.headers = headers
+    self.params = params
+    self.formBody = formBody
+    self.jsonBody = nil
   }
 }
 

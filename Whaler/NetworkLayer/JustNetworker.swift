@@ -11,17 +11,17 @@ import Combine
 import Just
 
 struct JustNetworker: Networker {
-  static func execute<T: Encodable>(request: NetworkRequest<T>) -> NetworkResult {
+  static func execute(request: NetworkRequest) -> NetworkResult {
     switch request.method {
     case .get:
       return JustNetworker.get(url: request.path, params: request.params, headers: request.headers)
     case .post:
-      return JustNetworker.post(url: request.path, headers: request.headers, body: request.body)
+      return JustNetworker.post(url: request.path, headers: request.headers, formBody: request.formBody, jsonBody: request.jsonBody)
     }
   }
   
-  static private func post<T: Encodable>(url: String, headers: [String: String], body: T?) -> NetworkResult {
-    let result: HTTPResult = Just.post(url, json: body, headers: headers)
+  static private func post(url: String, headers: [String: String], formBody: [String: String], jsonBody: Any?) -> NetworkResult {
+    let result: HTTPResult = Just.post(url, data: formBody, json: jsonBody, headers: headers)
     return NetworkResult(ok: result.ok, statusCode: result.statusCode, data: result.content)
   }
   
