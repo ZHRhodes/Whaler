@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import AuthenticationServices
 
 class MainInteractor {
   lazy var accounts: [WorkState: [Account]] = .init(uniqueKeysWithValues: self.accountStates.map { ($0, []) })
@@ -100,12 +101,65 @@ class MainInteractor {
   
   func fetchAccountsFromSalesforce() {
     let soql = "SELECT id, name, type, industry, annualRevenue, billingCity, billingState, phone, website, numberOfEmployees, ownerId, description from Account WHERE (NOT type like 'Customer%')"
-    let sfAccounts: [SF.Account] = try! SF.query(soql)
+    var sfAccounts = [SF.Account]()
+    do {
+      sfAccounts = try SF.query(soql)
+    } catch let error {
+      print(error)
+      raise(SIGINT)
+    }
     print(accounts)
     print()
     
     let accounts = sfAccounts.map(Account.init)
     setAccounts(accounts)
     print(accounts)
+  }
+  
+  func makeSFAuthenticationSession(completion: @escaping VoidClosure) -> ASWebAuthenticationSession? {
+    let session = SFHelper.makeAuthenticationSession { [weak self] in
+      self?.fetchAccountsFromSalesforce()
+      completion()
+    }
+    
+    return session
+  }
+  
+  private func storeTokens(accessToken: String, refreshToken: String) {
+//    let r1: OSStatus?
+//    if let data = accessToken.data(using: .utf8) {
+//      r1 = Keychain.save(key: .accessToken, data: data)
+//    }
+//
+//    let r2: OSStatus?
+//    if let data = refreshToken.data(using: .utf8) {
+//      r2 = Keychain.save(key: .refreshToken, data: data)
+//    }
+//
+//
+    print("Access Token: \(accessToken.removingPercentEncoding)")
+    print("Refresh Token: \(refreshToken.removingPercentEncoding)")
+
+//    var at: String?
+//    if let data = Keychain.load(key: .accessToken) {
+//      at = String(data: data, encoding: .utf8)
+//    }
+//
+//    var rt: String?
+//    if let data = Keychain.load(key: .refreshToken) {
+//      rt = String(data: data, encoding: .utf8)
+//    }
+//
+//    print("AT: \(at)")
+//    print("RT: \(rt)")
+    
+    SF.accessToken = accessToken.removingPercentEncoding ?? ""
+    SF.refreshToken = refreshToken.removingPercentEncoding ?? ""
+    
+    do {
+      try SF.refreshAccessToken()
+    } catch let error {
+      print(error)
+    }
   }
 }

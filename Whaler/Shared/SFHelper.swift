@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import AuthenticationServices
 
 class SFHelper {
   static func queryContacts(accountId: String?, accountName: String?) -> [Contact] {
@@ -30,5 +31,22 @@ class SFHelper {
     
     contacts.append(contentsOf: sfContacts.map(Contact.init))
     return contacts
+  }
+  
+  static func makeAuthenticationSession(completion: @escaping VoidClosure) -> ASWebAuthenticationSession? {
+    let urlString = #"https://login.salesforce.com/services/oauth2/authorize?response_type=token&client_id=3MVG9Kip4IKAZQEVUyT0t2bh34B.GSy._2rVDX_MVJ7a3GyUtHsAGG2GZU843.Gajp7AusaDdCEero1UuAJwK&redirect_uri=getwhaler://salesforce_connect"#
+    guard let url = URL(string: urlString) else { return nil }
+    let session = ASWebAuthenticationSession(url: url, callbackURLScheme: "getwhaler") { (url, error) in
+      if let error = error {
+        print(error)
+      }
+      SF.accessToken = url?.fragmentValueOf("access_token")?.removingPercentEncoding
+      SF.refreshToken = url?.fragmentValueOf("refresh_token")?.removingPercentEncoding
+      DispatchQueue.main.sync {
+        completion()
+      }
+    }
+    
+    return session
   }
 }

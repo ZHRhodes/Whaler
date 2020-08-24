@@ -217,79 +217,14 @@ class MainViewController: UIViewController {
   }
   
   @objc
-  private func connectToSalesforceTapped() {
-    /*
-     https://login.salesforce.com/services/oauth2/authorize?response_type=token&
-     client_id=3MVG9lKcPoNINVBIPJjdw1J9LLJbP_pqwoJYyuisjQhr_LLurNDv7AgQvDTZwCoZuDZrXcPCmBv4o.8ds.5iE&
-     redirect_uri=https://www.customercontactinfo.com/user_callback.jspk&
-     state=mystate
-     */
-    
-    //http://www.getwhaler.io/salesforce_connect_callback
-    
-    /*
-     https://login.salesforce.com/services/oauth2/authorize?response_type=token&client_id=3MVG9Kip4IKAZQEVUyT0t2bh34B.GSy._2rVDX_MVJ7a3GyUtHsAGG2GZU843.Gajp7AusaDdCEero1UuAJwK&redirect_uri=https://www.getwhaler.io/salesforce_connect_callback
-     */
-    
-    //move all this
-    
-    let urlString = #"https://login.salesforce.com/services/oauth2/authorize?response_type=token&client_id=3MVG9Kip4IKAZQEVUyT0t2bh34B.GSy._2rVDX_MVJ7a3GyUtHsAGG2GZU843.Gajp7AusaDdCEero1UuAJwK&redirect_uri=getwhaler://salesforce_connect"#
-    guard let url = URL(string: urlString) else { return }
-    let session = ASWebAuthenticationSession(url: url, callbackURLScheme: "getwhaler") { [weak self] (url, error) in
-      if let error = error {
-        print(error)
-      }
-      let accessToken = url?.fragmentValueOf("access_token") ?? ""
-      let refreshToken = url?.fragmentValueOf("refresh_token") ?? ""
-      self?.storeTokens(accessToken: accessToken, refreshToken: refreshToken)
-      self?.interactor.fetchAccountsFromSalesforce()
-      DispatchQueue.main.sync {
-        self?.removeNoDataViews()
-        self?.configureTableView()
-        self?.configureDeleteButton()
-      }
-    }
-    session.presentationContextProvider = self
-    session.start()
-  }
-  
-  //move
-  private func storeTokens(accessToken: String, refreshToken: String) {
-//    let r1: OSStatus?
-//    if let data = accessToken.data(using: .utf8) {
-//      r1 = Keychain.save(key: .accessToken, data: data)
-//    }
-//
-//    let r2: OSStatus?
-//    if let data = refreshToken.data(using: .utf8) {
-//      r2 = Keychain.save(key: .refreshToken, data: data)
-//    }
-//
-//
-    print("Access Token: \(accessToken.removingPercentEncoding)")
-    print("Refresh Token: \(refreshToken.removingPercentEncoding)")
-
-//    var at: String?
-//    if let data = Keychain.load(key: .accessToken) {
-//      at = String(data: data, encoding: .utf8)
-//    }
-//
-//    var rt: String?
-//    if let data = Keychain.load(key: .refreshToken) {
-//      rt = String(data: data, encoding: .utf8)
-//    }
-//
-//    print("AT: \(at)")
-//    print("RT: \(rt)")
-    
-    SF.accessToken = accessToken.removingPercentEncoding ?? ""
-    SF.refreshToken = refreshToken.removingPercentEncoding ?? ""
-    
-    do {
-      try SF.refreshAccessToken()
-    } catch let error {
-      print(error)
-    }
+  private func connectToSalesforceTapped() {    
+    let sfAuthSession = interactor.makeSFAuthenticationSession(completion: { [weak self] in
+      self?.removeNoDataViews()
+      self?.configureTableView()
+      self?.configureDeleteButton()
+    })
+    sfAuthSession?.presentationContextProvider = self
+    sfAuthSession?.start()
   }
 }
 
