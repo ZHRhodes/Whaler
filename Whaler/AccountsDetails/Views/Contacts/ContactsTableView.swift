@@ -35,23 +35,23 @@ struct ContactCellItem: Identifiable {
 
 struct ContactsTableView: View {
   private class ViewModel {
-    var contacts: [WorkState: [Contact]]
+    var contactGrouper: Grouper<WorkState, Contact>
     
-    init(contacts: [WorkState: [Contact]]) {
-      self.contacts = contacts
+    init(contactGrouper: Grouper<WorkState, Contact>) {
+      self.contactGrouper = contactGrouper
     }
   }
   
   private let viewModel: ViewModel
   
-  init(contacts: [WorkState: [Contact]]) {
-    viewModel = ViewModel(contacts: contacts)
+  init(contactGrouper: Grouper<WorkState, Contact>) {
+    viewModel = ViewModel(contactGrouper: contactGrouper)
   }
   
   var body: some View {
     VStack(alignment: .leading, spacing: 2) {
       Text("CONTACTS").padding().font(Font.custom(boldFontName, size: 17))
-      ContactsTableViewControllerRepresentable(contacts: viewModel.contacts)
+      ContactsTableViewControllerRepresentable(contactGrouper: viewModel.contactGrouper)
     }
     .padding(EdgeInsets(top: 40, leading: 10, bottom: 40, trailing: 40))
   }

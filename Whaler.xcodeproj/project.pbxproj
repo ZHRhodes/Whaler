@@ -49,6 +49,7 @@
 		14861EFC249F49DE00D2FA92 /* DocumentPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14861EFB249F49DE00D2FA92 /* DocumentPickerViewController.swift */; };
 		14A2834724DE510D0016BA82 /* SF.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A2834624DE510D0016BA82 /* SF.swift */; };
 		14AB262E24D137E800AC280D /* ContactsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14AB262D24D137E800AC280D /* ContactsTableViewController.swift */; };
+		14B037E125049CDE00BA488D /* Grouper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B037E025049CDE00BA488D /* Grouper.swift */; };
 		14D97D7924DBEC4B00058B09 /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D97D7824DBEC4B00058B09 /* Keychain.swift */; };
 		14D9CA5924B599230030B17A /* AccountStateTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D9CA5824B599230030B17A /* AccountStateTagView.swift */; };
 		14D9CA5B24B599300030B17A /* AccountRowValuesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D9CA5A24B599300030B17A /* AccountRowValuesView.swift */; };
@@ -125,6 +126,7 @@
 		14861EFB249F49DE00D2FA92 /* DocumentPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentPickerViewController.swift; sourceTree = "<group>"; };
 		14A2834624DE510D0016BA82 /* SF.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SF.swift; sourceTree = "<group>"; };
 		14AB262D24D137E800AC280D /* ContactsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsTableViewController.swift; sourceTree = "<group>"; };
+		14B037E025049CDE00BA488D /* Grouper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grouper.swift; sourceTree = "<group>"; };
 		14D97D7824DBEC4B00058B09 /* Keychain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keychain.swift; sourceTree = "<group>"; };
 		14D9CA5824B599230030B17A /* AccountStateTagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountStateTagView.swift; sourceTree = "<group>"; };
 		14D9CA5A24B599300030B17A /* AccountRowValuesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountRowValuesView.swift; sourceTree = "<group>"; };
@@ -180,6 +182,7 @@
 				14EF4DE724CD4F1C00ED5461 /* Contact */,
 				14EF4DE824CD4F3100ED5461 /* ObjectManager.swift */,
 				140AE79F24A9B58300F7705E /* WorkState.swift */,
+				14B037E025049CDE00BA488D /* Grouper.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -556,6 +559,7 @@
 				146834FF24DA99810075B639 /* CommonTextField.swift in Sources */,
 				146C35D924C5689B00DBCA23 /* ContactRowView.swift in Sources */,
 				140AE7A024A9B58400F7705E /* WorkState.swift in Sources */,
+				14B037E125049CDE00BA488D /* Grouper.swift in Sources */,
 				140AE7A524A9BEC300F7705E /* AccountTableCell.swift in Sources */,
 				14EED67C24F0E5E400660BD1 /* SFLead.swift in Sources */,
 				14861ED5249F3DE100D2FA92 /* AppDelegate.swift in Sources */,

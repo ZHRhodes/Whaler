@@ -259,7 +259,7 @@ extension MainViewController: UIDropInteractionDelegate {
 extension MainViewController: UITableViewDelegate, UITableViewDataSource {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     let state = interactor.accountStates[section]
-    return interactor.accounts[state]!.count
+    return interactor.accountGrouper[state].count
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -267,7 +267,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
       return UITableViewCell()
     }
     let state = interactor.accountStates[indexPath.section]
-    let account = interactor.accounts[state]![indexPath.row]
+    let account = interactor.accountGrouper[state][indexPath.row]
     cell.configure(with: account)
     return cell
   }
@@ -299,7 +299,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     tableView.deselectRow(at: indexPath, animated: true)
     let accountState = interactor.accountStates[indexPath.section]
-    let account = interactor.accounts[accountState]![indexPath.row]
+    let account = interactor.accountGrouper[accountState][indexPath.row]
     interactor.retrieveAndAssignContacts(for: account)
     let view = AccountDetailsView(account: account)
     let viewController = UIHostingController(rootView: view)
@@ -310,7 +310,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
 extension MainViewController: UITableViewDragDelegate, UITableViewDropDelegate {
   func tableView(_ tableView: UITableView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
     let state = interactor.accountStates[indexPath.section]
-    let account = interactor.accounts[state]![indexPath.row]
+    let account = interactor.accountGrouper[state][indexPath.row]
     let itemProvider = NSItemProvider(object: account)
     let dragItem = UIDragItem(itemProvider: itemProvider)
     return [dragItem]

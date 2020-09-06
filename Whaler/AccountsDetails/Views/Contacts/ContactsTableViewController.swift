@@ -11,10 +11,10 @@ import SwiftUI
 
 struct ContactsTableViewControllerRepresentable: UIViewControllerRepresentable {
   typealias UIViewControllerType = ContactsTableViewController
-  var contacts: [WorkState: [Contact]]
+  var contactGrouper: Grouper<WorkState, Contact>
   
   func makeUIViewController(context: Context) -> ContactsTableViewController {
-    return ContactsTableViewController(contacts: contacts)
+    return ContactsTableViewController(contactGrouper: contactGrouper)
   }
   
   func updateUIViewController(_ uiViewController: ContactsTableViewController, context: Context) {
@@ -24,10 +24,10 @@ struct ContactsTableViewControllerRepresentable: UIViewControllerRepresentable {
 
 class ContactsTableViewController: UIViewController {
   private let tableView = UITableView()
-  private var contacts: [WorkState: [Contact]]
+  private var contactGrouper: Grouper<WorkState, Contact>
   
-  init(contacts: [WorkState: [Contact]]) {
-    self.contacts = contacts
+  init(contactGrouper: Grouper<WorkState, Contact>) {
+    self.contactGrouper = contactGrouper
     super.init(nibName: nil, bundle: nil)
   }
   
@@ -61,11 +61,11 @@ class ContactsTableViewController: UIViewController {
   
   func moveContact(from fromPath: IndexPath, to toPath: IndexPath) {
     let fromState = WorkState.allCases[fromPath.section]
-    guard let contactBeingMoved = contacts[fromState]?.remove(at: fromPath.row) else { return }
+    guard let contactBeingMoved = contactGrouper.remove(from: fromState, at: fromPath.row) else { return }
 
     let toState = WorkState.allCases[toPath.section]
     contactBeingMoved.state = toState
-    contacts[toState]?.insert(contactBeingMoved, at: toPath.row)
+    contactGrouper.insert(contactBeingMoved, to: toState, at: toPath.row)
     
     ObjectManager.save(contactBeingMoved) //Move, or make this async, or both
   }
@@ -96,14 +96,14 @@ extension ContactsTableViewController: UITableViewDataSource, UITableViewDelegat
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     let state = WorkState.allCases[section]
-    let numberOfRows = contacts[state]?.count ?? 0
+    let numberOfRows = contactGrouper[state].count
     return numberOfRows
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let state = WorkState.allCases[indexPath.section]
-    guard let contact = contacts[state]?[indexPath.row],
-          let cell = tableView.dequeueReusableCell(withIdentifier: ContactRowViewCell.id) as? ContactRowViewCell else {
+    let contact = contactGrouper[state][indexPath.row]
+    guard let cell = tableView.dequeueReusableCell(withIdentifier: ContactRowViewCell.id) as? ContactRowViewCell else {
       return UITableViewCell()
     }
     cell.configure(withContact: contact)
@@ -114,7 +114,7 @@ extension ContactsTableViewController: UITableViewDataSource, UITableViewDelegat
 extension ContactsTableViewController: UITableViewDragDelegate, UITableViewDropDelegate {
   func tableView(_ tableView: UITableView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
     let state = WorkState.allCases[indexPath.section]
-    let contact = contacts[state]![indexPath.row]
+    let contact = contactGrouper[state][indexPath.row]
     let itemProvider = NSItemProvider(object: contact)
     let dragItem = UIDragItem(itemProvider: itemProvider)
     return [dragItem]

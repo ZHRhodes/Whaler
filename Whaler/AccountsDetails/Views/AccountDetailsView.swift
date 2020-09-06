@@ -42,7 +42,7 @@ struct AccountDetailsView: View {
         Rectangle()
           .fill(Color(red: 0, green: 0, blue: 0, opacity: 0.2))
           .frame(width: 1)
-        ContactsTableView(contacts: self.account.contacts)
+        ContactsTableView(contactGrouper: self.account.contactGrouper)
       }
       .navigationBarItems(leading: backButton)
     }

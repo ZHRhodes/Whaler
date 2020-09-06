@@ -12,7 +12,7 @@ import CoreData
 
 final class Account: NSObject, Codable {
   private enum CodingKeys: String, CodingKey {
-    case id, owner, name, industry, employees, annualRevenue, billingCity, billingState, phone, website, type, accountDescription, state, contacts, notes
+    case id, owner, name, industry, employees, annualRevenue, billingCity, billingState, phone, website, type, accountDescription, state, contactGrouper, notes
   }
   
   let id: String
@@ -24,7 +24,7 @@ final class Account: NSObject, Codable {
   let billingCity: String?
   let billingState: String?
   var contactsCount: String {
-    return String(contacts.values.reduce(0, { $0 + $1.count}))
+    return String(contactGrouper.values.count)
   }
   let phone: String?
   let website: String?
@@ -33,7 +33,7 @@ final class Account: NSObject, Codable {
   
   var state: WorkState
   
-  var contacts: [WorkState: [Contact]] = .init(uniqueKeysWithValues: WorkState.allCases.map { ($0, []) })
+  var contactGrouper = Grouper<WorkState, Contact>(groups: WorkState.allCases)
   
   var notes: String
   
@@ -55,7 +55,7 @@ final class Account: NSObject, Codable {
     super.init()
   }
   
-  init(id: String, owner: String, name: String, industry: String?, employees: String?, annualRevenue: String?, billingCity: String?, billingState: String?, phone: String?, website: String?, type: String?, accountDescription: String?, state: WorkState, contacts: [WorkState: [Contact]]? = nil, notes: String = "") {
+  init(id: String, owner: String, name: String, industry: String?, employees: String?, annualRevenue: String?, billingCity: String?, billingState: String?, phone: String?, website: String?, type: String?, accountDescription: String?, state: WorkState, contactGrouper: Grouper<WorkState, Contact>? = nil, notes: String = "") {
     self.id = id
     self.owner = owner
     self.name = name
@@ -71,7 +71,7 @@ final class Account: NSObject, Codable {
     self.state = state
     self.notes = notes
     super.init()
-    contacts.map { self.contacts = $0 }
+    contactGrouper.map { self.contactGrouper = $0 }
   }
   
   init(dictionary: Dictionary<String, String>) {
@@ -109,7 +109,7 @@ final class Account: NSObject, Codable {
   }
   
   func resetContacts() {
-    contacts = .init(uniqueKeysWithValues: WorkState.allCases.map { ($0, []) })
+    contactGrouper.resetValues()
   }
 }
 
@@ -193,5 +193,11 @@ extension Account: NSItemProviderReading {
     } catch let error {
       throw error
     }
+  }
+}
+
+extension Account {
+  override var description: String {
+    return "<Whaler.Account: \(name)>"
   }
 }

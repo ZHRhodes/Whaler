@@ -86,11 +86,11 @@ struct CSVParser {
       if !parsedAccounts.contains(accountID) {
         parsedAccounts.insert(accountID)
         account = Account(dictionary: row)
-        account.contacts[contact.state]?.append(contact)
+        account.contactGrouper.append(contact, to: contact.state)
         accounts.append(account)
       } else {
         account = accounts.first(where: { $0.id == accountID }) ?? Account()
-        account.contacts[contact.state]?.append(contact)
+        account.contactGrouper.append(contact, to: contact.state)
       }
     }
     return (accounts, contacts)

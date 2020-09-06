@@ -10,11 +10,11 @@ import Foundation
 import AuthenticationServices
 
 class MainInteractor {
-  lazy var accounts: [WorkState: [Account]] = .init(uniqueKeysWithValues: self.accountStates.map { ($0, []) })
+  lazy var accountGrouper = Grouper<WorkState, Account>(groups: self.accountStates)
   lazy var accountStates = WorkState.allCases
   
   var hasNoAccounts: Bool {
-    accounts.allSatisfy({ $1.isEmpty })
+    accountGrouper.hasNoValues
   }
   
   init() {
@@ -26,7 +26,7 @@ class MainInteractor {
     let (parsedAccounts, parsedContacts) = CSVParser.parseAccountsAndContacts(from: csv)
     
     parsedAccounts.forEach { account in
-      accounts[account.state]?.append(account)
+      accountGrouper.append(account, to: account.state)
       ObjectManager.save(account)
     }
     
@@ -37,11 +37,11 @@ class MainInteractor {
   
   func moveAccount(from fromPath: IndexPath, to toPath: IndexPath) {
     let fromState = accountStates[fromPath.section]
-    guard let accountBeingMoved = accounts[fromState]?.remove(at: fromPath.row) else { return }
+    guard let accountBeingMoved = accountGrouper.remove(from: fromState, at: fromPath.row) else { return }
 
     let toState = accountStates[toPath.section]
     accountBeingMoved.state = toState
-    accounts[toState]?.insert(accountBeingMoved, at: toPath.row)
+    accountGrouper.insert(accountBeingMoved, to: toState, at: toPath.row)
     
     ObjectManager.save(accountBeingMoved) //Move, or make this async, or both
   }
@@ -56,9 +56,9 @@ class MainInteractor {
   }
   
   func setAccounts(_ newAccounts: [Account]) {
-    accounts = .init(uniqueKeysWithValues: self.accountStates.map { ($0, []) })
+    accountGrouper.resetValues()
     newAccounts.forEach { account in
-      accounts[account.state]?.append(account)
+      accountGrouper.append(account, to: account.state)
     }
   }
   
@@ -73,7 +73,7 @@ class MainInteractor {
     account.resetContacts()
     let retrievedContacts = SFHelper.queryContacts(accountId: account.id, accountName: account.name)
     retrievedContacts.forEach { contact in
-      account.contacts[contact.state]?.append(contact)
+      account.contactGrouper.append(contact, to: contact.state)
     }
   }
   
@@ -81,13 +81,13 @@ class MainInteractor {
     let retrievedContacts = ObjectManager.retrieveAll(ofType: Contact.self)
     let accountsMap = createAccountsMap()
     retrievedContacts.forEach { contact in
-      accountsMap[contact.accountID]?.contacts[contact.state]?.append(contact)
+      accountsMap[contact.accountID]?.contactGrouper.append(contact, to: contact.state)
     }
   }
   
   private func createAccountsMap() -> [String: Account] {
     var map = [String: Account]()
-    accounts.values.flatMap { $0 }.forEach { account in
+    accountGrouper.values.forEach { account in
       map[account.id] = account
     }
     
@@ -95,7 +95,7 @@ class MainInteractor {
   }
   
   func deleteAccounts() {
-    accounts = .init(uniqueKeysWithValues: self.accountStates.map { ($0, []) })
+    accountGrouper.resetValues()
     ObjectManager.deleteAll(ofType: Account.self)
   }
   
@@ -106,14 +106,12 @@ class MainInteractor {
       sfAccounts = try SF.query(soql)
     } catch let error {
       print(error)
-      raise(SIGINT)
     }
-    print(accounts)
-    print()
-    
+
     let accounts = sfAccounts.map(Account.init)
     setAccounts(accounts)
-    print(accounts)
+    
+    print(accountGrouper)
   }
   
   func makeSFAuthenticationSession(completion: @escaping VoidClosure) -> ASWebAuthenticationSession? {
