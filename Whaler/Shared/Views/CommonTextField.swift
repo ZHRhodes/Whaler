@@ -13,9 +13,10 @@ struct CommonTextFieldRepresentable: UIViewRepresentable {
   typealias UIViewType = CommonTextField
   
   let initialText: String
+  let isSecureText: Bool
 
   func makeUIView(context: Context) -> CommonTextField {
-    let textField = CommonTextField(label: initialText)
+    let textField = CommonTextField(label: initialText, isSecureText: isSecureText)
     return textField
   }
   
@@ -28,8 +29,9 @@ class CommonTextField: UITextField {
   private let placeholderLabel = UILabel()
   private let fieldNameLabel = UILabel()
 
-  init(label: String) {
+  init(label: String, isSecureText: Bool = false) {
     super.init(frame: .zero)
+    isSecureTextEntry = isSecureText
     configure(with: label)
   }
   
