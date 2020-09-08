@@ -14,14 +14,37 @@ struct CommonTextFieldRepresentable: UIViewRepresentable {
   
   let initialText: String
   let isSecureText: Bool
+  @Binding var text: String
 
   func makeUIView(context: Context) -> CommonTextField {
     let textField = CommonTextField(label: initialText, isSecureText: isSecureText)
+    textField.addTarget(context.coordinator,
+                        action: #selector(Coordinator.textFieldDidChange(textField:)),
+                        for: .editingChanged)
     return textField
   }
   
   func updateUIView(_ uiView: CommonTextField, context: Context) {
+    uiView.text = text
+  }
+  
+  func makeCoordinator() -> Coordinator {
+    Coordinator($text)
+  }
+  
+  class Coordinator: NSObject, UITextFieldDelegate {
+    var text: Binding<String>
     
+    init(_ text: Binding<String>) {
+      self.text = text
+    }
+    
+    @objc
+    func textFieldDidChange(textField: UITextField) {
+      if let text = textField.text {
+        self.text.wrappedValue = text
+      }
+    }
   }
 }
 

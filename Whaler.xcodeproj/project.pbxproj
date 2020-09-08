@@ -50,6 +50,10 @@
 		14A2834724DE510D0016BA82 /* SF.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A2834624DE510D0016BA82 /* SF.swift */; };
 		14AB262E24D137E800AC280D /* ContactsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14AB262D24D137E800AC280D /* ContactsTableViewController.swift */; };
 		14B037E125049CDE00BA488D /* Grouper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B037E025049CDE00BA488D /* Grouper.swift */; };
+		14B037E325073E8800BA488D /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B037E225073E8800BA488D /* Response.swift */; };
+		14B037E525073EBA00BA488D /* Tokens.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B037E425073EBA00BA488D /* Tokens.swift */; };
+		14B037EB250749D000BA488D /* AuthenticationInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B037EA250749D000BA488D /* AuthenticationInteractor.swift */; };
+		14B037EE25074B1E00BA488D /* UserRemote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B037ED25074B1E00BA488D /* UserRemote.swift */; };
 		14D97D7924DBEC4B00058B09 /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D97D7824DBEC4B00058B09 /* Keychain.swift */; };
 		14D9CA5924B599230030B17A /* AccountStateTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D9CA5824B599230030B17A /* AccountStateTagView.swift */; };
 		14D9CA5B24B599300030B17A /* AccountRowValuesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D9CA5A24B599300030B17A /* AccountRowValuesView.swift */; };
@@ -127,6 +131,10 @@
 		14A2834624DE510D0016BA82 /* SF.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SF.swift; sourceTree = "<group>"; };
 		14AB262D24D137E800AC280D /* ContactsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsTableViewController.swift; sourceTree = "<group>"; };
 		14B037E025049CDE00BA488D /* Grouper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grouper.swift; sourceTree = "<group>"; };
+		14B037E225073E8800BA488D /* Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
+		14B037E425073EBA00BA488D /* Tokens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tokens.swift; sourceTree = "<group>"; };
+		14B037EA250749D000BA488D /* AuthenticationInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationInteractor.swift; sourceTree = "<group>"; };
+		14B037ED25074B1E00BA488D /* UserRemote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRemote.swift; sourceTree = "<group>"; };
 		14D97D7824DBEC4B00058B09 /* Keychain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keychain.swift; sourceTree = "<group>"; };
 		14D9CA5824B599230030B17A /* AccountStateTagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountStateTagView.swift; sourceTree = "<group>"; };
 		14D9CA5A24B599300030B17A /* AccountRowValuesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountRowValuesView.swift; sourceTree = "<group>"; };
@@ -178,6 +186,7 @@
 		140AE79724A9AA4B00F7705E /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				14B037EC25074B1200BA488D /* User */,
 				14EF4DE624CD4F0700ED5461 /* Account */,
 				14EF4DE724CD4F1C00ED5461 /* Contact */,
 				14EF4DE824CD4F3100ED5461 /* ObjectManager.swift */,
@@ -234,6 +243,7 @@
 			children = (
 				146834FD24DA79830075B639 /* Views */,
 				14025FC924D6BF5D00408379 /* AuthenticationViewController.swift */,
+				14B037EA250749D000BA488D /* AuthenticationInteractor.swift */,
 			);
 			path = Authentication;
 			sourceTree = "<group>";
@@ -322,6 +332,8 @@
 				1480800824EA4AE8007EB6D1 /* Networker.swift */,
 				1480800A24EA4B32007EB6D1 /* NetworkInterface.swift */,
 				1480800F24EA4BE7007EB6D1 /* JustNetworker.swift */,
+				14B037E225073E8800BA488D /* Response.swift */,
+				14B037E425073EBA00BA488D /* Tokens.swift */,
 			);
 			path = NetworkLayer;
 			sourceTree = "<group>";
@@ -377,6 +389,14 @@
 				14861EED249F3DE400D2FA92 /* Info.plist */,
 			);
 			path = WhalerTests;
+			sourceTree = "<group>";
+		};
+		14B037EC25074B1200BA488D /* User */ = {
+			isa = PBXGroup;
+			children = (
+				14B037ED25074B1E00BA488D /* UserRemote.swift */,
+			);
+			path = User;
 			sourceTree = "<group>";
 		};
 		14D9CA5724B599080030B17A /* MainTableSectionHeader */ = {
@@ -552,6 +572,7 @@
 				14ECDD2124CABC7D006B4550 /* RichTextEditor.swift in Sources */,
 				14AB262E24D137E800AC280D /* ContactsTableViewController.swift in Sources */,
 				1443045D24F32FD900D2FBD2 /* String+Extensions.swift in Sources */,
+				14B037EB250749D000BA488D /* AuthenticationInteractor.swift in Sources */,
 				14ECDB2124CA9288006B4550 /* NoteEditor.swift in Sources */,
 				146C35DB24C56A0100DBCA23 /* ContactsTableView.swift in Sources */,
 				14861ED9249F3DE100D2FA92 /* MainViewController.swift in Sources */,
@@ -576,8 +597,10 @@
 				14EED67E24F0EB7300660BD1 /* SFHelper.swift in Sources */,
 				14F4090824C6A2D100F405BC /* UIFont+Extensions.swift in Sources */,
 				144FA6BD24C2C0C500506F15 /* CompanyInfoHeaderView.swift in Sources */,
+				14B037EE25074B1E00BA488D /* UserRemote.swift in Sources */,
 				144AECDA24D26658009625BE /* ContactRowViewCell.swift in Sources */,
 				145A376A24C588DF0081F9DB /* NotesView.swift in Sources */,
+				14B037E325073E8800BA488D /* Response.swift in Sources */,
 				146C35CF24C2CA9700DBCA23 /* TitleValueView.swift in Sources */,
 				146C35D324C557C800DBCA23 /* CompanyInfoValuesView.swift in Sources */,
 				14F7DD9F24EE527600D43055 /* SFQueryResponse.swift in Sources */,
@@ -593,6 +616,7 @@
 				144BF56C24D7E66E00F231F0 /* RootContainerViewController.swift in Sources */,
 				14E63ED124B9109C003EAF22 /* Whaler.xcdatamodeld in Sources */,
 				14EF4DE924CD4F3100ED5461 /* ObjectManager.swift in Sources */,
+				14B037E525073EBA00BA488D /* Tokens.swift in Sources */,
 				140AE7A324A9BA6500F7705E /* MainTableSectionHeader.swift in Sources */,
 				1480801024EA4BE7007EB6D1 /* JustNetworker.swift in Sources */,
 				1443045F24F3356A00D2FBD2 /* SFNewAccessToken.swift in Sources */,

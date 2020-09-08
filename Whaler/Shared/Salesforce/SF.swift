@@ -26,7 +26,7 @@ class SF {
   static func query<T: Codable>(_ soql: String) throws -> [T] {
     guard let accessToken = SF.accessToken else { throw SFError.emptyAccessToken }
     let request = NetworkRequest(method: .get,
-                                 path: "https://na111.salesforce.com/services/data/v37.0/query",
+                                 path: "services/data/v37.0/query",
                                  headers: ["Authorization": "Bearer \(accessToken)"],
                                  params: ["q": soql],
                                  jsonBody: nil)

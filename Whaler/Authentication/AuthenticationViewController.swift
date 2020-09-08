@@ -18,6 +18,7 @@ class AuthenticationViewController: UIViewController {
   static let minSize: CGSize = CGSize(width: 1400, height: 1000)
   static let maxSize: CGSize = minSize
   
+  private let interactor = AuthenticationInteractor(networkInterface: APINetworkInterface())
   weak var delegate: AuthenticationViewControllerDelegate?
   
   private lazy var authView = UIHostingController(rootView: AuthenticationView(delegate: self))
@@ -39,6 +40,10 @@ class AuthenticationViewController: UIViewController {
 
 extension AuthenticationViewController: AuthenticationViewDelegate {
   func signInTapped(email: String, password: String) {
-    delegate?.signedIn()
+    interactor.signIn(email: email, password: password) { [weak self] in
+      self?.delegate?.signedIn()
+    } failure: {
+      //show error
+    }
   }
 }

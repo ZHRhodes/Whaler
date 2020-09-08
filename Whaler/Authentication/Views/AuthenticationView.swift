@@ -14,6 +14,8 @@ protocol AuthenticationViewDelegate: class {
 
 struct AuthenticationView: View {
   weak var delegate: AuthenticationViewDelegate?
+  @State private var email = ""
+  @State private var password = ""
   
   var body: some View {
     GeometryReader { geometry in
@@ -34,12 +36,12 @@ struct AuthenticationView: View {
                 Spacer().frame(height: 26)
                 Text("SIGN IN").font(Font.custom(boldFontName, size: 25))
                 Spacer().frame(height: 26)
-                CommonTextFieldRepresentable(initialText: "EMAIL", isSecureText: false).frame(height: 72)
+                CommonTextFieldRepresentable(initialText: "EMAIL", isSecureText: false, text: $email).frame(height: 72)
                 Spacer().frame(height: 50)
-                CommonTextFieldRepresentable(initialText: "PASSWORD", isSecureText: true).frame(height: 72)
+                CommonTextFieldRepresentable(initialText: "PASSWORD", isSecureText: true, text: $password).frame(height: 72)
                 Spacer().frame(height: 60)
                 Button(action: {
-                  delegate?.signInTapped(email: "", password: "")
+                  delegate?.signInTapped(email: email, password: password)
                 }) {
                   Text("SIGN IN")
                     .padding()
