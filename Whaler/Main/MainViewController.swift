@@ -178,7 +178,8 @@ class MainViewController: UIViewController {
   
   private func configureDeleteButton() {
     deleteButton = UIButton()
-    deleteButton.setImage(UIImage(named: "delete"), for: .normal)
+    deleteButton.setImage(UIImage(named: "tripleDotsTEMP"), for: .normal)
+    deleteButton.imageView?.contentMode = .scaleAspectFit
     deleteButton.addTarget(self, action: #selector(deleteTapped), for: .touchUpInside)
     deleteButton.translatesAutoresizingMaskIntoConstraints = false
     view.addSubview(deleteButton)
@@ -186,8 +187,8 @@ class MainViewController: UIViewController {
     let constraints = [
       deleteButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -12),
       deleteButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 12),
-      deleteButton.heightAnchor.constraint(equalToConstant: 50),
-      deleteButton.widthAnchor.constraint(equalToConstant: 60)
+      deleteButton.heightAnchor.constraint(equalToConstant: 25),
+      deleteButton.widthAnchor.constraint(equalToConstant: 25)
     ]
     
     NSLayoutConstraint.activate(constraints)
