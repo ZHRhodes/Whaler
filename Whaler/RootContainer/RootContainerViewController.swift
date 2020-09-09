@@ -10,27 +10,39 @@ import Combine
 import UIKit
 
 class RootContainerViewController: UIViewController {
-  private var mainViewController: MainViewController!
+  private var mainViewController: MainViewController?
   private var authenticationViewController: AuthenticationViewController?
   
   private let interactor = RootContainerInteractor()
   private var unauthorizedUserCancellable: Cancellable!
   
   override func viewDidLoad() {
-    //TODO:
-    //if user has refresh token cached, dont show auth view. but try to get a new token with refresh. if that fails, show auth view (kick out)
-    //if user has no token cache, show auth view right away
-    //temp solution for now
-//    unauthorizedUserCancellable = interactor.unauthorizedUserPublisher.sink { [weak self] _ in
-//      self?.configureAuthenticationView()
-//    }
- 
     super.viewDidLoad()
-    configureAuthenticationView()
-//    configureMainView()
+    configureViewsOnLaunch()
+    unauthorizedUserCancellable = interactor.unauthorizedUserPublisher.sink { [weak self] _ in
+      self?.showAuthenticationView()
+    }
   }
   
-  private func configureAuthenticationView() {
+  private func configureViewsOnLaunch() {
+    if !Lifecycle.hasTokens() {
+      showAuthenticationView()
+      return
+    } else {
+      showMainView()
+      Lifecycle.refreshAPITokens { [weak self] (success) in
+        if !success {
+          self?.removeMainView()
+          self?.showAuthenticationView()
+        } else {
+          self?.showMainView()
+        }
+      }
+    }
+  }
+  
+  private func showAuthenticationView() {
+    authenticationViewController?.view.removeFromSuperview()
     authenticationViewController = AuthenticationViewController()
     authenticationViewController!.delegate = self
     
@@ -53,9 +65,11 @@ class RootContainerViewController: UIViewController {
     }
   }
   
-  private func configureMainView() {
+  private func showMainView() {
+    mainViewController?.removeFromParent()
+    mainViewController?.view.removeFromSuperview()
     mainViewController = MainViewController()
-    let navigationController = UINavigationController(rootViewController: mainViewController)
+    let navigationController = UINavigationController(rootViewController: mainViewController!)
     navigationController.navigationBar.isHidden = true
     navigationController.modalPresentationStyle = .fullScreen
     
@@ -86,7 +100,7 @@ class RootContainerViewController: UIViewController {
   }
   
   private func removeMainView() {
-    mainViewController.view.removeFromSuperview()
+    mainViewController?.view.removeFromSuperview()
     mainViewController = nil
   }
 }
@@ -94,6 +108,6 @@ class RootContainerViewController: UIViewController {
 extension RootContainerViewController: AuthenticationViewControllerDelegate {
   func signedIn() {
     removeAuthenticationView()
-    configureMainView()
+    showMainView()
   }
 }

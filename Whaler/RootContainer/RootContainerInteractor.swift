@@ -10,9 +10,9 @@ import Foundation
 import Combine
 
 struct RootContainerInteractor {
-//  let unauthorizedUserPublisher: NotificationCenter.Publisher
+  let unauthorizedUserPublisher: NotificationCenter.Publisher
 
   init() {
-//    unauthorizedUserPublisher = NotificationCenter.Publisher(center: .default, name: .unauthorizedUser)
+    unauthorizedUserPublisher = NotificationCenter.Publisher(center: .default, name: .unauthorizedUser)
   }
 }

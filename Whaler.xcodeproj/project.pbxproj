@@ -47,6 +47,8 @@
 		14861EEC249F3DE400D2FA92 /* WhalerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14861EEB249F3DE400D2FA92 /* WhalerTests.swift */; };
 		14861EF7249F401300D2FA92 /* CSVParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14861EF6249F401300D2FA92 /* CSVParser.swift */; };
 		14861EFC249F49DE00D2FA92 /* DocumentPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14861EFB249F49DE00D2FA92 /* DocumentPickerViewController.swift */; };
+		1488423F25086D910025C7EE /* Lifecycle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1488423E25086D910025C7EE /* Lifecycle.swift */; };
+		14884241250876080025C7EE /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14884240250876080025C7EE /* Notifications.swift */; };
 		14A2834724DE510D0016BA82 /* SF.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A2834624DE510D0016BA82 /* SF.swift */; };
 		14AB262E24D137E800AC280D /* ContactsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14AB262D24D137E800AC280D /* ContactsTableViewController.swift */; };
 		14B037E125049CDE00BA488D /* Grouper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B037E025049CDE00BA488D /* Grouper.swift */; };
@@ -128,6 +130,8 @@
 		14861EF6249F401300D2FA92 /* CSVParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSVParser.swift; sourceTree = "<group>"; };
 		14861EF8249F439600D2FA92 /* Whaler.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Whaler.entitlements; sourceTree = "<group>"; };
 		14861EFB249F49DE00D2FA92 /* DocumentPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentPickerViewController.swift; sourceTree = "<group>"; };
+		1488423E25086D910025C7EE /* Lifecycle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lifecycle.swift; sourceTree = "<group>"; };
+		14884240250876080025C7EE /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
 		14A2834624DE510D0016BA82 /* SF.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SF.swift; sourceTree = "<group>"; };
 		14AB262D24D137E800AC280D /* ContactsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsTableViewController.swift; sourceTree = "<group>"; };
 		14B037E025049CDE00BA488D /* Grouper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grouper.swift; sourceTree = "<group>"; };
@@ -220,11 +224,13 @@
 			children = (
 				140AE7A724A9DF1800F7705E /* Views */,
 				140AE79724A9AA4B00F7705E /* Models */,
+				14F7DD9D24EE526200D43055 /* Salesforce */,
 				14D97D7824DBEC4B00058B09 /* Keychain.swift */,
 				146C344524EA53690009C68C /* UserDefaultsManaged.swift */,
 				14EED67D24F0EB7300660BD1 /* SFHelper.swift */,
 				1443046024F3AFFC00D2FBD2 /* Typealiases.swift */,
-				14F7DD9D24EE526200D43055 /* Salesforce */,
+				1488423E25086D910025C7EE /* Lifecycle.swift */,
+				14884240250876080025C7EE /* Notifications.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -576,6 +582,7 @@
 				14ECDB2124CA9288006B4550 /* NoteEditor.swift in Sources */,
 				146C35DB24C56A0100DBCA23 /* ContactsTableView.swift in Sources */,
 				14861ED9249F3DE100D2FA92 /* MainViewController.swift in Sources */,
+				1488423F25086D910025C7EE /* Lifecycle.swift in Sources */,
 				14A2834724DE510D0016BA82 /* SF.swift in Sources */,
 				146834FF24DA99810075B639 /* CommonTextField.swift in Sources */,
 				146C35D924C5689B00DBCA23 /* ContactRowView.swift in Sources */,
@@ -604,6 +611,7 @@
 				146C35CF24C2CA9700DBCA23 /* TitleValueView.swift in Sources */,
 				146C35D324C557C800DBCA23 /* CompanyInfoValuesView.swift in Sources */,
 				14F7DD9F24EE527600D43055 /* SFQueryResponse.swift in Sources */,
+				14884241250876080025C7EE /* Notifications.swift in Sources */,
 				14D97D7924DBEC4B00058B09 /* Keychain.swift in Sources */,
 				140AE79E24A9B50900F7705E /* UIColor+Extensions.swift in Sources */,
 				1480800B24EA4B32007EB6D1 /* NetworkInterface.swift in Sources */,

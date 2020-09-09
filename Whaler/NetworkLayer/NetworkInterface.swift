@@ -15,8 +15,9 @@ protocol NetworkInterface {
 }
 
 protocol APIInterface {
-  func logOut() -> Response<EmptyRemote>
-  func refreshTokens() -> Bool
+  static var hasTokens: Bool { get }
+  @discardableResult func logOut() -> Response<EmptyRemote>
+  @discardableResult func refreshTokens() -> Bool
 }
 
 struct APINetworkInterface: NetworkInterface {
@@ -26,7 +27,7 @@ struct APINetworkInterface: NetworkInterface {
   
   //Temp
   @UserDefaultsManaged(key: "refreshToken")
-  static private var refreshToken: String?
+  static var refreshToken: String?
   
   private let networker: Networker.Type = JustNetworker.self
 
@@ -64,13 +65,14 @@ struct APINetworkInterface: NetworkInterface {
   private func execute<R: Codable>(request: NetworkRequest) -> Response<R> {
     var result = networker.execute(request: request)
 
+    //Potential for endless loop
     if result.statusCode == 403 {
-//      refreshTokens()
+      refreshTokens()
       result = networker.execute(request: request)
     }
 
     if result.statusCode == 401 {
-//      NotificationCenter.default.post(name: .unauthorizedUser, object: nil)
+      NotificationCenter.default.post(name: .unauthorizedUser, object: nil)
     }
 
     if !result.ok {
@@ -88,7 +90,7 @@ struct APINetworkInterface: NetworkInterface {
     case .error(let code, let message):
 //      log.error("Error from request path \(request.path) -- Code: \(code), Message: \(message)", context: LoggingContext.rest)
       if code == 4004 {
-//        NotificationCenter.default.post(name: .unauthorizedUser, object: nil)
+        NotificationCenter.default.post(name: .unauthorizedUser, object: nil)
       }
     case .value(let rResponse):
       if let accessToken = rResponse.tokens?.accessToken, !accessToken.isEmpty {
@@ -102,15 +104,22 @@ struct APINetworkInterface: NetworkInterface {
 
     return response
   }
-  
-  private struct AnyCodable: Codable {}
 }
 
 extension APINetworkInterface: APIInterface {
+  static var hasTokens: Bool {
+    get {
+      return APINetworkInterface.accessToken != nil && APINetworkInterface.refreshToken != nil
+    }
+  }
+  
   @discardableResult
   func logOut() -> Response<EmptyRemote> {
     let body = [String: String]()
-    let response: Response<EmptyRemote> = post(path: "/api/user/logout", formBody: body)
+    let response: Response<EmptyRemote> = post(path: "https://getwhalergo.herokuapp.com/api/user/logout",
+                                               formBody: body)
+    APINetworkInterface.accessToken = nil
+    APINetworkInterface.refreshToken = nil
     return response
   }
 
@@ -118,16 +127,21 @@ extension APINetworkInterface: APIInterface {
   func refreshTokens() -> Bool {
     guard let refreshToken = APINetworkInterface.refreshToken else { return false }
     let refreshRequest = NetworkRequest(method: .post,
-                                        path: "/api/user/refresh",
+                                        path: "https://getwhalergo.herokuapp.com/api/user/refresh",
                                         headers: authorizationHeader,
                                         params: [:],
-                                        formBody: ["refreshToken": refreshToken])
+                                        jsonBody: ["refreshToken": refreshToken])
     let result = networker.execute(request: refreshRequest)
 
-    guard let data = result.data,
-      let response = try? JSONDecoder().decode(Response<AnyCodable?>.self, from: data) else {
-        //log and do something
-        return false
+    guard let data = result.data else { return false }
+    let response: Response<AnyCodable?>
+    
+    do {
+      response = try JSONDecoder().decode(Response<AnyCodable?>.self, from: data)
+    } catch let error {
+      //log.error(error)
+      print(error)
+      return false
     }
 
     switch response.result {
@@ -147,3 +161,4 @@ extension APINetworkInterface: APIInterface {
 }
 
 struct EmptyRemote: Codable {}
+struct AnyCodable: Codable {}
