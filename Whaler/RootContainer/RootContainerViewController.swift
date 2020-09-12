@@ -16,99 +16,83 @@ class RootContainerViewController: UIViewController {
   private let interactor = RootContainerInteractor()
   private var unauthorizedUserCancellable: Cancellable!
   
+  private var state: State?
+  private var shownViewController: UIViewController?
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     configureViewsOnLaunch()
     unauthorizedUserCancellable = interactor.unauthorizedUserPublisher.sink { [weak self] _ in
-      self?.showAuthenticationView()
+      self?.transition(to: .authentication)
+    }
+    if state == nil {
+      transition(to: .authentication)
+    }
+  }
+  
+  func transition(to newState: State) {
+    shownViewController?.remove()
+    let vc = viewController(for: newState)
+    add(vc)
+    shownViewController = vc
+    state = newState
+  }
+  
+  func setWindowConstraints(for state: State) {
+    let minSize: CGSize
+    let maxSize: CGSize
+    
+    switch state {
+    case .authentication:
+      minSize = AuthenticationViewController.minSize
+      maxSize = AuthenticationViewController.maxSize
+    case .main:
+      minSize = MainViewController.minSize
+      maxSize = MainViewController.maxSize
+    }
+    
+    UIApplication.shared.connectedScenes.compactMap { $0 as? UIWindowScene }.forEach { windowScene in
+      windowScene.sizeRestrictions?.minimumSize = minSize
+      windowScene.sizeRestrictions?.maximumSize = maxSize
+    }
+  }
+  
+  func viewController(for state: State) -> UIViewController {
+    switch state {
+    case .authentication:
+      return AuthenticationViewController()
+    case .main:
+      return MainViewController()
     }
   }
   
   private func configureViewsOnLaunch() {
     Lifecycle.loadApiTokens()
     if !Lifecycle.hasTokens() {
-      showAuthenticationView()
+      transition(to: .authentication)
       return
     } else {
-      showMainView()
+      transition(to: .main)
       Lifecycle.refreshAPITokens { [weak self] (success) in
         if !success {
-          self?.removeMainView()
-          self?.showAuthenticationView()
+          self?.transition(to: .authentication)
         } else {
-          self?.showMainView()
+          self?.transition(to: .main)
         }
       }
     }
-  }
-  
-  private func showAuthenticationView() {
-    authenticationViewController?.view.removeFromSuperview()
-    authenticationViewController = AuthenticationViewController()
-    authenticationViewController!.delegate = self
-    
-    guard let authView = authenticationViewController?.view else { return }
-    view.addSubview(authView)
-    
-    authView.translatesAutoresizingMaskIntoConstraints = false
-    let constraints = [
-      authView.leftAnchor.constraint(equalTo: view.leftAnchor),
-      authView.rightAnchor.constraint(equalTo: view.rightAnchor),
-      authView.topAnchor.constraint(equalTo: view.topAnchor),
-      authView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-    ]
-    
-    NSLayoutConstraint.activate(constraints)
-    
-    UIApplication.shared.connectedScenes.compactMap { $0 as? UIWindowScene }.forEach { windowScene in
-      windowScene.sizeRestrictions?.minimumSize = AuthenticationViewController.minSize
-      windowScene.sizeRestrictions?.maximumSize = AuthenticationViewController.maxSize
-    }
-  }
-  
-  private func showMainView() {
-    mainViewController?.removeFromParent()
-    mainViewController?.view.removeFromSuperview()
-    mainViewController = MainViewController()
-    let navigationController = UINavigationController(rootViewController: mainViewController!)
-    navigationController.navigationBar.isHidden = true
-    navigationController.modalPresentationStyle = .fullScreen
-    
-    present(navigationController, animated: false, completion: nil)
-    
-//    guard let mainView = mainViewController.view else { return }
-//    view.addSubview(mainView)
-//
-//    mainView.translatesAutoresizingMaskIntoConstraints = false
-//    let constraints = [
-//      mainView.leftAnchor.constraint(equalTo: view.leftAnchor),
-//      mainView.rightAnchor.constraint(equalTo: view.rightAnchor),
-//      mainView.topAnchor.constraint(equalTo: view.topAnchor),
-//      mainView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-//    ]
-//
-//    NSLayoutConstraint.activate(constraints)
-    
-    UIApplication.shared.connectedScenes.compactMap { $0 as? UIWindowScene }.forEach { windowScene in
-      windowScene.sizeRestrictions?.minimumSize = MainViewController.minSize
-      windowScene.sizeRestrictions?.maximumSize = MainViewController.maxSize
-    }
-  }
-  
-  private func removeAuthenticationView() {
-    authenticationViewController?.view.removeFromSuperview()
-    authenticationViewController = nil
-  }
-  
-  private func removeMainView() {
-    mainViewController?.view.removeFromSuperview()
-    mainViewController = nil
   }
 }
 
 extension RootContainerViewController: AuthenticationViewControllerDelegate {
   func signedIn() {
-    removeAuthenticationView()
-    showMainView()
+    transition(to: .main)
+  }
+}
+
+extension RootContainerViewController {
+  enum State {
+    case authentication
+    case main
   }
 }
