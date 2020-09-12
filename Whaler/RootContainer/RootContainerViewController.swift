@@ -25,6 +25,7 @@ class RootContainerViewController: UIViewController {
   }
   
   private func configureViewsOnLaunch() {
+    Lifecycle.loadApiTokens()
     if !Lifecycle.hasTokens() {
       showAuthenticationView()
       return

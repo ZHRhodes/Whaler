@@ -8,9 +8,40 @@
 
 import Foundation
 
-enum Lifecycle {
+protocol TokenContainer {
+  static var accessToken: String? { get set }
+  static var refreshToken: String? { get set }
+}
+
+enum Lifecycle: TokenContainer {
+  static var accessToken: String? {
+    willSet {
+      if let newValue = newValue, newValue != accessToken, let data = newValue.data(using: .utf8) {
+        Keychain.save(key: .apiAccessToken, data: data)
+      }
+    }
+  }
+  
+  static var refreshToken: String? {
+    willSet {
+      if let newValue = newValue, newValue != refreshToken, let data = newValue.data(using: .utf8) {
+        Keychain.save(key: .apiRefreshToken, data: data)
+      }
+    }
+  }
+  
+  static func loadApiTokens() {
+    if let accessTokenData = Keychain.load(key: .apiAccessToken) {
+      accessToken = String(data: accessTokenData, encoding: .utf8)
+    }
+    
+    if let refreshTokenData = Keychain.load(key: .apiRefreshToken) {
+      refreshToken = String(data: refreshTokenData, encoding: .utf8)
+    }
+  }
+  
   static func hasTokens(using interface: APIInterface.Type = APINetworkInterface.self) -> Bool {
-    return interface.hasTokens
+    return accessToken != nil && refreshToken != nil
   }
   
   static func refreshAPITokens(using interface: APIInterface = APINetworkInterface(), completion: @escaping BoolClosure) {

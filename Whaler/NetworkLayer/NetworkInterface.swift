@@ -15,24 +15,16 @@ protocol NetworkInterface {
 }
 
 protocol APIInterface {
-  static var hasTokens: Bool { get }
   @discardableResult func logOut() -> Response<EmptyRemote>
   @discardableResult func refreshTokens() -> Bool
 }
 
 struct APINetworkInterface: NetworkInterface {
-  //Temp
-  @UserDefaultsManaged(key: "accessToken")
-  static var accessToken: String?
-  
-  //Temp
-  @UserDefaultsManaged(key: "refreshToken")
-  static var refreshToken: String?
-  
   private let networker: Networker.Type = JustNetworker.self
+  private let tokenContainer: TokenContainer.Type = Lifecycle.self
 
   private var authorizationHeader: [String: String] {
-    return ["Authorization": APINetworkInterface.accessToken ?? ""]
+    return ["Authorization": tokenContainer.accessToken ?? ""]
   }
 
   func post<B: Encodable, R: Codable>(path: String, jsonBody: B? = nil) -> Response<R> {
@@ -94,11 +86,11 @@ struct APINetworkInterface: NetworkInterface {
       }
     case .value(let rResponse):
       if let accessToken = rResponse.tokens?.accessToken, !accessToken.isEmpty {
-        APINetworkInterface.accessToken = accessToken
+        tokenContainer.accessToken = accessToken
       }
 
       if let refreshToken = rResponse.tokens?.refreshToken, !refreshToken.isEmpty {
-        APINetworkInterface.refreshToken = refreshToken
+        tokenContainer.refreshToken = refreshToken
       }
     }
 
@@ -106,26 +98,20 @@ struct APINetworkInterface: NetworkInterface {
   }
 }
 
-extension APINetworkInterface: APIInterface {
-  static var hasTokens: Bool {
-    get {
-      return APINetworkInterface.accessToken != nil && APINetworkInterface.refreshToken != nil
-    }
-  }
-  
+extension APINetworkInterface: APIInterface {  
   @discardableResult
   func logOut() -> Response<EmptyRemote> {
     let body = [String: String]()
     let response: Response<EmptyRemote> = post(path: "https://getwhalergo.herokuapp.com/api/user/logout",
                                                formBody: body)
-    APINetworkInterface.accessToken = nil
-    APINetworkInterface.refreshToken = nil
+    tokenContainer.accessToken = nil
+    tokenContainer.refreshToken = nil
     return response
   }
 
   @discardableResult
   func refreshTokens() -> Bool {
-    guard let refreshToken = APINetworkInterface.refreshToken else { return false }
+    guard let refreshToken = tokenContainer.refreshToken else { return false }
     let refreshRequest = NetworkRequest(method: .post,
                                         path: "https://getwhalergo.herokuapp.com/api/user/refresh",
                                         headers: authorizationHeader,
@@ -153,8 +139,8 @@ extension APINetworkInterface: APIInterface {
         let refreshToken = tokensResponse.tokens?.refreshToken else {
           return false
       }
-      APINetworkInterface.accessToken = accessToken
-      APINetworkInterface.refreshToken = refreshToken
+      tokenContainer.accessToken = accessToken
+      tokenContainer.refreshToken = refreshToken
       return true
     }
   }
