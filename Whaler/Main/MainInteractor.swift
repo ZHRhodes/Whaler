@@ -17,6 +17,11 @@ class MainInteractor {
     accountGrouper.hasNoValues
   }
   
+  var hasSalesforceTokens: Bool {
+    SFSession.loadSFTokens()
+    return SFSession.hasTokens()
+  }
+  
   init() {
 //    retrieveAccounts()
   }
@@ -123,41 +128,14 @@ class MainInteractor {
     return session
   }
   
-  private func storeTokens(accessToken: String, refreshToken: String) {
-//    let r1: OSStatus?
-//    if let data = accessToken.data(using: .utf8) {
-//      r1 = Keychain.save(key: .accessToken, data: data)
-//    }
-//
-//    let r2: OSStatus?
-//    if let data = refreshToken.data(using: .utf8) {
-//      r2 = Keychain.save(key: .refreshToken, data: data)
-//    }
-//
-//
-    print("Access Token: \(accessToken.removingPercentEncoding)")
-    print("Refresh Token: \(refreshToken.removingPercentEncoding)")
-
-//    var at: String?
-//    if let data = Keychain.load(key: .accessToken) {
-//      at = String(data: data, encoding: .utf8)
-//    }
-//
-//    var rt: String?
-//    if let data = Keychain.load(key: .refreshToken) {
-//      rt = String(data: data, encoding: .utf8)
-//    }
-//
-//    print("AT: \(at)")
-//    print("RT: \(rt)")
-    
-    SF.accessToken = accessToken.removingPercentEncoding ?? ""
-    SF.refreshToken = refreshToken.removingPercentEncoding ?? ""
-    
+  func refreshSalesforceSession(completion: @escaping BoolClosure) {
     do {
       try SF.refreshAccessToken()
+      completion(true)
     } catch let error {
       print(error)
+      //log this
+      completion(false)
     }
   }
 }

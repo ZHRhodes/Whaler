@@ -57,18 +57,35 @@ class MainViewController: UIViewController {
     super.viewDidLoad()
     title = "Accounts"
     view.backgroundColor = .white
+    
     if interactor.hasNoAccounts {
-      configureNoDataViews()
+      if interactor.hasSalesforceTokens {
+        //present loading indicator
+        interactor.refreshSalesforceSession { [weak self] (success) in
+          if success {
+            self?.interactor.fetchAccountsFromSalesforce()
+            self?.configureViewsForContent()
+          } else {
+            self?.configureNoDataViews()
+          }
+        }
+      } else {
+        configureNoDataViews()
+      }
     } else {
-      self.removeNoDataViews()
-      self.configureTableView()
-      self.configureDeleteButton()
+      configureNoDataViews()
     }
   }
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     navigationController?.setNavigationBarHidden(true, animated: false)
+  }
+  
+  private func configureViewsForContent() {
+    removeNoDataViews()
+    configureTableView()
+    configureDeleteButton()
   }
   
   private func configureNoDataViews() {

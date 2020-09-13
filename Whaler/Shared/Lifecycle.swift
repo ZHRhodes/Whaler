@@ -40,7 +40,7 @@ enum Lifecycle: TokenContainer {
     }
   }
   
-  static func hasTokens(using interface: APIInterface.Type = APINetworkInterface.self) -> Bool {
+  static func hasTokens() -> Bool {
     return accessToken != nil && refreshToken != nil
   }
   

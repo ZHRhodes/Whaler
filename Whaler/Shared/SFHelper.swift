@@ -40,8 +40,8 @@ class SFHelper {
       if let error = error {
         print(error)
       }
-      SF.accessToken = url?.fragmentValueOf("access_token")?.removingPercentEncoding
-      SF.refreshToken = url?.fragmentValueOf("refresh_token")?.removingPercentEncoding
+      SFSession.accessToken = url?.fragmentValueOf("access_token")?.removingPercentEncoding
+      SFSession.refreshToken = url?.fragmentValueOf("refresh_token")?.removingPercentEncoding
       DispatchQueue.main.sync {
         completion()
       }

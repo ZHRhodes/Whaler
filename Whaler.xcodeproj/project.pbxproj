@@ -25,6 +25,7 @@
 		144BF56C24D7E66E00F231F0 /* RootContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144BF56B24D7E66E00F231F0 /* RootContainerViewController.swift */; };
 		144FA6BD24C2C0C500506F15 /* CompanyInfoHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144FA6BC24C2C0C500506F15 /* CompanyInfoHeaderView.swift */; };
 		1454743B250D904700257A89 /* UIViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1454743A250D904700257A89 /* UIViewController+Extensions.swift */; };
+		1454743D250D93DC00257A89 /* SFSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1454743C250D93DC00257A89 /* SFSession.swift */; };
 		145A376A24C588DF0081F9DB /* NotesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145A376924C588DF0081F9DB /* NotesView.swift */; };
 		145A376C24C58D440081F9DB /* AccountDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145A376B24C58D440081F9DB /* AccountDetailsView.swift */; };
 		146834FC24DA76CE0075B639 /* RootContainerInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146834FB24DA76CE0075B639 /* RootContainerInteractor.swift */; };
@@ -105,6 +106,7 @@
 		144BF56B24D7E66E00F231F0 /* RootContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootContainerViewController.swift; sourceTree = "<group>"; };
 		144FA6BC24C2C0C500506F15 /* CompanyInfoHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyInfoHeaderView.swift; sourceTree = "<group>"; };
 		1454743A250D904700257A89 /* UIViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extensions.swift"; sourceTree = "<group>"; };
+		1454743C250D93DC00257A89 /* SFSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFSession.swift; sourceTree = "<group>"; };
 		145A376924C588DF0081F9DB /* NotesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesView.swift; sourceTree = "<group>"; };
 		145A376B24C58D440081F9DB /* AccountDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDetailsView.swift; sourceTree = "<group>"; };
 		146834FB24DA76CE0075B639 /* RootContainerInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootContainerInteractor.swift; sourceTree = "<group>"; };
@@ -460,6 +462,7 @@
 				14EED67924F0E48C00660BD1 /* SFContact.swift */,
 				14EED67B24F0E5E400660BD1 /* SFLead.swift */,
 				1443045E24F3356A00D2FBD2 /* SFNewAccessToken.swift */,
+				1454743C250D93DC00257A89 /* SFSession.swift */,
 			);
 			path = Salesforce;
 			sourceTree = "<group>";
@@ -608,6 +611,7 @@
 				14EED67E24F0EB7300660BD1 /* SFHelper.swift in Sources */,
 				14F4090824C6A2D100F405BC /* UIFont+Extensions.swift in Sources */,
 				144FA6BD24C2C0C500506F15 /* CompanyInfoHeaderView.swift in Sources */,
+				1454743D250D93DC00257A89 /* SFSession.swift in Sources */,
 				14B037EE25074B1E00BA488D /* UserRemote.swift in Sources */,
 				144AECDA24D26658009625BE /* ContactRowViewCell.swift in Sources */,
 				145A376A24C588DF0081F9DB /* NotesView.swift in Sources */,

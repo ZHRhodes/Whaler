@@ -25,9 +25,6 @@ class RootContainerViewController: UIViewController {
     unauthorizedUserCancellable = interactor.unauthorizedUserPublisher.sink { [weak self] _ in
       self?.transition(to: .authentication)
     }
-    if state == nil {
-      transition(to: .authentication)
-    }
   }
   
   func transition(to newState: State) {
