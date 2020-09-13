@@ -18,6 +18,8 @@ enum Lifecycle: TokenContainer {
     willSet {
       if let newValue = newValue, newValue != accessToken, let data = newValue.data(using: .utf8) {
         Keychain.save(key: .apiAccessToken, data: data)
+      } else if newValue == nil {
+        Keychain.delete(key: .apiAccessToken)
       }
     }
   }
@@ -26,6 +28,8 @@ enum Lifecycle: TokenContainer {
     willSet {
       if let newValue = newValue, newValue != refreshToken, let data = newValue.data(using: .utf8) {
         Keychain.save(key: .apiRefreshToken, data: data)
+      } else if newValue == nil {
+        Keychain.delete(key: .apiRefreshToken)
       }
     }
   }

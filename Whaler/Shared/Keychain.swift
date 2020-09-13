@@ -71,6 +71,23 @@ class Keychain {
     
     return data
   }
+  
+  @discardableResult
+  class func delete(key: Key) -> OSStatus {
+    let query: [String : Any] = [
+      kSecClass as String       : kSecClassGenericPassword,
+      kSecAttrAccount as String : key.rawValue,
+      kSecReturnData as String  : true,
+      kSecMatchLimit as String  : kSecMatchLimitOne,
+      kSecReturnAttributes as String: true
+    ]
+
+    let status: OSStatus = SecItemDelete(query as CFDictionary)
+    if status != errSecSuccess {
+      print("failed to delete key: \(key). Status: \(status)")
+    }
+    return status
+  }
 
   class func createUniqueID() -> String {
       let uuid: CFUUID = CFUUIDCreate(nil)

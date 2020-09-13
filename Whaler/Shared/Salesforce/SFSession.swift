@@ -13,6 +13,8 @@ class SFSession: TokenContainer {
     willSet {
       if let newValue = newValue, newValue != accessToken, let data = newValue.data(using: .utf8) {
         Keychain.save(key: .sfAccessToken, data: data)
+      } else if newValue == nil {
+        Keychain.delete(key: .sfAccessToken)
       }
     }
   }
@@ -21,6 +23,8 @@ class SFSession: TokenContainer {
     willSet {
       if let newValue = newValue, newValue != refreshToken, let data = newValue.data(using: .utf8) {
         Keychain.save(key: .sfRefreshToken, data: data)
+      } else if newValue == nil {
+        Keychain.delete(key: .sfRefreshToken)
       }
     }
   }

@@ -46,10 +46,11 @@ class MainViewController: UIViewController {
   static let minSize = CGSize(width: 500, height: 500)
   static let maxSize = CGSize(width: .max, height: .max)
   
-  let interactor = MainInteractor()
-  var noDataStackView: UIStackView?
-  var tableView: UITableView!
-  var deleteButton: UIButton!
+  private let interactor = MainInteractor()
+  private var noDataStackView: UIStackView?
+  private var tableView: UITableView!
+  private var deleteButton: UIButton!
+  private var signOutButton: UIButton!
   
   private var sectionHeaders = Set<WeakRef<UIView>>()
   
@@ -85,6 +86,7 @@ class MainViewController: UIViewController {
   private func configureViewsForContent() {
     removeNoDataViews()
     configureTableView()
+    configureSignOutButton()
     configureDeleteButton()
   }
   
@@ -193,16 +195,34 @@ class MainViewController: UIViewController {
     deleteButton = nil
   }
   
+  private func configureSignOutButton() {
+    signOutButton = UIButton()
+    signOutButton.setImage(UIImage(named: "signOutTEMP"), for: .normal)
+    signOutButton.imageView?.contentMode = .scaleAspectFit
+    signOutButton.addTarget(self, action: #selector(signOutTapped), for: .touchUpInside)
+    signOutButton.translatesAutoresizingMaskIntoConstraints = false
+    view.addSubview(signOutButton)
+    
+    let constraints = [
+      signOutButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -12),
+      signOutButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 12),
+      signOutButton.heightAnchor.constraint(equalToConstant: 25),
+      signOutButton.widthAnchor.constraint(equalToConstant: 25)
+    ]
+    
+    NSLayoutConstraint.activate(constraints)
+  }
+  
   private func configureDeleteButton() {
     deleteButton = UIButton()
-    deleteButton.setImage(UIImage(named: "tripleDotsTEMP"), for: .normal)
+    deleteButton.setImage(UIImage(named: "delete"), for: .normal)
     deleteButton.imageView?.contentMode = .scaleAspectFit
     deleteButton.addTarget(self, action: #selector(deleteTapped), for: .touchUpInside)
     deleteButton.translatesAutoresizingMaskIntoConstraints = false
     view.addSubview(deleteButton)
     
     let constraints = [
-      deleteButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -12),
+      deleteButton.rightAnchor.constraint(equalTo: signOutButton.leftAnchor, constant: -12),
       deleteButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 12),
       deleteButton.heightAnchor.constraint(equalToConstant: 25),
       deleteButton.widthAnchor.constraint(equalToConstant: 25)
@@ -212,8 +232,14 @@ class MainViewController: UIViewController {
   }
   
   @objc
+  private func signOutTapped() {
+    Lifecycle.logOut()
+  }
+  
+  @objc
   private func deleteTapped() {
     interactor.deleteAccounts()
+    interactor.endSalesforceSession()
     removeTableView()
     removeDeleteButton()
     configureNoDataViews()
@@ -225,9 +251,7 @@ class MainViewController: UIViewController {
         supportedTypes: ["public.comma-separated-values-text"],
         onPick: { url in
           self.interactor.parseAccountsAndContacts(from: url)
-          self.removeNoDataViews()
-          self.configureTableView()
-          self.configureDeleteButton()
+          self.configureViewsForContent()
         },
         onDismiss: {}
     )
@@ -237,9 +261,7 @@ class MainViewController: UIViewController {
   @objc
   private func connectToSalesforceTapped() {    
     let sfAuthSession = interactor.makeSFAuthenticationSession(completion: { [weak self] in
-      self?.removeNoDataViews()
-      self?.configureTableView()
-      self?.configureDeleteButton()
+      self?.configureViewsForContent()
     })
     sfAuthSession?.presentationContextProvider = self
     sfAuthSession?.start()

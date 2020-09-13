@@ -138,4 +138,8 @@ class MainInteractor {
       completion(false)
     }
   }
+  
+  func endSalesforceSession() {
+    SFHelper.endSession()
+  }
 }

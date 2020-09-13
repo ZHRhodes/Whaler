@@ -57,7 +57,9 @@ class RootContainerViewController: UIViewController {
   func viewController(for state: State) -> UIViewController {
     switch state {
     case .authentication:
-      return AuthenticationViewController()
+      let vc = AuthenticationViewController()
+      vc.delegate = self
+      return vc
     case .main:
       return MainViewController()
     }

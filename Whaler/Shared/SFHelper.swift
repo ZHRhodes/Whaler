@@ -49,4 +49,9 @@ class SFHelper {
     
     return session
   }
+  
+  static func endSession() {
+    SFSession.accessToken = nil
+    SFSession.refreshToken = nil
+  }
 }
