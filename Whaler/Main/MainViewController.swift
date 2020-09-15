@@ -46,7 +46,7 @@ class MainViewController: UIViewController {
   static let minSize = CGSize(width: 500, height: 500)
   static let maxSize = CGSize(width: .max, height: .max)
   
-  private let interactor = MainInteractor()
+  private var interactor: MainInteractor!
   private var noDataStackView: UIStackView?
   private var tableView: UITableView!
   private var deleteButton: UIButton!
@@ -59,7 +59,10 @@ class MainViewController: UIViewController {
     title = "Accounts"
     view.backgroundColor = .white
     
-    if interactor.hasNoAccounts {
+    Lifecycle.loadCurrentUser()
+    interactor = MainInteractor()
+    
+    if interactor.hasNoAccounts() {
       if interactor.hasSalesforceTokens {
         //present loading indicator
         interactor.refreshSalesforceSession { [weak self] (success) in
@@ -74,7 +77,7 @@ class MainViewController: UIViewController {
         configureNoDataViews()
       }
     } else {
-      configureNoDataViews()
+      configureViewsForContent()
     }
   }
   

@@ -11,7 +11,7 @@ import Security
 
 class Keychain {
   enum Key: String {
-    case apiAccessToken, apiRefreshToken, sfAccessToken, sfRefreshToken
+    case currentUser, apiAccessToken, apiRefreshToken, sfAccessToken, sfRefreshToken
   }
   
   @discardableResult

@@ -159,6 +159,9 @@ extension Account: ManagedObject {
     managedObject.setValue(accountDescription, forKey: CodingKeys.accountDescription.rawValue)
     managedObject.setValue(state.rawValue, forKey: CodingKeys.state.rawValue)
     managedObject.setValue(notes, forKey: CodingKeys.notes.rawValue)
+    if let userId = Lifecycle.currentUser?.id {
+      managedObject.setValue(String(userId), forKey: "ownerUserId")
+    }
   }
 }
 

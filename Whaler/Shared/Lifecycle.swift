@@ -14,6 +14,23 @@ protocol TokenContainer {
 }
 
 enum Lifecycle: TokenContainer {
+  static var currentUser: User? {
+    willSet {
+      print("Current user: \(newValue as Any)")
+      if let newValue = newValue, newValue != currentUser {
+        do {
+          let currentUserData = try JSONEncoder().encode(newValue)
+          Keychain.save(key: .currentUser, data: currentUserData)
+        } catch let error {
+          print("Failed to save currentUserData to keychain. Error: \(error)")
+          //log this
+        }
+      } else if newValue == nil {
+        Keychain.delete(key: .currentUser)
+      }
+    }
+  }
+  
   static var accessToken: String? {
     willSet {
       if let newValue = newValue, newValue != accessToken, let data = newValue.data(using: .utf8) {
@@ -56,5 +73,16 @@ enum Lifecycle: TokenContainer {
   static func logOut(using interface: APIInterface = APINetworkInterface()) {
     interface.logOut()
     NotificationCenter.default.post(name: .unauthorizedUser, object: nil)
+  }
+  
+  static func loadCurrentUser() {
+    if let userData = Keychain.load(key: .currentUser) {
+      do {
+        currentUser = try JSONDecoder().decode(User.self, from: userData)
+      } catch let error {
+        print("failed to decode currentUserData from Keychain. Error: \(error)")
+        //log this
+      }
+    }
   }
 }

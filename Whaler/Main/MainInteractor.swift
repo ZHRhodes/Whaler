@@ -13,8 +13,8 @@ class MainInteractor {
   lazy var accountGrouper = Grouper<WorkState, Account>(groups: self.accountStates)
   lazy var accountStates = WorkState.allCases
   
-  var hasNoAccounts: Bool {
-    accountGrouper.hasNoValues
+  func hasNoAccounts() -> Bool {
+    return accountGrouper.hasNoValues
   }
   
   var hasSalesforceTokens: Bool {
@@ -23,7 +23,7 @@ class MainInteractor {
   }
   
   init() {
-//    retrieveAccounts()
+    retrieveAccounts()
   }
   
   func parseAccountsAndContacts(from url: URL) {
@@ -52,12 +52,19 @@ class MainInteractor {
   }
   
   func retrieveAccounts() {
-    let retrievedAccounts = ObjectManager.retrieveAll(ofType: Account.self)
+    guard let userId = Lifecycle.currentUser?.id else { return }
+    let predicate = NSPredicate(format: "ownerUserId == %d", userId)
+    let retrievedAccounts = ObjectManager.retrieveAll(ofType: Account.self, with: predicate)
+    print(retrievedAccounts)
     setAccounts(retrievedAccounts)
     
     //store contact count to Account so that this isn't
     //required in order to show correct number of contacts on the accounts page
     retrieveAndAssignContacts()
+    
+    //For next time:
+    //make it easy to print everything in core data out whenever
+    //Need to use that to check that accounts for multiple users are in there right now
   }
   
   func setAccounts(_ newAccounts: [Account]) {
@@ -101,7 +108,8 @@ class MainInteractor {
   
   func deleteAccounts() {
     accountGrouper.resetValues()
-    ObjectManager.deleteAll(ofType: Account.self)
+    guard let userId = Lifecycle.currentUser?.id else { return }
+    ObjectManager.deleteAll(ofType: Account.self, with: NSPredicate(format: "ownerUserId == %d", userId))
   }
   
   func fetchAccountsFromSalesforce() {

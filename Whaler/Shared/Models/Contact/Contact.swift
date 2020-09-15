@@ -104,6 +104,9 @@ extension Contact: ManagedObject {
     managedObject.setValue(phone, forKey: CodingKeys.phone.rawValue)
     managedObject.setValue(email, forKey: CodingKeys.email.rawValue)
     managedObject.setValue(state.rawValue, forKey: CodingKeys.state.rawValue)
+    if let userId = Lifecycle.currentUser?.id {
+      managedObject.setValue(String(userId), forKey: "ownerUserId")
+    }
   }
 }
 

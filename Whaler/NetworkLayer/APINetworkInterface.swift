@@ -1,5 +1,5 @@
 //
-//  NetworkInterface.swift
+//  APINetworkInterface.swift
 //  Whaler
 //
 //  Created by Zachary Rhodes on 8/16/20.
@@ -120,10 +120,16 @@ extension APINetworkInterface: APIInterface {
     let result = networker.execute(request: refreshRequest)
 
     guard let data = result.data else { return false }
-    let response: Response<AnyCodable?>
+    let response: Response<User>
     
     do {
-      response = try JSONDecoder().decode(Response<AnyCodable?>.self, from: data)
+      response = try JSONDecoder().decode(Response<User>.self, from: data)
+      switch response.result {
+      case .value(let userResponse):
+        Lifecycle.currentUser = userResponse.response
+      case .error(_, _):
+        break
+      }
     } catch let error {
       //log.error(error)
       print(error)

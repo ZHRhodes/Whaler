@@ -13,12 +13,14 @@ struct AuthenticationInteractor {
   
   func signIn(email: String, password: String, success: @escaping VoidClosure, failure: @escaping VoidClosure) {
     let body = ["email": email, "password": password]
-    let response: Response<UserRemote> = networkInterface.post(path: "https://getwhalergo.herokuapp.com/api/user/login",
+    let response: Response<User> = networkInterface.post(path: "https://getwhalergo.herokuapp.com/api/user/login",
                                          jsonBody: body)
     switch response.result {
     case .error(let code, let message):
+      print("Failed to sign in. code: \(code), message: \(message)")
       failure()
-    case .value(let userRemoteResponse):
+    case .value(let userResponse):
+      Lifecycle.currentUser = userResponse.response
       success()
     }
   }

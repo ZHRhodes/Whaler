@@ -10,13 +10,19 @@ import Foundation
 import UIKit
 
 enum ObjectManager {
-  static func save(_ object: ManagedObject) {
+  static func save(_ object: ManagedObject, ownerUserId: String? = nil) {
     guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
     let managedContext = appDelegate.persistentContainer.viewContext
     
     let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: type(of: object).entityName)
-    fetchRequest.predicate = NSPredicate(format: "id == %@", object.id)
+    let predicate: NSPredicate
 
+    if let ownerUserId = ownerUserId {
+      predicate = NSPredicate(format: "id == %@ && ownerUserId == %d", object.id, ownerUserId)
+    } else {
+      predicate = NSPredicate(format: "id == %@", object.id)
+    }
+    fetchRequest.predicate = predicate
     do {
       guard let results = try managedContext.fetch(fetchRequest) as? [NSManagedObject] else { return }
       if results.count != 0 {
@@ -47,11 +53,12 @@ enum ObjectManager {
     }
   }
   
-  static func deleteAll<T: ManagedObject>(ofType type: T.Type) {
+  static func deleteAll<T: ManagedObject>(ofType type: T.Type, with predicate: NSPredicate? = nil) {
     guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
     let managedContext = appDelegate.persistentContainer.viewContext
     
     let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: T.entityName)
+    predicate.map { fetchRequest.predicate = $0 }
     let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
     
     do {

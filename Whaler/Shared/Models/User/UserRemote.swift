@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct UserRemote: Codable {
+struct User: Codable {
   let id: Int
   let email: String
   let firstName: String
@@ -17,3 +17,5 @@ struct UserRemote: Codable {
   let organizationId: UInt
 //  let workspaces: [WorkspaceRemote]?
 }
+
+extension User: Equatable {}
