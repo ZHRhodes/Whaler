@@ -9,15 +9,20 @@
 import UIKit
 import SwiftUI
 
+protocol TextFieldDelegate: class {
+  func didPressEnter(from textField: UITextField)
+}
+
 struct CommonTextFieldRepresentable: UIViewRepresentable {
   typealias UIViewType = CommonTextField
   
   let initialText: String
   let isSecureText: Bool
+  weak var textFieldDelegate: TextFieldDelegate?
   @Binding var text: String
 
   func makeUIView(context: Context) -> CommonTextField {
-    let textField = CommonTextField(label: initialText, isSecureText: isSecureText)
+    let textField = CommonTextField(label: initialText, isSecureText: isSecureText, textFieldDelegate: textFieldDelegate)
     textField.addTarget(context.coordinator,
                         action: #selector(Coordinator.textFieldDidChange(textField:)),
                         for: .editingChanged)
@@ -51,10 +56,12 @@ struct CommonTextFieldRepresentable: UIViewRepresentable {
 class CommonTextField: UITextField {
   private let placeholderLabel = UILabel()
   private let fieldNameLabel = UILabel()
+  private weak var textFieldDelegate: TextFieldDelegate?
 
-  init(label: String, isSecureText: Bool = false) {
+  init(label: String, isSecureText: Bool = false, textFieldDelegate: TextFieldDelegate?) {
     super.init(frame: .zero)
     isSecureTextEntry = isSecureText
+    self.textFieldDelegate = textFieldDelegate
     configure(with: label)
   }
   
@@ -72,6 +79,7 @@ class CommonTextField: UITextField {
     configureUnderlineView()
     
     addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
+    addTarget(self, action: #selector(enterPressed), for: .editingDidEndOnExit)
   }
   
   private func configurePlaceholderLabel(with label: String) {
@@ -115,5 +123,10 @@ class CommonTextField: UITextField {
     UIView.animate(withDuration: duration) {
       self.fieldNameLabel.alpha = alpha
     }
+  }
+  
+  @objc
+  private func enterPressed() {
+    textFieldDelegate?.didPressEnter(from: self)
   }
 }

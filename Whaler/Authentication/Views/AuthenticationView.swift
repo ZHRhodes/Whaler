@@ -14,8 +14,8 @@ protocol AuthenticationViewDelegate: class {
 
 struct AuthenticationView: View {
   weak var delegate: AuthenticationViewDelegate?
-  @State private var email = ""
-  @State private var password = ""
+  weak var textFieldDelegate: TextFieldDelegate?
+  @ObservedObject var viewModel: ViewModel
   
   var body: some View {
     GeometryReader { geometry in
@@ -36,12 +36,12 @@ struct AuthenticationView: View {
                 Spacer().frame(height: 26)
                 Text("SIGN IN").font(Font.custom(boldFontName, size: 25))
                 Spacer().frame(height: 26)
-                CommonTextFieldRepresentable(initialText: "EMAIL", isSecureText: false, text: $email).frame(height: 72)
+                CommonTextFieldRepresentable(initialText: "EMAIL", isSecureText: false, textFieldDelegate: textFieldDelegate, text: $viewModel.email).frame(height: 72)
                 Spacer().frame(height: 50)
-                CommonTextFieldRepresentable(initialText: "PASSWORD", isSecureText: true, text: $password).frame(height: 72)
+                CommonTextFieldRepresentable(initialText: "PASSWORD", isSecureText: true, textFieldDelegate: textFieldDelegate, text: $viewModel.password).frame(height: 72)
                 Spacer().frame(height: 60)
                 Button(action: {
-                  delegate?.signInTapped(email: email, password: password)
+                  delegate?.signInTapped(email: viewModel.email, password: viewModel.password)
                 }) {
                   Text("SIGN IN")
                     .padding()
@@ -64,7 +64,14 @@ struct AuthenticationView: View {
 }
 
 struct AuthenticationView_Previews: PreviewProvider {
-    static var previews: some View {
-        AuthenticationView()
-    }
+  static var previews: some View {
+    AuthenticationView(viewModel: AuthenticationView.ViewModel())
+  }
+}
+
+extension AuthenticationView {
+  class ViewModel: ObservableObject {
+    @Published var email = ""
+    @Published var password = ""
+  }
 }

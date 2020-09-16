@@ -70,8 +70,12 @@ enum Lifecycle: TokenContainer {
     completion(success)
   }
   
-  static func logOut(using interface: APIInterface = APINetworkInterface()) {
+  static func logOut(using interface: APIInterface = APINetworkInterface(), tokenContainers: [TokenContainer.Type] = [Lifecycle.self, SFSession.self]) {
     interface.logOut()
+    for containerType in tokenContainers {
+      containerType.accessToken = nil
+      containerType.refreshToken = nil
+    }
     NotificationCenter.default.post(name: .unauthorizedUser, object: nil)
   }
   

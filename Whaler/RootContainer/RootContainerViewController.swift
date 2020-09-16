@@ -32,6 +32,7 @@ class RootContainerViewController: UIViewController {
     let vc = viewController(for: newState)
     add(vc)
     shownViewController = vc
+    setWindowConstraints(for: newState)
     state = newState
   }
   
@@ -61,7 +62,9 @@ class RootContainerViewController: UIViewController {
       vc.delegate = self
       return vc
     case .main:
-      return MainViewController()
+      let navigationController = UINavigationController(rootViewController: MainViewController())
+      navigationController.isNavigationBarHidden = true
+      return navigationController
     }
   }
   

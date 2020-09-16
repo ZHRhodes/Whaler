@@ -21,7 +21,8 @@ class AuthenticationViewController: UIViewController {
   private let interactor = AuthenticationInteractor(networkInterface: APINetworkInterface())
   weak var delegate: AuthenticationViewControllerDelegate?
   
-  private lazy var authView = UIHostingController(rootView: AuthenticationView(delegate: self))
+  private let authViewModel = AuthenticationView.ViewModel()
+  private lazy var authView = UIHostingController(rootView: AuthenticationView(delegate: self, textFieldDelegate: self, viewModel: authViewModel))
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -45,5 +46,11 @@ extension AuthenticationViewController: AuthenticationViewDelegate {
     } failure: {
       //show error
     }
+  }
+}
+
+extension AuthenticationViewController: TextFieldDelegate {
+  func didPressEnter(from textField: UITextField) {
+    signInTapped(email: authViewModel.email, password: authViewModel.password)
   }
 }
