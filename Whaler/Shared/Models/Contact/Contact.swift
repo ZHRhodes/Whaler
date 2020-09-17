@@ -24,7 +24,7 @@ final class Contact: NSObject, Codable {
   let phone: String?
   let email: String?
   
-  var state: WorkState
+  var state: WorkState?
   
   var fullName: String {
     return firstName + " " + lastName
@@ -73,6 +73,10 @@ final class Contact: NSObject, Codable {
     email = sfLead.Email
     state = .ready
   }
+  
+  func mergeLocalProperties(with contact: Contact) {
+    state = contact.state
+  }
 }
 
 extension Contact: Identifiable {}
@@ -103,7 +107,7 @@ extension Contact: ManagedObject {
     managedObject.setValue(title, forKey: CodingKeys.title.rawValue)
     managedObject.setValue(phone, forKey: CodingKeys.phone.rawValue)
     managedObject.setValue(email, forKey: CodingKeys.email.rawValue)
-    managedObject.setValue(state.rawValue, forKey: CodingKeys.state.rawValue)
+    managedObject.setValue(state?.rawValue, forKey: CodingKeys.state.rawValue)
     if let userId = Lifecycle.currentUser?.id {
       managedObject.setValue(String(userId), forKey: "ownerUserId")
     }

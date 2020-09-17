@@ -10,6 +10,18 @@ import Foundation
 import AuthenticationServices
 
 class SFHelper {
+  static func queryAccounts() -> [Account] {
+    let soql = "SELECT id, name, type, industry, annualRevenue, billingCity, billingState, phone, website, numberOfEmployees, ownerId, description from Account WHERE (NOT type like 'Customer%')"
+    var sfAccounts = [SF.Account]()
+    do {
+      sfAccounts = try SF.query(soql)
+    } catch let error {
+      print(error)
+    }
+
+    return sfAccounts.map(Account.init)
+  }
+  
   static func queryContacts(accountId: String?, accountName: String?) -> [Contact] {
     let sfContacts: [SF.Contact]
     do {

@@ -31,11 +31,10 @@ final class Account: NSObject, Codable {
   let type: String?
   let accountDescription: String?
   
-  var state: WorkState
+  var state: WorkState?
+  var notes: String?
   
   var contactGrouper = Grouper<WorkState, Contact>(groups: WorkState.allCases)
-  
-  var notes: String
   
   override init() {
     id = ""
@@ -50,12 +49,10 @@ final class Account: NSObject, Codable {
     website = ""
     type = ""
     accountDescription = ""
-    state = .inProgress
-    notes = ""
     super.init()
   }
   
-  init(id: String, owner: String, name: String, industry: String?, employees: String?, annualRevenue: String?, billingCity: String?, billingState: String?, phone: String?, website: String?, type: String?, accountDescription: String?, state: WorkState, contactGrouper: Grouper<WorkState, Contact>? = nil, notes: String = "") {
+  init(id: String, owner: String, name: String, industry: String?, employees: String?, annualRevenue: String?, billingCity: String?, billingState: String?, phone: String?, website: String?, type: String?, accountDescription: String?, state: WorkState?, contactGrouper: Grouper<WorkState, Contact>? = nil, notes: String?) {
     self.id = id
     self.owner = owner
     self.name = name
@@ -87,8 +84,6 @@ final class Account: NSObject, Codable {
     website = dictionary["Website"]
     type = dictionary["Type"]
     accountDescription = dictionary["Account Description"]
-    state = .ready
-    notes = ""
   }
   
   init(sfAccount: SF.Account) {
@@ -104,12 +99,15 @@ final class Account: NSObject, Codable {
     website = sfAccount.Website
     type = sfAccount.Type
     accountDescription = sfAccount.Description
-    state = .ready
-    notes = ""
   }
   
   func resetContacts() {
     contactGrouper.resetValues()
+  }
+  
+  func mergeLocalProperties(with account: Account) {
+    state = account.state
+    notes = account.notes
   }
 }
 
@@ -157,7 +155,7 @@ extension Account: ManagedObject {
     managedObject.setValue(website, forKey: CodingKeys.website.rawValue)
     managedObject.setValue(type, forKey: CodingKeys.type.rawValue)
     managedObject.setValue(accountDescription, forKey: CodingKeys.accountDescription.rawValue)
-    managedObject.setValue(state.rawValue, forKey: CodingKeys.state.rawValue)
+    managedObject.setValue(state?.rawValue, forKey: CodingKeys.state.rawValue)
     managedObject.setValue(notes, forKey: CodingKeys.notes.rawValue)
     if let userId = Lifecycle.currentUser?.id {
       managedObject.setValue(String(userId), forKey: "ownerUserId")

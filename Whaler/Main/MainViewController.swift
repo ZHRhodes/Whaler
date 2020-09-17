@@ -62,22 +62,20 @@ class MainViewController: UIViewController {
     Lifecycle.loadCurrentUser()
     interactor = MainInteractor()
     
-    if interactor.hasNoAccounts() {
-      if interactor.hasSalesforceTokens {
-        //present loading indicator
-        interactor.refreshSalesforceSession { [weak self] (success) in
-          if success {
-            self?.interactor.fetchAccountsFromSalesforce()
-            self?.configureViewsForContent()
-          } else {
+    if interactor.hasSalesforceTokens {
+      //present loading indicator
+      interactor.refreshSalesforceSession { [weak self] (success) in
+        if success {
+          self?.interactor.fetchAccountsFromSalesforce()
+          self?.configureViewsForContent()
+        } else {
+          if !(self?.interactor.hasAccounts() ?? false) {
             self?.configureNoDataViews()
           }
         }
-      } else {
-        configureNoDataViews()
       }
     } else {
-      configureViewsForContent()
+      configureNoDataViews()
     }
   }
   

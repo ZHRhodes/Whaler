@@ -13,8 +13,8 @@ class MainInteractor {
   lazy var accountGrouper = Grouper<WorkState, Account>(groups: self.accountStates)
   lazy var accountStates = WorkState.allCases
   
-  func hasNoAccounts() -> Bool {
-    return accountGrouper.hasNoValues
+  func hasAccounts() -> Bool {
+    return !accountGrouper.hasNoValues
   }
   
   var hasSalesforceTokens: Bool {
@@ -31,7 +31,7 @@ class MainInteractor {
     let (parsedAccounts, parsedContacts) = CSVParser.parseAccountsAndContacts(from: csv)
     
     parsedAccounts.forEach { account in
-      accountGrouper.append(account, to: account.state)
+      accountGrouper.append(account, to: account.state ?? .ready)
       ObjectManager.save(account)
     }
     
@@ -61,31 +61,22 @@ class MainInteractor {
     //store contact count to Account so that this isn't
     //required in order to show correct number of contacts on the accounts page
     retrieveAndAssignContacts()
-    
-    //For next time:
-    //make it easy to print everything in core data out whenever
-    //Need to use that to check that accounts for multiple users are in there right now
   }
   
   func setAccounts(_ newAccounts: [Account]) {
     accountGrouper.resetValues()
     newAccounts.forEach { account in
-      accountGrouper.append(account, to: account.state)
+      accountGrouper.append(account, to: account.state ?? .ready)
     }
   }
   
   func retrieveAndAssignContacts(for account: Account) {
-//    let predicate = NSPredicate(format: "accountID == %@", account.id)
-//    let retrievedContacts = ObjectManager.retrieveAll(ofType: Contact.self, with: predicate)
-//    account.contacts = .init(uniqueKeysWithValues: WorkState.allCases.map { ($0, []) })
-//    retrievedContacts.forEach { contact in
-//      account.contacts[contact.state]?.append(contact)
-//    }
-    
     account.resetContacts()
     let retrievedContacts = SFHelper.queryContacts(accountId: account.id, accountName: account.name)
+    let localContacts = ObjectManager.retrieveAll(ofType: Contact.self)
+    reconcileContactsFromSalesforce(localContacts: localContacts, salesforceContacts: retrievedContacts)
     retrievedContacts.forEach { contact in
-      account.contactGrouper.append(contact, to: contact.state)
+      account.contactGrouper.append(contact, to: contact.state ?? .ready)
     }
   }
   
@@ -93,7 +84,15 @@ class MainInteractor {
     let retrievedContacts = ObjectManager.retrieveAll(ofType: Contact.self)
     let accountsMap = createAccountsMap()
     retrievedContacts.forEach { contact in
-      accountsMap[contact.accountID]?.contactGrouper.append(contact, to: contact.state)
+      accountsMap[contact.accountID]?.contactGrouper.append(contact, to: contact.state ?? .ready)
+    }
+  }
+  
+  func reconcileContactsFromSalesforce(localContacts: [Contact], salesforceContacts: [Contact]) {
+    salesforceContacts.forEach { contact in
+      if let matchingLocalContact = localContacts.first(where: { $0.id == contact.id }) {
+        contact.mergeLocalProperties(with: matchingLocalContact)
+      }
     }
   }
   
@@ -113,18 +112,18 @@ class MainInteractor {
   }
   
   func fetchAccountsFromSalesforce() {
-    let soql = "SELECT id, name, type, industry, annualRevenue, billingCity, billingState, phone, website, numberOfEmployees, ownerId, description from Account WHERE (NOT type like 'Customer%')"
-    var sfAccounts = [SF.Account]()
-    do {
-      sfAccounts = try SF.query(soql)
-    } catch let error {
-      print(error)
-    }
-
-    let accounts = sfAccounts.map(Account.init)
-    setAccounts(accounts)
-    
+    let accountsfromSalesforce = SFHelper.queryAccounts()
+    reconcileAccountsFromSalesforce(localAccounts: accountGrouper.values, salesforceAccounts: accountsfromSalesforce)
+    setAccounts(accountsfromSalesforce)
     print(accountGrouper)
+  }
+  
+  func reconcileAccountsFromSalesforce(localAccounts: [Account], salesforceAccounts: [Account]) {
+    salesforceAccounts.forEach { account in
+      if let matchingLocalAccount = localAccounts.first(where: { $0.id == account.id }) {
+        account.mergeLocalProperties(with: matchingLocalAccount)
+      }
+    }
   }
   
   func makeSFAuthenticationSession(completion: @escaping VoidClosure) -> ASWebAuthenticationSession? {
