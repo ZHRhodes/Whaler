@@ -9,6 +9,16 @@
 import Foundation
 
 class SFSession: TokenContainer {
+  static var id: String? {
+    willSet {
+      if let newValue = newValue, newValue != id, let data = newValue.data(using: .utf8) {
+        Keychain.save(key: .sfId, data: data)
+      } else if newValue == nil {
+        Keychain.delete(key: .sfId)
+      }
+    }
+  }
+  
   static var accessToken: String? {
     willSet {
       if let newValue = newValue, newValue != accessToken, let data = newValue.data(using: .utf8) {
@@ -29,13 +39,17 @@ class SFSession: TokenContainer {
     }
   }
   
-  static func loadSFTokens() {
+  static func loadCachedSFSession() {
     if let accessTokenData = Keychain.load(key: .sfAccessToken) {
       accessToken = String(data: accessTokenData, encoding: .utf8)
     }
     
     if let refreshTokenData = Keychain.load(key: .sfRefreshToken) {
       refreshToken = String(data: refreshTokenData, encoding: .utf8)
+    }
+    
+    if let idTokenData = Keychain.load(key: .sfId) {
+      id = String(data: idTokenData, encoding: .utf8)
     }
   }
   

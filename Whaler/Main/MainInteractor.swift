@@ -18,7 +18,7 @@ class MainInteractor {
   }
   
   var hasSalesforceTokens: Bool {
-    SFSession.loadSFTokens()
+    SFSession.loadCachedSFSession()
     return SFSession.hasTokens()
   }
   

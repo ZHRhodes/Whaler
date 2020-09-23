@@ -11,7 +11,7 @@ import AuthenticationServices
 
 class SFHelper {
   static func queryAccounts() -> [Account] {
-    let soql = "SELECT id, name, type, industry, annualRevenue, billingCity, billingState, phone, website, numberOfEmployees, ownerId, description from Account WHERE (NOT type like 'Customer%')"
+    let soql = "SELECT id, name, type, industry, annualRevenue, billingCity, billingState, phone, website, numberOfEmployees, ownerId, description from Account WHERE (NOT type like 'Customer%') AND OwnerId = '\(SFSession.id ?? "")'"
     var sfAccounts = [SF.Account]()
     do {
       sfAccounts = try SF.query(soql)
@@ -54,6 +54,10 @@ class SFHelper {
       }
       SFSession.accessToken = url?.fragmentValueOf("access_token")?.removingPercentEncoding
       SFSession.refreshToken = url?.fragmentValueOf("refresh_token")?.removingPercentEncoding
+      let idUrl = url?.fragmentValueOf("id")?.removingPercentEncoding
+      if let id = idUrl?.split(separator: "/").last {
+        SFSession.id = String(id)
+      }
       DispatchQueue.main.sync {
         completion()
       }
