@@ -32,7 +32,7 @@ class SFHelper {
     }
     
     let sfLeads: [SF.Lead]
-    do {
+    do { //WHERE TravelBank LIKE 'TravelBank HR'
       sfLeads = try SF.query("SELECT id, company, firstName, lastName, title, phone, email from Lead WHERE Company LIKE '%\(accountName ?? "")%'")
     } catch let error {
       print(error)
