@@ -9,7 +9,11 @@
 import Foundation
 import AuthenticationServices
 
-class MainInteractor {
+protocol MainInteractorData: class {
+  var accountGrouper: Grouper<WorkState, Account> {get set}
+}
+
+class MainInteractor: MainInteractorData {
   lazy var accountGrouper = Grouper<WorkState, Account>(groups: self.accountStates)
   lazy var accountStates = WorkState.allCases
   
@@ -117,6 +121,8 @@ class MainInteractor {
     setAccounts(accountsfromSalesforce)
     print(accountGrouper)
   }
+  
+  //will newly added in salesforce accounts save to cache in whaler? or is that only done on authentication?
   
   func reconcileAccountsFromSalesforce(localAccounts: [Account], salesforceAccounts: [Account]) {
     salesforceAccounts.forEach { account in

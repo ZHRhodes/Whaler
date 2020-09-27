@@ -51,6 +51,9 @@
 		14861EFC249F49DE00D2FA92 /* DocumentPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14861EFB249F49DE00D2FA92 /* DocumentPickerViewController.swift */; };
 		1488423F25086D910025C7EE /* Lifecycle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1488423E25086D910025C7EE /* Lifecycle.swift */; };
 		14884241250876080025C7EE /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14884240250876080025C7EE /* Notifications.swift */; };
+		149F3A0025206AE4001F38BF /* MainCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149F39FF25206AE4001F38BF /* MainCollectionCell.swift */; };
+		149F3A0725206BB7001F38BF /* MainTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149F3A0625206BB7001F38BF /* MainTableCell.swift */; };
+		149F3A0B25209575001F38BF /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149F3A0A25209575001F38BF /* UIView+Extensions.swift */; };
 		14A2834724DE510D0016BA82 /* SF.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A2834624DE510D0016BA82 /* SF.swift */; };
 		14AB262E24D137E800AC280D /* ContactsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14AB262D24D137E800AC280D /* ContactsTableViewController.swift */; };
 		14B037E125049CDE00BA488D /* Grouper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B037E025049CDE00BA488D /* Grouper.swift */; };
@@ -136,6 +139,9 @@
 		14861EFB249F49DE00D2FA92 /* DocumentPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentPickerViewController.swift; sourceTree = "<group>"; };
 		1488423E25086D910025C7EE /* Lifecycle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lifecycle.swift; sourceTree = "<group>"; };
 		14884240250876080025C7EE /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
+		149F39FF25206AE4001F38BF /* MainCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCollectionCell.swift; sourceTree = "<group>"; };
+		149F3A0625206BB7001F38BF /* MainTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableCell.swift; sourceTree = "<group>"; };
+		149F3A0A25209575001F38BF /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
 		14A2834624DE510D0016BA82 /* SF.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SF.swift; sourceTree = "<group>"; };
 		14AB262D24D137E800AC280D /* ContactsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsTableViewController.swift; sourceTree = "<group>"; };
 		14B037E025049CDE00BA488D /* Grouper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grouper.swift; sourceTree = "<group>"; };
@@ -211,6 +217,7 @@
 				14F4090724C6A2D100F405BC /* UIFont+Extensions.swift */,
 				1443045C24F32FD900D2FBD2 /* String+Extensions.swift */,
 				1454743A250D904700257A89 /* UIViewController+Extensions.swift */,
+				149F3A0A25209575001F38BF /* UIView+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -220,6 +227,7 @@
 			children = (
 				14D9CA5724B599080030B17A /* MainTableSectionHeader */,
 				140AE7A424A9BEC300F7705E /* AccountTableCell.swift */,
+				149F3A0325206BA6001F38BF /* CollectionView */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -400,6 +408,15 @@
 				14861EED249F3DE400D2FA92 /* Info.plist */,
 			);
 			path = WhalerTests;
+			sourceTree = "<group>";
+		};
+		149F3A0325206BA6001F38BF /* CollectionView */ = {
+			isa = PBXGroup;
+			children = (
+				149F39FF25206AE4001F38BF /* MainCollectionCell.swift */,
+				149F3A0625206BB7001F38BF /* MainTableCell.swift */,
+			);
+			path = CollectionView;
 			sourceTree = "<group>";
 		};
 		14B037EC25074B1200BA488D /* User */ = {
@@ -606,6 +623,8 @@
 				140AE79924A9AA5C00F7705E /* Account.swift in Sources */,
 				140AE79624A9AA0B00F7705E /* MainInteractor.swift in Sources */,
 				145A376C24C58D440081F9DB /* AccountDetailsView.swift in Sources */,
+				149F3A0B25209575001F38BF /* UIView+Extensions.swift in Sources */,
+				149F3A0025206AE4001F38BF /* MainCollectionCell.swift in Sources */,
 				1454743B250D904700257A89 /* UIViewController+Extensions.swift in Sources */,
 				14EED67A24F0E48C00660BD1 /* SFContact.swift in Sources */,
 				14EED67E24F0EB7300660BD1 /* SFHelper.swift in Sources */,
@@ -636,6 +655,7 @@
 				140AE7A324A9BA6500F7705E /* MainTableSectionHeader.swift in Sources */,
 				1480801024EA4BE7007EB6D1 /* JustNetworker.swift in Sources */,
 				1443045F24F3356A00D2FBD2 /* SFNewAccessToken.swift in Sources */,
+				149F3A0725206BB7001F38BF /* MainTableCell.swift in Sources */,
 				1480800924EA4AE8007EB6D1 /* Networker.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

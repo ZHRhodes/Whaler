@@ -9,7 +9,7 @@
 import UIKit
 
 enum WorkState: String, CaseIterable, Codable {
-  case inProgress = "IN PROGRESS", ready = "READY", worked = "WORKED"
+  case ready = "READY", inProgress = "IN PROGRESS", worked = "WORKED"
   
   var color: UIColor {
     switch self {

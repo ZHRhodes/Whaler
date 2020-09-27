@@ -48,9 +48,9 @@ class MainViewController: UIViewController {
   
   private var interactor: MainInteractor!
   private var noDataStackView: UIStackView?
-  private var tableView: UITableView!
   private var deleteButton: UIButton!
   private var signOutButton: UIButton!
+  private var collectionView: UICollectionView!
   
   private var sectionHeaders = Set<WeakRef<UIView>>()
   
@@ -86,7 +86,7 @@ class MainViewController: UIViewController {
   
   private func configureViewsForContent() {
     removeNoDataViews()
-    configureTableView()
+    configureCollectionView()
     configureSignOutButton()
     configureDeleteButton()
   }
@@ -161,39 +161,41 @@ class MainViewController: UIViewController {
     return containerView
   }
   
-  private func configureTableView() {
-    tableView = UITableView(frame: .zero, style: .plain)
-    tableView.delegate = self
-    tableView.dataSource = self
-    tableView.dragInteractionEnabled = true
-    tableView.dragDelegate = self
-    tableView.dropDelegate = self
-    tableView.translatesAutoresizingMaskIntoConstraints = false
-    tableView.backgroundColor =  .white
-    tableView.separatorStyle = .none
-    tableView.tableFooterView = UIView(frame: .zero)
-    tableView.register(AccountTableCell.self, forCellReuseIdentifier: AccountTableCell.id)
-    tableView.register(MainTableSectionHeader.self, forHeaderFooterViewReuseIdentifier: MainTableSectionHeader.id)
-    view.addSubview(tableView)
-    
-    let constraints = [
-      tableView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 31),
-      tableView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -31),
-      tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -24),
-      tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 24)
-    ]
-    
-    NSLayoutConstraint.activate(constraints)
-  }
-  
   private func removeTableView() {
-    tableView.removeFromSuperview()
-    tableView = nil
+    collectionView.removeFromSuperview()
+    collectionView = nil
   }
   
   private func removeDeleteButton() {
     deleteButton.removeFromSuperview()
     deleteButton = nil
+  }
+  
+  private func configureCollectionView() {
+    let layout = UICollectionViewFlowLayout()
+    layout.scrollDirection = .horizontal
+    layout.minimumLineSpacing = 50.0
+//    layout.minimumInteritemSpacing = 100.0
+//    let itemSize = view.bounds.width/3 - 3
+//    layout.itemSize = CGSize(width: itemSize, height: itemSize)
+    
+    collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+    collectionView.delegate = self
+    collectionView.dataSource = self
+    collectionView.backgroundColor = .white
+    collectionView.register(MainCollectionCell.self, forCellWithReuseIdentifier: MainCollectionCell.id)
+    collectionView.translatesAutoresizingMaskIntoConstraints = false
+
+    view.addSubview(collectionView)
+    
+    let constraints = [
+      collectionView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 100),
+      collectionView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -100),
+      collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0),
+      collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 100)
+    ]
+    
+    NSLayoutConstraint.activate(constraints)
   }
   
   private func configureSignOutButton() {
@@ -283,102 +285,32 @@ extension MainViewController: ASWebAuthenticationPresentationContextProviding {
   }
 }
 
-extension MainViewController: UIDropInteractionDelegate {
-  func dropInteraction(_ interaction: UIDropInteraction, canHandle session: UIDropSession) -> Bool {
-    return session.canLoadObjects(ofClass: String.self)
-  }
-
-  func dropInteraction(_ interaction: UIDropInteraction, sessionDidUpdate session: UIDropSession) -> UIDropProposal {
-    //only want external app sessions
-    if session.localDragSession == nil {
-      return UIDropProposal(operation: .copy)
-    }
-    return UIDropProposal(operation: .cancel)
-  }
-}
-
-extension MainViewController: UITableViewDelegate, UITableViewDataSource {
-  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    let state = interactor.accountStates[section]
-    return interactor.accountGrouper[state].count
+extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+  func numberOfSections(in collectionView: UICollectionView) -> Int {
+    return 1
   }
   
-  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    guard let cell = tableView.dequeueReusableCell(withIdentifier: AccountTableCell.id) as? AccountTableCell else {
-      return UITableViewCell()
-    }
-    let state = interactor.accountStates[indexPath.section]
-    let account = interactor.accountGrouper[state][indexPath.row]
-    cell.configure(with: account)
-    return cell
-  }
-  
-  func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-    return 60
-  }
-  
-  func numberOfSections(in tableView: UITableView) -> Int {
+  func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
     return interactor.accountStates.count
   }
-  
-  func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-    let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: MainTableSectionHeader.id) as? MainTableSectionHeader
-    let state = interactor.accountStates[section]
-    let values = ["Account", "Contacts", "Industry", "City", "State"]
-    header?.configure(state: state, values: values)
-    return header
-  }
-  
-  func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-    sectionHeaders.remove(WeakRef(value: view))
-  }
-  
-  func tableView(_ tableView: UITableView, didEndDisplayingHeaderView view: UIView, forSection section: Int) {
-    sectionHeaders.insert(WeakRef(value: view))
-  }
-  
-  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    tableView.deselectRow(at: indexPath, animated: true)
-    let accountState = interactor.accountStates[indexPath.section]
-    let account = interactor.accountGrouper[accountState][indexPath.row]
-    interactor.retrieveAndAssignContacts(for: account)
-    let view = AccountDetailsView(account: account)
-    let viewController = UIHostingController(rootView: view)
-    navigationController?.pushViewController(viewController, animated: false)
+
+  func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MainCollectionCell.id, for: indexPath) as? MainCollectionCell else {
+      return UICollectionViewCell()
+    }
+  //    let state = interactor.accountStates[indexPath.section]
+  //    let account = interactor.accountGrouper[state][indexPath.row]
+    cell.section = indexPath.row
+    cell.dataSource = interactor
+    cell.configure()
+    return cell
   }
 }
 
-extension MainViewController: UITableViewDragDelegate, UITableViewDropDelegate {
-  func tableView(_ tableView: UITableView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
-    let state = interactor.accountStates[indexPath.section]
-    let account = interactor.accountGrouper[state][indexPath.row]
-    let itemProvider = NSItemProvider(object: account)
-    let dragItem = UIDragItem(itemProvider: itemProvider)
-    return [dragItem]
-  }
-  
-  func tableView(_ tableView: UITableView, dropSessionDidUpdate session: UIDropSession, withDestinationIndexPath destinationIndexPath: IndexPath?) -> UITableViewDropProposal {
-    return UITableViewDropProposal(operation: .move, intent: .insertAtDestinationIndexPath)
-  }
-  
-  func tableView(_ tableView: UITableView, performDropWith coordinator: UITableViewDropCoordinator) {
-    let insertionIndex: IndexPath
-    if let indexPath = coordinator.destinationIndexPath {
-      insertionIndex = indexPath
-    } else {
-      let section = tableView.numberOfSections - 1
-      let row = tableView.numberOfRows(inSection: section)
-      insertionIndex = IndexPath(row: row, section: section)
-    }
-    
-    for item in coordinator.items {
-      guard let sourceIndexPath = item.sourceIndexPath else { continue }
-      item.dragItem.itemProvider.loadObject(ofClass: Account.self) { (object, error) in
-        DispatchQueue.main.async {
-          self.interactor.moveAccount(from: sourceIndexPath, to: insertionIndex)
-          self.tableView.reloadData()
-        }
-      }
-    }
+extension MainViewController: UICollectionViewDelegateFlowLayout {
+  func collectionView(_ collectionView: UICollectionView,
+                      layout collectionViewLayout: UICollectionViewLayout,
+                      sizeForItemAt indexPath: IndexPath) -> CGSize {
+    return CGSize(width: (collectionView.frame.size.width/3) - 20, height: collectionView.frame.size.height)
   }
 }

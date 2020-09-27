@@ -9,7 +9,7 @@
 import Foundation
 
 struct Grouper<X: Hashable & Codable, Y: Codable>: Codable {
-  private var groups: [X]
+  private(set) var groups: [X]
   private var items: [X: [Y]]
   
   var hasNoValues: Bool {
