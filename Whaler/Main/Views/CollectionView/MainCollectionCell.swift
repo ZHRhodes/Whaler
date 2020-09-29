@@ -9,9 +9,14 @@
 import Foundation
 import UIKit
 
+protocol MainCollectionCellDelegate: class {
+  func didSelectRowAt(section: Int, didSelectRowAt indexPath: IndexPath)
+}
+
 class MainCollectionCell: UICollectionViewCell {
   static let id = "MainCollectionCellId"
   
+  weak var delegate: MainCollectionCellDelegate?
   private var headerView: UIView?
   private let tableView = UITableView()
   var section: Int? {
@@ -97,6 +102,11 @@ extension MainCollectionCell:  UITableViewDelegate, UITableViewDataSource {
       cell.configure(with: account)
     }
     return cell
+  }
+  
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    guard let section = section else { return }
+    delegate?.didSelectRowAt(section: section, didSelectRowAt: indexPath)
   }
   
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

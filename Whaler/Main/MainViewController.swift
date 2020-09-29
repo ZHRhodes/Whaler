@@ -313,6 +313,7 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
   //    let account = interactor.accountGrouper[state][indexPath.row]
     cell.section = indexPath.row
     cell.dataSource = interactor
+    cell.delegate = self
     return cell
   }
 }
@@ -324,5 +325,16 @@ extension MainViewController: UICollectionViewDelegateFlowLayout {
     return CGSize(width: 500, height: collectionView.frame.size.height-200)
     //width: (collectionView.frame.size.width/4) - 20
 //    return CGSize(width: 500, height: 1400)
+  }
+}
+
+extension MainViewController: MainCollectionCellDelegate {
+  func didSelectRowAt(section: Int, didSelectRowAt indexPath: IndexPath) {
+    let accountState = interactor.accountStates[section]
+    let account = interactor.accountGrouper[accountState][indexPath.row]
+    interactor.retrieveAndAssignContacts(for: account)
+    let view = AccountDetailsView(account: account)
+    let viewController = UIHostingController(rootView: view)
+    navigationController?.pushViewController(viewController, animated: false)
   }
 }

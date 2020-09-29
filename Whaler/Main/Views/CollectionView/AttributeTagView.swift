@@ -1,21 +1,28 @@
 //
-//  AccountStateTagView.swift
+//  AttributeTagView.swift
 //  Whaler
 //
-//  Created by Zachary Rhodes on 7/7/20.
+//  Created by Zachary Rhodes on 9/28/20.
 //  Copyright © 2020 Whaler. All rights reserved.
 //
 
+import Foundation
 import UIKit
-import SwiftUI
 
-class AccountStateTagView: UIView {
-  static let height: CGFloat = 60
+struct Attribute {
+  let text: String
+  let foregroundColor: UIColor
+  let backgroundColor: UIColor
+  let borderColor: UIColor
+}
+
+class AttributeTagView: UIView {
+  static let height: CGFloat = 30
   
-  init(state: WorkState, sidePadding: CGFloat = 22, fontSize: CGFloat = 19) {
+  init(attribute: Attribute, sidePadding: CGFloat = 12, fontSize: CGFloat = 15) {
     super.init(frame: .zero)
-    let backgroundView = makeBackgroundView(with: state.backgroundColor)
-    let label = makeLabel(with: state.rawValue, fontSize: fontSize, textColor: state.foregroundColor)
+    let backgroundView = makeBackgroundView(backgroundColor: attribute.backgroundColor, borderColor: attribute.borderColor)
+    let label = makeLabel(with: attribute.text, fontSize: fontSize, textColor: attribute.foregroundColor)
     backgroundView.addSubview(label)
     
     label.centerXAnchor.constraint(equalTo: backgroundView.centerXAnchor).isActive = true
@@ -23,15 +30,18 @@ class AccountStateTagView: UIView {
     
     backgroundView.widthAnchor.constraint(equalTo: label.widthAnchor, constant: sidePadding*2).isActive = true
     
+    widthAnchor.constraint(equalTo: backgroundView.widthAnchor).isActive = true
     heightAnchor.constraint(equalTo: backgroundView.heightAnchor, constant: (2/7) * AccountStateTagView.height).isActive = true
-    backgroundColor = .clear
+    self.backgroundColor = .clear
   }
 
-  private func makeBackgroundView(with color: UIColor) -> UIView {
+  private func makeBackgroundView(backgroundColor: UIColor, borderColor: UIColor) -> UIView {
     let backgroundView = UIView()
-    backgroundView.backgroundColor = color
-    backgroundView.layer.cornerRadius = 8.0
-    backgroundView.heightAnchor.constraint(equalToConstant: (5/7) * AccountStateTagView.height).isActive = true
+    backgroundView.layer.borderWidth = 2.0
+    backgroundView.layer.borderColor = borderColor.cgColor
+    backgroundView.backgroundColor = backgroundColor
+    backgroundView.layer.cornerRadius = 16.0
+    backgroundView.heightAnchor.constraint(equalToConstant: (4/7) * AccountStateTagView.height).isActive = true
     backgroundView.translatesAutoresizingMaskIntoConstraints = false
     addSubview(backgroundView)
     backgroundView.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
@@ -43,7 +53,7 @@ class AccountStateTagView: UIView {
     let label = UILabel()
     label.text = text
     label.textColor = textColor
-    label.font = UIFont.openSans(weight: .bold, size: fontSize)
+    label.font = UIFont.openSans(weight: .regular, size: fontSize)
     label.translatesAutoresizingMaskIntoConstraints = false
     return label
   }
@@ -51,15 +61,4 @@ class AccountStateTagView: UIView {
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
-}
-
-struct AccountStateTagWrapperView: UIViewRepresentable {
-  typealias UIViewType = AccountStateTagView
-  let state: WorkState
-  
-  func makeUIView(context: Context) -> AccountStateTagView {
-    return AccountStateTagView(state: state)
-  }
-  
-  func updateUIView(_ uiView: AccountStateTagView, context: Context) {}
 }
