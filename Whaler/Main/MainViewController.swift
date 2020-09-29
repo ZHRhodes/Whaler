@@ -57,7 +57,7 @@ class MainViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     title = "Accounts"
-    view.backgroundColor = .white
+    view.backgroundColor = .primaryBackground
     
     Lifecycle.loadCurrentUser()
     interactor = MainInteractor()
@@ -82,6 +82,11 @@ class MainViewController: UIViewController {
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     navigationController?.setNavigationBarHidden(true, animated: false)
+  }
+  
+  override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+    super.viewWillTransition(to: size, with: coordinator)
+    collectionView?.reloadData()
   }
   
   private func configureViewsForContent() {
@@ -182,20 +187,26 @@ class MainViewController: UIViewController {
     collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
     collectionView.delegate = self
     collectionView.dataSource = self
-    collectionView.backgroundColor = .white
+    collectionView.backgroundColor = .primaryBackground
     collectionView.register(MainCollectionCell.self, forCellWithReuseIdentifier: MainCollectionCell.id)
     collectionView.translatesAutoresizingMaskIntoConstraints = false
+    collectionView.contentInset = .init(top: 200, left: 200, bottom: 0, right: 0)
+//    collectionView.contentOffset = .init(x: 500, y: 500)
+//    collectionView.setContentOffset(CGPoint(x: 200, y: 200), animated: false)
 
-    view.addSubview(collectionView)
+//    view.addSubview(collectionView)
     
-    let constraints = [
-      collectionView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 100),
-      collectionView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -100),
-      collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0),
-      collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 100)
-    ]
-    
-    NSLayoutConstraint.activate(constraints)
+//    let constraints = [
+////      collectionView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 250),
+////      collectionView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: 0),
+//      collectionView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+//      collectionView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+////      collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0),
+////      collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 200)
+//    ]
+//
+//    NSLayoutConstraint.activate(constraints)
+    view.addAndAttachToEdges(view: collectionView)
   }
   
   private func configureSignOutButton() {
@@ -302,7 +313,6 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
   //    let account = interactor.accountGrouper[state][indexPath.row]
     cell.section = indexPath.row
     cell.dataSource = interactor
-    cell.configure()
     return cell
   }
 }
@@ -311,6 +321,8 @@ extension MainViewController: UICollectionViewDelegateFlowLayout {
   func collectionView(_ collectionView: UICollectionView,
                       layout collectionViewLayout: UICollectionViewLayout,
                       sizeForItemAt indexPath: IndexPath) -> CGSize {
-    return CGSize(width: (collectionView.frame.size.width/3) - 20, height: collectionView.frame.size.height)
+    return CGSize(width: 500, height: collectionView.frame.size.height-200)
+    //width: (collectionView.frame.size.width/4) - 20
+//    return CGSize(width: 500, height: 1400)
   }
 }

@@ -14,8 +14,8 @@ class AccountStateTagView: UIView {
   
   init(state: WorkState, sidePadding: CGFloat = 22, fontSize: CGFloat = 19) {
     super.init(frame: .zero)
-    let backgroundView = makeBackgroundView(with: state.color)
-    let label = makeLabel(with: state.rawValue, fontSize: fontSize)
+    let backgroundView = makeBackgroundView(with: state.backgroundColor)
+    let label = makeLabel(with: state.rawValue, fontSize: fontSize, textColor: state.foregroundColor)
     backgroundView.addSubview(label)
     
     label.centerXAnchor.constraint(equalTo: backgroundView.centerXAnchor).isActive = true
@@ -24,13 +24,13 @@ class AccountStateTagView: UIView {
     backgroundView.widthAnchor.constraint(equalTo: label.widthAnchor, constant: sidePadding*2).isActive = true
     
     heightAnchor.constraint(equalTo: backgroundView.heightAnchor, constant: (2/7) * AccountStateTagView.height).isActive = true
-    backgroundColor = .white
+    backgroundColor = .clear
   }
 
   private func makeBackgroundView(with color: UIColor) -> UIView {
     let backgroundView = UIView()
     backgroundView.backgroundColor = color
-    backgroundView.layer.cornerRadius = 4.0
+    backgroundView.layer.cornerRadius = 12.0
     backgroundView.heightAnchor.constraint(equalToConstant: (5/7) * AccountStateTagView.height).isActive = true
     backgroundView.translatesAutoresizingMaskIntoConstraints = false
     addSubview(backgroundView)
@@ -39,10 +39,10 @@ class AccountStateTagView: UIView {
     return backgroundView
   }
 
-  private func makeLabel(with text: String, fontSize: CGFloat) -> UIView {
+  private func makeLabel(with text: String, fontSize: CGFloat, textColor: UIColor) -> UIView {
     let label = UILabel()
     label.text = text
-    label.textColor = .white
+    label.textColor = textColor
     label.font = UIFont.boldSystemFont(ofSize: fontSize)
     label.translatesAutoresizingMaskIntoConstraints = false
     return label

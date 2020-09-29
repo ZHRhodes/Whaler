@@ -12,14 +12,18 @@ import UIKit
 class MainTableCell: UITableViewCell {
   static let id = "MainTableCellId"
   private let shadowView = UIView()
+  private let containerView = UIView()
   private let nameLabel = UILabel()
 
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
     let background = UIView()
-    background.backgroundColor = .white
+    background.backgroundColor = .primaryBackground
     selectedBackgroundView = background
+    backgroundColor = .clear
+    contentView.backgroundColor = .clear
     configureShadowView()
+    configureContainerView()
     configureNameLabel()
   }
   
@@ -31,18 +35,14 @@ class MainTableCell: UITableViewCell {
     configureNameLabel(with: account)
   }
   
-  func configureShadowView() {
+  private func configureShadowView() {
     shadowView.backgroundColor = .white
-//    shadowView.clipsToBounds = false
-//    shadowView.layer.shadowColor = UIColor(red: 0.77, green: 0.77, blue: 0.77, alpha: 0.21).cgColor
-//    shadowView.layer.shadowOpacity = 1.0
-//    shadowView.layer.shadowRadius = 6.0
-//    shadowView.layer.shadowOffset = CGSize(width: 0, height: 2)
-    
-    shadowView.layer.borderWidth = 2
-    shadowView.layer.borderColor = UIColor(red: 235/255, green: 235/255, blue: 235/255, alpha: 1.0).cgColor
-    shadowView.layer.masksToBounds = true
-    shadowView.layer.cornerRadius = 8.0
+    shadowView.layer.cornerRadius = 16.0
+    shadowView.clipsToBounds = false
+    shadowView.layer.shadowColor = UIColor(red: 0.77, green: 0.77, blue: 0.77, alpha: 0.21).cgColor
+    shadowView.layer.shadowOpacity = 1.0
+    shadowView.layer.shadowRadius = 3.0
+    shadowView.layer.shadowOffset = CGSize(width: 0, height: 2)
     
     shadowView.translatesAutoresizingMaskIntoConstraints = false
     contentView.addSubview(shadowView)
@@ -53,11 +53,20 @@ class MainTableCell: UITableViewCell {
     shadowView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8).isActive = true
   }
   
+  private func configureContainerView() {
+    containerView.layer.borderWidth = 2
+    containerView.layer.borderColor = UIColor(red: 235/255, green: 235/255, blue: 235/255, alpha: 1.0).cgColor
+    containerView.layer.masksToBounds = true
+    containerView.layer.cornerRadius = 16.0
+    
+    shadowView.addAndAttachToEdges(view: containerView)
+  }
+  
   private func configureNameLabel() {
     nameLabel.font = UIFont.openSans(weight: .regular, size: 25)
     nameLabel.translatesAutoresizingMaskIntoConstraints = false
     
-    shadowView.addSubview(nameLabel)
+    containerView.addSubview(nameLabel)
     
     nameLabel.leftAnchor.constraint(equalTo: shadowView.leftAnchor, constant: 36).isActive = true
     nameLabel.rightAnchor.constraint(equalTo: shadowView.rightAnchor, constant: -12).isActive = true

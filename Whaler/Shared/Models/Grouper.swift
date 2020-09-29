@@ -37,6 +37,7 @@ struct Grouper<X: Hashable & Codable, Y: Codable>: Codable {
     items[group]?.append(item)
   }
   
+  @discardableResult
   mutating func remove(from group: X, at index: Int) -> Y? {
     return items[group]?.remove(at: index)
   }

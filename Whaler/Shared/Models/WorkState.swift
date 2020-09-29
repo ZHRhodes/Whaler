@@ -11,14 +11,25 @@ import UIKit
 enum WorkState: String, CaseIterable, Codable {
   case ready = "READY", inProgress = "IN PROGRESS", worked = "WORKED"
   
-  var color: UIColor {
+  var backgroundColor: UIColor {
     switch self {
     case .inProgress:
-      return .inProgress
+      return .inProgressBackground
     case .ready:
-      return .ready
+      return .readyBackground
     case .worked:
-      return .worked
+      return .workedBackground
+    }
+  }
+  
+  var foregroundColor: UIColor {
+    switch self {
+    case .inProgress:
+      return .inProgressForeground
+    case .ready:
+      return .readyForeground
+    case .worked:
+      return .workedForeground
     }
   }
 }
