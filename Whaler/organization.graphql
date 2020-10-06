@@ -1,0 +1,10 @@
+query fetchOrganization {
+  organization {
+    id
+    name
+    users {
+      firstName
+      lastName
+    }
+  }
+}

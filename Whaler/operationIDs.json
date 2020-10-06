@@ -1,0 +1,6 @@
+{
+  "7f84dfc864fba0ea99d889df782636ef27349f211ac9bc38919d2439fb415123": {
+    "name": "fetchOrganization",
+    "source": "query fetchOrganization {\n  organization {\n    __typename\n    id\n    name\n    users {\n      __typename\n      firstName\n      lastName\n    }\n  }\n}"
+  }
+}
