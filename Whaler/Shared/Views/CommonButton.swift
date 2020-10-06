@@ -56,7 +56,7 @@ enum ButtonStyle {
   var borderColor: UIColor {
     switch self {
     case .outline:
-      return .accent1
+      return .brandGreen
     }
   }
   
@@ -70,7 +70,7 @@ enum ButtonStyle {
   var highlightFillColor: UIColor {
     switch self {
     case .outline:
-      return .accent1
+      return .brandGreen
     }
   }
   

@@ -24,6 +24,6 @@ struct TagView: View {
 
 struct TagView_Previews: PreviewProvider {
     static var previews: some View {
-      TagView(text: WorkState.inProgress.rawValue, color: Color(.inProgressBackground))
+      TagView(text: WorkState.inProgress.rawValue, color: Color(.brandGreenLight))
     }
 }

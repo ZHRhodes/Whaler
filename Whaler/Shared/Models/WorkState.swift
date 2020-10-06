@@ -14,22 +14,22 @@ enum WorkState: String, CaseIterable, Codable {
   var backgroundColor: UIColor {
     switch self {
     case .inProgress:
-      return .inProgressBackground
+      return .brandPurpleLight
     case .ready:
-      return .readyBackground
+      return .brandGreenLight
     case .worked:
-      return .workedBackground
+      return .brandRedLight
     }
   }
   
   var foregroundColor: UIColor {
     switch self {
     case .inProgress:
-      return .inProgressForeground
+      return .brandPurpleDark
     case .ready:
-      return .readyForeground
+      return .brandGreenDark
     case .worked:
-      return .workedForeground
+      return .brandRedDark
     }
   }
 }

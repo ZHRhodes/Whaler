@@ -46,12 +46,12 @@ struct AuthenticationView: View {
                   Text("SIGN IN")
                     .padding()
                     .frame(maxWidth: .infinity)
-                    .border(Color(.accent1))
+                    .border(Color(.brandGreen))
                     .foregroundColor(.black)
                 }
                 .overlay(
                   RoundedRectangle(cornerRadius: 4)
-                    .stroke(Color(.accent1), lineWidth: 2)
+                    .stroke(Color(.brandGreen), lineWidth: 2)
                 )
               }
             }
