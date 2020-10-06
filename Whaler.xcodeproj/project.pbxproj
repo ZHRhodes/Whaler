@@ -34,6 +34,7 @@
 		146A6DCB252C486100DA8E85 /* schema.json in Resources */ = {isa = PBXBuildFile; fileRef = 146A6DCA252C486100DA8E85 /* schema.json */; };
 		146A6DCF252C48BE00DA8E85 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146A6DCE252C48BE00DA8E85 /* API.swift */; };
 		146A6DD6252C496100DA8E85 /* Apollo in Frameworks */ = {isa = PBXBuildFile; productRef = 146A6DD5252C496100DA8E85 /* Apollo */; };
+		146A6DDA252C563200DA8E85 /* SFNetworkInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146A6DD9252C563200DA8E85 /* SFNetworkInterface.swift */; };
 		146C344624EA53690009C68C /* UserDefaultsManaged.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146C344524EA53690009C68C /* UserDefaultsManaged.swift */; };
 		146C35CF24C2CA9700DBCA23 /* TitleValueView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146C35CE24C2CA9700DBCA23 /* TitleValueView.swift */; };
 		146C35D324C557C800DBCA23 /* CompanyInfoValuesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146C35D224C557C800DBCA23 /* CompanyInfoValuesView.swift */; };
@@ -122,6 +123,7 @@
 		146A6DC3252C439000DA8E85 /* organization.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = organization.graphql; sourceTree = "<group>"; };
 		146A6DCA252C486100DA8E85 /* schema.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = schema.json; sourceTree = "<group>"; };
 		146A6DCE252C48BE00DA8E85 /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
+		146A6DD9252C563200DA8E85 /* SFNetworkInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFNetworkInterface.swift; sourceTree = "<group>"; };
 		146C344524EA53690009C68C /* UserDefaultsManaged.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManaged.swift; sourceTree = "<group>"; };
 		146C35CE24C2CA9700DBCA23 /* TitleValueView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleValueView.swift; sourceTree = "<group>"; };
 		146C35D224C557C800DBCA23 /* CompanyInfoValuesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyInfoValuesView.swift; sourceTree = "<group>"; };
@@ -363,6 +365,7 @@
 				1480800F24EA4BE7007EB6D1 /* JustNetworker.swift */,
 				14B037E225073E8800BA488D /* Response.swift */,
 				14B037E425073EBA00BA488D /* Tokens.swift */,
+				146A6DD9252C563200DA8E85 /* SFNetworkInterface.swift */,
 			);
 			path = NetworkLayer;
 			sourceTree = "<group>";
@@ -664,6 +667,7 @@
 				140AE79624A9AA0B00F7705E /* MainInteractor.swift in Sources */,
 				145A376C24C58D440081F9DB /* AccountDetailsView.swift in Sources */,
 				149F3A0B25209575001F38BF /* UIView+Extensions.swift in Sources */,
+				146A6DDA252C563200DA8E85 /* SFNetworkInterface.swift in Sources */,
 				149F3A0025206AE4001F38BF /* MainCollectionCell.swift in Sources */,
 				1454743B250D904700257A89 /* UIViewController+Extensions.swift in Sources */,
 				14EED67A24F0E48C00660BD1 /* SFContact.swift in Sources */,

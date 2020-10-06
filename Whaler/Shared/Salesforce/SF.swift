@@ -13,17 +13,17 @@ enum SFError: Error {
 }
 
 class SF {
-  static private let networker: Networker.Type = JustNetworker.self
-  static private let tokenContainer: TokenContainer.Type = SFSession.self
+  static private let networkInterface = SFNetworkInterface.self
   
   static func query<T: Codable>(_ soql: String) throws -> [T] {
-    guard let accessToken = tokenContainer.accessToken else { throw SFError.emptyAccessToken }
-    let request = NetworkRequest(method: .get,
-                                 path: "https://na111.salesforce.com/services/data/v37.0/query",
-                                 headers: ["Authorization": "Bearer \(accessToken)"],
-                                 params: ["q": soql],
-                                 jsonBody: nil)
-    let result = SF.networker.execute(request: request)
+    let result: NetworkResult
+    do {
+      result = try networkInterface.get(path: "/query", params: ["q": soql])
+    } catch {
+      print(error)
+      throw error
+    }
+    
     guard let data = result.data else { return [] }
     let resultAsResponse: SF.QueryResponse<T>
     
@@ -38,35 +38,6 @@ class SF {
   }
   
   static func refreshAccessToken() throws {
-    let clientId = "3MVG9Kip4IKAZQEVUyT0t2bh34B.GSy._2rVDX_MVJ7a3GyUtHsAGG2GZU843.Gajp7AusaDdCEero1UuAJwK"
-    let clientSecret = "44AD56EB0DEA62F7001FA2E05EE5C83018781D89EA78D52E9677619E194937E8"
-    guard let refreshToken = tokenContainer.refreshToken else { throw SFError.emptyRefreshToken }
-    let body = [
-      "grant_type": "refresh_token",
-      "client_id": clientId,
-      "client_secret": clientSecret,
-      "refresh_token": refreshToken
-    ]
-    let request = NetworkRequest(method: .post,
-                                 path: "https://na111.salesforce.com/services/oauth2/token",
-                                 headers: [:],
-                                 params: [:],
-                                 formBody: body)
-    let result = SF.networker.execute(request: request)
-    guard let data = result.data else {
-      throw SFError.failedToRefreshAccessToken
-    }
-    
-    do {
-      let resultAsResponse = try JSONDecoder().decode(SF.NewAccessToken.self, from: data)
-      guard let newAccessToken = resultAsResponse.access_token else {
-        tokenContainer.accessToken = ""
-        throw SFError.failedToRefreshAccessToken
-      }
-      tokenContainer.accessToken = newAccessToken
-    } catch let error {
-      print(error)
-      throw error
-    }
+    try networkInterface.refreshAccessToken()
   }
 }

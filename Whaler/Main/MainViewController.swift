@@ -48,6 +48,7 @@ class MainViewController: UIViewController {
   
   private var interactor: MainInteractor!
   private var noDataStackView: UIStackView?
+  private var reloadButton: UIButton!
   private var deleteButton: UIButton!
   private var signOutButton: UIButton!
   private var collectionView: UICollectionView!
@@ -94,6 +95,7 @@ class MainViewController: UIViewController {
     configureCollectionView()
     configureSignOutButton()
     configureDeleteButton()
+    configureReloadButton()
   }
   
   private func configureNoDataViews() {
@@ -245,6 +247,24 @@ class MainViewController: UIViewController {
     NSLayoutConstraint.activate(constraints)
   }
   
+  private func configureReloadButton() {
+    reloadButton = UIButton()
+    reloadButton.setImage(UIImage(named: "delete"), for: .normal)
+    reloadButton.imageView?.contentMode = .scaleAspectFit
+    reloadButton.addTarget(self, action: #selector(reloadTapped), for: .touchUpInside)
+    reloadButton.translatesAutoresizingMaskIntoConstraints = false
+    view.addSubview(reloadButton)
+    
+    let constraints = [
+      reloadButton.rightAnchor.constraint(equalTo: deleteButton.leftAnchor, constant: -12),
+      reloadButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 12),
+      reloadButton.heightAnchor.constraint(equalToConstant: 25),
+      reloadButton.widthAnchor.constraint(equalToConstant: 25)
+    ]
+    
+    NSLayoutConstraint.activate(constraints)
+  }
+  
   @objc
   private func signOutTapped() {
     Lifecycle.logOut()
@@ -257,6 +277,12 @@ class MainViewController: UIViewController {
     removeTableView()
     removeDeleteButton()
     configureNoDataViews()
+  }
+  
+  @objc
+  private func reloadTapped() {
+    interactor.fetchAccountsFromSalesforce()
+    collectionView.reloadData()
   }
 
   @objc

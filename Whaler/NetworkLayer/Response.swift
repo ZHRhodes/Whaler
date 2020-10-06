@@ -45,11 +45,14 @@ struct ResponseData<T: Codable>: Codable {
 
 enum ResponseError {
   case failedToDecodeResultData
+  case accessTokenIssue
   
   var code: Int {
     switch self {
     case .failedToDecodeResultData:
       return -1
+    case .accessTokenIssue:
+      return -2
     }
   }
   
@@ -57,6 +60,8 @@ enum ResponseError {
     switch self {
     case .failedToDecodeResultData:
       return "Local error: failed to decode the result data as a Response"
+    case .accessTokenIssue:
+      return "Local error: invalid or missing acess token"
     }
   }
   
