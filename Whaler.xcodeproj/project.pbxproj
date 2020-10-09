@@ -16,6 +16,7 @@
 		140AE7A324A9BA6500F7705E /* MainTableSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140AE7A224A9BA6500F7705E /* MainTableSectionHeader.swift */; };
 		140AE7A524A9BEC300F7705E /* AccountTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140AE7A424A9BEC300F7705E /* AccountTableCell.swift */; };
 		140AE7A924A9DF3300F7705E /* CommonButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140AE7A824A9DF3300F7705E /* CommonButton.swift */; };
+		1414810B252FFD8100640946 /* TablePopoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1414810A252FFD8100640946 /* TablePopoverViewController.swift */; };
 		142EC6A824D6AE01004F7A28 /* AuthenticationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142EC6A724D6AE01004F7A28 /* AuthenticationView.swift */; };
 		1440A20424C947FA00E36853 /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1440A20324C947FA00E36853 /* Contact.swift */; };
 		1443045D24F32FD900D2FBD2 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1443045C24F32FD900D2FBD2 /* String+Extensions.swift */; };
@@ -106,6 +107,7 @@
 		140AE7A224A9BA6500F7705E /* MainTableSectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableSectionHeader.swift; sourceTree = "<group>"; };
 		140AE7A424A9BEC300F7705E /* AccountTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountTableCell.swift; sourceTree = "<group>"; };
 		140AE7A824A9DF3300F7705E /* CommonButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonButton.swift; sourceTree = "<group>"; };
+		1414810A252FFD8100640946 /* TablePopoverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TablePopoverViewController.swift; sourceTree = "<group>"; };
 		142EC6A724D6AE01004F7A28 /* AuthenticationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationView.swift; sourceTree = "<group>"; };
 		1440A20324C947FA00E36853 /* Contact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contact.swift; sourceTree = "<group>"; };
 		1443045C24F32FD900D2FBD2 /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
@@ -247,6 +249,7 @@
 		140AE7A624A9DF0B00F7705E /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				1414810E252FFD8800640946 /* ViewControllers */,
 				140AE7A724A9DF1800F7705E /* Views */,
 				140AE79724A9AA4B00F7705E /* Models */,
 				14F7DD9D24EE526200D43055 /* Salesforce */,
@@ -267,6 +270,14 @@
 				146834FE24DA99810075B639 /* CommonTextField.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		1414810E252FFD8800640946 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				1414810A252FFD8100640946 /* TablePopoverViewController.swift */,
+			);
+			path = ViewControllers;
 			sourceTree = "<group>";
 		};
 		142EC6A624D6ADDD004F7A28 /* Authentication */ = {
@@ -681,6 +692,7 @@
 				14B037E325073E8800BA488D /* Response.swift in Sources */,
 				146C35CF24C2CA9700DBCA23 /* TitleValueView.swift in Sources */,
 				146C35D324C557C800DBCA23 /* CompanyInfoValuesView.swift in Sources */,
+				1414810B252FFD8100640946 /* TablePopoverViewController.swift in Sources */,
 				14F7DD9F24EE527600D43055 /* SFQueryResponse.swift in Sources */,
 				14884241250876080025C7EE /* Notifications.swift in Sources */,
 				14D97D7924DBEC4B00058B09 /* Keychain.swift in Sources */,
@@ -874,7 +886,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.2;
+				MARKETING_VERSION = 0.3;
 				PRODUCT_BUNDLE_IDENTIFIER = Whaler.catalyst.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -902,7 +914,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.2;
+				MARKETING_VERSION = 0.3;
 				PRODUCT_BUNDLE_IDENTIFIER = Whaler.catalyst.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

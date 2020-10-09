@@ -249,7 +249,7 @@ class MainViewController: UIViewController {
   
   private func configureReloadButton() {
     reloadButton = UIButton()
-    reloadButton.setImage(UIImage(named: "delete"), for: .normal)
+    reloadButton.setImage(UIImage(named: "reloadIcon"), for: .normal)
     reloadButton.imageView?.contentMode = .scaleAspectFit
     reloadButton.addTarget(self, action: #selector(reloadTapped), for: .touchUpInside)
     reloadButton.translatesAutoresizingMaskIntoConstraints = false
@@ -362,5 +362,31 @@ extension MainViewController: MainCollectionCellDelegate {
     let view = AccountDetailsView(account: account)
     let viewController = UIHostingController(rootView: view)
     navigationController?.pushViewController(viewController, animated: false)
+  }
+  
+  func didClickAssignButton(_ button: UIButton) {
+    let viewController = TablePopoverViewController()
+    viewController.modalPresentationStyle = .popover
+    viewController.provider = OrgUsersProvider()
+    navigationController?.present(viewController, animated: true, completion: nil)
+    let popoverVC = viewController.popoverPresentationController
+    popoverVC?.permittedArrowDirections = [.left, .up, .right]
+    popoverVC?.sourceView = button
+  }
+}
+
+struct OrgUser: SimpleItem {
+  var name = ""
+  var icon: UIImage?
+}
+
+struct OrgUsersProvider: SimpleItemProviding {
+  func getItems(success: ([SimpleItem]) -> Void, error: (Error) -> Void) {
+    let user1 = OrgUser(name: "Zack Rhodes", icon: nil)
+    let user2 = OrgUser(name: "Adam Maes", icon: nil)
+    let user3 = OrgUser(name: "Kady Barnfield", icon: nil)
+    
+    
+    success([user1, user2, user3, user1, user2, user3, user1, user2, user3])
   }
 }

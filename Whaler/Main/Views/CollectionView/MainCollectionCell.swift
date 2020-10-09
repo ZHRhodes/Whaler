@@ -11,6 +11,7 @@ import UIKit
 
 protocol MainCollectionCellDelegate: class {
   func didSelectRowAt(section: Int, didSelectRowAt indexPath: IndexPath)
+  func didClickAssignButton(_ button: UIButton)
 }
 
 class MainCollectionCell: UICollectionViewCell {
@@ -101,6 +102,7 @@ extension MainCollectionCell:  UITableViewDelegate, UITableViewDataSource {
     if let account = dataSource?.accountGrouper[state][indexPath.row] {
       cell.configure(with: account)
     }
+    cell.delegate = self
     return cell
   }
   
@@ -200,5 +202,11 @@ extension MainCollectionCell: UITableViewDropDelegate {
     
   func tableView(_ tableView: UITableView, dropSessionDidUpdate session: UIDropSession, withDestinationIndexPath destinationIndexPath: IndexPath?) -> UITableViewDropProposal {
       return UITableViewDropProposal(operation: .move, intent: .insertAtDestinationIndexPath)
+  }
+}
+
+extension MainCollectionCell: MainTableCellDelegate {
+  func didClickAssignButton(_ button: UIButton) {
+    delegate?.didClickAssignButton(button)
   }
 }

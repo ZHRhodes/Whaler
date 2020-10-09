@@ -9,12 +9,18 @@
 import Foundation
 import UIKit
 
+protocol MainTableCellDelegate: class {
+  func didClickAssignButton(_ button: UIButton)
+}
+
 class MainTableCell: UITableViewCell {
   static let id = "MainTableCellId"
+  weak var delegate: MainTableCellDelegate?
   private let shadowView = UIView()
   private let containerView = UIView()
   private let nameLabel = UILabel()
   private var attributesStack: UIStackView?
+  private var assignedButton: UIButton?
 
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -26,6 +32,7 @@ class MainTableCell: UITableViewCell {
     configureShadowView()
     configureContainerView()
     configureNameLabel()
+    configureAssignedButton()
   }
   
   required init?(coder: NSCoder) {
@@ -100,7 +107,7 @@ class MainTableCell: UITableViewCell {
     containerView.addSubview(attributesStack!)
     
     attributesStack!.leftAnchor.constraint(equalTo: containerView.leftAnchor, constant: 32).isActive = true
-    attributesStack?.rightAnchor.constraint(lessThanOrEqualTo: containerView.rightAnchor, constant: -12).isActive = true
+    attributesStack!.rightAnchor.constraint(lessThanOrEqualTo: containerView.rightAnchor, constant: -12).isActive = true
 //    attributesStack!.rightAnchor.constraint(equalTo: containerView.rightAnchor, constant: -12).isActive = true
 //    attributesStack!.leftAnchor.constraint(equalTo: containerView.topAnchor, constant: 4).isActive = true
     attributesStack!.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -4).isActive = true
@@ -112,5 +119,27 @@ class MainTableCell: UITableViewCell {
     }
     
     attributesStack?.addArrangedSubview(UIView())
+  }
+  
+  private func configureAssignedButton() {
+    assignedButton?.removeFromSuperview()
+    assignedButton = UIButton()
+    assignedButton?.backgroundColor = .brandGreen
+    assignedButton?.addTarget(self, action: #selector(assignButtonTapped), for: .touchUpInside)
+    assignedButton!.layer.cornerRadius = 25
+    assignedButton?.translatesAutoresizingMaskIntoConstraints = false
+    
+    containerView.addSubview(assignedButton!)
+    
+    assignedButton!.rightAnchor.constraint(equalTo: containerView.rightAnchor, constant: -32).isActive = true
+    assignedButton!.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -32).isActive = true
+    assignedButton!.widthAnchor.constraint(equalToConstant: 50).isActive = true
+    assignedButton!.heightAnchor.constraint(equalToConstant: 50).isActive = true
+  }
+  
+  @objc
+  private func assignButtonTapped() {
+    guard let delegate = delegate else { return }
+    assignedButton.map(delegate.didClickAssignButton)
   }
 }
