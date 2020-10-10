@@ -10,9 +10,16 @@ import Foundation
 import SwiftUI
 import UIKit
 
+protocol ContactRowViewCellDelegate: class {
+  func didClickAssignButton(_ button: UIView, forContact contact: Contact)
+}
+
 class ContactRowViewCell: UITableViewCell {
   static let id = "ContactRowViewCellID"
-  var cellView: UIHostingController<ContactRowView>!
+  static let height: CGFloat = 70.0
+  
+  var cellView: ContactRowView!
+  weak var delegate: ContactRowViewCellDelegate?
   
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -32,23 +39,19 @@ class ContactRowViewCell: UITableViewCell {
   func configure(withContact contact: Contact) {
     if cellView == nil {
       configureCellView(with: contact)
-    } else {
-      cellView.rootView.contact = contact
     }
+    cellView.configure(with: contact)
   }
   
   private func configureCellView(with contact: Contact) {
-    cellView = UIHostingController(rootView: ContactRowView(contact: contact))
-    cellView.view.translatesAutoresizingMaskIntoConstraints = false
-    addSubview(cellView.view)
-    
-    let constraints = [
-      cellView.view.leftAnchor.constraint(equalTo: leftAnchor, constant: 4),
-      cellView.view.rightAnchor.constraint(equalTo: rightAnchor, constant: -4),
-      cellView.view.topAnchor.constraint(equalTo: topAnchor, constant: 4),
-      cellView.view.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -4)
-    ]
-    
-    NSLayoutConstraint.activate(constraints)
+    cellView = ContactRowView()
+    cellView.delegate = self
+    addAndAttachToEdges(view: cellView, inset: -4)
+  }
+}
+
+extension ContactRowViewCell: ContactRowViewDelegate {
+  func didClickAssignButton(_ button: UIView, forContact contact: Contact) {
+    delegate?.didClickAssignButton(button, forContact: contact)
   }
 }

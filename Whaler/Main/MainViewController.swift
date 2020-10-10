@@ -364,10 +364,12 @@ extension MainViewController: MainCollectionCellDelegate {
     navigationController?.pushViewController(viewController, animated: false)
   }
   
-  func didClickAssignButton(_ button: UIButton) {
+  func didClickAssignButton(_ button: UIButton, forAccount account: Account) {
+    interactor.accountBeingAssigned = account
     let viewController = TablePopoverViewController()
     viewController.modalPresentationStyle = .popover
     viewController.provider = OrgUsersProvider()
+    viewController.delegate = self
     navigationController?.present(viewController, animated: true, completion: nil)
     let popoverVC = viewController.popoverPresentationController
     popoverVC?.permittedArrowDirections = [.left, .up, .right]
@@ -387,3 +389,10 @@ struct OrgUsersProvider: SimpleItemProviding {
   }
 }
     
+extension MainViewController: TablePopoverViewControllerDelegate {
+  func didSelectItem(_ item: SimpleItem) {
+    guard let user = item as? User,
+          let account = interactor.accountBeingAssigned else { return }
+    interactor.assign(user, to: account)
+  }
+}

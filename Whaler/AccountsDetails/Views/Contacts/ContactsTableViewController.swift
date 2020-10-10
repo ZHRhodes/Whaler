@@ -25,6 +25,7 @@ struct ContactsTableViewControllerRepresentable: UIViewControllerRepresentable {
 class ContactsTableViewController: UIViewController {
   private let tableView = UITableView()
   private var contactGrouper: Grouper<WorkState, Contact>
+  private var contactBeingAssigned: Contact?
   
   init(contactGrouper: Grouper<WorkState, Contact>) {
     self.contactGrouper = contactGrouper
@@ -107,7 +108,12 @@ extension ContactsTableViewController: UITableViewDataSource, UITableViewDelegat
       return UITableViewCell()
     }
     cell.configure(withContact: contact)
+    cell.delegate = self
     return cell
+  }
+  
+  func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    return ContactRowViewCell.height
   }
 }
 
@@ -146,4 +152,24 @@ extension ContactsTableViewController: UITableViewDragDelegate, UITableViewDropD
   }
 }
 
+extension ContactsTableViewController: ContactRowViewCellDelegate {
+  func didClickAssignButton(_ button: UIView, forContact contact: Contact) {
+    contactBeingAssigned = contact
+    let viewController = TablePopoverViewController()
+    viewController.modalPresentationStyle = .popover
+    viewController.provider = OrgUsersProvider()
+    viewController.delegate = self
+    navigationController?.present(viewController, animated: true, completion: nil)
+    let popoverVC = viewController.popoverPresentationController
+    popoverVC?.permittedArrowDirections = [.left, .up, .right]
+    popoverVC?.sourceView = button
+  }
+}
 
+extension ContactsTableViewController: TablePopoverViewControllerDelegate {
+  func didSelectItem(_ item: SimpleItem) {
+    guard let contact = contactBeingAssigned else { return }
+    let mutation = CreateContactAssignmentEntryMutation()
+    mutation.
+  }
+}

@@ -18,6 +18,8 @@
 		140AE7A924A9DF3300F7705E /* CommonButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140AE7A824A9DF3300F7705E /* CommonButton.swift */; };
 		1414810B252FFD8100640946 /* TablePopoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1414810A252FFD8100640946 /* TablePopoverViewController.swift */; };
 		141F795F25319E60005F9295 /* Organization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141F795E25319E60005F9295 /* Organization.swift */; };
+		141F796325326EF4005F9295 /* createContactAssignmentEntry.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 141F796225326EF4005F9295 /* createContactAssignmentEntry.graphql */; };
+		141F796925327503005F9295 /* Graph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141F796825327503005F9295 /* Graph.swift */; };
 		142EC6A824D6AE01004F7A28 /* AuthenticationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142EC6A724D6AE01004F7A28 /* AuthenticationView.swift */; };
 		1440A20424C947FA00E36853 /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1440A20324C947FA00E36853 /* Contact.swift */; };
 		1443045D24F32FD900D2FBD2 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1443045C24F32FD900D2FBD2 /* String+Extensions.swift */; };
@@ -110,6 +112,8 @@
 		140AE7A824A9DF3300F7705E /* CommonButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonButton.swift; sourceTree = "<group>"; };
 		1414810A252FFD8100640946 /* TablePopoverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TablePopoverViewController.swift; sourceTree = "<group>"; };
 		141F795E25319E60005F9295 /* Organization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Organization.swift; sourceTree = "<group>"; };
+		141F796225326EF4005F9295 /* createContactAssignmentEntry.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = createContactAssignmentEntry.graphql; sourceTree = "<group>"; };
+		141F796825327503005F9295 /* Graph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Graph.swift; sourceTree = "<group>"; };
 		142EC6A724D6AE01004F7A28 /* AuthenticationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationView.swift; sourceTree = "<group>"; };
 		1440A20324C947FA00E36853 /* Contact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contact.swift; sourceTree = "<group>"; };
 		1443045C24F32FD900D2FBD2 /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
@@ -223,6 +227,7 @@
 				14EF4DE824CD4F3100ED5461 /* ObjectManager.swift */,
 				140AE79F24A9B58300F7705E /* WorkState.swift */,
 				14B037E025049CDE00BA488D /* Grouper.swift */,
+				141F796825327503005F9295 /* Graph.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -416,6 +421,7 @@
 				146A6DCE252C48BE00DA8E85 /* API.swift */,
 				146A6DCA252C486100DA8E85 /* schema.json */,
 				146A6DC3252C439000DA8E85 /* organization.graphql */,
+				141F796225326EF4005F9295 /* createContactAssignmentEntry.graphql */,
 				1480800724EA4AD2007EB6D1 /* NetworkLayer */,
 				14861EF8249F439600D2FA92 /* Whaler.entitlements */,
 				14861ED4249F3DE100D2FA92 /* AppDelegate.swift */,
@@ -621,6 +627,7 @@
 				140AE79B24A9B48000F7705E /* Colors.xcassets in Resources */,
 				14861EDE249F3DE400D2FA92 /* Assets.xcassets in Resources */,
 				146A6DC4252C439000DA8E85 /* organization.graphql in Resources */,
+				141F796325326EF4005F9295 /* createContactAssignmentEntry.graphql in Resources */,
 				14861EDC249F3DE100D2FA92 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -719,6 +726,7 @@
 				144BF56C24D7E66E00F231F0 /* RootContainerViewController.swift in Sources */,
 				14E63ED124B9109C003EAF22 /* Whaler.xcdatamodeld in Sources */,
 				14EF4DE924CD4F3100ED5461 /* ObjectManager.swift in Sources */,
+				141F796925327503005F9295 /* Graph.swift in Sources */,
 				14B037E525073EBA00BA488D /* Tokens.swift in Sources */,
 				140AE7A324A9BA6500F7705E /* MainTableSectionHeader.swift in Sources */,
 				1480801024EA4BE7007EB6D1 /* JustNetworker.swift in Sources */,

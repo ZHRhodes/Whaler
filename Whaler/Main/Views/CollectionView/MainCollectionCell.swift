@@ -11,7 +11,7 @@ import UIKit
 
 protocol MainCollectionCellDelegate: class {
   func didSelectRowAt(section: Int, didSelectRowAt indexPath: IndexPath)
-  func didClickAssignButton(_ button: UIButton)
+  func didClickAssignButton(_ button: UIButton, forAccount account: Account)
 }
 
 class MainCollectionCell: UICollectionViewCell {
@@ -206,7 +206,7 @@ extension MainCollectionCell: UITableViewDropDelegate {
 }
 
 extension MainCollectionCell: MainTableCellDelegate {
-  func didClickAssignButton(_ button: UIButton) {
-    delegate?.didClickAssignButton(button)
+  func didClickAssignButton(_ button: UIButton, forAccount account: Account) {
+    delegate?.didClickAssignButton(button, forAccount: account)
   }
 }

@@ -16,6 +16,7 @@ protocol MainInteractorData: class {
 class MainInteractor: MainInteractorData {
   lazy var accountGrouper = Grouper<WorkState, Account>(groups: self.accountStates)
   lazy var accountStates = WorkState.allCases
+  var accountBeingAssigned: Account?
   
   func hasAccounts() -> Bool {
     return !accountGrouper.hasNoValues
@@ -154,5 +155,9 @@ class MainInteractor: MainInteractorData {
   
   func endSalesforceSession() {
     SFHelper.endSession()
+  }
+  
+  func assign(_ user: User, to account: Account) {
+    print(user, account)
   }
 }

@@ -4,6 +4,138 @@
 import Apollo
 import Foundation
 
+public final class CreateContactAssignmentEntryMutation: GraphQLMutation {
+  /// The raw GraphQL definition of this operation.
+  public let operationDefinition: String =
+    """
+    mutation createContactAssignmentEntry {
+      createContactAssignmentEntry(input: {contactId: "1", assignedBy: "2", assignedTo: "3"}) {
+        __typename
+        id
+        createdAt
+        contactId
+        assignedBy
+        assignedTo
+      }
+    }
+    """
+
+  public let operationName: String = "createContactAssignmentEntry"
+
+  public let operationIdentifier: String? = "713e97bbfdafaad51b8056fce3e7045db620349da507f240825542c610e9cc1d"
+
+  public init() {
+  }
+
+  public struct Data: GraphQLSelectionSet {
+    public static let possibleTypes: [String] = ["Mutation"]
+
+    public static var selections: [GraphQLSelection] {
+      return [
+        GraphQLField("createContactAssignmentEntry", arguments: ["input": ["contactId": "1", "assignedBy": "2", "assignedTo": "3"]], type: .nonNull(.object(CreateContactAssignmentEntry.selections))),
+      ]
+    }
+
+    public private(set) var resultMap: ResultMap
+
+    public init(unsafeResultMap: ResultMap) {
+      self.resultMap = unsafeResultMap
+    }
+
+    public init(createContactAssignmentEntry: CreateContactAssignmentEntry) {
+      self.init(unsafeResultMap: ["__typename": "Mutation", "createContactAssignmentEntry": createContactAssignmentEntry.resultMap])
+    }
+
+    public var createContactAssignmentEntry: CreateContactAssignmentEntry {
+      get {
+        return CreateContactAssignmentEntry(unsafeResultMap: resultMap["createContactAssignmentEntry"]! as! ResultMap)
+      }
+      set {
+        resultMap.updateValue(newValue.resultMap, forKey: "createContactAssignmentEntry")
+      }
+    }
+
+    public struct CreateContactAssignmentEntry: GraphQLSelectionSet {
+      public static let possibleTypes: [String] = ["ContactAssignmentEntry"]
+
+      public static var selections: [GraphQLSelection] {
+        return [
+          GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+          GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
+          GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
+          GraphQLField("contactId", type: .nonNull(.scalar(String.self))),
+          GraphQLField("assignedBy", type: .nonNull(.scalar(String.self))),
+          GraphQLField("assignedTo", type: .scalar(String.self)),
+        ]
+      }
+
+      public private(set) var resultMap: ResultMap
+
+      public init(unsafeResultMap: ResultMap) {
+        self.resultMap = unsafeResultMap
+      }
+
+      public init(id: GraphQLID, createdAt: String, contactId: String, assignedBy: String, assignedTo: String? = nil) {
+        self.init(unsafeResultMap: ["__typename": "ContactAssignmentEntry", "id": id, "createdAt": createdAt, "contactId": contactId, "assignedBy": assignedBy, "assignedTo": assignedTo])
+      }
+
+      public var __typename: String {
+        get {
+          return resultMap["__typename"]! as! String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "__typename")
+        }
+      }
+
+      public var id: GraphQLID {
+        get {
+          return resultMap["id"]! as! GraphQLID
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "id")
+        }
+      }
+
+      public var createdAt: String {
+        get {
+          return resultMap["createdAt"]! as! String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "createdAt")
+        }
+      }
+
+      public var contactId: String {
+        get {
+          return resultMap["contactId"]! as! String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "contactId")
+        }
+      }
+
+      public var assignedBy: String {
+        get {
+          return resultMap["assignedBy"]! as! String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "assignedBy")
+        }
+      }
+
+      public var assignedTo: String? {
+        get {
+          return resultMap["assignedTo"] as? String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "assignedTo")
+        }
+      }
+    }
+  }
+}
+
 public final class FetchOrganizationQuery: GraphQLQuery {
   /// The raw GraphQL definition of this operation.
   public let operationDefinition: String =

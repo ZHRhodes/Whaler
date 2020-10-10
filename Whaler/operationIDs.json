@@ -1,4 +1,8 @@
 {
+  "713e97bbfdafaad51b8056fce3e7045db620349da507f240825542c610e9cc1d": {
+    "name": "createContactAssignmentEntry",
+    "source": "mutation createContactAssignmentEntry {\n  createContactAssignmentEntry(input: {contactId: \"1\", assignedBy: \"2\", assignedTo: \"3\"}) {\n    __typename\n    id\n    createdAt\n    contactId\n    assignedBy\n    assignedTo\n  }\n}"
+  },
   "7f84dfc864fba0ea99d889df782636ef27349f211ac9bc38919d2439fb415123": {
     "name": "fetchOrganization",
     "source": "query fetchOrganization {\n  organization {\n    __typename\n    id\n    name\n    users {\n      __typename\n      firstName\n      lastName\n    }\n  }\n}"

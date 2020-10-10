@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 protocol MainTableCellDelegate: class {
-  func didClickAssignButton(_ button: UIButton)
+  func didClickAssignButton(_ button: UIButton, forAccount account: Account)
 }
 
 class MainTableCell: UITableViewCell {
@@ -21,6 +21,7 @@ class MainTableCell: UITableViewCell {
   private let nameLabel = UILabel()
   private var attributesStack: UIStackView?
   private var assignedButton: UIButton?
+  private var account: Account?
 
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -40,6 +41,7 @@ class MainTableCell: UITableViewCell {
   }
   
   func configure(with account: Account) {
+    self.account = account
     configureNameLabel(with: account)
     var attributes = [Attribute]()
     if let industry = account.industry {
@@ -131,15 +133,17 @@ class MainTableCell: UITableViewCell {
     
     containerView.addSubview(assignedButton!)
     
-    assignedButton!.rightAnchor.constraint(equalTo: containerView.rightAnchor, constant: -32).isActive = true
-    assignedButton!.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -32).isActive = true
+    assignedButton!.rightAnchor.constraint(equalTo: containerView.rightAnchor, constant: -16).isActive = true
+    assignedButton!.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -16).isActive = true
     assignedButton!.widthAnchor.constraint(equalToConstant: 50).isActive = true
     assignedButton!.heightAnchor.constraint(equalToConstant: 50).isActive = true
   }
   
   @objc
   private func assignButtonTapped() {
-    guard let delegate = delegate else { return }
-    assignedButton.map(delegate.didClickAssignButton)
+    guard let delegate = delegate,
+          let assignedButton = assignedButton,
+          let account = account else { return }
+    delegate.didClickAssignButton(assignedButton, forAccount: account)
   }
 }

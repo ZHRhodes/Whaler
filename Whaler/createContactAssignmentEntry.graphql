@@ -1,0 +1,9 @@
+mutation createContactAssignmentEntry {
+  createContactAssignmentEntry(input:{contactId: "1", assignedBy: "2", assignedTo: "3"}) {
+    id
+    createdAt
+    contactId
+    assignedBy
+    assignedTo
+  }
+}

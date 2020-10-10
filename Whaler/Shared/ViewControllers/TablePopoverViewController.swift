@@ -24,10 +24,11 @@ protocol SimpleItemProviding {
 }
 
 protocol TablePopoverViewControllerDelegate: class {
-  func didSelect
+  func didSelectItem(_ item: SimpleItem)
 }
 
 class TablePopoverViewController: UIViewController {
+  weak var delegate: TablePopoverViewControllerDelegate?
   private let tableView = UITableView()
   var provider: SimpleItemProviding? {
     didSet {
@@ -53,8 +54,8 @@ class TablePopoverViewController: UIViewController {
   }
   
   private func configureTableView() {
-    tableView.delegate = self
     tableView.dataSource = self
+    tableView.delegate = self
     tableView.translatesAutoresizingMaskIntoConstraints = false
 
     view.addSubview(tableView)
@@ -67,7 +68,7 @@ class TablePopoverViewController: UIViewController {
   }
 }
 
-extension TablePopoverViewController: UITableViewDataSource {
+extension TablePopoverViewController: UITableViewDataSource, UITableViewDelegate {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return items.count
   }
@@ -80,10 +81,7 @@ extension TablePopoverViewController: UITableViewDataSource {
   }
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    
+    let item = items[indexPath.row]
+    delegate?.didSelectItem(item)
   }
-}
-
-extension TablePopoverViewController: UITableViewDelegate {
-  
 }
