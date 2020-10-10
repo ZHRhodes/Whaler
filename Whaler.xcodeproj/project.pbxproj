@@ -17,6 +17,7 @@
 		140AE7A524A9BEC300F7705E /* AccountTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140AE7A424A9BEC300F7705E /* AccountTableCell.swift */; };
 		140AE7A924A9DF3300F7705E /* CommonButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140AE7A824A9DF3300F7705E /* CommonButton.swift */; };
 		1414810B252FFD8100640946 /* TablePopoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1414810A252FFD8100640946 /* TablePopoverViewController.swift */; };
+		141F795F25319E60005F9295 /* Organization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141F795E25319E60005F9295 /* Organization.swift */; };
 		142EC6A824D6AE01004F7A28 /* AuthenticationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142EC6A724D6AE01004F7A28 /* AuthenticationView.swift */; };
 		1440A20424C947FA00E36853 /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1440A20324C947FA00E36853 /* Contact.swift */; };
 		1443045D24F32FD900D2FBD2 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1443045C24F32FD900D2FBD2 /* String+Extensions.swift */; };
@@ -108,6 +109,7 @@
 		140AE7A424A9BEC300F7705E /* AccountTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountTableCell.swift; sourceTree = "<group>"; };
 		140AE7A824A9DF3300F7705E /* CommonButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonButton.swift; sourceTree = "<group>"; };
 		1414810A252FFD8100640946 /* TablePopoverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TablePopoverViewController.swift; sourceTree = "<group>"; };
+		141F795E25319E60005F9295 /* Organization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Organization.swift; sourceTree = "<group>"; };
 		142EC6A724D6AE01004F7A28 /* AuthenticationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationView.swift; sourceTree = "<group>"; };
 		1440A20324C947FA00E36853 /* Contact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contact.swift; sourceTree = "<group>"; };
 		1443045C24F32FD900D2FBD2 /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
@@ -214,6 +216,7 @@
 		140AE79724A9AA4B00F7705E /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				141F795D25319DEA005F9295 /* Organization */,
 				14B037EC25074B1200BA488D /* User */,
 				14EF4DE624CD4F0700ED5461 /* Account */,
 				14EF4DE724CD4F1C00ED5461 /* Contact */,
@@ -278,6 +281,14 @@
 				1414810A252FFD8100640946 /* TablePopoverViewController.swift */,
 			);
 			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		141F795D25319DEA005F9295 /* Organization */ = {
+			isa = PBXGroup;
+			children = (
+				141F795E25319E60005F9295 /* Organization.swift */,
+			);
+			path = Organization;
 			sourceTree = "<group>";
 		};
 		142EC6A624D6ADDD004F7A28 /* Authentication */ = {
@@ -667,6 +678,7 @@
 				140AE7A524A9BEC300F7705E /* AccountTableCell.swift in Sources */,
 				14EED67C24F0E5E400660BD1 /* SFLead.swift in Sources */,
 				14861ED5249F3DE100D2FA92 /* AppDelegate.swift in Sources */,
+				141F795F25319E60005F9295 /* Organization.swift in Sources */,
 				14861ED7249F3DE100D2FA92 /* SceneDelegate.swift in Sources */,
 				14861EF7249F401300D2FA92 /* CSVParser.swift in Sources */,
 				146C344624EA53690009C68C /* UserDefaultsManaged.swift in Sources */,

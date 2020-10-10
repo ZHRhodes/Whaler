@@ -7,6 +7,8 @@
 //
 
 import Foundation
+import UIKit
+
 
 struct User: Codable {
   let id: Int
@@ -16,6 +18,17 @@ struct User: Codable {
   let isAdmin: Bool
   let organizationId: UInt
 //  let workspaces: [WorkspaceRemote]?
+  let organization: Organization?
+}
+
+extension User: SimpleItem {
+  var name: String {
+    [firstName, lastName].joined(separator: " ")
+  }
+  
+  var icon: UIImage? {
+    return nil
+  }
 }
 
 extension User: Equatable {}

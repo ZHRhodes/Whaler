@@ -72,11 +72,14 @@ struct APINetworkInterface: NetworkInterface {
       return Response<R>(code: result.statusCode ?? -1, message: "")
     }
 
-    guard let data = result.data,
-      let response = try? JSONDecoder().decode(Response<R>.self, from: data) else {
-      //couldn't decode the response in the way we expected, log it
-//        log.error("Failed to decode response from \(request.path)", context: LoggingContext.rest)
-        return Response<R>(.failedToDecodeResultData)
+    guard let data = result.data else { return Response<R>(.failedToDecodeResultData) }
+    let response: Response<R>
+    do {
+      response = try JSONDecoder().decode(Response<R>.self, from: data)
+    } catch let error {
+//      log.error("Failed to decode response from \(request.path)", context: LoggingContext.rest)
+      print(error)
+      return Response<R>(.failedToDecodeResultData)
     }
     switch response.result {
     case .error(let code, let message):

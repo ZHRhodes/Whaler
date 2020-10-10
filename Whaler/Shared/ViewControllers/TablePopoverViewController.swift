@@ -23,6 +23,10 @@ protocol SimpleItemProviding {
   func getItems(success: ([SimpleItem]) -> Void, error: (Error) -> Void)
 }
 
+protocol TablePopoverViewControllerDelegate: class {
+  func didSelect
+}
+
 class TablePopoverViewController: UIViewController {
   private let tableView = UITableView()
   var provider: SimpleItemProviding? {
@@ -73,6 +77,10 @@ extension TablePopoverViewController: UITableViewDataSource {
     let item = items[indexPath.row]
     cell.textLabel?.text = item.name
     return cell
+  }
+  
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    
   }
 }
 

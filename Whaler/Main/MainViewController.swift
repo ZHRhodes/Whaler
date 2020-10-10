@@ -382,11 +382,8 @@ struct OrgUser: SimpleItem {
 
 struct OrgUsersProvider: SimpleItemProviding {
   func getItems(success: ([SimpleItem]) -> Void, error: (Error) -> Void) {
-    let user1 = OrgUser(name: "Zack Rhodes", icon: nil)
-    let user2 = OrgUser(name: "Adam Maes", icon: nil)
-    let user3 = OrgUser(name: "Kady Barnfield", icon: nil)
-    
-    
-    success([user1, user2, user3, user1, user2, user3, user1, user2, user3])
+    let users = Lifecycle.currentUser?.organization?.users ?? []
+    success(users)
   }
 }
+    
