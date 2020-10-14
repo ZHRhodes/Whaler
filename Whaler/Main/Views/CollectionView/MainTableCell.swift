@@ -134,7 +134,9 @@ class MainTableCell: UITableViewCell {
     assignedButton!.addTarget(self, action: #selector(assignButtonTapped), for: .touchUpInside)
     assignedButton!.layer.cornerRadius = 25
     assignedButton!.translatesAutoresizingMaskIntoConstraints = false
-    assignedButton?.setTitle("ZR", for: .normal)
+    let characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    let title = "\(characters.randomElement()!)\(characters.randomElement()!)"
+    assignedButton?.setTitle(title, for: .normal)
     assignedButton?.titleLabel?.font = .openSans(weight: .regular, size: 18)
     assignedButton?.setTitleColor(.white, for: .normal)
     
