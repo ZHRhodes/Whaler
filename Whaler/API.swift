@@ -8,8 +8,8 @@ public final class CreateContactAssignmentEntryMutation: GraphQLMutation {
   /// The raw GraphQL definition of this operation.
   public let operationDefinition: String =
     """
-    mutation createContactAssignmentEntry {
-      createContactAssignmentEntry(input: {contactId: "1", assignedBy: "2", assignedTo: "3"}) {
+    mutation createContactAssignmentEntry($contactId: Int!, $assignedBy: String!, $assignedTo: String) {
+      createContactAssignmentEntry(input: {contactId: $contactId, assignedBy: $assignedBy, assignedTo: $assignedTo}) {
         __typename
         id
         createdAt
@@ -22,9 +22,20 @@ public final class CreateContactAssignmentEntryMutation: GraphQLMutation {
 
   public let operationName: String = "createContactAssignmentEntry"
 
-  public let operationIdentifier: String? = "713e97bbfdafaad51b8056fce3e7045db620349da507f240825542c610e9cc1d"
+  public let operationIdentifier: String? = "61f0c1808dbd75d3d95de49951c6508d84cf82b3f6f83774a50026b416fffb87"
 
-  public init() {
+  public var contactId: Int
+  public var assignedBy: String
+  public var assignedTo: String?
+
+  public init(contactId: Int, assignedBy: String, assignedTo: String? = nil) {
+    self.contactId = contactId
+    self.assignedBy = assignedBy
+    self.assignedTo = assignedTo
+  }
+
+  public var variables: GraphQLMap? {
+    return ["contactId": contactId, "assignedBy": assignedBy, "assignedTo": assignedTo]
   }
 
   public struct Data: GraphQLSelectionSet {
@@ -32,7 +43,7 @@ public final class CreateContactAssignmentEntryMutation: GraphQLMutation {
 
     public static var selections: [GraphQLSelection] {
       return [
-        GraphQLField("createContactAssignmentEntry", arguments: ["input": ["contactId": "1", "assignedBy": "2", "assignedTo": "3"]], type: .nonNull(.object(CreateContactAssignmentEntry.selections))),
+        GraphQLField("createContactAssignmentEntry", arguments: ["input": ["contactId": GraphQLVariable("contactId"), "assignedBy": GraphQLVariable("assignedBy"), "assignedTo": GraphQLVariable("assignedTo")]], type: .nonNull(.object(CreateContactAssignmentEntry.selections))),
       ]
     }
 
@@ -63,7 +74,7 @@ public final class CreateContactAssignmentEntryMutation: GraphQLMutation {
           GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
           GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
           GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
-          GraphQLField("contactId", type: .nonNull(.scalar(String.self))),
+          GraphQLField("contactId", type: .nonNull(.scalar(GraphQLID.self))),
           GraphQLField("assignedBy", type: .nonNull(.scalar(String.self))),
           GraphQLField("assignedTo", type: .scalar(String.self)),
         ]
@@ -75,7 +86,7 @@ public final class CreateContactAssignmentEntryMutation: GraphQLMutation {
         self.resultMap = unsafeResultMap
       }
 
-      public init(id: GraphQLID, createdAt: String, contactId: String, assignedBy: String, assignedTo: String? = nil) {
+      public init(id: GraphQLID, createdAt: String, contactId: GraphQLID, assignedBy: String, assignedTo: String? = nil) {
         self.init(unsafeResultMap: ["__typename": "ContactAssignmentEntry", "id": id, "createdAt": createdAt, "contactId": contactId, "assignedBy": assignedBy, "assignedTo": assignedTo])
       }
 
@@ -106,9 +117,9 @@ public final class CreateContactAssignmentEntryMutation: GraphQLMutation {
         }
       }
 
-      public var contactId: String {
+      public var contactId: GraphQLID {
         get {
-          return resultMap["contactId"]! as! String
+          return resultMap["contactId"]! as! GraphQLID
         }
         set {
           resultMap.updateValue(newValue, forKey: "contactId")

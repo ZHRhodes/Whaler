@@ -9,6 +9,22 @@
 import Foundation
 import Apollo
 
+class Graph {
+  static let shared = Graph()
+  
+  private(set) lazy var apollo: ApolloClient = {
+    let client = URLSessionClient()
+    let cache = InMemoryNormalizedCache()
+    let store = ApolloStore(cache: cache)
+    let provider = NetworkInterceptorProvider(client: client, store: store)
+    let url = URL(string: "https://getwhalergo.herokuapp.com/query")!
+    let transport = RequestChainNetworkTransport(interceptorProvider: provider,
+                                                 endpointURL: url)
+    return ApolloClient(networkTransport: transport)
+  }()
+}
+
+
 
 //
 //class Graph {

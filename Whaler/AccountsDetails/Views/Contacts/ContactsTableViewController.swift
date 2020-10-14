@@ -168,8 +168,17 @@ extension ContactsTableViewController: ContactRowViewCellDelegate {
 
 extension ContactsTableViewController: TablePopoverViewControllerDelegate {
   func didSelectItem(_ item: SimpleItem) {
-    guard let contact = contactBeingAssigned else { return }
-    let mutation = CreateContactAssignmentEntryMutation()
-    mutation.
+    guard let contact = contactBeingAssigned,
+          let currentUser = Lifecycle.currentUser,
+          let selectedUser = item as? User else { return }
+    let mutation = CreateContactAssignmentEntryMutation(contactId: Int(contact.id)!, //TEMP
+                                                        assignedBy: String(currentUser.id),
+                                                        assignedTo: String(selectedUser.id))
+    Graph.shared.apollo.perform(mutation: mutation) { result in
+      print("here")
+    }
+//    let input = CreateContactAssignmentEntryMutation
+//    let mutation = CreateContactAssignmentEntryMutation()
+//    Graph.shared.apollo.mutation(mutation)
   }
 }

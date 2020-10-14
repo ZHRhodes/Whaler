@@ -45,7 +45,7 @@ class MainCollectionCell: UICollectionViewCell {
   func configure() {
     layer.masksToBounds = true
     layer.cornerRadius = 10.0
-    backgroundColor = .primaryBackground
+    backgroundColor = .white
     tableView.dragInteractionEnabled = true
     tableView.dragDelegate = self
     tableView.dropDelegate = self
@@ -65,13 +65,19 @@ class MainCollectionCell: UICollectionViewCell {
     headerView!.leftAnchor.constraint(equalTo: leftAnchor, constant: 8).isActive = true
     headerView!.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
     headerView!.topAnchor.constraint(equalTo: topAnchor, constant: 10).isActive = true
-    headerView!.heightAnchor.constraint(equalToConstant: AccountStateTagView.height+10).isActive = true
+    headerView!.heightAnchor.constraint(equalToConstant: MainCollectionCellHeader.height).isActive = true
     
-    headerView!.addAndAttachToEdges(view: AccountStateTagView(state: WorkState.allCases[section ?? 0]))
+    let state = WorkState.allCases[self.section ?? 0]
+    headerView!.addAndAttachToEdges(view: MainCollectionCellHeader(text: state.rawValue, colors: [
+                                                                    state.darkColor,
+                                                                    state.color,
+                                                                    state.lightColor]))
   }
   
   private func configureTableView() {
     tableView.backgroundColor = .primaryBackground
+    tableView.layer.cornerRadius = 10.0
+    tableView.clipsToBounds = true
     tableView.delegate = self
     tableView.dataSource = self
     tableView.register(MainTableCell.self, forCellReuseIdentifier: MainTableCell.id)
@@ -112,7 +118,7 @@ extension MainCollectionCell:  UITableViewDelegate, UITableViewDataSource {
   }
   
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-    175
+    150
   }
 }
 

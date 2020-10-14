@@ -45,13 +45,11 @@ class MainTableCell: UITableViewCell {
     configureNameLabel(with: account)
     var attributes = [Attribute]()
     if let industry = account.industry {
-      let state = WorkState.allCases.randomElement()
-      attributes.append(Attribute(text: industry, foregroundColor: state!.foregroundColor, backgroundColor: .clear, borderColor: state!.backgroundColor))
+      attributes.append(Attribute(text: industry, foregroundColor: .lightText, backgroundColor: .clear, borderColor: .lightText))
     }
     
     if let billingState = account.billingState {
-      let state = WorkState.allCases.randomElement()
-      attributes.append(Attribute(text: billingState, foregroundColor: state!.foregroundColor, backgroundColor: .clear, borderColor: state!.backgroundColor))
+      attributes.append(Attribute(text: billingState, foregroundColor: .lightText, backgroundColor: .clear, borderColor: .lightText))
     }
     configureAttributeTags(attributes: attributes)
   }
@@ -60,18 +58,19 @@ class MainTableCell: UITableViewCell {
     shadowView.backgroundColor = .white
     shadowView.layer.cornerRadius = 12.0
     shadowView.clipsToBounds = false
-    shadowView.layer.shadowColor = UIColor(red: 0.77, green: 0.77, blue: 0.77, alpha: 0.21).cgColor
+    
+    shadowView.layer.shadowColor = UIColor(red: 116/255, green: 111/255, blue: 146/255, alpha: 0.30).cgColor
     shadowView.layer.shadowOpacity = 1.0
-    shadowView.layer.shadowRadius = 3.0
-    shadowView.layer.shadowOffset = CGSize(width: 0, height: 2)
+    shadowView.layer.shadowRadius = 15.0
+    shadowView.layer.shadowOffset = CGSize(width: 0, height: 4)
     
     shadowView.translatesAutoresizingMaskIntoConstraints = false
     contentView.addSubview(shadowView)
     
-    shadowView.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 5).isActive = true
-    shadowView.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -5).isActive = true
-    shadowView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8).isActive = true
-    shadowView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8).isActive = true
+    shadowView.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 24).isActive = true
+    shadowView.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -24).isActive = true
+    shadowView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 12).isActive = true
+    shadowView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -12).isActive = true
   }
   
   private func configureContainerView() {
@@ -84,14 +83,14 @@ class MainTableCell: UITableViewCell {
   }
   
   private func configureNameLabel() {
-    nameLabel.font = UIFont.openSans(weight: .regular, size: 25)
+    nameLabel.font = UIFont.openSans(weight: .regular, size: 24)
     nameLabel.translatesAutoresizingMaskIntoConstraints = false
     
     containerView.addSubview(nameLabel)
     
-    nameLabel.leftAnchor.constraint(equalTo: shadowView.leftAnchor, constant: 36).isActive = true
+    nameLabel.leftAnchor.constraint(equalTo: shadowView.leftAnchor, constant: 22).isActive = true
     nameLabel.rightAnchor.constraint(equalTo: shadowView.rightAnchor, constant: -12).isActive = true
-    nameLabel.topAnchor.constraint(equalTo: shadowView.topAnchor, constant: 28).isActive = true
+    nameLabel.topAnchor.constraint(equalTo: shadowView.topAnchor, constant: 12).isActive = true
   }
   
   private func configureNameLabel(with account: Account) {
@@ -108,11 +107,11 @@ class MainTableCell: UITableViewCell {
     
     containerView.addSubview(attributesStack!)
     
-    attributesStack!.leftAnchor.constraint(equalTo: containerView.leftAnchor, constant: 32).isActive = true
+    attributesStack!.leftAnchor.constraint(equalTo: containerView.leftAnchor, constant: 22).isActive = true
+    attributesStack!.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -18).isActive = true
     attributesStack!.rightAnchor.constraint(lessThanOrEqualTo: containerView.rightAnchor, constant: -12).isActive = true
 //    attributesStack!.rightAnchor.constraint(equalTo: containerView.rightAnchor, constant: -12).isActive = true
 //    attributesStack!.leftAnchor.constraint(equalTo: containerView.topAnchor, constant: 4).isActive = true
-    attributesStack!.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -4).isActive = true
     
     for attribute in attributes {
       let tagView = AttributeTagView(attribute: attribute)
@@ -126,15 +125,23 @@ class MainTableCell: UITableViewCell {
   private func configureAssignedButton() {
     assignedButton?.removeFromSuperview()
     assignedButton = UIButton()
-    assignedButton?.backgroundColor = .brandGreen
-    assignedButton?.addTarget(self, action: #selector(assignButtonTapped), for: .touchUpInside)
+    let color: UIColor = [.brandGreenDark,
+                          .brandPurpleDark,
+                          .brandRedDark,
+                          .brandYellowDark,
+                          .brandPinkDark].randomElement()!
+    assignedButton!.backgroundColor = color
+    assignedButton!.addTarget(self, action: #selector(assignButtonTapped), for: .touchUpInside)
     assignedButton!.layer.cornerRadius = 25
-    assignedButton?.translatesAutoresizingMaskIntoConstraints = false
+    assignedButton!.translatesAutoresizingMaskIntoConstraints = false
+    assignedButton?.setTitle("ZR", for: .normal)
+    assignedButton?.titleLabel?.font = .openSans(weight: .regular, size: 18)
+    assignedButton?.setTitleColor(.white, for: .normal)
     
     containerView.addSubview(assignedButton!)
     
-    assignedButton!.rightAnchor.constraint(equalTo: containerView.rightAnchor, constant: -16).isActive = true
-    assignedButton!.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -16).isActive = true
+    assignedButton!.rightAnchor.constraint(equalTo: containerView.rightAnchor, constant: -22).isActive = true
+    assignedButton!.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -22).isActive = true
     assignedButton!.widthAnchor.constraint(equalToConstant: 50).isActive = true
     assignedButton!.heightAnchor.constraint(equalToConstant: 50).isActive = true
   }

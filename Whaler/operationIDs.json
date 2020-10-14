@@ -1,7 +1,7 @@
 {
-  "713e97bbfdafaad51b8056fce3e7045db620349da507f240825542c610e9cc1d": {
+  "61f0c1808dbd75d3d95de49951c6508d84cf82b3f6f83774a50026b416fffb87": {
     "name": "createContactAssignmentEntry",
-    "source": "mutation createContactAssignmentEntry {\n  createContactAssignmentEntry(input: {contactId: \"1\", assignedBy: \"2\", assignedTo: \"3\"}) {\n    __typename\n    id\n    createdAt\n    contactId\n    assignedBy\n    assignedTo\n  }\n}"
+    "source": "mutation createContactAssignmentEntry($contactId: Int!, $assignedBy: String!, $assignedTo: String) {\n  createContactAssignmentEntry(input: {contactId: $contactId, assignedBy: $assignedBy, assignedTo: $assignedTo}) {\n    __typename\n    id\n    createdAt\n    contactId\n    assignedBy\n    assignedTo\n  }\n}"
   },
   "7f84dfc864fba0ea99d889df782636ef27349f211ac9bc38919d2439fb415123": {
     "name": "fetchOrganization",

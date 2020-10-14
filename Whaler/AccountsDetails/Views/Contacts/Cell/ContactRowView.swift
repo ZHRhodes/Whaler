@@ -93,7 +93,7 @@ class ContactRowView: UIView {
       label.textColor = .black
     } else {
       label.text = "—"
-      label.textColor = .textInactive
+      label.textColor = .lightText
     }
 
     return label

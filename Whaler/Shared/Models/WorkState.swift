@@ -9,27 +9,44 @@
 import UIKit
 
 enum WorkState: String, CaseIterable, Codable {
-  case ready = "READY", inProgress = "IN PROGRESS", worked = "WORKED"
+  case ready = "Ready", inProgress = "In Progress", worked = "Worked", opportunity = "Opportunity"
   
-  var backgroundColor: UIColor {
+  var lightColor: UIColor {
     switch self {
-    case .inProgress:
-      return .brandPurpleLight
     case .ready:
       return .brandGreenLight
+    case .inProgress:
+      return .brandPurpleLight
     case .worked:
       return .brandRedLight
+    case .opportunity:
+      return .brandYellowLight
     }
   }
   
-  var foregroundColor: UIColor {
+  var color: UIColor {
     switch self {
+    case .ready:
+      return .brandGreen
     case .inProgress:
-      return .brandPurpleDark
+      return .brandPurple
+    case .worked:
+      return .brandRed
+    case .opportunity:
+      return .brandYellow
+    }
+  }
+  
+  var darkColor: UIColor {
+    switch self {
     case .ready:
       return .brandGreenDark
+    case .inProgress:
+      return .brandPurpleDark
     case .worked:
       return .brandRedDark
+    case .opportunity:
+      return .brandYellowDark
     }
   }
 }

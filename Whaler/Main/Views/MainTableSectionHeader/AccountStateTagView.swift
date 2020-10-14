@@ -14,8 +14,8 @@ class AccountStateTagView: UIView {
   
   init(state: WorkState, sidePadding: CGFloat = 22, fontSize: CGFloat = 19) {
     super.init(frame: .zero)
-    let backgroundView = makeBackgroundView(with: state.backgroundColor)
-    let label = makeLabel(with: state.rawValue, fontSize: fontSize, textColor: state.foregroundColor)
+    let backgroundView = makeBackgroundView(with: state.lightColor)
+    let label = makeLabel(with: state.rawValue, fontSize: fontSize, textColor: state.darkColor)
     backgroundView.addSubview(label)
     
     label.centerXAnchor.constraint(equalTo: backgroundView.centerXAnchor).isActive = true

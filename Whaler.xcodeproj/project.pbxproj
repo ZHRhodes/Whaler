@@ -20,6 +20,8 @@
 		141F795F25319E60005F9295 /* Organization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141F795E25319E60005F9295 /* Organization.swift */; };
 		141F796325326EF4005F9295 /* createContactAssignmentEntry.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 141F796225326EF4005F9295 /* createContactAssignmentEntry.graphql */; };
 		141F796925327503005F9295 /* Graph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141F796825327503005F9295 /* Graph.swift */; };
+		141F796E25342974005F9295 /* TokenAddingIntercepter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141F796D25342974005F9295 /* TokenAddingIntercepter.swift */; };
+		141F797225342B0F005F9295 /* LegacyInterceptorProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141F797125342B0F005F9295 /* LegacyInterceptorProvider.swift */; };
 		142EC6A824D6AE01004F7A28 /* AuthenticationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142EC6A724D6AE01004F7A28 /* AuthenticationView.swift */; };
 		1440A20424C947FA00E36853 /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1440A20324C947FA00E36853 /* Contact.swift */; };
 		1443045D24F32FD900D2FBD2 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1443045C24F32FD900D2FBD2 /* String+Extensions.swift */; };
@@ -71,6 +73,7 @@
 		14B037E525073EBA00BA488D /* Tokens.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B037E425073EBA00BA488D /* Tokens.swift */; };
 		14B037EB250749D000BA488D /* AuthenticationInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B037EA250749D000BA488D /* AuthenticationInteractor.swift */; };
 		14B037EE25074B1E00BA488D /* UserRemote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B037ED25074B1E00BA488D /* UserRemote.swift */; };
+		14B8BF662536E536006CE4B5 /* MainCollectionCellHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B8BF652536E536006CE4B5 /* MainCollectionCellHeader.swift */; };
 		14D97D7924DBEC4B00058B09 /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D97D7824DBEC4B00058B09 /* Keychain.swift */; };
 		14D9CA5924B599230030B17A /* AccountStateTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D9CA5824B599230030B17A /* AccountStateTagView.swift */; };
 		14D9CA5B24B599300030B17A /* AccountRowValuesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D9CA5A24B599300030B17A /* AccountRowValuesView.swift */; };
@@ -114,6 +117,8 @@
 		141F795E25319E60005F9295 /* Organization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Organization.swift; sourceTree = "<group>"; };
 		141F796225326EF4005F9295 /* createContactAssignmentEntry.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = createContactAssignmentEntry.graphql; sourceTree = "<group>"; };
 		141F796825327503005F9295 /* Graph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Graph.swift; sourceTree = "<group>"; };
+		141F796D25342974005F9295 /* TokenAddingIntercepter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenAddingIntercepter.swift; sourceTree = "<group>"; };
+		141F797125342B0F005F9295 /* LegacyInterceptorProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegacyInterceptorProvider.swift; sourceTree = "<group>"; };
 		142EC6A724D6AE01004F7A28 /* AuthenticationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationView.swift; sourceTree = "<group>"; };
 		1440A20324C947FA00E36853 /* Contact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contact.swift; sourceTree = "<group>"; };
 		1443045C24F32FD900D2FBD2 /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
@@ -168,6 +173,7 @@
 		14B037E425073EBA00BA488D /* Tokens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tokens.swift; sourceTree = "<group>"; };
 		14B037EA250749D000BA488D /* AuthenticationInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationInteractor.swift; sourceTree = "<group>"; };
 		14B037ED25074B1E00BA488D /* UserRemote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRemote.swift; sourceTree = "<group>"; };
+		14B8BF652536E536006CE4B5 /* MainCollectionCellHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCollectionCellHeader.swift; sourceTree = "<group>"; };
 		14D97D7824DBEC4B00058B09 /* Keychain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keychain.swift; sourceTree = "<group>"; };
 		14D9CA5824B599230030B17A /* AccountStateTagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountStateTagView.swift; sourceTree = "<group>"; };
 		14D9CA5A24B599300030B17A /* AccountRowValuesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountRowValuesView.swift; sourceTree = "<group>"; };
@@ -227,7 +233,6 @@
 				14EF4DE824CD4F3100ED5461 /* ObjectManager.swift */,
 				140AE79F24A9B58300F7705E /* WorkState.swift */,
 				14B037E025049CDE00BA488D /* Grouper.swift */,
-				141F796825327503005F9295 /* Graph.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -294,6 +299,16 @@
 				141F795E25319E60005F9295 /* Organization.swift */,
 			);
 			path = Organization;
+			sourceTree = "<group>";
+		};
+		141F796C2534290B005F9295 /* GraphQL */ = {
+			isa = PBXGroup;
+			children = (
+				141F796825327503005F9295 /* Graph.swift */,
+				141F796D25342974005F9295 /* TokenAddingIntercepter.swift */,
+				141F797125342B0F005F9295 /* LegacyInterceptorProvider.swift */,
+			);
+			path = GraphQL;
 			sourceTree = "<group>";
 		};
 		142EC6A624D6ADDD004F7A28 /* Authentication */ = {
@@ -387,6 +402,7 @@
 		1480800724EA4AD2007EB6D1 /* NetworkLayer */ = {
 			isa = PBXGroup;
 			children = (
+				141F796C2534290B005F9295 /* GraphQL */,
 				1480800824EA4AE8007EB6D1 /* Networker.swift */,
 				1480800A24EA4B32007EB6D1 /* APINetworkInterface.swift */,
 				1480800F24EA4BE7007EB6D1 /* JustNetworker.swift */,
@@ -422,10 +438,10 @@
 				146A6DCA252C486100DA8E85 /* schema.json */,
 				146A6DC3252C439000DA8E85 /* organization.graphql */,
 				141F796225326EF4005F9295 /* createContactAssignmentEntry.graphql */,
-				1480800724EA4AD2007EB6D1 /* NetworkLayer */,
 				14861EF8249F439600D2FA92 /* Whaler.entitlements */,
 				14861ED4249F3DE100D2FA92 /* AppDelegate.swift */,
 				14861ED6249F3DE100D2FA92 /* SceneDelegate.swift */,
+				1480800724EA4AD2007EB6D1 /* NetworkLayer */,
 				140AE7A624A9DF0B00F7705E /* Shared */,
 				144BF56A24D7E64300F231F0 /* RootContainer */,
 				142EC6A624D6ADDD004F7A28 /* Authentication */,
@@ -458,6 +474,7 @@
 			isa = PBXGroup;
 			children = (
 				149F39FF25206AE4001F38BF /* MainCollectionCell.swift */,
+				14B8BF652536E536006CE4B5 /* MainCollectionCellHeader.swift */,
 				149F3A0625206BB7001F38BF /* MainTableCell.swift */,
 				1473C8A72522E6D000A991DA /* AttributeTagView.swift */,
 			);
@@ -685,8 +702,10 @@
 				140AE7A524A9BEC300F7705E /* AccountTableCell.swift in Sources */,
 				14EED67C24F0E5E400660BD1 /* SFLead.swift in Sources */,
 				14861ED5249F3DE100D2FA92 /* AppDelegate.swift in Sources */,
+				14B8BF662536E536006CE4B5 /* MainCollectionCellHeader.swift in Sources */,
 				141F795F25319E60005F9295 /* Organization.swift in Sources */,
 				14861ED7249F3DE100D2FA92 /* SceneDelegate.swift in Sources */,
+				141F797225342B0F005F9295 /* LegacyInterceptorProvider.swift in Sources */,
 				14861EF7249F401300D2FA92 /* CSVParser.swift in Sources */,
 				146C344624EA53690009C68C /* UserDefaultsManaged.swift in Sources */,
 				14FE635324C575CD00F7D30B /* TagView.swift in Sources */,
@@ -729,6 +748,7 @@
 				141F796925327503005F9295 /* Graph.swift in Sources */,
 				14B037E525073EBA00BA488D /* Tokens.swift in Sources */,
 				140AE7A324A9BA6500F7705E /* MainTableSectionHeader.swift in Sources */,
+				141F796E25342974005F9295 /* TokenAddingIntercepter.swift in Sources */,
 				1480801024EA4BE7007EB6D1 /* JustNetworker.swift in Sources */,
 				1443045F24F3356A00D2FBD2 /* SFNewAccessToken.swift in Sources */,
 				149F3A0725206BB7001F38BF /* MainTableCell.swift in Sources */,

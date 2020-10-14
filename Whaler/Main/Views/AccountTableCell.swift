@@ -36,10 +36,10 @@ class AccountTableCell: UITableViewCell {
   private func configureShadowView() {
     shadowView.backgroundColor = .white
     shadowView.clipsToBounds = false
-    shadowView.layer.shadowColor = UIColor(red: 0.77, green: 0.77, blue: 0.77, alpha: 0.21).cgColor
+    shadowView.layer.shadowColor = UIColor(red: 116/255, green: 111/255, blue: 146/255, alpha: 0.30).cgColor
     shadowView.layer.shadowOpacity = 1.0
-    shadowView.layer.shadowRadius = 6.0
-    shadowView.layer.shadowOffset = CGSize(width: 0, height: 2)
+    shadowView.layer.shadowRadius = 15.0
+    shadowView.layer.shadowOffset = CGSize(width: 0, height: 4)
     
     shadowView.translatesAutoresizingMaskIntoConstraints = false
     contentView.addSubview(shadowView)
@@ -98,7 +98,7 @@ class AccountTableCell: UITableViewCell {
       label.textColor = .black
     } else {
       label.text = "—"
-      label.textColor = .textInactive
+      label.textColor = .lightText
     }
 
     return label

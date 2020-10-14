@@ -83,11 +83,11 @@ class CommonTextField: UITextField {
   }
   
   private func configurePlaceholderLabel(with label: String) {
-    attributedPlaceholder = NSAttributedString(string: label, attributes: [NSAttributedString.Key.foregroundColor: UIColor.textInactive])
+    attributedPlaceholder = NSAttributedString(string: label, attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightText])
   }
   
   private func configureFieldNameLabel(with label: String) {
-    fieldNameLabel.textColor = .textInactive
+    fieldNameLabel.textColor = .lightText
     fieldNameLabel.font = UIFont.systemFont(ofSize: 15, weight: .regular)
     fieldNameLabel.text = label
     fieldNameLabel.alpha = 0.0
@@ -103,7 +103,7 @@ class CommonTextField: UITextField {
   
   private func configureUnderlineView() {
     let view = UIView()
-    view.backgroundColor = .textInactive
+    view.backgroundColor = .lightText
     view.translatesAutoresizingMaskIntoConstraints = false
     
     addSubview(view)

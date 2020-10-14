@@ -43,8 +43,8 @@ struct MainViewControllerRepresentable: UIViewControllerRepresentable {
 }
 
 class MainViewController: UIViewController {
-  static let minSize = CGSize(width: 500, height: 500)
-  static let maxSize = CGSize(width: .max, height: .max)
+  static let minSize = CGSize(width: 2155, height: 1217)
+  static let maxSize = CGSize(width: 2155, height: 1217)
   
   private var interactor: MainInteractor!
   private var noDataStackView: UIStackView?
@@ -58,7 +58,7 @@ class MainViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     title = "Accounts"
-    view.backgroundColor = .primaryBackground
+    view.backgroundColor = .white
     
     Lifecycle.loadCurrentUser()
     interactor = MainInteractor()
@@ -189,10 +189,10 @@ class MainViewController: UIViewController {
     collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
     collectionView.delegate = self
     collectionView.dataSource = self
-    collectionView.backgroundColor = .primaryBackground
+    collectionView.backgroundColor = .white
     collectionView.register(MainCollectionCell.self, forCellWithReuseIdentifier: MainCollectionCell.id)
     collectionView.translatesAutoresizingMaskIntoConstraints = false
-    collectionView.contentInset = .init(top: 200, left: 200, bottom: 0, right: 0)
+    collectionView.contentInset = .init(top: 100, left: 40, bottom: 0, right: 0)
 //    collectionView.contentOffset = .init(x: 500, y: 500)
 //    collectionView.setContentOffset(CGPoint(x: 200, y: 200), animated: false)
 
@@ -348,7 +348,7 @@ extension MainViewController: UICollectionViewDelegateFlowLayout {
   func collectionView(_ collectionView: UICollectionView,
                       layout collectionViewLayout: UICollectionViewLayout,
                       sizeForItemAt indexPath: IndexPath) -> CGSize {
-    return CGSize(width: 500, height: collectionView.frame.size.height-200)
+    return CGSize(width: 482, height: collectionView.frame.size.height-100)
     //width: (collectionView.frame.size.width/4) - 20
 //    return CGSize(width: 500, height: 1400)
   }

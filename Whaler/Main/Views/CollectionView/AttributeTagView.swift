@@ -40,7 +40,7 @@ class AttributeTagView: UIView {
     backgroundView.layer.borderWidth = 2.0
     backgroundView.layer.borderColor = borderColor.cgColor
     backgroundView.backgroundColor = backgroundColor
-    backgroundView.layer.cornerRadius = 16.0
+    backgroundView.layer.cornerRadius = 10.0
     backgroundView.heightAnchor.constraint(equalToConstant: (4/7) * AccountStateTagView.height).isActive = true
     backgroundView.translatesAutoresizingMaskIntoConstraints = false
     addSubview(backgroundView)
