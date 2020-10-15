@@ -74,6 +74,7 @@
 		14B037EB250749D000BA488D /* AuthenticationInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B037EA250749D000BA488D /* AuthenticationInteractor.swift */; };
 		14B037EE25074B1E00BA488D /* UserRemote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B037ED25074B1E00BA488D /* UserRemote.swift */; };
 		14B8BF662536E536006CE4B5 /* MainCollectionCellHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B8BF652536E536006CE4B5 /* MainCollectionCellHeader.swift */; };
+		14B8BF7825380A01006CE4B5 /* OpenSans-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 14B8BF7725380A01006CE4B5 /* OpenSans-SemiBold.ttf */; };
 		14D97D7924DBEC4B00058B09 /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D97D7824DBEC4B00058B09 /* Keychain.swift */; };
 		14D9CA5924B599230030B17A /* AccountStateTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D9CA5824B599230030B17A /* AccountStateTagView.swift */; };
 		14D9CA5B24B599300030B17A /* AccountRowValuesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D9CA5A24B599300030B17A /* AccountRowValuesView.swift */; };
@@ -174,6 +175,7 @@
 		14B037EA250749D000BA488D /* AuthenticationInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationInteractor.swift; sourceTree = "<group>"; };
 		14B037ED25074B1E00BA488D /* UserRemote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRemote.swift; sourceTree = "<group>"; };
 		14B8BF652536E536006CE4B5 /* MainCollectionCellHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCollectionCellHeader.swift; sourceTree = "<group>"; };
+		14B8BF7725380A01006CE4B5 /* OpenSans-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-SemiBold.ttf"; sourceTree = "<group>"; };
 		14D97D7824DBEC4B00058B09 /* Keychain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keychain.swift; sourceTree = "<group>"; };
 		14D9CA5824B599230030B17A /* AccountStateTagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountStateTagView.swift; sourceTree = "<group>"; };
 		14D9CA5A24B599300030B17A /* AccountRowValuesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountRowValuesView.swift; sourceTree = "<group>"; };
@@ -528,6 +530,7 @@
 			children = (
 				14F4090324C6A09E00F405BC /* OpenSans-Regular.ttf */,
 				14F4090524C6A0C300F405BC /* OpenSans-Bold.ttf */,
+				14B8BF7725380A01006CE4B5 /* OpenSans-SemiBold.ttf */,
 			);
 			path = Fonts;
 			sourceTree = "<group>";
@@ -638,6 +641,7 @@
 			files = (
 				14F4090424C6A09E00F405BC /* OpenSans-Regular.ttf in Resources */,
 				146A6DCB252C486100DA8E85 /* schema.json in Resources */,
+				14B8BF7825380A01006CE4B5 /* OpenSans-SemiBold.ttf in Resources */,
 				14861EE1249F3DE400D2FA92 /* LaunchScreen.storyboard in Resources */,
 				14F4090624C6A0C300F405BC /* OpenSans-Bold.ttf in Resources */,
 				14ECDD1524CAB819006B4550 /* trix-master in Resources */,
@@ -926,7 +930,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.3;
+				MARKETING_VERSION = 0.4;
 				PRODUCT_BUNDLE_IDENTIFIER = Whaler.catalyst.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -954,7 +958,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.3;
+				MARKETING_VERSION = 0.4;
 				PRODUCT_BUNDLE_IDENTIFIER = Whaler.catalyst.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

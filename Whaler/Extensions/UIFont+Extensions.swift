@@ -8,11 +8,12 @@
 
 let regularFontName = "OpenSans-Regular"
 let boldFontName = "OpenSans-Bold"
+let semiboldFontName = "OpenSans-SemiBold"
 
 import UIKit
 
 enum FontWeight {
-  case regular, bold
+  case regular, bold, semibold
 }
 
 extension UIFont {
@@ -22,6 +23,8 @@ extension UIFont {
       return UIFont(name: regularFontName, size: size)!
     case .bold:
       return UIFont(name: boldFontName, size: size)!
+    case .semibold:
+      return UIFont(name: semiboldFontName, size: size)!
     }
   }
 }

@@ -59,9 +59,9 @@ class MainTableCell: UITableViewCell {
     shadowView.layer.cornerRadius = 12.0
     shadowView.clipsToBounds = false
     
-    shadowView.layer.shadowColor = UIColor(red: 116/255, green: 111/255, blue: 146/255, alpha: 0.30).cgColor
+    shadowView.layer.shadowColor = UIColor(red: 116/255, green: 111/255, blue: 146/255, alpha: 0.35).cgColor
     shadowView.layer.shadowOpacity = 1.0
-    shadowView.layer.shadowRadius = 15.0
+    shadowView.layer.shadowRadius = 10.0
     shadowView.layer.shadowOffset = CGSize(width: 0, height: 4)
     
     shadowView.translatesAutoresizingMaskIntoConstraints = false
@@ -137,7 +137,7 @@ class MainTableCell: UITableViewCell {
     let characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
     let title = "\(characters.randomElement()!)\(characters.randomElement()!)"
     assignedButton?.setTitle(title, for: .normal)
-    assignedButton?.titleLabel?.font = .openSans(weight: .regular, size: 18)
+    assignedButton?.titleLabel?.font = .openSans(weight: .bold, size: 18)
     assignedButton?.setTitleColor(.white, for: .normal)
     
     containerView.addSubview(assignedButton!)

@@ -19,7 +19,7 @@ struct Attribute {
 class AttributeTagView: UIView {
   static let height: CGFloat = 30
   
-  init(attribute: Attribute, sidePadding: CGFloat = 12, fontSize: CGFloat = 15) {
+  init(attribute: Attribute, sidePadding: CGFloat = 12, fontSize: CGFloat = 18) {
     super.init(frame: .zero)
     let backgroundView = makeBackgroundView(backgroundColor: attribute.backgroundColor, borderColor: attribute.borderColor)
     let label = makeLabel(with: attribute.text, fontSize: fontSize, textColor: attribute.foregroundColor)
@@ -53,7 +53,7 @@ class AttributeTagView: UIView {
     let label = UILabel()
     label.text = text
     label.textColor = textColor
-    label.font = UIFont.openSans(weight: .regular, size: fontSize)
+    label.font = UIFont.openSans(weight: .semibold, size: fontSize)
     label.translatesAutoresizingMaskIntoConstraints = false
     return label
   }
