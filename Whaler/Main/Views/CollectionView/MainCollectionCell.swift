@@ -179,9 +179,11 @@ extension MainCollectionCell: UITableViewDropDelegate {
               self.tableView.beginUpdates()
               self.removeSourceTableData(localContext: coordinator.session.localDragSession?.localContext)
               let state = WorkState.allCases[self.section ?? 0]
+              account.state = state
               self.dataSource?.accountGrouper.insert(account, to: state, at: destinationIndexPath.row)
               self.tableView.insertRows(at: [destinationIndexPath], with: .fade)
               self.tableView.endUpdates()
+              ObjectManager.save(account)
             }
           case (nil, nil):
             // Insert data from a table to another table
@@ -189,10 +191,12 @@ extension MainCollectionCell: UITableViewDropDelegate {
               self.tableView.beginUpdates()
               self.removeSourceTableData(localContext: coordinator.session.localDragSession?.localContext)
               let state = WorkState.allCases[self.section ?? 0]
+              account.state = state
               self.dataSource?.accountGrouper.append(account, to: state)
               let count = self.dataSource?.accountGrouper[state].count ?? 1
               self.tableView.insertRows(at: [IndexPath(row: count - 1, section: 0)], with: .fade)
               self.tableView.endUpdates()
+              ObjectManager.save(account)
             }
           default: break
         }

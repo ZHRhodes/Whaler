@@ -45,17 +45,6 @@ class MainInteractor: MainInteractorData {
     }
   }
   
-  func moveAccount(from fromPath: IndexPath, to toPath: IndexPath) {
-    let fromState = accountStates[fromPath.section]
-    guard let accountBeingMoved = accountGrouper.remove(from: fromState, at: fromPath.row) else { return }
-
-    let toState = accountStates[toPath.section]
-    accountBeingMoved.state = toState
-    accountGrouper.insert(accountBeingMoved, to: toState, at: toPath.row)
-    
-    ObjectManager.save(accountBeingMoved) //Move, or make this async, or both
-  }
-  
   func retrieveAccounts() {
     guard let userId = Lifecycle.currentUser?.id else { return }
     let predicate = NSPredicate(format: "ownerUserId == %d", userId)
