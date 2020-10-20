@@ -1,4 +1,12 @@
 {
+  "9a8f9cb47522cab379aae87d2311e07a33f971773240297ea9101f1e5c2c7135": {
+    "name": "createAccount",
+    "source": "mutation createAccount($name: String!, $owner: String!, $industry: String, $description: String, $numberOfEmployees: String, $annualRevenue: String, $billingCity: String, $billingState: String, $phone: String, $website: String, $type: String, $state: String, $notes: String) {\n  createAccount(input: {name: $name, owner: $owner, industry: $industry, description: $description, numberOfEmployees: $numberOfEmployees, annualRevenue: $annualRevenue, billingCity: $billingCity, billingState: $billingState, phone: $phone, website: $website, type: $type, state: $state, notes: $notes}) {\n    __typename\n    id\n    createdAt\n    updatedAt\n    deletedAt\n    name\n    owner\n    industry\n    description\n    numberOfEmployees\n    annualRevenue\n    billingCity\n    billingState\n    phone\n    website\n    type\n    state\n    notes\n  }\n}"
+  },
+  "61be1fa096f0401eaf17b6868e07898a4273b794bb744854de51d3c4e795257c": {
+    "name": "createContact",
+    "source": "mutation createContact($firstName: String!, $lastName: String!, $jobTitle: String, $state: String, $email: String, $phone: String, $accountID: String) {\n  createContact(input: {firstName: $firstName, lastName: $lastName, jobTitle: $jobTitle, state: $state, email: $email, phone: $phone, accountID: $accountID}) {\n    __typename\n    id\n    createdAt\n    updatedAt\n    deletedAt\n    firstName\n    lastName\n    jobTitle\n    state\n    email\n    phone\n    accountID\n  }\n}"
+  },
   "61f0c1808dbd75d3d95de49951c6508d84cf82b3f6f83774a50026b416fffb87": {
     "name": "createContactAssignmentEntry",
     "source": "mutation createContactAssignmentEntry($contactId: Int!, $assignedBy: String!, $assignedTo: String) {\n  createContactAssignmentEntry(input: {contactId: $contactId, assignedBy: $assignedBy, assignedTo: $assignedTo}) {\n    __typename\n    id\n    createdAt\n    contactId\n    assignedBy\n    assignedTo\n  }\n}"

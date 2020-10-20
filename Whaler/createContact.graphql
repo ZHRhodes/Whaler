@@ -1,0 +1,15 @@
+mutation createContact($firstName: String!, $lastName: String!, $jobTitle: String, $state: String, $email: String, $phone: String, $accountID: String) {
+  createContact(input: {firstName: $firstName, lastName: $lastName, jobTitle: $jobTitle, state: $state, email: $email, phone: $phone, accountID: $accountID}) {
+    id
+    createdAt
+    updatedAt
+    deletedAt
+    firstName
+    lastName
+    jobTitle
+    state
+    email
+    phone
+    accountID
+  }
+}
