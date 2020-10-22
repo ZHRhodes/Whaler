@@ -7,12 +7,20 @@
     "name": "createContact",
     "source": "mutation createContact($firstName: String!, $lastName: String!, $jobTitle: String, $state: String, $email: String, $phone: String, $accountID: String) {\n  createContact(input: {firstName: $firstName, lastName: $lastName, jobTitle: $jobTitle, state: $state, email: $email, phone: $phone, accountID: $accountID}) {\n    __typename\n    id\n    createdAt\n    updatedAt\n    deletedAt\n    firstName\n    lastName\n    jobTitle\n    state\n    email\n    phone\n    accountID\n  }\n}"
   },
-  "61f0c1808dbd75d3d95de49951c6508d84cf82b3f6f83774a50026b416fffb87": {
+  "676045ca69f0934ebeed857e54ba7291f2247c8a1a26490a7e241230f061c2d2": {
     "name": "createContactAssignmentEntry",
-    "source": "mutation createContactAssignmentEntry($contactId: Int!, $assignedBy: String!, $assignedTo: String) {\n  createContactAssignmentEntry(input: {contactId: $contactId, assignedBy: $assignedBy, assignedTo: $assignedTo}) {\n    __typename\n    id\n    createdAt\n    contactId\n    assignedBy\n    assignedTo\n  }\n}"
+    "source": "mutation createContactAssignmentEntry($contactId: ID!, $assignedBy: String!, $assignedTo: String) {\n  createContactAssignmentEntry(input: {contactId: $contactId, assignedBy: $assignedBy, assignedTo: $assignedTo}) {\n    __typename\n    id\n    createdAt\n    contactId\n    assignedBy\n    assignedTo\n  }\n}"
   },
   "7f84dfc864fba0ea99d889df782636ef27349f211ac9bc38919d2439fb415123": {
     "name": "fetchOrganization",
     "source": "query fetchOrganization {\n  organization {\n    __typename\n    id\n    name\n    users {\n      __typename\n      firstName\n      lastName\n    }\n  }\n}"
+  },
+  "a3919a91c37bbb4644c3deca9b107edd0fb7a1c48c2e8678cdc9bd19c5c0a0fd": {
+    "name": "saveAccounts",
+    "source": "mutation saveAccounts($input: [NewAccount!]!) {\n  saveAccounts(input: $input) {\n    __typename\n    id\n    name\n    owner\n    salesforceID\n    industry\n    description\n    numberOfEmployees\n    annualRevenue\n    billingCity\n    billingState\n    phone\n    website\n    type\n    state\n    notes\n  }\n}"
+  },
+  "94a4ebe7e1bda140638098c4c4cce1b38a5747e93524f4866270eb0c84746cc8": {
+    "name": "saveContacts",
+    "source": "mutation saveContacts($input: [NewContact!]!) {\n  saveContacts(input: $input) {\n    __typename\n    id\n    firstName\n    lastName\n    jobTitle\n    email\n    salesforceID\n    accountID\n  }\n}"
   }
 }

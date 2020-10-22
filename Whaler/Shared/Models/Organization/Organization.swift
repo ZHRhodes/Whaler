@@ -9,7 +9,7 @@
 import Foundation
 
 struct Organization: Codable {
-  let id: Int
+  let id: String
   var name: String = ""
   var users: [User] = []
 }

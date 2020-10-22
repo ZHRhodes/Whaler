@@ -22,10 +22,12 @@ class SFHelper {
     return sfAccounts.map(Account.init)
   }
   
-  static func queryContacts(accountId: String?, accountName: String?) -> [Contact] {
+  static func queryContacts(accountId: String,
+                            salesforceAccountId: String,
+                            accountName: String?) -> [Contact] {
     let sfContacts: [SF.Contact]
     do {
-       sfContacts = try SF.query("SELECT id, accountId, firstName, lastName, title, phone, email from Contact WHERE AccountId = '\(accountId ?? "")'")
+       sfContacts = try SF.query("SELECT id, accountId, firstName, lastName, title, phone, email from Contact WHERE AccountId = '\(salesforceAccountId)'")
     } catch let error {
       print(error)
       sfContacts = []
@@ -39,9 +41,11 @@ class SFHelper {
       sfLeads = []
     }
     
-    var contacts = sfLeads.map { Contact(sfLead: $0, accountId: accountId ?? "") }
+    var contacts = sfLeads.map { Contact(sfLead: $0,
+                                         accountId: accountId,
+                                         salesforceAccountId: salesforceAccountId) }
     
-    contacts.append(contentsOf: sfContacts.map(Contact.init))
+    contacts.append(contentsOf: sfContacts.map { Contact(sfContact: $0, accountId: accountId) })
     return contacts
   }
   

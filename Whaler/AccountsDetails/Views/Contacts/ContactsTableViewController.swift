@@ -171,11 +171,11 @@ extension ContactsTableViewController: TablePopoverViewControllerDelegate {
     guard let contact = contactBeingAssigned,
           let currentUser = Lifecycle.currentUser,
           let selectedUser = item as? User else { return }
-    let mutation = CreateContactAssignmentEntryMutation(contactId: Int(contact.id)!, //TEMP
+    let mutation = CreateContactAssignmentEntryMutation(contactId: contact.id, //TEMP
                                                         assignedBy: String(currentUser.id),
                                                         assignedTo: String(selectedUser.id))
     Graph.shared.apollo.perform(mutation: mutation) { result in
-      print("here")
+      print(result)
     }
 //    let input = CreateContactAssignmentEntryMutation
 //    let mutation = CreateContactAssignmentEntryMutation()

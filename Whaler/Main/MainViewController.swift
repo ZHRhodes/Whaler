@@ -62,6 +62,7 @@ class MainViewController: UIViewController {
     
     Lifecycle.loadCurrentUser()
     interactor = MainInteractor()
+    interactor.viewController = self
     
     if interactor.hasSalesforceTokens {
       //present loading indicator
@@ -282,6 +283,9 @@ class MainViewController: UIViewController {
   @objc
   private func reloadTapped() {
     interactor.fetchAccountsFromSalesforce()
+  }
+  
+  func reloadCollection() {
     collectionView.reloadData()
   }
 

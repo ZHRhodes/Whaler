@@ -69,7 +69,7 @@ class ContactRowView: UIView {
     stackView?.removeFromSuperview()
     stackView = UIStackView()
     let valuesToShow = [\Contact.fullName,
-                        \Contact.title]
+                        \Contact.jobTitle]
     valuesToShow.forEach { path in
       let text = contact[keyPath: path]
       stackView.addArrangedSubview(makeColumn(text: text))

@@ -12,14 +12,15 @@ import CoreData
 
 final class Account: NSObject, Codable {
   private enum CodingKeys: String, CodingKey {
-    case id, owner, name, industry, employees, annualRevenue, billingCity, billingState, phone, website, type, accountDescription, state, contactGrouper, notes
+    case id, owner, name, salesforceID, industry, numberOfEmployees, annualRevenue, billingCity, billingState, phone, website, type, accountDescription, state, contactGrouper, notes
   }
   
   let id: String
   let owner: String
   let name: String
+  var salesforceID: String?
   let industry: String?
-  let employees: String?
+  let numberOfEmployees: String?
   let annualRevenue: String?
   let billingCity: String?
   let billingState: String?
@@ -40,8 +41,9 @@ final class Account: NSObject, Codable {
     id = ""
     owner = ""
     name = ""
+    salesforceID = ""
     industry = ""
-    employees = ""
+    numberOfEmployees = ""
     annualRevenue = ""
     billingCity = ""
     billingState = ""
@@ -52,12 +54,13 @@ final class Account: NSObject, Codable {
     super.init()
   }
   
-  init(id: String, owner: String, name: String, industry: String?, employees: String?, annualRevenue: String?, billingCity: String?, billingState: String?, phone: String?, website: String?, type: String?, accountDescription: String?, state: WorkState?, contactGrouper: Grouper<WorkState, Contact>? = nil, notes: String?) {
+  init(id: String, owner: String, name: String, salesforceID: String?, industry: String?, numberOfEmployees: String?, annualRevenue: String?, billingCity: String?, billingState: String?, phone: String?, website: String?, type: String?, accountDescription: String?, state: WorkState?, contactGrouper: Grouper<WorkState, Contact>? = nil, notes: String?) {
     self.id = id
     self.owner = owner
     self.name = name
+    self.salesforceID = salesforceID
     self.industry = industry
-    self.employees = employees
+    self.numberOfEmployees = numberOfEmployees
     self.annualRevenue = annualRevenue
     self.billingCity = billingCity
     self.billingState = billingState
@@ -72,11 +75,12 @@ final class Account: NSObject, Codable {
   }
   
   init(dictionary: Dictionary<String, String>) {
-    id = dictionary["Account ID"] ?? ""
+    id = "" //will this mess up local caching?
+    salesforceID = dictionary["Account ID"] ?? ""
     owner = dictionary["Account Owner"] ?? ""
     name = dictionary["Account Name"] ?? ""
     industry = dictionary["Industry"]
-    employees = dictionary["Employees"]
+    numberOfEmployees = dictionary["Employees"]
     annualRevenue = dictionary["Annual Revenue"]
     billingCity = dictionary["Billing City"]
     billingState = dictionary["Billing State/Province"]
@@ -87,11 +91,12 @@ final class Account: NSObject, Codable {
   }
   
   init(sfAccount: SF.Account) {
-    id = sfAccount.Id ?? ""
+    id = ""
+    salesforceID = sfAccount.Id ?? ""
     owner = sfAccount.OwnerId ?? ""
     name = sfAccount.Name ?? ""
     industry = sfAccount.Industry
-    employees = String(sfAccount.NumberOfEmployees ?? 0)
+    numberOfEmployees = String(sfAccount.NumberOfEmployees ?? 0)
     annualRevenue = String(sfAccount.AnnualRevenue ?? 0)
     billingCity = sfAccount.BillingCity
     billingState = sfAccount.BillingState
@@ -127,8 +132,9 @@ extension Account: ManagedObject {
     let id = managedObject.value(forKey: CodingKeys.id.rawValue) as? String ?? ""
     let owner = managedObject.value(forKey: CodingKeys.owner.rawValue) as? String ?? ""
     let name = managedObject.value(forKey: CodingKeys.name.rawValue) as? String ?? ""
+    let salesforceID = managedObject.value(forKey: CodingKeys.salesforceID.rawValue) as? String ?? ""
     let industry = managedObject.value(forKey: CodingKeys.industry.rawValue) as? String
-    let employees = managedObject.value(forKey: CodingKeys.employees.rawValue) as? String
+    let numberOfEmployees = managedObject.value(forKey: CodingKeys.numberOfEmployees.rawValue) as? String
     let annualRevenue = managedObject.value(forKey: CodingKeys.annualRevenue.rawValue) as? String
     let billingCity = managedObject.value(forKey: CodingKeys.billingCity.rawValue) as? String
     let billingState = managedObject.value(forKey: CodingKeys.billingState.rawValue) as? String
@@ -139,15 +145,16 @@ extension Account: ManagedObject {
     let stateString = managedObject.value(forKey: CodingKeys.state.rawValue) as? String ?? ""
     let state = WorkState(rawValue: stateString) ?? .ready
     let notes = managedObject.value(forKey: CodingKeys.notes.rawValue) as? String ?? ""
-    self.init(id: id, owner: owner, name: name, industry: industry, employees: employees, annualRevenue: annualRevenue, billingCity: billingCity, billingState: billingState, phone: phone, website: website, type: type, accountDescription: accountDescription, state: state, notes: notes)
+    self.init(id: id, owner: owner, name: name, salesforceID: salesforceID, industry: industry, numberOfEmployees: numberOfEmployees, annualRevenue: annualRevenue, billingCity: billingCity, billingState: billingState, phone: phone, website: website, type: type, accountDescription: accountDescription, state: state, notes: notes)
   }
   
   func setProperties(in managedObject: NSManagedObject) {
     managedObject.setValue(id, forKey: CodingKeys.id.rawValue)
     managedObject.setValue(owner, forKey: CodingKeys.owner.rawValue)
     managedObject.setValue(name, forKey: CodingKeys.name.rawValue)
+    managedObject.setValue(salesforceID, forKey: CodingKeys.salesforceID.rawValue)
     managedObject.setValue(industry, forKey: CodingKeys.industry.rawValue)
-    managedObject.setValue(employees, forKey: CodingKeys.employees.rawValue)
+    managedObject.setValue(numberOfEmployees, forKey: CodingKeys.numberOfEmployees.rawValue)
     managedObject.setValue(annualRevenue, forKey: CodingKeys.annualRevenue.rawValue)
     managedObject.setValue(billingCity, forKey: CodingKeys.billingCity.rawValue)
     managedObject.setValue(billingState, forKey: CodingKeys.billingState.rawValue)
@@ -200,5 +207,27 @@ extension Account: NSItemProviderReading {
 extension Account {
   override var description: String {
     return "<Whaler.Account: \(name)>"
+  }
+}
+
+extension Account {
+  convenience init(savedAccount: SaveAccountsMutation.Data.SaveAccount) {
+    let state = savedAccount.state.map(WorkState.init) ?? WorkState.ready
+    self.init(id: savedAccount.id,
+              owner: savedAccount.owner,
+              name: savedAccount.name,
+              salesforceID: savedAccount.salesforceId,
+              industry: savedAccount.industry,
+              numberOfEmployees: savedAccount.numberOfEmployees,
+              annualRevenue: savedAccount.annualRevenue,
+              billingCity: savedAccount.billingCity,
+              billingState: savedAccount.billingState,
+              phone: savedAccount.phone,
+              website: savedAccount.website,
+              type: savedAccount.type,
+              accountDescription: savedAccount.description,
+              state: state,
+              contactGrouper: nil,
+              notes: savedAccount.notes)
   }
 }

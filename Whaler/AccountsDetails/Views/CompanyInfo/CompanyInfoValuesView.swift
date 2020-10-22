@@ -17,7 +17,7 @@ struct CompanyInfoValuesView: View {
         HStack(spacing: 60) {
           TitleValueView(title: "INDUSTRY", value: account.industry ?? "N/A")
           Spacer()
-          TitleValueView(title: "HEADCOUNT", value: account.employees ?? "N/A")
+          TitleValueView(title: "HEADCOUNT", value: account.numberOfEmployees ?? "N/A")
           Spacer()
           TitleValueView(title: "REVENUE", value: account.annualRevenue ?? "N/A")
           Spacer()

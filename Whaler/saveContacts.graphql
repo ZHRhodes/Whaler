@@ -1,0 +1,11 @@
+mutation saveContacts($input: [NewContact!]!) {
+  saveContacts(input: $input) {
+    id
+    firstName
+    lastName
+    jobTitle
+    email
+    salesforceID
+    accountID
+  }
+}

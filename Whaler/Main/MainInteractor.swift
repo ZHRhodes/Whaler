@@ -17,6 +17,7 @@ class MainInteractor: MainInteractorData {
   lazy var accountGrouper = Grouper<WorkState, Account>(groups: self.accountStates)
   lazy var accountStates = WorkState.allCases
   var accountBeingAssigned: Account?
+  weak var viewController: MainViewController?
   
   func hasAccounts() -> Bool {
     return !accountGrouper.hasNoValues
@@ -66,11 +67,27 @@ class MainInteractor: MainInteractorData {
   
   func retrieveAndAssignContacts(for account: Account) {
     account.resetContacts()
-    let retrievedContacts = SFHelper.queryContacts(accountId: account.id, accountName: account.name)
+    var retrievedContacts = [Contact]()
+    if let salesforceId = account.salesforceID {
+      retrievedContacts = SFHelper.queryContacts(accountId: account.id,
+                                                     salesforceAccountId: salesforceId,
+                                                     accountName: account.name)
+    }
     let localContacts = ObjectManager.retrieveAll(ofType: Contact.self)
     reconcileContactsFromSalesforce(localContacts: localContacts, salesforceContacts: retrievedContacts)
     retrievedContacts.forEach { contact in
       account.contactGrouper.append(contact, to: contact.state ?? .ready)
+    }
+    DispatchQueue.global(qos: .utility).async {
+      let input = retrievedContacts.map { NewContact(id: $0.id,
+                                                     firstName: $0.firstName,
+                                                     lastName: $0.lastName,
+                                                     jobTitle: $0.jobTitle,
+                                                     state: $0.state?.rawValue,
+                                                     email: $0.email,
+                                                     phone: $0.phone,
+                                                     accountId: $0.accountID)}
+      Graph.shared.apollo.perform(mutation: SaveContactsMutation(input: input))
     }
   }
   
@@ -108,7 +125,27 @@ class MainInteractor: MainInteractorData {
   func fetchAccountsFromSalesforce() {
     let accountsfromSalesforce = SFHelper.queryAccounts()
     reconcileAccountsFromSalesforce(localAccounts: accountGrouper.values, salesforceAccounts: accountsfromSalesforce)
-    setAccounts(accountsfromSalesforce)
+    let input = accountsfromSalesforce.map { NewAccount(id: $0.id,
+                                                        salesforceId: $0.salesforceID,
+                                                        name: $0.name,
+                                                        owner: $0.owner,
+                                                        industry: $0.industry,
+                                                        description: $0.description,
+                                                        numberOfEmployees: $0.numberOfEmployees,
+                                                        annualRevenue: $0.annualRevenue,
+                                                        billingCity: $0.billingCity,
+                                                        billingState: $0.billingState,
+                                                        phone: $0.phone,
+                                                        website: $0.website,
+                                                        type: $0.type,
+                                                        state: $0.state?.rawValue,
+                                                        notes: $0.notes) }
+    Graph.shared.apollo.perform(mutation: SaveAccountsMutation(input: input)) { [weak self] result in
+      guard let data = try? result.get().data else { return }
+      let accounts = data.saveAccounts.map(Account.init)
+      self?.setAccounts(accounts)
+      self?.viewController?.reloadCollection()
+    }
     print(accountGrouper)
   }
   

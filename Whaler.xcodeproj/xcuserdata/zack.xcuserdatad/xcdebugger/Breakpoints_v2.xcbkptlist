@@ -50,49 +50,17 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "06CB5092-9670-4B62-BD91-4FABCE60705B"
+            uuid = "F438BF43-A674-4F44-852D-070A6D1E4261"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Whaler/Main/MainInteractor.swift"
+            filePath = "Whaler/Shared/SFHelper.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "62"
-            endingLineNumber = "62"
-            landmarkName = "setAccounts(_:)"
+            startingLineNumber = "49"
+            endingLineNumber = "49"
+            landmarkName = "queryContacts(accountId:salesforceAccountId:accountName:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "06CB5092-9670-4B62-BD91-4FABCE60705B - d08c7f7c28ed77a2"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Whaler.MainInteractor.setAccounts(Swift.Array&lt;Whaler.Account&gt;) -&gt; ()"
-                  moduleName = "Whaler"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/zack/Documents/Development/WhalerNew/Whaler/Whaler/Main/MainInteractor.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "73"
-                  endingLineNumber = "73"
-                  offsetFromSymbolStart = "163">
-               </Location>
-               <Location
-                  uuid = "06CB5092-9670-4B62-BD91-4FABCE60705B - ef0fa2e894a9f722"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Whaler.Account) -&gt; () in Whaler.MainInteractor.setAccounts(Swift.Array&lt;Whaler.Account&gt;) -&gt; ()"
-                  moduleName = "Whaler"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/zack/Documents/Development/WhalerNew/Whaler/Whaler/Main/MainInteractor.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "74"
-                  endingLineNumber = "74"
-                  offsetFromSymbolStart = "125">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

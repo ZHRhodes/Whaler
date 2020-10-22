@@ -11,12 +11,12 @@ import UIKit
 
 
 struct User: Codable {
-  let id: Int
+  let id: String
   let email: String
   let firstName: String
   let lastName: String
   let isAdmin: Bool
-  let organizationId: UInt
+  let organizationId: String
 //  let workspaces: [WorkspaceRemote]?
   let organization: Organization?
 }
