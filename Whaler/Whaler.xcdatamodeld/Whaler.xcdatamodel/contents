@@ -15,6 +15,7 @@
         <attribute name="ownerUserId" optional="YES" attributeType="String"/>
         <attribute name="phone" optional="YES" attributeType="String"/>
         <attribute name="salesforceID" optional="YES" attributeType="String"/>
+        <attribute name="salesforceOwnerID" optional="YES" attributeType="String"/>
         <attribute name="state" optional="YES" attributeType="String"/>
         <attribute name="type" optional="YES" attributeType="String"/>
         <attribute name="website" optional="YES" attributeType="String"/>
@@ -33,7 +34,7 @@
         <attribute name="state" optional="YES" attributeType="String"/>
     </entity>
     <elements>
-        <element name="AccountEntity" positionX="-63" positionY="-18" width="128" height="298"/>
+        <element name="AccountEntity" positionX="-63" positionY="-18" width="128" height="313"/>
         <element name="ContactEntity" positionX="-63" positionY="-27" width="128" height="208"/>
     </elements>
 </model>

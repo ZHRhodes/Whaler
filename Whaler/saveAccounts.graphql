@@ -2,8 +2,9 @@ mutation saveAccounts($input: [NewAccount!]!) {
   saveAccounts(input: $input) {
     id
     name
-    owner
+    ownerID
     salesforceID
+    salesforceOwnerID
     industry
     description
     numberOfEmployees

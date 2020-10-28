@@ -1,11 +1,11 @@
-mutation createAccount($name: String!, $owner: String!, $industry: String, $description: String, $numberOfEmployees: String, $annualRevenue: String, $billingCity: String, $billingState: String, $phone: String, $website: String, $type: String, $state: String, $notes: String) {
-  createAccount(input: {name: $name, owner: $owner, industry: $industry, description: $description, numberOfEmployees: $numberOfEmployees, annualRevenue: $annualRevenue, billingCity: $billingCity, billingState: $billingState, phone: $phone, website: $website, type: $type, state: $state, notes: $notes}) {
+mutation createAccount($name: String!, $ownerID: String!, $industry: String, $description: String, $numberOfEmployees: String, $annualRevenue: String, $billingCity: String, $billingState: String, $phone: String, $website: String, $type: String, $state: String, $notes: String) {
+  createAccount(input: {name: $name, ownerID: $ownerID, industry: $industry, description: $description, numberOfEmployees: $numberOfEmployees, annualRevenue: $annualRevenue, billingCity: $billingCity, billingState: $billingState, phone: $phone, website: $website, type: $type, state: $state, notes: $notes}) {
     id
     createdAt
     updatedAt
     deletedAt
     name
-    owner
+    ownerID
     industry
     description
     numberOfEmployees

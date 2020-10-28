@@ -128,7 +128,7 @@ class MainInteractor: MainInteractorData {
     let input = accountsfromSalesforce.map { NewAccount(id: $0.id,
                                                         salesforceId: $0.salesforceID,
                                                         name: $0.name,
-                                                        owner: $0.owner,
+                                                        ownerId: $0.ownerID,
                                                         industry: $0.industry,
                                                         description: $0.description,
                                                         numberOfEmployees: $0.numberOfEmployees,
@@ -145,6 +145,9 @@ class MainInteractor: MainInteractorData {
       let accounts = data.saveAccounts.map(Account.init)
       self?.setAccounts(accounts)
       self?.viewController?.reloadCollection()
+      AccountsWorker().fetchAccountsFromAPI { (accounts) in
+        print(accounts)
+      }
     }
     print(accountGrouper)
   }

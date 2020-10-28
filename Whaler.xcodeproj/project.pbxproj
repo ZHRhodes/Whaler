@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		14018152254643AF00246BDA /* AccountsWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14018151254643AF00246BDA /* AccountsWorker.swift */; };
 		14025FCA24D6BF5D00408379 /* AuthenticationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14025FC924D6BF5D00408379 /* AuthenticationViewController.swift */; };
 		14086913253E85DE007324A4 /* createAccount.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 14086912253E85DE007324A4 /* createAccount.graphql */; };
 		14086917253ED084007324A4 /* createContact.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 14086916253ED084007324A4 /* createContact.graphql */; };
@@ -32,6 +33,7 @@
 		144AECDA24D26658009625BE /* ContactRowViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144AECD924D26658009625BE /* ContactRowViewCell.swift */; };
 		144BF56C24D7E66E00F231F0 /* RootContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144BF56B24D7E66E00F231F0 /* RootContainerViewController.swift */; };
 		144FA6BD24C2C0C500506F15 /* CompanyInfoHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144FA6BC24C2C0C500506F15 /* CompanyInfoHeaderView.swift */; };
+		145146E725495FC40090D3E2 /* accounts.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 145146E625495FC40090D3E2 /* accounts.graphql */; };
 		1454743B250D904700257A89 /* UIViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1454743A250D904700257A89 /* UIViewController+Extensions.swift */; };
 		1454743D250D93DC00257A89 /* SFSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1454743C250D93DC00257A89 /* SFSession.swift */; };
 		145A376A24C588DF0081F9DB /* NotesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145A376924C588DF0081F9DB /* NotesView.swift */; };
@@ -109,6 +111,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		14018151254643AF00246BDA /* AccountsWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsWorker.swift; sourceTree = "<group>"; };
 		14025FC924D6BF5D00408379 /* AuthenticationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationViewController.swift; sourceTree = "<group>"; };
 		14086912253E85DE007324A4 /* createAccount.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = createAccount.graphql; sourceTree = "<group>"; };
 		14086916253ED084007324A4 /* createContact.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = createContact.graphql; sourceTree = "<group>"; };
@@ -134,6 +137,7 @@
 		144AECD924D26658009625BE /* ContactRowViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactRowViewCell.swift; sourceTree = "<group>"; };
 		144BF56B24D7E66E00F231F0 /* RootContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootContainerViewController.swift; sourceTree = "<group>"; };
 		144FA6BC24C2C0C500506F15 /* CompanyInfoHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyInfoHeaderView.swift; sourceTree = "<group>"; };
+		145146E625495FC40090D3E2 /* accounts.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = accounts.graphql; sourceTree = "<group>"; };
 		1454743A250D904700257A89 /* UIViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extensions.swift"; sourceTree = "<group>"; };
 		1454743C250D93DC00257A89 /* SFSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFSession.swift; sourceTree = "<group>"; };
 		145A376924C588DF0081F9DB /* NotesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesView.swift; sourceTree = "<group>"; };
@@ -229,6 +233,7 @@
 				140AE7A124A9BA4D00F7705E /* Views */,
 				14861ED8249F3DE100D2FA92 /* MainViewController.swift */,
 				140AE79524A9AA0B00F7705E /* MainInteractor.swift */,
+				14018151254643AF00246BDA /* AccountsWorker.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -402,8 +407,8 @@
 			isa = PBXGroup;
 			children = (
 				144AECD824D26646009625BE /* Cell */,
-				146C35DA24C56A0100DBCA23 /* ContactsTableView.swift */,
 				14FE635224C575CD00F7D30B /* TagView.swift */,
+				146C35DA24C56A0100DBCA23 /* ContactsTableView.swift */,
 				14AB262D24D137E800AC280D /* ContactsTableViewController.swift */,
 			);
 			path = Contacts;
@@ -452,6 +457,7 @@
 				141F796225326EF4005F9295 /* createContactAssignmentEntry.graphql */,
 				14EF43A92540AA5C002BE27D /* saveAccounts.graphql */,
 				14EF43AF254103A9002BE27D /* saveContacts.graphql */,
+				145146E625495FC40090D3E2 /* accounts.graphql */,
 				14861EF8249F439600D2FA92 /* Whaler.entitlements */,
 				14861ED4249F3DE100D2FA92 /* AppDelegate.swift */,
 				14861ED6249F3DE100D2FA92 /* SceneDelegate.swift */,
@@ -664,6 +670,7 @@
 				14086917253ED084007324A4 /* createContact.graphql in Resources */,
 				14861EDE249F3DE400D2FA92 /* Assets.xcassets in Resources */,
 				146A6DC4252C439000DA8E85 /* organization.graphql in Resources */,
+				145146E725495FC40090D3E2 /* accounts.graphql in Resources */,
 				141F796325326EF4005F9295 /* createContactAssignmentEntry.graphql in Resources */,
 				14861EDC249F3DE100D2FA92 /* Main.storyboard in Resources */,
 			);
@@ -752,6 +759,7 @@
 				146C35D324C557C800DBCA23 /* CompanyInfoValuesView.swift in Sources */,
 				1414810B252FFD8100640946 /* TablePopoverViewController.swift in Sources */,
 				14F7DD9F24EE527600D43055 /* SFQueryResponse.swift in Sources */,
+				14018152254643AF00246BDA /* AccountsWorker.swift in Sources */,
 				14884241250876080025C7EE /* Notifications.swift in Sources */,
 				14D97D7924DBEC4B00058B09 /* Keychain.swift in Sources */,
 				140AE79E24A9B50900F7705E /* UIColor+Extensions.swift in Sources */,
@@ -946,7 +954,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.4;
+				MARKETING_VERSION = 0.5;
 				PRODUCT_BUNDLE_IDENTIFIER = Whaler.catalyst.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -974,7 +982,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.4;
+				MARKETING_VERSION = 0.5;
 				PRODUCT_BUNDLE_IDENTIFIER = Whaler.catalyst.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

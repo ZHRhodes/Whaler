@@ -10,8 +10,9 @@ public struct NewAccount: GraphQLMapConvertible {
   /// - Parameters:
   ///   - id
   ///   - salesforceId
+  ///   - salesforceOwnerId
   ///   - name
-  ///   - owner
+  ///   - ownerId
   ///   - industry
   ///   - description
   ///   - numberOfEmployees
@@ -23,8 +24,8 @@ public struct NewAccount: GraphQLMapConvertible {
   ///   - type
   ///   - state
   ///   - notes
-  public init(id: Swift.Optional<GraphQLID?> = nil, salesforceId: Swift.Optional<String?> = nil, name: String, owner: String, industry: Swift.Optional<String?> = nil, description: Swift.Optional<String?> = nil, numberOfEmployees: Swift.Optional<String?> = nil, annualRevenue: Swift.Optional<String?> = nil, billingCity: Swift.Optional<String?> = nil, billingState: Swift.Optional<String?> = nil, phone: Swift.Optional<String?> = nil, website: Swift.Optional<String?> = nil, type: Swift.Optional<String?> = nil, state: Swift.Optional<String?> = nil, notes: Swift.Optional<String?> = nil) {
-    graphQLMap = ["id": id, "salesforceID": salesforceId, "name": name, "owner": owner, "industry": industry, "description": description, "numberOfEmployees": numberOfEmployees, "annualRevenue": annualRevenue, "billingCity": billingCity, "billingState": billingState, "phone": phone, "website": website, "type": type, "state": state, "notes": notes]
+  public init(id: Swift.Optional<GraphQLID?> = nil, salesforceId: Swift.Optional<String?> = nil, salesforceOwnerId: Swift.Optional<String?> = nil, name: String, ownerId: Swift.Optional<String?> = nil, industry: Swift.Optional<String?> = nil, description: Swift.Optional<String?> = nil, numberOfEmployees: Swift.Optional<String?> = nil, annualRevenue: Swift.Optional<String?> = nil, billingCity: Swift.Optional<String?> = nil, billingState: Swift.Optional<String?> = nil, phone: Swift.Optional<String?> = nil, website: Swift.Optional<String?> = nil, type: Swift.Optional<String?> = nil, state: Swift.Optional<String?> = nil, notes: Swift.Optional<String?> = nil) {
+    graphQLMap = ["id": id, "salesforceID": salesforceId, "salesforceOwnerID": salesforceOwnerId, "name": name, "ownerID": ownerId, "industry": industry, "description": description, "numberOfEmployees": numberOfEmployees, "annualRevenue": annualRevenue, "billingCity": billingCity, "billingState": billingState, "phone": phone, "website": website, "type": type, "state": state, "notes": notes]
   }
 
   public var id: Swift.Optional<GraphQLID?> {
@@ -45,6 +46,15 @@ public struct NewAccount: GraphQLMapConvertible {
     }
   }
 
+  public var salesforceOwnerId: Swift.Optional<String?> {
+    get {
+      return graphQLMap["salesforceOwnerID"] as? Swift.Optional<String?> ?? Swift.Optional<String?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "salesforceOwnerID")
+    }
+  }
+
   public var name: String {
     get {
       return graphQLMap["name"] as! String
@@ -54,12 +64,12 @@ public struct NewAccount: GraphQLMapConvertible {
     }
   }
 
-  public var owner: String {
+  public var ownerId: Swift.Optional<String?> {
     get {
-      return graphQLMap["owner"] as! String
+      return graphQLMap["ownerID"] as? Swift.Optional<String?> ?? Swift.Optional<String?>.none
     }
     set {
-      graphQLMap.updateValue(newValue, forKey: "owner")
+      graphQLMap.updateValue(newValue, forKey: "ownerID")
     }
   }
 
@@ -168,6 +178,7 @@ public struct NewContact: GraphQLMapConvertible {
 
   /// - Parameters:
   ///   - id
+  ///   - salesforceId
   ///   - firstName
   ///   - lastName
   ///   - jobTitle
@@ -175,8 +186,8 @@ public struct NewContact: GraphQLMapConvertible {
   ///   - email
   ///   - phone
   ///   - accountId
-  public init(id: Swift.Optional<GraphQLID?> = nil, firstName: String, lastName: String, jobTitle: Swift.Optional<String?> = nil, state: Swift.Optional<String?> = nil, email: Swift.Optional<String?> = nil, phone: Swift.Optional<String?> = nil, accountId: Swift.Optional<String?> = nil) {
-    graphQLMap = ["id": id, "firstName": firstName, "lastName": lastName, "jobTitle": jobTitle, "state": state, "email": email, "phone": phone, "accountID": accountId]
+  public init(id: Swift.Optional<GraphQLID?> = nil, salesforceId: Swift.Optional<String?> = nil, firstName: String, lastName: String, jobTitle: Swift.Optional<String?> = nil, state: Swift.Optional<String?> = nil, email: Swift.Optional<String?> = nil, phone: Swift.Optional<String?> = nil, accountId: Swift.Optional<String?> = nil) {
+    graphQLMap = ["id": id, "salesforceID": salesforceId, "firstName": firstName, "lastName": lastName, "jobTitle": jobTitle, "state": state, "email": email, "phone": phone, "accountID": accountId]
   }
 
   public var id: Swift.Optional<GraphQLID?> {
@@ -185,6 +196,15 @@ public struct NewContact: GraphQLMapConvertible {
     }
     set {
       graphQLMap.updateValue(newValue, forKey: "id")
+    }
+  }
+
+  public var salesforceId: Swift.Optional<String?> {
+    get {
+      return graphQLMap["salesforceID"] as? Swift.Optional<String?> ?? Swift.Optional<String?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "salesforceID")
     }
   }
 
@@ -252,19 +272,107 @@ public struct NewContact: GraphQLMapConvertible {
   }
 }
 
+public final class AccountsQuery: GraphQLQuery {
+  /// The raw GraphQL definition of this operation.
+  public let operationDefinition: String =
+    """
+    query accounts {
+      accounts {
+        __typename
+        name
+      }
+    }
+    """
+
+  public let operationName: String = "accounts"
+
+  public let operationIdentifier: String? = "9050149d19f4a5d3cd0149d159ec9b13a92b2ddf605543424b37cff3cac995c1"
+
+  public init() {
+  }
+
+  public struct Data: GraphQLSelectionSet {
+    public static let possibleTypes: [String] = ["Query"]
+
+    public static var selections: [GraphQLSelection] {
+      return [
+        GraphQLField("accounts", type: .nonNull(.list(.nonNull(.object(Account.selections))))),
+      ]
+    }
+
+    public private(set) var resultMap: ResultMap
+
+    public init(unsafeResultMap: ResultMap) {
+      self.resultMap = unsafeResultMap
+    }
+
+    public init(accounts: [Account]) {
+      self.init(unsafeResultMap: ["__typename": "Query", "accounts": accounts.map { (value: Account) -> ResultMap in value.resultMap }])
+    }
+
+    public var accounts: [Account] {
+      get {
+        return (resultMap["accounts"] as! [ResultMap]).map { (value: ResultMap) -> Account in Account(unsafeResultMap: value) }
+      }
+      set {
+        resultMap.updateValue(newValue.map { (value: Account) -> ResultMap in value.resultMap }, forKey: "accounts")
+      }
+    }
+
+    public struct Account: GraphQLSelectionSet {
+      public static let possibleTypes: [String] = ["Account"]
+
+      public static var selections: [GraphQLSelection] {
+        return [
+          GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+          GraphQLField("name", type: .nonNull(.scalar(String.self))),
+        ]
+      }
+
+      public private(set) var resultMap: ResultMap
+
+      public init(unsafeResultMap: ResultMap) {
+        self.resultMap = unsafeResultMap
+      }
+
+      public init(name: String) {
+        self.init(unsafeResultMap: ["__typename": "Account", "name": name])
+      }
+
+      public var __typename: String {
+        get {
+          return resultMap["__typename"]! as! String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "__typename")
+        }
+      }
+
+      public var name: String {
+        get {
+          return resultMap["name"]! as! String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "name")
+        }
+      }
+    }
+  }
+}
+
 public final class CreateAccountMutation: GraphQLMutation {
   /// The raw GraphQL definition of this operation.
   public let operationDefinition: String =
     """
-    mutation createAccount($name: String!, $owner: String!, $industry: String, $description: String, $numberOfEmployees: String, $annualRevenue: String, $billingCity: String, $billingState: String, $phone: String, $website: String, $type: String, $state: String, $notes: String) {
-      createAccount(input: {name: $name, owner: $owner, industry: $industry, description: $description, numberOfEmployees: $numberOfEmployees, annualRevenue: $annualRevenue, billingCity: $billingCity, billingState: $billingState, phone: $phone, website: $website, type: $type, state: $state, notes: $notes}) {
+    mutation createAccount($name: String!, $ownerID: String!, $industry: String, $description: String, $numberOfEmployees: String, $annualRevenue: String, $billingCity: String, $billingState: String, $phone: String, $website: String, $type: String, $state: String, $notes: String) {
+      createAccount(input: {name: $name, ownerID: $ownerID, industry: $industry, description: $description, numberOfEmployees: $numberOfEmployees, annualRevenue: $annualRevenue, billingCity: $billingCity, billingState: $billingState, phone: $phone, website: $website, type: $type, state: $state, notes: $notes}) {
         __typename
         id
         createdAt
         updatedAt
         deletedAt
         name
-        owner
+        ownerID
         industry
         description
         numberOfEmployees
@@ -282,10 +390,10 @@ public final class CreateAccountMutation: GraphQLMutation {
 
   public let operationName: String = "createAccount"
 
-  public let operationIdentifier: String? = "9a8f9cb47522cab379aae87d2311e07a33f971773240297ea9101f1e5c2c7135"
+  public let operationIdentifier: String? = "24d8a619db81e7857eec19cdb6352c2e69d136357b0bc1e5c0f7d8fbb4b64a8e"
 
   public var name: String
-  public var owner: String
+  public var ownerID: String
   public var industry: String?
   public var description: String?
   public var numberOfEmployees: String?
@@ -298,9 +406,9 @@ public final class CreateAccountMutation: GraphQLMutation {
   public var state: String?
   public var notes: String?
 
-  public init(name: String, owner: String, industry: String? = nil, description: String? = nil, numberOfEmployees: String? = nil, annualRevenue: String? = nil, billingCity: String? = nil, billingState: String? = nil, phone: String? = nil, website: String? = nil, type: String? = nil, state: String? = nil, notes: String? = nil) {
+  public init(name: String, ownerID: String, industry: String? = nil, description: String? = nil, numberOfEmployees: String? = nil, annualRevenue: String? = nil, billingCity: String? = nil, billingState: String? = nil, phone: String? = nil, website: String? = nil, type: String? = nil, state: String? = nil, notes: String? = nil) {
     self.name = name
-    self.owner = owner
+    self.ownerID = ownerID
     self.industry = industry
     self.description = description
     self.numberOfEmployees = numberOfEmployees
@@ -315,7 +423,7 @@ public final class CreateAccountMutation: GraphQLMutation {
   }
 
   public var variables: GraphQLMap? {
-    return ["name": name, "owner": owner, "industry": industry, "description": description, "numberOfEmployees": numberOfEmployees, "annualRevenue": annualRevenue, "billingCity": billingCity, "billingState": billingState, "phone": phone, "website": website, "type": type, "state": state, "notes": notes]
+    return ["name": name, "ownerID": ownerID, "industry": industry, "description": description, "numberOfEmployees": numberOfEmployees, "annualRevenue": annualRevenue, "billingCity": billingCity, "billingState": billingState, "phone": phone, "website": website, "type": type, "state": state, "notes": notes]
   }
 
   public struct Data: GraphQLSelectionSet {
@@ -323,7 +431,7 @@ public final class CreateAccountMutation: GraphQLMutation {
 
     public static var selections: [GraphQLSelection] {
       return [
-        GraphQLField("createAccount", arguments: ["input": ["name": GraphQLVariable("name"), "owner": GraphQLVariable("owner"), "industry": GraphQLVariable("industry"), "description": GraphQLVariable("description"), "numberOfEmployees": GraphQLVariable("numberOfEmployees"), "annualRevenue": GraphQLVariable("annualRevenue"), "billingCity": GraphQLVariable("billingCity"), "billingState": GraphQLVariable("billingState"), "phone": GraphQLVariable("phone"), "website": GraphQLVariable("website"), "type": GraphQLVariable("type"), "state": GraphQLVariable("state"), "notes": GraphQLVariable("notes")]], type: .nonNull(.object(CreateAccount.selections))),
+        GraphQLField("createAccount", arguments: ["input": ["name": GraphQLVariable("name"), "ownerID": GraphQLVariable("ownerID"), "industry": GraphQLVariable("industry"), "description": GraphQLVariable("description"), "numberOfEmployees": GraphQLVariable("numberOfEmployees"), "annualRevenue": GraphQLVariable("annualRevenue"), "billingCity": GraphQLVariable("billingCity"), "billingState": GraphQLVariable("billingState"), "phone": GraphQLVariable("phone"), "website": GraphQLVariable("website"), "type": GraphQLVariable("type"), "state": GraphQLVariable("state"), "notes": GraphQLVariable("notes")]], type: .nonNull(.object(CreateAccount.selections))),
       ]
     }
 
@@ -357,7 +465,7 @@ public final class CreateAccountMutation: GraphQLMutation {
           GraphQLField("updatedAt", type: .nonNull(.scalar(String.self))),
           GraphQLField("deletedAt", type: .scalar(String.self)),
           GraphQLField("name", type: .nonNull(.scalar(String.self))),
-          GraphQLField("owner", type: .nonNull(.scalar(String.self))),
+          GraphQLField("ownerID", type: .nonNull(.scalar(String.self))),
           GraphQLField("industry", type: .scalar(String.self)),
           GraphQLField("description", type: .scalar(String.self)),
           GraphQLField("numberOfEmployees", type: .scalar(String.self)),
@@ -378,8 +486,8 @@ public final class CreateAccountMutation: GraphQLMutation {
         self.resultMap = unsafeResultMap
       }
 
-      public init(id: GraphQLID, createdAt: String, updatedAt: String, deletedAt: String? = nil, name: String, owner: String, industry: String? = nil, description: String? = nil, numberOfEmployees: String? = nil, annualRevenue: String? = nil, billingCity: String? = nil, billingState: String? = nil, phone: String? = nil, website: String? = nil, type: String? = nil, state: String? = nil, notes: String? = nil) {
-        self.init(unsafeResultMap: ["__typename": "Account", "id": id, "createdAt": createdAt, "updatedAt": updatedAt, "deletedAt": deletedAt, "name": name, "owner": owner, "industry": industry, "description": description, "numberOfEmployees": numberOfEmployees, "annualRevenue": annualRevenue, "billingCity": billingCity, "billingState": billingState, "phone": phone, "website": website, "type": type, "state": state, "notes": notes])
+      public init(id: GraphQLID, createdAt: String, updatedAt: String, deletedAt: String? = nil, name: String, ownerId: String, industry: String? = nil, description: String? = nil, numberOfEmployees: String? = nil, annualRevenue: String? = nil, billingCity: String? = nil, billingState: String? = nil, phone: String? = nil, website: String? = nil, type: String? = nil, state: String? = nil, notes: String? = nil) {
+        self.init(unsafeResultMap: ["__typename": "Account", "id": id, "createdAt": createdAt, "updatedAt": updatedAt, "deletedAt": deletedAt, "name": name, "ownerID": ownerId, "industry": industry, "description": description, "numberOfEmployees": numberOfEmployees, "annualRevenue": annualRevenue, "billingCity": billingCity, "billingState": billingState, "phone": phone, "website": website, "type": type, "state": state, "notes": notes])
       }
 
       public var __typename: String {
@@ -436,12 +544,12 @@ public final class CreateAccountMutation: GraphQLMutation {
         }
       }
 
-      public var owner: String {
+      public var ownerId: String {
         get {
-          return resultMap["owner"]! as! String
+          return resultMap["ownerID"]! as! String
         }
         set {
-          resultMap.updateValue(newValue, forKey: "owner")
+          resultMap.updateValue(newValue, forKey: "ownerID")
         }
       }
 
@@ -1079,8 +1187,9 @@ public final class SaveAccountsMutation: GraphQLMutation {
         __typename
         id
         name
-        owner
+        ownerID
         salesforceID
+        salesforceOwnerID
         industry
         description
         numberOfEmployees
@@ -1098,7 +1207,7 @@ public final class SaveAccountsMutation: GraphQLMutation {
 
   public let operationName: String = "saveAccounts"
 
-  public let operationIdentifier: String? = "a3919a91c37bbb4644c3deca9b107edd0fb7a1c48c2e8678cdc9bd19c5c0a0fd"
+  public let operationIdentifier: String? = "05f0b63acd951da1aa6061184d30145d0de82012b349e1151744e2b43fd394ea"
 
   public var input: [NewAccount]
 
@@ -1146,8 +1255,9 @@ public final class SaveAccountsMutation: GraphQLMutation {
           GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
           GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
           GraphQLField("name", type: .nonNull(.scalar(String.self))),
-          GraphQLField("owner", type: .nonNull(.scalar(String.self))),
+          GraphQLField("ownerID", type: .nonNull(.scalar(String.self))),
           GraphQLField("salesforceID", type: .scalar(String.self)),
+          GraphQLField("salesforceOwnerID", type: .scalar(String.self)),
           GraphQLField("industry", type: .scalar(String.self)),
           GraphQLField("description", type: .scalar(String.self)),
           GraphQLField("numberOfEmployees", type: .scalar(String.self)),
@@ -1168,8 +1278,8 @@ public final class SaveAccountsMutation: GraphQLMutation {
         self.resultMap = unsafeResultMap
       }
 
-      public init(id: GraphQLID, name: String, owner: String, salesforceId: String? = nil, industry: String? = nil, description: String? = nil, numberOfEmployees: String? = nil, annualRevenue: String? = nil, billingCity: String? = nil, billingState: String? = nil, phone: String? = nil, website: String? = nil, type: String? = nil, state: String? = nil, notes: String? = nil) {
-        self.init(unsafeResultMap: ["__typename": "Account", "id": id, "name": name, "owner": owner, "salesforceID": salesforceId, "industry": industry, "description": description, "numberOfEmployees": numberOfEmployees, "annualRevenue": annualRevenue, "billingCity": billingCity, "billingState": billingState, "phone": phone, "website": website, "type": type, "state": state, "notes": notes])
+      public init(id: GraphQLID, name: String, ownerId: String, salesforceId: String? = nil, salesforceOwnerId: String? = nil, industry: String? = nil, description: String? = nil, numberOfEmployees: String? = nil, annualRevenue: String? = nil, billingCity: String? = nil, billingState: String? = nil, phone: String? = nil, website: String? = nil, type: String? = nil, state: String? = nil, notes: String? = nil) {
+        self.init(unsafeResultMap: ["__typename": "Account", "id": id, "name": name, "ownerID": ownerId, "salesforceID": salesforceId, "salesforceOwnerID": salesforceOwnerId, "industry": industry, "description": description, "numberOfEmployees": numberOfEmployees, "annualRevenue": annualRevenue, "billingCity": billingCity, "billingState": billingState, "phone": phone, "website": website, "type": type, "state": state, "notes": notes])
       }
 
       public var __typename: String {
@@ -1199,12 +1309,12 @@ public final class SaveAccountsMutation: GraphQLMutation {
         }
       }
 
-      public var owner: String {
+      public var ownerId: String {
         get {
-          return resultMap["owner"]! as! String
+          return resultMap["ownerID"]! as! String
         }
         set {
-          resultMap.updateValue(newValue, forKey: "owner")
+          resultMap.updateValue(newValue, forKey: "ownerID")
         }
       }
 
@@ -1214,6 +1324,15 @@ public final class SaveAccountsMutation: GraphQLMutation {
         }
         set {
           resultMap.updateValue(newValue, forKey: "salesforceID")
+        }
+      }
+
+      public var salesforceOwnerId: String? {
+        get {
+          return resultMap["salesforceOwnerID"] as? String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "salesforceOwnerID")
         }
       }
 
