@@ -1,5 +1,20 @@
 query accounts {
   accounts {
+    id
+    ownerID
+    salesforceOwnerID
     name
+    salesforceID
+    industry
+    numberOfEmployees
+    annualRevenue
+    billingCity
+    billingState
+    phone
+    website
+    type
+    description
+    state
+    notes
   }
 }

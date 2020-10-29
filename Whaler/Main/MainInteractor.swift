@@ -18,6 +18,7 @@ class MainInteractor: MainInteractorData {
   lazy var accountStates = WorkState.allCases
   var accountBeingAssigned: Account?
   weak var viewController: MainViewController?
+  private let accountsHelper = AccountsHelper()
   
   func hasAccounts() -> Bool {
     return !accountGrouper.hasNoValues
@@ -122,41 +123,28 @@ class MainInteractor: MainInteractorData {
     ObjectManager.deleteAll(ofType: Account.self, with: NSPredicate(format: "ownerUserId == %d", userId))
   }
   
-  func fetchAccountsFromSalesforce() {
-    let accountsfromSalesforce = SFHelper.queryAccounts()
-    reconcileAccountsFromSalesforce(localAccounts: accountGrouper.values, salesforceAccounts: accountsfromSalesforce)
-    let input = accountsfromSalesforce.map { NewAccount(id: $0.id,
-                                                        salesforceId: $0.salesforceID,
-                                                        name: $0.name,
-                                                        ownerId: $0.ownerID,
-                                                        industry: $0.industry,
-                                                        description: $0.description,
-                                                        numberOfEmployees: $0.numberOfEmployees,
-                                                        annualRevenue: $0.annualRevenue,
-                                                        billingCity: $0.billingCity,
-                                                        billingState: $0.billingState,
-                                                        phone: $0.phone,
-                                                        website: $0.website,
-                                                        type: $0.type,
-                                                        state: $0.state?.rawValue,
-                                                        notes: $0.notes) }
-    Graph.shared.apollo.perform(mutation: SaveAccountsMutation(input: input)) { [weak self] result in
-      guard let data = try? result.get().data else { return }
-      let accounts = data.saveAccounts.map(Account.init)
-      self?.setAccounts(accounts)
-      self?.viewController?.reloadCollection()
-      AccountsWorker().fetchAccountsFromAPI { (accounts) in
-        print(accounts)
+  func getAccounts() {
+    accountsHelper.fetchAccountsFromAPI { (accounts) in
+      guard let accounts = accounts else {
+        print("Failed to fetch account from API")
+        return
       }
+      
+      let accountsfromSalesforce = self.accountsHelper.fetchAccountsFromSalesforce()
+      self.reconcileAccountsFromSalesforce(localAccounts: accounts, salesforceAccounts: accountsfromSalesforce)
+      self.accountsHelper.saveAccountsToAPI(accountsfromSalesforce) { (accountsPostSave) in
+        self.setAccounts(accountsPostSave)
+        self.viewController?.reloadCollection()
+      }
+      print(self.accountGrouper)
     }
-    print(accountGrouper)
   }
   
   //will newly added in salesforce accounts save to cache in whaler? or is that only done on authentication?
   
   func reconcileAccountsFromSalesforce(localAccounts: [Account], salesforceAccounts: [Account]) {
     salesforceAccounts.forEach { account in
-      if let matchingLocalAccount = localAccounts.first(where: { $0.id == account.id }) {
+      if let matchingLocalAccount = localAccounts.first(where: { $0.salesforceID == account.salesforceID }) {
         account.mergeLocalProperties(with: matchingLocalAccount)
       }
     }
@@ -164,7 +152,7 @@ class MainInteractor: MainInteractorData {
   
   func makeSFAuthenticationSession(completion: @escaping VoidClosure) -> ASWebAuthenticationSession? {
     let session = SFHelper.makeAuthenticationSession { [weak self] in
-      self?.fetchAccountsFromSalesforce()
+      self?.getAccounts()
       completion()
     }
     

@@ -68,7 +68,7 @@ class MainViewController: UIViewController {
       //present loading indicator
       interactor.refreshSalesforceSession { [weak self] (success) in
         if success {
-          self?.interactor.fetchAccountsFromSalesforce()
+          self?.interactor.getAccounts()
           self?.configureViewsForContent()
         } else {
           if !(self?.interactor.hasAccounts() ?? false) {
@@ -282,7 +282,7 @@ class MainViewController: UIViewController {
   
   @objc
   private func reloadTapped() {
-    interactor.fetchAccountsFromSalesforce()
+    interactor.getAccounts()
   }
   
   func reloadCollection() {

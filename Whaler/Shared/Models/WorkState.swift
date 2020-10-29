@@ -49,6 +49,12 @@ enum WorkState: String, CaseIterable, Codable {
       return .brandYellowDark
     }
   }
+  
+  init?(from string: String?) {
+    guard let string = string,
+          let state = WorkState(rawValue: string) else { return nil}
+    self = state
+  }
 }
 
 extension WorkState: Identifiable {

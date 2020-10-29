@@ -1,7 +1,7 @@
 {
-  "9050149d19f4a5d3cd0149d159ec9b13a92b2ddf605543424b37cff3cac995c1": {
+  "f746bba696a7d379a82c188e4d6fdb89706d839d289a5c14d0c8ce637a1a0e72": {
     "name": "accounts",
-    "source": "query accounts {\n  accounts {\n    __typename\n    name\n  }\n}"
+    "source": "query accounts {\n  accounts {\n    __typename\n    id\n    ownerID\n    salesforceOwnerID\n    name\n    salesforceID\n    industry\n    numberOfEmployees\n    annualRevenue\n    billingCity\n    billingState\n    phone\n    website\n    type\n    description\n    state\n    notes\n  }\n}"
   },
   "24d8a619db81e7857eec19cdb6352c2e69d136357b0bc1e5c0f7d8fbb4b64a8e": {
     "name": "createAccount",

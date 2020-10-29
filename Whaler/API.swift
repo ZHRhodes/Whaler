@@ -279,14 +279,29 @@ public final class AccountsQuery: GraphQLQuery {
     query accounts {
       accounts {
         __typename
+        id
+        ownerID
+        salesforceOwnerID
         name
+        salesforceID
+        industry
+        numberOfEmployees
+        annualRevenue
+        billingCity
+        billingState
+        phone
+        website
+        type
+        description
+        state
+        notes
       }
     }
     """
 
   public let operationName: String = "accounts"
 
-  public let operationIdentifier: String? = "9050149d19f4a5d3cd0149d159ec9b13a92b2ddf605543424b37cff3cac995c1"
+  public let operationIdentifier: String? = "f746bba696a7d379a82c188e4d6fdb89706d839d289a5c14d0c8ce637a1a0e72"
 
   public init() {
   }
@@ -325,7 +340,22 @@ public final class AccountsQuery: GraphQLQuery {
       public static var selections: [GraphQLSelection] {
         return [
           GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+          GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
+          GraphQLField("ownerID", type: .nonNull(.scalar(String.self))),
+          GraphQLField("salesforceOwnerID", type: .scalar(String.self)),
           GraphQLField("name", type: .nonNull(.scalar(String.self))),
+          GraphQLField("salesforceID", type: .scalar(String.self)),
+          GraphQLField("industry", type: .scalar(String.self)),
+          GraphQLField("numberOfEmployees", type: .scalar(String.self)),
+          GraphQLField("annualRevenue", type: .scalar(String.self)),
+          GraphQLField("billingCity", type: .scalar(String.self)),
+          GraphQLField("billingState", type: .scalar(String.self)),
+          GraphQLField("phone", type: .scalar(String.self)),
+          GraphQLField("website", type: .scalar(String.self)),
+          GraphQLField("type", type: .scalar(String.self)),
+          GraphQLField("description", type: .scalar(String.self)),
+          GraphQLField("state", type: .scalar(String.self)),
+          GraphQLField("notes", type: .scalar(String.self)),
         ]
       }
 
@@ -335,8 +365,8 @@ public final class AccountsQuery: GraphQLQuery {
         self.resultMap = unsafeResultMap
       }
 
-      public init(name: String) {
-        self.init(unsafeResultMap: ["__typename": "Account", "name": name])
+      public init(id: GraphQLID, ownerId: String, salesforceOwnerId: String? = nil, name: String, salesforceId: String? = nil, industry: String? = nil, numberOfEmployees: String? = nil, annualRevenue: String? = nil, billingCity: String? = nil, billingState: String? = nil, phone: String? = nil, website: String? = nil, type: String? = nil, description: String? = nil, state: String? = nil, notes: String? = nil) {
+        self.init(unsafeResultMap: ["__typename": "Account", "id": id, "ownerID": ownerId, "salesforceOwnerID": salesforceOwnerId, "name": name, "salesforceID": salesforceId, "industry": industry, "numberOfEmployees": numberOfEmployees, "annualRevenue": annualRevenue, "billingCity": billingCity, "billingState": billingState, "phone": phone, "website": website, "type": type, "description": description, "state": state, "notes": notes])
       }
 
       public var __typename: String {
@@ -348,12 +378,147 @@ public final class AccountsQuery: GraphQLQuery {
         }
       }
 
+      public var id: GraphQLID {
+        get {
+          return resultMap["id"]! as! GraphQLID
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "id")
+        }
+      }
+
+      public var ownerId: String {
+        get {
+          return resultMap["ownerID"]! as! String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "ownerID")
+        }
+      }
+
+      public var salesforceOwnerId: String? {
+        get {
+          return resultMap["salesforceOwnerID"] as? String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "salesforceOwnerID")
+        }
+      }
+
       public var name: String {
         get {
           return resultMap["name"]! as! String
         }
         set {
           resultMap.updateValue(newValue, forKey: "name")
+        }
+      }
+
+      public var salesforceId: String? {
+        get {
+          return resultMap["salesforceID"] as? String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "salesforceID")
+        }
+      }
+
+      public var industry: String? {
+        get {
+          return resultMap["industry"] as? String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "industry")
+        }
+      }
+
+      public var numberOfEmployees: String? {
+        get {
+          return resultMap["numberOfEmployees"] as? String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "numberOfEmployees")
+        }
+      }
+
+      public var annualRevenue: String? {
+        get {
+          return resultMap["annualRevenue"] as? String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "annualRevenue")
+        }
+      }
+
+      public var billingCity: String? {
+        get {
+          return resultMap["billingCity"] as? String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "billingCity")
+        }
+      }
+
+      public var billingState: String? {
+        get {
+          return resultMap["billingState"] as? String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "billingState")
+        }
+      }
+
+      public var phone: String? {
+        get {
+          return resultMap["phone"] as? String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "phone")
+        }
+      }
+
+      public var website: String? {
+        get {
+          return resultMap["website"] as? String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "website")
+        }
+      }
+
+      public var type: String? {
+        get {
+          return resultMap["type"] as? String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "type")
+        }
+      }
+
+      public var description: String? {
+        get {
+          return resultMap["description"] as? String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "description")
+        }
+      }
+
+      public var state: String? {
+        get {
+          return resultMap["state"] as? String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "state")
+        }
+      }
+
+      public var notes: String? {
+        get {
+          return resultMap["notes"] as? String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "notes")
         }
       }
     }

@@ -239,3 +239,25 @@ extension Account {
               notes: savedAccount.notes)
   }
 }
+
+extension Account {
+  convenience init(apiAccount: AccountsQuery.Data.Account) {
+    self.init(id: apiAccount.id,
+              ownerID: apiAccount.ownerId,
+              salesforceOwnerID: apiAccount.salesforceOwnerId,
+              name: apiAccount.name,
+              salesforceID: apiAccount.salesforceId,
+              industry: apiAccount.industry,
+              numberOfEmployees: apiAccount.numberOfEmployees,
+              annualRevenue: apiAccount.annualRevenue,
+              billingCity: apiAccount.billingCity,
+              billingState: apiAccount.billingState,
+              phone: apiAccount.phone,
+              website: apiAccount.website,
+              type: apiAccount.type,
+              accountDescription: apiAccount.description,
+              state: WorkState.init(from: apiAccount.state),
+              contactGrouper: nil,
+              notes: apiAccount.notes)
+  }
+}

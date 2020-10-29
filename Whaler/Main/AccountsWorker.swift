@@ -8,17 +8,41 @@
 
 import Foundation
 
-struct AccountsWorker {
+struct AccountsHelper {
   func fetchAccountsFromSalesforce() -> [Account] {
     return SFHelper.queryAccounts()
   }
   
   func fetchAccountsFromAPI(completion: @escaping ([Account]?) -> Void) {
     Graph.shared.apollo.fetch(query: AccountsQuery()) { result in
-      guard let data = try? result.get().data else { return }
-      print(data.accounts)
-      completion([])
+      guard let data = try? result.get().data else {
+        completion(nil)
+        return
+      }
+      completion(data.accounts.map(Account.init))
     }
-//    return []
+  }
+  
+  func saveAccountsToAPI(_ accounts: [Account], completion: @escaping ([Account]) -> Void) {
+    let input = accounts.map { NewAccount(id: $0.id,
+                                          salesforceId: $0.salesforceID,
+                                          name: $0.name,
+                                          ownerId: $0.ownerID,
+                                          industry: $0.industry,
+                                          description: $0.accountDescription,
+                                          numberOfEmployees: $0.numberOfEmployees,
+                                          annualRevenue: $0.annualRevenue,
+                                          billingCity: $0.billingCity,
+                                          billingState: $0.billingState,
+                                          phone: $0.phone,
+                                          website: $0.website,
+                                          type: $0.type,
+                                          state: $0.state?.rawValue,
+                                          notes: $0.notes) }
+    Graph.shared.apollo.perform(mutation: SaveAccountsMutation(input: input)) { result in
+      guard let data = try? result.get().data else { return }
+      let accounts = data.saveAccounts.map(Account.init)
+      completion(accounts)
+    }
   }
 }
