@@ -19,6 +19,7 @@ class MainInteractor: MainInteractorData {
   var accountBeingAssigned: Account?
   weak var viewController: MainViewController?
   private let accountsHelper = AccountsHelper()
+  private let contactsHelper = ContactsHelper()
   
   func hasAccounts() -> Bool {
     return !accountGrouper.hasNoValues
@@ -66,29 +67,29 @@ class MainInteractor: MainInteractorData {
     }
   }
   
-  func retrieveAndAssignContacts(for account: Account) {
+  func getContacts(for account: Account, completion: @escaping () -> Void) {
     account.resetContacts()
-    var retrievedContacts = [Contact]()
-    if let salesforceId = account.salesforceID {
-      retrievedContacts = SFHelper.queryContacts(accountId: account.id,
-                                                     salesforceAccountId: salesforceId,
-                                                     accountName: account.name)
-    }
-    let localContacts = ObjectManager.retrieveAll(ofType: Contact.self)
-    reconcileContactsFromSalesforce(localContacts: localContacts, salesforceContacts: retrievedContacts)
-    retrievedContacts.forEach { contact in
-      account.contactGrouper.append(contact, to: contact.state ?? .ready)
-    }
-    DispatchQueue.global(qos: .utility).async {
-      let input = retrievedContacts.map { NewContact(id: $0.id,
-                                                     firstName: $0.firstName,
-                                                     lastName: $0.lastName,
-                                                     jobTitle: $0.jobTitle,
-                                                     state: $0.state?.rawValue,
-                                                     email: $0.email,
-                                                     phone: $0.phone,
-                                                     accountId: $0.accountID)}
-      Graph.shared.apollo.perform(mutation: SaveContactsMutation(input: input))
+    contactsHelper.fetchContactsFromAPI(accountID: account.id) { (apiContacts) in
+      print(apiContacts?.reduce("", { $0 + " " + $1.id }))
+      guard let apiContacts = apiContacts else {
+        print("Failed to fetch contacts from API")
+        return
+      }
+      
+      var retrievedContacts = [Contact]()
+      if let salesforceId = account.salesforceID {
+        retrievedContacts = self.contactsHelper.fetchContactsFromSalesforce(accountId: account.id,
+                                                                            salesforceAccountId: salesforceId,
+                                                                            accountName: account.name)
+      }
+      
+      self.reconcileContactsFromSalesforce(localContacts: apiContacts, salesforceContacts: retrievedContacts)
+      self.contactsHelper.saveContactsToAPI(retrievedContacts) { (contacts) in
+        contacts.forEach { contact in
+          account.contactGrouper.append(contact, to: contact.state ?? .ready)
+        }
+        completion()
+      }
     }
   }
   
@@ -102,7 +103,7 @@ class MainInteractor: MainInteractorData {
   
   func reconcileContactsFromSalesforce(localContacts: [Contact], salesforceContacts: [Contact]) {
     salesforceContacts.forEach { contact in
-      if let matchingLocalContact = localContacts.first(where: { $0.id == contact.id }) {
+      if let matchingLocalContact = localContacts.first(where: { $0.salesforceID == contact.salesforceID }) {
         contact.mergeLocalProperties(with: matchingLocalContact)
       }
     }
@@ -126,7 +127,7 @@ class MainInteractor: MainInteractorData {
   func getAccounts() {
     accountsHelper.fetchAccountsFromAPI { (accounts) in
       guard let accounts = accounts else {
-        print("Failed to fetch account from API")
+        print("Failed to fetch accounts from API")
         return
       }
       

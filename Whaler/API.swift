@@ -525,6 +525,123 @@ public final class AccountsQuery: GraphQLQuery {
   }
 }
 
+public final class ContactsQuery: GraphQLQuery {
+  /// The raw GraphQL definition of this operation.
+  public let operationDefinition: String =
+    """
+    query contacts($accountID: ID!) {
+      contacts(accountID: $accountID) {
+        __typename
+        id
+        accountID
+        salesforceID
+      }
+    }
+    """
+
+  public let operationName: String = "contacts"
+
+  public let operationIdentifier: String? = "dbc6572a72cb64e776e5bac045b150f8a699fdec5ae4864ae2b2cbad02a2cba4"
+
+  public var accountID: GraphQLID
+
+  public init(accountID: GraphQLID) {
+    self.accountID = accountID
+  }
+
+  public var variables: GraphQLMap? {
+    return ["accountID": accountID]
+  }
+
+  public struct Data: GraphQLSelectionSet {
+    public static let possibleTypes: [String] = ["Query"]
+
+    public static var selections: [GraphQLSelection] {
+      return [
+        GraphQLField("contacts", arguments: ["accountID": GraphQLVariable("accountID")], type: .nonNull(.list(.nonNull(.object(Contact.selections))))),
+      ]
+    }
+
+    public private(set) var resultMap: ResultMap
+
+    public init(unsafeResultMap: ResultMap) {
+      self.resultMap = unsafeResultMap
+    }
+
+    public init(contacts: [Contact]) {
+      self.init(unsafeResultMap: ["__typename": "Query", "contacts": contacts.map { (value: Contact) -> ResultMap in value.resultMap }])
+    }
+
+    public var contacts: [Contact] {
+      get {
+        return (resultMap["contacts"] as! [ResultMap]).map { (value: ResultMap) -> Contact in Contact(unsafeResultMap: value) }
+      }
+      set {
+        resultMap.updateValue(newValue.map { (value: Contact) -> ResultMap in value.resultMap }, forKey: "contacts")
+      }
+    }
+
+    public struct Contact: GraphQLSelectionSet {
+      public static let possibleTypes: [String] = ["Contact"]
+
+      public static var selections: [GraphQLSelection] {
+        return [
+          GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+          GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
+          GraphQLField("accountID", type: .scalar(String.self)),
+          GraphQLField("salesforceID", type: .scalar(String.self)),
+        ]
+      }
+
+      public private(set) var resultMap: ResultMap
+
+      public init(unsafeResultMap: ResultMap) {
+        self.resultMap = unsafeResultMap
+      }
+
+      public init(id: GraphQLID, accountId: String? = nil, salesforceId: String? = nil) {
+        self.init(unsafeResultMap: ["__typename": "Contact", "id": id, "accountID": accountId, "salesforceID": salesforceId])
+      }
+
+      public var __typename: String {
+        get {
+          return resultMap["__typename"]! as! String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "__typename")
+        }
+      }
+
+      public var id: GraphQLID {
+        get {
+          return resultMap["id"]! as! GraphQLID
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "id")
+        }
+      }
+
+      public var accountId: String? {
+        get {
+          return resultMap["accountID"] as? String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "accountID")
+        }
+      }
+
+      public var salesforceId: String? {
+        get {
+          return resultMap["salesforceID"] as? String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "salesforceID")
+        }
+      }
+    }
+  }
+}
+
 public final class CreateAccountMutation: GraphQLMutation {
   /// The raw GraphQL definition of this operation.
   public let operationDefinition: String =

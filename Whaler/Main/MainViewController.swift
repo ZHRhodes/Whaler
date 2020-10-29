@@ -362,10 +362,11 @@ extension MainViewController: MainCollectionCellDelegate {
   func didSelectRowAt(section: Int, didSelectRowAt indexPath: IndexPath) {
     let accountState = interactor.accountStates[section]
     let account = interactor.accountGrouper[accountState][indexPath.row]
-    interactor.retrieveAndAssignContacts(for: account)
-    let view = AccountDetailsView(account: account)
-    let viewController = UIHostingController(rootView: view)
-    navigationController?.pushViewController(viewController, animated: false)
+    interactor.getContacts(for: account) { [weak self] in
+      let view = AccountDetailsView(account: account)
+      let viewController = UIHostingController(rootView: view)
+      self?.navigationController?.pushViewController(viewController, animated: false)
+    }
   }
   
   func didClickAssignButton(_ button: UIButton, forAccount account: Account) {

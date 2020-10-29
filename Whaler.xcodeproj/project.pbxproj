@@ -95,6 +95,8 @@
 		14F4090424C6A09E00F405BC /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 14F4090324C6A09E00F405BC /* OpenSans-Regular.ttf */; };
 		14F4090624C6A0C300F405BC /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 14F4090524C6A0C300F405BC /* OpenSans-Bold.ttf */; };
 		14F4090824C6A2D100F405BC /* UIFont+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F4090724C6A2D100F405BC /* UIFont+Extensions.swift */; };
+		14F4FE14254AA5C600C89485 /* ContactsWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F4FE13254AA5C600C89485 /* ContactsWorker.swift */; };
+		14F4FE18254AA6A600C89485 /* contacts.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 14F4FE17254AA6A600C89485 /* contacts.graphql */; };
 		14F7DD9F24EE527600D43055 /* SFQueryResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F7DD9E24EE527600D43055 /* SFQueryResponse.swift */; };
 		14F7DDA124EE529300D43055 /* SFAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F7DDA024EE529300D43055 /* SFAccount.swift */; };
 		14FE635324C575CD00F7D30B /* TagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14FE635224C575CD00F7D30B /* TagView.swift */; };
@@ -202,6 +204,8 @@
 		14F4090324C6A09E00F405BC /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Regular.ttf"; sourceTree = "<group>"; };
 		14F4090524C6A0C300F405BC /* OpenSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Bold.ttf"; sourceTree = "<group>"; };
 		14F4090724C6A2D100F405BC /* UIFont+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extensions.swift"; sourceTree = "<group>"; };
+		14F4FE13254AA5C600C89485 /* ContactsWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsWorker.swift; sourceTree = "<group>"; };
+		14F4FE17254AA6A600C89485 /* contacts.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = contacts.graphql; sourceTree = "<group>"; };
 		14F7DD9E24EE527600D43055 /* SFQueryResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFQueryResponse.swift; sourceTree = "<group>"; };
 		14F7DDA024EE529300D43055 /* SFAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFAccount.swift; sourceTree = "<group>"; };
 		14FE635224C575CD00F7D30B /* TagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagView.swift; sourceTree = "<group>"; };
@@ -233,7 +237,6 @@
 				140AE7A124A9BA4D00F7705E /* Views */,
 				14861ED8249F3DE100D2FA92 /* MainViewController.swift */,
 				140AE79524A9AA0B00F7705E /* MainInteractor.swift */,
-				14018151254643AF00246BDA /* AccountsWorker.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -458,6 +461,7 @@
 				14EF43A92540AA5C002BE27D /* saveAccounts.graphql */,
 				14EF43AF254103A9002BE27D /* saveContacts.graphql */,
 				145146E625495FC40090D3E2 /* accounts.graphql */,
+				14F4FE17254AA6A600C89485 /* contacts.graphql */,
 				14861EF8249F439600D2FA92 /* Whaler.entitlements */,
 				14861ED4249F3DE100D2FA92 /* AppDelegate.swift */,
 				14861ED6249F3DE100D2FA92 /* SceneDelegate.swift */,
@@ -531,6 +535,7 @@
 			isa = PBXGroup;
 			children = (
 				140AE79824A9AA5C00F7705E /* Account.swift */,
+				14018151254643AF00246BDA /* AccountsWorker.swift */,
 			);
 			path = Account;
 			sourceTree = "<group>";
@@ -539,6 +544,7 @@
 			isa = PBXGroup;
 			children = (
 				1440A20324C947FA00E36853 /* Contact.swift */,
+				14F4FE13254AA5C600C89485 /* ContactsWorker.swift */,
 			);
 			path = Contact;
 			sourceTree = "<group>";
@@ -574,10 +580,10 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 14861EF0249F3DE400D2FA92 /* Build configuration list for PBXNativeTarget "Whaler" */;
 			buildPhases = (
+				146A6DC7252C45E400DA8E85 /* ShellScript */,
 				14861ECD249F3DE100D2FA92 /* Sources */,
 				14861ECE249F3DE100D2FA92 /* Frameworks */,
 				14861ECF249F3DE100D2FA92 /* Resources */,
-				146A6DC7252C45E400DA8E85 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -657,6 +663,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				14F4FE18254AA6A600C89485 /* contacts.graphql in Resources */,
 				14EF43B0254103A9002BE27D /* saveContacts.graphql in Resources */,
 				14F4090424C6A09E00F405BC /* OpenSans-Regular.ttf in Resources */,
 				146A6DCB252C486100DA8E85 /* schema.json in Resources */,
@@ -745,6 +752,7 @@
 				149F3A0B25209575001F38BF /* UIView+Extensions.swift in Sources */,
 				146A6DDA252C563200DA8E85 /* SFNetworkInterface.swift in Sources */,
 				149F3A0025206AE4001F38BF /* MainCollectionCell.swift in Sources */,
+				14F4FE14254AA5C600C89485 /* ContactsWorker.swift in Sources */,
 				1454743B250D904700257A89 /* UIViewController+Extensions.swift in Sources */,
 				14EED67A24F0E48C00660BD1 /* SFContact.swift in Sources */,
 				14EED67E24F0EB7300660BD1 /* SFHelper.swift in Sources */,

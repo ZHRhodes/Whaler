@@ -3,6 +3,10 @@
     "name": "accounts",
     "source": "query accounts {\n  accounts {\n    __typename\n    id\n    ownerID\n    salesforceOwnerID\n    name\n    salesforceID\n    industry\n    numberOfEmployees\n    annualRevenue\n    billingCity\n    billingState\n    phone\n    website\n    type\n    description\n    state\n    notes\n  }\n}"
   },
+  "dbc6572a72cb64e776e5bac045b150f8a699fdec5ae4864ae2b2cbad02a2cba4": {
+    "name": "contacts",
+    "source": "query contacts($accountID: ID!) {\n  contacts(accountID: $accountID) {\n    __typename\n    id\n    accountID\n    salesforceID\n  }\n}"
+  },
   "24d8a619db81e7857eec19cdb6352c2e69d136357b0bc1e5c0f7d8fbb4b64a8e": {
     "name": "createAccount",
     "source": "mutation createAccount($name: String!, $ownerID: String!, $industry: String, $description: String, $numberOfEmployees: String, $annualRevenue: String, $billingCity: String, $billingState: String, $phone: String, $website: String, $type: String, $state: String, $notes: String) {\n  createAccount(input: {name: $name, ownerID: $ownerID, industry: $industry, description: $description, numberOfEmployees: $numberOfEmployees, annualRevenue: $annualRevenue, billingCity: $billingCity, billingState: $billingState, phone: $phone, website: $website, type: $type, state: $state, notes: $notes}) {\n    __typename\n    id\n    createdAt\n    updatedAt\n    deletedAt\n    name\n    ownerID\n    industry\n    description\n    numberOfEmployees\n    annualRevenue\n    billingCity\n    billingState\n    phone\n    website\n    type\n    state\n    notes\n  }\n}"

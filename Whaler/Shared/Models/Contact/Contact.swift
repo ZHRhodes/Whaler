@@ -15,7 +15,7 @@ final class Contact: NSObject, Codable {
     case id, accountID, salesforceID, salesforceAccountID, firstName, lastName, jobTitle, phone, email, state
   }
   
-  let id: String
+  var id: String
   var salesforceID: String?
   var accountID: String
   var salesforceAccountID: String?
@@ -83,6 +83,8 @@ final class Contact: NSObject, Codable {
   }
   
   func mergeLocalProperties(with contact: Contact) {
+    id = contact.id
+    accountID = contact.accountID
     state = contact.state
   }
 }
@@ -161,3 +163,18 @@ extension Contact: NSItemProviderReading {
 }
 
 extension Contact: ObservableObject {}
+
+extension Contact {
+  convenience init(apiContact: ContactsQuery.Data.Contact) {
+    self.init(id: apiContact.id,
+              accountID: apiContact.accountId ?? "",
+              salesforceID: apiContact.salesforceId,
+              salesforceAccountID: nil,
+              firstName: "",
+              lastName: "",
+              jobTitle: "",
+              phone: nil,
+              email: nil,
+              state: .ready)
+  }
+}
