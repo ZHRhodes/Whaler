@@ -127,7 +127,7 @@ class MainInteractor: MainInteractorData {
   func getAccounts() {
     accountsHelper.fetchAccountsFromAPI { (accounts) in
       guard let accounts = accounts else {
-        print("Failed to fetch accounts from API")
+        print("Failed to fetch accountsdbea from API")
         return
       }
       

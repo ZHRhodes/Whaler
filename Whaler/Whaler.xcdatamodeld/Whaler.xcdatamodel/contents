@@ -11,7 +11,7 @@
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="notes" optional="YES" attributeType="String"/>
         <attribute name="numberOfEmployees" optional="YES" attributeType="String"/>
-        <attribute name="owner" optional="YES" attributeType="String"/>
+        <attribute name="ownerID" optional="YES" attributeType="String"/>
         <attribute name="ownerUserId" optional="YES" attributeType="String"/>
         <attribute name="phone" optional="YES" attributeType="String"/>
         <attribute name="salesforceID" optional="YES" attributeType="String"/>
