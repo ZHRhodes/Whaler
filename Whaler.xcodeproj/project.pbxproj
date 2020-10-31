@@ -84,6 +84,7 @@
 		14C509C3254CF83B0021D9C5 /* RevenueBucket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C509C2254CF83B0021D9C5 /* RevenueBucket.swift */; };
 		14C509C7254CFE7A0021D9C5 /* FieldValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C509C6254CFE7A0021D9C5 /* FieldValue.swift */; };
 		14C509CB254D42800021D9C5 /* SFGroupModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C509CA254D42800021D9C5 /* SFGroupModels.swift */; };
+		14C509D0254D49CD0021D9C5 /* SwiftyBeaver in Frameworks */ = {isa = PBXBuildFile; productRef = 14C509CF254D49CD0021D9C5 /* SwiftyBeaver */; };
 		14D97D7924DBEC4B00058B09 /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D97D7824DBEC4B00058B09 /* Keychain.swift */; };
 		14D9CA5924B599230030B17A /* AccountStateTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D9CA5824B599230030B17A /* AccountStateTagView.swift */; };
 		14D9CA5B24B599300030B17A /* AccountRowValuesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D9CA5A24B599300030B17A /* AccountRowValuesView.swift */; };
@@ -228,6 +229,7 @@
 			files = (
 				1480800E24EA4BDA007EB6D1 /* Just in Frameworks */,
 				146A6DD6252C496100DA8E85 /* Apollo in Frameworks */,
+				14C509D0254D49CD0021D9C5 /* SwiftyBeaver in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -624,6 +626,7 @@
 			packageProductDependencies = (
 				1480800D24EA4BDA007EB6D1 /* Just */,
 				146A6DD5252C496100DA8E85 /* Apollo */,
+				14C509CF254D49CD0021D9C5 /* SwiftyBeaver */,
 			);
 			productName = Whaler;
 			productReference = 14861ED1249F3DE100D2FA92 /* Whaler.app */;
@@ -678,6 +681,7 @@
 			packageReferences = (
 				1480800C24EA4BDA007EB6D1 /* XCRemoteSwiftPackageReference "Just" */,
 				146A6DD4252C496100DA8E85 /* XCRemoteSwiftPackageReference "apollo-ios" */,
+				14C509CE254D49CD0021D9C5 /* XCRemoteSwiftPackageReference "SwiftyBeaver" */,
 			);
 			productRefGroup = 14861ED2249F3DE100D2FA92 /* Products */;
 			projectDirPath = "";
@@ -1130,6 +1134,14 @@
 				minimumVersion = 0.8.0;
 			};
 		};
+		14C509CE254D49CD0021D9C5 /* XCRemoteSwiftPackageReference "SwiftyBeaver" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SwiftyBeaver/SwiftyBeaver.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.9.2;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1142,6 +1154,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 1480800C24EA4BDA007EB6D1 /* XCRemoteSwiftPackageReference "Just" */;
 			productName = Just;
+		};
+		14C509CF254D49CD0021D9C5 /* SwiftyBeaver */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 14C509CE254D49CD0021D9C5 /* XCRemoteSwiftPackageReference "SwiftyBeaver" */;
+			productName = SwiftyBeaver;
 		};
 /* End XCSwiftPackageProductDependency section */
 
