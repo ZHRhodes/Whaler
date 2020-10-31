@@ -64,7 +64,7 @@ class MainInteractor: MainInteractorData {
     accountGrouper.resetValues()
     newAccounts.forEach { account in
       accountGrouper.append(account, to: account.state ?? .ready)
-    }
+    } 
   }
   
   func getContacts(for account: Account, completion: @escaping () -> Void) {

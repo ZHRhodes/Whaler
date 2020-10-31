@@ -49,6 +49,39 @@ class SFHelper {
     return contacts
   }
   
+  static func queryPossibleIndustries() -> [String] {
+    let soql = "Select Industry from Account group by Industry"
+    var industries = [SF.IndustryGroup]()
+    do {
+      industries = try SF.query(soql)
+    } catch let error {
+      print(error)
+    }
+    return industries.compactMap { $0.Industry }
+  }
+  
+  static func queryPossibleOwners() -> [String] {
+    let soql = "Select Owner.Name from Account group by Owner.Name"
+    var ownerNames = [SF.OwnerNameGroup]()
+    do {
+      ownerNames = try SF.query(soql)
+    } catch let error {
+      print(error)
+    }
+    return ownerNames.compactMap { $0.Name }
+  }
+  
+  static func queryPossibleBillingStates() -> [String] {
+    let soql = "Select BillingState from Account group by BillingState"
+    var billingStates = [SF.BillingStateGroup]()
+    do {
+      billingStates = try SF.query(soql)
+    } catch let error {
+      print(error)
+    }
+    return billingStates.compactMap { $0.BillingState }
+  }
+  
   static func makeAuthenticationSession(completion: @escaping VoidClosure) -> ASWebAuthenticationSession? {
     let urlString = #"https://login.salesforce.com/services/oauth2/authorize?response_type=token&client_id=3MVG9Kip4IKAZQEVUyT0t2bh34B.GSy._2rVDX_MVJ7a3GyUtHsAGG2GZU843.Gajp7AusaDdCEero1UuAJwK&redirect_uri=getwhaler://salesforce_connect"#
     guard let url = URL(string: urlString) else { return nil }

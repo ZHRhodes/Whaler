@@ -79,6 +79,11 @@
 		14B037EE25074B1E00BA488D /* UserRemote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B037ED25074B1E00BA488D /* UserRemote.swift */; };
 		14B8BF662536E536006CE4B5 /* MainCollectionCellHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B8BF652536E536006CE4B5 /* MainCollectionCellHeader.swift */; };
 		14B8BF7825380A01006CE4B5 /* OpenSans-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 14B8BF7725380A01006CE4B5 /* OpenSans-SemiBold.ttf */; };
+		14C509B8254CECD70021D9C5 /* AddAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C509B7254CECD70021D9C5 /* AddAccountViewController.swift */; };
+		14C509BF254CF5DD0021D9C5 /* StandardField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C509BE254CF5DD0021D9C5 /* StandardField.swift */; };
+		14C509C3254CF83B0021D9C5 /* RevenueBucket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C509C2254CF83B0021D9C5 /* RevenueBucket.swift */; };
+		14C509C7254CFE7A0021D9C5 /* FieldValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C509C6254CFE7A0021D9C5 /* FieldValue.swift */; };
+		14C509CB254D42800021D9C5 /* SFGroupModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C509CA254D42800021D9C5 /* SFGroupModels.swift */; };
 		14D97D7924DBEC4B00058B09 /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D97D7824DBEC4B00058B09 /* Keychain.swift */; };
 		14D9CA5924B599230030B17A /* AccountStateTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D9CA5824B599230030B17A /* AccountStateTagView.swift */; };
 		14D9CA5B24B599300030B17A /* AccountRowValuesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D9CA5A24B599300030B17A /* AccountRowValuesView.swift */; };
@@ -188,6 +193,11 @@
 		14B037ED25074B1E00BA488D /* UserRemote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRemote.swift; sourceTree = "<group>"; };
 		14B8BF652536E536006CE4B5 /* MainCollectionCellHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCollectionCellHeader.swift; sourceTree = "<group>"; };
 		14B8BF7725380A01006CE4B5 /* OpenSans-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-SemiBold.ttf"; sourceTree = "<group>"; };
+		14C509B7254CECD70021D9C5 /* AddAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAccountViewController.swift; sourceTree = "<group>"; };
+		14C509BE254CF5DD0021D9C5 /* StandardField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandardField.swift; sourceTree = "<group>"; };
+		14C509C2254CF83B0021D9C5 /* RevenueBucket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RevenueBucket.swift; sourceTree = "<group>"; };
+		14C509C6254CFE7A0021D9C5 /* FieldValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FieldValue.swift; sourceTree = "<group>"; };
+		14C509CA254D42800021D9C5 /* SFGroupModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFGroupModels.swift; sourceTree = "<group>"; };
 		14D97D7824DBEC4B00058B09 /* Keychain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keychain.swift; sourceTree = "<group>"; };
 		14D9CA5824B599230030B17A /* AccountStateTagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountStateTagView.swift; sourceTree = "<group>"; };
 		14D9CA5A24B599300030B17A /* AccountRowValuesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountRowValuesView.swift; sourceTree = "<group>"; };
@@ -470,6 +480,7 @@
 				144BF56A24D7E64300F231F0 /* RootContainer */,
 				142EC6A624D6ADDD004F7A28 /* Authentication */,
 				140AE79424A9A9FE00F7705E /* Main */,
+				14C509B6254CEC810021D9C5 /* AddAccount */,
 				146C35D024C5575E00DBCA23 /* AccountsDetails */,
 				140AE79C24A9B4F700F7705E /* Extensions */,
 				14F4090224C6A04D00F405BC /* Fonts */,
@@ -511,6 +522,25 @@
 				14B037ED25074B1E00BA488D /* UserRemote.swift */,
 			);
 			path = User;
+			sourceTree = "<group>";
+		};
+		14C509B6254CEC810021D9C5 /* AddAccount */ = {
+			isa = PBXGroup;
+			children = (
+				14C509BD254CF5D00021D9C5 /* Models */,
+				14C509B7254CECD70021D9C5 /* AddAccountViewController.swift */,
+			);
+			path = AddAccount;
+			sourceTree = "<group>";
+		};
+		14C509BD254CF5D00021D9C5 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				14C509BE254CF5DD0021D9C5 /* StandardField.swift */,
+				14C509C2254CF83B0021D9C5 /* RevenueBucket.swift */,
+				14C509C6254CFE7A0021D9C5 /* FieldValue.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		14D9CA5724B599080030B17A /* MainTableSectionHeader */ = {
@@ -569,6 +599,7 @@
 				14EED67B24F0E5E400660BD1 /* SFLead.swift */,
 				1443045E24F3356A00D2FBD2 /* SFNewAccessToken.swift */,
 				1454743C250D93DC00257A89 /* SFSession.swift */,
+				14C509CA254D42800021D9C5 /* SFGroupModels.swift */,
 			);
 			path = Salesforce;
 			sourceTree = "<group>";
@@ -731,10 +762,12 @@
 				14A2834724DE510D0016BA82 /* SF.swift in Sources */,
 				146834FF24DA99810075B639 /* CommonTextField.swift in Sources */,
 				146C35D924C5689B00DBCA23 /* ContactRowView.swift in Sources */,
+				14C509C7254CFE7A0021D9C5 /* FieldValue.swift in Sources */,
 				140AE7A024A9B58400F7705E /* WorkState.swift in Sources */,
 				14B037E125049CDE00BA488D /* Grouper.swift in Sources */,
 				140AE7A524A9BEC300F7705E /* AccountTableCell.swift in Sources */,
 				14EED67C24F0E5E400660BD1 /* SFLead.swift in Sources */,
+				14C509C3254CF83B0021D9C5 /* RevenueBucket.swift in Sources */,
 				14861ED5249F3DE100D2FA92 /* AppDelegate.swift in Sources */,
 				14B8BF662536E536006CE4B5 /* MainCollectionCellHeader.swift in Sources */,
 				141F795F25319E60005F9295 /* Organization.swift in Sources */,
@@ -743,6 +776,7 @@
 				14861EF7249F401300D2FA92 /* CSVParser.swift in Sources */,
 				146C344624EA53690009C68C /* UserDefaultsManaged.swift in Sources */,
 				14FE635324C575CD00F7D30B /* TagView.swift in Sources */,
+				14C509BF254CF5DD0021D9C5 /* StandardField.swift in Sources */,
 				14D9CA5924B599230030B17A /* AccountStateTagView.swift in Sources */,
 				142EC6A824D6AE01004F7A28 /* AuthenticationView.swift in Sources */,
 				140AE79924A9AA5C00F7705E /* Account.swift in Sources */,
@@ -768,9 +802,11 @@
 				1414810B252FFD8100640946 /* TablePopoverViewController.swift in Sources */,
 				14F7DD9F24EE527600D43055 /* SFQueryResponse.swift in Sources */,
 				14018152254643AF00246BDA /* AccountsWorker.swift in Sources */,
+				14C509CB254D42800021D9C5 /* SFGroupModels.swift in Sources */,
 				14884241250876080025C7EE /* Notifications.swift in Sources */,
 				14D97D7924DBEC4B00058B09 /* Keychain.swift in Sources */,
 				140AE79E24A9B50900F7705E /* UIColor+Extensions.swift in Sources */,
+				14C509B8254CECD70021D9C5 /* AddAccountViewController.swift in Sources */,
 				1480800B24EA4B32007EB6D1 /* APINetworkInterface.swift in Sources */,
 				146C35D524C5635D00DBCA23 /* CompanyInfoView.swift in Sources */,
 				14861EFC249F49DE00D2FA92 /* DocumentPickerViewController.swift in Sources */,
