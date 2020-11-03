@@ -24,3 +24,7 @@ extension SF {
     var Description: String?
   }
 }
+
+extension SF.Account: SFObject {
+  static let name = "Account"
+}

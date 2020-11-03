@@ -25,6 +25,11 @@
 		141F796925327503005F9295 /* Graph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141F796825327503005F9295 /* Graph.swift */; };
 		141F796E25342974005F9295 /* TokenAddingIntercepter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141F796D25342974005F9295 /* TokenAddingIntercepter.swift */; };
 		141F797225342B0F005F9295 /* LegacyInterceptorProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141F797125342B0F005F9295 /* LegacyInterceptorProvider.swift */; };
+		14251745255108F0006255F1 /* SFQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14251744255108F0006255F1 /* SFQuery.swift */; };
+		142517492551096F006255F1 /* SFObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142517482551096F006255F1 /* SFObject.swift */; };
+		1425174D25510D4B006255F1 /* SFSoqlProviding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1425174C25510D4B006255F1 /* SFSoqlProviding.swift */; };
+		1425175125510E11006255F1 /* FilterBucket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1425175025510E11006255F1 /* FilterBucket.swift */; };
+		1425175525510E46006255F1 /* FilterValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1425175425510E46006255F1 /* FilterValue.swift */; };
 		142EC6A824D6AE01004F7A28 /* AuthenticationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142EC6A724D6AE01004F7A28 /* AuthenticationView.swift */; };
 		1440A20424C947FA00E36853 /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1440A20324C947FA00E36853 /* Contact.swift */; };
 		1443045D24F32FD900D2FBD2 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1443045C24F32FD900D2FBD2 /* String+Extensions.swift */; };
@@ -137,6 +142,11 @@
 		141F796825327503005F9295 /* Graph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Graph.swift; sourceTree = "<group>"; };
 		141F796D25342974005F9295 /* TokenAddingIntercepter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenAddingIntercepter.swift; sourceTree = "<group>"; };
 		141F797125342B0F005F9295 /* LegacyInterceptorProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegacyInterceptorProvider.swift; sourceTree = "<group>"; };
+		14251744255108F0006255F1 /* SFQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFQuery.swift; sourceTree = "<group>"; };
+		142517482551096F006255F1 /* SFObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFObject.swift; sourceTree = "<group>"; };
+		1425174C25510D4B006255F1 /* SFSoqlProviding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFSoqlProviding.swift; sourceTree = "<group>"; };
+		1425175025510E11006255F1 /* FilterBucket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterBucket.swift; sourceTree = "<group>"; };
+		1425175425510E46006255F1 /* FilterValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterValue.swift; sourceTree = "<group>"; };
 		142EC6A724D6AE01004F7A28 /* AuthenticationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationView.swift; sourceTree = "<group>"; };
 		1440A20324C947FA00E36853 /* Contact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contact.swift; sourceTree = "<group>"; };
 		1443045C24F32FD900D2FBD2 /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
@@ -296,9 +306,11 @@
 				140AE7A724A9DF1800F7705E /* Views */,
 				140AE79724A9AA4B00F7705E /* Models */,
 				14F7DD9D24EE526200D43055 /* Salesforce */,
+				14EED67D24F0EB7300660BD1 /* SFHelper.swift */,
+				1425175425510E46006255F1 /* FilterValue.swift */,
+				1425175025510E11006255F1 /* FilterBucket.swift */,
 				14D97D7824DBEC4B00058B09 /* Keychain.swift */,
 				146C344524EA53690009C68C /* UserDefaultsManaged.swift */,
-				14EED67D24F0EB7300660BD1 /* SFHelper.swift */,
 				1443046024F3AFFC00D2FBD2 /* Typealiases.swift */,
 				1488423E25086D910025C7EE /* Lifecycle.swift */,
 				14884240250876080025C7EE /* Notifications.swift */,
@@ -602,6 +614,9 @@
 				1443045E24F3356A00D2FBD2 /* SFNewAccessToken.swift */,
 				1454743C250D93DC00257A89 /* SFSession.swift */,
 				14C509CA254D42800021D9C5 /* SFGroupModels.swift */,
+				14251744255108F0006255F1 /* SFQuery.swift */,
+				142517482551096F006255F1 /* SFObject.swift */,
+				1425174C25510D4B006255F1 /* SFSoqlProviding.swift */,
 			);
 			path = Salesforce;
 			sourceTree = "<group>";
@@ -752,8 +767,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				14251745255108F0006255F1 /* SFQuery.swift in Sources */,
 				1440A20424C947FA00E36853 /* Contact.swift in Sources */,
 				14F7DDA124EE529300D43055 /* SFAccount.swift in Sources */,
+				1425175525510E46006255F1 /* FilterValue.swift in Sources */,
 				1443046124F3AFFC00D2FBD2 /* Typealiases.swift in Sources */,
 				14ECDD2124CABC7D006B4550 /* RichTextEditor.swift in Sources */,
 				14AB262E24D137E800AC280D /* ContactsTableViewController.swift in Sources */,
@@ -790,8 +807,11 @@
 				149F3A0B25209575001F38BF /* UIView+Extensions.swift in Sources */,
 				146A6DDA252C563200DA8E85 /* SFNetworkInterface.swift in Sources */,
 				149F3A0025206AE4001F38BF /* MainCollectionCell.swift in Sources */,
+				1425175125510E11006255F1 /* FilterBucket.swift in Sources */,
 				14F4FE14254AA5C600C89485 /* ContactsWorker.swift in Sources */,
 				1454743B250D904700257A89 /* UIViewController+Extensions.swift in Sources */,
+				142517492551096F006255F1 /* SFObject.swift in Sources */,
+				1425174D25510D4B006255F1 /* SFSoqlProviding.swift in Sources */,
 				14EED67A24F0E48C00660BD1 /* SFContact.swift in Sources */,
 				14EED67E24F0EB7300660BD1 /* SFHelper.swift in Sources */,
 				14F4090824C6A2D100F405BC /* UIFont+Extensions.swift in Sources */,

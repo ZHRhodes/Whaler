@@ -10,6 +10,8 @@ import Foundation
 import AuthenticationServices
 
 class SFHelper {
+  static let fullAccount = "id, name, type, industry, annualRevenue, billingCity, billingState, phone, website, numberOfEmployees, ownerId, description"
+  
   static func queryAccounts() -> [Account] {
     let soql = "SELECT id, name, type, industry, annualRevenue, billingCity, billingState, phone, website, numberOfEmployees, ownerId, description from Account WHERE (NOT type like 'Customer%') AND OwnerId = '\(SFSession.id ?? "")'"
     var sfAccounts = [SF.Account]()
