@@ -31,7 +31,7 @@ extension FilterBucket: NameProviding {
 extension FilterBucket: SoqlProviding {
   var soql: String {
     guard !soqlProperty.isEmpty else {
-      //log
+      log.error("Must set soqlProperty name before accessing soql")
       return ""
     }
     var soql = "\(soqlProperty) >= \(lowerBound.bound)"
