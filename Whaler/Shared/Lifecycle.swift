@@ -16,7 +16,7 @@ protocol TokenContainer {
 enum Lifecycle: TokenContainer {
   static var currentUser: User? {
     willSet {
-      print("Current user: \(newValue as Any)")
+      Log.info("Current user: \(newValue as Any)")
       if let newValue = newValue, newValue != currentUser {
         do {
           let currentUserData = try JSONEncoder().encode(newValue)

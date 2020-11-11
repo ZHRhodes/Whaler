@@ -93,6 +93,8 @@
 		14D97D7924DBEC4B00058B09 /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D97D7824DBEC4B00058B09 /* Keychain.swift */; };
 		14D9CA5924B599230030B17A /* AccountStateTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D9CA5824B599230030B17A /* AccountStateTagView.swift */; };
 		14D9CA5B24B599300030B17A /* AccountRowValuesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D9CA5A24B599300030B17A /* AccountRowValuesView.swift */; };
+		14DACF42255BAC2A00FC0900 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14DACF41255BAC2A00FC0900 /* Log.swift */; };
+		14DACF46255BAC9200FC0900 /* SwiftyBeaver+LoggingDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14DACF45255BAC9200FC0900 /* SwiftyBeaver+LoggingDestination.swift */; };
 		14E63ED124B9109C003EAF22 /* Whaler.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 14E63ECF24B9109C003EAF22 /* Whaler.xcdatamodeld */; };
 		14ECDB2124CA9288006B4550 /* NoteEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14ECDB2024CA9288006B4550 /* NoteEditor.swift */; };
 		14ECDD1524CAB819006B4550 /* trix-master in Resources */ = {isa = PBXBuildFile; fileRef = 14ECDD1424CAB819006B4550 /* trix-master */; };
@@ -212,6 +214,8 @@
 		14D97D7824DBEC4B00058B09 /* Keychain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keychain.swift; sourceTree = "<group>"; };
 		14D9CA5824B599230030B17A /* AccountStateTagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountStateTagView.swift; sourceTree = "<group>"; };
 		14D9CA5A24B599300030B17A /* AccountRowValuesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountRowValuesView.swift; sourceTree = "<group>"; };
+		14DACF41255BAC2A00FC0900 /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
+		14DACF45255BAC9200FC0900 /* SwiftyBeaver+LoggingDestination.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SwiftyBeaver+LoggingDestination.swift"; sourceTree = "<group>"; };
 		14E63ED024B9109C003EAF22 /* Whaler.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Whaler.xcdatamodel; sourceTree = "<group>"; };
 		14ECDB2024CA9288006B4550 /* NoteEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteEditor.swift; sourceTree = "<group>"; };
 		14ECDD1424CAB819006B4550 /* trix-master */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "trix-master"; sourceTree = "<group>"; };
@@ -285,6 +289,7 @@
 				1443045C24F32FD900D2FBD2 /* String+Extensions.swift */,
 				1454743A250D904700257A89 /* UIViewController+Extensions.swift */,
 				149F3A0A25209575001F38BF /* UIView+Extensions.swift */,
+				14DACF45255BAC9200FC0900 /* SwiftyBeaver+LoggingDestination.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -314,6 +319,7 @@
 				1443046024F3AFFC00D2FBD2 /* Typealiases.swift */,
 				1488423E25086D910025C7EE /* Lifecycle.swift */,
 				14884240250876080025C7EE /* Notifications.swift */,
+				14DACF41255BAC2A00FC0900 /* Log.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -817,6 +823,7 @@
 				14F4090824C6A2D100F405BC /* UIFont+Extensions.swift in Sources */,
 				144FA6BD24C2C0C500506F15 /* CompanyInfoHeaderView.swift in Sources */,
 				1454743D250D93DC00257A89 /* SFSession.swift in Sources */,
+				14DACF42255BAC2A00FC0900 /* Log.swift in Sources */,
 				14B037EE25074B1E00BA488D /* UserRemote.swift in Sources */,
 				144AECDA24D26658009625BE /* ContactRowViewCell.swift in Sources */,
 				145A376A24C588DF0081F9DB /* NotesView.swift in Sources */,
@@ -844,6 +851,7 @@
 				141F796925327503005F9295 /* Graph.swift in Sources */,
 				14B037E525073EBA00BA488D /* Tokens.swift in Sources */,
 				140AE7A324A9BA6500F7705E /* MainTableSectionHeader.swift in Sources */,
+				14DACF46255BAC9200FC0900 /* SwiftyBeaver+LoggingDestination.swift in Sources */,
 				141F796E25342974005F9295 /* TokenAddingIntercepter.swift in Sources */,
 				1480801024EA4BE7007EB6D1 /* JustNetworker.swift in Sources */,
 				1443045F24F3356A00D2FBD2 /* SFNewAccessToken.swift in Sources */,

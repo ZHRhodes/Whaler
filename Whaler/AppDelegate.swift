@@ -9,8 +9,6 @@
 import UIKit
 import SwiftyBeaver
 
-let log = SwiftyBeaver.self
-
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
@@ -30,19 +28,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   }
   
   private func configureSwiftyBeaverLogging() {
+    let format = "$DHH:mm:ss.SSS$d $C$L$c $M"
+    
     let file = FileDestination()  //Should only log to file when debugging -- need to add that -- or maybe just remove..
     file.logFileURL = URL(fileURLWithPath: "./WhalerLogs.beaver")
+    file.format = format
     SwiftyBeaver.addDestination(file)
     
     let platform = SBPlatformDestination(appID: "JXQ8RN",
                                          appSecret: "vaa2mnVbU2FscXvcv5bmuutxCKc3tjgV",
                                          encryptionKey: "91fezcmxcWusZdnsE2NyaSzsikLweCnv")
-    platform.sendingPoints.threshold = 1 //Temporary -- This is not efficient, just want to see the logs immediately right now
     platform.showNSLog = true
+    platform.format = format
     SwiftyBeaver.addDestination(platform)
     
     let console = ConsoleDestination()
+    console.format = format
     SwiftyBeaver.addDestination(console)
+    
+    Log.destinations.append(SwiftyBeaver.self)
   }
 
   // MARK: UISceneSession Lifecycle
