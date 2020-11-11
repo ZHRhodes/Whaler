@@ -131,10 +131,11 @@ extension MainCollectionCell: UITableViewDragDelegate {
     let itemProvider = NSItemProvider(object: account)
     let dragItem = UIDragItem(itemProvider: itemProvider)
     dragItem.previewProvider = { () -> UIDragPreview? in
-//      let cell = tableView.cellForRow(at: indexPath)
-//      cell?.layer.opacity = 0.0
-//      return UIDragPreview(view: cell!)
-      print("PREVIEW BEING CALLED ------------------------------------------------------")
+      /* what's going on here? what was i trying to figure out.. */
+// //      let cell = tableView.cellForRow(at: indexPath)
+// //      cell?.layer.opacity = 0.0
+// //      return UIDragPreview(view: cell!)
+//      print("PREVIEW BEING CALLED ------------------------------------------------------")
       return nil
     }
     session.localContext = (dataSource, state, indexPath, tableView)

@@ -20,7 +20,7 @@ protocol IconProviding {
 typealias SimpleItem = NameProviding & IconProviding
 
 protocol SimpleItemProviding {
-  func getItems(success: ([SimpleItem]) -> Void, error: (Error) -> Void)
+  func getItems(success: ([SimpleItem]) -> Void, failure: (Error) -> Void)
 }
 
 protocol TablePopoverViewControllerDelegate: class {
@@ -34,9 +34,8 @@ class TablePopoverViewController: UIViewController {
     didSet {
       provider?.getItems(success: { (items) in
         self.items = items
-      }, error: { error in
-        print(error)
-        //TODO log this
+      }, failure: { error in
+        
       })
     }
   }

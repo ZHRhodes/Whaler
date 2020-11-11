@@ -20,7 +20,7 @@ class SF {
     do {
       result = try networkInterface.get(path: "/query", params: ["q": soql])
     } catch {
-      print(error)
+      Log.error(error.localizedDescription, context: .salesforce)
       throw error
     }
     
@@ -30,7 +30,7 @@ class SF {
     do {
       resultAsResponse = try JSONDecoder().decode(QueryResponse<T>.self, from: data)
     } catch let error {
-      print(error)
+      Log.error(error.localizedDescription, context: .salesforce)
       throw error
     }
     

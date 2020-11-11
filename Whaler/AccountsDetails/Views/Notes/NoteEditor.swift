@@ -119,7 +119,7 @@ class EditorToolbar: UIView {
   
   @objc
   private func buttonTapped(sender: ToolbarButton) {
-    print(sender.option)
+    Log.debug("Button tapped. \(sender.option)", context: .textEditor)
   }
 }
 

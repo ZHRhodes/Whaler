@@ -388,8 +388,13 @@ struct OrgUser: SimpleItem {
 }
 
 struct OrgUsersProvider: SimpleItemProviding {
-  func getItems(success: ([SimpleItem]) -> Void, error: (Error) -> Void) {
-    let users = Lifecycle.currentUser?.organization?.users ?? []
+  func getItems(success: ([SimpleItem]) -> Void, failure: (Error) -> Void) {
+    guard let users = Lifecycle.currentUser?.organization?.users else {
+      let error = CustomError("Failed to get users from Organization.")
+      Log.error(error.localizedDescription)
+      failure(error)
+      return
+    }
     success(users)
   }
 }

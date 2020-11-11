@@ -18,7 +18,7 @@ class SFHelper {
     do {
       sfAccounts = try SF.query(soql)
     } catch let error {
-      print(error)
+      Log.error(error.localizedDescription)
     }
 
     return sfAccounts.map(Account.init)
@@ -31,7 +31,7 @@ class SFHelper {
     do {
        sfContacts = try SF.query("SELECT id, accountId, firstName, lastName, title, phone, email from Contact WHERE AccountId = '\(salesforceAccountId)'")
     } catch let error {
-      print(error)
+      Log.error(error.localizedDescription)
       sfContacts = []
     }
     
@@ -39,7 +39,7 @@ class SFHelper {
     do { //WHERE TravelBank LIKE 'TravelBank HR'
       sfLeads = try SF.query("SELECT id, company, firstName, lastName, title, phone, email from Lead WHERE Company LIKE '%\(accountName ?? "")%'")
     } catch let error {
-      print(error)
+      Log.error(error.localizedDescription)
       sfLeads = []
     }
     
@@ -57,7 +57,7 @@ class SFHelper {
     do {
       industries = try SF.query(soql)
     } catch let error {
-      print(error)
+      Log.error(error.localizedDescription)
     }
     return industries.compactMap { $0.Industry }
   }
@@ -68,7 +68,7 @@ class SFHelper {
     do {
       ownerNames = try SF.query(soql)
     } catch let error {
-      print(error)
+      Log.error(error.localizedDescription)
     }
     return ownerNames.compactMap { $0.Name }
   }
@@ -79,7 +79,7 @@ class SFHelper {
     do {
       billingStates = try SF.query(soql)
     } catch let error {
-      print(error)
+      Log.error(error.localizedDescription)
     }
     return billingStates.compactMap { $0.BillingState }
   }
@@ -89,7 +89,7 @@ class SFHelper {
     guard let url = URL(string: urlString) else { return nil }
     let session = ASWebAuthenticationSession(url: url, callbackURLScheme: "getwhaler") { (url, error) in
       if let error = error {
-        print(error)
+        Log.error(error.localizedDescription)
       }
       SFSession.accessToken = url?.fragmentValueOf("access_token")?.removingPercentEncoding
       SFSession.refreshToken = url?.fragmentValueOf("refresh_token")?.removingPercentEncoding

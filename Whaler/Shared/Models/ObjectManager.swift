@@ -35,7 +35,7 @@ enum ObjectManager {
       }
       try managedContext.save()
     } catch let error as NSError {
-      print("Could not save. \(error), \(error.userInfo)")
+      Log.error("Could not save. \(error), \(error.userInfo)", context: .cache)
     }
   }
   
@@ -48,7 +48,7 @@ enum ObjectManager {
     do {
       return try managedContext.fetch(fetchRequest).map(T.init)
     } catch let error as NSError {
-      print("Could not retrieve objects. \(error), \(error.userInfo)")
+      Log.error("Could not retrieve objects. \(error), \(error.userInfo)", context: .cache)
       return []
     }
   }
@@ -65,7 +65,7 @@ enum ObjectManager {
       try managedContext.execute(deleteRequest)
       try managedContext.save()
     } catch let error as NSError {
-      print ("Could not delete objects. \(error), \(error.userInfo)")
+      Log.error("Could not delete objects. \(error), \(error.userInfo)", context: .cache)
     }
   }
 }

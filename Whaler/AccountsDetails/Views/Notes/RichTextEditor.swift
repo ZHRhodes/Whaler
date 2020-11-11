@@ -190,8 +190,8 @@ final class RichTextEditor: UIView, WKNavigationDelegate, UIScrollViewDelegate {
   
   func restoreEditor(to state: String) {
     editorView.evaluateJavaScript("restoreEditor('\(state)')") { (response, error) in
-      print(response)
-      print(error)
+      Log.debug(String(reflecting: response))
+      Log.debug(String(reflecting: error))
     }
   }
 }
@@ -233,8 +233,8 @@ fileprivate extension String {
 
 extension RichTextEditor: WKScriptMessageHandler {
   func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
-      if message.name == "logHandler" {
-          print("WebKit LOG: \(message.body)")
-      }
+    if message.name == "logHandler" {
+      Log.info("WebKit LOG: \(message.body)", context: .textEditor)
+    }
   }
 }

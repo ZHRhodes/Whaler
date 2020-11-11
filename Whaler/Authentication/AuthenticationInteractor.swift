@@ -17,7 +17,7 @@ struct AuthenticationInteractor {
                                          jsonBody: body)
     switch response.result {
     case .error(let code, let message):
-      print("Failed to sign in. code: \(code), message: \(message)")
+      Log.debug("Failed to sign in. code: \(code), message: \(message)")
       failure()
     case .value(let userResponse):
       Lifecycle.currentUser = userResponse.response

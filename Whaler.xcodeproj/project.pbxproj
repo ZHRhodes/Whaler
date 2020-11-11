@@ -95,6 +95,7 @@
 		14D9CA5B24B599300030B17A /* AccountRowValuesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D9CA5A24B599300030B17A /* AccountRowValuesView.swift */; };
 		14DACF42255BAC2A00FC0900 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14DACF41255BAC2A00FC0900 /* Log.swift */; };
 		14DACF46255BAC9200FC0900 /* SwiftyBeaver+LoggingDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14DACF45255BAC9200FC0900 /* SwiftyBeaver+LoggingDestination.swift */; };
+		14DACF4A255BCD4C00FC0900 /* CustomError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14DACF49255BCD4C00FC0900 /* CustomError.swift */; };
 		14E63ED124B9109C003EAF22 /* Whaler.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 14E63ECF24B9109C003EAF22 /* Whaler.xcdatamodeld */; };
 		14ECDB2124CA9288006B4550 /* NoteEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14ECDB2024CA9288006B4550 /* NoteEditor.swift */; };
 		14ECDD1524CAB819006B4550 /* trix-master in Resources */ = {isa = PBXBuildFile; fileRef = 14ECDD1424CAB819006B4550 /* trix-master */; };
@@ -216,6 +217,7 @@
 		14D9CA5A24B599300030B17A /* AccountRowValuesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountRowValuesView.swift; sourceTree = "<group>"; };
 		14DACF41255BAC2A00FC0900 /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 		14DACF45255BAC9200FC0900 /* SwiftyBeaver+LoggingDestination.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SwiftyBeaver+LoggingDestination.swift"; sourceTree = "<group>"; };
+		14DACF49255BCD4C00FC0900 /* CustomError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomError.swift; sourceTree = "<group>"; };
 		14E63ED024B9109C003EAF22 /* Whaler.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Whaler.xcdatamodel; sourceTree = "<group>"; };
 		14ECDB2024CA9288006B4550 /* NoteEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteEditor.swift; sourceTree = "<group>"; };
 		14ECDD1424CAB819006B4550 /* trix-master */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "trix-master"; sourceTree = "<group>"; };
@@ -320,6 +322,7 @@
 				1488423E25086D910025C7EE /* Lifecycle.swift */,
 				14884240250876080025C7EE /* Notifications.swift */,
 				14DACF41255BAC2A00FC0900 /* Log.swift */,
+				14DACF49255BCD4C00FC0900 /* CustomError.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -808,6 +811,7 @@
 				142EC6A824D6AE01004F7A28 /* AuthenticationView.swift in Sources */,
 				140AE79924A9AA5C00F7705E /* Account.swift in Sources */,
 				1473C8A82522E6D000A991DA /* AttributeTagView.swift in Sources */,
+				14DACF4A255BCD4C00FC0900 /* CustomError.swift in Sources */,
 				140AE79624A9AA0B00F7705E /* MainInteractor.swift in Sources */,
 				145A376C24C58D440081F9DB /* AccountDetailsView.swift in Sources */,
 				149F3A0B25209575001F38BF /* UIView+Extensions.swift in Sources */,

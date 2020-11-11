@@ -39,8 +39,7 @@ struct SFNetworkInterface { //fix up conformance later}: NetworkInterface {
       do {
         try refreshAccessToken()
         result = networker.execute(request: request)
-      } catch let error {
-        print(error)
+      } catch {
         return NetworkResult(ok: false, statusCode: nil, data: "Failed to refresh SF access token.".data(using: .utf8))
       }
     }
@@ -76,7 +75,7 @@ struct SFNetworkInterface { //fix up conformance later}: NetworkInterface {
       }
       tokenContainer.accessToken = newAccessToken
     } catch let error {
-      print(error)
+      Log.error("Failed to refresh SF access token. Error: \(error)", context: .salesforce)
       throw error
     }
   }

@@ -68,7 +68,8 @@ struct APINetworkInterface: NetworkInterface {
     }
 
     if !result.ok {
-//      log.warning("Request \(request.path) failed with status code \(String(describing: result.statusCode))", context: LoggingContext.rest)
+      Log.warning("Request \(request.path) failed with status code \(String(describing: result.statusCode))",
+                  context: .networking)
       return Response<R>(code: result.statusCode ?? -1, message: "")
     }
 
@@ -77,13 +78,12 @@ struct APINetworkInterface: NetworkInterface {
     do {
       response = try JSONDecoder().decode(Response<R>.self, from: data)
     } catch let error {
-//      log.error("Failed to decode response from \(request.path)", context: LoggingContext.rest)
-      print(error)
+      Log.error("Failed to decode response from \(request.path). Error: \(error)", context: .networking)
       return Response<R>(.failedToDecodeResultData)
     }
     switch response.result {
     case .error(let code, let message):
-//      log.error("Error from request path \(request.path) -- Code: \(code), Message: \(message)", context: LoggingContext.rest)
+      Log.error("Error from request path \(request.path) -- Code: \(code), Message: \(message)", context: .networking)
       if code == 4004 {
         NotificationCenter.default.post(name: .unauthorizedUser, object: nil)
       }
@@ -134,14 +134,14 @@ extension APINetworkInterface: APIInterface {
         break
       }
     } catch let error {
-      //log.error(error)
-      print(error)
+      Log.error(error.localizedDescription, context: .networking)
       return false
     }
 
     switch response.result {
     case .error(let code, let message):
-//      log.error("Error from request path /api/user/refresh -- Code: \(code), Message: \(message)", context: LoggingContext.rest)
+      Log.error("Error from request path /api/user/refresh -- Code: \(code), Message: \(message)",
+                context: .networking)
       return false
     case .value(let tokensResponse):
       guard let accessToken = tokensResponse.tokens?.accessToken,

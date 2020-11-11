@@ -52,7 +52,7 @@ class MainInteractor: MainInteractorData {
     guard let userId = Lifecycle.currentUser?.id else { return }
     let predicate = NSPredicate(format: "ownerUserId == %d", userId)
     let retrievedAccounts = ObjectManager.retrieveAll(ofType: Account.self, with: predicate)
-    print(retrievedAccounts)
+    Log.info(String(reflecting: retrievedAccounts))
     setAccounts(retrievedAccounts)
     
     //store contact count to Account so that this isn't
@@ -70,9 +70,9 @@ class MainInteractor: MainInteractorData {
   func getContacts(for account: Account, completion: @escaping () -> Void) {
     account.resetContacts()
     contactsHelper.fetchContactsFromAPI(accountID: account.id) { (apiContacts) in
-      print(apiContacts?.reduce("", { $0 + " " + $1.id }))
+      Log.info(apiContacts?.reduce("", { $0 + " " + $1.id }) ?? "")
       guard let apiContacts = apiContacts else {
-        print("Failed to fetch contacts from API")
+        Log.error("Failed to fetch contacts from API")
         return
       }
       
@@ -127,7 +127,7 @@ class MainInteractor: MainInteractorData {
   func getAccounts() {
     accountsHelper.fetchAccountsFromAPI { (accounts) in
       guard let accounts = accounts else {
-        print("Failed to fetch accountsdbea from API")
+        Log.error("Failed to fetch accounts from API")
         return
       }
       
@@ -137,7 +137,7 @@ class MainInteractor: MainInteractorData {
         self.setAccounts(accountsPostSave)
         self.viewController?.reloadCollection()
       }
-      print(self.accountGrouper)
+      Log.info(String(reflecting: self.accountGrouper))
     }
   }
   
@@ -165,8 +165,7 @@ class MainInteractor: MainInteractorData {
       try SF.refreshAccessToken()
       completion(true)
     } catch let error {
-      print(error)
-      //log this
+      Log.error("Failed to refresh Salesforce session.")
       completion(false)
     }
   }
@@ -176,6 +175,6 @@ class MainInteractor: MainInteractorData {
   }
   
   func assign(_ user: User, to account: Account) {
-    print(user, account)
+    Log.info("Assigned account \(account.id) to user \(user.id)")
   }
 }

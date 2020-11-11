@@ -57,15 +57,13 @@ class Keychain {
     let status: OSStatus = SecItemCopyMatching(query as CFDictionary, &dataTypeRef)
     
     guard status == errSecSuccess else {
-      print("failed to load key: \(key). Status: \(status)")
-      //log this
+      Log.error("Failed to load key: \(key). Status: \(status)", context: .keychain)
       return nil
     }
     
     guard let existingItem = dataTypeRef as? [String: Any],
           let data = existingItem[kSecValueData as String] as? Data else {
-      print("failed to extract data from existingItem with key: \(key)")
-      //log this
+      Log.error("Failed to extract data from existingItem with key: \(key)", context: .keychain)
       return nil
     }
     
@@ -84,7 +82,7 @@ class Keychain {
 
     let status: OSStatus = SecItemDelete(query as CFDictionary)
     if status != errSecSuccess {
-      print("failed to delete key: \(key). Status: \(status)")
+      Log.error("failed to delete key: \(key). Status: \(status)", context: .keychain)
     }
     return status
   }

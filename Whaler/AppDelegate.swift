@@ -12,15 +12,13 @@ import SwiftyBeaver
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-    // Override point for customization after application launch.
     UITableView.appearance().backgroundColor = .white
     UITableViewCell.appearance().backgroundColor = .white
     UITableViewHeaderFooterView.appearance().tintColor = .white
     UITableView.appearance().separatorStyle = .none
-//    print("Documents Directory: ", FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).last ?? "Not Found!")
-    if let directoryLocation = FileManager.default.urls(for: .libraryDirectory, in: .userDomainMask).last {
-      print("Documents Directory: \(directoryLocation)Application Support")
-    }
+//    if let directoryLocation = FileManager.default.urls(for: .libraryDirectory, in: .userDomainMask).last {
+//      print("Documents Directory: \(directoryLocation)Application Support")
+//    }
 //    resetAllRecords(of: "AccountEntity")
 //    resetAllRecords(of: "ContactEntity")
     configureSwiftyBeaverLogging()

@@ -13,12 +13,21 @@ protocol LoggingDestination {
   static func error(log: Any, context: Any?)
 }
 
+enum LoggingContext: String {
+  case networking = "Context: Networking",
+       salesforce = "Context: Salesforce",
+       cache = "Context: Cache",
+       keychain = "Context: Keychain",
+       lifecycle = "Context: Lifecycle",
+       textEditor = "Context: TextEditor"
+}
+
 enum Log {
   static var destinations: [LoggingDestination.Type] = []
   
   static func debug(_ message: String,
                     extraData: [String: Any] = [:],
-                    context: String? = nil,
+                    context: LoggingContext? = nil,
                     file: String = #file,
                     function: String = #function,
                     line: Int = #line) {
@@ -28,7 +37,7 @@ enum Log {
   
   static func info(_ message: String,
                    extraData: [String: Any] = [:],
-                   context: String? = nil,
+                   context: LoggingContext? = nil,
                    file: String = #file,
                    function: String = #function,
                    line: Int = #line) {
@@ -38,7 +47,7 @@ enum Log {
   
   static func warning(_ message: String,
                       extraData: [String: Any] = [:],
-                      context: String? = nil,
+                      context: LoggingContext? = nil,
                       file: String = #file,
                       function: String = #function,
                       line: Int = #line) {
@@ -48,7 +57,7 @@ enum Log {
   
   static func error(_ message: String,
                     extraData: [String: Any] = [:],
-                    context: String? = nil,
+                    context: LoggingContext? = nil,
                     file: String = #file,
                     function: String = #function,
                     line: Int = #line) {
@@ -64,7 +73,10 @@ enum Log {
                              function: String,
                              line: Int) -> String {
     let lastFileComponent = file.components(separatedBy: "/").last ?? file
-    let logMessage = "\(lastFileComponent).\(function):\(line)\n" + message + " " + extraData.description
+    var logMessage = "\(lastFileComponent).\(function):\(line)\n" + message
+    if !extraData.isEmpty {
+      logMessage.append(" " + extraData.description)
+    }
     return logMessage
   }
 }

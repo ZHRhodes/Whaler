@@ -44,7 +44,7 @@ struct AccountDetailsView: View {
         account.notes = notes
         ObjectManager.save(account)
       }, failure: { error in
-        print(error)
+        Log.error("Failed to serialize the text editor.", context: .textEditor)
       })
     }) {
       Image("backArrow").resizable()
