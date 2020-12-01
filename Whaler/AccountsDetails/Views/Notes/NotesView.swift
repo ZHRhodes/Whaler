@@ -11,11 +11,11 @@ import SwiftUI
 struct NotesView: View {
   let initialState: String
   let editor = RichTextEditor()
-  private(set) var editorView: RichTextEditorRepresentable!
+  private(set) var editorView: NoteEditorRepresentable!
   
   init(initialState: String) {
     self.initialState = initialState
-    editorView = RichTextEditorRepresentable(editor: editor)
+    editorView = NoteEditorRepresentable()
   }
   
   var body: some View {
@@ -29,7 +29,7 @@ struct NotesView: View {
             .padding()
             .onAppear(perform: {
               Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false, block: { (_) in
-                editor.restoreEditor(to: initialState)
+//                editor.restoreEditor(to: initialState)
               })
             })
         }

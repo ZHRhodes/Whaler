@@ -9,6 +9,7 @@
 import Foundation
 import WebKit
 import SwiftUI
+import Aztec
 
 public protocol RichTextEditorDelegate: class {
     func textDidChange(text: String)
@@ -82,57 +83,14 @@ final class RichTextEditor: UIView, WKNavigationDelegate, UIScrollViewDelegate {
 //      }
 //  }
 
-  private var editorView: WKWebView!
+  private var editorView: Aztec.TextView!//WKWebView!
   private let placeholderLabel = UILabel()
-
+  
   public override init(frame: CGRect = .zero) {
-    placeholderLabel.textColor = UIColor.lightGray.withAlphaComponent(0.65)
-
-    guard let scriptPath = Bundle.main.path(forResource: "richTextEditor", ofType: "js", inDirectory: "trix-master/dist") else { fatalError("") }
-
-    guard let scriptContent = try? String(contentsOfFile: scriptPath, encoding: String.Encoding.utf8) else { fatalError("") }
-    
-    let configuration = WKWebViewConfiguration()
-    configuration.userContentController.addUserScript(
-        WKUserScript(source: scriptContent,
-                     injectionTime: .atDocumentStart,
-                     forMainFrameOnly: true
-        )
-    )
-    
     super.init(frame: frame)
-    
-    [RichTextEditor.textDidChange, RichTextEditor.heightDidChange].forEach {
-        configuration.userContentController.add(self, name: $0)
-    }
-    
-    editorView = WKWebView(frame: .zero, configuration: configuration)
-    
-    let source = "function captureLog(msg) { window.webkit.messageHandlers.logHandler.postMessage(msg); } window.console.log = captureLog;"
-    let script = WKUserScript(source: source, injectionTime: .atDocumentStart, forMainFrameOnly: false)
-    editorView.configuration.userContentController.addUserScript(script)
-    editorView.configuration.userContentController.add(self, name: "logHandler")
-    
-    let url = Bundle.main.url(forResource: "richTextEditor", withExtension: "html", subdirectory: "trix-master/dist")!
-
-    editorView.navigationDelegate = self
-    editorView.isOpaque = false
-    editorView.backgroundColor = .clear
-    editorView.scrollView.showsHorizontalScrollIndicator = false
-    editorView.scrollView.showsVerticalScrollIndicator = true
-    editorView.scrollView.bounces = true
-    editorView.scrollView.isScrollEnabled = true
-    editorView.scrollView.delegate = self
-
-    addSubview(placeholderLabel)
-    placeholderLabel.translatesAutoresizingMaskIntoConstraints = false
-    NSLayoutConstraint.activate([
-        placeholderLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-        placeholderLabel.topAnchor.constraint(equalTo: topAnchor),
-        placeholderLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
-        placeholderLabel.bottomAnchor.constraint(equalTo: bottomAnchor)
-    ])
-
+    editorView = Aztec.TextView(defaultFont: UIFont.openSans(weight: .regular, size: 25),
+                                defaultParagraphStyle: .default,
+                                defaultMissingImage: UIImage(named: "bold")!)
     addSubview(editorView)
     editorView.translatesAutoresizingMaskIntoConstraints = false
     NSLayoutConstraint.activate([
@@ -141,9 +99,67 @@ final class RichTextEditor: UIView, WKNavigationDelegate, UIScrollViewDelegate {
         editorView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8),
         editorView.bottomAnchor.constraint(equalTo: bottomAnchor)
     ])
-
-    editorView.loadFileURL(url, allowingReadAccessTo: url)
   }
+
+//  public override init(frame: CGRect = .zero) {
+//    placeholderLabel.textColor = UIColor.lightGray.withAlphaComponent(0.65)
+//
+//    guard let scriptPath = Bundle.main.path(forResource: "richTextEditor", ofType: "js", inDirectory: "trix-master/dist") else { fatalError("") }
+//
+//    guard let scriptContent = try? String(contentsOfFile: scriptPath, encoding: String.Encoding.utf8) else { fatalError("") }
+//
+//    let configuration = WKWebViewConfiguration()
+//    configuration.userContentController.addUserScript(
+//        WKUserScript(source: scriptContent,
+//                     injectionTime: .atDocumentStart,
+//                     forMainFrameOnly: true
+//        )
+//    )
+//
+//    super.init(frame: frame)
+//
+//    [RichTextEditor.textDidChange, RichTextEditor.heightDidChange].forEach {
+//        configuration.userContentController.add(self, name: $0)
+//    }
+//
+//    editorView = WKWebView(frame: .zero, configuration: configuration)
+//
+//    let source = "function captureLog(msg) { window.webkit.messageHandlers.logHandler.postMessage(msg); } window.console.log = captureLog;"
+//    let script = WKUserScript(source: source, injectionTime: .atDocumentStart, forMainFrameOnly: false)
+//    editorView.configuration.userContentController.addUserScript(script)
+//    editorView.configuration.userContentController.add(self, name: "logHandler")
+//
+//    let url = Bundle.main.url(forResource: "richTextEditor", withExtension: "html", subdirectory: "trix-master/dist")!
+//
+//    editorView.navigationDelegate = self
+//    editorView.isOpaque = false
+//    editorView.backgroundColor = .clear
+//    editorView.scrollView.showsHorizontalScrollIndicator = false
+//    editorView.scrollView.showsVerticalScrollIndicator = true
+//    editorView.scrollView.bounces = true
+//    editorView.scrollView.isScrollEnabled = true
+//    editorView.scrollView.delegate = self
+//
+//    addSubview(placeholderLabel)
+//    placeholderLabel.translatesAutoresizingMaskIntoConstraints = false
+//    NSLayoutConstraint.activate([
+//        placeholderLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
+//        placeholderLabel.topAnchor.constraint(equalTo: topAnchor),
+//        placeholderLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+//        placeholderLabel.bottomAnchor.constraint(equalTo: bottomAnchor)
+//    ])
+//
+//    addSubview(editorView)
+//    editorView.translatesAutoresizingMaskIntoConstraints = false
+//    NSLayoutConstraint.activate([
+//        editorView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8),
+//        editorView.topAnchor.constraint(equalTo: topAnchor, constant: 10),
+//        editorView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8),
+//        editorView.bottomAnchor.constraint(equalTo: bottomAnchor)
+//    ])
+//
+//    editorView.loadFileURL(url, allowingReadAccessTo: url)
+//  }
 
   public required init?(coder aDecoder: NSCoder) {
       super.init(coder: aDecoder)
@@ -175,25 +191,25 @@ final class RichTextEditor: UIView, WKNavigationDelegate, UIScrollViewDelegate {
       return nil
   }
   
-  func serializeEditor(success: @escaping (String) -> Void, failure: @escaping (Error?) -> Void) {
-    editorView.evaluateJavaScript("serializeEditor()") { (response, error) in
-      guard error == nil,
-            var responseString = response as? String else { return failure(error) }
-      responseString = responseString.replacingOccurrences(of: #"\n"#, with: #"\\n"#)
-      success(responseString)
-//      let utf16array = Array(responseString.utf16)
-//      let string = String(utf16CodeUnits: utf16array, count: utf16array.count)
-//      string.replace
-//      success(string)
-    }
-  }
+//  func serializeEditor(success: @escaping (String) -> Void, failure: @escaping (Error?) -> Void) {
+//    editorView.evaluateJavaScript("serializeEditor()") { (response, error) in
+//      guard error == nil,
+//            var responseString = response as? String else { return failure(error) }
+//      responseString = responseString.replacingOccurrences(of: #"\n"#, with: #"\\n"#)
+//      success(responseString)
+////      let utf16array = Array(responseString.utf16)
+////      let string = String(utf16CodeUnits: utf16array, count: utf16array.count)
+////      string.replace
+////      success(string)
+//    }
+//  }
   
-  func restoreEditor(to state: String) {
-    editorView.evaluateJavaScript("restoreEditor('\(state)')") { (response, error) in
-      Log.debug(String(reflecting: response))
-      Log.debug(String(reflecting: error))
-    }
-  }
+//  func restoreEditor(to state: String) {
+//    editorView.evaluateJavaScript("restoreEditor('\(state)')") { (response, error) in
+//      Log.debug(String(reflecting: response))
+//      Log.debug(String(reflecting: error))
+//    }
+//  }
 }
 
 fileprivate extension String {

@@ -40,12 +40,12 @@ struct AccountDetailsView: View {
   var backButton: some View {
     Button(action: {
       presentation.wrappedValue.dismiss()
-      notesView.editorView.editor?.serializeEditor(success: { notes in
-        account.notes = notes
-        ObjectManager.save(account)
-      }, failure: { error in
-        Log.error("Failed to serialize the text editor.", context: .textEditor)
-      })
+//      notesView.editorView.editor?.serializeEditor(success: { notes in
+//        account.notes = notes
+//        ObjectManager.save(account)
+//      }, failure: { error in
+//        Log.error("Failed to serialize the text editor.", context: .textEditor)
+//      })
     }) {
       Image("backArrow").resizable()
     }

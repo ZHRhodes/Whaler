@@ -1,0 +1,20 @@
+PODS:
+  - WordPress-Aztec-iOS (1.19.3)
+  - WordPress-Editor-iOS (1.19.3):
+    - WordPress-Aztec-iOS (= 1.19.3)
+
+DEPENDENCIES:
+  - WordPress-Editor-iOS
+
+SPEC REPOS:
+  trunk:
+    - WordPress-Aztec-iOS
+    - WordPress-Editor-iOS
+
+SPEC CHECKSUMS:
+  WordPress-Aztec-iOS: b7ac8b30f746992e85d9668453ac87c2cdcecf4f
+  WordPress-Editor-iOS: 1886f7fe464d79ee64ccfe7985281f8cf45f75eb
+
+PODFILE CHECKSUM: 39ec58c30774dae6d09f0027f2da172cd0c34d45
+
+COCOAPODS: 1.10.0
