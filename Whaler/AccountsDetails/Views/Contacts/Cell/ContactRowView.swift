@@ -37,15 +37,23 @@ class ContactRowView: UIView {
   }
   
   private func configureShadowView() {
-    shadowView.backgroundColor = .white
-    shadowView.clipsToBounds = false
-    shadowView.layer.shadowColor = UIColor(red: 0.77, green: 0.77, blue: 0.77, alpha: 0.21).cgColor
-    shadowView.layer.shadowOpacity = 1.0
-    shadowView.layer.shadowRadius = 6.0
-    shadowView.layer.shadowOffset = CGSize(width: 0, height: 2)
+    //if we actually go with the line, clean up and rename this, etc
+    shadowView.layer.cornerRadius = 10
+    shadowView.layer.masksToBounds = true
+    shadowView.layer.borderWidth = 1.0
+    shadowView.layer.borderColor = UIColor(red: 0.77, green: 0.77, blue: 0.77, alpha: 0.75).cgColor
     
+//    shadowView.backgroundColor = .white
+//    shadowView.clipsToBounds = false
+//    shadowView.layer.shadowColor = UIColor(red: 0.77, green: 0.77, blue: 0.77, alpha: 0.21).cgColor
+//    shadowView.layer.shadowOpacity = 1.0
+//    shadowView.layer.shadowRadius = 6.0
+//    shadowView.layer.shadowOffset = CGSize(width: 0, height: 2)
+//
+    shadowView.clipsToBounds = true
     shadowView.translatesAutoresizingMaskIntoConstraints = false
-    addAndAttachToEdges(view: shadowView)
+    
+    addAndAttachToEdges(view: shadowView, inset: 10)
   }
   
   private func configureMoveDots() {
@@ -107,7 +115,7 @@ class ContactRowView: UIView {
     
     addSubview(assignButton)
     
-    assignButton.rightAnchor.constraint(equalTo: rightAnchor, constant: -8).isActive = true
+    assignButton.rightAnchor.constraint(equalTo: shadowView.rightAnchor, constant: -8).isActive = true
     assignButton.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
     assignButton.widthAnchor.constraint(equalToConstant: 40).isActive = true
     assignButton.heightAnchor.constraint(equalToConstant: 40).isActive = true

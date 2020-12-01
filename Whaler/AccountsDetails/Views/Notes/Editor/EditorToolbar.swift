@@ -9,13 +9,19 @@
 import Foundation
 import UIKit
 
+protocol EditorToolbarDelegate: class {
+  func didSelect(option: EditorToolbarOption)
+}
+
 class EditorToolbar: UIView {
   private let stackView = UIStackView()
   private var options: [EditorToolbarOption] = []
+  private weak var delegate: EditorToolbarDelegate?
   
-  init(options: [EditorToolbarOption]) {
+  init(options: [EditorToolbarOption], delegate: EditorToolbarDelegate?) {
     super.init(frame: .zero)
     self.options = options
+    self.delegate = delegate
     configure()
   }
   
@@ -30,12 +36,16 @@ class EditorToolbar: UIView {
   }
   
   private func configure() {
+    layer.masksToBounds = true
+    layer.cornerRadius = 10.0
     configureStackView()
   }
   
   private func configureStackView() {
     addSubview(stackView)
     stackView.axis = .horizontal
+    stackView.distribution = .fillEqually
+    stackView.translatesAutoresizingMaskIntoConstraints = false
     
     options.forEach { option in
       let button = makeToolbarButton(for: option)
@@ -54,21 +64,15 @@ class EditorToolbar: UIView {
   
   func makeToolbarButton(for option: EditorToolbarOption) -> UIButton {
     let button = ToolbarButton(option: option)
-    button.setImage(option.icon, for: .normal)
+    let icon = option.icon.withTintColor(.brandPurple)
+//    button.imageEdgeInsets = UIEdgeInsets(top: 15.6, left: 12, bottom: 15.6, right: 12)
+    button.setImage(icon, for: .normal)
     button.addTarget(self, action: #selector(buttonTapped(sender:)), for: .touchUpInside)
-    
-    let constraints = [
-      button.heightAnchor.constraint(equalToConstant: 20),
-      button.widthAnchor.constraint(equalToConstant: 30)
-    ]
-    
-    NSLayoutConstraint.activate(constraints)
-    
     return button
   }
   
   @objc
   private func buttonTapped(sender: ToolbarButton) {
-    Log.debug("Button tapped. \(sender.option)", context: .textEditor)
+    delegate?.didSelect(option: sender.option)
   }
 }

@@ -34,10 +34,14 @@ struct NotesView: View {
             })
         }
       }
-      .background(Color.white)
-      .background(RoundedRectangle(cornerRadius: 4)
-                    .shadow(color: Color(red: 2/256, green: 2/256, blue: 2/256, opacity: 0.21),
-                            radius: 6, x: 0, y: 2))
+      .overlay(
+                  RoundedRectangle(cornerRadius: 20)
+                      .stroke(Color(UIColor(red: 0.77, green: 0.77, blue: 0.77, alpha: 0.75)), lineWidth: 2)
+              )
+//      .background(Color.white)
+//      .background(RoundedRectangle(cornerRadius: 4)
+//                    .shadow(color: Color(red: 2/256, green: 2/256, blue: 2/256, opacity: 0.21),
+//                            radius: 6, x: 0, y: 2))
     }
     .foregroundColor(Color.black)
     .padding(EdgeInsets(top: 10, leading: 40, bottom: 40, trailing: 40))
