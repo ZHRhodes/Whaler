@@ -57,6 +57,7 @@
 		146C35D924C5689B00DBCA23 /* ContactRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146C35D824C5689B00DBCA23 /* ContactRowView.swift */; };
 		146C35DB24C56A0100DBCA23 /* ContactsTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146C35DA24C56A0100DBCA23 /* ContactsTableView.swift */; };
 		1473C8A82522E6D000A991DA /* AttributeTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1473C8A72522E6D000A991DA /* AttributeTagView.swift */; };
+		147A3CB22577625500D96637 /* Starscream in Frameworks */ = {isa = PBXBuildFile; productRef = 147A3CB12577625500D96637 /* Starscream */; };
 		1480800924EA4AE8007EB6D1 /* Networker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1480800824EA4AE8007EB6D1 /* Networker.swift */; };
 		1480800B24EA4B32007EB6D1 /* APINetworkInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1480800A24EA4B32007EB6D1 /* APINetworkInterface.swift */; };
 		1480800E24EA4BDA007EB6D1 /* Just in Frameworks */ = {isa = PBXBuildFile; productRef = 1480800D24EA4BDA007EB6D1 /* Just */; };
@@ -90,6 +91,9 @@
 		14C509C7254CFE7A0021D9C5 /* FieldValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C509C6254CFE7A0021D9C5 /* FieldValue.swift */; };
 		14C509CB254D42800021D9C5 /* SFGroupModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C509CA254D42800021D9C5 /* SFGroupModels.swift */; };
 		14C509D0254D49CD0021D9C5 /* SwiftyBeaver in Frameworks */ = {isa = PBXBuildFile; productRef = 14C509CF254D49CD0021D9C5 /* SwiftyBeaver */; };
+		14D4A2E72574CA7E003EFF61 /* EditorToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D4A2E62574CA7E003EFF61 /* EditorToolbar.swift */; };
+		14D4A2EB2574CA94003EFF61 /* ToolbarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D4A2EA2574CA94003EFF61 /* ToolbarButton.swift */; };
+		14D4A2EF2574CAAB003EFF61 /* EditorToolbarOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D4A2EE2574CAAB003EFF61 /* EditorToolbarOption.swift */; };
 		14D97D7924DBEC4B00058B09 /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D97D7824DBEC4B00058B09 /* Keychain.swift */; };
 		14D9CA5924B599230030B17A /* AccountStateTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D9CA5824B599230030B17A /* AccountStateTagView.swift */; };
 		14D9CA5B24B599300030B17A /* AccountRowValuesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D9CA5A24B599300030B17A /* AccountRowValuesView.swift */; };
@@ -114,6 +118,8 @@
 		14F7DD9F24EE527600D43055 /* SFQueryResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F7DD9E24EE527600D43055 /* SFQueryResponse.swift */; };
 		14F7DDA124EE529300D43055 /* SFAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F7DDA024EE529300D43055 /* SFAccount.swift */; };
 		14FE635324C575CD00F7D30B /* TagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14FE635224C575CD00F7D30B /* TagView.swift */; };
+		53863F9DCDB377BBC7A9A114 /* Pods_WhalerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B39B01D0F7BB942BF53407DA /* Pods_WhalerTests.framework */; };
+		6EC92F4185E77A246A6185B6 /* Pods_Whaler.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFB12DFA879B292F66B37334 /* Pods_Whaler.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -212,6 +218,9 @@
 		14C509C2254CF83B0021D9C5 /* RevenueBucket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RevenueBucket.swift; sourceTree = "<group>"; };
 		14C509C6254CFE7A0021D9C5 /* FieldValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FieldValue.swift; sourceTree = "<group>"; };
 		14C509CA254D42800021D9C5 /* SFGroupModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFGroupModels.swift; sourceTree = "<group>"; };
+		14D4A2E62574CA7E003EFF61 /* EditorToolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorToolbar.swift; sourceTree = "<group>"; };
+		14D4A2EA2574CA94003EFF61 /* ToolbarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolbarButton.swift; sourceTree = "<group>"; };
+		14D4A2EE2574CAAB003EFF61 /* EditorToolbarOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorToolbarOption.swift; sourceTree = "<group>"; };
 		14D97D7824DBEC4B00058B09 /* Keychain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keychain.swift; sourceTree = "<group>"; };
 		14D9CA5824B599230030B17A /* AccountStateTagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountStateTagView.swift; sourceTree = "<group>"; };
 		14D9CA5A24B599300030B17A /* AccountRowValuesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountRowValuesView.swift; sourceTree = "<group>"; };
@@ -236,6 +245,12 @@
 		14F7DD9E24EE527600D43055 /* SFQueryResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFQueryResponse.swift; sourceTree = "<group>"; };
 		14F7DDA024EE529300D43055 /* SFAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFAccount.swift; sourceTree = "<group>"; };
 		14FE635224C575CD00F7D30B /* TagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagView.swift; sourceTree = "<group>"; };
+		57110742B23D922EA5090E41 /* Pods-Whaler.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Whaler.debug.xcconfig"; path = "Target Support Files/Pods-Whaler/Pods-Whaler.debug.xcconfig"; sourceTree = "<group>"; };
+		8CA86D4EC912C483DCE033E5 /* Pods-WhalerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WhalerTests.release.xcconfig"; path = "Target Support Files/Pods-WhalerTests/Pods-WhalerTests.release.xcconfig"; sourceTree = "<group>"; };
+		93E5013172480A1DF7E0F414 /* Pods-WhalerTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WhalerTests.debug.xcconfig"; path = "Target Support Files/Pods-WhalerTests/Pods-WhalerTests.debug.xcconfig"; sourceTree = "<group>"; };
+		A6A180E84B0CE02E7DE1D907 /* Pods-Whaler.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Whaler.release.xcconfig"; path = "Target Support Files/Pods-Whaler/Pods-Whaler.release.xcconfig"; sourceTree = "<group>"; };
+		AFB12DFA879B292F66B37334 /* Pods_Whaler.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Whaler.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B39B01D0F7BB942BF53407DA /* Pods_WhalerTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WhalerTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -246,6 +261,8 @@
 				1480800E24EA4BDA007EB6D1 /* Just in Frameworks */,
 				146A6DD6252C496100DA8E85 /* Apollo in Frameworks */,
 				14C509D0254D49CD0021D9C5 /* SwiftyBeaver in Frameworks */,
+				147A3CB22577625500D96637 /* Starscream in Frameworks */,
+				6EC92F4185E77A246A6185B6 /* Pods_Whaler.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -253,12 +270,33 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				53863F9DCDB377BBC7A9A114 /* Pods_WhalerTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1080CD03CF5A4923ECDCE851 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				AFB12DFA879B292F66B37334 /* Pods_Whaler.framework */,
+				B39B01D0F7BB942BF53407DA /* Pods_WhalerTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		137AB8594FCDBC2B900A8073 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				57110742B23D922EA5090E41 /* Pods-Whaler.debug.xcconfig */,
+				A6A180E84B0CE02E7DE1D907 /* Pods-Whaler.release.xcconfig */,
+				93E5013172480A1DF7E0F414 /* Pods-WhalerTests.debug.xcconfig */,
+				8CA86D4EC912C483DCE033E5 /* Pods-WhalerTests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		140AE79424A9A9FE00F7705E /* Main */ = {
 			isa = PBXGroup;
 			children = (
@@ -394,8 +432,7 @@
 			isa = PBXGroup;
 			children = (
 				145A376924C588DF0081F9DB /* NotesView.swift */,
-				14ECDB2024CA9288006B4550 /* NoteEditor.swift */,
-				14ECDD2024CABC7D006B4550 /* RichTextEditor.swift */,
+				14D4A2F22574CAE6003EFF61 /* Editor */,
 				14ECDB2824CAB2D4006B4550 /* TrixEditor */,
 			);
 			path = Notes;
@@ -470,6 +507,8 @@
 				14861ED3249F3DE100D2FA92 /* Whaler */,
 				14861EEA249F3DE400D2FA92 /* WhalerTests */,
 				14861ED2249F3DE100D2FA92 /* Products */,
+				137AB8594FCDBC2B900A8073 /* Pods */,
+				1080CD03CF5A4923ECDCE851 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -566,6 +605,18 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		14D4A2F22574CAE6003EFF61 /* Editor */ = {
+			isa = PBXGroup;
+			children = (
+				14ECDB2024CA9288006B4550 /* NoteEditor.swift */,
+				14ECDD2024CABC7D006B4550 /* RichTextEditor.swift */,
+				14D4A2E62574CA7E003EFF61 /* EditorToolbar.swift */,
+				14D4A2EA2574CA94003EFF61 /* ToolbarButton.swift */,
+				14D4A2EE2574CAAB003EFF61 /* EditorToolbarOption.swift */,
+			);
+			path = Editor;
+			sourceTree = "<group>";
+		};
 		14D9CA5724B599080030B17A /* MainTableSectionHeader */ = {
 			isa = PBXGroup;
 			children = (
@@ -637,10 +688,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 14861EF0249F3DE400D2FA92 /* Build configuration list for PBXNativeTarget "Whaler" */;
 			buildPhases = (
-				146A6DC7252C45E400DA8E85 /* ShellScript */,
+				02074D00114C423E64EB694E /* [CP] Check Pods Manifest.lock */,
 				14861ECD249F3DE100D2FA92 /* Sources */,
 				14861ECE249F3DE100D2FA92 /* Frameworks */,
 				14861ECF249F3DE100D2FA92 /* Resources */,
+				203E58C7E23863A753F5737C /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -651,6 +703,7 @@
 				1480800D24EA4BDA007EB6D1 /* Just */,
 				146A6DD5252C496100DA8E85 /* Apollo */,
 				14C509CF254D49CD0021D9C5 /* SwiftyBeaver */,
+				147A3CB12577625500D96637 /* Starscream */,
 			);
 			productName = Whaler;
 			productReference = 14861ED1249F3DE100D2FA92 /* Whaler.app */;
@@ -660,6 +713,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 14861EF3249F3DE400D2FA92 /* Build configuration list for PBXNativeTarget "WhalerTests" */;
 			buildPhases = (
+				87E3662F20F80FCA3D994806 /* [CP] Check Pods Manifest.lock */,
 				14861EE3249F3DE400D2FA92 /* Sources */,
 				14861EE4249F3DE400D2FA92 /* Frameworks */,
 				14861EE5249F3DE400D2FA92 /* Resources */,
@@ -706,6 +760,7 @@
 				1480800C24EA4BDA007EB6D1 /* XCRemoteSwiftPackageReference "Just" */,
 				146A6DD4252C496100DA8E85 /* XCRemoteSwiftPackageReference "apollo-ios" */,
 				14C509CE254D49CD0021D9C5 /* XCRemoteSwiftPackageReference "SwiftyBeaver" */,
+				147A3CB02577625500D96637 /* XCRemoteSwiftPackageReference "Starscream" */,
 			);
 			productRefGroup = 14861ED2249F3DE100D2FA92 /* Products */;
 			projectDirPath = "";
@@ -752,7 +807,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		146A6DC7252C45E400DA8E85 /* ShellScript */ = {
+		02074D00114C423E64EB694E /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -760,14 +815,58 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
+			name = "[CP] Check Pods Manifest.lock";
 			outputFileListPaths = (
 			);
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Whaler-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "cd \"${SRCROOT}\"/Codegen\nxcrun -sdk macosx swift run\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		203E58C7E23863A753F5737C /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Whaler/Pods-Whaler-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Whaler/Pods-Whaler-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Whaler/Pods-Whaler-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		87E3662F20F80FCA3D994806 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-WhalerTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -789,6 +888,7 @@
 				146C35DB24C56A0100DBCA23 /* ContactsTableView.swift in Sources */,
 				14861ED9249F3DE100D2FA92 /* MainViewController.swift in Sources */,
 				1488423F25086D910025C7EE /* Lifecycle.swift in Sources */,
+				14D4A2E72574CA7E003EFF61 /* EditorToolbar.swift in Sources */,
 				14A2834724DE510D0016BA82 /* SF.swift in Sources */,
 				146834FF24DA99810075B639 /* CommonTextField.swift in Sources */,
 				146C35D924C5689B00DBCA23 /* ContactRowView.swift in Sources */,
@@ -807,6 +907,8 @@
 				146C344624EA53690009C68C /* UserDefaultsManaged.swift in Sources */,
 				14FE635324C575CD00F7D30B /* TagView.swift in Sources */,
 				14C509BF254CF5DD0021D9C5 /* StandardField.swift in Sources */,
+				14D4A2EB2574CA94003EFF61 /* ToolbarButton.swift in Sources */,
+				14D4A2EF2574CAAB003EFF61 /* EditorToolbarOption.swift in Sources */,
 				14D9CA5924B599230030B17A /* AccountStateTagView.swift in Sources */,
 				142EC6A824D6AE01004F7A28 /* AuthenticationView.swift in Sources */,
 				140AE79924A9AA5C00F7705E /* Account.swift in Sources */,
@@ -1019,6 +1121,7 @@
 		};
 		14861EF1249F3DE400D2FA92 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 57110742B23D922EA5090E41 /* Pods-Whaler.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Whaler/Whaler.entitlements;
@@ -1047,6 +1150,7 @@
 		};
 		14861EF2249F3DE400D2FA92 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A6A180E84B0CE02E7DE1D907 /* Pods-Whaler.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Whaler/Whaler.entitlements;
@@ -1075,6 +1179,7 @@
 		};
 		14861EF4249F3DE400D2FA92 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 93E5013172480A1DF7E0F414 /* Pods-WhalerTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -1097,6 +1202,7 @@
 		};
 		14861EF5249F3DE400D2FA92 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8CA86D4EC912C483DCE033E5 /* Pods-WhalerTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -1158,6 +1264,14 @@
 				version = 0.34.1;
 			};
 		};
+		147A3CB02577625500D96637 /* XCRemoteSwiftPackageReference "Starscream" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/daltoniam/Starscream";
+			requirement = {
+				kind = upToNextMinorVersion;
+				minimumVersion = 3.1.1;
+			};
+		};
 		1480800C24EA4BDA007EB6D1 /* XCRemoteSwiftPackageReference "Just" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/dduan/Just";
@@ -1181,6 +1295,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 146A6DD4252C496100DA8E85 /* XCRemoteSwiftPackageReference "apollo-ios" */;
 			productName = Apollo;
+		};
+		147A3CB12577625500D96637 /* Starscream */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 147A3CB02577625500D96637 /* XCRemoteSwiftPackageReference "Starscream" */;
+			productName = Starscream;
 		};
 		1480800D24EA4BDA007EB6D1 /* Just */ = {
 			isa = XCSwiftPackageProductDependency;

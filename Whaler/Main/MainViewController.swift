@@ -55,6 +55,7 @@ class MainViewController: UIViewController {
   
   private var sectionHeaders = Set<WeakRef<UIView>>()
   
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     title = "Accounts"

@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 import SwiftUI
 import Aztec
+import Starscream //Temporary
 
 struct NoteEditorRepresentable: UIViewRepresentable {
   typealias UIViewType = NoteEditor
@@ -26,6 +27,7 @@ struct NoteEditorRepresentable: UIViewRepresentable {
 class NoteEditor: UIView {
   lazy var toolBar = EditorToolbar(options: EditorToolbarOption.allCases, delegate: self)
   var textView: Aztec.TextView!
+  var socket: WebSocket! // temp
   
   override init(frame: CGRect) {
     super.init(frame: frame)
@@ -47,7 +49,6 @@ class NoteEditor: UIView {
     textView = Aztec.TextView(defaultFont: UIFont.openSans(weight: .regular, size: 25),
                                 defaultParagraphStyle: .default,
                                 defaultMissingImage: UIImage(named: "bold")!)
-    
     addSubview(textView)
     textView.translatesAutoresizingMaskIntoConstraints = false
     
@@ -61,6 +62,15 @@ class NoteEditor: UIView {
     ]
     
     NSLayoutConstraint.activate(constraints)
+    
+    /* Temporary */
+    var request = URLRequest(url: URL(string: "http://127.0.0.1:8080/socket")!) //reminder: drop the s for local
+    request.timeoutInterval = 5
+    request.setValue(Lifecycle.accessToken, forHTTPHeaderField: "Authorization")
+    socket = WebSocket(request: request, protocols: ["echo"])
+    socket.delegate = self
+    socket.enableCompression = false
+    socket.connect()
   }
   
   required init?(coder: NSCoder) {
@@ -72,6 +82,7 @@ extension NoteEditor: EditorToolbarDelegate {
   func didSelect(option: EditorToolbarOption) {
     switch option {
     case .header1:
+      socket.write(string: textView.text)
       textView.toggleHeader(.h1, range: textView.selectedRange)
     case .header2:
       textView.toggleHeader(.h2, range: textView.selectedRange)
@@ -88,5 +99,24 @@ extension NoteEditor: EditorToolbarDelegate {
     default:
       break
     }
+  }
+}
+
+//Temp
+extension NoteEditor: WebSocketDelegate {
+  func websocketDidConnect(socket: WebSocketClient) {
+    Log.debug("websocket did connect")
+  }
+  
+  func websocketDidDisconnect(socket: WebSocketClient, error: Error?) {
+    Log.debug("websocket did disconnect")
+  }
+  
+  func websocketDidReceiveMessage(socket: WebSocketClient, text: String) {
+    Log.debug("websocket did receive message: \(text)")
+  }
+  
+  func websocketDidReceiveData(socket: WebSocketClient, data: Data) {
+    Log.debug("websocket did receive data")
   }
 }
