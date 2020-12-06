@@ -36,7 +36,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let platform = SBPlatformDestination(appID: "JXQ8RN",
                                          appSecret: "vaa2mnVbU2FscXvcv5bmuutxCKc3tjgV",
                                          encryptionKey: "91fezcmxcWusZdnsE2NyaSzsikLweCnv")
-    platform.showNSLog = true
     platform.format = format
     SwiftyBeaver.addDestination(platform)
     
