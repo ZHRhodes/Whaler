@@ -10,7 +10,6 @@ import Foundation
 import UIKit
 import SwiftUI
 import Aztec
-import Starscream //Temporary
 
 struct NoteEditorRepresentable: UIViewRepresentable {
   typealias UIViewType = NoteEditor
@@ -27,7 +26,7 @@ struct NoteEditorRepresentable: UIViewRepresentable {
 class NoteEditor: UIView {
   lazy var toolBar = EditorToolbar(options: EditorToolbarOption.allCases, delegate: self)
   var textView: Aztec.TextView!
-  var socket: WebSocket! // temp
+  var conn: WebSocketConn!
   
   override init(frame: CGRect) {
     super.init(frame: frame)
@@ -64,13 +63,9 @@ class NoteEditor: UIView {
     NSLayoutConstraint.activate(constraints)
     
     /* Temporary */
-    var request = URLRequest(url: URL(string: "http://127.0.0.1:8080/socket")!) //reminder: drop the s for local
-    request.timeoutInterval = 5
-    request.setValue(Lifecycle.accessToken, forHTTPHeaderField: "Authorization")
-    socket = WebSocket(request: request, protocols: ["echo"])
-    socket.delegate = self
-    socket.enableCompression = false
-    socket.connect()
+//      {"type": "docDelta", "data": {"documentID": "1", "value": "Hello World!"}}
+    conn = WebSocketManager.shared.registerConnection(id: "072cf97d-ecda-41f7-adb7-a9ab538f44ec",
+                                                      delegate: self)
   }
   
   required init?(coder: NSCoder) {
@@ -78,7 +73,14 @@ class NoteEditor: UIView {
   }
   
   deinit {
-    socket.disconnect()
+//    socket.disconnect() //still have to do something about this
+  }
+}
+
+extension NoteEditor: LiteWebSocketDelegate {
+  func didReceiveMessage(_ message: SocketMessage) {
+    Log.debug("Did receive message:\n\(message)")
+    textView.text += message.data.value
   }
 }
 
@@ -86,7 +88,8 @@ extension NoteEditor: EditorToolbarDelegate {
   func didSelect(option: EditorToolbarOption) {
     switch option {
     case .header1:
-      socket.write(string: textView.text)
+      let message = SocketMessage(type: .docDelta, data: DocumentDelta(value: textView.text))
+      conn.send(message: message)
       textView.toggleHeader(.h1, range: textView.selectedRange)
     case .header2:
       textView.toggleHeader(.h2, range: textView.selectedRange)
@@ -103,24 +106,5 @@ extension NoteEditor: EditorToolbarDelegate {
     default:
       break
     }
-  }
-}
-
-//Temp
-extension NoteEditor: WebSocketDelegate {
-  func websocketDidConnect(socket: WebSocketClient) {
-    Log.debug("websocket did connect")
-  }
-  
-  func websocketDidDisconnect(socket: WebSocketClient, error: Error?) {
-    Log.debug("websocket did disconnect")
-  }
-  
-  func websocketDidReceiveMessage(socket: WebSocketClient, text: String) {
-    Log.debug("websocket did receive message: \(text)")
-  }
-  
-  func websocketDidReceiveData(socket: WebSocketClient, data: Data) {
-    Log.debug("websocket did receive data")
   }
 }

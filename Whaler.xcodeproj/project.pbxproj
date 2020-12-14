@@ -73,6 +73,11 @@
 		14861EFC249F49DE00D2FA92 /* DocumentPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14861EFB249F49DE00D2FA92 /* DocumentPickerViewController.swift */; };
 		1488423F25086D910025C7EE /* Lifecycle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1488423E25086D910025C7EE /* Lifecycle.swift */; };
 		14884241250876080025C7EE /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14884240250876080025C7EE /* Notifications.swift */; };
+		148A096E2586E0FC00811E35 /* WebSocketManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148A096D2586E0FC00811E35 /* WebSocketManager.swift */; };
+		148A09742586FEC500811E35 /* LiteWebSocketDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148A09732586FEC500811E35 /* LiteWebSocketDelegate.swift */; };
+		148A09782586FF6A00811E35 /* WebSocketInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148A09772586FF6A00811E35 /* WebSocketInfo.swift */; };
+		148A097C258700FF00811E35 /* SocketMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148A097B258700FF00811E35 /* SocketMessage.swift */; };
+		148A0980258705DB00811E35 /* WebSocketConn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148A097F258705DB00811E35 /* WebSocketConn.swift */; };
 		149F3A0025206AE4001F38BF /* MainCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149F39FF25206AE4001F38BF /* MainCollectionCell.swift */; };
 		149F3A0725206BB7001F38BF /* MainTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149F3A0625206BB7001F38BF /* MainTableCell.swift */; };
 		149F3A0B25209575001F38BF /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149F3A0A25209575001F38BF /* UIView+Extensions.swift */; };
@@ -201,6 +206,11 @@
 		14861EFB249F49DE00D2FA92 /* DocumentPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentPickerViewController.swift; sourceTree = "<group>"; };
 		1488423E25086D910025C7EE /* Lifecycle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lifecycle.swift; sourceTree = "<group>"; };
 		14884240250876080025C7EE /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
+		148A096D2586E0FC00811E35 /* WebSocketManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = WebSocketManager.swift; path = ../../../../../../../WebSocketManager.swift; sourceTree = "<group>"; };
+		148A09732586FEC500811E35 /* LiteWebSocketDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiteWebSocketDelegate.swift; sourceTree = "<group>"; };
+		148A09772586FF6A00811E35 /* WebSocketInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebSocketInfo.swift; sourceTree = "<group>"; };
+		148A097B258700FF00811E35 /* SocketMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketMessage.swift; sourceTree = "<group>"; };
+		148A097F258705DB00811E35 /* WebSocketConn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebSocketConn.swift; sourceTree = "<group>"; };
 		149F39FF25206AE4001F38BF /* MainCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCollectionCell.swift; sourceTree = "<group>"; };
 		149F3A0625206BB7001F38BF /* MainTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableCell.swift; sourceTree = "<group>"; };
 		149F3A0A25209575001F38BF /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
@@ -490,6 +500,7 @@
 		1480800724EA4AD2007EB6D1 /* NetworkLayer */ = {
 			isa = PBXGroup;
 			children = (
+				148A096C2586E0DC00811E35 /* Websocket */,
 				141F796C2534290B005F9295 /* GraphQL */,
 				1480800824EA4AE8007EB6D1 /* Networker.swift */,
 				1480800A24EA4B32007EB6D1 /* APINetworkInterface.swift */,
@@ -565,6 +576,18 @@
 				14861EED249F3DE400D2FA92 /* Info.plist */,
 			);
 			path = WhalerTests;
+			sourceTree = "<group>";
+		};
+		148A096C2586E0DC00811E35 /* Websocket */ = {
+			isa = PBXGroup;
+			children = (
+				148A096D2586E0FC00811E35 /* WebSocketManager.swift */,
+				148A09732586FEC500811E35 /* LiteWebSocketDelegate.swift */,
+				148A09772586FF6A00811E35 /* WebSocketInfo.swift */,
+				148A097B258700FF00811E35 /* SocketMessage.swift */,
+				148A097F258705DB00811E35 /* WebSocketConn.swift */,
+			);
+			path = Websocket;
 			sourceTree = "<group>";
 		};
 		149F3A0325206BA6001F38BF /* CollectionView */ = {
@@ -878,6 +901,7 @@
 				14251745255108F0006255F1 /* SFQuery.swift in Sources */,
 				1440A20424C947FA00E36853 /* Contact.swift in Sources */,
 				14F7DDA124EE529300D43055 /* SFAccount.swift in Sources */,
+				148A09742586FEC500811E35 /* LiteWebSocketDelegate.swift in Sources */,
 				1425175525510E46006255F1 /* FilterValue.swift in Sources */,
 				1443046124F3AFFC00D2FBD2 /* Typealiases.swift in Sources */,
 				14ECDD2124CABC7D006B4550 /* RichTextEditor.swift in Sources */,
@@ -899,6 +923,7 @@
 				14EED67C24F0E5E400660BD1 /* SFLead.swift in Sources */,
 				14C509C3254CF83B0021D9C5 /* RevenueBucket.swift in Sources */,
 				14861ED5249F3DE100D2FA92 /* AppDelegate.swift in Sources */,
+				148A09782586FF6A00811E35 /* WebSocketInfo.swift in Sources */,
 				14B8BF662536E536006CE4B5 /* MainCollectionCellHeader.swift in Sources */,
 				141F795F25319E60005F9295 /* Organization.swift in Sources */,
 				14861ED7249F3DE100D2FA92 /* SceneDelegate.swift in Sources */,
@@ -940,12 +965,14 @@
 				14F7DD9F24EE527600D43055 /* SFQueryResponse.swift in Sources */,
 				14018152254643AF00246BDA /* AccountsWorker.swift in Sources */,
 				14C509CB254D42800021D9C5 /* SFGroupModels.swift in Sources */,
+				148A096E2586E0FC00811E35 /* WebSocketManager.swift in Sources */,
 				14884241250876080025C7EE /* Notifications.swift in Sources */,
 				14D97D7924DBEC4B00058B09 /* Keychain.swift in Sources */,
 				140AE79E24A9B50900F7705E /* UIColor+Extensions.swift in Sources */,
 				14C509B8254CECD70021D9C5 /* AddAccountViewController.swift in Sources */,
 				1480800B24EA4B32007EB6D1 /* APINetworkInterface.swift in Sources */,
 				146C35D524C5635D00DBCA23 /* CompanyInfoView.swift in Sources */,
+				148A097C258700FF00811E35 /* SocketMessage.swift in Sources */,
 				14861EFC249F49DE00D2FA92 /* DocumentPickerViewController.swift in Sources */,
 				14D9CA5B24B599300030B17A /* AccountRowValuesView.swift in Sources */,
 				14025FCA24D6BF5D00408379 /* AuthenticationViewController.swift in Sources */,
@@ -960,6 +987,7 @@
 				14DACF46255BAC9200FC0900 /* SwiftyBeaver+LoggingDestination.swift in Sources */,
 				141F796E25342974005F9295 /* TokenAddingIntercepter.swift in Sources */,
 				1480801024EA4BE7007EB6D1 /* JustNetworker.swift in Sources */,
+				148A0980258705DB00811E35 /* WebSocketConn.swift in Sources */,
 				1443045F24F3356A00D2FBD2 /* SFNewAccessToken.swift in Sources */,
 				149F3A0725206BB7001F38BF /* MainTableCell.swift in Sources */,
 				146A6DCF252C48BE00DA8E85 /* API.swift in Sources */,

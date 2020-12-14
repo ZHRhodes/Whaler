@@ -22,6 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //    resetAllRecords(of: "AccountEntity")
 //    resetAllRecords(of: "ContactEntity")
     configureSwiftyBeaverLogging()
+    WebSocketManager.shared = WebSocketManager()
     return true
   }
   

@@ -17,6 +17,7 @@ struct ContactsHelper {
                                   accountName: accountName)
   }
   
+  //this needs to be directed through the networking library. this call wont refresh token if necessary
   func fetchContactsFromAPI(accountID: String, completion: @escaping ([Contact]?) -> Void) {
     Graph.shared.apollo.fetch(query: ContactsQuery(accountID: accountID)) { result in
       guard let data = try? result.get().data else {
