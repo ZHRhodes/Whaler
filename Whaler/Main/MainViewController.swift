@@ -364,8 +364,8 @@ extension MainViewController: MainCollectionCellDelegate {
     let accountState = interactor.accountStates[section]
     let account = interactor.accountGrouper[accountState][indexPath.row]
     interactor.getContacts(for: account) { [weak self] in
-      let view = AccountDetailsView(account: account)
-      let viewController = UIHostingController(rootView: view)
+//      let view = AccountDetailsView(account: account)
+      let viewController = AccountDetailsViewController()//UIHostingController(rootView: view)
       self?.navigationController?.pushViewController(viewController, animated: false)
     }
   }

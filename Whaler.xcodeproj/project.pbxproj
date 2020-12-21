@@ -20,6 +20,9 @@
 		140AE7A524A9BEC300F7705E /* AccountTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140AE7A424A9BEC300F7705E /* AccountTableCell.swift */; };
 		140AE7A924A9DF3300F7705E /* CommonButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140AE7A824A9DF3300F7705E /* CommonButton.swift */; };
 		1414810B252FFD8100640946 /* TablePopoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1414810A252FFD8100640946 /* TablePopoverViewController.swift */; };
+		141802AD258EF07700E38840 /* AccountDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141802AC258EF07700E38840 /* AccountDetailsViewController.swift */; };
+		141802B1258EF30B00E38840 /* ToolbarDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141802B0258EF30A00E38840 /* ToolbarDelegate.swift */; };
+		141802B5258EF72A00E38840 /* Notification+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141802B4258EF72A00E38840 /* Notification+Extensions.swift */; };
 		141F795F25319E60005F9295 /* Organization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141F795E25319E60005F9295 /* Organization.swift */; };
 		141F796325326EF4005F9295 /* createContactAssignmentEntry.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 141F796225326EF4005F9295 /* createContactAssignmentEntry.graphql */; };
 		141F796925327503005F9295 /* Graph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141F796825327503005F9295 /* Graph.swift */; };
@@ -151,6 +154,9 @@
 		140AE7A424A9BEC300F7705E /* AccountTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountTableCell.swift; sourceTree = "<group>"; };
 		140AE7A824A9DF3300F7705E /* CommonButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonButton.swift; sourceTree = "<group>"; };
 		1414810A252FFD8100640946 /* TablePopoverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TablePopoverViewController.swift; sourceTree = "<group>"; };
+		141802AC258EF07700E38840 /* AccountDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDetailsViewController.swift; sourceTree = "<group>"; };
+		141802B0258EF30A00E38840 /* ToolbarDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolbarDelegate.swift; sourceTree = "<group>"; };
+		141802B4258EF72A00E38840 /* Notification+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification+Extensions.swift"; sourceTree = "<group>"; };
 		141F795E25319E60005F9295 /* Organization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Organization.swift; sourceTree = "<group>"; };
 		141F796225326EF4005F9295 /* createContactAssignmentEntry.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = createContactAssignmentEntry.graphql; sourceTree = "<group>"; };
 		141F796825327503005F9295 /* Graph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Graph.swift; sourceTree = "<group>"; };
@@ -340,6 +346,7 @@
 				1454743A250D904700257A89 /* UIViewController+Extensions.swift */,
 				149F3A0A25209575001F38BF /* UIView+Extensions.swift */,
 				14DACF45255BAC9200FC0900 /* SwiftyBeaver+LoggingDestination.swift */,
+				141802B4258EF72A00E38840 /* Notification+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -390,6 +397,15 @@
 				1414810A252FFD8100640946 /* TablePopoverViewController.swift */,
 			);
 			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		141802AB258EF04A00E38840 /* AccountDetailsV2 */ = {
+			isa = PBXGroup;
+			children = (
+				141802AC258EF07700E38840 /* AccountDetailsViewController.swift */,
+				141802B0258EF30A00E38840 /* ToolbarDelegate.swift */,
+			);
+			path = AccountDetailsV2;
 			sourceTree = "<group>";
 		};
 		141F795D25319DEA005F9295 /* Organization */ = {
@@ -555,6 +571,7 @@
 				140AE79424A9A9FE00F7705E /* Main */,
 				14C509B6254CEC810021D9C5 /* AddAccount */,
 				146C35D024C5575E00DBCA23 /* AccountsDetails */,
+				141802AB258EF04A00E38840 /* AccountDetailsV2 */,
 				140AE79C24A9B4F700F7705E /* Extensions */,
 				14F4090224C6A04D00F405BC /* Fonts */,
 				14861EDA249F3DE100D2FA92 /* Main.storyboard */,
@@ -946,6 +963,7 @@
 				149F3A0025206AE4001F38BF /* MainCollectionCell.swift in Sources */,
 				1425175125510E11006255F1 /* FilterBucket.swift in Sources */,
 				14F4FE14254AA5C600C89485 /* ContactsWorker.swift in Sources */,
+				141802AD258EF07700E38840 /* AccountDetailsViewController.swift in Sources */,
 				1454743B250D904700257A89 /* UIViewController+Extensions.swift in Sources */,
 				142517492551096F006255F1 /* SFObject.swift in Sources */,
 				1425174D25510D4B006255F1 /* SFSoqlProviding.swift in Sources */,
@@ -959,6 +977,7 @@
 				144AECDA24D26658009625BE /* ContactRowViewCell.swift in Sources */,
 				145A376A24C588DF0081F9DB /* NotesView.swift in Sources */,
 				14B037E325073E8800BA488D /* Response.swift in Sources */,
+				141802B1258EF30B00E38840 /* ToolbarDelegate.swift in Sources */,
 				146C35CF24C2CA9700DBCA23 /* TitleValueView.swift in Sources */,
 				146C35D324C557C800DBCA23 /* CompanyInfoValuesView.swift in Sources */,
 				1414810B252FFD8100640946 /* TablePopoverViewController.swift in Sources */,
@@ -992,6 +1011,7 @@
 				149F3A0725206BB7001F38BF /* MainTableCell.swift in Sources */,
 				146A6DCF252C48BE00DA8E85 /* API.swift in Sources */,
 				1480800924EA4AE8007EB6D1 /* Networker.swift in Sources */,
+				141802B5258EF72A00E38840 /* Notification+Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1159,8 +1179,8 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 8H9FMTH9DY;
 				INFOPLIST_FILE = Whaler/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
-				"IPHONEOS_DEPLOYMENT_TARGET[sdk=macosx*]" = 13.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				"IPHONEOS_DEPLOYMENT_TARGET[sdk=macosx*]" = 14.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1171,6 +1191,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
 				SUPPORTS_MACCATALYST = YES;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1188,8 +1209,8 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 8H9FMTH9DY;
 				INFOPLIST_FILE = Whaler/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
-				"IPHONEOS_DEPLOYMENT_TARGET[sdk=macosx*]" = 13.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				"IPHONEOS_DEPLOYMENT_TARGET[sdk=macosx*]" = 14.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1200,6 +1221,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
 				SUPPORTS_MACCATALYST = YES;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
