@@ -261,3 +261,5 @@ extension Account {
               notes: apiAccount.notes)
   }
 }
+
+extension Account: RepoStorable {}
