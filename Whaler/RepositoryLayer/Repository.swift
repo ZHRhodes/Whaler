@@ -9,71 +9,85 @@
 import Foundation
 import Combine
 
-protocol Repository {
-//  associatedtype Entity: RepoStorable
+//protocol Repository {
+////  func publisher<T: RepoStorable>() -> AnyPublisher<[T], Error>
 //
-////  func subscribeChanges() -> AnyPublisher<Entity, Error>
-//  func observeAll() -> AnyPublisher<[Entity], Error>
-////  func get(id: String) -> AnyPublisher<Entity?, Error>
-////  func add(_ entity: Entity) -> AnyPublisher<Entity, Error>
-////  func delete(id: String) -> AnyPublisher<Void, Error>
 //
-//  init()
-}
+////
+//////  func subscribeChanges() -> AnyPublisher<Entity, Error>
+////  func observeAll() -> AnyPublisher<[Entity], Error>
+//////  func get(id: String) -> AnyPublisher<Entity?, Error>
+//////  func add(_ entity: Entity) -> AnyPublisher<Entity, Error>
+//////  func delete(id: String) -> AnyPublisher<Void, Error>
+////
+////  init()
+//}
 
 protocol RepoStorable {
   var id: String { get }
-//  var repoType: Repository.Type { get }
 }
 
 class RepoStore {
-  var accountRepository = AccountRepository(accountInterface: AccountDataInterface(remoteDataSource: AccountRemoteDataSource(),
-                                                                                   sfDataSource: AccountSFDataSource()))
+  var accountRepository = Repository<Account>(dataInterface:
+                                                AccountDataInterface(
+                                                  remoteDataSource: AccountRemoteDataSource(),
+                                                                                   
+                                                  sfDataSource: AccountSFDataSource()))
 }
 
-enum Repo {
-  static func `for`<T: RepoStorable>(_ type: T.Type, using repoStore: RepoStore) -> Repository {
-    switch type {
-    case is Account.Type:
-      return repoStore.accountRepository
-    default:
-      fatalError("Repository not implemented for type \(type)")
-    }
-  }
-}
+//enum Repo {
+//  static func `for`<T: RepoStorable>(_ type: T.Type, using repoStore: RepoStore) -> Repository {
+//    switch type {
+//    case is Account.Type:
+//      return repoStore.accountRepository
+//    default:
+//      fatalError("Repository not implemented for type \(type)")
+//    }
+//  }
+//}
 
-final class AccountRepository: Repository {
-  typealias Entity = Account
+struct Repository<Entity: RepoStorable> {
   private var subject = CurrentValueSubject<[Entity], Error>([])
-  private var accountInterface: AccountInterface
+  private var dataInterface: DataInterface
   private var cancellable: AnyCancellable?
+  
+  var type: Entity.Type {
+    return Entity.self
+  }
   
   var publisher: AnyPublisher<[Entity], Error> {
     return subject.eraseToAnyPublisher()
   }
   
-  init(accountInterface: AccountInterface) {
-    self.accountInterface = accountInterface
+  init(dataInterface: DataInterface) {
+    self.dataInterface = dataInterface
   }
   
-  private func broadcast(newValues: [Entity]) {
+  func broadcast(newValues: [Entity]) {
     subject.send(newValues)
   }
   
-  func fetchAll() {
-    cancellable = accountInterface.fetchAll().sink(receiveCompletion: { (status) in
+  mutating func fetchAll() {
+    cancellable = _fetchAll()
+  }
+  
+  private func _fetchAll() -> AnyCancellable {
+    return dataInterface
+      .fetchAll()
+      .sink(receiveCompletion: { (status) in
       print(status)
-    }, receiveValue: { [weak self] (accounts) in
-      self?.broadcast(newValues: accounts)
+    }, receiveValue: { (data) in
+      guard let entities = data as? [Entity] else { return }
+      self.broadcast(newValues: entities)
     })
   }
 }
 
-protocol AccountInterface {
-  func fetchAll() -> AnyPublisher<[Account], Error>
+protocol DataInterface {
+  func fetchAll() -> AnyPublisher<[RepoStorable], Error>
 }
 
-class AccountDataInterface: AccountInterface {
+class AccountDataInterface: DataInterface {
   private let remoteDataSource: AccountDataSource
   private let sfDataSource: AccountDataSource
   private var cancellable: AnyCancellable?
@@ -84,8 +98,8 @@ class AccountDataInterface: AccountInterface {
     self.sfDataSource = sfDataSource
   }
   
-  func fetchAll() -> AnyPublisher<[Account], Error> {
-    return Future<[Account], Error> { [weak self] promise in
+  func fetchAll() -> AnyPublisher<[RepoStorable], Error> {
+    return Future<[RepoStorable], Error> { [weak self] promise in
       guard let strongSelf = self else { return }
       strongSelf.cancellable = strongSelf.remoteDataSource
         .fetchAll()
