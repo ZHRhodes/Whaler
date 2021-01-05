@@ -8,6 +8,7 @@
 
 import Foundation
 import AuthenticationServices
+import Combine
 
 protocol MainInteractorData: class {
   var accountGrouper: Grouper<WorkState, Account> {get set}
@@ -124,16 +125,17 @@ class MainInteractor: MainInteractorData {
     ObjectManager.deleteAll(ofType: Account.self, with: NSPredicate(format: "ownerUserId == %d", userId))
   }
   
+  //move to share
+  let repoStore = RepoStore()
+  var cancellable: AnyCancellable?
+  
   func getAccounts() {
-    accountsHelper.fetchAccountsFromAPI { (accounts) in
-      guard let accounts = accounts else {
-        Log.error("Failed to fetch accounts from API")
-        return
-      }
+    let repo = repoStore.accountRepository
+    repo.fetchAll()
+    cancellable = repo.publisher.sink { (status) in
       
-      let accountsfromSalesforce = self.accountsHelper.fetchAccountsFromSalesforce()
-      self.reconcileAccountsFromSalesforce(localAccounts: accounts, salesforceAccounts: accountsfromSalesforce)
-      self.accountsHelper.saveAccountsToAPI(accountsfromSalesforce) { (accountsPostSave) in
+    } receiveValue: { (accounts) in
+      self.accountsHelper.saveAccountsToAPI(accounts) { (accountsPostSave) in
         self.setAccounts(accountsPostSave)
         self.viewController?.reloadCollection()
       }

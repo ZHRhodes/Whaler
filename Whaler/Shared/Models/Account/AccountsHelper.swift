@@ -1,5 +1,5 @@
 //
-//  AccountsWorker.swift
+//  AccountsHelper.swift
 //  Whaler
 //
 //  Created by Zachary Rhodes on 10/25/20.
@@ -15,11 +15,13 @@ struct AccountsHelper {
   
   func fetchAccountsFromAPI(completion: @escaping ([Account]?) -> Void) {
     Graph.shared.apollo.fetch(query: AccountsQuery()) { result in
-      guard let data = try? result.get().data else {
+      do {
+        guard let data = try result.get().data else { throw "Apollo account fetch data was nil" }
+        completion(data.accounts.map(Account.init))
+      } catch {
+        Log.error("Failed to fetch and decode accounts from Apollo. Error: \(error)")
         completion(nil)
-        return
       }
-      completion(data.accounts.map(Account.init))
     }
   }
   

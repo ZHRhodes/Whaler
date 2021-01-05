@@ -21,3 +21,7 @@ extension String {
     return Data(self.utf8).base64EncodedString()
   }
 }
+
+extension String: LocalizedError {
+    public var errorDescription: String? { return self }
+}
