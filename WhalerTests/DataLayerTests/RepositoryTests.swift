@@ -1,5 +1,5 @@
 //
-//  AccountRepoTests.swift
+//  RepositoryTests.swift
 //  WhalerTests
 //
 //  Created by Zachary Rhodes on 6/21/20.
@@ -10,7 +10,7 @@ import XCTest
 import Combine
 @testable import Whaler
 
-class AccountRepoTests: XCTestCase {
+class RepositoryTests: XCTestCase {
   var cancellable: AnyCancellable?
   
   override func setUpWithError() throws {
