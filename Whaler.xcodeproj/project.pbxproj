@@ -24,6 +24,7 @@
 		1416480B25A4FA270008E16B /* AccountDataInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1416480A25A4FA270008E16B /* AccountDataInterface.swift */; };
 		1416481325A4FA780008E16B /* RepoStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1416481225A4FA780008E16B /* RepoStore.swift */; };
 		1416481725A4FA970008E16B /* DataInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1416481625A4FA970008E16B /* DataInterface.swift */; };
+		1416482125A550890008E16B /* DataRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1416482025A550890008E16B /* DataRequest.swift */; };
 		141802AD258EF07700E38840 /* AccountDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141802AC258EF07700E38840 /* AccountDetailsViewController.swift */; };
 		141802B1258EF30B00E38840 /* ToolbarDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141802B0258EF30A00E38840 /* ToolbarDelegate.swift */; };
 		141802B5258EF72A00E38840 /* Notification+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141802B4258EF72A00E38840 /* Notification+Extensions.swift */; };
@@ -164,6 +165,7 @@
 		1416480A25A4FA270008E16B /* AccountDataInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDataInterface.swift; sourceTree = "<group>"; };
 		1416481225A4FA780008E16B /* RepoStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoStore.swift; sourceTree = "<group>"; };
 		1416481625A4FA970008E16B /* DataInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataInterface.swift; sourceTree = "<group>"; };
+		1416482025A550890008E16B /* DataRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataRequest.swift; sourceTree = "<group>"; };
 		141802AC258EF07700E38840 /* AccountDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDetailsViewController.swift; sourceTree = "<group>"; };
 		141802B0258EF30A00E38840 /* ToolbarDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolbarDelegate.swift; sourceTree = "<group>"; };
 		141802B4258EF72A00E38840 /* Notification+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification+Extensions.swift"; sourceTree = "<group>"; };
@@ -541,6 +543,7 @@
 				147EB86A2593C950002B93D8 /* Repository.swift */,
 				1416481225A4FA780008E16B /* RepoStore.swift */,
 				1416481625A4FA970008E16B /* DataInterface.swift */,
+				1416482025A550890008E16B /* DataRequest.swift */,
 			);
 			path = RepositoryLayer;
 			sourceTree = "<group>";
@@ -1014,6 +1017,7 @@
 				14EED67A24F0E48C00660BD1 /* SFContact.swift in Sources */,
 				14EED67E24F0EB7300660BD1 /* SFHelper.swift in Sources */,
 				14F4090824C6A2D100F405BC /* UIFont+Extensions.swift in Sources */,
+				1416482125A550890008E16B /* DataRequest.swift in Sources */,
 				144FA6BD24C2C0C500506F15 /* CompanyInfoHeaderView.swift in Sources */,
 				1454743D250D93DC00257A89 /* SFSession.swift in Sources */,
 				14DACF42255BAC2A00FC0900 /* Log.swift in Sources */,

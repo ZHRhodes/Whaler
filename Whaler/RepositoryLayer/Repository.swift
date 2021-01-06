@@ -9,9 +9,21 @@
 import Foundation
 import Combine
 
-class Repository<Entity: RepoStorable> {
+protocol DataRequestTypes {
+  associatedtype All
+  associatedtype Single
+  associatedtype Subset
+}
+
+struct AccountRequestTypes: DataRequestTypes {
+  typealias All = String
+  typealias Single = String
+  typealias Subset = String
+}
+
+class Repository<Entity: RepoStorable, Interface: DataInterface> {
   private var subject = CurrentValueSubject<[Entity], Error>([])
-  private var dataInterface: DataInterface
+  private var dataInterface: Interface
   private var cancellable: AnyCancellable?
   
   var type: Entity.Type {
@@ -22,7 +34,10 @@ class Repository<Entity: RepoStorable> {
     return subject.eraseToAnyPublisher()
   }
   
-  init(dataInterface: DataInterface) {
+  //use keyvaluepairs or something similar to implement limited cache
+  private var singlePublishers: [DataRequest: CurrentValueSubject<Entity, Error>] = [:]
+  
+  init(dataInterface: Interface) {
     self.dataInterface = dataInterface
   }
   
@@ -30,14 +45,22 @@ class Repository<Entity: RepoStorable> {
     subject.send(newValues)
   }
   
-  func fetchAll() {
+  func fetchAll(dataRequest: Interface.RequestAllType? = nil) {
     cancellable = dataInterface
-      .fetchAll()
+      .fetchAll(with: dataRequest)
       .sink(receiveCompletion: { (status) in
       print(status)
     }, receiveValue: { (data) in
       guard let entities = data as? [Entity] else { return }
       self.broadcast(newValues: entities)
     })
+  }
+  
+  func fetchSubset(dataRequest: Interface.RequestSubsetType) {
+    
+  }
+  
+  func fetchSingle(dataRequest: Interface.RequestSingleType) {
+    
   }
 }

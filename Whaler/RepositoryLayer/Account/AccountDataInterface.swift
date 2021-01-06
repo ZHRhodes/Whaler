@@ -10,6 +10,10 @@ import Foundation
 import Combine
 
 class AccountDataInterface: DataInterface {
+  typealias RequestAllType = Void
+  typealias RequestSingleType = String
+  typealias RequestSubsetType = String
+  
   private let remoteDataSource: AccountDataSource
   private let sfDataSource: AccountDataSource
   private var cancellable: AnyCancellable?
@@ -21,7 +25,7 @@ class AccountDataInterface: DataInterface {
     self.sfDataSource = sfDataSource
   }
   
-  func fetchAll() -> AnyPublisher<[RepoStorable], Error> {
+  func fetchAll(with dataRequest: RequestAllType?) -> AnyPublisher<[RepoStorable], Error> {
     let subject = PassthroughSubject<[RepoStorable], Error>()
     
     cancellable = remoteDataSource

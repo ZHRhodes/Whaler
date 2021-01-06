@@ -13,7 +13,7 @@ protocol RepoStorable {
 }
 
 class RepoStore {
-  var accountRepository = Repository<Account>(dataInterface:
+  var accountRepository = Repository<Account, AccountDataInterface>(dataInterface:
                                                 AccountDataInterface(
                                                   remoteDataSource: AccountRemoteDataSource(),
                                                                                    
