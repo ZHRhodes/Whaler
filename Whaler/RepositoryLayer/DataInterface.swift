@@ -15,6 +15,6 @@ protocol DataInterface {
   associatedtype RequestSubsetType
   
   func fetchAll(with dataRequest: RequestAllType?) -> AnyPublisher<[RepoStorable], Error>
-//  func fetchSubset(_ dataRequest: RequestSubsetType?) -> AnyPublisher<[RepoStorable], Error>
-//  func fetchSingle(_ dataRequest: RequestSingleType?) -> AnyPublisher<RepoStorable, Error>
+  func fetchSubset(_ dataRequest: RequestSubsetType?) -> AnyPublisher<[RepoStorable], Error>
+  func fetchSingle(_ dataRequest: RequestSingleType?) -> AnyPublisher<RepoStorable, Error>
 }
