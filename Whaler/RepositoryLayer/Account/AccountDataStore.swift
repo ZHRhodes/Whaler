@@ -11,6 +11,7 @@ import Combine
 
 protocol AccountDataSource {
   func fetchAll() -> AnyPublisher<[Account], Error>
+  func saveAll(_ new: [Account]) -> AnyPublisher<[Account], Error>
 }
 
 struct AccountRemoteDataSource: AccountDataSource {
@@ -19,6 +20,15 @@ struct AccountRemoteDataSource: AccountDataSource {
       let accountsHelper = AccountsHelper()
       accountsHelper.fetchAccountsFromAPI { (accounts) in
         promise(.success(accounts ?? []))
+      }
+    }.eraseToAnyPublisher()
+  }
+  
+  func saveAll(_ new: [Account]) -> AnyPublisher<[Account], Error> {
+    return Future<[Account], Error> { promise in
+      let accountsHelper = AccountsHelper()
+      accountsHelper.saveAccountsToAPI(new) { (accounts) in
+        promise(.success(accounts))
       }
     }.eraseToAnyPublisher()
   }
@@ -31,5 +41,9 @@ struct AccountSFDataSource: AccountDataSource {
       let accounts = accountsHelper.fetchAccountsFromSalesforce()
       promise(.success(accounts))
     }.eraseToAnyPublisher()
+  }
+  
+  func saveAll(_ new: [Account]) -> AnyPublisher<[Account], Error> {
+    fatalError("Not implemented")
   }
 }

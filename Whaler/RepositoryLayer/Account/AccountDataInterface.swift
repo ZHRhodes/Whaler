@@ -13,6 +13,7 @@ class AccountDataInterface: DataInterface {
   private let remoteDataSource: AccountDataSource
   private let sfDataSource: AccountDataSource
   private var cancellable: AnyCancellable?
+  private var saveCancellable: AnyCancellable?
   
   init(remoteDataSource: AccountDataSource,
        sfDataSource: AccountDataSource) {
@@ -21,21 +22,25 @@ class AccountDataInterface: DataInterface {
   }
   
   func fetchAll() -> AnyPublisher<[RepoStorable], Error> {
-    return Future<[RepoStorable], Error> { [weak self] promise in
-      guard let strongSelf = self else { return }
-      strongSelf.cancellable = strongSelf.remoteDataSource
-        .fetchAll()
-        .zip(strongSelf.sfDataSource.fetchAll())
-        .sink { (status) in
-        print(status)
-      } receiveValue: { (remoteAccounts, sfAccounts) in
-        sfAccounts.forEach { account in
-          if let matchingLocalAccount = remoteAccounts.first(where: { $0.salesforceID == account.salesforceID }) {
-            account.mergeLocalProperties(with: matchingLocalAccount)
-          }
+    let subject = PassthroughSubject<[RepoStorable], Error>()
+    
+    cancellable = remoteDataSource
+      .fetchAll()
+      .zip(sfDataSource.fetchAll())
+      .sink { (status) in
+      print(status)
+    } receiveValue: { [weak self] (remoteAccounts, sfAccounts) in
+      sfAccounts.forEach { account in
+        if let matchingLocalAccount = remoteAccounts.first(where: { $0.salesforceID == account.salesforceID }) {
+          account.mergeLocalProperties(with: matchingLocalAccount)
         }
-        promise(.success(sfAccounts))
       }
-    }.eraseToAnyPublisher()
+      subject.send(sfAccounts)
+      guard let strongSelf = self else { return }
+      strongSelf.saveCancellable = strongSelf.remoteDataSource.saveAll(sfAccounts)
+        .sink(receiveCompletion: { _ in }, receiveValue: { subject.send($0) })
+    }
+    
+    return subject.eraseToAnyPublisher()
   }
 }

@@ -132,13 +132,9 @@ class MainInteractor: MainInteractorData {
   func getAccounts() {
     let repo = repoStore.accountRepository
     repo.fetchAll()
-    cancellable = repo.publisher.sink { (status) in
-      
-    } receiveValue: { (accounts) in
-      self.accountsHelper.saveAccountsToAPI(accounts) { (accountsPostSave) in
-        self.setAccounts(accountsPostSave)
-        self.viewController?.reloadCollection()
-      }
+    cancellable = repo.publisher.sink { _ in } receiveValue: { (accounts) in
+      self.setAccounts(accounts)
+      self.viewController?.reloadCollection()
       Log.info(String(reflecting: self.accountGrouper))
     }
   }

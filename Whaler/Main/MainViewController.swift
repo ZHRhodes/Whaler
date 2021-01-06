@@ -287,7 +287,7 @@ class MainViewController: UIViewController {
   }
   
   func reloadCollection() {
-    collectionView.reloadData()
+    collectionView?.reloadData()
   }
 
   @objc
