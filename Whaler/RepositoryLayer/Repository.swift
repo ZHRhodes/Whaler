@@ -9,22 +9,12 @@
 import Foundation
 import Combine
 
-protocol DataRequestTypes {
-  associatedtype All
-  associatedtype Single
-  associatedtype Subset
-}
-
-struct AccountRequestTypes: DataRequestTypes {
-  typealias All = String
-  typealias Single = String
-  typealias Subset = String
-}
-
 class Repository<Entity: RepoStorable, Interface: DataInterface> {
   private var subject = CurrentValueSubject<[Entity], Error>([])
   private var dataInterface: Interface
-  private var cancellable: AnyCancellable?
+  private var allCancellable: AnyCancellable?
+  private var subsetCancellable: AnyCancellable?
+  private var singleCancellable: AnyCancellable?
   
   var type: Entity.Type {
     return Entity.self
@@ -35,7 +25,7 @@ class Repository<Entity: RepoStorable, Interface: DataInterface> {
   }
   
   //use keyvaluepairs or something similar to implement limited cache
-  private var singlePublishers: [DataRequest: CurrentValueSubject<Entity, Error>] = [:]
+//  private var singlePublishers: [DataRequest: CurrentValueSubject<Entity, Error>] = [:]
   
   init(dataInterface: Interface) {
     self.dataInterface = dataInterface
@@ -46,21 +36,77 @@ class Repository<Entity: RepoStorable, Interface: DataInterface> {
   }
   
   func fetchAll(dataRequest: Interface.RequestAllType? = nil) {
-    cancellable = dataInterface
+    allCancellable = dataInterface
       .fetchAll(with: dataRequest)
+      .tryMap({ storables -> [Entity] in
+        guard let entities = storables as? [Entity] else {
+          throw "Could not cast storables to expected entity type."
+        }
+        return entities
+      })
       .sink(receiveCompletion: { (status) in
-      print(status)
+        Log.debug(String(describing: status))
     }, receiveValue: { (data) in
-      guard let entities = data as? [Entity] else { return }
-      self.broadcast(newValues: entities)
+      self.broadcast(newValues: data)
     })
   }
   
   func fetchSubset(dataRequest: Interface.RequestSubsetType) {
-    
+    subsetCancellable = subject.sink(receiveCompletion: { _ in },
+                                     receiveValue: { (currentValues) in
+                                      var currentValues = currentValues
+                                      self.subsetCancellable = self.dataInterface
+                                        .fetchSubset(with: dataRequest)
+                                        .tryMap({ storables -> [Entity] in
+                                          guard let entities = storables as? [Entity] else {
+                                            throw "Could not cast storables to expected entity type."
+                                          }
+                                          return entities
+                                        })
+                                        .flatMap({ $0.publisher })
+                                        .sink(receiveCompletion: { (status) in
+                                          switch status {
+                                          case .finished:
+                                            self.broadcast(newValues: currentValues)
+                                          case .failure(let error):
+                                            Log.error(String(describing: error))
+                                          }
+                                        }, receiveValue: { (newValue) in
+                                          if let idx = currentValues.firstIndex(where: { $0.id == newValue.id }) {
+                                            currentValues[idx] = newValue
+                                          } else {
+                                            currentValues.append(newValue)
+                                          }
+                                        })
+                                     })
   }
   
   func fetchSingle(dataRequest: Interface.RequestSingleType) {
-    
+    singleCancellable = subject.sink(receiveCompletion: { _ in },
+                                     receiveValue: { (currentValues) in
+                                      var currentValues = currentValues
+                                      self.singleCancellable = self.dataInterface
+                                        .fetchSingle(with: dataRequest)
+                                        .tryMap({ storable -> Entity in
+                                          guard let entity = storable as? Entity else {
+                                            throw "Could not cast storable to expected entity type."
+                                          }
+                                          return entity
+                                        })
+                                        .sink(receiveCompletion: { (status) in
+                                          switch status {
+                                          case .finished:
+                                            self.broadcast(newValues: currentValues)
+                                          case .failure(let error):
+                                            Log.error(String(describing: error))
+                                          }
+                                        }, receiveValue: { (newValue) in
+                                          if let idx = currentValues.firstIndex(where: { $0.id == newValue.id }) {
+                                            currentValues[idx] = newValue
+                                          } else {
+                                            currentValues.append(newValue)
+                                          }
+                                        })
+    })
   }
 }

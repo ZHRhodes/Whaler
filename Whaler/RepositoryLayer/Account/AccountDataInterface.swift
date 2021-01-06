@@ -48,11 +48,11 @@ class AccountDataInterface: DataInterface {
     return subject.eraseToAnyPublisher()
   }
   
-  func fetchSubset(_ dataRequest: RequestSubsetType?) -> AnyPublisher<[RepoStorable], Error> {
+  func fetchSubset(with dataRequest: RequestSubsetType?) -> AnyPublisher<[RepoStorable], Error> {
     return PassthroughSubject<[RepoStorable], Error>().eraseToAnyPublisher()
   }
   
-  func fetchSingle(_ dataRequest: RequestSingleType?) -> AnyPublisher<RepoStorable, Error> {
+  func fetchSingle(with dataRequest: RequestSingleType?) -> AnyPublisher<RepoStorable, Error> {
     return PassthroughSubject<RepoStorable, Error>().eraseToAnyPublisher()
   }
 }
