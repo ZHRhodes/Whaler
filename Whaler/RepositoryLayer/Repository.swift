@@ -35,7 +35,8 @@ class Repository<Entity: RepoStorable, Interface: DataInterface> {
     subject.send(newValues)
   }
   
-  func fetchAll(dataRequest: Interface.RequestAllType? = nil) {
+  @discardableResult
+  func fetchAll(dataRequest: Interface.RequestAllType? = nil) -> AnyPublisher<[Entity], Error> {
     allCancellable = dataInterface
       .fetchAll(with: dataRequest)
       .tryMap({ storables -> [Entity] in
@@ -49,9 +50,13 @@ class Repository<Entity: RepoStorable, Interface: DataInterface> {
     }, receiveValue: { (data) in
       self.broadcast(newValues: data)
     })
+    
+    return publisher
   }
   
-  func fetchSubset(dataRequest: Interface.RequestSubsetType) {
+  func fetchSubset(dataRequest: Interface.RequestSubsetType) -> AnyPublisher<[Entity], Error> {
+    let subsetSubject = PassthroughSubject<[Entity], Error>()
+    
     subsetCancellable = subject.sink(receiveCompletion: { _ in },
                                      receiveValue: { (currentValues) in
                                       var currentValues = currentValues
@@ -61,6 +66,7 @@ class Repository<Entity: RepoStorable, Interface: DataInterface> {
                                           guard let entities = storables as? [Entity] else {
                                             throw "Could not cast storables to expected entity type."
                                           }
+                                          subsetSubject.send(entities)
                                           return entities
                                         })
                                         .flatMap({ $0.publisher })
@@ -79,9 +85,13 @@ class Repository<Entity: RepoStorable, Interface: DataInterface> {
                                           }
                                         })
                                      })
+    
+    return subsetSubject.eraseToAnyPublisher()
   }
   
-  func fetchSingle(dataRequest: Interface.RequestSingleType) {
+  func fetchSingle(dataRequest: Interface.RequestSingleType) -> AnyPublisher<Entity, Error> {
+    let singleSubject = PassthroughSubject<Entity, Error>()
+    
     singleCancellable = subject.sink(receiveCompletion: { _ in },
                                      receiveValue: { (currentValues) in
                                       var currentValues = currentValues
@@ -91,6 +101,7 @@ class Repository<Entity: RepoStorable, Interface: DataInterface> {
                                           guard let entity = storable as? Entity else {
                                             throw "Could not cast storable to expected entity type."
                                           }
+                                          singleSubject.send(entity)
                                           return entity
                                         })
                                         .sink(receiveCompletion: { (status) in
@@ -108,5 +119,7 @@ class Repository<Entity: RepoStorable, Interface: DataInterface> {
                                           }
                                         })
     })
+    
+    return singleSubject.eraseToAnyPublisher()
   }
 }
