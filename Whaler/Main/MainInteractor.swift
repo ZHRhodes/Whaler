@@ -70,28 +70,15 @@ class MainInteractor: MainInteractorData {
   
   func getContacts(for account: Account, completion: @escaping () -> Void) {
     account.resetContacts()
-    contactsHelper.fetchContactsFromAPI(accountID: account.id) { (apiContacts) in
-      Log.info(apiContacts?.reduce("", { $0 + " " + $1.id }) ?? "")
-      guard let apiContacts = apiContacts else {
-        Log.error("Failed to fetch contacts from API")
-        return
-      }
-      
-      var retrievedContacts = [Contact]()
-      if let salesforceId = account.salesforceID {
-        retrievedContacts = self.contactsHelper.fetchContactsFromSalesforce(accountId: account.id,
-                                                                            salesforceAccountId: salesforceId,
-                                                                            accountName: account.name)
-      }
-      
-      self.reconcileContactsFromSalesforce(localContacts: apiContacts, salesforceContacts: retrievedContacts)
-      self.contactsHelper.saveContactsToAPI(retrievedContacts) { (contacts) in
-        contacts.forEach { contact in
-          account.contactGrouper.append(contact, to: contact.state ?? .ready)
-        }
-        completion()
-      }
-    }
+    let repo = repoStore.contactRepository
+    repo.fetchAll()
+    contactsCancellable = repo.publisher.sink(receiveCompletion: { _ in },
+                                              receiveValue: { (contacts) in
+                                                contacts.forEach { contact in
+                                                  account.contactGrouper.append(contact, to: contact.state ?? .ready)
+                                                }
+                                                completion()
+                                              })
   }
   
   private func retrieveAndAssignContacts() {
@@ -99,14 +86,6 @@ class MainInteractor: MainInteractorData {
     let accountsMap = createAccountsMap()
     retrievedContacts.forEach { contact in
       accountsMap[contact.accountID]?.contactGrouper.append(contact, to: contact.state ?? .ready)
-    }
-  }
-  
-  func reconcileContactsFromSalesforce(localContacts: [Contact], salesforceContacts: [Contact]) {
-    salesforceContacts.forEach { contact in
-      if let matchingLocalContact = localContacts.first(where: { $0.salesforceID == contact.salesforceID }) {
-        contact.mergeLocalProperties(with: matchingLocalContact)
-      }
     }
   }
   
@@ -127,12 +106,14 @@ class MainInteractor: MainInteractorData {
   
   //move to share
   let repoStore = RepoStore()
-  var cancellable: AnyCancellable?
+  var accountsCancellable: AnyCancellable?
+  var contactsCancellable: AnyCancellable?
   
   func getAccounts() {
     let repo = repoStore.accountRepository
     repo.fetchAll()
-    cancellable = repo.publisher.sink { _ in } receiveValue: { (accounts) in
+    accountsCancellable = repo.publisher.sink { _ in }
+      receiveValue: { (accounts) in
       self.setAccounts(accounts)
       self.viewController?.reloadCollection()
       Log.info(String(reflecting: self.accountGrouper))
@@ -140,14 +121,6 @@ class MainInteractor: MainInteractorData {
   }
   
   //will newly added in salesforce accounts save to cache in whaler? or is that only done on authentication?
-  
-  func reconcileAccountsFromSalesforce(localAccounts: [Account], salesforceAccounts: [Account]) {
-    salesforceAccounts.forEach { account in
-      if let matchingLocalAccount = localAccounts.first(where: { $0.salesforceID == account.salesforceID }) {
-        account.mergeLocalProperties(with: matchingLocalAccount)
-      }
-    }
-  }
   
   func makeSFAuthenticationSession(completion: @escaping VoidClosure) -> ASWebAuthenticationSession? {
     let session = SFHelper.makeAuthenticationSession { [weak self] in

@@ -10,9 +10,11 @@ import Foundation
 import Combine
 
 class AccountDataInterface: DataInterface {
-  typealias RequestAllType = Void
-  typealias RequestSingleType = String
-  typealias RequestSubsetType = String
+  typealias Entity = Account
+  
+  typealias AllDataRequestType = Void
+  typealias SubsetDataRequestType = Void
+  typealias SingleDataRequestType = Void
   
   private let remoteDataSource: AccountDataSource
   private let sfDataSource: AccountDataSource
@@ -25,8 +27,8 @@ class AccountDataInterface: DataInterface {
     self.sfDataSource = sfDataSource
   }
   
-  func fetchAll(with dataRequest: RequestAllType?) -> AnyPublisher<[RepoStorable], Error> {
-    let subject = PassthroughSubject<[RepoStorable], Error>()
+  func fetchAll(with dataRequest: AllDataRequestType?) -> AnyPublisher<[Entity], Error> {
+    let subject = PassthroughSubject<[Entity], Error>()
     
     cancellable = remoteDataSource
       .fetchAll()
@@ -34,11 +36,7 @@ class AccountDataInterface: DataInterface {
       .sink { (status) in
       print(status)
     } receiveValue: { [weak self] (remoteAccounts, sfAccounts) in
-      sfAccounts.forEach { account in
-        if let matchingLocalAccount = remoteAccounts.first(where: { $0.salesforceID == account.salesforceID }) {
-          account.mergeLocalProperties(with: matchingLocalAccount)
-        }
-      }
+      self?.reconcileAccountsFromSalesforce(remoteAccounts: remoteAccounts, salesforceAccounts: sfAccounts)
       subject.send(sfAccounts)
       guard let strongSelf = self else { return }
       strongSelf.saveCancellable = strongSelf.remoteDataSource.saveAll(sfAccounts)
@@ -48,11 +46,18 @@ class AccountDataInterface: DataInterface {
     return subject.eraseToAnyPublisher()
   }
   
-  func fetchSubset(with dataRequest: RequestSubsetType?) -> AnyPublisher<[RepoStorable], Error> {
-    return PassthroughSubject<[RepoStorable], Error>().eraseToAnyPublisher()
+  func fetchSubset(with dataRequest: SubsetDataRequestType?) -> AnyPublisher<[Entity], Error> {
+    return PassthroughSubject<[Entity], Error>().eraseToAnyPublisher()
   }
   
-  func fetchSingle(with dataRequest: RequestSingleType?) -> AnyPublisher<RepoStorable, Error> {
-    return PassthroughSubject<RepoStorable, Error>().eraseToAnyPublisher()
+  func fetchSingle(with dataRequest: SingleDataRequestType?) -> AnyPublisher<Entity, Error> {
+    return PassthroughSubject<Entity, Error>().eraseToAnyPublisher()
   }
-}
+  
+  func reconcileAccountsFromSalesforce(remoteAccounts: [Account], salesforceAccounts: [Account]) {
+    salesforceAccounts.forEach { account in
+      if let matchingLocalAccount = remoteAccounts.first(where: { $0.salesforceID == account.salesforceID }) {
+        account.mergeLocalProperties(with: matchingLocalAccount)
+      }
+    }
+  }}

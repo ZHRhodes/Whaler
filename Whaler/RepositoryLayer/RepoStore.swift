@@ -12,10 +12,16 @@ protocol RepoStorable {
   var id: String { get }
 }
 
+//kill on logout -- recreate
 class RepoStore {
-  var accountRepository = Repository<Account, AccountDataInterface>(dataInterface:
+  lazy var accountRepository = Repository<Account, AccountDataInterface>(dataInterface:
                                                 AccountDataInterface(
                                                   remoteDataSource: AccountRemoteDataSource(),
                                                                                    
                                                   sfDataSource: AccountSFDataSource()))
+  lazy var contactRepository = Repository<Contact, ContactDataInterface>(dataInterface:
+                                                                          ContactDataInterface(
+                                                                            remoteDataSource: ContactRemoteDataSource(),
+                                                                                                             
+                                                                            sfDataSource: ContactSFDataSource()))
 }

@@ -178,3 +178,5 @@ extension Contact {
               state: .ready)
   }
 }
+
+extension Contact: RepoStorable {}
