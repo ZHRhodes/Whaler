@@ -14,12 +14,12 @@ protocol RepoStorable {
 
 //kill on logout -- recreate
 class RepoStore {
-  lazy var accountRepository = Repository<Account, AccountDataInterface>(dataInterface:
+  lazy var accountRepository = Repository<AccountDataInterface>(dataInterface:
                                                 AccountDataInterface(
                                                   remoteDataSource: AccountRemoteDataSource(),
                                                                                    
                                                   sfDataSource: AccountSFDataSource()))
-  lazy var contactRepository = Repository<Contact, ContactDataInterface>(dataInterface:
+  lazy var contactRepository = Repository<ContactDataInterface>(dataInterface:
                                                                           ContactDataInterface(
                                                                             remoteDataSource: ContactRemoteDataSource(),
                                                                                                              

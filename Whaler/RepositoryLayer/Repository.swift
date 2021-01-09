@@ -9,7 +9,9 @@
 import Foundation
 import Combine
 
-class Repository<Entity, Interface: DataInterface> where Interface.Entity == Entity {
+class Repository<Interface: DataInterface> {
+  typealias Entity = Interface.Entity
+  
   private var subject = CurrentValueSubject<[Entity], Error>([])
   private var dataInterface: Interface
   private var allCancellable: AnyCancellable?

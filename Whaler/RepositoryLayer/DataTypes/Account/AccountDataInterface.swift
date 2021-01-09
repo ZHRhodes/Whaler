@@ -16,6 +16,9 @@ class AccountDataInterface: DataInterface {
   typealias SubsetDataRequestType = Void
   typealias SingleDataRequestType = Void
   
+  typealias SubsetDataSaveType = Void
+  typealias SingleDataSaveType = Void
+  
   private let remoteDataSource: AccountDataSource
   private let sfDataSource: AccountDataSource
   private var cancellable: AnyCancellable?
@@ -53,14 +56,20 @@ class AccountDataInterface: DataInterface {
   }
   
   func fetchSubset(with dataRequest: SubsetDataRequestType?) -> AnyPublisher<[Entity], Error> {
-    return PassthroughSubject<[Entity], Error>().eraseToAnyPublisher()
+    fatalError()
   }
   
   func fetchSingle(with dataRequest: SingleDataRequestType?) -> AnyPublisher<Entity, Error> {
-    return PassthroughSubject<Entity, Error>().eraseToAnyPublisher()
+    fatalError()
   }
   
-  func reconcileAccountsFromSalesforce(remoteAccounts: [Account], salesforceAccounts: [Account]) {
+  func save(_ set: [Entity]) -> AnyPublisher<[Entity], Error> {
+    fatalError()
+  }
+
+  //Mark: Private Methods
+  
+  private func reconcileAccountsFromSalesforce(remoteAccounts: [Account], salesforceAccounts: [Account]) {
     salesforceAccounts.forEach { account in
       if let matchingLocalAccount = remoteAccounts.first(where: { $0.salesforceID == account.salesforceID }) {
         account.mergeLocalProperties(with: matchingLocalAccount)

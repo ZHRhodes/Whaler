@@ -16,6 +16,9 @@ class ContactDataInterface: DataInterface {
   typealias SubsetDataRequestType = Void
   typealias SingleDataRequestType = Void
   
+  typealias SubsetDataSaveType = Void
+  typealias SingleDataSaveType = Void
+  
   private var remoteDataSource: ContactDataSource
   private var sfDataSource: ContactDataSource
   private var cancellable: AnyCancellable?
@@ -63,6 +66,10 @@ class ContactDataInterface: DataInterface {
   }
   
   func fetchSingle(with dataRequest: SingleDataRequestType?) -> AnyPublisher<Entity, Error> {
+    fatalError()
+  }
+  
+  func save(_ set: [Entity]) -> AnyPublisher<[Entity], Error> {
     fatalError()
   }
   
