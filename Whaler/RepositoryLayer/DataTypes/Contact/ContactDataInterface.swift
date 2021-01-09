@@ -19,6 +19,7 @@ class ContactDataInterface: DataInterface {
   private var remoteDataSource: ContactDataSource
   private var sfDataSource: ContactDataSource
   private var cancellable: AnyCancellable?
+  private var saveCancellable: AnyCancellable?
   
   init(remoteDataSource: ContactDataSource,
        sfDataSource: ContactDataSource) {
@@ -38,11 +39,20 @@ class ContactDataInterface: DataInterface {
       .fetchAll(with: dataRequest)
       .zip(sfDataSource.fetchAll(with: dataRequest))
       .sink { (status) in
-        Log.debug(String(describing: status))
+        switch status {
+        case .finished:
+          break
+        case .failure(_):
+          subject.send(completion: status)
+        }
       } receiveValue: { [weak self] (remoteContacts, sfContacts) in
         self?.reconcileContactsFromSalesforce(remoteContacts: remoteContacts,
                                               salesforceContacts: sfContacts)
         subject.send(sfContacts)
+        guard let strongSelf = self else { return }
+        strongSelf.saveCancellable = strongSelf.remoteDataSource.saveAll(sfContacts)
+          .sink(receiveCompletion: { subject.send(completion: $0) },
+                receiveValue: { subject.send($0) })
       }
     
     return subject.eraseToAnyPublisher()

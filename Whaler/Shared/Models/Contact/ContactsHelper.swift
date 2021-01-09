@@ -1,5 +1,5 @@
 //
-//  ContactsWorker.swift
+//  ContactsHelper.swift
 //  Whaler
 //
 //  Created by Zachary Rhodes on 10/29/20.

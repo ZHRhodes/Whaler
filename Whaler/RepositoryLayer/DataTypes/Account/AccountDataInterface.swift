@@ -34,13 +34,19 @@ class AccountDataInterface: DataInterface {
       .fetchAll()
       .zip(sfDataSource.fetchAll())
       .sink { (status) in
-      print(status)
+        switch status {
+        case .finished:
+          break
+        case .failure(_):
+          subject.send(completion: status)
+        }
     } receiveValue: { [weak self] (remoteAccounts, sfAccounts) in
       self?.reconcileAccountsFromSalesforce(remoteAccounts: remoteAccounts, salesforceAccounts: sfAccounts)
       subject.send(sfAccounts)
       guard let strongSelf = self else { return }
       strongSelf.saveCancellable = strongSelf.remoteDataSource.saveAll(sfAccounts)
-        .sink(receiveCompletion: { _ in }, receiveValue: { subject.send($0) })
+        .sink(receiveCompletion: { subject.send(completion: $0) },
+              receiveValue: { subject.send($0) })
     }
     
     return subject.eraseToAnyPublisher()

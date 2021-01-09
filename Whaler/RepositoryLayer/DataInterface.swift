@@ -16,17 +16,12 @@ protocol DataInterface {
   associatedtype SubsetDataRequestType
   associatedtype SingleDataRequestType
   
+  associatedtype SubsetDataSaveType
+  associatedtype SingleDataSaveType
+  
   func fetchAll(with dataRequest: AllDataRequestType?) -> AnyPublisher<[Entity], Error>
   func fetchSubset(with dataRequest: SubsetDataRequestType?) -> AnyPublisher<[Entity], Error>
   func fetchSingle(with dataRequest: SingleDataRequestType?) -> AnyPublisher<Entity, Error>
+  
+  func save(_ set: [Entity]) -> AnyPublisher<[Entity], Error>
 }
-
-//protocol DataRequestBuilder {
-//  associatedtype RemoteRequestType
-//  associatedtype LocalRequestType
-//
-//  func remoteRequest() -> RemoteRequestType
-//  func localRequest() -> LocalRequestType
-//}
-
-//struct EmptyDataRequestBuilder: DataRequestBuilder {}
