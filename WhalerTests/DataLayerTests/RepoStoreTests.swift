@@ -16,4 +16,10 @@ class RepoStoreTests: XCTestCase {
     let repo = repoStore.accountRepository
     XCTAssert(repo.type === Account.self)
   }
+  
+  func testRepoForContact() throws {
+    let repoStore = RepoStore()
+    let repo = repoStore.contactRepository
+    XCTAssert(repo.type === Contact.self)
+  }
 }

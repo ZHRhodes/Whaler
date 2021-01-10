@@ -89,6 +89,7 @@
 		148A09782586FF6A00811E35 /* WebSocketInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148A09772586FF6A00811E35 /* WebSocketInfo.swift */; };
 		148A097C258700FF00811E35 /* SocketMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148A097B258700FF00811E35 /* SocketMessage.swift */; };
 		148A0980258705DB00811E35 /* WebSocketConn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148A097F258705DB00811E35 /* WebSocketConn.swift */; };
+		148D460F25AA7326003D5FA7 /* MockAccountInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148D460E25AA7326003D5FA7 /* MockAccountInterface.swift */; };
 		149F3A0025206AE4001F38BF /* MainCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149F39FF25206AE4001F38BF /* MainCollectionCell.swift */; };
 		149F3A0725206BB7001F38BF /* MainTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149F3A0625206BB7001F38BF /* MainTableCell.swift */; };
 		149F3A0B25209575001F38BF /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149F3A0A25209575001F38BF /* UIView+Extensions.swift */; };
@@ -233,6 +234,7 @@
 		148A09772586FF6A00811E35 /* WebSocketInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebSocketInfo.swift; sourceTree = "<group>"; };
 		148A097B258700FF00811E35 /* SocketMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketMessage.swift; sourceTree = "<group>"; };
 		148A097F258705DB00811E35 /* WebSocketConn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebSocketConn.swift; sourceTree = "<group>"; };
+		148D460E25AA7326003D5FA7 /* MockAccountInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAccountInterface.swift; sourceTree = "<group>"; };
 		149F39FF25206AE4001F38BF /* MainCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCollectionCell.swift; sourceTree = "<group>"; };
 		149F3A0625206BB7001F38BF /* MainTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableCell.swift; sourceTree = "<group>"; };
 		149F3A0A25209575001F38BF /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
@@ -556,7 +558,7 @@
 			path = Contacts;
 			sourceTree = "<group>";
 		};
-		147EB8672593C930002B93D8 /* RepositoryLayer */ = {
+		147EB8672593C930002B93D8 /* DataLayer */ = {
 			isa = PBXGroup;
 			children = (
 				1416482A25A7ACEC0008E16B /* DataTypes */,
@@ -564,12 +566,13 @@
 				1416481225A4FA780008E16B /* RepoStore.swift */,
 				1416481625A4FA970008E16B /* DataInterface.swift */,
 			);
-			path = RepositoryLayer;
+			path = DataLayer;
 			sourceTree = "<group>";
 		};
 		147EB8A125A413B0002B93D8 /* DataLayerTests */ = {
 			isa = PBXGroup;
 			children = (
+				148D460D25AA7305003D5FA7 /* Mocks */,
 				14861EEB249F3DE400D2FA92 /* RepositoryTests.swift */,
 				147EB89925A4136E002B93D8 /* RepoStoreTests.swift */,
 			);
@@ -628,7 +631,7 @@
 				14861ED4249F3DE100D2FA92 /* AppDelegate.swift */,
 				14861ED6249F3DE100D2FA92 /* SceneDelegate.swift */,
 				1480800724EA4AD2007EB6D1 /* NetworkLayer */,
-				147EB8672593C930002B93D8 /* RepositoryLayer */,
+				147EB8672593C930002B93D8 /* DataLayer */,
 				140AE7A624A9DF0B00F7705E /* Shared */,
 				144BF56A24D7E64300F231F0 /* RootContainer */,
 				142EC6A624D6ADDD004F7A28 /* Authentication */,
@@ -669,6 +672,14 @@
 				148A097F258705DB00811E35 /* WebSocketConn.swift */,
 			);
 			path = Websocket;
+			sourceTree = "<group>";
+		};
+		148D460D25AA7305003D5FA7 /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				148D460E25AA7326003D5FA7 /* MockAccountInterface.swift */,
+			);
+			path = Mocks;
 			sourceTree = "<group>";
 		};
 		149F3A0325206BA6001F38BF /* CollectionView */ = {
@@ -1091,6 +1102,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				14861EEC249F3DE400D2FA92 /* RepositoryTests.swift in Sources */,
+				148D460F25AA7326003D5FA7 /* MockAccountInterface.swift in Sources */,
 				147EB89A25A4136E002B93D8 /* RepoStoreTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

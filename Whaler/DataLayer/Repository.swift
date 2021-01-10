@@ -17,6 +17,7 @@ class Repository<Interface: DataInterface> {
   private var allCancellable: AnyCancellable?
   private var subsetCancellable: AnyCancellable?
   private var singleCancellable: AnyCancellable?
+  private var saveCancellable: AnyCancellable?
   private var replaceCancellable: AnyCancellable?
   
   var type: Entity.Type {
@@ -36,7 +37,7 @@ class Repository<Interface: DataInterface> {
   }
   
   @discardableResult
-  func fetchAll(dataRequest: Interface.AllDataRequestType? = nil) -> AnyPublisher<[Entity], Error> {
+  func fetchAll(with dataRequest: Interface.AllDataRequestType? = nil) -> AnyPublisher<[Entity], Error> {
     allCancellable = dataInterface
       .fetchAll(with: dataRequest)
       .sink(receiveCompletion: { (status) in
@@ -53,25 +54,27 @@ class Repository<Interface: DataInterface> {
     return publisher
   }
   
-  func fetchSubset(dataRequest: Interface.SubsetDataRequestType) -> AnyPublisher<[Entity], Error> {
+  func fetchSubset(with dataRequest: Interface.SubsetDataRequestType) -> AnyPublisher<[Entity], Error> {
     let publisher = dataInterface.fetchSubset(with: dataRequest)
-    subsetCancellable = updateWithFetchedSubset(publisher: publisher)
+    subsetCancellable = processNewResults(from: publisher)
     return publisher
   }
   
-  func fetchSingle(dataRequest: Interface.SingleDataRequestType) -> AnyPublisher<Entity, Error> {
+  func fetchSingle(with dataRequest: Interface.SingleDataRequestType) -> AnyPublisher<Entity, Error> {
     let publisher = dataInterface.fetchSingle(with: dataRequest)
-    singleCancellable = updateWithFetchedSingle(publisher: publisher)
+    singleCancellable = processNewResult(from: publisher)
     return publisher
   }
   
-  func save(_ set: [Entity]) -> AnyPublisher<[Entity], Error> {
-    return dataInterface.save(set)
+  func save(_ data: Interface.DataSaveType) -> AnyPublisher<[Entity], Error> {
+    let publisher = dataInterface.save(data)
+    saveCancellable = processNewResults(from: publisher)
+    return publisher.eraseToAnyPublisher()
   }
   
   //MARK: Private Methods
   
-  private func updateWithFetchedSubset(publisher: AnyPublisher<[Entity], Error>) -> AnyCancellable {
+  private func processNewResults(from publisher: AnyPublisher<[Entity], Error>) -> AnyCancellable {
     return publisher
       .sink(receiveCompletion: { (status) in
       switch status {
@@ -83,27 +86,30 @@ class Repository<Interface: DataInterface> {
     }, receiveValue: { [weak self] (newValue) in
       guard let strongSelf = self else { return }
       var currentValues = strongSelf.subject.value
-      currentValues = strongSelf.update(set: currentValues, with: newValue)
+      currentValues = strongSelf.update(values: currentValues, with: newValue)
       strongSelf.broadcast(newValues: currentValues)
     })
   }
   
-  private func updateWithFetchedSingle(publisher: AnyPublisher<Entity, Error>) -> AnyCancellable {
+  private func processNewResult(from publisher: AnyPublisher<Entity, Error>) -> AnyCancellable {
     let publisher = publisher.map { (entity) -> [Entity] in
       return [entity]
     }.eraseToAnyPublisher()
-    return updateWithFetchedSubset(publisher: publisher)
+    return processNewResults(from: publisher)
   }
   
-  private func update(set: [Entity], with new: [Entity]) -> [Entity] {
+  private func update(values: [Entity], with new: [Entity]) -> [Entity] {
+    var values = values
     var dict = [String: Entity]()
-    set.forEach({ dict[$0.id] = $0 })
+    new.forEach({ dict[$0.id] = $0 })
     
-    new.forEach { (newEntity) in
-      dict[newEntity.id] = newEntity
+    values.enumerated().forEach { (index, element) in
+      if let matchInNew = dict[element.id] {
+        values[index] = matchInNew
+      }
     }
     
-    return Array(dict.values)
+    return values
   }
   
   //function to clear cache?

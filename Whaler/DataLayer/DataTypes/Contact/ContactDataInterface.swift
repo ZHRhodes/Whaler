@@ -16,8 +16,7 @@ class ContactDataInterface: DataInterface {
   typealias SubsetDataRequestType = Void
   typealias SingleDataRequestType = Void
   
-  typealias SubsetDataSaveType = Void
-  typealias SingleDataSaveType = Void
+  typealias DataSaveType = Void
   
   private var remoteDataSource: ContactDataSource
   private var sfDataSource: ContactDataSource
@@ -61,15 +60,15 @@ class ContactDataInterface: DataInterface {
     return subject.eraseToAnyPublisher()
   }
   
-  func fetchSubset(with dataRequest: SubsetDataRequestType?) -> AnyPublisher<[Entity], Error> {
+  func fetchSubset(with dataRequest: SubsetDataRequestType) -> AnyPublisher<[Entity], Error> {
     fatalError()
   }
   
-  func fetchSingle(with dataRequest: SingleDataRequestType?) -> AnyPublisher<Entity, Error> {
+  func fetchSingle(with dataRequest: SingleDataRequestType) -> AnyPublisher<Entity, Error> {
     fatalError()
   }
   
-  func save(_ set: [Entity]) -> AnyPublisher<[Entity], Error> {
+  func save(_ data: DataSaveType) -> AnyPublisher<[Entity], Error> {
     fatalError()
   }
   

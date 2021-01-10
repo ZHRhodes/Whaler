@@ -18,7 +18,7 @@ final class Account: NSObject, Codable {
   var id: String
   let ownerID: String
   var salesforceOwnerID: String?
-  let name: String
+  var name: String
   var salesforceID: String?
   let industry: String?
   let numberOfEmployees: String?
