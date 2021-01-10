@@ -11,13 +11,13 @@ import UIKit
 import Combine
 
 class AccountDetailsViewController: UIViewController {
-  var backSubscriber: AnyCancellable?
+  var backCancellable: AnyCancellable?
   private let splitPaneViewController = SplitPaneViewController()
   
   override func viewDidLoad() {
     super.viewDidLoad()
     configureSplitPaneViewController()
-    backSubscriber = NotificationCenter.default
+    backCancellable = NotificationCenter.default
       .publisher(for: .back)
       .sink(receiveValue: { [weak self] notification in
       self?.navigationController?.popViewController(animated: false) //temp, move
@@ -25,6 +25,8 @@ class AccountDetailsViewController: UIViewController {
   }
   
   private func configureSplitPaneViewController() {
+    splitPaneViewController.resizable = true
+    
     let vc1 = UIViewController()
     vc1.view.backgroundColor = .white
     splitPaneViewController.appendViewController(vc1)
@@ -33,7 +35,7 @@ class AccountDetailsViewController: UIViewController {
     vc2.view.backgroundColor = .white
     splitPaneViewController.appendViewController(vc2)
     
-    try? splitPaneViewController.setDistribution(ratios: [0.65, 0.35])
+    try? splitPaneViewController.setDistribution(ratios: [0.60, 0.40])
     view.addAndAttachToEdges(view: splitPaneViewController.view)
   }
 }

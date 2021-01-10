@@ -11,10 +11,13 @@ import UIKit
 import Combine
 
 class SplitPaneViewController: UIViewController {
+  //Known issue: currently resizing ONLY works with two views, not more
   var resizable = false
   private let viewStacker = ViewControllerViewStacker()
+  private var separators = [UIView]() //currently, these are never removed
   private var distribution = [CGFloat]()
   private var cancellable: AnyCancellable?
+  private let separatorWidth: CGFloat = 5
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -38,8 +41,10 @@ class SplitPaneViewController: UIViewController {
   }
   
   func appendViewController(_ viewController: UIViewController) {
+    if viewStacker.viewControllers.count > 0 {
+      viewStacker.appendView(makeDraggableSeparator())
+    }
     viewStacker.appendViewController(viewController)
-    viewStacker.appendView(makeDraggableSeparator())
   }
   
   func removeViewController(at index: Int) {
@@ -60,6 +65,7 @@ class SplitPaneViewController: UIViewController {
       .sink(receiveValue: { [weak self] (vc, ratio) in
       guard let strongSelf = self else { return }
       let width = strongSelf.calculateWidthForRatio(ratio)
+      vc.view.removeConstraints(vc.view.constraints)
       vc.view.widthAnchor.constraint(equalToConstant: width).isActive = true
     })
   }
@@ -67,25 +73,10 @@ class SplitPaneViewController: UIViewController {
   //MARK: Private Methods
   
   private func distributeViewsEqually() {
-    let width = calculateEqualWidthForView()
-    viewStacker.viewControllers.forEach { (vc) in
-      vc.view.widthAnchor.constraint(equalToConstant: width).isActive = true
-    }
-  }
-  
-  private func calculateEqualWidthForView() -> CGFloat {
-    var width: CGFloat = view.frame.width
-    let viewControllerCount = viewStacker.viewControllers.count
-    
-    let separators = viewStacker.viewControllers.count - 1
-    if separators > 0 {
-      width -= CGFloat(separators)
-    }
-    
-    if viewControllerCount > 1 {
-      width /= CGFloat(viewControllerCount)
-    }
-    return width
+    let vcCount = viewStacker.viewControllers.count
+    let ratio = CGFloat(1) / CGFloat(vcCount)
+    let distribution = Array(repeating: ratio, count: vcCount)
+    try? setDistribution(ratios: distribution)
   }
   
   private func calculateWidthForRatio(_ ratio: CGFloat) -> CGFloat {
@@ -93,7 +84,7 @@ class SplitPaneViewController: UIViewController {
     
     let separators = viewStacker.viewControllers.count - 1
     if separators > 0 {
-      width -= CGFloat(separators)
+      width -= CGFloat(separators) * separatorWidth
     }
     
     return width * ratio
@@ -104,15 +95,26 @@ class SplitPaneViewController: UIViewController {
   }
   
   private func makeDraggableSeparator() -> UIView {
-    let view = UIView()
-    view.backgroundColor = .black
+    let container = UIView()
+    container.widthAnchor.constraint(equalToConstant: separatorWidth).isActive = true
+    container.backgroundColor = .clear
+    let line = UIView()
+    line.backgroundColor = .black
     if resizable {
       let hoverGesture = UIHoverGestureRecognizer(target: self,
-                                                 action: #selector(hovering(_:)))
-      view.addGestureRecognizer(hoverGesture)
+                                                  action: #selector(hovering(_:)))
+      container.addGestureRecognizer(hoverGesture)
+      
+      let longPressGesture = UILongPressGestureRecognizer(target: self,
+                                                          action: #selector(handleLongPressGesture(_:)))
+      longPressGesture.minimumPressDuration = 0.1
+      container.addGestureRecognizer(longPressGesture)
     }
-    view.widthAnchor.constraint(equalToConstant: 1).isActive = true
-    return view
+    let lineWidth: CGFloat = 1.0
+    line.widthAnchor.constraint(equalToConstant: lineWidth).isActive = true
+    separators.append(container)
+    container.addAndAttachToEdges(view: line, inset: (separatorWidth - lineWidth) / 2)
+    return container
   }
   
   @objc
@@ -129,7 +131,24 @@ class SplitPaneViewController: UIViewController {
     #endif
   }
   
-  //TODO: dragging when resizable is enabled (using log press gestures) should update the appropriate view constraints
+  @objc
+  private func handleLongPressGesture(_ gesture: UILongPressGestureRecognizer) {
+    if gesture.state == UIGestureRecognizer.State.changed {
+      var ratios = [CGFloat]()
+      var xMax: CGFloat = 0.0
+      separators.forEach { (separator) in
+        var separatorX: CGFloat = separator.frame.minX
+        if separator === gesture.view {
+          separatorX += gesture.location(in: gesture.view).x
+        }
+        let xRatio = separatorX/view.frame.width
+        ratios.append(xRatio - xMax)
+        xMax = xRatio
+      }
+      ratios.append(1.0 - xMax)
+      do { try setDistribution(ratios: ratios) } catch(let error) { print(error) }
+    }
+  }
 }
 
 class ViewControllerViewStacker {
