@@ -90,6 +90,7 @@
 		148A097C258700FF00811E35 /* SocketMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148A097B258700FF00811E35 /* SocketMessage.swift */; };
 		148A0980258705DB00811E35 /* WebSocketConn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148A097F258705DB00811E35 /* WebSocketConn.swift */; };
 		148D460F25AA7326003D5FA7 /* MockAccountInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148D460E25AA7326003D5FA7 /* MockAccountInterface.swift */; };
+		148D461525AAD3C7003D5FA7 /* SplitPaneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148D461425AAD3C6003D5FA7 /* SplitPaneViewController.swift */; };
 		149F3A0025206AE4001F38BF /* MainCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149F39FF25206AE4001F38BF /* MainCollectionCell.swift */; };
 		149F3A0725206BB7001F38BF /* MainTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149F3A0625206BB7001F38BF /* MainTableCell.swift */; };
 		149F3A0B25209575001F38BF /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149F3A0A25209575001F38BF /* UIView+Extensions.swift */; };
@@ -235,6 +236,7 @@
 		148A097B258700FF00811E35 /* SocketMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketMessage.swift; sourceTree = "<group>"; };
 		148A097F258705DB00811E35 /* WebSocketConn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebSocketConn.swift; sourceTree = "<group>"; };
 		148D460E25AA7326003D5FA7 /* MockAccountInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAccountInterface.swift; sourceTree = "<group>"; };
+		148D461425AAD3C6003D5FA7 /* SplitPaneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitPaneViewController.swift; sourceTree = "<group>"; };
 		149F39FF25206AE4001F38BF /* MainCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCollectionCell.swift; sourceTree = "<group>"; };
 		149F3A0625206BB7001F38BF /* MainTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableCell.swift; sourceTree = "<group>"; };
 		149F3A0A25209575001F38BF /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
@@ -413,6 +415,7 @@
 			isa = PBXGroup;
 			children = (
 				1414810A252FFD8100640946 /* TablePopoverViewController.swift */,
+				148D461425AAD3C6003D5FA7 /* SplitPaneViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -1040,6 +1043,7 @@
 				146A6DDA252C563200DA8E85 /* SFNetworkInterface.swift in Sources */,
 				149F3A0025206AE4001F38BF /* MainCollectionCell.swift in Sources */,
 				1425175125510E11006255F1 /* FilterBucket.swift in Sources */,
+				148D461525AAD3C7003D5FA7 /* SplitPaneViewController.swift in Sources */,
 				14F4FE14254AA5C600C89485 /* ContactsHelper.swift in Sources */,
 				141802AD258EF07700E38840 /* AccountDetailsViewController.swift in Sources */,
 				1454743B250D904700257A89 /* UIViewController+Extensions.swift in Sources */,

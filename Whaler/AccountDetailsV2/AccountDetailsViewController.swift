@@ -12,13 +12,28 @@ import Combine
 
 class AccountDetailsViewController: UIViewController {
   var backSubscriber: AnyCancellable?
+  private let splitPaneViewController = SplitPaneViewController()
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    configureSplitPaneViewController()
     backSubscriber = NotificationCenter.default
       .publisher(for: .back)
       .sink(receiveValue: { [weak self] notification in
       self?.navigationController?.popViewController(animated: false) //temp, move
     })
+  }
+  
+  private func configureSplitPaneViewController() {
+    let vc1 = UIViewController()
+    vc1.view.backgroundColor = .white
+    splitPaneViewController.appendViewController(vc1)
+    
+    let vc2 = UIViewController()
+    vc2.view.backgroundColor = .white
+    splitPaneViewController.appendViewController(vc2)
+    
+    try? splitPaneViewController.setDistribution(ratios: [0.65, 0.35])
+    view.addAndAttachToEdges(view: splitPaneViewController.view)
   }
 }
