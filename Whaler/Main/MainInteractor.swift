@@ -137,7 +137,7 @@ class MainInteractor: MainInteractorData {
       try SF.refreshAccessToken()
       completion(true)
     } catch let error {
-      Log.error("Failed to refresh Salesforce session.")
+      Log.error("Failed to refresh Salesforce session. \(error)")
       completion(false)
     }
   }

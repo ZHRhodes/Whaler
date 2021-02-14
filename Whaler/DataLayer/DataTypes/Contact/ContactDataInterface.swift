@@ -18,24 +18,25 @@ class ContactDataInterface: DataInterface {
   
   typealias DataSaveType = Void
   
-  private var remoteDataSource: ContactDataSource
-  private var sfDataSource: ContactDataSource
+  private var remoteDataSource: ContactRemoteDataSource
+  private var sfDataSource: ContactSFDataSource
   private var cancellable: AnyCancellable?
   private var saveCancellable: AnyCancellable?
   
-  init(remoteDataSource: ContactDataSource,
-       sfDataSource: ContactDataSource) {
+  init(remoteDataSource: ContactRemoteDataSource,
+       sfDataSource: ContactSFDataSource) {
     self.remoteDataSource = remoteDataSource
     self.sfDataSource = sfDataSource
   }
   
-  func fetchAll(with dataRequest: AllDataRequestType?) -> AnyPublisher<[Entity], Error> {
+  func fetchAll(with dataRequest: AllDataRequestType?) -> AnyPublisher<[Entity], RepoError> {
     guard let dataRequest = dataRequest else {
       let message = "Fetching all contacts requires a non-nil data request"
-      return Fail(error: message).eraseToAnyPublisher()
+      let error = RepoError(reason: message, humanReadableMessage: nil)
+      return Fail(error: error).eraseToAnyPublisher()
     }
     
-    let subject = PassthroughSubject<[Entity], Error>()
+    let subject = PassthroughSubject<[Entity], RepoError>()
     
     cancellable = remoteDataSource
       .fetchAll(with: dataRequest)
@@ -60,15 +61,15 @@ class ContactDataInterface: DataInterface {
     return subject.eraseToAnyPublisher()
   }
   
-  func fetchSubset(with dataRequest: SubsetDataRequestType) -> AnyPublisher<[Entity], Error> {
+  func fetchSubset(with dataRequest: SubsetDataRequestType) -> AnyPublisher<[Entity], RepoError> {
     fatalError()
   }
   
-  func fetchSingle(with dataRequest: SingleDataRequestType) -> AnyPublisher<Entity, Error> {
+  func fetchSingle(with dataRequest: SingleDataRequestType) -> AnyPublisher<Entity?, RepoError> {
     fatalError()
   }
   
-  func save(_ data: DataSaveType) -> AnyPublisher<[Entity], Error> {
+  func save(_ data: DataSaveType) -> AnyPublisher<[Entity], RepoError> {
     fatalError()
   }
   

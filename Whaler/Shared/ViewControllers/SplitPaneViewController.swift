@@ -65,7 +65,8 @@ class SplitPaneViewController: UIViewController {
       .sink(receiveValue: { [weak self] (vc, ratio) in
       guard let strongSelf = self else { return }
       let width = strongSelf.calculateWidthForRatio(ratio)
-      vc.view.removeConstraints(vc.view.constraints)
+//      vc.view.removeConstraints(vc.view.constraints)
+        vc.view.constraintsAffectingLayout(for: .horizontal).forEach({ $0.isActive = false })
       vc.view.widthAnchor.constraint(equalToConstant: width).isActive = true
     })
   }

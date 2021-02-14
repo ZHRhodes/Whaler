@@ -17,10 +17,10 @@ protocol DataInterface {
   associatedtype SingleDataRequestType
   
   associatedtype DataSaveType
+    
+  func fetchAll(with dataRequest: AllDataRequestType?) -> AnyPublisher<[Entity], RepoError>
+  func fetchSubset(with dataRequest: SubsetDataRequestType) -> AnyPublisher<[Entity], RepoError>
+  func fetchSingle(with dataRequest: SingleDataRequestType) -> AnyPublisher<Entity?, RepoError>
   
-  func fetchAll(with dataRequest: AllDataRequestType?) -> AnyPublisher<[Entity], Error>
-  func fetchSubset(with dataRequest: SubsetDataRequestType) -> AnyPublisher<[Entity], Error>
-  func fetchSingle(with dataRequest: SingleDataRequestType) -> AnyPublisher<Entity, Error>
-  
-  func save(_ data: DataSaveType) -> AnyPublisher<[Entity], Error>
+  func save(_ data: DataSaveType) -> AnyPublisher<[Entity], RepoError>
 }

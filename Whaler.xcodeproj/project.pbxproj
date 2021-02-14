@@ -20,12 +20,12 @@
 		140AE7A524A9BEC300F7705E /* AccountTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140AE7A424A9BEC300F7705E /* AccountTableCell.swift */; };
 		140AE7A924A9DF3300F7705E /* CommonButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140AE7A824A9DF3300F7705E /* CommonButton.swift */; };
 		1414810B252FFD8100640946 /* TablePopoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1414810A252FFD8100640946 /* TablePopoverViewController.swift */; };
-		1416480725A4FA020008E16B /* AccountDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1416480625A4FA020008E16B /* AccountDataStore.swift */; };
+		1416480725A4FA020008E16B /* AccountSFDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1416480625A4FA020008E16B /* AccountSFDataSource.swift */; };
 		1416480B25A4FA270008E16B /* AccountDataInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1416480A25A4FA270008E16B /* AccountDataInterface.swift */; };
 		1416481325A4FA780008E16B /* RepoStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1416481225A4FA780008E16B /* RepoStore.swift */; };
 		1416481725A4FA970008E16B /* DataInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1416481625A4FA970008E16B /* DataInterface.swift */; };
 		1416482C25A7F49C0008E16B /* ContactDataInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1416482B25A7F49C0008E16B /* ContactDataInterface.swift */; };
-		1416483225A7F4BC0008E16B /* ContactDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1416483125A7F4BC0008E16B /* ContactDataStore.swift */; };
+		1416483225A7F4BC0008E16B /* ContactSFDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1416483125A7F4BC0008E16B /* ContactSFDataSource.swift */; };
 		141802AD258EF07700E38840 /* AccountDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141802AC258EF07700E38840 /* AccountDetailsViewController.swift */; };
 		141802B1258EF30B00E38840 /* ToolbarDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141802B0258EF30A00E38840 /* ToolbarDelegate.swift */; };
 		141802B5258EF72A00E38840 /* Notification+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141802B4258EF72A00E38840 /* Notification+Extensions.swift */; };
@@ -52,6 +52,10 @@
 		1454743D250D93DC00257A89 /* SFSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1454743C250D93DC00257A89 /* SFSession.swift */; };
 		145A376A24C588DF0081F9DB /* NotesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145A376924C588DF0081F9DB /* NotesView.swift */; };
 		145A376C24C58D440081F9DB /* AccountDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145A376B24C58D440081F9DB /* AccountDetailsView.swift */; };
+		1467379B25D79B3B00B64735 /* RepoError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1467379A25D79B3B00B64735 /* RepoError.swift */; };
+		146737A125D79CFE00B64735 /* AccountRemoteDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146737A025D79CFE00B64735 /* AccountRemoteDataSource.swift */; };
+		146737A725D79D3A00B64735 /* ContactRemoteDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146737A625D79D3A00B64735 /* ContactRemoteDataSource.swift */; };
+		146737AF25D7A02500B64735 /* NoteEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146737AE25D7A02500B64735 /* NoteEditorViewController.swift */; };
 		146834FC24DA76CE0075B639 /* RootContainerInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146834FB24DA76CE0075B639 /* RootContainerInteractor.swift */; };
 		146834FF24DA99810075B639 /* CommonTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146834FE24DA99810075B639 /* CommonTextField.swift */; };
 		146A6DC4252C439000DA8E85 /* organization.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 146A6DC3252C439000DA8E85 /* organization.graphql */; };
@@ -164,12 +168,12 @@
 		140AE7A424A9BEC300F7705E /* AccountTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountTableCell.swift; sourceTree = "<group>"; };
 		140AE7A824A9DF3300F7705E /* CommonButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonButton.swift; sourceTree = "<group>"; };
 		1414810A252FFD8100640946 /* TablePopoverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TablePopoverViewController.swift; sourceTree = "<group>"; };
-		1416480625A4FA020008E16B /* AccountDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDataStore.swift; sourceTree = "<group>"; };
+		1416480625A4FA020008E16B /* AccountSFDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSFDataSource.swift; sourceTree = "<group>"; };
 		1416480A25A4FA270008E16B /* AccountDataInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDataInterface.swift; sourceTree = "<group>"; };
 		1416481225A4FA780008E16B /* RepoStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoStore.swift; sourceTree = "<group>"; };
 		1416481625A4FA970008E16B /* DataInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataInterface.swift; sourceTree = "<group>"; };
 		1416482B25A7F49C0008E16B /* ContactDataInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactDataInterface.swift; sourceTree = "<group>"; };
-		1416483125A7F4BC0008E16B /* ContactDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactDataStore.swift; sourceTree = "<group>"; };
+		1416483125A7F4BC0008E16B /* ContactSFDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactSFDataSource.swift; sourceTree = "<group>"; };
 		141802AC258EF07700E38840 /* AccountDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDetailsViewController.swift; sourceTree = "<group>"; };
 		141802B0258EF30A00E38840 /* ToolbarDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolbarDelegate.swift; sourceTree = "<group>"; };
 		141802B4258EF72A00E38840 /* Notification+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification+Extensions.swift"; sourceTree = "<group>"; };
@@ -196,6 +200,10 @@
 		1454743C250D93DC00257A89 /* SFSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFSession.swift; sourceTree = "<group>"; };
 		145A376924C588DF0081F9DB /* NotesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesView.swift; sourceTree = "<group>"; };
 		145A376B24C58D440081F9DB /* AccountDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDetailsView.swift; sourceTree = "<group>"; };
+		1467379A25D79B3B00B64735 /* RepoError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoError.swift; sourceTree = "<group>"; };
+		146737A025D79CFE00B64735 /* AccountRemoteDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountRemoteDataSource.swift; sourceTree = "<group>"; };
+		146737A625D79D3A00B64735 /* ContactRemoteDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactRemoteDataSource.swift; sourceTree = "<group>"; };
+		146737AE25D7A02500B64735 /* NoteEditorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteEditorViewController.swift; sourceTree = "<group>"; };
 		146834FB24DA76CE0075B639 /* RootContainerInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootContainerInteractor.swift; sourceTree = "<group>"; };
 		146834FE24DA99810075B639 /* CommonTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonTextField.swift; sourceTree = "<group>"; };
 		146A6DC3252C439000DA8E85 /* organization.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = organization.graphql; sourceTree = "<group>"; };
@@ -424,7 +432,8 @@
 			isa = PBXGroup;
 			children = (
 				1416480A25A4FA270008E16B /* AccountDataInterface.swift */,
-				1416480625A4FA020008E16B /* AccountDataStore.swift */,
+				146737A025D79CFE00B64735 /* AccountRemoteDataSource.swift */,
+				1416480625A4FA020008E16B /* AccountSFDataSource.swift */,
 			);
 			path = Account;
 			sourceTree = "<group>";
@@ -433,7 +442,8 @@
 			isa = PBXGroup;
 			children = (
 				1416482B25A7F49C0008E16B /* ContactDataInterface.swift */,
-				1416483125A7F4BC0008E16B /* ContactDataStore.swift */,
+				146737A625D79D3A00B64735 /* ContactRemoteDataSource.swift */,
+				1416483125A7F4BC0008E16B /* ContactSFDataSource.swift */,
 			);
 			path = Contact;
 			sourceTree = "<group>";
@@ -452,6 +462,7 @@
 			children = (
 				141802AC258EF07700E38840 /* AccountDetailsViewController.swift */,
 				141802B0258EF30A00E38840 /* ToolbarDelegate.swift */,
+				146737AE25D7A02500B64735 /* NoteEditorViewController.swift */,
 			);
 			path = AccountDetailsV2;
 			sourceTree = "<group>";
@@ -568,6 +579,7 @@
 				147EB86A2593C950002B93D8 /* Repository.swift */,
 				1416481225A4FA780008E16B /* RepoStore.swift */,
 				1416481625A4FA970008E16B /* DataInterface.swift */,
+				1467379A25D79B3B00B64735 /* RepoError.swift */,
 			);
 			path = DataLayer;
 			sourceTree = "<group>";
@@ -996,6 +1008,7 @@
 				14251745255108F0006255F1 /* SFQuery.swift in Sources */,
 				1440A20424C947FA00E36853 /* Contact.swift in Sources */,
 				14F7DDA124EE529300D43055 /* SFAccount.swift in Sources */,
+				146737A725D79D3A00B64735 /* ContactRemoteDataSource.swift in Sources */,
 				148A09742586FEC500811E35 /* LiteWebSocketDelegate.swift in Sources */,
 				1425175525510E46006255F1 /* FilterValue.swift in Sources */,
 				1443046124F3AFFC00D2FBD2 /* Typealiases.swift in Sources */,
@@ -1034,10 +1047,12 @@
 				14D9CA5924B599230030B17A /* AccountStateTagView.swift in Sources */,
 				1416481325A4FA780008E16B /* RepoStore.swift in Sources */,
 				142EC6A824D6AE01004F7A28 /* AuthenticationView.swift in Sources */,
+				146737AF25D7A02500B64735 /* NoteEditorViewController.swift in Sources */,
 				140AE79924A9AA5C00F7705E /* Account.swift in Sources */,
 				1473C8A82522E6D000A991DA /* AttributeTagView.swift in Sources */,
 				14DACF4A255BCD4C00FC0900 /* CustomError.swift in Sources */,
 				140AE79624A9AA0B00F7705E /* MainInteractor.swift in Sources */,
+				146737A125D79CFE00B64735 /* AccountRemoteDataSource.swift in Sources */,
 				145A376C24C58D440081F9DB /* AccountDetailsView.swift in Sources */,
 				149F3A0B25209575001F38BF /* UIView+Extensions.swift in Sources */,
 				146A6DDA252C563200DA8E85 /* SFNetworkInterface.swift in Sources */,
@@ -1063,6 +1078,7 @@
 				147EB86B2593C950002B93D8 /* Repository.swift in Sources */,
 				146C35CF24C2CA9700DBCA23 /* TitleValueView.swift in Sources */,
 				146C35D324C557C800DBCA23 /* CompanyInfoValuesView.swift in Sources */,
+				1467379B25D79B3B00B64735 /* RepoError.swift in Sources */,
 				1414810B252FFD8100640946 /* TablePopoverViewController.swift in Sources */,
 				14F7DD9F24EE527600D43055 /* SFQueryResponse.swift in Sources */,
 				14018152254643AF00246BDA /* AccountsHelper.swift in Sources */,
@@ -1072,13 +1088,13 @@
 				14D97D7924DBEC4B00058B09 /* Keychain.swift in Sources */,
 				1416480B25A4FA270008E16B /* AccountDataInterface.swift in Sources */,
 				140AE79E24A9B50900F7705E /* UIColor+Extensions.swift in Sources */,
-				1416480725A4FA020008E16B /* AccountDataStore.swift in Sources */,
+				1416480725A4FA020008E16B /* AccountSFDataSource.swift in Sources */,
 				14C509B8254CECD70021D9C5 /* AddAccountViewController.swift in Sources */,
 				1480800B24EA4B32007EB6D1 /* APINetworkInterface.swift in Sources */,
 				146C35D524C5635D00DBCA23 /* CompanyInfoView.swift in Sources */,
 				148A097C258700FF00811E35 /* SocketMessage.swift in Sources */,
 				14861EFC249F49DE00D2FA92 /* DocumentPickerViewController.swift in Sources */,
-				1416483225A7F4BC0008E16B /* ContactDataStore.swift in Sources */,
+				1416483225A7F4BC0008E16B /* ContactSFDataSource.swift in Sources */,
 				14D9CA5B24B599300030B17A /* AccountRowValuesView.swift in Sources */,
 				14025FCA24D6BF5D00408379 /* AuthenticationViewController.swift in Sources */,
 				140AE7A924A9DF3300F7705E /* CommonButton.swift in Sources */,

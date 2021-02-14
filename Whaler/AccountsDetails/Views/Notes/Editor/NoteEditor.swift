@@ -30,11 +30,12 @@ class NoteEditor: UIView {
   
   override init(frame: CGRect) {
     super.init(frame: frame)
-    
+    translatesAutoresizingMaskIntoConstraints = false
+
     toolBar.translatesAutoresizingMaskIntoConstraints = false
     toolBar.layer.borderWidth = 2.0
     toolBar.layer.borderColor = UIColor.brandPurple.cgColor//UIColor(red: 0.77, green: 0.77, blue: 0.77, alpha: 0.75).cgColor
-    
+
     addSubview(toolBar)
     let toolbarConstraints = [
       toolBar.leftAnchor.constraint(equalTo: leftAnchor, constant: 4),
@@ -42,7 +43,7 @@ class NoteEditor: UIView {
       toolBar.heightAnchor.constraint(equalToConstant: 50),
       toolBar.widthAnchor.constraint(equalToConstant: 450) //too constant probably
     ]
-    
+
     NSLayoutConstraint.activate(toolbarConstraints)
 
     textView = Aztec.TextView(defaultFont: UIFont.openSans(weight: .regular, size: 25),
@@ -50,18 +51,16 @@ class NoteEditor: UIView {
                                 defaultMissingImage: UIImage(named: "bold")!)
     addSubview(textView)
     textView.translatesAutoresizingMaskIntoConstraints = false
-    
+
     let constraints = [
       textView.leftAnchor.constraint(equalTo: leftAnchor),
       textView.rightAnchor.constraint(equalTo: rightAnchor),
       textView.bottomAnchor.constraint(equalTo: bottomAnchor),
       textView.topAnchor.constraint(equalTo: toolBar.bottomAnchor, constant: 20),
-      textView.heightAnchor.constraint(equalToConstant: 100),
-      textView.widthAnchor.constraint(equalToConstant: 100)
     ]
-    
+
     NSLayoutConstraint.activate(constraints)
-    
+
     /* Temporary */
 //      {"type": "docDelta", "data": {"documentID": "1", "value": "Hello World!"}}
     conn = WebSocketManager.shared.registerConnection(id: "072cf97d-ecda-41f7-adb7-a9ab538f44ec",

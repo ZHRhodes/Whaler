@@ -18,12 +18,6 @@ class RepositoryTests: XCTestCase {
   override func tearDownWithError() throws {
     cancellable = nil
   }
-
-  func testRepoForAccount() throws {
-    let repoStore = RepoStore()
-    let repo = repoStore.accountRepository
-    XCTAssert(repo.type === Account.self)
-  }
   
   func testBroadcastNewValues() throws {
     let repo = Repository(dataInterface: MockAccountInterface())
@@ -126,6 +120,7 @@ class RepositoryTests: XCTestCase {
     var allFetched = false
     
     cancellable = repo.fetchAll(with: accountSet1).sink(receiveCompletion: { _ in }, receiveValue: { (accounts) in
+      print(accounts)
       if !allFetched {
         allFetched = true
         return
@@ -139,6 +134,26 @@ class RepositoryTests: XCTestCase {
     
     _ = repo.fetchSubset(with: accountSet2)
     
+    waitForExpectations(timeout: 2.0, handler: nil)
+  }
+  
+  func testFetchingNewSubsetAppendsToCurrentValue() throws {
+    let repo = Repository(dataInterface: MockAccountInterface())
+    let expectation = self.expectation(description: "Received single")
+    
+    _ = repo.fetchSingle(with: account3)
+    
+    cancellable = repo.publisher.sink(receiveCompletion: { _ in },
+                                      receiveValue: { (accounts) in
+                                        guard accounts.count == 3 else { return }
+                                        XCTAssertEqual(accounts[0].name, "Name3")
+                                        XCTAssertEqual(accounts[1].name, "NameA")
+                                        XCTAssertEqual(accounts[2].name, "NameB")
+                                        expectation.fulfill()
+                                      })
+
+    _ = repo.fetchSubset(with: accountSet2)
+        
     waitForExpectations(timeout: 2.0, handler: nil)
   }
   
@@ -171,6 +186,23 @@ class RepositoryTests: XCTestCase {
     })
     
     _ = repo.fetchSingle(with: accountB)
+    
+    waitForExpectations(timeout: 2.0, handler: nil)
+  }
+  
+  func testFetchingNewSingleAppendsToCurrentValue() throws {
+    let repo = Repository(dataInterface: MockAccountInterface())
+    let expectation = self.expectation(description: "Received single")
+    
+    cancellable = repo.fetchAll(with: accountSet2).sink(receiveCompletion: { _ in }, receiveValue: { (accounts) in
+      guard accounts.count == 3 else { return }
+      XCTAssertEqual(accounts[0].name, "NameA")
+      XCTAssertEqual(accounts[1].name, "NameB")
+      XCTAssertEqual(accounts[2].name, "Name3")
+      expectation.fulfill()
+    })
+    
+    _ = repo.fetchSingle(with: account3)
     
     waitForExpectations(timeout: 2.0, handler: nil)
   }

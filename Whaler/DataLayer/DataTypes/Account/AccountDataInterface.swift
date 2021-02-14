@@ -18,23 +18,23 @@ class AccountDataInterface: DataInterface {
   
   typealias DataSaveType = Void
   
-  private let remoteDataSource: AccountDataSource
-  private let sfDataSource: AccountDataSource
+  private let remoteDataSource: AccountRemoteDataSource
+  private let sfDataSource: AccountSFDataSource
   private var cancellable: AnyCancellable?
   private var saveCancellable: AnyCancellable?
   
-  init(remoteDataSource: AccountDataSource,
-       sfDataSource: AccountDataSource) {
+  init(remoteDataSource: AccountRemoteDataSource,
+       sfDataSource: AccountSFDataSource) {
     self.remoteDataSource = remoteDataSource
     self.sfDataSource = sfDataSource
   }
   
-  func fetchAll(with dataRequest: AllDataRequestType?) -> AnyPublisher<[Entity], Error> {
-    let subject = PassthroughSubject<[Entity], Error>()
+  func fetchAll(with dataRequest: AllDataRequestType?) -> AnyPublisher<[Entity], RepoError> {
+    let subject = PassthroughSubject<[Entity], RepoError>()
     
     cancellable = remoteDataSource
       .fetchAll()
-      .zip(sfDataSource.fetchAll())
+      .zip(sfDataSource.fetchAll())   
       .sink { (status) in
         switch status {
         case .finished:
@@ -54,15 +54,15 @@ class AccountDataInterface: DataInterface {
     return subject.eraseToAnyPublisher()
   }
   
-  func fetchSubset(with dataRequest: SubsetDataRequestType) -> AnyPublisher<[Entity], Error> {
+  func fetchSubset(with dataRequest: SubsetDataRequestType) -> AnyPublisher<[Entity], RepoError> {
     fatalError()
   }
   
-  func fetchSingle(with dataRequest: SingleDataRequestType) -> AnyPublisher<Entity, Error> {
+  func fetchSingle(with dataRequest: SingleDataRequestType) -> AnyPublisher<Entity?, RepoError> {
     fatalError()
   }
   
-  func save(_ data: DataSaveType) -> AnyPublisher<[Entity], Error> {
+  func save(_ data: DataSaveType) -> AnyPublisher<[Entity], RepoError> {
     fatalError()
   }
 
