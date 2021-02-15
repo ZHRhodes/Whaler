@@ -54,7 +54,7 @@ class EditorToolbar: UIView {
     
     let constraints = [
       stackView.leftAnchor.constraint(equalTo: leftAnchor),
-      stackView.rightAnchor.constraint(equalTo: rightAnchor),
+      stackView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.75),
       stackView.bottomAnchor.constraint(equalTo: bottomAnchor),
       stackView.topAnchor.constraint(equalTo: topAnchor)
     ]
@@ -64,7 +64,7 @@ class EditorToolbar: UIView {
   
   func makeToolbarButton(for option: EditorToolbarOption) -> UIButton {
     let button = ToolbarButton(option: option)
-    let icon = option.icon.withTintColor(.brandPurple)
+    let icon = option.icon.withTintColor(.lightText)
 //    button.imageEdgeInsets = UIEdgeInsets(top: 15.6, left: 12, bottom: 15.6, right: 12)
     button.setImage(icon, for: .normal)
     button.addTarget(self, action: #selector(buttonTapped(sender:)), for: .touchUpInside)

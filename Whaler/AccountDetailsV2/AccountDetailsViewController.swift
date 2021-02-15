@@ -36,14 +36,14 @@ class AccountDetailsViewController: UIViewController {
     view1.topAnchor.constraint(equalTo: view.topAnchor, constant: 70).isActive = true
     view1.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0).isActive = true
     
-    let noteEditor = NoteEditor(frame: .zero)
-    noteEditor.translatesAutoresizingMaskIntoConstraints = false
-    view.addSubview(noteEditor)
+    let noteEditorVC = NoteEditorViewController()
+    noteEditorVC.view.translatesAutoresizingMaskIntoConstraints = false
+    view.addSubview(noteEditorVC.view)
     
-    noteEditor.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.4).isActive = true
-    noteEditor.topAnchor.constraint(equalTo: view.topAnchor, constant: 90).isActive = true
-    noteEditor.rightAnchor.constraint(equalTo: view.rightAnchor, constant: 32).isActive = true
-    noteEditor.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 32).isActive = true
+    noteEditorVC.view.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.4).isActive = true
+    noteEditorVC.view.topAnchor.constraint(equalTo: view.topAnchor, constant: 70).isActive = true
+    noteEditorVC.view.rightAnchor.constraint(equalTo: view.rightAnchor, constant: 0).isActive = true
+    noteEditorVC.view.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0).isActive = true
   }
   
 //  private func configureSplitPaneViewController() {

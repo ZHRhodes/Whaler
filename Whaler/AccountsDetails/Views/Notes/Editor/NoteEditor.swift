@@ -24,47 +24,73 @@ struct NoteEditorRepresentable: UIViewRepresentable {
 }
 
 class NoteEditor: UIView {
+  private let container = UIView()
   lazy var toolBar = EditorToolbar(options: EditorToolbarOption.allCases, delegate: self)
   var textView: Aztec.TextView!
   var conn: WebSocketConn!
   
   override init(frame: CGRect) {
     super.init(frame: frame)
-    translatesAutoresizingMaskIntoConstraints = false
-
-    toolBar.translatesAutoresizingMaskIntoConstraints = false
-    toolBar.layer.borderWidth = 2.0
-    toolBar.layer.borderColor = UIColor.brandPurple.cgColor//UIColor(red: 0.77, green: 0.77, blue: 0.77, alpha: 0.75).cgColor
-
-    addSubview(toolBar)
-    let toolbarConstraints = [
-      toolBar.leftAnchor.constraint(equalTo: leftAnchor, constant: 4),
-      toolBar.topAnchor.constraint(equalTo: topAnchor, constant: 0),
-      toolBar.heightAnchor.constraint(equalToConstant: 50),
-      toolBar.widthAnchor.constraint(equalToConstant: 450) //too constant probably
-    ]
-
-    NSLayoutConstraint.activate(toolbarConstraints)
-
-    textView = Aztec.TextView(defaultFont: UIFont.openSans(weight: .regular, size: 25),
-                                defaultParagraphStyle: .default,
-                                defaultMissingImage: UIImage(named: "bold")!)
-    addSubview(textView)
-    textView.translatesAutoresizingMaskIntoConstraints = false
-
-    let constraints = [
-      textView.leftAnchor.constraint(equalTo: leftAnchor),
-      textView.rightAnchor.constraint(equalTo: rightAnchor),
-      textView.bottomAnchor.constraint(equalTo: bottomAnchor),
-      textView.topAnchor.constraint(equalTo: toolBar.bottomAnchor, constant: 20),
-    ]
-
-    NSLayoutConstraint.activate(constraints)
+    
+    configureView()
+    configureContainer()
+    configureToolBar()
+    configureTextView()
 
     /* Temporary */
 //      {"type": "docDelta", "data": {"documentID": "1", "value": "Hello World!"}}
     conn = WebSocketManager.shared.registerConnection(id: "072cf97d-ecda-41f7-adb7-a9ab538f44ec",
                                                       delegate: self)
+  }
+  
+  private func configureView() {
+    translatesAutoresizingMaskIntoConstraints = false
+    layer.masksToBounds = false
+    layer.shadowRadius = 10
+    layer.shadowColor = UIColor(red: 0.454, green: 0.435, blue: 0.571, alpha: 0.3).cgColor
+    layer.shadowOpacity = 1.0
+    layer.shadowOffset = .init(width: 0, height: 4)
+  }
+  
+  private func configureContainer() {
+    container.translatesAutoresizingMaskIntoConstraints = false
+    container.backgroundColor = .white
+    container.clipsToBounds = true
+    container.layer.cornerRadius = 10.0
+    
+    addAndAttachToEdges(view: container, inset: 0)
+  }
+  
+  private func configureToolBar() {
+    toolBar.translatesAutoresizingMaskIntoConstraints = false
+    toolBar.backgroundColor = .white
+
+    container.addSubview(toolBar)
+    let toolbarConstraints = [
+      toolBar.leftAnchor.constraint(equalTo: container.leftAnchor, constant: 8),
+      toolBar.topAnchor.constraint(equalTo: container.topAnchor, constant: 8),
+      toolBar.heightAnchor.constraint(equalToConstant: 50),
+      toolBar.rightAnchor.constraint(equalTo: container.rightAnchor, constant: -8)
+    ]
+
+    NSLayoutConstraint.activate(toolbarConstraints)
+  }
+  
+  private func configureTextView() {
+    textView = Aztec.TextView(defaultFont: UIFont.openSans(weight: .regular, size: 25),
+                                defaultParagraphStyle: .default,
+                                defaultMissingImage: UIImage(named: "bold")!)
+    container.addSubview(textView)
+    textView.translatesAutoresizingMaskIntoConstraints = false
+
+    let constraints = [
+      textView.leftAnchor.constraint(equalTo: container.leftAnchor, constant: 16),
+      textView.rightAnchor.constraint(equalTo: container.rightAnchor, constant: -16),
+      textView.bottomAnchor.constraint(equalTo: container.bottomAnchor, constant: -16),
+      textView.topAnchor.constraint(equalTo: toolBar.bottomAnchor, constant: 20),
+    ]
+
+    NSLayoutConstraint.activate(constraints)
   }
   
   required init?(coder: NSCoder) {
