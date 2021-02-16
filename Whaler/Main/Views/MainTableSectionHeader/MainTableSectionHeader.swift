@@ -18,10 +18,10 @@ class MainTableSectionHeader: UITableViewHeaderFooterView {
   override init(reuseIdentifier: String?) {
     super.init(reuseIdentifier: reuseIdentifier)
     tintColor = .clear
-    contentView.backgroundColor = .white
+    contentView.backgroundColor = .primaryBackground
     contentView.heightAnchor.constraint(equalToConstant: AccountStateTagView.height + AccountRowValuesView.height + spaceFromTagToTop).isActive = true
     
-    backgroundColor = .white
+    backgroundColor = .primaryBackground
     clipsToBounds = false
     layer.shadowColor = UIColor(red: 0.77, green: 0.77, blue: 0.77, alpha: 0.21).cgColor
     layer.shadowOpacity = 1.0

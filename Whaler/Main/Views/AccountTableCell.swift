@@ -34,7 +34,7 @@ class AccountTableCell: UITableViewCell {
   }
   
   private func configureShadowView() {
-    shadowView.backgroundColor = .white
+    shadowView.backgroundColor = .cellBackground
     shadowView.clipsToBounds = false
     shadowView.layer.shadowColor = UIColor(red: 116/255, green: 111/255, blue: 146/255, alpha: 0.30).cgColor
     shadowView.layer.shadowOpacity = 1.0

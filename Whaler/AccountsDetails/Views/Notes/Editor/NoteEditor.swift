@@ -54,7 +54,7 @@ class NoteEditor: UIView {
   
   private func configureContainer() {
     container.translatesAutoresizingMaskIntoConstraints = false
-    container.backgroundColor = .white
+    container.backgroundColor = .primaryBackground
     container.clipsToBounds = true
     container.layer.cornerRadius = 10.0
     
@@ -63,7 +63,7 @@ class NoteEditor: UIView {
   
   private func configureToolBar() {
     toolBar.translatesAutoresizingMaskIntoConstraints = false
-    toolBar.backgroundColor = .white
+    toolBar.backgroundColor = .primaryBackground
 
     container.addSubview(toolBar)
     let toolbarConstraints = [

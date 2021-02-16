@@ -16,7 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     UITableViewCell.appearance().backgroundColor = .white
     UITableViewHeaderFooterView.appearance().tintColor = .white
     UITableView.appearance().separatorStyle = .none
-//    if let directoryLocation = FileManager.default.urls(for: .libraryDirectory, in: .userDomainMask).last {
+//    if let directoryLocation = FileManager.default.urls(for: .libraryDirectory, in: .userDomainMask).last {
 //      print("Documents Directory: \(directoryLocation)Application Support")
 //    }
 //    resetAllRecords(of: "AccountEntity")

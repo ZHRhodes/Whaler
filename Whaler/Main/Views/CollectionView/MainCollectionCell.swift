@@ -45,7 +45,7 @@ class MainCollectionCell: UICollectionViewCell {
   func configure() {
     layer.masksToBounds = true
     layer.cornerRadius = 10.0
-    backgroundColor = .white
+    backgroundColor = .primaryBackground
     tableView.dragInteractionEnabled = true
     tableView.dragDelegate = self
     tableView.dropDelegate = self
@@ -68,10 +68,7 @@ class MainCollectionCell: UICollectionViewCell {
     headerView!.heightAnchor.constraint(equalToConstant: MainCollectionCellHeader.height).isActive = true
     
     let state = WorkState.allCases[self.section ?? 0]
-    headerView!.addAndAttachToEdges(view: MainCollectionCellHeader(text: state.rawValue, colors: [
-                                                                    state.darkColor,
-                                                                    state.color,
-                                                                    state.lightColor]))
+    headerView!.addAndAttachToEdges(view: MainCollectionCellHeader(text: state.rawValue, colors: [state.color, state.color]))
   }
   
   private func configureTableView() {

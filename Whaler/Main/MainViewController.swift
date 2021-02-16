@@ -55,11 +55,10 @@ class MainViewController: UIViewController {
   
   private var sectionHeaders = Set<WeakRef<UIView>>()
   
-  
   override func viewDidLoad() {
     super.viewDidLoad()
     title = "Accounts"
-    view.backgroundColor = .white
+    view.backgroundColor = .primaryBackground
     
     Lifecycle.loadCurrentUser()
     interactor = MainInteractor()
@@ -191,7 +190,7 @@ class MainViewController: UIViewController {
     collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
     collectionView.delegate = self
     collectionView.dataSource = self
-    collectionView.backgroundColor = .white
+    collectionView.backgroundColor = .primaryBackground
     collectionView.register(MainCollectionCell.self, forCellWithReuseIdentifier: MainCollectionCell.id)
     collectionView.translatesAutoresizingMaskIntoConstraints = false
     collectionView.contentInset = .init(top: 100, left: 40, bottom: 0, right: 0)
@@ -364,8 +363,9 @@ extension MainViewController: MainCollectionCellDelegate {
     let accountState = interactor.accountStates[section]
     let account = interactor.accountGrouper[accountState][indexPath.row]
     interactor.getContacts(for: account) { [weak self] in
-//      let view = AccountDetailsView(account: account)
-      let viewController = AccountDetailsViewController()//UIHostingController(rootView: view)
+      guard let strongSelf = self else { return }
+      let viewController = AccountDetailsViewController()
+      viewController.configure(with: strongSelf.interactor)
       self?.navigationController?.pushViewController(viewController, animated: false)
     }
   }

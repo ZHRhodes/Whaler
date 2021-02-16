@@ -33,6 +33,9 @@ extension UIColor {
   static let brandYellow = UIColor(named: "brandYellow")!
   static let brandYellowLight = UIColor(named: "brandYellowLight")!
   static let brandYellowDark = UIColor(named: "brandYellowDark")!
+  
+  static let cellBackground = UIColor(named: "cellBackground")!
+  static let cellShadow = UIColor(named: "cellShadow")!
 }
 
 extension UIColor {

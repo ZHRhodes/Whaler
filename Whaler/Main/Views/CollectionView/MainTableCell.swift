@@ -55,13 +55,13 @@ class MainTableCell: UITableViewCell {
   }
   
   private func configureShadowView() {
-    shadowView.backgroundColor = .white
+    shadowView.backgroundColor = .cellBackground
     shadowView.layer.cornerRadius = 12.0
     shadowView.clipsToBounds = false
     
-    shadowView.layer.shadowColor = UIColor(red: 116/255, green: 111/255, blue: 146/255, alpha: 0.35).cgColor
+    shadowView.layer.shadowColor = UIColor.cellShadow.cgColor
     shadowView.layer.shadowOpacity = 1.0
-    shadowView.layer.shadowRadius = 10.0
+    shadowView.layer.shadowRadius = 5.0
     shadowView.layer.shadowOffset = CGSize(width: 0, height: 4)
     
     shadowView.translatesAutoresizingMaskIntoConstraints = false
@@ -74,8 +74,7 @@ class MainTableCell: UITableViewCell {
   }
   
   private func configureContainerView() {
-    containerView.layer.borderWidth = 2
-    containerView.layer.borderColor = UIColor(red: 235/255, green: 235/255, blue: 235/255, alpha: 1.0).cgColor
+//    containerView.layer.borderColor = UIColor(red: 235/255, green: 235/255, blue: 235/255, alpha: 1.0).cgColor
     containerView.layer.masksToBounds = true
     containerView.layer.cornerRadius = 12.0
     

@@ -13,11 +13,11 @@ import Combine
 class AccountDetailsViewController: UIViewController {
   var backCancellable: AnyCancellable?
   private let splitPaneViewController = SplitPaneViewController()
+  private let contentVC = AccountDetailsContentViewController()
   
   override func viewDidLoad() {
     super.viewDidLoad()
 //    configureSplitPaneViewController()
-    configure()
     backCancellable = NotificationCenter.default
       .publisher(for: .back)
       .sink(receiveValue: { [weak self] notification in
@@ -25,11 +25,12 @@ class AccountDetailsViewController: UIViewController {
     })
   }
   
-  private func configure() {
-    let view1 = UIView()
+  func configure(with interactor: MainInteractor) {
+    contentVC.configure(with: interactor)
+    let view1 = contentVC.view!
     view1.translatesAutoresizingMaskIntoConstraints = false
     view.addSubview(view1)
-    view1.backgroundColor = .lightGray
+//    view1.backgroundColor = .lightGray
     
     view1.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.6).isActive = true
     view1.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 0).isActive = true
