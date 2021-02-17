@@ -10,4 +10,5 @@ import Foundation
 
 extension Notification.Name {
   static let back = Notification.Name("back")
+  static let unauthorizedUser = Notification.Name("unauthorizedUser")
 }

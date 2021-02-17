@@ -20,8 +20,9 @@ class AccountDetailsViewController: UIViewController {
 //    configureSplitPaneViewController()
     backCancellable = NotificationCenter.default
       .publisher(for: .back)
+      .first()
       .sink(receiveValue: { [weak self] notification in
-      self?.navigationController?.popViewController(animated: false) //temp, move
+        self?.navigationController?.popViewController(animated: false) //temp, move
     })
   }
   
@@ -30,7 +31,6 @@ class AccountDetailsViewController: UIViewController {
     let view1 = contentVC.view!
     view1.translatesAutoresizingMaskIntoConstraints = false
     view.addSubview(view1)
-//    view1.backgroundColor = .lightGray
     
     view1.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.6).isActive = true
     view1.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 0).isActive = true
@@ -46,29 +46,4 @@ class AccountDetailsViewController: UIViewController {
     noteEditorVC.view.rightAnchor.constraint(equalTo: view.rightAnchor, constant: 0).isActive = true
     noteEditorVC.view.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0).isActive = true
   }
-  
-//  private func configureSplitPaneViewController() {
-//    splitPaneViewController.resizable = true
-//
-//    let vc1 = UIViewController()
-//    vc1.view.backgroundColor = .white
-//    splitPaneViewController.appendViewController(vc1)
-//
-//    let vc2 = NoteEditorViewController()
-////    vc2.view.backgroundColor = .white
-//    splitPaneViewController.appendViewController(vc2)
-//
-//    try? splitPaneViewController.setDistribution(ratios: [0.60, 0.40])
-//
-//    view.addSubview(splitPaneViewController.view)
-//
-//    let constraints = [
-//      splitPaneViewController.view.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 0),
-//      splitPaneViewController.view.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 0),
-//      splitPaneViewController.view.rightAnchor.constraint(equalTo: view.rightAnchor, constant: 0),
-//      splitPaneViewController.view.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0)
-//    ]
-//
-//    NSLayoutConstraint.activate(constraints)
-//  }
 }

@@ -72,14 +72,15 @@ class MainInteractor: MainInteractorData {
     account.resetContacts()
     let repo = repoStore.contactRepository
     let request = ContactAllDataRequest(account: account)
-    repo.fetchAll(with: request)
-    contactsCancellable = repo.publisher.sink(receiveCompletion: { _ in },
-                                              receiveValue: { (contacts) in
-                                                contacts.forEach { contact in
-                                                  account.contactGrouper.append(contact, to: contact.state ?? .ready)
-                                                }
-                                                completion()
-                                              })
+    contactsCancellable = repo.fetchAll(with: request)
+      .first()
+      .sink(receiveCompletion: { _ in },
+            receiveValue: { (contacts) in
+              contacts.forEach { contact in
+                account.contactGrouper.append(contact, to: contact.state ?? .ready)
+              }
+              completion()
+    })
   }
   
   private func retrieveAndAssignContacts() {

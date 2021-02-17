@@ -24,7 +24,6 @@ extension NSToolbarItem.Identifier {
 extension ToolbarDelegate: NSToolbarDelegate {
     func toolbarDefaultItemIdentifiers(_ toolbar: NSToolbar) -> [NSToolbarItem.Identifier] {
         let identifiers: [NSToolbarItem.Identifier] = [
-          .toggleSidebar,
           .back
         ]
         return identifiers
@@ -41,13 +40,10 @@ extension ToolbarDelegate: NSToolbarDelegate {
         var toolbarItem: NSToolbarItem?
         
         switch itemIdentifier {
-        case .toggleSidebar:
-          toolbarItem = NSToolbarItem(itemIdentifier: itemIdentifier)
-          toolbarItem?.action = #selector(backTapped)
-          toolbarItem?.target = self
         case .back:
           toolbarItem = NSToolbarItem(itemIdentifier: itemIdentifier)
           toolbarItem?.image = UIImage(named: "backArrow2")?.withTintColor(.lightGray)
+          toolbarItem?.isNavigational = true
           toolbarItem?.action = #selector(backTapped)
           toolbarItem?.target = self
         default:

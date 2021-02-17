@@ -89,7 +89,6 @@
 		14861EF7249F401300D2FA92 /* CSVParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14861EF6249F401300D2FA92 /* CSVParser.swift */; };
 		14861EFC249F49DE00D2FA92 /* DocumentPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14861EFB249F49DE00D2FA92 /* DocumentPickerViewController.swift */; };
 		1488423F25086D910025C7EE /* Lifecycle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1488423E25086D910025C7EE /* Lifecycle.swift */; };
-		14884241250876080025C7EE /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14884240250876080025C7EE /* Notifications.swift */; };
 		148A096E2586E0FC00811E35 /* WebSocketManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148A096D2586E0FC00811E35 /* WebSocketManager.swift */; };
 		148A09742586FEC500811E35 /* LiteWebSocketDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148A09732586FEC500811E35 /* LiteWebSocketDelegate.swift */; };
 		148A09782586FF6A00811E35 /* WebSocketInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148A09772586FF6A00811E35 /* WebSocketInfo.swift */; };
@@ -241,7 +240,6 @@
 		14861EF8249F439600D2FA92 /* Whaler.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Whaler.entitlements; sourceTree = "<group>"; };
 		14861EFB249F49DE00D2FA92 /* DocumentPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentPickerViewController.swift; sourceTree = "<group>"; };
 		1488423E25086D910025C7EE /* Lifecycle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lifecycle.swift; sourceTree = "<group>"; };
-		14884240250876080025C7EE /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
 		148A096D2586E0FC00811E35 /* WebSocketManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = WebSocketManager.swift; path = ../../../../../../../WebSocketManager.swift; sourceTree = "<group>"; };
 		148A09732586FEC500811E35 /* LiteWebSocketDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiteWebSocketDelegate.swift; sourceTree = "<group>"; };
 		148A09772586FF6A00811E35 /* WebSocketInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebSocketInfo.swift; sourceTree = "<group>"; };
@@ -407,7 +405,6 @@
 				146C344524EA53690009C68C /* UserDefaultsManaged.swift */,
 				1443046024F3AFFC00D2FBD2 /* Typealiases.swift */,
 				1488423E25086D910025C7EE /* Lifecycle.swift */,
-				14884240250876080025C7EE /* Notifications.swift */,
 				14DACF41255BAC2A00FC0900 /* Log.swift */,
 				14DACF49255BCD4C00FC0900 /* CustomError.swift */,
 			);
@@ -1092,7 +1089,6 @@
 				14018152254643AF00246BDA /* AccountsHelper.swift in Sources */,
 				14C509CB254D42800021D9C5 /* SFGroupModels.swift in Sources */,
 				148A096E2586E0FC00811E35 /* WebSocketManager.swift in Sources */,
-				14884241250876080025C7EE /* Notifications.swift in Sources */,
 				14D97D7924DBEC4B00058B09 /* Keychain.swift in Sources */,
 				1416480B25A4FA270008E16B /* AccountDataInterface.swift in Sources */,
 				140AE79E24A9B50900F7705E /* UIColor+Extensions.swift in Sources */,
