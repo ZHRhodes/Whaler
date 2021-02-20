@@ -64,7 +64,7 @@ class MainCollectionCell: UICollectionViewCell {
     
     headerView!.leftAnchor.constraint(equalTo: leftAnchor, constant: 8).isActive = true
     headerView!.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
-    headerView!.topAnchor.constraint(equalTo: topAnchor, constant: 10).isActive = true
+    headerView!.topAnchor.constraint(equalTo: topAnchor, constant: 0).isActive = true
     headerView!.heightAnchor.constraint(equalToConstant: MainCollectionCellHeader.height).isActive = true
     
     let state = WorkState.allCases[self.section ?? 0]

@@ -51,6 +51,8 @@ class MainViewController: UIViewController {
   private var reloadButton: UIButton!
   private var deleteButton: UIButton!
   private var signOutButton: UIButton!
+  private var helloLabel: UILabel!
+  private var subHelloLabel: UILabel!
   private var collectionView: UICollectionView!
   
   private var sectionHeaders = Set<WeakRef<UIView>>()
@@ -93,6 +95,8 @@ class MainViewController: UIViewController {
   
   private func configureViewsForContent() {
     removeNoDataViews()
+    configureHelloLabel()
+    configureSubHelloLabel()
     configureCollectionView()
     configureSignOutButton()
     configureDeleteButton()
@@ -179,13 +183,50 @@ class MainViewController: UIViewController {
     deleteButton = nil
   }
   
+  private func configureHelloLabel() {
+    helloLabel = UILabel()
+    helloLabel.font = .openSans(weight: .bold, size: 48)
+    let text: String
+    if let name = Lifecycle.currentUser?.firstName {
+      text = "👋 Hello, \(name)"
+    } else {
+      text = "👋 Hello!"
+    }
+    
+    helloLabel.text = text
+    helloLabel.translatesAutoresizingMaskIntoConstraints = false
+    view.addSubview(helloLabel)
+    
+    let constraints = [
+      helloLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 38),
+      helloLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 25),
+      helloLabel.heightAnchor.constraint(equalToConstant: 64)
+    ]
+    
+    NSLayoutConstraint.activate(constraints)
+  }
+  
+  private func configureSubHelloLabel() {
+    subHelloLabel = UILabel()
+    subHelloLabel.font = .openSans(weight: .regular, size: 24)
+    
+    subHelloLabel.text = "Here's a look at the accounts you're tracking…"
+    subHelloLabel.translatesAutoresizingMaskIntoConstraints = false
+    view.addSubview(subHelloLabel)
+    
+    let constraints = [
+      subHelloLabel.leftAnchor.constraint(equalTo: helloLabel.leftAnchor, constant: 0),
+      subHelloLabel.topAnchor.constraint(equalTo: helloLabel.bottomAnchor, constant: 0),
+      subHelloLabel.heightAnchor.constraint(equalToConstant: 28)
+    ]
+    
+    NSLayoutConstraint.activate(constraints)
+  }
+  
   private func configureCollectionView() {
     let layout = UICollectionViewFlowLayout()
     layout.scrollDirection = .horizontal
     layout.minimumLineSpacing = 50.0
-//    layout.minimumInteritemSpacing = 100.0
-//    let itemSize = view.bounds.width/3 - 3
-//    layout.itemSize = CGSize(width: itemSize, height: itemSize)
     
     collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
     collectionView.delegate = self
@@ -193,23 +234,19 @@ class MainViewController: UIViewController {
     collectionView.backgroundColor = .primaryBackground
     collectionView.register(MainCollectionCell.self, forCellWithReuseIdentifier: MainCollectionCell.id)
     collectionView.translatesAutoresizingMaskIntoConstraints = false
-    collectionView.contentInset = .init(top: 100, left: 40, bottom: 0, right: 0)
-//    collectionView.contentOffset = .init(x: 500, y: 500)
-//    collectionView.setContentOffset(CGPoint(x: 200, y: 200), animated: false)
+    collectionView.contentInset = .init(top: 0, left: 0, bottom: 0, right: 0)
 
-//    view.addSubview(collectionView)
+    collectionView.translatesAutoresizingMaskIntoConstraints = false
+    view.addSubview(collectionView)
     
-//    let constraints = [
-////      collectionView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 250),
-////      collectionView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: 0),
-//      collectionView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-//      collectionView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
-////      collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0),
-////      collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 200)
-//    ]
-//
-//    NSLayoutConstraint.activate(constraints)
-    view.addAndAttachToEdges(view: collectionView)
+    let constraints = [
+      collectionView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 40),
+      collectionView.topAnchor.constraint(equalTo: subHelloLabel.bottomAnchor, constant: 40),
+      collectionView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -40),
+      collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0)
+    ]
+    
+    NSLayoutConstraint.activate(constraints)
   }
   
   private func configureSignOutButton() {
@@ -352,9 +389,7 @@ extension MainViewController: UICollectionViewDelegateFlowLayout {
   func collectionView(_ collectionView: UICollectionView,
                       layout collectionViewLayout: UICollectionViewLayout,
                       sizeForItemAt indexPath: IndexPath) -> CGSize {
-    return CGSize(width: 482, height: collectionView.frame.size.height-100)
-    //width: (collectionView.frame.size.width/4) - 20
-//    return CGSize(width: 500, height: 1400)
+    return CGSize(width: collectionView.frame.size.width * 0.2342, height: collectionView.frame.size.height)
   }
 }
 
