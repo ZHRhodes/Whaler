@@ -11,6 +11,10 @@ import UIKit
 enum WorkState: String, CaseIterable, Codable {
   case ready = "Ready", inProgress = "In Progress", worked = "Worked", opportunity = "Opportunity"
   
+  static var contactsCases: [WorkState] {
+    return [.ready, .inProgress, .worked]
+  }
+  
   var lightColor: UIColor {
     switch self {
     case .ready:

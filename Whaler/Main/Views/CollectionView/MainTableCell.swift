@@ -13,7 +13,7 @@ protocol MainTableCellDelegate: class {
   func didClickAssignButton(_ button: UIButton, forAccount account: Account)
 }
 
-class MainTableCell: UITableViewCell {
+class MainTableCell: UITableViewCell, MainCollectionTableCell {
   static let id = "MainTableCellId"
   weak var delegate: MainTableCellDelegate?
   private let shadowView = UIView()
@@ -40,7 +40,12 @@ class MainTableCell: UITableViewCell {
     fatalError("init(coder:) has not been implemented")
   }
   
-  func configure(with account: Account) {
+  func configure<T>(with object: T) {
+    guard let account = object as? Account else {
+      let message = "Fatal error! Configuring cell with wrong type."
+      Log.error(message)
+      fatalError(message)
+    }
     self.account = account
     configureNameLabel(with: account)
     var attributes = [Attribute]()

@@ -10,8 +10,11 @@ import Foundation
 import AuthenticationServices
 import Combine
 
+//temporary location for this -- inject for testing
+let repoStore = RepoStore()
+
 protocol MainInteractorData: class {
-  var accountGrouper: Grouper<WorkState, Account> {get set}
+  var accountGrouper: Grouper<WorkState, Account> { get set }
 }
 
 class MainInteractor: MainInteractorData {
@@ -21,6 +24,7 @@ class MainInteractor: MainInteractorData {
   weak var viewController: MainViewController?
   private let accountsHelper = AccountsHelper()
   private let contactsHelper = ContactsHelper()
+  var accountsCancellable: AnyCancellable?
   
   func hasAccounts() -> Bool {
     return !accountGrouper.hasNoValues
@@ -68,20 +72,20 @@ class MainInteractor: MainInteractorData {
     } 
   }
   
-  func getContacts(for account: Account, completion: @escaping () -> Void) {
-    account.resetContacts()
-    let repo = repoStore.contactRepository
-    let request = ContactAllDataRequest(account: account)
-    contactsCancellable = repo.fetchAll(with: request)
-      .first()
-      .sink(receiveCompletion: { _ in },
-            receiveValue: { (contacts) in
-              contacts.forEach { contact in
-                account.contactGrouper.append(contact, to: contact.state ?? .ready)
-              }
-              completion()
-    })
-  }
+//  func getContacts(for account: Account, completion: @escaping () -> Void) {
+//    account.resetContacts()
+//    let repo = repoStore.contactRepository
+//    let request = ContactAllDataRequest(account: account)
+//    contactsCancellable = repo.fetchAll(with: request)
+//      .first()
+//      .sink(receiveCompletion: { _ in },
+//            receiveValue: { (contacts) in
+//              contacts.forEach { contact in
+//                account.contactGrouper.append(contact, to: contact.state ?? .ready)
+//              }
+//              completion()
+//    })
+//  }
   
   private func retrieveAndAssignContacts() {
     let retrievedContacts = ObjectManager.retrieveAll(ofType: Contact.self)
@@ -105,12 +109,7 @@ class MainInteractor: MainInteractorData {
     guard let userId = Lifecycle.currentUser?.id else { return }
     ObjectManager.deleteAll(ofType: Account.self, with: NSPredicate(format: "ownerUserId == %d", userId))
   }
-  
-  //move to share
-  let repoStore = RepoStore()
-  var accountsCancellable: AnyCancellable?
-  var contactsCancellable: AnyCancellable?
-  
+    
   func getAccounts() {
     let repo = repoStore.accountRepository
     repo.fetchAll()
@@ -122,7 +121,7 @@ class MainInteractor: MainInteractorData {
     }
   }
   
-  //will newly added in salesforce accounts save to cache in whaler? or is that only done on authentication?
+  //TODO: will newly added in salesforce accounts save to cache in whaler? or is that only done on authentication?
   
   func makeSFAuthenticationSession(completion: @escaping VoidClosure) -> ASWebAuthenticationSession? {
     let session = SFHelper.makeAuthenticationSession { [weak self] in

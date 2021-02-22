@@ -232,7 +232,7 @@ class MainViewController: UIViewController {
     collectionView.delegate = self
     collectionView.dataSource = self
     collectionView.backgroundColor = .primaryBackground
-    collectionView.register(MainCollectionCell.self, forCellWithReuseIdentifier: MainCollectionCell.id)
+    collectionView.register(MainCollectionCell<MainTableCell>.self, forCellWithReuseIdentifier: MainCollectionCell<MainTableCell>.id())
     collectionView.translatesAutoresizingMaskIntoConstraints = false
     collectionView.contentInset = .init(top: 0, left: 0, bottom: 0, right: 0)
 
@@ -373,7 +373,7 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
   }
 
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MainCollectionCell.id, for: indexPath) as? MainCollectionCell else {
+    guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MainCollectionCell<MainTableCell>.id(), for: indexPath) as? MainCollectionCell<MainTableCell> else {
       return UICollectionViewCell()
     }
   //    let state = interactor.accountStates[indexPath.section]
@@ -397,12 +397,9 @@ extension MainViewController: MainCollectionCellDelegate {
   func didSelectRowAt(section: Int, didSelectRowAt indexPath: IndexPath) {
     let accountState = interactor.accountStates[section]
     let account = interactor.accountGrouper[accountState][indexPath.row]
-    interactor.getContacts(for: account) { [weak self] in
-      guard let strongSelf = self else { return }
-      let viewController = AccountDetailsViewController()
-      viewController.configure(with: strongSelf.interactor)
-      self?.navigationController?.pushViewController(viewController, animated: false)
-    }
+    let viewController = AccountDetailsViewController()
+    viewController.configure(with: account)
+    navigationController?.pushViewController(viewController, animated: false)
   }
   
   func didClickAssignButton(_ button: UIButton, forAccount account: Account) {

@@ -22,12 +22,12 @@ class AccountDetailsViewController: UIViewController {
       .publisher(for: .back)
       .first()
       .sink(receiveValue: { [weak self] notification in
-        self?.navigationController?.popViewController(animated: false) //temp, move
+        self?.navigationController?.popViewController(animated: false)
     })
   }
   
-  func configure(with interactor: MainInteractor) {
-    contentVC.configure(with: interactor)
+  func configure(with account: Account) {
+    contentVC.configure(with: account)
     let view1 = contentVC.view!
     view1.translatesAutoresizingMaskIntoConstraints = false
     view.addSubview(view1)

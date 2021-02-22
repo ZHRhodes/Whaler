@@ -10,14 +10,14 @@ import Foundation
 import UIKit
 
 class AccountDetailsContactsViewController: UIViewController {
-  private var interactor: MainInteractor!
+  private var interactor: AccountDetailsContactsInteractor!
   private var collectionView: UICollectionView!
   
   override func viewDidLoad() {
     super.viewDidLoad()
   }
   
-  func configure(with interactor: MainInteractor) {
+  func configure(with interactor: AccountDetailsContactsInteractor) {
     self.interactor = interactor
     configureCollectionView()
   }
@@ -31,7 +31,7 @@ class AccountDetailsContactsViewController: UIViewController {
     collectionView.delegate = self
     collectionView.dataSource = self
     collectionView.backgroundColor = .primaryBackground
-    collectionView.register(MainCollectionCell.self, forCellWithReuseIdentifier: MainCollectionCell.id)
+    collectionView.register(MainCollectionCell<MainTableCell>.self, forCellWithReuseIdentifier: MainCollectionCell<MainTableCell>.id())
     collectionView.translatesAutoresizingMaskIntoConstraints = false
     collectionView.contentInset = .init(top: 0, left: 40, bottom: 0, right: 40)
 
@@ -39,29 +39,23 @@ class AccountDetailsContactsViewController: UIViewController {
   }
 }
 
-extension AccountDetailsContactsViewController: MainCollectionCellDelegate {
-  func didSelectRowAt(section: Int, didSelectRowAt indexPath: IndexPath) {
-    let accountState = interactor.accountStates[section]
-    let account = interactor.accountGrouper[accountState][indexPath.row]
-    interactor.getContacts(for: account) { [weak self] in
-//      let view = AccountDetailsView(account: account)
-      let viewController = AccountDetailsViewController()//UIHostingController(rootView: view)
-      self?.navigationController?.pushViewController(viewController, animated: false)
-    }
-  }
-  
-  func didClickAssignButton(_ button: UIButton, forAccount account: Account) {
-    interactor.accountBeingAssigned = account
-    let viewController = TablePopoverViewController()
-    viewController.modalPresentationStyle = .popover
-    viewController.provider = OrgUsersProvider()
-    viewController.delegate = self
-    navigationController?.present(viewController, animated: true, completion: nil)
-    let popoverVC = viewController.popoverPresentationController
-    popoverVC?.permittedArrowDirections = [.left, .up, .right]
-    popoverVC?.sourceView = button
-  }
-}
+//extension AccountDetailsContactsViewController: MainCollectionCellDelegate {
+//  func didSelectRowAt(section: Int, didSelectRowAt indexPath: IndexPath) {
+//
+//  }
+//
+//  func didClickAssignButton(_ button: UIButton, forContact contact: Contact) {
+//    interactor.contactBeingAssigned = contact
+//    let viewController = TablePopoverViewController()
+//    viewController.modalPresentationStyle = .popover
+//    viewController.provider = OrgUsersProvider()
+//    viewController.delegate = self
+//    navigationController?.present(viewController, animated: true, completion: nil)
+//    let popoverVC = viewController.popoverPresentationController
+//    popoverVC?.permittedArrowDirections = [.left, .up, .right]
+//    popoverVC?.sourceView = button
+//  }
+//}
 
 extension AccountDetailsContactsViewController: UICollectionViewDelegate, UICollectionViewDataSource {
   func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -69,18 +63,18 @@ extension AccountDetailsContactsViewController: UICollectionViewDelegate, UIColl
   }
   
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return 3//get this from contactStates.count    //interactor.accountStates.count
+    return interactor.contactStates.count
   }
 
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MainCollectionCell.id, for: indexPath) as? MainCollectionCell else {
+    guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MainCollectionCell<MainTableCell>.id(), for: indexPath) as? MainCollectionCell<MainTableCell> else {
       return UICollectionViewCell()
     }
   //    let state = interactor.accountStates[indexPath.section]
   //    let account = interactor.accountGrouper[state][indexPath.row]
     cell.section = indexPath.row
-    cell.dataSource = interactor
-    cell.delegate = self
+//    cell.dataSource = interactor
+//    cell.delegate = self
     return cell
   }
 }
@@ -98,7 +92,7 @@ extension AccountDetailsContactsViewController: UICollectionViewDelegateFlowLayo
 extension AccountDetailsContactsViewController: TablePopoverViewControllerDelegate {
   func didSelectItem(_ item: SimpleItem) {
     guard let user = item as? User,
-          let account = interactor.accountBeingAssigned else { return }
-    interactor.assign(user, to: account)
+          let contact = interactor.contactBeingAssigned else { return }
+    interactor.assign(user, to: contact)
   }
 }

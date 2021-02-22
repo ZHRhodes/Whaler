@@ -9,13 +9,22 @@
 import Foundation
 import UIKit
 
+protocol MainCollectionTableCell: class {
+  static var id: String { get }
+  var delegate: MainTableCellDelegate? { get set }
+  func configure<T>(with object: T)
+}
+
 protocol MainCollectionCellDelegate: class {
   func didSelectRowAt(section: Int, didSelectRowAt indexPath: IndexPath)
   func didClickAssignButton(_ button: UIButton, forAccount account: Account)
 }
 
-class MainCollectionCell: UICollectionViewCell {
-  static let id = "MainCollectionCellId"
+class MainCollectionCell<TableCell: MainCollectionTableCell & UITableViewCell>: UICollectionViewCell,
+                                                                                UITableViewDelegate,
+                                                                                UITableViewDataSource,
+                                                                                UITableViewDragDelegate,
+                                                                                UITableViewDropDelegate {
   
   weak var delegate: MainCollectionCellDelegate?
   private var headerView: UIView?
@@ -40,6 +49,10 @@ class MainCollectionCell: UICollectionViewCell {
   required init?(coder: NSCoder) {
     super.init(coder: coder)
     configure()
+  }
+  
+  static func id() -> String {
+    "MainCollectionCellId"
   }
   
   func configure() {
@@ -77,7 +90,7 @@ class MainCollectionCell: UICollectionViewCell {
     tableView.clipsToBounds = true
     tableView.delegate = self
     tableView.dataSource = self
-    tableView.register(MainTableCell.self, forCellReuseIdentifier: MainTableCell.id)
+    tableView.register(TableCell.self, forCellReuseIdentifier: TableCell.id)
     tableView.translatesAutoresizingMaskIntoConstraints = false
     tableView.tableFooterView = UIView()
     
@@ -88,17 +101,16 @@ class MainCollectionCell: UICollectionViewCell {
     tableView.topAnchor.constraint(equalTo: topAnchor, constant: AccountStateTagView.height+20).isActive = true
     tableView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
   }
-}
-
-extension MainCollectionCell:  UITableViewDelegate, UITableViewDataSource {
+  
+ // UITableViewDelegate, UITableViewDataSource
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     let state = WorkState.allCases[self.section ?? 0]
     return dataSource?.accountGrouper[state].count ?? 0
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    guard let cell = tableView.dequeueReusableCell(withIdentifier: MainTableCell.id,
-                                                   for: indexPath) as? MainTableCell else {
+    guard let cell = tableView.dequeueReusableCell(withIdentifier: TableCell.id,
+                                                   for: indexPath) as? TableCell else {
       return UITableViewCell()
     }
     let state = WorkState.allCases[self.section ?? 0]
@@ -117,9 +129,8 @@ extension MainCollectionCell:  UITableViewDelegate, UITableViewDataSource {
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     150
   }
-}
-
-extension MainCollectionCell: UITableViewDragDelegate {
+  
+ // UITableViewDragDelegate
   func tableView(_ tableView: UITableView,
                  itemsForBeginning session: UIDragSession,
                  at indexPath: IndexPath) -> [UIDragItem] {
@@ -144,9 +155,9 @@ extension MainCollectionCell: UITableViewDragDelegate {
 //    previewParameters.visiblePath = UIBezierPath(roundedRect: CGRect(x: 5, y: 8, width: yourWidth, height: yourHeight), cornerRadius: yourRadius)
 //    return previewParameters
 //  }
-}
 
-extension MainCollectionCell: UITableViewDropDelegate {
+  //UITableViewDropDelegate
+  
     func tableView(_ tableView: UITableView, performDropWith coordinator: UITableViewDropCoordinator) {
       for item in coordinator.items {
 //        guard let sourceIndexPath = item.sourceIndexPath else { continue }
