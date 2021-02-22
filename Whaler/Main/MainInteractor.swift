@@ -13,12 +13,16 @@ import Combine
 //temporary location for this -- inject for testing
 let repoStore = RepoStore()
 
-protocol MainInteractorData: class {
+//TODO: refactor this data management. There's a lot I dont like here, but I'm prioritizing making what I have resuable across accounts and contacts for now.
+
+protocol MainDataManager: class {
   var accountGrouper: Grouper<WorkState, Account> { get set }
+  var lastSelected: (state: WorkState, index: Int)? { get }
 }
 
-class MainInteractor: MainInteractorData {
+class MainInteractor: MainDataManager {
   lazy var accountGrouper = Grouper<WorkState, Account>(groups: self.accountStates)
+  var lastSelected: (state: WorkState, index: Int)?
   lazy var accountStates = WorkState.allCases
   var accountBeingAssigned: Account?
   weak var viewController: MainViewController?
@@ -71,21 +75,6 @@ class MainInteractor: MainInteractorData {
       accountGrouper.append(account, to: account.state ?? .ready)
     } 
   }
-  
-//  func getContacts(for account: Account, completion: @escaping () -> Void) {
-//    account.resetContacts()
-//    let repo = repoStore.contactRepository
-//    let request = ContactAllDataRequest(account: account)
-//    contactsCancellable = repo.fetchAll(with: request)
-//      .first()
-//      .sink(receiveCompletion: { _ in },
-//            receiveValue: { (contacts) in
-//              contacts.forEach { contact in
-//                account.contactGrouper.append(contact, to: contact.state ?? .ready)
-//              }
-//              completion()
-//    })
-//  }
   
   private func retrieveAndAssignContacts() {
     let retrievedContacts = ObjectManager.retrieveAll(ofType: Contact.self)

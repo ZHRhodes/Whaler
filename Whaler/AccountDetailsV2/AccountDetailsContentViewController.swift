@@ -10,20 +10,20 @@ import Foundation
 import UIKit
 
 class AccountDetailsContentViewController: UIViewController {
-  private var account: Account!
+  private var dataManager: MainDataManager!
   private let contactsVC = AccountDetailsContactsViewController()
   
   override func viewDidLoad() {
     super.viewDidLoad()
   }
   
-  func configure(with account: Account) {
-    self.account = account
+  func configure(with dataManager: MainDataManager) {
+    self.dataManager = dataManager
     configureContactsSection()
   }
   
   func configureContactsSection() {
-    let interactor = AccountDetailsContactsInteractor(account: account)
+    let interactor = AccountDetailsContactsInteractor(dataManager: dataManager)
     contactsVC.configure(with: interactor)
     contactsVC.view.translatesAutoresizingMaskIntoConstraints = false
     view.addSubview(contactsVC.view)

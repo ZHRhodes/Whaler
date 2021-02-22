@@ -10,17 +10,22 @@ import Foundation
 import Combine
 
 class AccountDetailsContactsInteractor {
-  private let account: Account
+  let dataManager: MainDataManager
   let contactStates = WorkState.contactsCases
   lazy var contactGrouper = Grouper<WorkState, Contact>(groups: self.contactStates)
   var contactBeingAssigned: Contact?
   var contactsCancellable: AnyCancellable?
   
-  init(account: Account) {
-    self.account = account
+  init(dataManager: MainDataManager) {
+    self.dataManager = dataManager
   }
   
-  func subscribeToContacts(for account: Account, contactsUpdated: @escaping ([Contact]) -> Void) {
+  func subscribeToContacts(for dataManager: MainDataManager, contactsUpdated: @escaping ([Contact]) -> Void) {
+    guard let lastSelected = dataManager.lastSelected else {
+      Log.error("Arrived at account details without lastSelected.")
+      return
+    }
+    let account = dataManager.accountGrouper[lastSelected.state][lastSelected.index]
     account.resetContacts()
     let repo = repoStore.contactRepository
     let request = ContactAllDataRequest(account: account)

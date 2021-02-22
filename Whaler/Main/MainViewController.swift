@@ -396,9 +396,9 @@ extension MainViewController: UICollectionViewDelegateFlowLayout {
 extension MainViewController: MainCollectionCellDelegate {
   func didSelectRowAt(section: Int, didSelectRowAt indexPath: IndexPath) {
     let accountState = interactor.accountStates[section]
-    let account = interactor.accountGrouper[accountState][indexPath.row]
+    interactor.lastSelected = (accountState, indexPath.row)
     let viewController = AccountDetailsViewController()
-    viewController.configure(with: account)
+    viewController.configure(with: interactor)
     navigationController?.pushViewController(viewController, animated: false)
   }
   

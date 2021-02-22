@@ -39,23 +39,27 @@ class AccountDetailsContactsViewController: UIViewController {
   }
 }
 
-//extension AccountDetailsContactsViewController: MainCollectionCellDelegate {
-//  func didSelectRowAt(section: Int, didSelectRowAt indexPath: IndexPath) {
-//
-//  }
-//
-//  func didClickAssignButton(_ button: UIButton, forContact contact: Contact) {
-//    interactor.contactBeingAssigned = contact
-//    let viewController = TablePopoverViewController()
-//    viewController.modalPresentationStyle = .popover
-//    viewController.provider = OrgUsersProvider()
-//    viewController.delegate = self
-//    navigationController?.present(viewController, animated: true, completion: nil)
-//    let popoverVC = viewController.popoverPresentationController
-//    popoverVC?.permittedArrowDirections = [.left, .up, .right]
-//    popoverVC?.sourceView = button
-//  }
-//}
+extension AccountDetailsContactsViewController: MainCollectionCellDelegate {
+  func didClickAssignButton(_ button: UIButton, forAccount account: Account) {
+    //this needs to bbe removed after switching to other cell/delegate
+  }
+  
+  func didSelectRowAt(section: Int, didSelectRowAt indexPath: IndexPath) {
+
+  }
+
+  func didClickAssignButton(_ button: UIButton, forContact contact: Contact) {
+    interactor.contactBeingAssigned = contact
+    let viewController = TablePopoverViewController()
+    viewController.modalPresentationStyle = .popover
+    viewController.provider = OrgUsersProvider()
+    viewController.delegate = self
+    navigationController?.present(viewController, animated: true, completion: nil)
+    let popoverVC = viewController.popoverPresentationController
+    popoverVC?.permittedArrowDirections = [.left, .up, .right]
+    popoverVC?.sourceView = button
+  }
+}
 
 extension AccountDetailsContactsViewController: UICollectionViewDelegate, UICollectionViewDataSource {
   func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -70,11 +74,11 @@ extension AccountDetailsContactsViewController: UICollectionViewDelegate, UIColl
     guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MainCollectionCell<MainTableCell>.id(), for: indexPath) as? MainCollectionCell<MainTableCell> else {
       return UICollectionViewCell()
     }
-  //    let state = interactor.accountStates[indexPath.section]
-  //    let account = interactor.accountGrouper[state][indexPath.row]
+//      let state = interactor.accountStates[indexPath.section]
+//      let account = interactor.accountGrouper[state][indexPath.row]
     cell.section = indexPath.row
-//    cell.dataSource = interactor
-//    cell.delegate = self
+    cell.dataSource = interactor.dataManager
+    cell.delegate = self
     return cell
   }
 }

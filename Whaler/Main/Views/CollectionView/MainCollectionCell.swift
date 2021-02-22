@@ -35,7 +35,7 @@ class MainCollectionCell<TableCell: MainCollectionTableCell & UITableViewCell>: 
       configureHeaderView()
     }
   }
-  weak var dataSource: MainInteractorData? {
+  weak var dataSource: MainDataManager? {
     didSet {
       tableView.reloadData()
     }
@@ -214,7 +214,7 @@ class MainCollectionCell<TableCell: MainCollectionTableCell & UITableViewCell>: 
   }
   
   func removeSourceTableData(localContext: Any?) {
-    guard let (dataSource, state, sourceIndexPath, tableView) = localContext as? (MainInteractorData, WorkState, IndexPath, UITableView) else { return }
+    guard let (dataSource, state, sourceIndexPath, tableView) = localContext as? (MainDataManager, WorkState, IndexPath, UITableView) else { return }
     dataSource.accountGrouper.remove(from: state, at: sourceIndexPath.row)
     tableView.deleteRows(at: [sourceIndexPath], with: .automatic)
   }
