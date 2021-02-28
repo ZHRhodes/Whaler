@@ -21,15 +21,15 @@ class NoteEditorViewController: UIViewController {
   
   private func configureLabel() {
     label.text = "Notes"
-    label.font = .openSans(weight: .bold, size: 26)
-    label.textColor = .lightText
+    label.font = .openSans(weight: .regular, size: 24)
+    label.textColor = .primaryText
     label.translatesAutoresizingMaskIntoConstraints = false
     
     view.addSubview(label)
     
     let constraints = [
       label.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 44),
-      label.topAnchor.constraint(equalTo: view.topAnchor, constant: 32),
+      label.topAnchor.constraint(equalTo: view.topAnchor, constant: 84),
       label.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -44),
       label.heightAnchor.constraint(equalToConstant: 41)
     ]
@@ -44,7 +44,7 @@ class NoteEditorViewController: UIViewController {
     
     let constraints = [
       noteEditor.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 44),
-      noteEditor.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 16),
+      noteEditor.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 31),
       noteEditor.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -44),
       noteEditor.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 10)
     ]

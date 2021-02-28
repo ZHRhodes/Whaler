@@ -248,6 +248,7 @@ class MainViewController: UIViewController {
     collectionView.register(MainCollectionCell<MainTableCell>.self, forCellWithReuseIdentifier: MainCollectionCell<MainTableCell>.id())
     collectionView.translatesAutoresizingMaskIntoConstraints = false
     collectionView.contentInset = .init(top: 0, left: 0, bottom: 0, right: 0)
+    collectionView.clipsToBounds = false
     collectionView.isSkeletonable = true
 
     collectionView.translatesAutoresizingMaskIntoConstraints = false
