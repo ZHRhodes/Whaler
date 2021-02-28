@@ -31,7 +31,7 @@ class AccountDetailsContactsViewController: UIViewController {
     collectionView.delegate = self
     collectionView.dataSource = self
     collectionView.backgroundColor = .primaryBackground
-    collectionView.register(MainCollectionCell<MainTableCell>.self, forCellWithReuseIdentifier: MainCollectionCell<MainTableCell>.id())
+    collectionView.register(MainCollectionCell<ContactTableCell>.self, forCellWithReuseIdentifier: MainCollectionCell<ContactTableCell>.id())
     collectionView.translatesAutoresizingMaskIntoConstraints = false
     collectionView.contentInset = .init(top: 0, left: 40, bottom: 0, right: 40)
 
@@ -71,7 +71,7 @@ extension AccountDetailsContactsViewController: UICollectionViewDelegate, UIColl
   }
 
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MainCollectionCell<MainTableCell>.id(), for: indexPath) as? MainCollectionCell<MainTableCell> else {
+    guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MainCollectionCell<ContactTableCell>.id(), for: indexPath) as? MainCollectionCell<ContactTableCell> else {
       return UICollectionViewCell()
     }
 //      let state = interactor.accountStates[indexPath.section]

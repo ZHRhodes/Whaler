@@ -42,6 +42,7 @@
 		1425175125510E11006255F1 /* FilterBucket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1425175025510E11006255F1 /* FilterBucket.swift */; };
 		1425175525510E46006255F1 /* FilterValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1425175425510E46006255F1 /* FilterValue.swift */; };
 		142EC6A824D6AE01004F7A28 /* AuthenticationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142EC6A724D6AE01004F7A28 /* AuthenticationView.swift */; };
+		1430FDEC25E4F1E900BD955F /* ContactTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1430FDEB25E4F1E900BD955F /* ContactTableCell.swift */; };
 		1440A20424C947FA00E36853 /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1440A20324C947FA00E36853 /* Contact.swift */; };
 		1443045D24F32FD900D2FBD2 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1443045C24F32FD900D2FBD2 /* String+Extensions.swift */; };
 		1443045F24F3356A00D2FBD2 /* SFNewAccessToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1443045E24F3356A00D2FBD2 /* SFNewAccessToken.swift */; };
@@ -192,6 +193,7 @@
 		1425175025510E11006255F1 /* FilterBucket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterBucket.swift; sourceTree = "<group>"; };
 		1425175425510E46006255F1 /* FilterValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterValue.swift; sourceTree = "<group>"; };
 		142EC6A724D6AE01004F7A28 /* AuthenticationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationView.swift; sourceTree = "<group>"; };
+		1430FDEB25E4F1E900BD955F /* ContactTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactTableCell.swift; sourceTree = "<group>"; };
 		1440A20324C947FA00E36853 /* Contact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contact.swift; sourceTree = "<group>"; };
 		1443045C24F32FD900D2FBD2 /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		1443045E24F3356A00D2FBD2 /* SFNewAccessToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFNewAccessToken.swift; sourceTree = "<group>"; };
@@ -505,6 +507,7 @@
 			children = (
 				140E644125DB78170033AC8F /* AccountDetailsContactsViewController.swift */,
 				14446D6825E350BA008E46CD /* AccountDetailsContactsInteractor.swift */,
+				1430FDEB25E4F1E900BD955F /* ContactTableCell.swift */,
 			);
 			path = Contacts;
 			sourceTree = "<group>";
@@ -1024,6 +1027,7 @@
 				14F7DDA124EE529300D43055 /* SFAccount.swift in Sources */,
 				146737A725D79D3A00B64735 /* ContactRemoteDataSource.swift in Sources */,
 				148A09742586FEC500811E35 /* LiteWebSocketDelegate.swift in Sources */,
+				1430FDEC25E4F1E900BD955F /* ContactTableCell.swift in Sources */,
 				1425175525510E46006255F1 /* FilterValue.swift in Sources */,
 				1443046124F3AFFC00D2FBD2 /* Typealiases.swift in Sources */,
 				14ECDD2124CABC7D006B4550 /* RichTextEditor.swift in Sources */,

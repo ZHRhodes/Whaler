@@ -15,6 +15,7 @@ protocol MainTableCellDelegate: class {
 
 class MainTableCell: UITableViewCell, MainCollectionTableCell {
   static let id = "MainTableCellId"
+  static let cellHeight: CGFloat = 150.0
   weak var delegate: MainTableCellDelegate?
   private let shadowView = UIView()
   private let containerView = UIView()

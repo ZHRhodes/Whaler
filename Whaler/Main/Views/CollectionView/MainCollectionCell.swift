@@ -11,6 +11,7 @@ import UIKit
 
 protocol MainCollectionTableCell: class {
   static var id: String { get }
+  static var cellHeight: CGFloat { get }
   var delegate: MainTableCellDelegate? { get set }
   func configure<T>(with object: T)
 }
@@ -127,7 +128,7 @@ class MainCollectionCell<TableCell: MainCollectionTableCell & UITableViewCell>: 
   }
   
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-    150
+    return TableCell.cellHeight
   }
   
  // UITableViewDragDelegate
