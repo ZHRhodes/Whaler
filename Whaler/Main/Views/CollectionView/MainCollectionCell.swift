@@ -56,13 +56,10 @@ class MainCollectionCell<TableCell: MainCollectionTableCell & UITableViewCell>: 
     "MainCollectionCellId"
   }
   
-  func configure() {
+  private func configure() {
     layer.masksToBounds = true
     layer.cornerRadius = 10.0
     backgroundColor = .primaryBackground
-    tableView.dragInteractionEnabled = true
-    tableView.dragDelegate = self
-    tableView.dropDelegate = self
     configureHeaderView()
     configureTableView()
 //    let cover = UIView()
@@ -86,6 +83,9 @@ class MainCollectionCell<TableCell: MainCollectionTableCell & UITableViewCell>: 
   }
   
   private func configureTableView() {
+    tableView.dragInteractionEnabled = true
+    tableView.dragDelegate = self
+    tableView.dropDelegate = self
     tableView.backgroundColor = .primaryBackground
     tableView.layer.cornerRadius = 10.0
     tableView.clipsToBounds = true

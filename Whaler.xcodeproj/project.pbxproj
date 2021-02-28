@@ -21,6 +21,7 @@
 		140AE7A924A9DF3300F7705E /* CommonButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140AE7A824A9DF3300F7705E /* CommonButton.swift */; };
 		140E643E25DB77AD0033AC8F /* AccountDetailsContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140E643D25DB77AD0033AC8F /* AccountDetailsContentViewController.swift */; };
 		140E644225DB78170033AC8F /* AccountDetailsContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140E644125DB78170033AC8F /* AccountDetailsContactsViewController.swift */; };
+		1410404525EB1C3E00D8C793 /* TableInCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1410404425EB1C3E00D8C793 /* TableInCollectionViewCell.swift */; };
 		1414810B252FFD8100640946 /* TablePopoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1414810A252FFD8100640946 /* TablePopoverViewController.swift */; };
 		1416480725A4FA020008E16B /* AccountSFDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1416480625A4FA020008E16B /* AccountSFDataSource.swift */; };
 		1416480B25A4FA270008E16B /* AccountDataInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1416480A25A4FA270008E16B /* AccountDataInterface.swift */; };
@@ -172,6 +173,7 @@
 		140AE7A824A9DF3300F7705E /* CommonButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonButton.swift; sourceTree = "<group>"; };
 		140E643D25DB77AD0033AC8F /* AccountDetailsContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDetailsContentViewController.swift; sourceTree = "<group>"; };
 		140E644125DB78170033AC8F /* AccountDetailsContactsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDetailsContactsViewController.swift; sourceTree = "<group>"; };
+		1410404425EB1C3E00D8C793 /* TableInCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableInCollectionViewCell.swift; sourceTree = "<group>"; };
 		1414810A252FFD8100640946 /* TablePopoverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TablePopoverViewController.swift; sourceTree = "<group>"; };
 		1416480625A4FA020008E16B /* AccountSFDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSFDataSource.swift; sourceTree = "<group>"; };
 		1416480A25A4FA270008E16B /* AccountDataInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDataInterface.swift; sourceTree = "<group>"; };
@@ -508,6 +510,7 @@
 				140E644125DB78170033AC8F /* AccountDetailsContactsViewController.swift */,
 				14446D6825E350BA008E46CD /* AccountDetailsContactsInteractor.swift */,
 				1430FDEB25E4F1E900BD955F /* ContactTableCell.swift */,
+				1410404425EB1C3E00D8C793 /* TableInCollectionViewCell.swift */,
 			);
 			path = Contacts;
 			sourceTree = "<group>";
@@ -1080,6 +1083,7 @@
 				14F4FE14254AA5C600C89485 /* ContactsHelper.swift in Sources */,
 				141802AD258EF07700E38840 /* AccountDetailsViewController.swift in Sources */,
 				14446D6925E350BA008E46CD /* AccountDetailsContactsInteractor.swift in Sources */,
+				1410404525EB1C3E00D8C793 /* TableInCollectionViewCell.swift in Sources */,
 				1454743B250D904700257A89 /* UIViewController+Extensions.swift in Sources */,
 				140E643E25DB77AD0033AC8F /* AccountDetailsContentViewController.swift in Sources */,
 				142517492551096F006255F1 /* SFObject.swift in Sources */,

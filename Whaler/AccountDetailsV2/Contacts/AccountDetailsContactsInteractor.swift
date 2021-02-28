@@ -26,16 +26,16 @@ class AccountDetailsContactsInteractor {
       return
     }
     let account = dataManager.accountGrouper[lastSelected.state][lastSelected.index]
-    account.resetContacts()
     let repo = repoStore.contactRepository
     let request = ContactAllDataRequest(account: account)
     contactsCancellable = repo
       .fetchAll(with: request)
       .sink(receiveCompletion: { _ in },
-            receiveValue: { (contacts) in
-              account.resetContacts()
+            receiveValue: { [weak self] (contacts) in
+              guard let strongSelf = self else { return }
+              strongSelf.contactGrouper = .init(groups: strongSelf.contactStates)
               contacts.forEach { contact in
-                account.contactGrouper.append(contact, to: contact.state ?? .ready)
+                strongSelf.contactGrouper.append(contact, to: contact.state ?? .ready)
               }
               contactsUpdated(contacts)
     })

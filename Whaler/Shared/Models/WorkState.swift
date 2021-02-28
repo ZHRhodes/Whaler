@@ -64,3 +64,9 @@ enum WorkState: String, CaseIterable, Codable {
 extension WorkState: Identifiable {
   var id: String { rawValue }
 }
+
+extension WorkState: SectionInfoProviding {
+  var title: String {
+    return rawValue
+  }
+}

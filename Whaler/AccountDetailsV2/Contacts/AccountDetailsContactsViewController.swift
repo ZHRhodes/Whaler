@@ -20,6 +20,9 @@ class AccountDetailsContactsViewController: UIViewController {
   func configure(with interactor: AccountDetailsContactsInteractor) {
     self.interactor = interactor
     configureCollectionView()
+    interactor.subscribeToContacts(for: interactor.dataManager) { [weak self] (contacts) in
+      self?.collectionView.reloadData()
+    }
   }
   
   private func configureCollectionView() {
@@ -30,8 +33,10 @@ class AccountDetailsContactsViewController: UIViewController {
     collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
     collectionView.delegate = self
     collectionView.dataSource = self
+    collectionView.backgroundColor = .red
     collectionView.backgroundColor = .primaryBackground
-    collectionView.register(MainCollectionCell<ContactTableCell>.self, forCellWithReuseIdentifier: MainCollectionCell<ContactTableCell>.id())
+    collectionView.register(TableInCollectionViewCell<ContactTableCell, Contact>.self,
+                            forCellWithReuseIdentifier: TableInCollectionViewCell<ContactTableCell, Contact>.id())
     collectionView.translatesAutoresizingMaskIntoConstraints = false
     collectionView.contentInset = .init(top: 0, left: 40, bottom: 0, right: 40)
 
@@ -71,14 +76,13 @@ extension AccountDetailsContactsViewController: UICollectionViewDelegate, UIColl
   }
 
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MainCollectionCell<ContactTableCell>.id(), for: indexPath) as? MainCollectionCell<ContactTableCell> else {
+    guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TableInCollectionViewCell<ContactTableCell, Contact>.id(), for: indexPath) as? TableInCollectionViewCell<ContactTableCell, Contact> else {
       return UICollectionViewCell()
     }
-//      let state = interactor.accountStates[indexPath.section]
-//      let account = interactor.accountGrouper[state][indexPath.row]
-    cell.section = indexPath.row
-    cell.dataSource = interactor.dataManager
-    cell.delegate = self
+    
+    let state = interactor.contactStates[indexPath.row]
+    let data = interactor.contactGrouper[state]
+    cell.configure(sectionInfo: state, dataSource: data)
     return cell
   }
 }
