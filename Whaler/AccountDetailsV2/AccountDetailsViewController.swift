@@ -27,7 +27,8 @@ class AccountDetailsViewController: UIViewController {
   }
   
   func configure(with dataManager: MainDataManager) {
-    contentVC.configure(with: dataManager)
+    let interactor = AccountDetailsContentInteractor(dataManager: dataManager)
+    contentVC.configure(with: interactor)
     let view1 = contentVC.view!
     view1.translatesAutoresizingMaskIntoConstraints = false
     view.addSubview(view1)

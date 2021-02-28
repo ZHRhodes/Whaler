@@ -22,6 +22,7 @@
 		140E643E25DB77AD0033AC8F /* AccountDetailsContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140E643D25DB77AD0033AC8F /* AccountDetailsContentViewController.swift */; };
 		140E644225DB78170033AC8F /* AccountDetailsContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140E644125DB78170033AC8F /* AccountDetailsContactsViewController.swift */; };
 		1410404525EB1C3E00D8C793 /* TableInCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1410404425EB1C3E00D8C793 /* TableInCollectionViewCell.swift */; };
+		1410404F25EB382400D8C793 /* AccountDetailsContentInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1410404E25EB382400D8C793 /* AccountDetailsContentInteractor.swift */; };
 		1414810B252FFD8100640946 /* TablePopoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1414810A252FFD8100640946 /* TablePopoverViewController.swift */; };
 		1416480725A4FA020008E16B /* AccountSFDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1416480625A4FA020008E16B /* AccountSFDataSource.swift */; };
 		1416480B25A4FA270008E16B /* AccountDataInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1416480A25A4FA270008E16B /* AccountDataInterface.swift */; };
@@ -174,6 +175,7 @@
 		140E643D25DB77AD0033AC8F /* AccountDetailsContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDetailsContentViewController.swift; sourceTree = "<group>"; };
 		140E644125DB78170033AC8F /* AccountDetailsContactsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDetailsContactsViewController.swift; sourceTree = "<group>"; };
 		1410404425EB1C3E00D8C793 /* TableInCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableInCollectionViewCell.swift; sourceTree = "<group>"; };
+		1410404E25EB382400D8C793 /* AccountDetailsContentInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDetailsContentInteractor.swift; sourceTree = "<group>"; };
 		1414810A252FFD8100640946 /* TablePopoverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TablePopoverViewController.swift; sourceTree = "<group>"; };
 		1416480625A4FA020008E16B /* AccountSFDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSFDataSource.swift; sourceTree = "<group>"; };
 		1416480A25A4FA270008E16B /* AccountDataInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDataInterface.swift; sourceTree = "<group>"; };
@@ -426,6 +428,24 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		1410404A25EB380200D8C793 /* Content */ = {
+			isa = PBXGroup;
+			children = (
+				140E643D25DB77AD0033AC8F /* AccountDetailsContentViewController.swift */,
+				1410404E25EB382400D8C793 /* AccountDetailsContentInteractor.swift */,
+				14446D6C25E36365008E46CD /* Contacts */,
+			);
+			path = Content;
+			sourceTree = "<group>";
+		};
+		1410404D25EB380D00D8C793 /* Notes */ = {
+			isa = PBXGroup;
+			children = (
+				146737AE25D7A02500B64735 /* NoteEditorViewController.swift */,
+			);
+			path = Notes;
+			sourceTree = "<group>";
+		};
 		1414810E252FFD8800640946 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -469,9 +489,8 @@
 			children = (
 				141802AC258EF07700E38840 /* AccountDetailsViewController.swift */,
 				141802B0258EF30A00E38840 /* ToolbarDelegate.swift */,
-				146737AE25D7A02500B64735 /* NoteEditorViewController.swift */,
-				140E643D25DB77AD0033AC8F /* AccountDetailsContentViewController.swift */,
-				14446D6C25E36365008E46CD /* Contacts */,
+				1410404A25EB380200D8C793 /* Content */,
+				1410404D25EB380D00D8C793 /* Notes */,
 			);
 			path = AccountDetailsV2;
 			sourceTree = "<group>";
@@ -1128,6 +1147,7 @@
 				14EF4DE924CD4F3100ED5461 /* ObjectManager.swift in Sources */,
 				141F796925327503005F9295 /* Graph.swift in Sources */,
 				14B037E525073EBA00BA488D /* Tokens.swift in Sources */,
+				1410404F25EB382400D8C793 /* AccountDetailsContentInteractor.swift in Sources */,
 				140AE7A324A9BA6500F7705E /* MainTableSectionHeader.swift in Sources */,
 				14DACF46255BAC9200FC0900 /* SwiftyBeaver+LoggingDestination.swift in Sources */,
 				141F796E25342974005F9295 /* TokenAddingIntercepter.swift in Sources */,

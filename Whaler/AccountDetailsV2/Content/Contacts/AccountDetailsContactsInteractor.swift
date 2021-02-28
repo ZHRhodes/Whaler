@@ -16,16 +16,20 @@ class AccountDetailsContactsInteractor {
   var contactBeingAssigned: Contact?
   var contactsCancellable: AnyCancellable?
   
+  var account: Account {
+    if let lastSelected = dataManager.lastSelected {
+      return dataManager.accountGrouper[lastSelected.state][lastSelected.index]
+    } else {
+      Log.error("Arrived at account details without lastSelected.")
+      return Account()
+    }
+  }
+  
   init(dataManager: MainDataManager) {
     self.dataManager = dataManager
   }
   
   func subscribeToContacts(for dataManager: MainDataManager, contactsUpdated: @escaping ([Contact]) -> Void) {
-    guard let lastSelected = dataManager.lastSelected else {
-      Log.error("Arrived at account details without lastSelected.")
-      return
-    }
-    let account = dataManager.accountGrouper[lastSelected.state][lastSelected.index]
     let repo = repoStore.contactRepository
     let request = ContactAllDataRequest(account: account)
     contactsCancellable = repo
