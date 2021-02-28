@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import SkeletonView
 
 extension UIView {
   func addAndAttachToEdges(view: UIView, inset: CGFloat = 0) {
@@ -22,5 +23,10 @@ extension UIView {
     ]
     
     NSLayoutConstraint.activate(constraints)
+  }
+  
+  func showCustomAnimatedSkeleton(crossDissolveTime: TimeInterval = 0.25) {
+    let gradient = SkeletonGradient(baseColor: .lightText)
+    showAnimatedGradientSkeleton(usingGradient: gradient, animation: nil, transition: .crossDissolve(crossDissolveTime))
   }
 }

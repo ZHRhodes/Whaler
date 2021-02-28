@@ -25,6 +25,7 @@
 		1410404F25EB382400D8C793 /* AccountDetailsContentInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1410404E25EB382400D8C793 /* AccountDetailsContentInteractor.swift */; };
 		1410405725EB39AC00D8C793 /* DetailsGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1410405625EB39AC00D8C793 /* DetailsGrid.swift */; };
 		1410405E25EB39C600D8C793 /* DetailsGridItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1410405D25EB39C600D8C793 /* DetailsGridItem.swift */; };
+		1410406325EB594100D8C793 /* SkeletonView in Frameworks */ = {isa = PBXBuildFile; productRef = 1410406225EB594100D8C793 /* SkeletonView */; };
 		1414810B252FFD8100640946 /* TablePopoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1414810A252FFD8100640946 /* TablePopoverViewController.swift */; };
 		1416480725A4FA020008E16B /* AccountSFDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1416480625A4FA020008E16B /* AccountSFDataSource.swift */; };
 		1416480B25A4FA270008E16B /* AccountDataInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1416480A25A4FA270008E16B /* AccountDataInterface.swift */; };
@@ -320,6 +321,7 @@
 				146A6DD6252C496100DA8E85 /* Apollo in Frameworks */,
 				14C509D0254D49CD0021D9C5 /* SwiftyBeaver in Frameworks */,
 				147A3CB22577625500D96637 /* Starscream in Frameworks */,
+				1410406325EB594100D8C793 /* SkeletonView in Frameworks */,
 				6EC92F4185E77A246A6185B6 /* Pods_Whaler.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -887,6 +889,7 @@
 				146A6DD5252C496100DA8E85 /* Apollo */,
 				14C509CF254D49CD0021D9C5 /* SwiftyBeaver */,
 				147A3CB12577625500D96637 /* Starscream */,
+				1410406225EB594100D8C793 /* SkeletonView */,
 			);
 			productName = Whaler;
 			productReference = 14861ED1249F3DE100D2FA92 /* Whaler.app */;
@@ -944,6 +947,7 @@
 				146A6DD4252C496100DA8E85 /* XCRemoteSwiftPackageReference "apollo-ios" */,
 				14C509CE254D49CD0021D9C5 /* XCRemoteSwiftPackageReference "SwiftyBeaver" */,
 				147A3CB02577625500D96637 /* XCRemoteSwiftPackageReference "Starscream" */,
+				1410406125EB594100D8C793 /* XCRemoteSwiftPackageReference "SkeletonView" */,
 			);
 			productRefGroup = 14861ED2249F3DE100D2FA92 /* Products */;
 			projectDirPath = "";
@@ -1470,6 +1474,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		1410406125EB594100D8C793 /* XCRemoteSwiftPackageReference "SkeletonView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Juanpe/SkeletonView";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.13.0;
+			};
+		};
 		146A6DD4252C496100DA8E85 /* XCRemoteSwiftPackageReference "apollo-ios" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/apollographql/apollo-ios.git";
@@ -1505,6 +1517,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		1410406225EB594100D8C793 /* SkeletonView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1410406125EB594100D8C793 /* XCRemoteSwiftPackageReference "SkeletonView" */;
+			productName = SkeletonView;
+		};
 		146A6DD5252C496100DA8E85 /* Apollo */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 146A6DD4252C496100DA8E85 /* XCRemoteSwiftPackageReference "apollo-ios" */;

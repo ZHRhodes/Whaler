@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import SkeletonView
 
 protocol MainCollectionTableCell: class {
   static var id: String { get }
@@ -23,7 +24,7 @@ protocol MainCollectionCellDelegate: class {
 
 class MainCollectionCell<TableCell: MainCollectionTableCell & UITableViewCell>: UICollectionViewCell,
                                                                                 UITableViewDelegate,
-                                                                                UITableViewDataSource,
+                                                                                SkeletonTableViewDataSource,
                                                                                 UITableViewDragDelegate,
                                                                                 UITableViewDropDelegate {
   
@@ -61,22 +62,21 @@ class MainCollectionCell<TableCell: MainCollectionTableCell & UITableViewCell>: 
     layer.cornerRadius = 10.0
     backgroundColor = .primaryBackground
     clipsToBounds = false
+    isSkeletonable = true
     configureHeaderView()
     configureTableView()
-//    let cover = UIView()
-//    cover.backgroundColor = .orange
-//    addAndAttachToEdges(view: cover)
+    tableView.showAnimatedGradientSkeleton()
   }
   
   private func configureHeaderView() {
     headerView = UIView()
     headerView!.translatesAutoresizingMaskIntoConstraints = false
     headerView!.backgroundColor = .clear
-    addSubview(headerView!)
+    contentView.addSubview(headerView!)
     
-    headerView!.leftAnchor.constraint(equalTo: leftAnchor, constant: 8).isActive = true
-    headerView!.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
-    headerView!.topAnchor.constraint(equalTo: topAnchor, constant: 0).isActive = true
+    headerView!.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 8).isActive = true
+    headerView!.rightAnchor.constraint(equalTo: contentView.rightAnchor).isActive = true
+    headerView!.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 0).isActive = true
     headerView!.heightAnchor.constraint(equalToConstant: MainCollectionCellHeader.height).isActive = true
     
     let state = WorkState.allCases[self.section ?? 0]
@@ -95,16 +95,25 @@ class MainCollectionCell<TableCell: MainCollectionTableCell & UITableViewCell>: 
     tableView.register(TableCell.self, forCellReuseIdentifier: TableCell.id)
     tableView.translatesAutoresizingMaskIntoConstraints = false
     tableView.tableFooterView = UIView()
+    tableView.isSkeletonable = true
     
-    addSubview(tableView)
+    contentView.addSubview(tableView)
     
-    tableView.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
-    tableView.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
-    tableView.topAnchor.constraint(equalTo: topAnchor, constant: AccountStateTagView.height+20).isActive = true
-    tableView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+    tableView.leftAnchor.constraint(equalTo: contentView.leftAnchor).isActive = true
+    tableView.rightAnchor.constraint(equalTo: contentView.rightAnchor).isActive = true
+    tableView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: AccountStateTagView.height+20).isActive = true
+    tableView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
   }
   
  // UITableViewDelegate, UITableViewDataSource
+  func collectionSkeletonView(_ skeletonView: UITableView, cellIdentifierForRowAt indexPath: IndexPath) -> ReusableCellIdentifier {
+    return TableCell.id
+  }
+  
+  func collectionSkeletonView(_ skeletonView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    return 6
+  }
+  
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     let state = WorkState.allCases[self.section ?? 0]
     return dataSource?.accountGrouper[state].count ?? 0

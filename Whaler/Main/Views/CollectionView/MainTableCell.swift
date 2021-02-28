@@ -32,10 +32,12 @@ class MainTableCell: UITableViewCell, MainCollectionTableCell {
     backgroundColor = .clear
     contentView.backgroundColor = .clear
     contentView.clipsToBounds = false
+    isSkeletonable = true
     configureShadowView()
     configureContainerView()
     configureNameLabel()
     configureAssignedButton()
+    configureAttributesCover()
   }
   
   required init?(coder: NSCoder) {
@@ -62,6 +64,7 @@ class MainTableCell: UITableViewCell, MainCollectionTableCell {
   }
   
   private func configureShadowView() {
+    shadowView.isSkeletonable = true
     shadowView.backgroundColor = .cellBackground
     shadowView.layer.cornerRadius = 12.0
     shadowView.clipsToBounds = false
@@ -83,6 +86,7 @@ class MainTableCell: UITableViewCell, MainCollectionTableCell {
   private func configureContainerView() {
     containerView.layer.masksToBounds = true
     containerView.layer.cornerRadius = 12.0
+    containerView.isSkeletonable = true
     
     shadowView.addAndAttachToEdges(view: containerView)
   }
@@ -90,12 +94,16 @@ class MainTableCell: UITableViewCell, MainCollectionTableCell {
   private func configureNameLabel() {
     nameLabel.font = UIFont.openSans(weight: .regular, size: 24)
     nameLabel.translatesAutoresizingMaskIntoConstraints = false
+    nameLabel.layer.cornerRadius = 10.0
+    nameLabel.isSkeletonable = true
+    nameLabel.skeletonCornerRadius = 8.0
     
     containerView.addSubview(nameLabel)
     
     nameLabel.leftAnchor.constraint(equalTo: shadowView.leftAnchor, constant: 22).isActive = true
-    nameLabel.rightAnchor.constraint(equalTo: shadowView.rightAnchor, constant: -12).isActive = true
+    nameLabel.rightAnchor.constraint(equalTo: shadowView.rightAnchor, constant: -22).isActive = true
     nameLabel.topAnchor.constraint(equalTo: shadowView.topAnchor, constant: 12).isActive = true
+    nameLabel.heightAnchor.constraint(equalToConstant: 33).isActive = true
   }
   
   private func configureNameLabel(with account: Account) {
@@ -127,6 +135,18 @@ class MainTableCell: UITableViewCell, MainCollectionTableCell {
     attributesStack?.addArrangedSubview(UIView())
   }
   
+  private func configureAttributesCover() {
+    let cover = UIView()
+    cover.translatesAutoresizingMaskIntoConstraints = false
+    cover.isSkeletonable = true
+    
+    containerView.addSubview(cover)
+    cover.leftAnchor.constraint(equalTo: leftAnchor, constant: 28).isActive = true
+    cover.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -30).isActive = true
+    cover.heightAnchor.constraint(equalToConstant: 33).isActive = true
+    cover.widthAnchor.constraint(equalTo: containerView.widthAnchor, multiplier: 0.5).isActive = true
+  }
+  
   private func configureAssignedButton() {
     assignedButton?.removeFromSuperview()
     assignedButton = UIButton()
@@ -141,9 +161,11 @@ class MainTableCell: UITableViewCell, MainCollectionTableCell {
     assignedButton!.translatesAutoresizingMaskIntoConstraints = false
     let characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
     let title = "\(characters.randomElement()!)\(characters.randomElement()!)"
-    assignedButton?.setTitle(title, for: .normal)
-    assignedButton?.titleLabel?.font = .openSans(weight: .bold, size: 18)
-    assignedButton?.setTitleColor(.white, for: .normal)
+    assignedButton!.setTitle(title, for: .normal)
+    assignedButton!.titleLabel?.font = .openSans(weight: .bold, size: 18)
+    assignedButton!.setTitleColor(.white, for: .normal)
+    assignedButton!.isSkeletonable = true
+    assignedButton?.skeletonCornerRadius = 25.0
     
     containerView.addSubview(assignedButton!)
     

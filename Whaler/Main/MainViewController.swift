@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 import SwiftUI
 import AuthenticationServices
+import SkeletonView
 
 class WeakRef<T> where T: AnyObject {
   private(set) weak var value: T?
@@ -61,6 +62,7 @@ class MainViewController: UIViewController {
     super.viewDidLoad()
     title = "Accounts"
     view.backgroundColor = .primaryBackground
+    SkeletonAppearance.default.multilineHeight = 30.0
     
     Lifecycle.loadCurrentUser()
     interactor = MainInteractor()
@@ -109,8 +111,8 @@ class MainViewController: UIViewController {
                                                      makeConnectToSalesforceButton()])
     noDataStackView!.spacing = 37
     noDataStackView!.axis = .vertical
-    noDataStackView?.distribution = .fillEqually
-    noDataStackView?.translatesAutoresizingMaskIntoConstraints = false
+    noDataStackView!.distribution = .fillEqually
+    noDataStackView!.translatesAutoresizingMaskIntoConstraints = false
     view.addSubview(noDataStackView!)
     
     let constraints = [
