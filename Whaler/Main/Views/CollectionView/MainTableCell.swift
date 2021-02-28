@@ -50,6 +50,7 @@ class MainTableCell: UITableViewCell, MainCollectionTableCell {
       Log.error(message)
       fatalError(message)
     }
+    hideSkeleton()
     self.account = account
     configureNameLabel(with: account)
     var attributes = [Attribute]()

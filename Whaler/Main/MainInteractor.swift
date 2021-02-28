@@ -101,13 +101,17 @@ class MainInteractor: MainDataManager {
     
   func getAccounts() {
     let repo = repoStore.accountRepository
-    repo.fetchAll()
-    accountsCancellable = repo.publisher.sink { _ in }
+    accountsCancellable = repo.publisher.dropFirst().sink { _ in }
       receiveValue: { (accounts) in
       self.setAccounts(accounts)
       self.viewController?.reloadCollection()
       Log.info(String(reflecting: self.accountGrouper))
     }
+    fetchAllAccounts()
+  }
+  
+  func fetchAllAccounts() {
+    repoStore.accountRepository.fetchAll()
   }
   
   //TODO: will newly added in salesforce accounts save to cache in whaler? or is that only done on authentication?

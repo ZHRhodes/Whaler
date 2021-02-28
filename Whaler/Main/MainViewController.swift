@@ -60,6 +60,11 @@ class MainViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+  }
+  
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    navigationController?.setNavigationBarHidden(true, animated: false)
     title = "Accounts"
     view.backgroundColor = .primaryBackground
     SkeletonAppearance.default.multilineHeight = 30.0
@@ -68,12 +73,13 @@ class MainViewController: UIViewController {
     interactor = MainInteractor()
     interactor.viewController = self
     
+    configureViewsForContent()
+
     if interactor.hasSalesforceTokens {
       //present loading indicator
       interactor.refreshSalesforceSession { [weak self] (success) in
         if success {
           self?.interactor.getAccounts()
-          self?.configureViewsForContent()
         } else {
           if !(self?.interactor.hasAccounts() ?? false) {
             self?.configureNoDataViews()
@@ -85,18 +91,18 @@ class MainViewController: UIViewController {
     }
   }
   
-  override func viewWillAppear(_ animated: Bool) {
-    super.viewWillAppear(animated)
-    navigationController?.setNavigationBarHidden(true, animated: false)
-  }
-  
   override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
     super.viewWillTransition(to: size, with: coordinator)
     collectionView?.reloadData()
   }
   
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
+    collectionView.showAnimatedGradientSkeleton()
+  }
+  
   private func configureViewsForContent() {
-    removeNoDataViews()
+//    removeNoDataViews()
     configureHelloLabel()
     configureSubHelloLabel()
     configureCollectionView()
@@ -237,13 +243,15 @@ class MainViewController: UIViewController {
     collectionView.register(MainCollectionCell<MainTableCell>.self, forCellWithReuseIdentifier: MainCollectionCell<MainTableCell>.id())
     collectionView.translatesAutoresizingMaskIntoConstraints = false
     collectionView.contentInset = .init(top: 0, left: 0, bottom: 0, right: 0)
+    collectionView.isSkeletonable = true
 
     collectionView.translatesAutoresizingMaskIntoConstraints = false
     view.addSubview(collectionView)
     
     let constraints = [
       collectionView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 40),
-      collectionView.topAnchor.constraint(equalTo: subHelloLabel.bottomAnchor, constant: 40),
+//      collectionView.topAnchor.constraint(equalTo: subHelloLabel.bottomAnchor, constant: 40),
+      collectionView.heightAnchor.constraint(equalToConstant: 993),
       collectionView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -40),
       collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0)
     ]
@@ -321,10 +329,12 @@ class MainViewController: UIViewController {
   
   @objc
   private func reloadTapped() {
-    interactor.getAccounts()
+//    view.showAnimatedGradientSkeleton()
+    interactor.fetchAllAccounts()
   }
   
   func reloadCollection() {
+    collectionView?.hideSkeleton()
     collectionView?.reloadData()
   }
 

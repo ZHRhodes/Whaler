@@ -63,9 +63,9 @@ class MainCollectionCell<TableCell: MainCollectionTableCell & UITableViewCell>: 
     backgroundColor = .primaryBackground
     clipsToBounds = false
     isSkeletonable = true
+    contentView.isSkeletonable = true
     configureHeaderView()
     configureTableView()
-    tableView.showAnimatedGradientSkeleton()
   }
   
   private func configureHeaderView() {
@@ -111,7 +111,7 @@ class MainCollectionCell<TableCell: MainCollectionTableCell & UITableViewCell>: 
   }
   
   func collectionSkeletonView(_ skeletonView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return 6
+    return 4
   }
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
