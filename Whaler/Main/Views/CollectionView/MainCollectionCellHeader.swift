@@ -15,12 +15,14 @@ class MainCollectionCellHeader: UICollectionViewCell {
   
   init(text: String, colors: [UIColor]) {
     super.init(frame: .zero)
+    backgroundColor = .primaryBackground
     configureLabel(with: text)
     configureGradient(with: colors)
   }
   
   required init?(coder: NSCoder) {
     super.init(coder: coder)
+    backgroundColor = .primaryBackground
     configureLabel(with: "")
     configureGradient(with: [])
   }

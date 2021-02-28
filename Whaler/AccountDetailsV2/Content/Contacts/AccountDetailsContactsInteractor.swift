@@ -12,7 +12,7 @@ import Combine
 class AccountDetailsContactsInteractor {
   let dataManager: MainDataManager
   let contactStates = WorkState.contactsCases
-  lazy var contactGrouper = Grouper<WorkState, Contact>(groups: self.contactStates)
+  var contactGrouper: Grouper<WorkState, Contact>?
   var contactBeingAssigned: Contact?
   var contactsCancellable: AnyCancellable?
   
@@ -39,7 +39,7 @@ class AccountDetailsContactsInteractor {
               guard let strongSelf = self else { return }
               strongSelf.contactGrouper = .init(groups: strongSelf.contactStates)
               contacts.forEach { contact in
-                strongSelf.contactGrouper.append(contact, to: contact.state ?? .ready)
+                strongSelf.contactGrouper?.append(contact, to: contact.state ?? .ready)
               }
               contactsUpdated(contacts)
     })

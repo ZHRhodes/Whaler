@@ -74,7 +74,7 @@ class MainCollectionCell<TableCell: MainCollectionTableCell & UITableViewCell>: 
     headerView!.backgroundColor = .clear
     contentView.addSubview(headerView!)
     
-    headerView!.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 8).isActive = true
+    headerView!.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 0).isActive = true
     headerView!.rightAnchor.constraint(equalTo: contentView.rightAnchor).isActive = true
     headerView!.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 0).isActive = true
     headerView!.heightAnchor.constraint(equalToConstant: MainCollectionCellHeader.height).isActive = true

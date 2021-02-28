@@ -78,7 +78,7 @@ class MainTableCell: UITableViewCell, MainCollectionTableCell {
     shadowView.translatesAutoresizingMaskIntoConstraints = false
     contentView.addSubview(shadowView)
     
-    shadowView.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 6).isActive = true
+    shadowView.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 0).isActive = true
     shadowView.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -0).isActive = true
     shadowView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 12).isActive = true
     shadowView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -12).isActive = true

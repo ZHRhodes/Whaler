@@ -16,11 +16,16 @@ class AccountDetailsContactsViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
   }
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
+//    collectionView.showAnimatedGradientSkeleton()
+  }
   
   func configure(with interactor: AccountDetailsContactsInteractor) {
     self.interactor = interactor
     configureCollectionView()
     interactor.subscribeToContacts(for: interactor.dataManager) { [weak self] (contacts) in
+//      self?.collectionView.hideSkeleton()
       self?.collectionView.reloadData()
     }
   }
@@ -34,6 +39,7 @@ class AccountDetailsContactsViewController: UIViewController {
     collectionView.delegate = self
     collectionView.dataSource = self
     collectionView.backgroundColor = .primaryBackground
+    collectionView.isSkeletonable = true
     collectionView.register(TableInCollectionViewCell<ContactTableCell, Contact>.self,
                             forCellWithReuseIdentifier: TableInCollectionViewCell<ContactTableCell, Contact>.id())
     collectionView.translatesAutoresizingMaskIntoConstraints = false
@@ -80,7 +86,7 @@ extension AccountDetailsContactsViewController: UICollectionViewDelegate, UIColl
     }
     
     let state = interactor.contactStates[indexPath.row]
-    let data = interactor.contactGrouper[state]
+    let data = interactor.contactGrouper?[state]
     cell.configure(sectionInfo: state, dataSource: data)
     return cell
   }

@@ -58,16 +58,13 @@ class MainViewController: UIViewController {
   
   private var sectionHeaders = Set<WeakRef<UIView>>()
   
+  private var didShowInitialLoad = false
+  
   override func viewDidLoad() {
     super.viewDidLoad()
-  }
-  
-  override func viewWillAppear(_ animated: Bool) {
-    super.viewWillAppear(animated)
-    navigationController?.setNavigationBarHidden(true, animated: false)
     title = "Accounts"
     view.backgroundColor = .primaryBackground
-    SkeletonAppearance.default.multilineHeight = 30.0
+    SkeletonAppearance.default.multilineHeight = 29.0
     
     Lifecycle.loadCurrentUser()
     interactor = MainInteractor()
@@ -91,6 +88,11 @@ class MainViewController: UIViewController {
     }
   }
   
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    navigationController?.setNavigationBarHidden(true, animated: false)
+  }
+  
   override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
     super.viewWillTransition(to: size, with: coordinator)
     collectionView?.reloadData()
@@ -98,7 +100,10 @@ class MainViewController: UIViewController {
   
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
-    collectionView.showAnimatedGradientSkeleton()
+    if !didShowInitialLoad {
+      collectionView.showAnimatedGradientSkeleton()
+      didShowInitialLoad.toggle()
+    }
   }
   
   private func configureViewsForContent() {
@@ -251,7 +256,7 @@ class MainViewController: UIViewController {
     let constraints = [
       collectionView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 40),
 //      collectionView.topAnchor.constraint(equalTo: subHelloLabel.bottomAnchor, constant: 40),
-      collectionView.heightAnchor.constraint(equalToConstant: 993),
+      collectionView.heightAnchor.constraint(equalToConstant: 993), //TODO: thiis is too static
       collectionView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -40),
       collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0)
     ]

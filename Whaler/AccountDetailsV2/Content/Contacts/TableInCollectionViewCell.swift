@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import SkeletonView
 
 protocol SectionInfoProviding {
   var title: String { get }
@@ -31,7 +32,7 @@ protocol TableInCollectionViewDataSource {
 class TableInCollectionViewCell<TableCell: UITableViewCell & TableInCollectionViewTableCell, TableCellData>:
   UICollectionViewCell,
   UITableViewDelegate,
-  UITableViewDataSource {
+  SkeletonTableViewDataSource {
   
   static func id() -> String {
     return "TableInCollectionViewCellId"
@@ -40,8 +41,9 @@ class TableInCollectionViewCell<TableCell: UITableViewCell & TableInCollectionVi
   weak var delegate: TableInCollectionViewDelegate?
   private var headerView: UIView?
   private let tableView = UITableView()
+  private var didShowInitialLoad = false
   
-  var dataSource = [TableCellData]() {
+  private var dataSource = [TableCellData]() {
     didSet {
       tableView.reloadData()
     }
@@ -64,16 +66,21 @@ class TableInCollectionViewCell<TableCell: UITableViewCell & TableInCollectionVi
     configure()
   }
   
-  func configure(sectionInfo: SectionInfoProviding, dataSource: [TableCellData]) {
+  func configure(sectionInfo: SectionInfoProviding, dataSource: [TableCellData]?) {
+    if let dataSource = dataSource {
+      self.dataSource = dataSource
+      tableView.hideSkeleton()
+    }
     self.sectionInfo = sectionInfo
-    self.dataSource = dataSource
   }
   
   private func configure() {
     layer.masksToBounds = true
     layer.cornerRadius = 10.0
     backgroundColor = .primaryBackground
+    isSkeletonable = true
     configureTableView()
+    tableView.showAnimatedGradientSkeleton()
   }
   
   private func configureTableView() {
@@ -88,6 +95,7 @@ class TableInCollectionViewCell<TableCell: UITableViewCell & TableInCollectionVi
     tableView.register(TableCell.self, forCellReuseIdentifier: TableCell.id)
     tableView.translatesAutoresizingMaskIntoConstraints = false
     tableView.tableFooterView = UIView()
+    tableView.isSkeletonable = true
     
     addSubview(tableView)
     
@@ -113,6 +121,14 @@ class TableInCollectionViewCell<TableCell: UITableViewCell & TableInCollectionVi
   }
   
   //UITableViewDelegate, UITableViewDataSource
+  func collectionSkeletonView(_ skeletonView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    return 3
+  }
+  
+  func collectionSkeletonView(_ skeletonView: UITableView, cellIdentifierForRowAt indexPath: IndexPath) -> ReusableCellIdentifier {
+    return TableCell.id
+  }
+  
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return dataSource.count //this is getting called a gazillion times
   }

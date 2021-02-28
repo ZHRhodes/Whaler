@@ -26,8 +26,12 @@ class ContactTableCell: UITableViewCell, TableInCollectionViewTableCell {
     selectedBackgroundView = background
     backgroundColor = .clear
     contentView.backgroundColor = .clear
+    contentView.isSkeletonable = true
+    isSkeletonable = true
     configureShadowView()
     configureContainerView()
+    configureNameLabel()
+    configureJobTitleLabel()
   }
   
   required init?(coder: NSCoder) {
@@ -38,6 +42,7 @@ class ContactTableCell: UITableViewCell, TableInCollectionViewTableCell {
     shadowView.backgroundColor = .cellBackground
     shadowView.layer.cornerRadius = 12.0
     shadowView.clipsToBounds = false
+    shadowView.isSkeletonable = true
     
     shadowView.layer.shadowColor = UIColor.cellShadow.cgColor
     shadowView.layer.shadowOpacity = 1.0
@@ -56,6 +61,7 @@ class ContactTableCell: UITableViewCell, TableInCollectionViewTableCell {
   private func configureContainerView() {
     containerView.layer.masksToBounds = true
     containerView.layer.cornerRadius = 12.0
+    containerView.isSkeletonable = true
     
     shadowView.addAndAttachToEdges(view: containerView)
   }
@@ -67,13 +73,13 @@ class ContactTableCell: UITableViewCell, TableInCollectionViewTableCell {
       fatalError(message)
     }
     self.contact = contact
-    configureNameLabel()
-    configureJobTitleLabel()
+    nameLabel.text = contact.fullName
+    jobTitleLabel.text = contact.jobTitle
   }
   
   private func configureNameLabel() {
-    nameLabel.text = contact.fullName
     nameLabel.font = .openSans(weight: .regular, size: 24)
+    nameLabel.isSkeletonable = true
     
     if nameLabel.superview == nil {
       nameLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -87,16 +93,16 @@ class ContactTableCell: UITableViewCell, TableInCollectionViewTableCell {
   }
   
   private func configureJobTitleLabel() {
-    jobTitleLabel.text = contact.jobTitle
     jobTitleLabel.font = .openSans(weight: .regular, size: 18)
     jobTitleLabel.textColor = .secondaryText
+    jobTitleLabel.isSkeletonable = true
     
     if jobTitleLabel.superview == nil {
       jobTitleLabel.translatesAutoresizingMaskIntoConstraints = false
       containerView.addSubview(jobTitleLabel)
       
       jobTitleLabel.leftAnchor.constraint(equalTo: containerView.leftAnchor, constant: 21).isActive = true
-      jobTitleLabel.rightAnchor.constraint(equalTo: containerView.rightAnchor, constant: -21).isActive = true
+      jobTitleLabel.widthAnchor.constraint(equalTo: containerView.widthAnchor, multiplier: 0.6).isActive = true
       jobTitleLabel.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -13).isActive = true
       jobTitleLabel.heightAnchor.constraint(equalToConstant: 25).isActive = true
     }
