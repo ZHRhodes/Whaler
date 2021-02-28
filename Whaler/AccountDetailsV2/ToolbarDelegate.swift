@@ -42,7 +42,8 @@ extension ToolbarDelegate: NSToolbarDelegate {
         switch itemIdentifier {
         case .back:
           toolbarItem = NSToolbarItem(itemIdentifier: itemIdentifier)
-          toolbarItem?.image = UIImage(named: "backArrow2")?.withTintColor(.lightGray)
+          let image = UIImage(named: "backArrow2")?.withRenderingMode(.alwaysTemplate)
+          toolbarItem?.image = image //i may have to use a custom view here instead in order to control tint
           toolbarItem?.isNavigational = true
           toolbarItem?.action = #selector(backTapped)
           toolbarItem?.target = self

@@ -46,7 +46,7 @@ class NoteEditorViewController: UIViewController {
       noteEditor.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 44),
       noteEditor.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 16),
       noteEditor.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -44),
-      noteEditor.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -32)
+      noteEditor.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 10)
     ]
     
     NSLayoutConstraint.activate(constraints)

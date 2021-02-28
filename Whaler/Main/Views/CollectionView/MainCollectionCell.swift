@@ -60,6 +60,7 @@ class MainCollectionCell<TableCell: MainCollectionTableCell & UITableViewCell>: 
     layer.masksToBounds = true
     layer.cornerRadius = 10.0
     backgroundColor = .primaryBackground
+    clipsToBounds = false
     configureHeaderView()
     configureTableView()
 //    let cover = UIView()
@@ -88,7 +89,7 @@ class MainCollectionCell<TableCell: MainCollectionTableCell & UITableViewCell>: 
     tableView.dropDelegate = self
     tableView.backgroundColor = .primaryBackground
     tableView.layer.cornerRadius = 10.0
-    tableView.clipsToBounds = true
+    tableView.clipsToBounds = false
     tableView.delegate = self
     tableView.dataSource = self
     tableView.register(TableCell.self, forCellReuseIdentifier: TableCell.id)

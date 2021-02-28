@@ -33,7 +33,6 @@ class AccountDetailsContactsViewController: UIViewController {
     collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
     collectionView.delegate = self
     collectionView.dataSource = self
-    collectionView.backgroundColor = .red
     collectionView.backgroundColor = .primaryBackground
     collectionView.register(TableInCollectionViewCell<ContactTableCell, Contact>.self,
                             forCellWithReuseIdentifier: TableInCollectionViewCell<ContactTableCell, Contact>.id())

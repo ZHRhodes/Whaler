@@ -12,6 +12,7 @@ import SwiftUI
 extension UIColor {
   static let lightText = UIColor(named: "lightText")!
   static let secondaryText = UIColor(named: "secondaryText")!
+  static let primaryText = UIColor(named: "primaryText")!
   static let primaryBackground = UIColor(named: "primaryBackground")!
   static let darkBackground = UIColor(named: "darkBackground")!
   static let borderLineColor = UIColor(named: "borderLineColor")!

@@ -31,6 +31,7 @@ class MainTableCell: UITableViewCell, MainCollectionTableCell {
     selectedBackgroundView = background
     backgroundColor = .clear
     contentView.backgroundColor = .clear
+    contentView.clipsToBounds = false
     configureShadowView()
     configureContainerView()
     configureNameLabel()
@@ -73,14 +74,13 @@ class MainTableCell: UITableViewCell, MainCollectionTableCell {
     shadowView.translatesAutoresizingMaskIntoConstraints = false
     contentView.addSubview(shadowView)
     
-    shadowView.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 24).isActive = true
-    shadowView.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -24).isActive = true
+    shadowView.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 6).isActive = true
+    shadowView.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -0).isActive = true
     shadowView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 12).isActive = true
     shadowView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -12).isActive = true
   }
   
   private func configureContainerView() {
-//    containerView.layer.borderColor = UIColor(red: 235/255, green: 235/255, blue: 235/255, alpha: 1.0).cgColor
     containerView.layer.masksToBounds = true
     containerView.layer.cornerRadius = 12.0
     

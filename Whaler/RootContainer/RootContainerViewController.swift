@@ -21,6 +21,7 @@ class RootContainerViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    view.backgroundColor = .primaryBackground
     configureViewsOnLaunch()
     unauthorizedUserCancellable = interactor.unauthorizedUserPublisher.sink { [weak self] _ in
       self?.transition(to: .authentication)

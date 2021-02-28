@@ -45,16 +45,14 @@ class NoteEditor: UIView {
   
   private func configureView() {
     translatesAutoresizingMaskIntoConstraints = false
-    layer.masksToBounds = false
-    layer.shadowRadius = 10
-    layer.shadowColor = UIColor(red: 0.454, green: 0.435, blue: 0.571, alpha: 0.3).cgColor
-    layer.shadowOpacity = 1.0
-    layer.shadowOffset = .init(width: 0, height: 4)
+    layer.borderColor = UIColor.borderLineColor.cgColor
+    layer.borderWidth = 1.0
+    layer.cornerRadius = 10.0
   }
   
   private func configureContainer() {
     container.translatesAutoresizingMaskIntoConstraints = false
-    container.backgroundColor = .primaryBackground
+    container.backgroundColor = .cellBackground
     container.clipsToBounds = true
     container.layer.cornerRadius = 10.0
     
@@ -63,7 +61,7 @@ class NoteEditor: UIView {
   
   private func configureToolBar() {
     toolBar.translatesAutoresizingMaskIntoConstraints = false
-    toolBar.backgroundColor = .primaryBackground
+    toolBar.backgroundColor = .cellBackground
 
     container.addSubview(toolBar)
     let toolbarConstraints = [
@@ -80,6 +78,7 @@ class NoteEditor: UIView {
     textView = Aztec.TextView(defaultFont: UIFont.openSans(weight: .regular, size: 25),
                                 defaultParagraphStyle: .default,
                                 defaultMissingImage: UIImage(named: "bold")!)
+    textView.backgroundColor = .cellBackground
     container.addSubview(textView)
     textView.translatesAutoresizingMaskIntoConstraints = false
 
