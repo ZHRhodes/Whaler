@@ -23,6 +23,8 @@
 		140E644225DB78170033AC8F /* AccountDetailsContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140E644125DB78170033AC8F /* AccountDetailsContactsViewController.swift */; };
 		1410404525EB1C3E00D8C793 /* TableInCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1410404425EB1C3E00D8C793 /* TableInCollectionViewCell.swift */; };
 		1410404F25EB382400D8C793 /* AccountDetailsContentInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1410404E25EB382400D8C793 /* AccountDetailsContentInteractor.swift */; };
+		1410405725EB39AC00D8C793 /* DetailsGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1410405625EB39AC00D8C793 /* DetailsGrid.swift */; };
+		1410405E25EB39C600D8C793 /* DetailsGridItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1410405D25EB39C600D8C793 /* DetailsGridItem.swift */; };
 		1414810B252FFD8100640946 /* TablePopoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1414810A252FFD8100640946 /* TablePopoverViewController.swift */; };
 		1416480725A4FA020008E16B /* AccountSFDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1416480625A4FA020008E16B /* AccountSFDataSource.swift */; };
 		1416480B25A4FA270008E16B /* AccountDataInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1416480A25A4FA270008E16B /* AccountDataInterface.swift */; };
@@ -176,6 +178,8 @@
 		140E644125DB78170033AC8F /* AccountDetailsContactsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDetailsContactsViewController.swift; sourceTree = "<group>"; };
 		1410404425EB1C3E00D8C793 /* TableInCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableInCollectionViewCell.swift; sourceTree = "<group>"; };
 		1410404E25EB382400D8C793 /* AccountDetailsContentInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDetailsContentInteractor.swift; sourceTree = "<group>"; };
+		1410405625EB39AC00D8C793 /* DetailsGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsGrid.swift; sourceTree = "<group>"; };
+		1410405D25EB39C600D8C793 /* DetailsGridItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsGridItem.swift; sourceTree = "<group>"; };
 		1414810A252FFD8100640946 /* TablePopoverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TablePopoverViewController.swift; sourceTree = "<group>"; };
 		1416480625A4FA020008E16B /* AccountSFDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSFDataSource.swift; sourceTree = "<group>"; };
 		1416480A25A4FA270008E16B /* AccountDataInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDataInterface.swift; sourceTree = "<group>"; };
@@ -433,6 +437,7 @@
 			children = (
 				140E643D25DB77AD0033AC8F /* AccountDetailsContentViewController.swift */,
 				1410404E25EB382400D8C793 /* AccountDetailsContentInteractor.swift */,
+				1410405A25EB39B100D8C793 /* DetailsGrid */,
 				14446D6C25E36365008E46CD /* Contacts */,
 			);
 			path = Content;
@@ -444,6 +449,15 @@
 				146737AE25D7A02500B64735 /* NoteEditorViewController.swift */,
 			);
 			path = Notes;
+			sourceTree = "<group>";
+		};
+		1410405A25EB39B100D8C793 /* DetailsGrid */ = {
+			isa = PBXGroup;
+			children = (
+				1410405625EB39AC00D8C793 /* DetailsGrid.swift */,
+				1410405D25EB39C600D8C793 /* DetailsGridItem.swift */,
+			);
+			path = DetailsGrid;
 			sourceTree = "<group>";
 		};
 		1414810E252FFD8800640946 /* ViewControllers */ = {
@@ -1075,6 +1089,7 @@
 				14861ED5249F3DE100D2FA92 /* AppDelegate.swift in Sources */,
 				148A09782586FF6A00811E35 /* WebSocketInfo.swift in Sources */,
 				14B8BF662536E536006CE4B5 /* MainCollectionCellHeader.swift in Sources */,
+				1410405E25EB39C600D8C793 /* DetailsGridItem.swift in Sources */,
 				141F795F25319E60005F9295 /* Organization.swift in Sources */,
 				14861ED7249F3DE100D2FA92 /* SceneDelegate.swift in Sources */,
 				141F797225342B0F005F9295 /* LegacyInterceptorProvider.swift in Sources */,
@@ -1140,6 +1155,7 @@
 				1416483225A7F4BC0008E16B /* ContactSFDataSource.swift in Sources */,
 				14D9CA5B24B599300030B17A /* AccountRowValuesView.swift in Sources */,
 				14025FCA24D6BF5D00408379 /* AuthenticationViewController.swift in Sources */,
+				1410405725EB39AC00D8C793 /* DetailsGrid.swift in Sources */,
 				140AE7A924A9DF3300F7705E /* CommonButton.swift in Sources */,
 				146834FC24DA76CE0075B639 /* RootContainerInteractor.swift in Sources */,
 				144BF56C24D7E66E00F231F0 /* RootContainerViewController.swift in Sources */,

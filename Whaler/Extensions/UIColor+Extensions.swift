@@ -14,6 +14,7 @@ extension UIColor {
   static let secondaryText = UIColor(named: "secondaryText")!
   static let primaryBackground = UIColor(named: "primaryBackground")!
   static let darkBackground = UIColor(named: "darkBackground")!
+  static let borderLineColor = UIColor(named: "borderLineColor")!
   
   static let brandPurple = UIColor(named: "brandPurple")!
   static let brandPurpleLight = UIColor(named: "brandPurpleLight")!

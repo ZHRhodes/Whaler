@@ -13,6 +13,7 @@ class AccountDetailsContentViewController: UIViewController {
   private var interactor: AccountDetailsContentInteractor!
   private var titleLabel = UILabel()
   private var subtitleLabel = UILabel()
+  private let detailsGrid = DetailsGrid()
   private let contactsVC = AccountDetailsContactsViewController()
   
   override func viewDidLoad() {
@@ -23,10 +24,30 @@ class AccountDetailsContentViewController: UIViewController {
   
   func configure(with interactor: AccountDetailsContentInteractor) {
     self.interactor = interactor
+    configureDetailsGrid()
     configureContactsSection()
   }
   
-  func configureContactsSection() {
+  private func configureDetailsGrid() {
+    detailsGrid.configure(with: [
+      DetailItem(image: UIImage(named: "IndustryDetailIcon")!, description: "Industry", value: interactor.account.industry ?? "—"),
+      DetailItem(image: UIImage(named: "CityDetailIcon")!, description: "City", value: interactor.account.billingCity ?? "—", showRightLine: false),
+      DetailItem(image: UIImage(named: "HeadcountDetailIcon")!, description: "Headcount", value: interactor.account.numberOfEmployees ?? "—"),
+      DetailItem(image: UIImage(named: "StateDetailIcon")!, description: "State", value: interactor.account.billingState ?? "—", showRightLine: false),
+      DetailItem(image: UIImage(named: "RevenueDetailIcon")!, description: "Revenue", value: interactor.account.annualRevenue ?? "—", showBottomLine: false),
+      DetailItem(image: UIImage(named: "ContactsDetailIcon")!, description: "Contacts", value: "—", showBottomLine: false, showRightLine: false),
+    ])
+    
+    detailsGrid.translatesAutoresizingMaskIntoConstraints = false
+    view.addSubview(detailsGrid)
+    
+    detailsGrid.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 40).isActive = true
+    detailsGrid.heightAnchor.constraint(equalToConstant: 210).isActive = true
+    detailsGrid.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -40).isActive = true
+    detailsGrid.topAnchor.constraint(equalTo: subtitleLabel.bottomAnchor, constant: 40).isActive = true
+  }
+  
+  private func configureContactsSection() {
     let interactor = AccountDetailsContactsInteractor(dataManager: self.interactor.dataManager)
     contactsVC.configure(with: interactor)
     contactsVC.view.translatesAutoresizingMaskIntoConstraints = false
