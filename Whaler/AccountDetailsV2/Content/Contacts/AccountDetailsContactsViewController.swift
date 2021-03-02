@@ -87,7 +87,7 @@ extension AccountDetailsContactsViewController: UICollectionViewDelegate, UIColl
     
     let state = interactor.contactStates[indexPath.row]
     let data = interactor.contactGrouper?[state]
-    cell.configure(sectionInfo: state, dataSource: data)
+    cell.configure(sectionInfo: state, dataSource: data ?? [], delegate: self, showSkeleton: data == nil)
     return cell
   }
 }
@@ -107,5 +107,31 @@ extension AccountDetailsContactsViewController: TablePopoverViewControllerDelega
     guard let user = item as? User,
           let contact = interactor.contactBeingAssigned else { return }
     interactor.assign(user, to: contact)
+  }
+}
+
+extension AccountDetailsContactsViewController: TableInCollectionViewDelegate {
+  func didSelectItemAt(section: String, row: Int) {
+    
+  }
+  
+  func requestChangeToData<ObjectType>(adding: ObjectType, index: Int, sectionTitle: String) {
+    guard let contact = adding as? Contact,
+          let state = WorkState(from: sectionTitle) else { return }
+    interactor.addContact(contact, state: state, index: index)
+    
+    guard let stateIndex = interactor.contactStates.firstIndex(of: state) else { return }
+    if let cell = collectionView.cellForItem(at: IndexPath(row: stateIndex, section: 0)) as? TableInCollectionViewCell<ContactTableCell, Contact> {
+      cell.dataSource = interactor.contactGrouper?[state] ?? []
+    }
+  }
+  
+  func requestChangeToData(removingFrom index: Int, sectionTitle: String) {
+    guard let state = WorkState(from: sectionTitle) else { return }
+    interactor.removeFrom(state: state, index: index)
+    guard let stateIndex = interactor.contactStates.firstIndex(of: state) else { return }
+    if let cell = collectionView.cellForItem(at: IndexPath(row: stateIndex, section: 0)) as? TableInCollectionViewCell<ContactTableCell, Contact> {
+      cell.dataSource = interactor.contactGrouper?[state] ?? []
+    }
   }
 }

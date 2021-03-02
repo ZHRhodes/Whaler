@@ -544,8 +544,8 @@
 			children = (
 				140E644125DB78170033AC8F /* AccountDetailsContactsViewController.swift */,
 				14446D6825E350BA008E46CD /* AccountDetailsContactsInteractor.swift */,
-				1430FDEB25E4F1E900BD955F /* ContactTableCell.swift */,
 				1410404425EB1C3E00D8C793 /* TableInCollectionViewCell.swift */,
+				1430FDEB25E4F1E900BD955F /* ContactTableCell.swift */,
 			);
 			path = Contacts;
 			sourceTree = "<group>";

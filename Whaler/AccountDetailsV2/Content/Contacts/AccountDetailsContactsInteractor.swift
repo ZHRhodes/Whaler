@@ -45,6 +45,16 @@ class AccountDetailsContactsInteractor {
     })
   }
   
+  func addContact(_ contact: Contact, state: WorkState, index: Int) {
+    contact.state = state
+    contactGrouper?.insert(contact, to: state, at: index)
+  }
+  
+  @discardableResult
+  func removeFrom(state: WorkState, index: Int) -> Contact? {
+    contactGrouper?.remove(from: state, at: index)
+  }
+  
   func assign(_ user: User, to contact: Contact) {
     Log.info("Assigned contact \(contact.id) to user \(user.id)")
   }

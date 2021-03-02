@@ -38,6 +38,11 @@ class ContactTableCell: UITableViewCell, TableInCollectionViewTableCell {
     fatalError("init(coder:) has not been implemented")
   }
   
+  override func prepareForReuse() {
+    super.prepareForReuse()
+    hideSkeleton()
+  }
+  
   private func configureShadowView() {
     shadowView.backgroundColor = .cellBackground
     shadowView.layer.cornerRadius = 12.0

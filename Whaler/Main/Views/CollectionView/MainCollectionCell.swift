@@ -149,14 +149,7 @@ class MainCollectionCell<TableCell: MainCollectionTableCell & UITableViewCell>: 
     guard let account = dataSource?.accountGrouper[state][indexPath.row] else { return [] }
     let itemProvider = NSItemProvider(object: account)
     let dragItem = UIDragItem(itemProvider: itemProvider)
-    dragItem.previewProvider = { () -> UIDragPreview? in
-      /* what's going on here? what was i trying to figure out.. */
-// //      let cell = tableView.cellForRow(at: indexPath)
-// //      cell?.layer.opacity = 0.0
-// //      return UIDragPreview(view: cell!)
-//      print("PREVIEW BEING CALLED ------------------------------------------------------")
-      return nil
-    }
+    dragItem.previewProvider = nil
     session.localContext = (dataSource, state, indexPath, tableView)
     return [dragItem]
   }
@@ -174,11 +167,12 @@ class MainCollectionCell<TableCell: MainCollectionTableCell & UITableViewCell>: 
 //        guard let sourceIndexPath = item.sourceIndexPath else { continue }
         item.dragItem.itemProvider.loadObject(ofClass: Account.self) { (object, error) in
           guard let account = object as? Account else { return }
-          var updatedIndexPaths = [IndexPath]()
           
           switch (coordinator.items.first?.sourceIndexPath, coordinator.destinationIndexPath) {
           case (.some(let sourceIndexPath), .some(let destinationIndexPath)):
           // Same Table View
+            var updatedIndexPaths = [IndexPath]()
+
             if sourceIndexPath.row < destinationIndexPath.row {
               updatedIndexPaths = (sourceIndexPath.row...destinationIndexPath.row).map { IndexPath(row: $0, section: 0) }
             } else if sourceIndexPath.row > destinationIndexPath.row {
