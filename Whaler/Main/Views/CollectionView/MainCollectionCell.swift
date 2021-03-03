@@ -61,7 +61,7 @@ class MainCollectionCell<TableCell: MainCollectionTableCell & UITableViewCell>: 
     layer.masksToBounds = true
     layer.cornerRadius = 10.0
     backgroundColor = .primaryBackground
-    clipsToBounds = false
+    clipsToBounds = true
     isSkeletonable = true
     contentView.isSkeletonable = true
     configureHeaderView()
@@ -74,8 +74,8 @@ class MainCollectionCell<TableCell: MainCollectionTableCell & UITableViewCell>: 
     headerView!.backgroundColor = .clear
     contentView.addSubview(headerView!)
     
-    headerView!.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 0).isActive = true
-    headerView!.rightAnchor.constraint(equalTo: contentView.rightAnchor).isActive = true
+    headerView!.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 6).isActive = true
+    headerView!.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -6).isActive = true
     headerView!.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 0).isActive = true
     headerView!.heightAnchor.constraint(equalToConstant: MainCollectionCellHeader.height).isActive = true
     
@@ -99,8 +99,8 @@ class MainCollectionCell<TableCell: MainCollectionTableCell & UITableViewCell>: 
     
     contentView.addSubview(tableView)
     
-    tableView.leftAnchor.constraint(equalTo: contentView.leftAnchor).isActive = true
-    tableView.rightAnchor.constraint(equalTo: contentView.rightAnchor).isActive = true
+    tableView.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 6).isActive = true
+    tableView.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -6).isActive = true
     tableView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: AccountStateTagView.height+20).isActive = true
     tableView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
   }

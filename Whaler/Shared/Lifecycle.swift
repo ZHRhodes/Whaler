@@ -75,7 +75,6 @@ enum Lifecycle: TokenContainer {
       containerType.accessToken = nil
       containerType.refreshToken = nil
     }
-    NotificationCenter.default.post(name: .unauthorizedUser, object: nil)
   }
   
   static func loadCurrentUser() {

@@ -5,12 +5,11 @@
       "scale" : "1x"
     },
     {
-      "filename" : "loginImage@2x.png",
+      "filename" : "IMG_1020.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "loginImage@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

@@ -24,6 +24,9 @@ class RootContainerViewController: UIViewController {
     view.backgroundColor = .primaryBackground
     configureViewsOnLaunch()
     unauthorizedUserCancellable = interactor.unauthorizedUserPublisher.sink { [weak self] _ in
+      // TODO: deliberately not clearing SF tokens right now for my own convenience.
+      // When ready, just add the SFSession.self container below
+      Lifecycle.logOut(tokenContainers: [Lifecycle.self])
       self?.transition(to: .authentication)
     }
   }

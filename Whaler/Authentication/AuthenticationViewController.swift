@@ -15,7 +15,7 @@ protocol AuthenticationViewControllerDelegate: class {
 }
 
 class AuthenticationViewController: UIViewController {
-  static let minSize: CGSize = CGSize(width: 1400, height: 1000)
+  static let minSize: CGSize = CGSize(width: 2136, height: 1217)
   static let maxSize: CGSize = minSize
   
   private let interactor = AuthenticationInteractor(networkInterface: APINetworkInterface())
@@ -23,10 +23,12 @@ class AuthenticationViewController: UIViewController {
   
   private let authViewModel = AuthenticationView.ViewModel()
   private lazy var authView = UIHostingController(rootView: AuthenticationView(delegate: self, textFieldDelegate: self, viewModel: authViewModel))
+  private var incomingToolbar: NSToolbar?
   
   override func viewDidLoad() {
     super.viewDidLoad()
     view.addSubview(authView.view)
+    view.backgroundColor = .primaryBackground
     authView.view.translatesAutoresizingMaskIntoConstraints = false
     
     let constraints = [
@@ -36,6 +38,21 @@ class AuthenticationViewController: UIViewController {
       authView.view.bottomAnchor.constraint(equalTo: view.bottomAnchor)
     ]
     NSLayoutConstraint.activate(constraints)
+  }
+  
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
+    let windowScene = view.window?.windowScene
+    windowScene?.titlebar?.titleVisibility = .hidden
+    incomingToolbar = windowScene?.titlebar?.toolbar
+    windowScene?.titlebar?.toolbar = nil
+  }
+  
+  override func viewWillDisappear(_ animated: Bool) {
+    super.viewWillDisappear(animated)
+    let windowScene = view.window?.windowScene
+    windowScene?.titlebar?.titleVisibility = .visible
+    windowScene?.titlebar?.toolbar = incomingToolbar
   }
 }
 

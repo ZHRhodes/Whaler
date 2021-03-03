@@ -14,17 +14,24 @@ class ToolbarDelegate: NSObject {
   func backTapped() {
     NotificationCenter.default.post(name: .back, object: self)
   }
+  
+  @objc
+  func logoutTapped() {
+    NotificationCenter.default.post(name: .unauthorizedUser, object: self)
+  }
 }
 
 #if targetEnvironment(macCatalyst)
 extension NSToolbarItem.Identifier {
-    static let back = NSToolbarItem.Identifier("com.example.Whaler.back")
+  static let back = NSToolbarItem.Identifier("com.Whaler.back")
+  static let logout = NSToolbarItem.Identifier("com.Whaler.logout")
 }
 
 extension ToolbarDelegate: NSToolbarDelegate {
     func toolbarDefaultItemIdentifiers(_ toolbar: NSToolbar) -> [NSToolbarItem.Identifier] {
         let identifiers: [NSToolbarItem.Identifier] = [
-          .back
+          .back,
+          .logout
         ]
         return identifiers
     }
@@ -40,6 +47,12 @@ extension ToolbarDelegate: NSToolbarDelegate {
         var toolbarItem: NSToolbarItem?
         
         switch itemIdentifier {
+        case .logout:
+          toolbarItem = NSToolbarItem(itemIdentifier: itemIdentifier)
+          let image = UIImage(named: "signOutTEMP")?.withRenderingMode(.alwaysTemplate)
+          toolbarItem?.image = image
+          toolbarItem?.action = #selector(logoutTapped)
+          toolbarItem?.target = self
         case .back:
           toolbarItem = NSToolbarItem(itemIdentifier: itemIdentifier)
           let image = UIImage(named: "backArrow2")?.withRenderingMode(.alwaysTemplate)

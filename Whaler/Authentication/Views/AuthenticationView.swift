@@ -20,46 +20,59 @@ struct AuthenticationView: View {
   var body: some View {
     GeometryReader { geometry in
       HStack {
-        Image("loginImage")
-          .resizable()
-          .scaledToFill()
-          .frame(width: geometry.size.width/2)
         HStack {
           Spacer().frame(width: geometry.size.width/8)
           VStack {
             ZStack {
               VStack(alignment: .leading) {
-                Image("whalerLogo")
-                  .resizable()
-                  .scaledToFit()
-                  .frame(width: 50, height: 50)
-                Spacer().frame(height: 26)
-                Text("SIGN IN").font(Font.custom(boldFontName, size: 25))
-                Spacer().frame(height: 26)
-                CommonTextFieldRepresentable(initialText: "EMAIL", isSecureText: false, textFieldDelegate: textFieldDelegate, text: $viewModel.email).frame(height: 72)
-                Spacer().frame(height: 50)
-                CommonTextFieldRepresentable(initialText: "PASSWORD", isSecureText: true, textFieldDelegate: textFieldDelegate, text: $viewModel.password).frame(height: 72)
+                HStack {
+                  Image("tinyWhale").renderingMode(.template).foregroundColor(Color(.primaryText))
+                  Spacer().frame(width: 17)
+                  Text("WHALER")
+                    .font(Font.custom(boldFontName, size: 32))
+                }.frame(maxWidth: .infinity, alignment: .center)
+                Spacer().frame(height: 280)
+                Text("Sign In").font(Font.custom(boldFontName, size: 36))
+                Spacer().frame(height: 30)
+                VStack {
+                  CommonTextFieldRepresentable(initialText: "Email", isSecureText: false, textFieldDelegate: textFieldDelegate, text: $viewModel.email).frame(height: 72)
+                  Spacer().frame(height: 50)
+                  CommonTextFieldRepresentable(initialText: "Password", isSecureText: true, textFieldDelegate: textFieldDelegate, text: $viewModel.password).frame(height: 72)
+                }
                 Spacer().frame(height: 60)
                 Button(action: {
                   delegate?.signInTapped(email: viewModel.email, password: viewModel.password)
                 }) {
-                  Text("SIGN IN")
+                  Text("Sign In")
                     .padding()
+                    .font(Font.custom(regularFontName, size: 18))
                     .frame(maxWidth: .infinity)
-                    .border(Color(.brandGreen))
+                    .border(Color(.primaryText))
+                    .foregroundColor(Color(.primaryBackground))
                     .foregroundColor(.black)
+                    .background(Color(.primaryText))
                 }
                 .overlay(
                   RoundedRectangle(cornerRadius: 4)
-                    .stroke(Color(.brandGreen), lineWidth: 2)
+                    .stroke(Color(.primaryText), lineWidth: 2)
                 )
+                Spacer().frame(height: 280)
+                Text("Treat salespeople right.")
+                  .font(Font.custom(semiboldFontName, size: 25))
+                  .frame(maxWidth: .infinity, alignment: .center)
               }
             }
           }
           Spacer().frame(width: geometry.size.width/8)
         }
+        Image("loginImage")
+          .resizable()
+          .scaledToFill()
+          .frame(width: geometry.size.width/2)
       }.edgesIgnoringSafeArea(.all)
     }
+    .background(Color(.primaryBackground))
+    .edgesIgnoringSafeArea(.all)
   }
 }
 
