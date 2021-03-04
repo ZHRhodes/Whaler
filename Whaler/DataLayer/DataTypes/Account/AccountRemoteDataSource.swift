@@ -27,4 +27,8 @@ struct AccountRemoteDataSource {
       }
     }.eraseToAnyPublisher()
   }
+  
+//  func saveSingle(_ new: Account) -> AnyPublisher<Account, RepoError> {
+//    
+//  }
 }

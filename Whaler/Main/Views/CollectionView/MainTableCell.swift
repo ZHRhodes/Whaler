@@ -151,12 +151,14 @@ class MainTableCell: UITableViewCell, MainCollectionTableCell {
   private func configureAssignedButton() {
     assignedButton?.removeFromSuperview()
     assignedButton = UIButton()
-    let color: UIColor = [.brandGreenDark,
-                          .brandPurpleDark,
-                          .brandRedDark,
-                          .brandYellowDark,
-                          .brandPinkDark].randomElement()!
-    assignedButton!.backgroundColor = color
+    if assignedButton?.backgroundColor == nil {
+      let color: UIColor = [.brandGreenDark,
+                            .brandPurpleDark,
+                            .brandRedDark,
+                            .brandYellowDark,
+                            .brandPinkDark].randomElement()!
+      assignedButton!.backgroundColor = color
+    }
     assignedButton!.addTarget(self, action: #selector(assignButtonTapped), for: .touchUpInside)
     assignedButton!.layer.cornerRadius = 25
     assignedButton!.translatesAutoresizingMaskIntoConstraints = false

@@ -197,7 +197,7 @@ class MainCollectionCell<TableCell: MainCollectionTableCell & UITableViewCell>: 
               self.dataSource?.accountGrouper.insert(account, to: state, at: destinationIndexPath.row)
               self.tableView.insertRows(at: [destinationIndexPath], with: .fade)
               self.tableView.endUpdates()
-              ObjectManager.save(account)
+              _ = repoStore.accountRepository.save([account])
             }
           case (nil, nil):
             // Insert data from a table to another table
@@ -210,7 +210,7 @@ class MainCollectionCell<TableCell: MainCollectionTableCell & UITableViewCell>: 
               let count = self.dataSource?.accountGrouper[state].count ?? 1
               self.tableView.insertRows(at: [IndexPath(row: count - 1, section: 0)], with: .fade)
               self.tableView.endUpdates()
-              ObjectManager.save(account)
+              _ = repoStore.accountRepository.save([account])
             }
           default: break
         }

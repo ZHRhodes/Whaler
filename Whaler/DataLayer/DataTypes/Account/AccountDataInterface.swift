@@ -16,7 +16,7 @@ class AccountDataInterface: DataInterface {
   typealias SubsetDataRequestType = Void
   typealias SingleDataRequestType = Void
   
-  typealias DataSaveType = Void
+  typealias DataSaveType = [Account]
   
   private let remoteDataSource: AccountRemoteDataSource
   private let sfDataSource: AccountSFDataSource
@@ -31,6 +31,8 @@ class AccountDataInterface: DataInterface {
   
   func fetchAll(with dataRequest: AllDataRequestType?) -> AnyPublisher<[Entity], RepoError> {
     let subject = PassthroughSubject<[Entity], RepoError>()
+    
+    subject.send(ObjectManager.retrieveAll(ofType: Account.self))
     
     cancellable = remoteDataSource
       .fetchAll()
@@ -63,7 +65,14 @@ class AccountDataInterface: DataInterface {
   }
   
   func save(_ data: DataSaveType) -> AnyPublisher<[Entity], RepoError> {
-    fatalError()
+    Future<[Entity], RepoError> { promise in
+      self.saveCancellable = self.remoteDataSource
+        .saveAll(data)
+        .sink(receiveCompletion: { _ in }) { (accounts) in
+          data.forEach { ObjectManager.save($0) }
+          promise(.success(accounts))
+      }
+    }.eraseToAnyPublisher()
   }
 
   //Mark: Private Methods
