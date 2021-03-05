@@ -12,8 +12,10 @@ import Combine
 
 class AccountDetailsViewController: UIViewController {
   var backCancellable: AnyCancellable?
+  private var interactor: AccountDetailsInteractor?
   private let splitPaneViewController = SplitPaneViewController()
   private let contentVC = AccountDetailsContentViewController()
+  private let noteEditorVC = NoteEditorViewController()
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -26,7 +28,13 @@ class AccountDetailsViewController: UIViewController {
     })
   }
   
+  override func viewWillDisappear(_ animated: Bool) {
+    super.viewWillDisappear(animated)
+    interactor?.save(account: interactor?.account, withNoteText: noteEditorVC.currentText)
+  }
+  
   func configure(with dataManager: MainDataManager) {
+    self.interactor = AccountDetailsInteractor(dataManager: dataManager)
     let interactor = AccountDetailsContentInteractor(dataManager: dataManager)
     contentVC.configure(with: interactor)
     let view1 = contentVC.view!
@@ -38,8 +46,8 @@ class AccountDetailsViewController: UIViewController {
     view1.topAnchor.constraint(equalTo: view.topAnchor, constant: 70).isActive = true
     view1.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0).isActive = true
     
-    let noteEditorVC = NoteEditorViewController()
     noteEditorVC.view.translatesAutoresizingMaskIntoConstraints = false
+    noteEditorVC.currentText = interactor.account.notes ?? ""
     view.addSubview(noteEditorVC.view)
     
     noteEditorVC.view.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.4).isActive = true

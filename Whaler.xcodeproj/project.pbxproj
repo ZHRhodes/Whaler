@@ -59,6 +59,7 @@
 		145146E725495FC40090D3E2 /* accounts.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 145146E625495FC40090D3E2 /* accounts.graphql */; };
 		1454743B250D904700257A89 /* UIViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1454743A250D904700257A89 /* UIViewController+Extensions.swift */; };
 		1454743D250D93DC00257A89 /* SFSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1454743C250D93DC00257A89 /* SFSession.swift */; };
+		14562B7725F216FD00BA9D3B /* AccountDetailsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14562B7625F216FD00BA9D3B /* AccountDetailsInteractor.swift */; };
 		145A376A24C588DF0081F9DB /* NotesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145A376924C588DF0081F9DB /* NotesView.swift */; };
 		145A376C24C58D440081F9DB /* AccountDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145A376B24C58D440081F9DB /* AccountDetailsView.swift */; };
 		1467379B25D79B3B00B64735 /* RepoError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1467379A25D79B3B00B64735 /* RepoError.swift */; };
@@ -214,6 +215,7 @@
 		145146E625495FC40090D3E2 /* accounts.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = accounts.graphql; sourceTree = "<group>"; };
 		1454743A250D904700257A89 /* UIViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extensions.swift"; sourceTree = "<group>"; };
 		1454743C250D93DC00257A89 /* SFSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFSession.swift; sourceTree = "<group>"; };
+		14562B7625F216FD00BA9D3B /* AccountDetailsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDetailsInteractor.swift; sourceTree = "<group>"; };
 		145A376924C588DF0081F9DB /* NotesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesView.swift; sourceTree = "<group>"; };
 		145A376B24C58D440081F9DB /* AccountDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDetailsView.swift; sourceTree = "<group>"; };
 		1467379A25D79B3B00B64735 /* RepoError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoError.swift; sourceTree = "<group>"; };
@@ -504,6 +506,7 @@
 			isa = PBXGroup;
 			children = (
 				141802AC258EF07700E38840 /* AccountDetailsViewController.swift */,
+				14562B7625F216FD00BA9D3B /* AccountDetailsInteractor.swift */,
 				141802B0258EF30A00E38840 /* ToolbarDelegate.swift */,
 				1410404A25EB380200D8C793 /* Content */,
 				1410404D25EB380D00D8C793 /* Notes */,
@@ -1175,6 +1178,7 @@
 				148A097C258700FF00811E35 /* SocketMessage.swift in Sources */,
 				14861EFC249F49DE00D2FA92 /* DocumentPickerViewController.swift in Sources */,
 				1416483225A7F4BC0008E16B /* ContactSFDataSource.swift in Sources */,
+				14562B7725F216FD00BA9D3B /* AccountDetailsInteractor.swift in Sources */,
 				14D9CA5B24B599300030B17A /* AccountRowValuesView.swift in Sources */,
 				14025FCA24D6BF5D00408379 /* AuthenticationViewController.swift in Sources */,
 				1410405725EB39AC00D8C793 /* DetailsGrid.swift in Sources */,

@@ -13,6 +13,15 @@ class NoteEditorViewController: UIViewController {
   private let label = UILabel()
   private let noteEditor = NoteEditor(frame: .zero)
   
+  var currentText: String {
+    get {
+      return noteEditor.textView.text
+    }
+    set {
+      noteEditor.textView.text = newValue
+    }
+  }
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     configureLabel()
