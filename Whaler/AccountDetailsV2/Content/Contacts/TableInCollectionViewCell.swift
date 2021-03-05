@@ -185,7 +185,6 @@ class TableInCollectionViewCell<TableCell: UITableViewCell & TableInCollectionVi
   func tableView(_ tableView: UITableView, performDropWith coordinator: UITableViewDropCoordinator) {
     for item in coordinator.items {
       item.dragItem.itemProvider.loadObject(ofClass: TableCellData.self) { (object, error) in
-        var updatedIndexPaths = [IndexPath]()
         guard let context = coordinator.session.localDragSession?.localContext as? (TableCellData, String, IndexPath, UITableView) else { return }
         let object = context.0
         

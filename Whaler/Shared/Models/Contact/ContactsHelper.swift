@@ -19,7 +19,7 @@ struct ContactsHelper {
   
   //this needs to be directed through the networking library. this call wont refresh token if necessary
   func fetchContactsFromAPI(accountID: String, completion: @escaping ([Contact]?) -> Void) {
-    Graph.shared.apollo.fetch(query: ContactsQuery(accountID: accountID)) { result in
+    Graph.shared.apollo.fetch(query: ContactsQuery(accountID: accountID), cachePolicy: .fetchIgnoringCacheData) { result in
       guard let data = try? result.get().data else {
         completion(nil)
         return
@@ -37,10 +37,11 @@ struct ContactsHelper {
                                           state: $0.state?.rawValue,
                                           email: $0.email,
                                           phone: $0.phone,
-                                          accountId: $0.accountID)}
+                                          accountId: $0.accountID) }
     Graph.shared.apollo.perform(mutation: SaveContactsMutation(input: input)) { result in
       guard let data = try? result.get().data else { return }
-      completion(contacts) //this isn't actually returning the newly saved contacts yet
+      let contacts = data.saveContacts.map(Contact.init)
+      completion(contacts)
     }
   }
 }

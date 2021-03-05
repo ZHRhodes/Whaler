@@ -142,7 +142,7 @@ class MainTableCell: UITableViewCell, MainCollectionTableCell {
     cover.isSkeletonable = true
     
     containerView.addSubview(cover)
-    cover.leftAnchor.constraint(equalTo: leftAnchor, constant: 28).isActive = true
+    cover.leftAnchor.constraint(equalTo: leftAnchor, constant: 22).isActive = true
     cover.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -30).isActive = true
     cover.heightAnchor.constraint(equalToConstant: 33).isActive = true
     cover.widthAnchor.constraint(equalTo: containerView.widthAnchor, multiplier: 0.5).isActive = true

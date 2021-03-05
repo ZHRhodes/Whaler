@@ -16,7 +16,7 @@ class ContactDataInterface: DataInterface {
   typealias SubsetDataRequestType = Void
   typealias SingleDataRequestType = Void
   
-  typealias DataSaveType = Void
+  typealias DataSaveType = [Contact]
   
   private var remoteDataSource: ContactRemoteDataSource
   private var sfDataSource: ContactSFDataSource
@@ -70,10 +70,11 @@ class ContactDataInterface: DataInterface {
   }
   
   func save(_ data: DataSaveType) -> AnyPublisher<[Entity], RepoError> {
-    fatalError()
+    return remoteDataSource.saveAll(data)
   }
   
   private func reconcileContactsFromSalesforce(remoteContacts: [Contact], salesforceContacts: [Contact]) {
+    //TODO optimize with hash map
     salesforceContacts.forEach { contact in
       if let matchingLocalContact = remoteContacts.first(where: { $0.salesforceID == contact.salesforceID }) {
         contact.mergeLocalProperties(with: matchingLocalContact)

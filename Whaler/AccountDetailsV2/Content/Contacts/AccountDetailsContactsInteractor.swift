@@ -48,6 +48,7 @@ class AccountDetailsContactsInteractor {
   func addContact(_ contact: Contact, state: WorkState, index: Int) {
     contact.state = state
     contactGrouper?.insert(contact, to: state, at: index)
+    _ = repoStore.contactRepository.save([contact])
   }
   
   @discardableResult

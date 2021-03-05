@@ -60,8 +60,9 @@ struct Response: Codable {
   }
 }
 
+//TODO: hardcoding credentials here is temporary
 func fetchAccessToken(completion: @escaping (String) -> Void) {
-  let parameters = "{\"email\" : \"zack@getwhaler.io\", \"password\" : \"testtest\"}"
+  let parameters = "{\"email\" : \"zack@getwhaler.com\", \"password\" : \"testtest\"}"
   let postData = parameters.data(using: .utf8)
 
   var request = URLRequest(url: URL(string: "https://getwhalergo.herokuapp.com/api/user/login")!, timeoutInterval: 30.0)

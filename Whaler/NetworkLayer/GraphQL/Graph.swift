@@ -20,7 +20,7 @@ class Graph {
     let url = URL(string: "https://getwhalergo.herokuapp.com/query")!
     let transport = RequestChainNetworkTransport(interceptorProvider: provider,
                                                  endpointURL: url)
-    return ApolloClient(networkTransport: transport)
+    return ApolloClient(networkTransport: transport, store: store)
   }()
 }
 

@@ -1,7 +1,13 @@
 query contacts($accountID: ID!) {
   contacts(accountID: $accountID) {
     id
-    accountID
+    firstName
+    lastName
+    jobTitle
+    email
+    phone
     salesforceID
+    accountID
+    state
   }
 }

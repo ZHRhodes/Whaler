@@ -165,17 +165,34 @@ extension Contact: NSItemProviderReading {
 extension Contact: ObservableObject {}
 
 extension Contact {
+  convenience init(savedContact: SaveContactsMutation.Data.SaveContact) {
+    let state = WorkState(from: savedContact.state ?? "") ?? .ready
+    self.init(id: savedContact.id,
+              accountID: savedContact.accountId ?? "",
+              salesforceID: savedContact.salesforceId,
+              salesforceAccountID: nil,
+              firstName: savedContact.firstName,
+              lastName: savedContact.lastName,
+              jobTitle: savedContact.jobTitle ?? "",
+              phone: savedContact.phone ?? "",
+              email: savedContact.email,
+              state: state)
+  }
+}
+
+extension Contact {
   convenience init(apiContact: ContactsQuery.Data.Contact) {
+    let state = WorkState(from: apiContact.state ?? "") ?? .ready
     self.init(id: apiContact.id,
               accountID: apiContact.accountId ?? "",
               salesforceID: apiContact.salesforceId,
               salesforceAccountID: nil,
-              firstName: "",
-              lastName: "",
-              jobTitle: "",
-              phone: nil,
-              email: nil,
-              state: .ready)
+              firstName: apiContact.firstName,
+              lastName: apiContact.lastName,
+              jobTitle: apiContact.jobTitle ?? "",
+              phone: apiContact.phone,
+              email: apiContact.email,
+              state: state)
   }
 }
 

@@ -5,7 +5,9 @@ mutation saveContacts($input: [NewContact!]!) {
     lastName
     jobTitle
     email
+    phone
     salesforceID
     accountID
+    state
   }
 }
