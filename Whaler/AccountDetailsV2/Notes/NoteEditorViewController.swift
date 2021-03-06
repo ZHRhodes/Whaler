@@ -12,7 +12,7 @@ import UIKit
 class NoteEditorViewController: UIViewController {
   private let label = UILabel()
   private let noteEditor = NoteEditor(frame: .zero)
-  private var progressView: ProgressView!
+  private var progressView: TextFinishedProgressIndicator!
   
   var delegate: NoteEditorDelegate? {
     didSet {
@@ -70,21 +70,22 @@ class NoteEditorViewController: UIViewController {
   }
   
   private func configureProgressIndicator() {
-    progressView = ProgressView(colors: [.brandGreen, .brandPurple, .brandRed],
-                                lineWidth: 5)
+    progressView = TextFinishedProgressIndicator(text: "Saved",
+                                          textColor: .brandGreen,
+                                          progressView: ProgressView(colors: [.brandGreen, .brandPurple, .brandRed], lineWidth: 5))
     progressView.translatesAutoresizingMaskIntoConstraints = false
-    view.addSubview(progressView!)
-    progressView.widthAnchor.constraint(equalToConstant: 20).isActive = true
-    progressView.heightAnchor.constraint(equalTo: progressView.widthAnchor).isActive = true
+    view.addSubview(progressView)
+    progressView.widthAnchor.constraint(equalToConstant: 90).isActive = true
+    progressView.heightAnchor.constraint(equalToConstant: 41).isActive = true
     progressView.centerYAnchor.constraint(equalTo: label.centerYAnchor, constant: 0).isActive = true
     progressView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -64).isActive = true
   }
   
   func showProgressIndicator() {
-    progressView.isAnimating = true
+    progressView.startAnimation()
   }
   
   func hideProgressIndicator() {
-    progressView.isAnimating = false
+    progressView.finishAnimation()
   }
 }

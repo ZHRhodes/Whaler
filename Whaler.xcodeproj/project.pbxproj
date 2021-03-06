@@ -101,6 +101,7 @@
 		1488423F25086D910025C7EE /* Lifecycle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1488423E25086D910025C7EE /* Lifecycle.swift */; };
 		1488DD7825F311B6002A898C /* ProgressStrokeAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1488DD7725F311B6002A898C /* ProgressStrokeAnimation.swift */; };
 		1488DD7C25F316E3002A898C /* ProgressStrokeColorAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1488DD7B25F316E3002A898C /* ProgressStrokeColorAnimation.swift */; };
+		1488DD8125F32683002A898C /* TextFinishedProgressIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1488DD8025F32683002A898C /* TextFinishedProgressIndicator.swift */; };
 		148A096E2586E0FC00811E35 /* WebSocketManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148A096D2586E0FC00811E35 /* WebSocketManager.swift */; };
 		148A09742586FEC500811E35 /* LiteWebSocketDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148A09732586FEC500811E35 /* LiteWebSocketDelegate.swift */; };
 		148A09782586FF6A00811E35 /* WebSocketInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148A09772586FF6A00811E35 /* WebSocketInfo.swift */; };
@@ -263,6 +264,7 @@
 		1488423E25086D910025C7EE /* Lifecycle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lifecycle.swift; sourceTree = "<group>"; };
 		1488DD7725F311B6002A898C /* ProgressStrokeAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressStrokeAnimation.swift; sourceTree = "<group>"; };
 		1488DD7B25F316E3002A898C /* ProgressStrokeColorAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressStrokeColorAnimation.swift; sourceTree = "<group>"; };
+		1488DD8025F32683002A898C /* TextFinishedProgressIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFinishedProgressIndicator.swift; sourceTree = "<group>"; };
 		148A096D2586E0FC00811E35 /* WebSocketManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = WebSocketManager.swift; path = ../../../../../../../WebSocketManager.swift; sourceTree = "<group>"; };
 		148A09732586FEC500811E35 /* LiteWebSocketDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiteWebSocketDelegate.swift; sourceTree = "<group>"; };
 		148A09772586FF6A00811E35 /* WebSocketInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebSocketInfo.swift; sourceTree = "<group>"; };
@@ -441,6 +443,7 @@
 				140AE7A824A9DF3300F7705E /* CommonButton.swift */,
 				146834FE24DA99810075B639 /* CommonTextField.swift */,
 				14562B8025F30E1E00BA9D3B /* ProgressIndicator */,
+				1488DD7F25F32626002A898C /* TextFinishedProgressIndicator */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -753,6 +756,14 @@
 				147EB8A125A413B0002B93D8 /* DataLayerTests */,
 			);
 			path = WhalerTests;
+			sourceTree = "<group>";
+		};
+		1488DD7F25F32626002A898C /* TextFinishedProgressIndicator */ = {
+			isa = PBXGroup;
+			children = (
+				1488DD8025F32683002A898C /* TextFinishedProgressIndicator.swift */,
+			);
+			path = TextFinishedProgressIndicator;
 			sourceTree = "<group>";
 		};
 		148A096C2586E0DC00811E35 /* Websocket */ = {
@@ -1196,6 +1207,7 @@
 				140AE79E24A9B50900F7705E /* UIColor+Extensions.swift in Sources */,
 				1416480725A4FA020008E16B /* AccountSFDataSource.swift in Sources */,
 				14C509B8254CECD70021D9C5 /* AddAccountViewController.swift in Sources */,
+				1488DD8125F32683002A898C /* TextFinishedProgressIndicator.swift in Sources */,
 				1480800B24EA4B32007EB6D1 /* APINetworkInterface.swift in Sources */,
 				146C35D524C5635D00DBCA23 /* CompanyInfoView.swift in Sources */,
 				148A097C258700FF00811E35 /* SocketMessage.swift in Sources */,
