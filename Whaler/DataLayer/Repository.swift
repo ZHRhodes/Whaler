@@ -152,10 +152,10 @@ class Repository<Interface: DataInterface> {
     return Future<[Entity], RepoError> { [weak self] promise in
       self?.queue.async { [weak self] in
         guard let strongSelf = self else { return }
-        let publisher = strongSelf.dataInterface
-          .save(data)
 
-        strongSelf.saveCancellable = publisher.sink { (completion) in
+        strongSelf.saveCancellable = strongSelf
+          .dataInterface
+          .save(data).sink { (completion) in
           if case let .failure(error) = completion {
             Log.error(String(describing: error))
             promise(.failure(error))

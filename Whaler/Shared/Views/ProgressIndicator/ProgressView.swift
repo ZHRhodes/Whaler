@@ -12,6 +12,7 @@ import UIKit
 class ProgressView: UIView {
   var isAnimating: Bool = false {
     didSet {
+      guard isAnimating != oldValue else { return }
       if isAnimating {
         self.animateStroke()
       } else {

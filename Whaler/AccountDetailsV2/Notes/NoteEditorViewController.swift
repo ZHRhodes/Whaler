@@ -12,6 +12,7 @@ import UIKit
 class NoteEditorViewController: UIViewController {
   private let label = UILabel()
   private let noteEditor = NoteEditor(frame: .zero)
+  private var progressView: ProgressView!
   
   var delegate: NoteEditorDelegate? {
     didSet {
@@ -32,6 +33,7 @@ class NoteEditorViewController: UIViewController {
     super.viewDidLoad()
     configureLabel()
     configureNotesView()
+    configureProgressIndicator()
   }
   
   private func configureLabel() {
@@ -65,5 +67,24 @@ class NoteEditorViewController: UIViewController {
     ]
     
     NSLayoutConstraint.activate(constraints)
+  }
+  
+  private func configureProgressIndicator() {
+    progressView = ProgressView(colors: [.brandGreen, .brandPurple, .brandRed],
+                                lineWidth: 5)
+    progressView.translatesAutoresizingMaskIntoConstraints = false
+    view.addSubview(progressView!)
+    progressView.widthAnchor.constraint(equalToConstant: 20).isActive = true
+    progressView.heightAnchor.constraint(equalTo: progressView.widthAnchor).isActive = true
+    progressView.centerYAnchor.constraint(equalTo: label.centerYAnchor, constant: 0).isActive = true
+    progressView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -64).isActive = true
+  }
+  
+  func showProgressIndicator() {
+    progressView.isAnimating = true
+  }
+  
+  func hideProgressIndicator() {
+    progressView.isAnimating = false
   }
 }

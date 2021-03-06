@@ -16,7 +16,6 @@ class AccountDetailsViewController: UIViewController {
   private let splitPaneViewController = SplitPaneViewController()
   private let contentVC = AccountDetailsContentViewController()
   private let noteEditorVC = NoteEditorViewController()
-  private var progressView: ProgressView?
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -35,6 +34,7 @@ class AccountDetailsViewController: UIViewController {
   
   func configure(with dataManager: MainDataManager) {
     self.interactor = AccountDetailsInteractor(dataManager: dataManager)
+    self.interactor?.viewController = self
     let interactor = AccountDetailsContentInteractor(dataManager: dataManager)
     contentVC.configure(with: interactor)
     let view1 = contentVC.view!
@@ -55,22 +55,19 @@ class AccountDetailsViewController: UIViewController {
     noteEditorVC.view.topAnchor.constraint(equalTo: view.topAnchor, constant: 70).isActive = true
     noteEditorVC.view.rightAnchor.constraint(equalTo: view.rightAnchor, constant: 0).isActive = true
     noteEditorVC.view.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0).isActive = true
-    
-    progressView = ProgressView(colors: [.red, .green, .blue], lineWidth: 5)
-    progressView!.translatesAutoresizingMaskIntoConstraints = false
-    view.addSubview(progressView!)
-    progressView!.widthAnchor.constraint(equalToConstant: 30).isActive = true
-    progressView!.heightAnchor.constraint(equalTo: progressView!.widthAnchor).isActive = true
-    progressView!.topAnchor.constraint(equalTo: noteEditorVC.view.topAnchor, constant: 0).isActive = true
-    progressView!.rightAnchor.constraint(equalTo: noteEditorVC.view.rightAnchor, constant: 0).isActive = true
-    
-    progressView!.isAnimating = true
+  }
+  
+  func didBeginSaving() {
+    noteEditorVC.showProgressIndicator()
+  }
+  
+  func didFinishSaving() {
+    noteEditorVC.hideProgressIndicator()
   }
 }
 
 extension AccountDetailsViewController: NoteEditorDelegate {
   func willChangeText(_ text: String, replacingRange range: NSRange, with replacementText: String) {
-    
   }
   
   func changedText(newValue: String) {
