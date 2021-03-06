@@ -60,6 +60,8 @@
 		1454743B250D904700257A89 /* UIViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1454743A250D904700257A89 /* UIViewController+Extensions.swift */; };
 		1454743D250D93DC00257A89 /* SFSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1454743C250D93DC00257A89 /* SFSession.swift */; };
 		14562B7725F216FD00BA9D3B /* AccountDetailsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14562B7625F216FD00BA9D3B /* AccountDetailsInteractor.swift */; };
+		14562B7D25F30DCC00BA9D3B /* ProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14562B7C25F30DCC00BA9D3B /* ProgressView.swift */; };
+		14562B8225F30E3500BA9D3B /* ProgressShapeLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14562B8125F30E3500BA9D3B /* ProgressShapeLayer.swift */; };
 		145A376A24C588DF0081F9DB /* NotesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145A376924C588DF0081F9DB /* NotesView.swift */; };
 		145A376C24C58D440081F9DB /* AccountDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145A376B24C58D440081F9DB /* AccountDetailsView.swift */; };
 		1467379B25D79B3B00B64735 /* RepoError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1467379A25D79B3B00B64735 /* RepoError.swift */; };
@@ -97,6 +99,8 @@
 		14861EF7249F401300D2FA92 /* CSVParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14861EF6249F401300D2FA92 /* CSVParser.swift */; };
 		14861EFC249F49DE00D2FA92 /* DocumentPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14861EFB249F49DE00D2FA92 /* DocumentPickerViewController.swift */; };
 		1488423F25086D910025C7EE /* Lifecycle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1488423E25086D910025C7EE /* Lifecycle.swift */; };
+		1488DD7825F311B6002A898C /* ProgressStrokeAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1488DD7725F311B6002A898C /* ProgressStrokeAnimation.swift */; };
+		1488DD7C25F316E3002A898C /* ProgressStrokeColorAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1488DD7B25F316E3002A898C /* ProgressStrokeColorAnimation.swift */; };
 		148A096E2586E0FC00811E35 /* WebSocketManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148A096D2586E0FC00811E35 /* WebSocketManager.swift */; };
 		148A09742586FEC500811E35 /* LiteWebSocketDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148A09732586FEC500811E35 /* LiteWebSocketDelegate.swift */; };
 		148A09782586FF6A00811E35 /* WebSocketInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148A09772586FF6A00811E35 /* WebSocketInfo.swift */; };
@@ -216,6 +220,8 @@
 		1454743A250D904700257A89 /* UIViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extensions.swift"; sourceTree = "<group>"; };
 		1454743C250D93DC00257A89 /* SFSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFSession.swift; sourceTree = "<group>"; };
 		14562B7625F216FD00BA9D3B /* AccountDetailsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDetailsInteractor.swift; sourceTree = "<group>"; };
+		14562B7C25F30DCC00BA9D3B /* ProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressView.swift; sourceTree = "<group>"; };
+		14562B8125F30E3500BA9D3B /* ProgressShapeLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressShapeLayer.swift; sourceTree = "<group>"; };
 		145A376924C588DF0081F9DB /* NotesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesView.swift; sourceTree = "<group>"; };
 		145A376B24C58D440081F9DB /* AccountDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDetailsView.swift; sourceTree = "<group>"; };
 		1467379A25D79B3B00B64735 /* RepoError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoError.swift; sourceTree = "<group>"; };
@@ -255,6 +261,8 @@
 		14861EF8249F439600D2FA92 /* Whaler.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Whaler.entitlements; sourceTree = "<group>"; };
 		14861EFB249F49DE00D2FA92 /* DocumentPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentPickerViewController.swift; sourceTree = "<group>"; };
 		1488423E25086D910025C7EE /* Lifecycle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lifecycle.swift; sourceTree = "<group>"; };
+		1488DD7725F311B6002A898C /* ProgressStrokeAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressStrokeAnimation.swift; sourceTree = "<group>"; };
+		1488DD7B25F316E3002A898C /* ProgressStrokeColorAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressStrokeColorAnimation.swift; sourceTree = "<group>"; };
 		148A096D2586E0FC00811E35 /* WebSocketManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = WebSocketManager.swift; path = ../../../../../../../WebSocketManager.swift; sourceTree = "<group>"; };
 		148A09732586FEC500811E35 /* LiteWebSocketDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiteWebSocketDelegate.swift; sourceTree = "<group>"; };
 		148A09772586FF6A00811E35 /* WebSocketInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebSocketInfo.swift; sourceTree = "<group>"; };
@@ -432,6 +440,7 @@
 			children = (
 				140AE7A824A9DF3300F7705E /* CommonButton.swift */,
 				146834FE24DA99810075B639 /* CommonTextField.swift */,
+				14562B8025F30E1E00BA9D3B /* ProgressIndicator */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -569,6 +578,17 @@
 				146834FB24DA76CE0075B639 /* RootContainerInteractor.swift */,
 			);
 			path = RootContainer;
+			sourceTree = "<group>";
+		};
+		14562B8025F30E1E00BA9D3B /* ProgressIndicator */ = {
+			isa = PBXGroup;
+			children = (
+				14562B7C25F30DCC00BA9D3B /* ProgressView.swift */,
+				14562B8125F30E3500BA9D3B /* ProgressShapeLayer.swift */,
+				1488DD7725F311B6002A898C /* ProgressStrokeAnimation.swift */,
+				1488DD7B25F316E3002A898C /* ProgressStrokeColorAnimation.swift */,
+			);
+			path = ProgressIndicator;
 			sourceTree = "<group>";
 		};
 		145A376824C588CB0081F9DB /* Notes */ = {
@@ -1118,6 +1138,7 @@
 				141F795F25319E60005F9295 /* Organization.swift in Sources */,
 				14861ED7249F3DE100D2FA92 /* SceneDelegate.swift in Sources */,
 				141F797225342B0F005F9295 /* LegacyInterceptorProvider.swift in Sources */,
+				14562B8225F30E3500BA9D3B /* ProgressShapeLayer.swift in Sources */,
 				14861EF7249F401300D2FA92 /* CSVParser.swift in Sources */,
 				146C344624EA53690009C68C /* UserDefaultsManaged.swift in Sources */,
 				14FE635324C575CD00F7D30B /* TagView.swift in Sources */,
@@ -1143,6 +1164,7 @@
 				141802AD258EF07700E38840 /* AccountDetailsViewController.swift in Sources */,
 				14446D6925E350BA008E46CD /* AccountDetailsContactsInteractor.swift in Sources */,
 				1410404525EB1C3E00D8C793 /* TableInCollectionViewCell.swift in Sources */,
+				1488DD7C25F316E3002A898C /* ProgressStrokeColorAnimation.swift in Sources */,
 				1454743B250D904700257A89 /* UIViewController+Extensions.swift in Sources */,
 				140E643E25DB77AD0033AC8F /* AccountDetailsContentViewController.swift in Sources */,
 				142517492551096F006255F1 /* SFObject.swift in Sources */,
@@ -1167,6 +1189,7 @@
 				140E644225DB78170033AC8F /* AccountDetailsContactsViewController.swift in Sources */,
 				14018152254643AF00246BDA /* AccountsHelper.swift in Sources */,
 				14C509CB254D42800021D9C5 /* SFGroupModels.swift in Sources */,
+				1488DD7825F311B6002A898C /* ProgressStrokeAnimation.swift in Sources */,
 				148A096E2586E0FC00811E35 /* WebSocketManager.swift in Sources */,
 				14D97D7924DBEC4B00058B09 /* Keychain.swift in Sources */,
 				1416480B25A4FA270008E16B /* AccountDataInterface.swift in Sources */,
@@ -1191,6 +1214,7 @@
 				14B037E525073EBA00BA488D /* Tokens.swift in Sources */,
 				1410404F25EB382400D8C793 /* AccountDetailsContentInteractor.swift in Sources */,
 				140AE7A324A9BA6500F7705E /* MainTableSectionHeader.swift in Sources */,
+				14562B7D25F30DCC00BA9D3B /* ProgressView.swift in Sources */,
 				14DACF46255BAC9200FC0900 /* SwiftyBeaver+LoggingDestination.swift in Sources */,
 				141F796E25342974005F9295 /* TokenAddingIntercepter.swift in Sources */,
 				1480801024EA4BE7007EB6D1 /* JustNetworker.swift in Sources */,

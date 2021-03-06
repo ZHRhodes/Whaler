@@ -16,6 +16,7 @@ class AccountDetailsViewController: UIViewController {
   private let splitPaneViewController = SplitPaneViewController()
   private let contentVC = AccountDetailsContentViewController()
   private let noteEditorVC = NoteEditorViewController()
+  private var progressView: ProgressView?
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -29,7 +30,7 @@ class AccountDetailsViewController: UIViewController {
   
   override func viewWillDisappear(_ animated: Bool) {
     super.viewWillDisappear(animated)
-//    interactor?.save(account: interactor?.account, withNoteText: <#T##String#>)
+//    interactor?.save(account: interactor?.account, withNoteText: )
   }
   
   func configure(with dataManager: MainDataManager) {
@@ -54,6 +55,16 @@ class AccountDetailsViewController: UIViewController {
     noteEditorVC.view.topAnchor.constraint(equalTo: view.topAnchor, constant: 70).isActive = true
     noteEditorVC.view.rightAnchor.constraint(equalTo: view.rightAnchor, constant: 0).isActive = true
     noteEditorVC.view.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0).isActive = true
+    
+    progressView = ProgressView(colors: [.red, .green, .blue], lineWidth: 5)
+    progressView!.translatesAutoresizingMaskIntoConstraints = false
+    view.addSubview(progressView!)
+    progressView!.widthAnchor.constraint(equalToConstant: 30).isActive = true
+    progressView!.heightAnchor.constraint(equalTo: progressView!.widthAnchor).isActive = true
+    progressView!.topAnchor.constraint(equalTo: noteEditorVC.view.topAnchor, constant: 0).isActive = true
+    progressView!.rightAnchor.constraint(equalTo: noteEditorVC.view.rightAnchor, constant: 0).isActive = true
+    
+    progressView!.isAnimating = true
   }
 }
 
