@@ -23,9 +23,15 @@ struct NoteEditorRepresentable: UIViewRepresentable {
   }
 }
 
+protocol NoteEditorDelegate {
+  func willChangeText(_ text: String, replacingRange range: NSRange, with replacementText: String)
+  func changedText(newValue: String)
+}
+
 class NoteEditor: UIView {
   private let container = UIView()
   lazy var toolBar = EditorToolbar(options: EditorToolbarOption.allCases, delegate: self)
+  var delegate: NoteEditorDelegate?
   var textView: Aztec.TextView!
   var conn: WebSocketConn!
   
@@ -79,6 +85,7 @@ class NoteEditor: UIView {
                                 defaultParagraphStyle: .default,
                                 defaultMissingImage: UIImage(named: "bold")!)
     textView.backgroundColor = .cellBackground
+    textView.delegate = self
     container.addSubview(textView)
     textView.translatesAutoresizingMaskIntoConstraints = false
 
@@ -130,5 +137,16 @@ extension NoteEditor: EditorToolbarDelegate {
     default:
       break
     }
+  }
+}
+
+extension NoteEditor: UITextViewDelegate {
+  func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+    delegate?.willChangeText(textView.text, replacingRange: range, with: text)
+    return true
+  }
+  
+  func textViewDidChange(_ textView: UITextView) {
+    delegate?.changedText(newValue: textView.text)
   }
 }

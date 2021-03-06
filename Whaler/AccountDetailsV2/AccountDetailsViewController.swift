@@ -19,7 +19,6 @@ class AccountDetailsViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-//    configureSplitPaneViewController()
     backCancellable = NotificationCenter.default
       .publisher(for: .back)
       .first()
@@ -30,7 +29,7 @@ class AccountDetailsViewController: UIViewController {
   
   override func viewWillDisappear(_ animated: Bool) {
     super.viewWillDisappear(animated)
-    interactor?.save(account: interactor?.account, withNoteText: noteEditorVC.currentText)
+//    interactor?.save(account: interactor?.account, withNoteText: <#T##String#>)
   }
   
   func configure(with dataManager: MainDataManager) {
@@ -48,11 +47,22 @@ class AccountDetailsViewController: UIViewController {
     
     noteEditorVC.view.translatesAutoresizingMaskIntoConstraints = false
     noteEditorVC.currentText = interactor.account.notes ?? ""
+    noteEditorVC.delegate = self
     view.addSubview(noteEditorVC.view)
     
     noteEditorVC.view.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.4).isActive = true
     noteEditorVC.view.topAnchor.constraint(equalTo: view.topAnchor, constant: 70).isActive = true
     noteEditorVC.view.rightAnchor.constraint(equalTo: view.rightAnchor, constant: 0).isActive = true
     noteEditorVC.view.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0).isActive = true
+  }
+}
+
+extension AccountDetailsViewController: NoteEditorDelegate {
+  func willChangeText(_ text: String, replacingRange range: NSRange, with replacementText: String) {
+    
+  }
+  
+  func changedText(newValue: String) {
+    interactor?.changedNoteText(newValue: newValue)
   }
 }

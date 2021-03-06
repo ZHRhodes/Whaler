@@ -13,6 +13,12 @@ class NoteEditorViewController: UIViewController {
   private let label = UILabel()
   private let noteEditor = NoteEditor(frame: .zero)
   
+  var delegate: NoteEditorDelegate? {
+    didSet {
+      noteEditor.delegate = delegate
+    }
+  }
+  
   var currentText: String {
     get {
       return noteEditor.textView.text
