@@ -13,6 +13,12 @@ class TrackAccountsViewController: ToolbarContainingViewController {
   private let interactor = TrackAccountsInteractor()
   private let tableView = UITableView()
   
+  override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+      super.traitCollectionDidChange(previousTraitCollection)
+      updateColors()
+      tableView.setNeedsDisplay()
+  }
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     view.backgroundColor = .primaryBackground
@@ -27,8 +33,8 @@ class TrackAccountsViewController: ToolbarContainingViewController {
     tableView.delegate = self
     tableView.dataSource = self
     tableView.layer.cornerRadius = 10.0
-    tableView.layer.borderColor = UIColor.primaryText.cgColor
     tableView.layer.borderWidth = 2.0
+    tableView.layer.borderColor = UIColor.primaryText.cgColor
     tableView.register(TrackAccountsTableCell.self, forCellReuseIdentifier: TrackAccountsTableCell.id)
     view.addSubview(tableView)
     
@@ -38,6 +44,10 @@ class TrackAccountsViewController: ToolbarContainingViewController {
       tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 200),
       tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -30)
     ])
+  }
+  
+  private func updateColors() {
+    tableView.layer.borderColor = UIColor.primaryText.cgColor
   }
   
   func didFetchAccounts() {
