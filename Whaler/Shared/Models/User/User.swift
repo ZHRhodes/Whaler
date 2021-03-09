@@ -1,5 +1,5 @@
 //
-//  UserRemote.swift
+//  User.swift
 //  Whaler
 //
 //  Created by Zachary Rhodes on 9/7/20.
@@ -9,6 +9,18 @@
 import Foundation
 import UIKit
 
+protocol FullNameProviding {
+  var firstName: String { get }
+  var lastName: String { get }
+}
+
+extension FullNameProviding {
+  var initials: String {
+    let firstInitial = firstName.first.map(String.init) ?? ""
+    let lastInitial = lastName.first.map(String.init) ?? ""
+    return firstInitial.uppercased() + lastInitial.uppercased()
+  }
+}
 
 struct User: Codable {
   let id: String
@@ -32,3 +44,5 @@ extension User: SimpleItem {
 }
 
 extension User: Equatable {}
+
+extension User: FullNameProviding {}

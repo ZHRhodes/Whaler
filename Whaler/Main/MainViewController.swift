@@ -50,10 +50,12 @@ class MainViewController: UIViewController {
   private var interactor: MainInteractor!
   private var noDataStackView: UIStackView?
   private var reloadButton: UIButton!
+  private var trackButton: UIButton!
   private var deleteButton: UIButton!
   private var signOutButton: UIButton!
   private var helloLabel: UILabel!
   private var subHelloLabel: UILabel!
+  private var actionsStack: UIStackView!
   private var collectionView: UICollectionView!
   
   private var sectionHeaders = Set<WeakRef<UIView>>()
@@ -111,9 +113,9 @@ class MainViewController: UIViewController {
     configureHelloLabel()
     configureSubHelloLabel()
     configureCollectionView()
+    configureActionsStackView()
     configureSignOutButton()
     configureDeleteButton()
-    configureReloadButton()
   }
   
   private func configureNoDataViews() {
@@ -230,10 +232,80 @@ class MainViewController: UIViewController {
     let constraints = [
       subHelloLabel.leftAnchor.constraint(equalTo: helloLabel.leftAnchor, constant: 0),
       subHelloLabel.topAnchor.constraint(equalTo: helloLabel.bottomAnchor, constant: 0),
-      subHelloLabel.heightAnchor.constraint(equalToConstant: 28)
+      subHelloLabel.heightAnchor.constraint(equalToConstant: 32)
     ]
     
     NSLayoutConstraint.activate(constraints)
+  }
+  
+  private func configureActionsStackView() {
+    actionsStack = UIStackView(arrangedSubviews: [
+      makeTrackView(),
+      makeReloadView(),
+      makeUserView(),
+    ])
+    actionsStack.axis = .horizontal
+    actionsStack.spacing = 20
+    actionsStack.translatesAutoresizingMaskIntoConstraints = false
+    view.addSubview(actionsStack)
+    NSLayoutConstraint.activate([
+      actionsStack.rightAnchor.constraint(equalTo: collectionView.rightAnchor, constant: -15),
+      actionsStack.centerYAnchor.constraint(equalTo: helloLabel.bottomAnchor, constant: -8),
+      actionsStack.heightAnchor.constraint(equalToConstant: 65),
+    ])
+  }
+  
+  private func makeUserView() -> UIView {
+    let userView = CurrentUserView()
+    userView.text = Lifecycle.currentUser?.initials
+    userView.backgroundColor = .brandPurple
+    let size: CGFloat = 65.0
+    userView.layer.cornerRadius = size/2
+    userView.widthAnchor.constraint(equalToConstant: size).isActive = true
+    userView.heightAnchor.constraint(equalTo: userView.widthAnchor).isActive = true
+    return userView
+  }
+  
+  private func makeReloadView() -> UIView {
+    reloadButton = UIButton()
+    let image = UIImage(named: "reloadIcon")?.withRenderingMode(.alwaysTemplate)
+    reloadButton.setImage(image, for: .normal)
+    reloadButton.tintColor = .primaryText
+    reloadButton.imageView?.contentMode = .scaleAspectFit
+    reloadButton.addTarget(self, action: #selector(reloadTapped), for: .touchUpInside)
+    reloadButton.translatesAutoresizingMaskIntoConstraints = false
+    
+    let constraints = [
+      reloadButton.heightAnchor.constraint(equalToConstant: 53),
+      reloadButton.widthAnchor.constraint(equalToConstant: 53)
+    ]
+    
+    NSLayoutConstraint.activate(constraints)
+    return reloadButton
+  }
+  
+  private func makeTrackView() -> UIView {
+    trackButton = UIButton()
+    let image = UIImage(named: "plusIcon")?.withRenderingMode(.alwaysTemplate)
+    trackButton.setImage(image, for: .normal)
+    trackButton.tintColor = .primaryText
+    trackButton.imageView?.contentMode = .scaleAspectFit
+    trackButton.addTarget(self, action: #selector(trackTapped), for: .touchUpInside)
+    trackButton.translatesAutoresizingMaskIntoConstraints = false
+    
+    let constraints = [
+      trackButton.heightAnchor.constraint(equalToConstant: 53),
+      trackButton.widthAnchor.constraint(equalToConstant: 53)
+    ]
+    
+    NSLayoutConstraint.activate(constraints)
+    return trackButton
+  }
+  
+  @objc
+  private func trackTapped() {
+    let vc = TrackAccountsViewController()
+    navigationController?.pushViewController(vc, animated: false)
   }
   
   private func configureCollectionView() {
@@ -296,24 +368,6 @@ class MainViewController: UIViewController {
       deleteButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 12),
       deleteButton.heightAnchor.constraint(equalToConstant: 25),
       deleteButton.widthAnchor.constraint(equalToConstant: 25)
-    ]
-    
-    NSLayoutConstraint.activate(constraints)
-  }
-  
-  private func configureReloadButton() {
-    reloadButton = UIButton()
-    reloadButton.setImage(UIImage(named: "reloadIcon"), for: .normal)
-    reloadButton.imageView?.contentMode = .scaleAspectFit
-    reloadButton.addTarget(self, action: #selector(reloadTapped), for: .touchUpInside)
-    reloadButton.translatesAutoresizingMaskIntoConstraints = false
-    view.addSubview(reloadButton)
-    
-    let constraints = [
-      reloadButton.rightAnchor.constraint(equalTo: deleteButton.leftAnchor, constant: -12),
-      reloadButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 12),
-      reloadButton.heightAnchor.constraint(equalToConstant: 25),
-      reloadButton.widthAnchor.constraint(equalToConstant: 25)
     ]
     
     NSLayoutConstraint.activate(constraints)
@@ -394,8 +448,6 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
     guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MainCollectionCell<MainTableCell>.id(), for: indexPath) as? MainCollectionCell<MainTableCell> else {
       return UICollectionViewCell()
     }
-  //    let state = interactor.accountStates[indexPath.section]
-  //    let account = interactor.accountGrouper[state][indexPath.row]
     cell.section = indexPath.row
     cell.dataSource = interactor
     cell.delegate = self

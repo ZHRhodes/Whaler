@@ -42,7 +42,7 @@ class NoteEditor: UIView {
     configureContainer()
     configureToolBar()
     configureTextView()
-
+    
     /* Temporary */
 //      {"type": "docDelta", "data": {"documentID": "1", "value": "Hello World!"}}
     conn = WebSocketManager.shared.registerConnection(id: "072cf97d-ecda-41f7-adb7-a9ab538f44ec",
