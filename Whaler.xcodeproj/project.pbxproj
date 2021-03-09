@@ -68,6 +68,7 @@
 		146737A125D79CFE00B64735 /* AccountRemoteDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146737A025D79CFE00B64735 /* AccountRemoteDataSource.swift */; };
 		146737A725D79D3A00B64735 /* ContactRemoteDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146737A625D79D3A00B64735 /* ContactRemoteDataSource.swift */; };
 		146737AF25D7A02500B64735 /* NoteEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146737AE25D7A02500B64735 /* NoteEditorViewController.swift */; };
+		1467E95F25F7F5CE00110880 /* ToolbarContainingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1467E95E25F7F5CE00110880 /* ToolbarContainingViewController.swift */; };
 		146834FC24DA76CE0075B639 /* RootContainerInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146834FB24DA76CE0075B639 /* RootContainerInteractor.swift */; };
 		146834FF24DA99810075B639 /* CommonTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146834FE24DA99810075B639 /* CommonTextField.swift */; };
 		146A6DC4252C439000DA8E85 /* organization.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 146A6DC3252C439000DA8E85 /* organization.graphql */; };
@@ -233,6 +234,7 @@
 		146737A025D79CFE00B64735 /* AccountRemoteDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountRemoteDataSource.swift; sourceTree = "<group>"; };
 		146737A625D79D3A00B64735 /* ContactRemoteDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactRemoteDataSource.swift; sourceTree = "<group>"; };
 		146737AE25D7A02500B64735 /* NoteEditorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteEditorViewController.swift; sourceTree = "<group>"; };
+		1467E95E25F7F5CE00110880 /* ToolbarContainingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolbarContainingViewController.swift; sourceTree = "<group>"; };
 		146834FB24DA76CE0075B639 /* RootContainerInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootContainerInteractor.swift; sourceTree = "<group>"; };
 		146834FE24DA99810075B639 /* CommonTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonTextField.swift; sourceTree = "<group>"; };
 		146A6DC3252C439000DA8E85 /* organization.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = organization.graphql; sourceTree = "<group>"; };
@@ -490,6 +492,7 @@
 			children = (
 				1414810A252FFD8100640946 /* TablePopoverViewController.swift */,
 				148D461425AAD3C6003D5FA7 /* SplitPaneViewController.swift */,
+				1467E95E25F7F5CE00110880 /* ToolbarContainingViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -1265,6 +1268,7 @@
 				141F796925327503005F9295 /* Graph.swift in Sources */,
 				14B037E525073EBA00BA488D /* Tokens.swift in Sources */,
 				1410404F25EB382400D8C793 /* AccountDetailsContentInteractor.swift in Sources */,
+				1467E95F25F7F5CE00110880 /* ToolbarContainingViewController.swift in Sources */,
 				140AE7A324A9BA6500F7705E /* MainTableSectionHeader.swift in Sources */,
 				14562B7D25F30DCC00BA9D3B /* ProgressView.swift in Sources */,
 				14DACF46255BAC9200FC0900 /* SwiftyBeaver+LoggingDestination.swift in Sources */,

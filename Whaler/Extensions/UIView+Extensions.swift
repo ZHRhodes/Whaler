@@ -10,6 +10,10 @@ import Foundation
 import UIKit
 import SkeletonView
 
+enum EdgeConstraint {
+  case left(CGFloat), right(CGFloat), top(CGFloat), bottom(CGFloat)
+}
+
 extension UIView {
   func addAndAttachToEdges(view: UIView, inset: CGFloat = 0) {
     view.translatesAutoresizingMaskIntoConstraints = false
@@ -23,6 +27,32 @@ extension UIView {
     ]
     
     NSLayoutConstraint.activate(constraints)
+  }
+  
+  func addAndAttach(view: UIView, height: CGFloat? = nil, width: CGFloat? = nil, attachingEdges: [EdgeConstraint]) {
+    view.translatesAutoresizingMaskIntoConstraints = false
+    addSubview(view)
+    
+    if let height = height {
+      view.heightAnchor.constraint(equalToConstant: height).isActive = true
+    }
+    
+    if let width = width {
+      view.widthAnchor.constraint(equalToConstant: width).isActive = true
+    }
+    
+    for edge in attachingEdges {
+      switch edge {
+      case .left(let constant):
+        view.leftAnchor.constraint(equalTo: leftAnchor, constant: constant).isActive = true
+      case .right(let constant):
+        view.rightAnchor.constraint(equalTo: rightAnchor, constant: constant).isActive = true
+      case .top(let constant):
+        view.topAnchor.constraint(equalTo: topAnchor, constant: constant).isActive = true
+      case .bottom(let constant):
+        view.bottomAnchor.constraint(equalTo: bottomAnchor, constant: constant).isActive = true
+      }
+    }
   }
   
   func showCustomAnimatedSkeleton(crossDissolveTime: TimeInterval = 0.25) {

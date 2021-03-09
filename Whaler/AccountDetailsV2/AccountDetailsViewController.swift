@@ -10,8 +10,7 @@ import Foundation
 import UIKit
 import Combine
 
-class AccountDetailsViewController: UIViewController {
-  var backCancellable: AnyCancellable?
+class AccountDetailsViewController: ToolbarContainingViewController {
   private var interactor: AccountDetailsInteractor?
   private let splitPaneViewController = SplitPaneViewController()
   private let contentVC = AccountDetailsContentViewController()
@@ -19,12 +18,6 @@ class AccountDetailsViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    backCancellable = NotificationCenter.default
-      .publisher(for: .back)
-      .first()
-      .sink(receiveValue: { [weak self] notification in
-        self?.navigationController?.popViewController(animated: false)
-    })
   }
   
   override func viewWillDisappear(_ animated: Bool) {
