@@ -272,4 +272,8 @@ extension Account: TrackAccountsDataSource {
   var contactCount: String {
     return String(Int.random(in: 5...30))
   }
+  
+  var style: TrackAccountsHeaderData.Style {
+    return .content
+  }
 }

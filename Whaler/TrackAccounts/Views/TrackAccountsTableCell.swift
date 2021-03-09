@@ -9,16 +9,31 @@
 import Foundation
 import UIKit
 
+struct TrackAccountsHeaderData: TrackAccountsDataSource {
+  enum Style {
+    case content, header
+  }
+  
+  var accountName: String
+  var industry: String?
+  var billingCity: String?
+  var billingState: String?
+  var contactCount: String
+  var style: TrackAccountsHeaderData.Style
+}
+
 protocol TrackAccountsDataSource {
   var accountName: String { get }
   var industry: String? { get }
   var billingCity: String? { get }
   var billingState: String? { get }
   var contactCount: String { get }
+  var style: TrackAccountsHeaderData.Style { get }
 }
 
 class TrackAccountsTableCell: UITableViewCell {
   static let id = "TrackAccountsTableCellId"
+  static let height: CGFloat = 70.0
   private lazy var stackView: UIStackView = {
     let stackView = UIStackView()
     stackView.axis = .horizontal
@@ -37,6 +52,17 @@ class TrackAccountsTableCell: UITableViewCell {
     }
   }
   
+  init() {
+    super.init(style: .default, reuseIdentifier: TrackAccountsTableCell.id)
+    configure()
+  }
+  
+  init(frame: CGRect) {
+    super.init(style: .default, reuseIdentifier: TrackAccountsTableCell.id)
+    self.frame = frame
+    configure()
+  }
+  
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
     configure()
@@ -50,7 +76,7 @@ class TrackAccountsTableCell: UITableViewCell {
   private func configure() {
     backgroundColor = .primaryBackground
     
-    let bottomLine = UILabel()
+    let bottomLine = UIView()
     bottomLine.backgroundColor = .primaryText
     bottomLine.translatesAutoresizingMaskIntoConstraints = false
     
@@ -78,11 +104,25 @@ class TrackAccountsTableCell: UITableViewCell {
   
   private func setLabelValues(with dataSource: TrackAccountsDataSource?) {
     guard let dataSource = dataSource else { return }
+    let textColor: UIColor
+    switch dataSource.style {
+    case .header:
+      textColor = .secondaryText
+    case .content:
+      textColor = .primaryText
+    }
+    
     accountBox.text = dataSource.accountName
     industryBox.text = dataSource.industry ?? "—"
     cityBox.text = dataSource.billingCity ?? "—"
     stateBox.text = dataSource.billingState ?? "—"
     contactsBox.text = dataSource.contactCount
+    
+    accountBox.textColor = textColor
+    industryBox.textColor = textColor
+    cityBox.textColor = textColor
+    stateBox.textColor = textColor
+    contactsBox.textColor = textColor
   }
 }
 
@@ -96,6 +136,15 @@ extension TrackAccountsTableCell {
       }
       set {
         label.text = newValue
+      }
+    }
+    
+    var textColor: UIColor? {
+      get {
+        return label.textColor
+      }
+      set {
+        label.textColor = newValue
       }
     }
     

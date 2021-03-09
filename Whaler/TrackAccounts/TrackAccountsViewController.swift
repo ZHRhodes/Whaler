@@ -35,6 +35,7 @@ class TrackAccountsViewController: ToolbarContainingViewController {
     tableView.layer.cornerRadius = 10.0
     tableView.layer.borderWidth = 2.0
     tableView.layer.borderColor = UIColor.primaryText.cgColor
+
     tableView.register(TrackAccountsTableCell.self, forCellReuseIdentifier: TrackAccountsTableCell.id)
     view.addSubview(tableView)
     
@@ -68,6 +69,21 @@ extension TrackAccountsViewController: UITableViewDelegate, UITableViewDataSourc
   }
   
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-    return 70
+    return TrackAccountsTableCell.height
+  }
+  
+  func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    let headerView = TrackAccountsTableCell()
+    headerView.dataSource = TrackAccountsHeaderData(accountName: "Account",
+                                                   industry: "Industry",
+                                                   billingCity: "City",
+                                                   billingState: "State",
+                                                   contactCount: "Contacts",
+                                                   style: .header)
+    return headerView
+  }
+  
+  func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    return TrackAccountsTableCell.height
   }
 }
