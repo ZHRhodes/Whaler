@@ -39,12 +39,12 @@ class TrackAccountsTableCell: UITableViewCell {
     stackView.axis = .horizontal
     return stackView
   }()
-  private var checkbox = UIView()
-  private lazy var accountBox: TextBox = makeTextBox(withWidthMultiplier: 1/5, toStackView: stackView)
-  private lazy var industryBox: TextBox = makeTextBox(withWidthMultiplier: 1/5, toStackView: stackView)
-  private lazy var cityBox: TextBox = makeTextBox(withWidthMultiplier: 1/5, toStackView: stackView)
-  private lazy var stateBox: TextBox = makeTextBox(withWidthMultiplier: 1/5, toStackView: stackView)
-  private lazy var contactsBox: TextBox = makeTextBox(withWidthMultiplier: 1/5, toStackView: stackView)
+  private lazy var checkbox: CellCheckBox = makeCheckBox(withWidthMultiplier: 33/593, toStackView: stackView)
+  private lazy var accountBox: CellTextBox = makeTextBox(withWidthMultiplier: 112/593, toStackView: stackView)
+  private lazy var industryBox: CellTextBox = makeTextBox(withWidthMultiplier: 112/593, toStackView: stackView)
+  private lazy var cityBox: CellTextBox = makeTextBox(withWidthMultiplier: 112/593, toStackView: stackView)
+  private lazy var stateBox: CellTextBox = makeTextBox(withWidthMultiplier: 112/593, toStackView: stackView)
+  private lazy var contactsBox: CellTextBox = makeTextBox(withWidthMultiplier: 112/593, toStackView: stackView)
   
   var dataSource: TrackAccountsDataSource? {
     didSet {
@@ -89,17 +89,26 @@ class TrackAccountsTableCell: UITableViewCell {
     contentView.addAndAttach(view: stackView, attachingEdges: [.left(0), .top(0), .right(0), .bottom(-2)])
   }
   
-  private func makeTextBox(withWidthMultiplier widthMultiplier: CGFloat, toStackView stackView: UIStackView) -> TextBox {
-    let box = TextBox()
-    box.translatesAutoresizingMaskIntoConstraints = false
-    stackView.addArrangedSubview(box)
+  private func makeTextBox(withWidthMultiplier widthMultiplier: CGFloat, toStackView stackView: UIStackView) -> CellTextBox {
+    let box = CellTextBox()
+    addViewToStackView(view: box, stackView: stackView, withWidthMultiplier: widthMultiplier)
+    return box
+  }
+  
+  private func makeCheckBox(withWidthMultiplier widthMultiplier: CGFloat, toStackView stackView: UIStackView) -> CellCheckBox {
+    let box = CellCheckBox()
+    addViewToStackView(view: box, stackView: stackView, withWidthMultiplier: widthMultiplier)
+    return box
+  }
+  
+  private func addViewToStackView(view: UIView, stackView: UIStackView, withWidthMultiplier widthMultiplier: CGFloat) {
+    view.translatesAutoresizingMaskIntoConstraints = false
+    stackView.addArrangedSubview(view)
     
     NSLayoutConstraint.activate([
-      box.widthAnchor.constraint(equalTo: widthAnchor, multiplier: widthMultiplier),
-      box.heightAnchor.constraint(equalTo: heightAnchor),
+      view.widthAnchor.constraint(equalTo: widthAnchor, multiplier: widthMultiplier),
+      view.heightAnchor.constraint(equalTo: heightAnchor),
     ])
-    
-    return box
   }
   
   private func setLabelValues(with dataSource: TrackAccountsDataSource?) {
@@ -112,6 +121,8 @@ class TrackAccountsTableCell: UITableViewCell {
       textColor = .primaryText
     }
     
+    _ = checkbox//.isSelected = dataSource.isSelected
+    
     accountBox.text = dataSource.accountName
     industryBox.text = dataSource.industry ?? "—"
     cityBox.text = dataSource.billingCity ?? "—"
@@ -123,65 +134,5 @@ class TrackAccountsTableCell: UITableViewCell {
     cityBox.textColor = textColor
     stateBox.textColor = textColor
     contactsBox.textColor = textColor
-  }
-}
-
-extension TrackAccountsTableCell {
-  private class TextBox: UIView {
-    private let label = UILabel()
-    
-    var text: String? {
-      get {
-        return label.text
-      }
-      set {
-        label.text = newValue
-      }
-    }
-    
-    var textColor: UIColor? {
-      get {
-        return label.textColor
-      }
-      set {
-        label.textColor = newValue
-      }
-    }
-    
-    init() {
-      super.init(frame: .zero)
-      configure()
-    }
-    
-    required init?(coder: NSCoder) {
-      super.init(coder: coder)
-      configure()
-    }
-    
-    private func configure() {
-      let rightLine = UIView()
-      rightLine.translatesAutoresizingMaskIntoConstraints = false
-      rightLine.backgroundColor = .primaryText
-      addSubview(rightLine)
-      
-      NSLayoutConstraint.activate([
-        rightLine.widthAnchor.constraint(equalToConstant: 2.0),
-        rightLine.rightAnchor.constraint(equalTo: rightAnchor),
-        rightLine.topAnchor.constraint(equalTo: topAnchor),
-        rightLine.bottomAnchor.constraint(equalTo: bottomAnchor),
-      ])
-      
-      label.translatesAutoresizingMaskIntoConstraints = false
-      label.textColor = .primaryText
-      label.font = .openSans(weight: .regular, size: 24)
-      addSubview(label)
-      
-      NSLayoutConstraint.activate([
-        label.rightAnchor.constraint(equalTo: rightAnchor),
-        label.centerYAnchor.constraint(equalTo: centerYAnchor),
-        label.leftAnchor.constraint(equalTo: leftAnchor, constant: 40),
-        label.heightAnchor.constraint(equalToConstant: 33.0)
-      ])
-    }
   }
 }

@@ -151,6 +151,9 @@
 		14EF43AA2540AA5C002BE27D /* saveAccounts.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 14EF43A92540AA5C002BE27D /* saveAccounts.graphql */; };
 		14EF43B0254103A9002BE27D /* saveContacts.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 14EF43AF254103A9002BE27D /* saveContacts.graphql */; };
 		14EF4DE924CD4F3100ED5461 /* ObjectManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EF4DE824CD4F3100ED5461 /* ObjectManager.swift */; };
+		14EF8D4125F93BA00065BEB3 /* CellTextBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EF8D4025F93BA00065BEB3 /* CellTextBox.swift */; };
+		14EF8D4525F93BD40065BEB3 /* CellCheckBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EF8D4425F93BD40065BEB3 /* CellCheckBox.swift */; };
+		14EF8D4D25F93CDA0065BEB3 /* CheckBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EF8D4C25F93CDA0065BEB3 /* CheckBox.swift */; };
 		14F4090424C6A09E00F405BC /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 14F4090324C6A09E00F405BC /* OpenSans-Regular.ttf */; };
 		14F4090624C6A0C300F405BC /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 14F4090524C6A0C300F405BC /* OpenSans-Bold.ttf */; };
 		14F4090824C6A2D100F405BC /* UIFont+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F4090724C6A2D100F405BC /* UIFont+Extensions.swift */; };
@@ -318,6 +321,9 @@
 		14EF43A92540AA5C002BE27D /* saveAccounts.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = saveAccounts.graphql; sourceTree = "<group>"; };
 		14EF43AF254103A9002BE27D /* saveContacts.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = saveContacts.graphql; sourceTree = "<group>"; };
 		14EF4DE824CD4F3100ED5461 /* ObjectManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectManager.swift; sourceTree = "<group>"; };
+		14EF8D4025F93BA00065BEB3 /* CellTextBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellTextBox.swift; sourceTree = "<group>"; };
+		14EF8D4425F93BD40065BEB3 /* CellCheckBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellCheckBox.swift; sourceTree = "<group>"; };
+		14EF8D4C25F93CDA0065BEB3 /* CheckBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckBox.swift; sourceTree = "<group>"; };
 		14F4090324C6A09E00F405BC /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Regular.ttf"; sourceTree = "<group>"; };
 		14F4090524C6A0C300F405BC /* OpenSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Bold.ttf"; sourceTree = "<group>"; };
 		14F4090724C6A2D100F405BC /* UIFont+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extensions.swift"; sourceTree = "<group>"; };
@@ -873,6 +879,9 @@
 			isa = PBXGroup;
 			children = (
 				14EA64EE25F4CDA300F26ECE /* TrackAccountsTableCell.swift */,
+				14EF8D4025F93BA00065BEB3 /* CellTextBox.swift */,
+				14EF8D4425F93BD40065BEB3 /* CellCheckBox.swift */,
+				14EF8D4C25F93CDA0065BEB3 /* CheckBox.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1167,6 +1176,7 @@
 				14B037EB250749D000BA488D /* AuthenticationInteractor.swift in Sources */,
 				14ECDB2124CA9288006B4550 /* NoteEditor.swift in Sources */,
 				146C35DB24C56A0100DBCA23 /* ContactsTableView.swift in Sources */,
+				14EF8D4525F93BD40065BEB3 /* CellCheckBox.swift in Sources */,
 				14861ED9249F3DE100D2FA92 /* MainViewController.swift in Sources */,
 				1488423F25086D910025C7EE /* Lifecycle.swift in Sources */,
 				1416481725A4FA970008E16B /* DataInterface.swift in Sources */,
@@ -1176,6 +1186,7 @@
 				146C35D924C5689B00DBCA23 /* ContactRowView.swift in Sources */,
 				14C509C7254CFE7A0021D9C5 /* FieldValue.swift in Sources */,
 				1416482C25A7F49C0008E16B /* ContactDataInterface.swift in Sources */,
+				14EF8D4D25F93CDA0065BEB3 /* CheckBox.swift in Sources */,
 				140AE7A024A9B58400F7705E /* WorkState.swift in Sources */,
 				14B037E125049CDE00BA488D /* Grouper.swift in Sources */,
 				140AE7A524A9BEC300F7705E /* AccountTableCell.swift in Sources */,
@@ -1207,6 +1218,7 @@
 				146737A125D79CFE00B64735 /* AccountRemoteDataSource.swift in Sources */,
 				145A376C24C58D440081F9DB /* AccountDetailsView.swift in Sources */,
 				149F3A0B25209575001F38BF /* UIView+Extensions.swift in Sources */,
+				14EF8D4125F93BA00065BEB3 /* CellTextBox.swift in Sources */,
 				146A6DDA252C563200DA8E85 /* SFNetworkInterface.swift in Sources */,
 				149F3A0025206AE4001F38BF /* MainCollectionCell.swift in Sources */,
 				1425175125510E11006255F1 /* FilterBucket.swift in Sources */,

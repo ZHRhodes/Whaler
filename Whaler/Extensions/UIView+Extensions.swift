@@ -11,7 +11,13 @@ import UIKit
 import SkeletonView
 
 enum EdgeConstraint {
-  case left(CGFloat), right(CGFloat), top(CGFloat), bottom(CGFloat)
+  case left(CGFloat),
+       right(CGFloat),
+       top(CGFloat),
+       bottom(CGFloat),
+       all(CGFloat),
+       centerY(CGFloat),
+       centerX(CGFloat)
 }
 
 extension UIView {
@@ -43,6 +49,10 @@ extension UIView {
     
     for edge in attachingEdges {
       switch edge {
+      case .centerX(let constant):
+        view.centerXAnchor.constraint(equalTo: centerXAnchor, constant: constant).isActive = true
+      case .centerY(let constant):
+        view.centerYAnchor.constraint(equalTo: centerYAnchor, constant: constant).isActive = true
       case .left(let constant):
         view.leftAnchor.constraint(equalTo: leftAnchor, constant: constant).isActive = true
       case .right(let constant):
@@ -51,6 +61,11 @@ extension UIView {
         view.topAnchor.constraint(equalTo: topAnchor, constant: constant).isActive = true
       case .bottom(let constant):
         view.bottomAnchor.constraint(equalTo: bottomAnchor, constant: constant).isActive = true
+      case .all(let constant):
+        view.leftAnchor.constraint(equalTo: leftAnchor, constant: constant).isActive = true
+        view.rightAnchor.constraint(equalTo: rightAnchor, constant: -constant).isActive = true
+        view.topAnchor.constraint(equalTo: topAnchor, constant: constant).isActive = true
+        view.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -constant).isActive = true
       }
     }
   }
