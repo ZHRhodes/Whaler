@@ -13,7 +13,7 @@ class TrackAccountsViewController: ToolbarContainingViewController {
   private let interactor = TrackAccountsInteractor()
   private let titleLabel = UILabel()
   private var actionsStack: UIStackView!
-  private let tableView = UITableView()
+  private let tableView = ContentSizedTableView()
   
   override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
       super.traitCollectionDidChange(previousTraitCollection)
@@ -29,6 +29,11 @@ class TrackAccountsViewController: ToolbarContainingViewController {
     configureActionsStackView()
     interactor.viewController = self
     interactor.fetchAccounts()
+  }
+  
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
+    
   }
   
   private func configurePageTitle() {
@@ -86,7 +91,7 @@ class TrackAccountsViewController: ToolbarContainingViewController {
       tableView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 40),
       tableView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -40),
       tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 200),
-      tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -30)
+      tableView.bottomAnchor.constraint(lessThanOrEqualTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -30)
     ])
   }
   
@@ -101,7 +106,7 @@ class TrackAccountsViewController: ToolbarContainingViewController {
 
 extension TrackAccountsViewController: UITableViewDelegate, UITableViewDataSource {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return interactor.accounts.count
+    return min(interactor.accounts.count, 12)
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -118,11 +123,11 @@ extension TrackAccountsViewController: UITableViewDelegate, UITableViewDataSourc
   func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
     let headerView = TrackAccountsTableCell()
     headerView.dataSource = TrackAccountsHeaderData(accountName: "Account",
-                                                   industry: "Industry",
-                                                   billingCity: "City",
-                                                   billingState: "State",
-                                                   contactCount: "Contacts",
-                                                   style: .header)
+                                                    industry: "Industry",
+                                                    billingCity: "City",
+                                                    billingState: "State",
+                                                    contactCount: "Contacts",
+                                                    style: .header)
     return headerView
   }
   

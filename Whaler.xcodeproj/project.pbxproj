@@ -154,6 +154,7 @@
 		14EF8D4125F93BA00065BEB3 /* CellTextBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EF8D4025F93BA00065BEB3 /* CellTextBox.swift */; };
 		14EF8D4525F93BD40065BEB3 /* CellCheckBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EF8D4425F93BD40065BEB3 /* CellCheckBox.swift */; };
 		14EF8D4D25F93CDA0065BEB3 /* CheckBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EF8D4C25F93CDA0065BEB3 /* CheckBox.swift */; };
+		14EF8D5125F950E10065BEB3 /* ContentSizedTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EF8D5025F950E10065BEB3 /* ContentSizedTableView.swift */; };
 		14F4090424C6A09E00F405BC /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 14F4090324C6A09E00F405BC /* OpenSans-Regular.ttf */; };
 		14F4090624C6A0C300F405BC /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 14F4090524C6A0C300F405BC /* OpenSans-Bold.ttf */; };
 		14F4090824C6A2D100F405BC /* UIFont+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F4090724C6A2D100F405BC /* UIFont+Extensions.swift */; };
@@ -324,6 +325,7 @@
 		14EF8D4025F93BA00065BEB3 /* CellTextBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellTextBox.swift; sourceTree = "<group>"; };
 		14EF8D4425F93BD40065BEB3 /* CellCheckBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellCheckBox.swift; sourceTree = "<group>"; };
 		14EF8D4C25F93CDA0065BEB3 /* CheckBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckBox.swift; sourceTree = "<group>"; };
+		14EF8D5025F950E10065BEB3 /* ContentSizedTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentSizedTableView.swift; sourceTree = "<group>"; };
 		14F4090324C6A09E00F405BC /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Regular.ttf"; sourceTree = "<group>"; };
 		14F4090524C6A0C300F405BC /* OpenSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Bold.ttf"; sourceTree = "<group>"; };
 		14F4090724C6A2D100F405BC /* UIFont+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extensions.swift"; sourceTree = "<group>"; };
@@ -458,6 +460,7 @@
 			children = (
 				140AE7A824A9DF3300F7705E /* CommonButton.swift */,
 				146834FE24DA99810075B639 /* CommonTextField.swift */,
+				14EF8D5025F950E10065BEB3 /* ContentSizedTableView.swift */,
 				14562B8025F30E1E00BA9D3B /* ProgressIndicator */,
 				1488DD7F25F32626002A898C /* TextFinishedProgressIndicator */,
 				14EA64F825F4CF7600F26ECE /* CurrentUserView */,
@@ -1264,6 +1267,7 @@
 				1480800B24EA4B32007EB6D1 /* APINetworkInterface.swift in Sources */,
 				14EA64EA25F4CD7700F26ECE /* TrackAccountsInteractor.swift in Sources */,
 				146C35D524C5635D00DBCA23 /* CompanyInfoView.swift in Sources */,
+				14EF8D5125F950E10065BEB3 /* ContentSizedTableView.swift in Sources */,
 				148A097C258700FF00811E35 /* SocketMessage.swift in Sources */,
 				14861EFC249F49DE00D2FA92 /* DocumentPickerViewController.swift in Sources */,
 				1416483225A7F4BC0008E16B /* ContactSFDataSource.swift in Sources */,
