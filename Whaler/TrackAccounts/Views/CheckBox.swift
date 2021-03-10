@@ -16,6 +16,12 @@ class CheckBox: UIView {
     }
   }
   
+  var isChecked: Bool = false {
+    didSet {
+      fillView.alpha = isChecked ? 1.0 : 0.0
+    }
+  }
+  
   private let fillView = UIView()
   
   override init(frame: CGRect) {

@@ -13,6 +13,15 @@ extension TrackAccountsTableCell {
   class CellCheckBox: UIView {
     private let checkbox = CheckBox()
     
+    var isChecked: Bool {
+      get {
+        return checkbox.isChecked
+      }
+      set {
+        checkbox.isChecked = newValue
+      }
+    }
+    
     init() {
       super.init(frame: .zero)
       configure()

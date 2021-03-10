@@ -12,7 +12,19 @@ import Combine
 class TrackAccountsInteractor {
   private var fetchCancellable: AnyCancellable?
   weak var viewController: TrackAccountsViewController?
-  private(set) var accounts = [Account]()
+  private(set) var accounts = [Account]() {
+    didSet {
+      accountsTableData = accounts.map({ (account) -> TrackAccountsTableData in
+        return TrackAccountsTableData(accountName: account.name,
+                                      industry: account.industry,
+                                      billingCity: account.billingCity,
+                                      billingState: account.billingState,
+                                      contactCount: String(Int.random(in: 5...35)),
+                                      style: .content)
+      })
+    }
+  }
+  private(set) var accountsTableData: [TrackAccountsTableData] = []
   
   func fetchAccounts() {
     fetchCancellable = repoStore

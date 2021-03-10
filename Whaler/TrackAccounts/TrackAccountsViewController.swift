@@ -112,7 +112,7 @@ extension TrackAccountsViewController: UITableViewDelegate, UITableViewDataSourc
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: TrackAccountsTableCell.id)
     guard let trackAccountsCell = cell as? TrackAccountsTableCell else { return UITableViewCell() }
-    trackAccountsCell.dataSource = interactor.accounts[indexPath.row]
+    trackAccountsCell.dataSource = interactor.accountsTableData[indexPath.row]
     return trackAccountsCell
   }
   
@@ -122,16 +122,21 @@ extension TrackAccountsViewController: UITableViewDelegate, UITableViewDataSourc
   
   func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
     let headerView = TrackAccountsTableCell()
-    headerView.dataSource = TrackAccountsHeaderData(accountName: "Account",
-                                                    industry: "Industry",
-                                                    billingCity: "City",
-                                                    billingState: "State",
-                                                    contactCount: "Contacts",
-                                                    style: .header)
+    headerView.dataSource = TrackAccountsTableData(accountName: "Account",
+                                                   industry: "Industry",
+                                                   billingCity: "City",
+                                                   billingState: "State",
+                                                   contactCount: "Contacts",
+                                                   style: .header)
     return headerView
   }
   
   func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
     return TrackAccountsTableCell.height
+  }
+  
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    guard let cell = tableView.cellForRow(at: indexPath) as? TrackAccountsTableCell else { return }
+    cell.isChecked = !cell.isChecked
   }
 }

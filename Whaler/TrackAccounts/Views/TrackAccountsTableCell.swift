@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-struct TrackAccountsHeaderData: TrackAccountsDataSource {
+struct TrackAccountsTableData {
   enum Style {
     case content, header
   }
@@ -19,16 +19,7 @@ struct TrackAccountsHeaderData: TrackAccountsDataSource {
   var billingCity: String?
   var billingState: String?
   var contactCount: String
-  var style: TrackAccountsHeaderData.Style
-}
-
-protocol TrackAccountsDataSource {
-  var accountName: String { get }
-  var industry: String? { get }
-  var billingCity: String? { get }
-  var billingState: String? { get }
-  var contactCount: String { get }
-  var style: TrackAccountsHeaderData.Style { get }
+  var style: TrackAccountsTableData.Style
 }
 
 class TrackAccountsTableCell: UITableViewCell {
@@ -46,9 +37,15 @@ class TrackAccountsTableCell: UITableViewCell {
   private lazy var stateBox: CellTextBox = makeTextBox(withWidthMultiplier: 112/593, toStackView: stackView)
   private lazy var contactsBox: CellTextBox = makeTextBox(withWidthMultiplier: 112/593, toStackView: stackView)
   
-  var dataSource: TrackAccountsDataSource? {
+  var dataSource: TrackAccountsTableData? {
     didSet {
       setLabelValues(with: dataSource)
+    }
+  }
+  
+  var isChecked: Bool = false {
+    didSet {
+      checkbox.isChecked = isChecked
     }
   }
   
@@ -74,6 +71,7 @@ class TrackAccountsTableCell: UITableViewCell {
   }
   
   private func configure() {
+    selectionStyle = .none
     backgroundColor = .primaryBackground
     
     let bottomLine = UIView()
@@ -111,7 +109,7 @@ class TrackAccountsTableCell: UITableViewCell {
     ])
   }
   
-  private func setLabelValues(with dataSource: TrackAccountsDataSource?) {
+  private func setLabelValues(with dataSource: TrackAccountsTableData?) {
     guard let dataSource = dataSource else { return }
     let textColor: UIColor
     switch dataSource.style {
@@ -121,7 +119,7 @@ class TrackAccountsTableCell: UITableViewCell {
       textColor = .primaryText
     }
     
-    _ = checkbox//.isSelected = dataSource.isSelected
+    checkbox.isChecked = false
     
     accountBox.text = dataSource.accountName
     industryBox.text = dataSource.industry ?? "—"

@@ -263,17 +263,3 @@ extension Account {
 }
 
 extension Account: RepoStorable {}
-
-extension Account: TrackAccountsDataSource {
-  var accountName: String {
-    return name
-  }
-  
-  var contactCount: String {
-    return String(Int.random(in: 5...30))
-  }
-  
-  var style: TrackAccountsHeaderData.Style {
-    return .content
-  }
-}
