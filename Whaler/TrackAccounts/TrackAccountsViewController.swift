@@ -11,6 +11,8 @@ import UIKit
 
 class TrackAccountsViewController: ToolbarContainingViewController {
   private let interactor = TrackAccountsInteractor()
+  private let titleLabel = UILabel()
+  private var actionsStack: UIStackView!
   private let tableView = UITableView()
   
   override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
@@ -22,9 +24,50 @@ class TrackAccountsViewController: ToolbarContainingViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     view.backgroundColor = .primaryBackground
+    configurePageTitle()
     configureTableView()
+    configureActionsStackView()
     interactor.viewController = self
     interactor.fetchAccounts()
+  }
+  
+  private func configurePageTitle() {
+    titleLabel.font = .openSans(weight: .bold, size: 48)
+    titleLabel.text = "🗂 Track Accounts"
+    titleLabel.translatesAutoresizingMaskIntoConstraints = false
+    view.addSubview(titleLabel)
+    
+    NSLayoutConstraint.activate([
+      titleLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 38),
+      titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 25),
+      titleLabel.heightAnchor.constraint(equalToConstant: 64),
+    ])
+  }
+  
+  private func configureActionsStackView() {
+    actionsStack = UIStackView(arrangedSubviews: [
+      makeUserView(),
+    ])
+    actionsStack.axis = .horizontal
+    actionsStack.spacing = 20
+    actionsStack.translatesAutoresizingMaskIntoConstraints = false
+    view.addSubview(actionsStack)
+    NSLayoutConstraint.activate([
+      actionsStack.rightAnchor.constraint(equalTo: tableView.rightAnchor, constant: 0),
+      actionsStack.centerYAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: -8),
+      actionsStack.heightAnchor.constraint(equalToConstant: 65),
+    ])
+  }
+  
+  private func makeUserView() -> UIView {
+    let userView = CurrentUserView()
+    userView.text = Lifecycle.currentUser?.initials
+    userView.backgroundColor = .brandPurple
+    let size: CGFloat = 65.0
+    userView.layer.cornerRadius = size/2
+    userView.widthAnchor.constraint(equalToConstant: size).isActive = true
+    userView.heightAnchor.constraint(equalTo: userView.widthAnchor).isActive = true
+    return userView
   }
   
   private func configureTableView() {
