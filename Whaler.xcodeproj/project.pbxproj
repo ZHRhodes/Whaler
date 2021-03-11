@@ -155,6 +155,7 @@
 		14EF8D4525F93BD40065BEB3 /* CellCheckBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EF8D4425F93BD40065BEB3 /* CellCheckBox.swift */; };
 		14EF8D4D25F93CDA0065BEB3 /* CheckBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EF8D4C25F93CDA0065BEB3 /* CheckBox.swift */; };
 		14EF8D5125F950E10065BEB3 /* ContentSizedTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EF8D5025F950E10065BEB3 /* ContentSizedTableView.swift */; };
+		14EF8D5825F9BCED0065BEB3 /* PageSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EF8D5725F9BCED0065BEB3 /* PageSelectorView.swift */; };
 		14F4090424C6A09E00F405BC /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 14F4090324C6A09E00F405BC /* OpenSans-Regular.ttf */; };
 		14F4090624C6A0C300F405BC /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 14F4090524C6A0C300F405BC /* OpenSans-Bold.ttf */; };
 		14F4090824C6A2D100F405BC /* UIFont+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F4090724C6A2D100F405BC /* UIFont+Extensions.swift */; };
@@ -326,6 +327,7 @@
 		14EF8D4425F93BD40065BEB3 /* CellCheckBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellCheckBox.swift; sourceTree = "<group>"; };
 		14EF8D4C25F93CDA0065BEB3 /* CheckBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckBox.swift; sourceTree = "<group>"; };
 		14EF8D5025F950E10065BEB3 /* ContentSizedTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentSizedTableView.swift; sourceTree = "<group>"; };
+		14EF8D5725F9BCED0065BEB3 /* PageSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageSelectorView.swift; sourceTree = "<group>"; };
 		14F4090324C6A09E00F405BC /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Regular.ttf"; sourceTree = "<group>"; };
 		14F4090524C6A0C300F405BC /* OpenSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Bold.ttf"; sourceTree = "<group>"; };
 		14F4090724C6A2D100F405BC /* UIFont+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extensions.swift"; sourceTree = "<group>"; };
@@ -881,10 +883,8 @@
 		14EA64ED25F4CD9200F26ECE /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				14EA64EE25F4CDA300F26ECE /* TrackAccountsTableCell.swift */,
-				14EF8D4025F93BA00065BEB3 /* CellTextBox.swift */,
-				14EF8D4425F93BD40065BEB3 /* CellCheckBox.swift */,
-				14EF8D4C25F93CDA0065BEB3 /* CheckBox.swift */,
+				14EF8D5625F9BCD10065BEB3 /* Table */,
+				14EF8D5725F9BCED0065BEB3 /* PageSelectorView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -921,6 +921,17 @@
 				14F4FE13254AA5C600C89485 /* ContactsHelper.swift */,
 			);
 			path = Contact;
+			sourceTree = "<group>";
+		};
+		14EF8D5625F9BCD10065BEB3 /* Table */ = {
+			isa = PBXGroup;
+			children = (
+				14EA64EE25F4CDA300F26ECE /* TrackAccountsTableCell.swift */,
+				14EF8D4025F93BA00065BEB3 /* CellTextBox.swift */,
+				14EF8D4425F93BD40065BEB3 /* CellCheckBox.swift */,
+				14EF8D4C25F93CDA0065BEB3 /* CheckBox.swift */,
+			);
+			path = Table;
 			sourceTree = "<group>";
 		};
 		14F4090224C6A04D00F405BC /* Fonts */ = {
@@ -1223,6 +1234,7 @@
 				149F3A0B25209575001F38BF /* UIView+Extensions.swift in Sources */,
 				14EF8D4125F93BA00065BEB3 /* CellTextBox.swift in Sources */,
 				146A6DDA252C563200DA8E85 /* SFNetworkInterface.swift in Sources */,
+				14EF8D5825F9BCED0065BEB3 /* PageSelectorView.swift in Sources */,
 				149F3A0025206AE4001F38BF /* MainCollectionCell.swift in Sources */,
 				1425175125510E11006255F1 /* FilterBucket.swift in Sources */,
 				148D461525AAD3C7003D5FA7 /* SplitPaneViewController.swift in Sources */,

@@ -14,11 +14,13 @@ class TrackAccountsViewController: ToolbarContainingViewController {
   private let titleLabel = UILabel()
   private var actionsStack: UIStackView!
   private let tableView = ContentSizedTableView()
+  private let pageSelector = PageSelectorView()
+  private var visiblePage = 0
   
   override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-      super.traitCollectionDidChange(previousTraitCollection)
-      updateColors()
-      tableView.setNeedsDisplay()
+    super.traitCollectionDidChange(previousTraitCollection)
+    updateColors()
+    tableView.setNeedsDisplay()
   }
   
   override func viewDidLoad() {
@@ -27,13 +29,9 @@ class TrackAccountsViewController: ToolbarContainingViewController {
     configurePageTitle()
     configureTableView()
     configureActionsStackView()
+    configurePageSelector()
     interactor.viewController = self
     interactor.fetchAccounts()
-  }
-  
-  override func viewDidAppear(_ animated: Bool) {
-    super.viewDidAppear(animated)
-    
   }
   
   private func configurePageTitle() {
@@ -64,6 +62,16 @@ class TrackAccountsViewController: ToolbarContainingViewController {
     ])
   }
   
+  private func configurePageSelector() {
+    pageSelector.delegate = self
+    view.addAndAttach(view: pageSelector,
+                      height: 33,
+                      attachingEdges: [
+                        .right(0, equalTo: tableView.rightAnchor),
+                        .bottom(-27, equalTo: tableView.topAnchor)
+    ])
+  }
+  
   private func makeUserView() -> UIView {
     let userView = CurrentUserView()
     userView.text = Lifecycle.currentUser?.initials
@@ -78,6 +86,7 @@ class TrackAccountsViewController: ToolbarContainingViewController {
   private func configureTableView() {
     tableView.translatesAutoresizingMaskIntoConstraints = false
     tableView.backgroundColor = .primaryBackground
+    tableView.isScrollEnabled = false
     tableView.delegate = self
     tableView.dataSource = self
     tableView.layer.cornerRadius = 10.0
@@ -106,13 +115,13 @@ class TrackAccountsViewController: ToolbarContainingViewController {
 
 extension TrackAccountsViewController: UITableViewDelegate, UITableViewDataSource {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return min(interactor.accounts.count, 12)
+    return min(interactor.accountsTableData[visiblePage]?.count ?? 0, interactor.pageSize)
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: TrackAccountsTableCell.id)
     guard let trackAccountsCell = cell as? TrackAccountsTableCell else { return UITableViewCell() }
-    trackAccountsCell.dataSource = interactor.accountsTableData[indexPath.row]
+    trackAccountsCell.dataSource = interactor.accountsTableData[visiblePage]![indexPath.row]
     return trackAccountsCell
   }
   
@@ -138,5 +147,17 @@ extension TrackAccountsViewController: UITableViewDelegate, UITableViewDataSourc
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     guard let cell = tableView.cellForRow(at: indexPath) as? TrackAccountsTableCell else { return }
     cell.isChecked = !cell.isChecked
+  }
+}
+
+extension TrackAccountsViewController: PageSelectorDelegate {
+  func backButtonTapped() {
+    visiblePage = max(visiblePage - 1, 0)
+    tableView.reloadData()
+  }
+  
+  func forwardButtonTapped() {
+    visiblePage = min(visiblePage + 1, interactor.numberOfPages)
+    tableView.reloadData()
   }
 }

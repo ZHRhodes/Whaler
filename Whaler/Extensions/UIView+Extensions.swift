@@ -11,13 +11,13 @@ import UIKit
 import SkeletonView
 
 enum EdgeConstraint {
-  case left(CGFloat),
-       right(CGFloat),
-       top(CGFloat),
-       bottom(CGFloat),
-       all(CGFloat),
-       centerY(CGFloat),
-       centerX(CGFloat)
+  case left(CGFloat, equalTo: NSLayoutXAxisAnchor? = nil),
+       right(CGFloat, equalTo: NSLayoutXAxisAnchor? = nil),
+       top(CGFloat, equalTo: NSLayoutYAxisAnchor? = nil),
+       bottom(CGFloat, equalTo: NSLayoutYAxisAnchor? = nil),
+       centerY(CGFloat, equalTo: NSLayoutYAxisAnchor? = nil),
+       centerX(CGFloat, equalTo: NSLayoutXAxisAnchor? = nil),
+       all(CGFloat)
 }
 
 extension UIView {
@@ -49,18 +49,19 @@ extension UIView {
     
     for edge in attachingEdges {
       switch edge {
-      case .centerX(let constant):
-        view.centerXAnchor.constraint(equalTo: centerXAnchor, constant: constant).isActive = true
-      case .centerY(let constant):
-        view.centerYAnchor.constraint(equalTo: centerYAnchor, constant: constant).isActive = true
-      case .left(let constant):
-        view.leftAnchor.constraint(equalTo: leftAnchor, constant: constant).isActive = true
-      case .right(let constant):
-        view.rightAnchor.constraint(equalTo: rightAnchor, constant: constant).isActive = true
-      case .top(let constant):
-        view.topAnchor.constraint(equalTo: topAnchor, constant: constant).isActive = true
-      case .bottom(let constant):
-        view.bottomAnchor.constraint(equalTo: bottomAnchor, constant: constant).isActive = true
+      case .centerX(let constant, let equalTo):
+        view.centerXAnchor.constraint(equalTo: equalTo ?? centerXAnchor, constant: constant).isActive = true
+      case .centerY(let constant, let equalTo):
+        view.centerYAnchor.constraint(equalTo: equalTo ?? centerYAnchor, constant: constant).isActive = true
+      case .left(let constant, let equalTo):
+        view.leftAnchor.constraint(equalTo: equalTo ?? leftAnchor, constant: constant).isActive = true
+      break
+      case .right(let constant, let equalTo):
+        view.rightAnchor.constraint(equalTo: equalTo ?? rightAnchor, constant: constant).isActive = true
+      case .top(let constant, let equalTo):
+        view.topAnchor.constraint(equalTo: equalTo ?? topAnchor, constant: constant).isActive = true
+      case .bottom(let constant, let equalTo):
+        view.bottomAnchor.constraint(equalTo: equalTo ?? bottomAnchor, constant: constant).isActive = true
       case .all(let constant):
         view.leftAnchor.constraint(equalTo: leftAnchor, constant: constant).isActive = true
         view.rightAnchor.constraint(equalTo: rightAnchor, constant: -constant).isActive = true
