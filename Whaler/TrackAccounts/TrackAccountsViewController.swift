@@ -179,13 +179,28 @@ extension TrackAccountsViewController: PageSelectorDelegate {
 
 extension TrackAccountsViewController: AddFilterViewDelegate {
   func tapped() {
-    let viewController = FilterPopoverViewController()
-    viewController.modalPresentationStyle = .popover
-    viewController.filters = [FilterProvider(name: "Test", optionsProvider: nil)]
+    let filterPopover = FilterPopoverViewController()
+    filterPopover.delegate = self
+    filterPopover.modalPresentationStyle = .popover
+    filterPopover.filters = [FilterProvider(name: "Test", optionsProvider: nil)]
 //    viewController.delegate = self
-    navigationController?.present(viewController, animated: true, completion: nil)
-    let popoverVC = viewController.popoverPresentationController
+    navigationController?.present(filterPopover, animated: true, completion: nil)
+    let popoverVC = filterPopover.popoverPresentationController
     popoverVC?.permittedArrowDirections = [.up]
     popoverVC?.sourceView = addFilterView
   }
+}
+
+
+extension TrackAccountsViewController: FilterPopoverViewControllerDelegate {
+//  func hovering(over view: UIView) {
+//    let viewController = FilterPopoverViewController()
+//    viewController.modalPresentationStyle = .popover
+//    viewController.filters = [FilterProvider(name: "Option", optionsProvider: nil)]
+////    viewController.delegate = self
+//    present(viewController, animated: true, completion: nil)
+//    let popoverVC = viewController.popoverPresentationController
+//    popoverVC?.permittedArrowDirections = [.left]
+//    popoverVC?.sourceView = view
+//  }
 }
