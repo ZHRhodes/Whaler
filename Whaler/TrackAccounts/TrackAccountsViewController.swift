@@ -15,7 +15,7 @@ class TrackAccountsViewController: ToolbarContainingViewController {
   private var actionsStack: UIStackView!
   private let tableView = ContentSizedTableView()
   private let pageSelector = PageSelectorView()
-  private var visiblePage = 0
+  private var visiblePage = 1
   
   override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
     super.traitCollectionDidChange(previousTraitCollection)
@@ -70,6 +70,10 @@ class TrackAccountsViewController: ToolbarContainingViewController {
                         .right(0, equalTo: tableView.rightAnchor),
                         .bottom(-27, equalTo: tableView.topAnchor)
     ])
+  }
+  
+  func setNumberOfPages(_ number: Int) {
+    pageSelector.totalPages = number
   }
   
   private func makeUserView() -> UIView {
@@ -152,7 +156,7 @@ extension TrackAccountsViewController: UITableViewDelegate, UITableViewDataSourc
 
 extension TrackAccountsViewController: PageSelectorDelegate {
   func backButtonTapped() {
-    visiblePage = max(visiblePage - 1, 0)
+    visiblePage = max(visiblePage - 1, 1)
     tableView.reloadData()
   }
   

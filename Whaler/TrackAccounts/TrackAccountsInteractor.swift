@@ -13,11 +13,15 @@ class TrackAccountsInteractor {
   private var fetchCancellable: AnyCancellable?
   weak var viewController: TrackAccountsViewController?
   var pageSize: Int = 12
-  private(set) var numberOfPages = 0
+  private(set) var numberOfPages = 0 {
+    didSet {
+      viewController?.setNumberOfPages(numberOfPages)
+    }
+  }
   private(set) var accounts = [Account]() {
     didSet {
       accountsTableData = [:]
-      var page = 0
+      var page = 1
       var numInCurrentPage = 0
       for account in accounts {
         let accountData =  TrackAccountsTableData(accountName: account.name,
@@ -31,10 +35,13 @@ class TrackAccountsInteractor {
         }
         accountsTableData[page]?.append(accountData)
         numInCurrentPage += 1
-        if numInCurrentPage == 12 {
+        if numInCurrentPage == pageSize {
           page += 1
           numInCurrentPage = 0
         }
+      }
+      if numInCurrentPage == 0 {
+        page = page - 1
       }
       numberOfPages = page
     }

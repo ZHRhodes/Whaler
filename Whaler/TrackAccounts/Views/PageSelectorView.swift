@@ -20,6 +20,16 @@ class PageSelectorView: UIView {
   private lazy var leftButton = makeButton(with: "<")
   private let label = UILabel()
   private lazy var rightButton = makeButton(with: ">")
+  var totalPages: Int = 1 {
+    didSet {
+      setLabelValue()
+    }
+  }
+  var currentPage: Int = 1 {
+    didSet {
+      setLabelValue()
+    }
+  }
   
   override init(frame: CGRect) {
     super.init(frame: frame)
@@ -40,7 +50,7 @@ class PageSelectorView: UIView {
     stackView.axis = .horizontal
     addAndAttach(view: stackView, attachingEdges: [.all(0)])
     label.textColor = .primaryText
-    label.text = "1 / 6"
+    label.text = "1 / 1"
   }
   
   private func makeButton(with text: String) -> UIButton {
@@ -51,11 +61,17 @@ class PageSelectorView: UIView {
     return button
   }
   
+  private func setLabelValue() {
+    label.text = "\(currentPage) / \(totalPages)"
+  }
+  
   @objc
   private func buttonTapped(_ sender: UIButton) {
     if sender === leftButton {
+      currentPage = max(currentPage - 1, 1)
       delegate?.backButtonTapped()
     } else if sender === rightButton {
+      currentPage = min(currentPage + 1, totalPages)
       delegate?.forwardButtonTapped()
     }
   }
