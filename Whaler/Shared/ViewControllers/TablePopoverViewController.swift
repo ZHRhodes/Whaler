@@ -49,10 +49,12 @@ class TablePopoverViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     preferredContentSize = CGSize(width: 300, height: 200)
+    view.backgroundColor = .primaryBackground
     configureTableView()
   }
   
   private func configureTableView() {
+    tableView.backgroundColor = .primaryBackground
     tableView.dataSource = self
     tableView.delegate = self
     tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -76,6 +78,8 @@ extension TablePopoverViewController: UITableViewDataSource, UITableViewDelegate
     let cell = UITableViewCell()
     let item = items[indexPath.row]
     cell.textLabel?.text = item.name
+    cell.textLabel?.tintColor = .primaryText
+    cell.backgroundColor = .primaryBackground
     return cell
   }
   

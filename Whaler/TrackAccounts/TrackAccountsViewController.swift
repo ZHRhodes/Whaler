@@ -17,6 +17,9 @@ class TrackAccountsViewController: ToolbarContainingViewController {
   private let pageSelector = PageSelectorView()
   private var visiblePage = 1
   
+  //move into separate stackview
+  private let addFilterView = AddFilterView()
+  
   override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
     super.traitCollectionDidChange(previousTraitCollection)
     updateColors()
@@ -30,6 +33,7 @@ class TrackAccountsViewController: ToolbarContainingViewController {
     configureTableView()
     configureActionsStackView()
     configurePageSelector()
+    configureAddFilterView()
     interactor.viewController = self
     interactor.fetchAccounts()
   }
@@ -85,6 +89,13 @@ class TrackAccountsViewController: ToolbarContainingViewController {
     userView.widthAnchor.constraint(equalToConstant: size).isActive = true
     userView.heightAnchor.constraint(equalTo: userView.widthAnchor).isActive = true
     return userView
+  }
+  
+  private func configureAddFilterView() {
+    addFilterView.delegate = self
+    view.addAndAttach(view: addFilterView,
+                      attachingEdges: [.left(0, equalTo: tableView.leftAnchor),
+                                       .bottom(0, equalTo: pageSelector.bottomAnchor)])
   }
   
   private func configureTableView() {
@@ -163,5 +174,18 @@ extension TrackAccountsViewController: PageSelectorDelegate {
   func forwardButtonTapped() {
     visiblePage = min(visiblePage + 1, interactor.numberOfPages)
     tableView.reloadData()
+  }
+}
+
+extension TrackAccountsViewController: AddFilterViewDelegate {
+  func tapped() {
+    let viewController = FilterPopoverViewController()
+    viewController.modalPresentationStyle = .popover
+    viewController.filters = [FilterProvider(name: "Test", optionsProvider: nil)]
+//    viewController.delegate = self
+    navigationController?.present(viewController, animated: true, completion: nil)
+    let popoverVC = viewController.popoverPresentationController
+    popoverVC?.permittedArrowDirections = [.up]
+    popoverVC?.sourceView = addFilterView
   }
 }
