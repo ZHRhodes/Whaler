@@ -10,6 +10,10 @@ import Foundation
 import UIKit
 
 class ProgressView: UIView {
+  static func makeDefaultStyle() -> ProgressView {
+    return ProgressView(colors: [.brandGreen, .brandPurple, .brandRed], lineWidth: 5)
+  }
+  
   var isAnimating: Bool = false {
     didSet {
       guard isAnimating != oldValue else { return }
@@ -28,7 +32,7 @@ class ProgressView: UIView {
   private lazy var shapeLayer: ProgressShapeLayer = {
     return ProgressShapeLayer(strokeColor: colors.first ?? .black,
                               lineWidth: lineWidth)
-   }()
+  }()
   
   init(frame: CGRect, colors: [UIColor], lineWidth: CGFloat) {
     self.colors = colors

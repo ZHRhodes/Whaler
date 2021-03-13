@@ -8,16 +8,60 @@
 
 import Foundation
 
+enum FilterGroup {
+  case base, owner, industry, revenue
+}
+
 protocol FilterProviding {
+  var group: FilterGroup { get }
   var name: String { get }
-  var optionsProvider: FilterOptionsProvider? { get }
+  var optionsProvider: FilterOptionsProviding? { get }
 }
 
-protocol FilterOptionsProvider {
-  func fetchOptions(completion: ([String]) -> Void)
+struct FilterOption: FilterProviding {
+  let group: FilterGroup
+  let name: String
+  var optionsProvider: FilterOptionsProviding?
 }
 
-struct FilterProvider: FilterProviding {
-  var name: String
-  var optionsProvider: FilterOptionsProvider?
+protocol FilterOptionsProviding {
+  func fetchOptions(completion: @escaping ([FilterProviding]) -> Void)
+}
+
+struct BaseOptionsProvider: FilterOptionsProviding {
+  func fetchOptions(completion: @escaping ([FilterProviding]) -> Void) {
+    let options: [FilterOption] = [
+      FilterOption(group: .owner,
+                   name: "Owner",
+                   optionsProvider: nil),
+      FilterOption(group: .industry,
+                   name: "Industry",
+                   optionsProvider: nil),
+      FilterOption(group: .revenue,
+                   name: "Revenue",
+                   optionsProvider: nil)
+    ]
+    completion(options)
+  }
+}
+
+struct FilterOptionsProviderFactory {
+  static func provider(for filterGroup: FilterGroup) -> FilterOptionsProviding {
+    switch filterGroup {
+    case .base:
+      return BaseOptionsProvider()
+    case .owner:
+      return OwnerOptionsProvider()
+    case .industry:
+      return BaseOptionsProvider()
+    case .revenue:
+      return BaseOptionsProvider()
+    }
+  }
+}
+
+struct OwnerOptionsProvider: FilterOptionsProviding {
+  func fetchOptions(completion: @escaping ([FilterProviding]) -> Void) {
+    
+  }
 }

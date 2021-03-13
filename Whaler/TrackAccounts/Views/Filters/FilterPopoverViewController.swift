@@ -15,9 +15,20 @@ protocol FilterPopoverViewControllerDelegate: class {
 class FilterPopoverViewController: UIViewController {
   weak var delegate: FilterPopoverViewControllerDelegate?
   private let tableView = UITableView()
-  var filters: [FilterProviding] = [] {
+  private var loadingView: UIView?
+  
+  var optionsProvider: FilterOptionsProviding? {
     didSet {
-      tableView.reloadData()
+      optionsProvider?.fetchOptions(completion: { [weak self] (providers) in
+        self?.filters = providers
+      })
+    }
+  }
+  
+  private var filters: [FilterProviding]? {
+    didSet {
+      hideLoadingIndicator()
+      configureTableView()
     }
   }
   
@@ -25,16 +36,42 @@ class FilterPopoverViewController: UIViewController {
     super.viewDidLoad()
     preferredContentSize = CGSize(width: 200, height: 300)
     view.backgroundColor = .clear
-    configureTableView()
+  }
+  
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
+    if filters == nil {
+      showLoadingIndicator()
+    }
   }
   
   private func configureTableView() {
+    tableView.register(FilterPopoverTableCell.self,
+                       forCellReuseIdentifier: FilterPopoverTableCell.id)
     tableView.backgroundColor = .primaryBackground
     tableView.dataSource = self
     tableView.delegate = self
     tableView.translatesAutoresizingMaskIntoConstraints = false
     
-    view.addAndAttach(view: tableView, width: 200.0, attachingEdges: [.left(0), .top(0), .bottom(0)])
+    view.addAndAttach(view: tableView,
+                      width: 200.0,
+                      attachingEdges: [.left(0), .top(0), .bottom(0)])
+  }
+  
+  private func showLoadingIndicator() {
+    loadingView = UIView()
+    let progressView = ProgressView.makeDefaultStyle()
+    loadingView!.addAndAttach(view: progressView,
+                              height: 30,
+                              width: 30,
+                              attachingEdges: [.centerY(0), .centerX(0)])
+    view.addAndAttach(view: loadingView!, attachingEdges: [.all(0)])
+    progressView.isAnimating = true
+  }
+  
+  private func hideLoadingIndicator() {
+    loadingView?.removeFromSuperview()
+    loadingView = nil
   }
   
   @objc
@@ -53,29 +90,57 @@ class FilterPopoverViewController: UIViewController {
   }
   
   private func showPopoverOnHover(view: UIView) {
+    guard let filterCell = view as? FilterPopoverTableCell,
+          let filterOption = filterCell.filterOption else { return }
     preferredContentSize = CGSize(width: 400, height: 300)
     let viewController = FilterPopoverViewController()
 //    viewController.delegate = self
-    viewController.filters = [FilterProvider(name: "Option", optionsProvider: nil)]
+    viewController.optionsProvider = FilterOptionsProviderFactory.provider(for: filterOption.group)
     self.view.addAndAttach(view: viewController.view, attachingEdges: [.left(0, equalTo: tableView.rightAnchor), .top(0), .right(0), .bottom(0)])
   }
 }
 
 extension FilterPopoverViewController: UITableViewDataSource, UITableViewDelegate {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return filters.count
+    return filters?.count ?? 0
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let cell = UITableViewCell()
+    let cell = tableView.dequeueReusableCell(withIdentifier: FilterPopoverTableCell.id)
+    guard let filterCell = cell as? FilterPopoverTableCell,
+          let filters = filters else { return UITableViewCell() }
+    
     let filter = filters[indexPath.row]
-    cell.textLabel?.text = filter.name
-    cell.textLabel?.tintColor = .primaryText
-    cell.backgroundColor = .primaryBackground
+    filterCell.filterOption = filter
+
     let hover = UIHoverGestureRecognizer(target: self, action: #selector(hovering(_:)))
-    cell.addGestureRecognizer(hover)
-    return cell
+    filterCell.addGestureRecognizer(hover)
+    
+    return filterCell
   }
 }
 
-
+class FilterPopoverTableCell: UITableViewCell {
+  static let id = "FilterPopoverTableCellId"
+  
+  var filterOption: FilterProviding? {
+    didSet {
+      textLabel?.text = filterOption?.name
+    }
+  }
+  
+  override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+    super.init(style: style, reuseIdentifier: reuseIdentifier)
+    configure()
+  }
+  
+  required init?(coder: NSCoder) {
+    super.init(coder: coder)
+    configure()
+  }
+  
+  private func configure() {
+    textLabel?.tintColor = .primaryText
+    backgroundColor = .primaryBackground
+  }
+}
