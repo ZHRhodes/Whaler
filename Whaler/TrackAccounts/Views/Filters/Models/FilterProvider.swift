@@ -36,7 +36,7 @@ struct BaseOptionsProvider: FilterOptionsProviding {
                    optionsProvider: OwnerOptionsProvider()),
       FilterOption(group: .industry,
                    name: "Industry",
-                   optionsProvider: nil),
+                   optionsProvider: IndustryOptionsProvider()),
       FilterOption(group: .revenue,
                    name: "Revenue",
                    optionsProvider: nil)
@@ -54,5 +54,21 @@ struct OwnerOptionsProvider: FilterOptionsProviding {
                           optionsProvider: nil)
     }
     completion(options)
+  }
+}
+
+struct IndustryOptionsProvider: FilterOptionsProviding {
+  func fetchOptions(completion: @escaping ([FilterProviding]) -> Void) {
+    DispatchQueue.global().async {
+      let industries = SFHelper.queryPossibleIndustries()
+      let options = industries.map { (name) -> FilterOption in
+        return FilterOption(group: .industry,
+                            name: name,
+                            optionsProvider: nil)
+      }
+      DispatchQueue.main.async {
+        completion(options)
+      }
+    }
   }
 }

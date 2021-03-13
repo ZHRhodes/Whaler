@@ -15,7 +15,7 @@ protocol FilterPopoverViewControllerDelegate: class {
 class FilterPopoverViewController: UIViewController {
   weak var delegate: FilterPopoverViewControllerDelegate?
   private let tableView = UITableView()
-  private var secondaryTable: UIView?
+  private var secondaryTableVC: UIViewController?
   private var loadingView: UIView?
   
   var optionsProvider: FilterOptionsProviding? {
@@ -91,10 +91,10 @@ class FilterPopoverViewController: UIViewController {
   }
   
   private func showPopoverOnHover(view: UIView) {
-    secondaryTable?.removeFromSuperview()
+    secondaryTableVC?.view.removeFromSuperview()
     guard let filterCell = view as? FilterPopoverTableCell,
           let optionsProvider = filterCell.filterOption?.optionsProvider else {
-      shrinkTableIfNecessary()
+      shrinkPopoverIfNecessary()
       return
     }
     
@@ -102,7 +102,7 @@ class FilterPopoverViewController: UIViewController {
     let viewController = FilterPopoverViewController()
 //    viewController.delegate = self
     viewController.optionsProvider = optionsProvider
-    secondaryTable = viewController.view
+    secondaryTableVC = viewController
     self.view.addAndAttach(view: viewController.view,
                            attachingEdges: [.left(0, equalTo: tableView.rightAnchor),
                                             .top(0),
@@ -110,8 +110,8 @@ class FilterPopoverViewController: UIViewController {
                                             .bottom(0)])
   }
   
-  private func shrinkTableIfNecessary() {
-    secondaryTable?.removeFromSuperview()
+  private func shrinkPopoverIfNecessary() {
+    secondaryTableVC?.view.removeFromSuperview()
     preferredContentSize = CGSize(width: 200, height: 300)
   }
 }
