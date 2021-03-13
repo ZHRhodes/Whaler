@@ -20,6 +20,10 @@ extension FullNameProviding {
     let lastInitial = lastName.first.map(String.init) ?? ""
     return firstInitial.uppercased() + lastInitial.uppercased()
   }
+  
+  var fullName: String {
+    return "\(firstName) \(lastName)"
+  }
 }
 
 struct User: Codable {

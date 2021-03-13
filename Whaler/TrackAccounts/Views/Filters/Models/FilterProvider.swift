@@ -33,7 +33,7 @@ struct BaseOptionsProvider: FilterOptionsProviding {
     let options: [FilterOption] = [
       FilterOption(group: .owner,
                    name: "Owner",
-                   optionsProvider: nil),
+                   optionsProvider: OwnerOptionsProvider()),
       FilterOption(group: .industry,
                    name: "Industry",
                    optionsProvider: nil),
@@ -45,23 +45,14 @@ struct BaseOptionsProvider: FilterOptionsProviding {
   }
 }
 
-struct FilterOptionsProviderFactory {
-  static func provider(for filterGroup: FilterGroup) -> FilterOptionsProviding {
-    switch filterGroup {
-    case .base:
-      return BaseOptionsProvider()
-    case .owner:
-      return OwnerOptionsProvider()
-    case .industry:
-      return BaseOptionsProvider()
-    case .revenue:
-      return BaseOptionsProvider()
-    }
-  }
-}
-
 struct OwnerOptionsProvider: FilterOptionsProviding {
   func fetchOptions(completion: @escaping ([FilterProviding]) -> Void) {
-    
+    guard let orgUsers = Lifecycle.currentUser?.organization?.users else { return }
+    let options: [FilterOption] = orgUsers.map { (user) -> FilterOption in
+      return FilterOption(group: .owner,
+                          name: user.fullName,
+                          optionsProvider: nil)
+    }
+    completion(options)
   }
 }

@@ -182,7 +182,7 @@ extension TrackAccountsViewController: AddFilterViewDelegate {
     let filterPopover = FilterPopoverViewController()
     filterPopover.delegate = self
     filterPopover.modalPresentationStyle = .popover
-    filterPopover.optionsProvider = FilterOptionsProviderFactory.provider(for: .base)
+    filterPopover.optionsProvider = BaseOptionsProvider()
 //    viewController.delegate = self
     navigationController?.present(filterPopover, animated: true, completion: nil)
     let popoverVC = filterPopover.popoverPresentationController
