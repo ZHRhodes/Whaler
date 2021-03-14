@@ -18,8 +18,13 @@ class TrackAccountsViewController: ToolbarContainingViewController {
   private var visiblePage = 1
   private var filterPopover: FilterPopoverViewController?
   
-  //move into separate stackview
-  private let addFilterView = AddFilterView()
+  private let filterStack = UIStackView()
+  private lazy var addFilterView: AddFilterView = {
+    let view = AddFilterView()
+    view.translatesAutoresizingMaskIntoConstraints = false
+    view.delegate = self
+    return view
+  }()
   
   override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
     super.traitCollectionDidChange(previousTraitCollection)
@@ -34,7 +39,7 @@ class TrackAccountsViewController: ToolbarContainingViewController {
     configureTableView()
     configureActionsStackView()
     configurePageSelector()
-    configureAddFilterView()
+    configureFilterStack()
     interactor.viewController = self
     interactor.fetchAccounts()
   }
@@ -92,11 +97,17 @@ class TrackAccountsViewController: ToolbarContainingViewController {
     return userView
   }
   
-  private func configureAddFilterView() {
-    addFilterView.delegate = self
-    view.addAndAttach(view: addFilterView,
-                      attachingEdges: [.left(0, equalTo: tableView.leftAnchor),
-                                       .bottom(0, equalTo: pageSelector.bottomAnchor)])
+  private func configureFilterStack() {
+    filterStack.axis = .horizontal
+    filterStack.spacing = 16.0
+    filterStack.distribution = .fillProportionally
+    view.addAndAttach(view: filterStack, height: 48, attachingEdges: [.left(0, equalTo: tableView.leftAnchor), .bottom(0, equalTo: pageSelector.bottomAnchor)])
+    
+    let filterValue = FilterValueView()
+    filterValue.translatesAutoresizingMaskIntoConstraints = false
+    filterStack.addArrangedSubview(filterValue)
+    
+    filterStack.addArrangedSubview(addFilterView)
   }
   
   private func configureTableView() {
