@@ -53,6 +53,7 @@
 		1443045F24F3356A00D2FBD2 /* SFNewAccessToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1443045E24F3356A00D2FBD2 /* SFNewAccessToken.swift */; };
 		1443046124F3AFFC00D2FBD2 /* Typealiases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1443046024F3AFFC00D2FBD2 /* Typealiases.swift */; };
 		14446D6925E350BA008E46CD /* AccountDetailsContactsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14446D6825E350BA008E46CD /* AccountDetailsContactsInteractor.swift */; };
+		1444F4BC25FDE18200939F10 /* FilterPopoverTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1444F4BB25FDE18200939F10 /* FilterPopoverTableCell.swift */; };
 		144AECDA24D26658009625BE /* ContactRowViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144AECD924D26658009625BE /* ContactRowViewCell.swift */; };
 		144BF56C24D7E66E00F231F0 /* RootContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144BF56B24D7E66E00F231F0 /* RootContainerViewController.swift */; };
 		144FA6BD24C2C0C500506F15 /* CompanyInfoHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144FA6BC24C2C0C500506F15 /* CompanyInfoHeaderView.swift */; };
@@ -228,6 +229,7 @@
 		1443045E24F3356A00D2FBD2 /* SFNewAccessToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFNewAccessToken.swift; sourceTree = "<group>"; };
 		1443046024F3AFFC00D2FBD2 /* Typealiases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Typealiases.swift; sourceTree = "<group>"; };
 		14446D6825E350BA008E46CD /* AccountDetailsContactsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDetailsContactsInteractor.swift; sourceTree = "<group>"; };
+		1444F4BB25FDE18200939F10 /* FilterPopoverTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterPopoverTableCell.swift; sourceTree = "<group>"; };
 		144AECD924D26658009625BE /* ContactRowViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactRowViewCell.swift; sourceTree = "<group>"; };
 		144BF56B24D7E66E00F231F0 /* RootContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootContainerViewController.swift; sourceTree = "<group>"; };
 		144FA6BC24C2C0C500506F15 /* CompanyInfoHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyInfoHeaderView.swift; sourceTree = "<group>"; };
@@ -966,6 +968,7 @@
 			children = (
 				14EF8D5C25FB1BB20065BEB3 /* FilterValueView.swift */,
 				14EF8D6025FB1C830065BEB3 /* AddFilterView.swift */,
+				1444F4BB25FDE18200939F10 /* FilterPopoverTableCell.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -1336,6 +1339,7 @@
 				14EA64EF25F4CDA300F26ECE /* TrackAccountsTableCell.swift in Sources */,
 				14025FCA24D6BF5D00408379 /* AuthenticationViewController.swift in Sources */,
 				1410405725EB39AC00D8C793 /* DetailsGrid.swift in Sources */,
+				1444F4BC25FDE18200939F10 /* FilterPopoverTableCell.swift in Sources */,
 				140AE7A924A9DF3300F7705E /* CommonButton.swift in Sources */,
 				146834FC24DA76CE0075B639 /* RootContainerInteractor.swift in Sources */,
 				144BF56C24D7E66E00F231F0 /* RootContainerViewController.swift in Sources */,

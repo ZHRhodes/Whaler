@@ -75,25 +75,9 @@ class FilterPopoverViewController: UIViewController {
     loadingView = nil
   }
   
-  @objc
-  private func hovering(_ recognizer: UIHoverGestureRecognizer) {
-    #if targetEnvironment(macCatalyst)
-    switch recognizer.state {
-    case .began, .changed:
-      showPopoverOnHover(view: recognizer.view!)
-    case .ended:
-      //hide popover
-    break
-    default:
-      break
-    }
-    #endif
-  }
-  
-  private func showPopoverOnHover(view: UIView) {
+  private func showPopover(for cell: FilterPopoverTableCell) {
     secondaryTableVC?.view.removeFromSuperview()
-    guard let filterCell = view as? FilterPopoverTableCell,
-          let optionsProvider = filterCell.filterOption?.optionsProvider else {
+    guard let optionsProvider = cell.filterOption?.optionsProvider else {
       shrinkPopoverIfNecessary()
       return
     }
@@ -128,35 +112,12 @@ extension FilterPopoverViewController: UITableViewDataSource, UITableViewDelegat
     
     let filter = filters[indexPath.row]
     filterCell.filterOption = filter
-
-    let hover = UIHoverGestureRecognizer(target: self, action: #selector(hovering(_:)))
-    filterCell.addGestureRecognizer(hover)
     
     return filterCell
   }
-}
-
-class FilterPopoverTableCell: UITableViewCell {
-  static let id = "FilterPopoverTableCellId"
   
-  var filterOption: FilterProviding? {
-    didSet {
-      textLabel?.text = filterOption?.name
-    }
-  }
-  
-  override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-    super.init(style: style, reuseIdentifier: reuseIdentifier)
-    configure()
-  }
-  
-  required init?(coder: NSCoder) {
-    super.init(coder: coder)
-    configure()
-  }
-  
-  private func configure() {
-    textLabel?.tintColor = .primaryText
-    backgroundColor = .primaryBackground
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    guard let cell = tableView.cellForRow(at: indexPath) as? FilterPopoverTableCell else { return }
+    showPopover(for: cell)
   }
 }
