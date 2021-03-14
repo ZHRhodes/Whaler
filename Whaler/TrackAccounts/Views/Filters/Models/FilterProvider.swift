@@ -9,7 +9,7 @@
 import Foundation
 
 enum FilterGroup {
-  case base, owner, industry, revenue
+  case base, owner, industry, revenue, state
 }
 
 protocol FilterProviding {
@@ -37,9 +37,9 @@ struct BaseOptionsProvider: FilterOptionsProviding {
       FilterOption(group: .industry,
                    name: "Industry",
                    optionsProvider: IndustryOptionsProvider()),
-      FilterOption(group: .revenue,
+      FilterOption(group: .state,
                    name: "Revenue",
-                   optionsProvider: nil)
+                   optionsProvider: StateOptionsProvider())
     ]
     completion(options)
   }
@@ -47,13 +47,17 @@ struct BaseOptionsProvider: FilterOptionsProviding {
 
 struct OwnerOptionsProvider: FilterOptionsProviding {
   func fetchOptions(completion: @escaping ([FilterProviding]) -> Void) {
-    guard let orgUsers = Lifecycle.currentUser?.organization?.users else { return }
-    let options: [FilterOption] = orgUsers.map { (user) -> FilterOption in
-      return FilterOption(group: .owner,
-                          name: user.fullName,
-                          optionsProvider: nil)
+    DispatchQueue.global().async {
+      let owners = SFHelper.queryPossibleOwners()
+      let options = owners.map { (name) -> FilterOption in
+        return FilterOption(group: .owner,
+                            name: name,
+                            optionsProvider: nil)
+      }
+      DispatchQueue.main.async {
+        completion(options)
+      }
     }
-    completion(options)
   }
 }
 
@@ -63,6 +67,22 @@ struct IndustryOptionsProvider: FilterOptionsProviding {
       let industries = SFHelper.queryPossibleIndustries()
       let options = industries.map { (name) -> FilterOption in
         return FilterOption(group: .industry,
+                            name: name,
+                            optionsProvider: nil)
+      }
+      DispatchQueue.main.async {
+        completion(options)
+      }
+    }
+  }
+}
+
+struct StateOptionsProvider: FilterOptionsProviding {
+  func fetchOptions(completion: @escaping ([FilterProviding]) -> Void) {
+    DispatchQueue.global().async {
+      let states = SFHelper.queryPossibleBillingStates()
+      let options = states.map { (name) -> FilterOption in
+        return FilterOption(group: .state,
                             name: name,
                             optionsProvider: nil)
       }

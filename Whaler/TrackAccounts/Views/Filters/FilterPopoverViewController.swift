@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 
 protocol FilterPopoverViewControllerDelegate: class {
+  func selected(filter: FilterProviding)
 }
 
 class FilterPopoverViewController: UIViewController {
@@ -75,16 +76,11 @@ class FilterPopoverViewController: UIViewController {
     loadingView = nil
   }
   
-  private func showPopover(for cell: FilterPopoverTableCell) {
+  private func showPopover(with optionsProvider: FilterOptionsProviding) {
     secondaryTableVC?.view.removeFromSuperview()
-    guard let optionsProvider = cell.filterOption?.optionsProvider else {
-      shrinkPopoverIfNecessary()
-      return
-    }
-    
     preferredContentSize = CGSize(width: 400, height: 300)
     let viewController = FilterPopoverViewController()
-//    viewController.delegate = self
+    viewController.delegate = self
     viewController.optionsProvider = optionsProvider
     secondaryTableVC = viewController
     self.view.addAndAttach(view: viewController.view,
@@ -118,6 +114,16 @@ extension FilterPopoverViewController: UITableViewDataSource, UITableViewDelegat
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     guard let cell = tableView.cellForRow(at: indexPath) as? FilterPopoverTableCell else { return }
-    showPopover(for: cell)
+    if let optionsProvider = cell.filterOption?.optionsProvider {
+      showPopover(with: optionsProvider)
+    } else if let filterOption = cell.filterOption {
+      delegate?.selected(filter: filterOption)
+    }
+  }
+}
+
+extension FilterPopoverViewController: FilterPopoverViewControllerDelegate {
+  func selected(filter: FilterProviding) {
+    delegate?.selected(filter: filter)
   }
 }

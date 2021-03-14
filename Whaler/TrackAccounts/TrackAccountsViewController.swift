@@ -16,6 +16,7 @@ class TrackAccountsViewController: ToolbarContainingViewController {
   private let tableView = ContentSizedTableView()
   private let pageSelector = PageSelectorView()
   private var visiblePage = 1
+  private var filterPopover: FilterPopoverViewController?
   
   //move into separate stackview
   private let addFilterView = AddFilterView()
@@ -179,13 +180,13 @@ extension TrackAccountsViewController: PageSelectorDelegate {
 
 extension TrackAccountsViewController: AddFilterViewDelegate {
   func tapped() {
-    let filterPopover = FilterPopoverViewController()
-    filterPopover.delegate = self
-    filterPopover.modalPresentationStyle = .popover
-    filterPopover.optionsProvider = BaseOptionsProvider()
+    filterPopover = FilterPopoverViewController()
+    filterPopover!.delegate = self
+    filterPopover!.modalPresentationStyle = .popover
+    filterPopover!.optionsProvider = BaseOptionsProvider()
 //    viewController.delegate = self
-    navigationController?.present(filterPopover, animated: true, completion: nil)
-    let popoverVC = filterPopover.popoverPresentationController
+    navigationController?.present(filterPopover!, animated: true, completion: nil)
+    let popoverVC = filterPopover!.popoverPresentationController
     popoverVC?.permittedArrowDirections = [.up]
     popoverVC?.sourceView = addFilterView
   }
@@ -193,14 +194,8 @@ extension TrackAccountsViewController: AddFilterViewDelegate {
 
 
 extension TrackAccountsViewController: FilterPopoverViewControllerDelegate {
-//  func hovering(over view: UIView) {
-//    let viewController = FilterPopoverViewController()
-//    viewController.modalPresentationStyle = .popover
-//    viewController.filters = [FilterProvider(name: "Option", optionsProvider: nil)]
-////    viewController.delegate = self
-//    present(viewController, animated: true, completion: nil)
-//    let popoverVC = viewController.popoverPresentationController
-//    popoverVC?.permittedArrowDirections = [.left]
-//    popoverVC?.sourceView = view
-//  }
+  func selected(filter: FilterProviding) {
+    filterPopover?.dismiss(animated: true, completion: nil)
+    print(filter.name)
+  }
 }
