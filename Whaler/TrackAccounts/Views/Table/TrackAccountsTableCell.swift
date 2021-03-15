@@ -31,11 +31,11 @@ class TrackAccountsTableCell: UITableViewCell {
     return stackView
   }()
   private lazy var checkbox: CellCheckBox = makeCheckBox(withWidthMultiplier: 33/593, toStackView: stackView)
-  private lazy var accountBox: CellTextBox = makeTextBox(withWidthMultiplier: 112/593, toStackView: stackView)
-  private lazy var industryBox: CellTextBox = makeTextBox(withWidthMultiplier: 112/593, toStackView: stackView)
+  private lazy var accountBox: CellTextBox = makeTextBox(withWidthMultiplier: 134/593, toStackView: stackView)
+  private lazy var industryBox: CellTextBox = makeTextBox(withWidthMultiplier: 134/593, toStackView: stackView)
   private lazy var cityBox: CellTextBox = makeTextBox(withWidthMultiplier: 112/593, toStackView: stackView)
-  private lazy var stateBox: CellTextBox = makeTextBox(withWidthMultiplier: 112/593, toStackView: stackView)
-  private lazy var contactsBox: CellTextBox = makeTextBox(withWidthMultiplier: 112/593, toStackView: stackView)
+  private lazy var stateBox: CellTextBox = makeTextBox(withWidthMultiplier: 90/593, toStackView: stackView)
+  private lazy var contactsBox: CellTextBox = makeTextBox(withWidthMultiplier: 90/593, toStackView: stackView)
   
   var dataSource: TrackAccountsTableData? {
     didSet {
