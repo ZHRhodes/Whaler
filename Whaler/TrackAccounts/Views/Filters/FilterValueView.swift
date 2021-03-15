@@ -9,8 +9,17 @@
 import Foundation
 import UIKit
 
+protocol FilterValueViewDelegate: class {
+  func removeTapped(sender: FilterValueView)
+}
+
 class FilterValueView: UIView {
-  var color: UIColor = [.brandGreenDark, .brandRedDark, .brandPinkDark, .brandYellowDark].randomElement()!
+  weak var delegate: FilterValueViewDelegate?
+  var color: UIColor = [.brandGreenDark, .brandRedDark, .brandPinkDark, .brandYellowDark].randomElement()! {
+    didSet {
+      backgroundColor = color
+    }
+  }
   
   private let button = UIButton()
   private let label = UILabel()
@@ -31,7 +40,6 @@ class FilterValueView: UIView {
   
   private func configure() {
     layer.cornerRadius = 24.0
-    backgroundColor = color
     configureButton()
     configureLabel()
   }
@@ -51,6 +59,6 @@ class FilterValueView: UIView {
   
   @objc
   private func buttonTapped() {
-    
+    delegate?.removeTapped(sender: self)
   }
 }

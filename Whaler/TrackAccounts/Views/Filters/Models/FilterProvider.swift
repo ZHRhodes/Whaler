@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 enum FilterGroup: String {
   case base = "Base",
@@ -14,6 +15,19 @@ enum FilterGroup: String {
        industry = "Industry",
        revenue = "Revenue",
        state = "State"
+  
+  var color: UIColor {
+    switch self {
+    case .owner:
+      return .brandYellowDark
+    case .industry:
+      return .brandGreenDark
+    case .state:
+      return .brandPinkDark
+    default:
+      return .brandYellowDark
+    }
+  }
 }
 
 protocol FilterProviding {

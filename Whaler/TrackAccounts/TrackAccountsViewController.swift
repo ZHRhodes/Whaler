@@ -206,7 +206,16 @@ extension TrackAccountsViewController: FilterPopoverViewControllerDelegate {
     filterPopover?.dismiss(animated: true, completion: nil)
     let filterView = FilterValueView()
     filterView.setText(type: filter.group.rawValue, value: filter.name)
+    filterView.color = filter.group.color
     filterView.translatesAutoresizingMaskIntoConstraints = false
+    filterView.delegate = self
     filterStack.addArrangedSubview(filterView)
+  }
+}
+
+extension TrackAccountsViewController: FilterValueViewDelegate {
+  func removeTapped(sender: FilterValueView) {
+    filterStack.removeArrangedSubview(sender)
+    sender.removeFromSuperview()
   }
 }
