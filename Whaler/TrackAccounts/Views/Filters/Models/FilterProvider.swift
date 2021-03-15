@@ -8,8 +8,12 @@
 
 import Foundation
 
-enum FilterGroup {
-  case base, owner, industry, revenue, state
+enum FilterGroup: String {
+  case base = "Base",
+       owner = "Owner",
+       industry = "Industry",
+       revenue = "Revenue",
+       state = "State"
 }
 
 protocol FilterProviding {

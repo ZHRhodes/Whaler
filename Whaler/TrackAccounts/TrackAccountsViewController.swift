@@ -103,11 +103,9 @@ class TrackAccountsViewController: ToolbarContainingViewController {
     filterStack.distribution = .fillProportionally
     view.addAndAttach(view: filterStack, height: 48, attachingEdges: [.left(0, equalTo: tableView.leftAnchor), .bottom(0, equalTo: pageSelector.bottomAnchor)])
     
-    let filterValue = FilterValueView()
-    filterValue.translatesAutoresizingMaskIntoConstraints = false
-    filterStack.addArrangedSubview(filterValue)
-    
-    filterStack.addArrangedSubview(addFilterView)
+    view.addAndAttach(view: addFilterView,
+                      attachingEdges: [.left(16.0, equalTo: filterStack.rightAnchor),
+                                       .bottom(0, equalTo: filterStack.bottomAnchor)])
   }
   
   private func configureTableView() {
@@ -195,7 +193,6 @@ extension TrackAccountsViewController: AddFilterViewDelegate {
     filterPopover!.delegate = self
     filterPopover!.modalPresentationStyle = .popover
     filterPopover!.optionsProvider = BaseOptionsProvider()
-//    viewController.delegate = self
     navigationController?.present(filterPopover!, animated: true, completion: nil)
     let popoverVC = filterPopover!.popoverPresentationController
     popoverVC?.permittedArrowDirections = [.up]
@@ -207,6 +204,9 @@ extension TrackAccountsViewController: AddFilterViewDelegate {
 extension TrackAccountsViewController: FilterPopoverViewControllerDelegate {
   func selected(filter: FilterProviding) {
     filterPopover?.dismiss(animated: true, completion: nil)
-    print(filter.name)
+    let filterView = FilterValueView()
+    filterView.setText(type: filter.group.rawValue, value: filter.name)
+    filterView.translatesAutoresizingMaskIntoConstraints = false
+    filterStack.addArrangedSubview(filterView)
   }
 }

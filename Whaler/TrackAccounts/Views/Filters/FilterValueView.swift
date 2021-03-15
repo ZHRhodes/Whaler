@@ -10,10 +10,9 @@ import Foundation
 import UIKit
 
 class FilterValueView: UIView {
-  var filterType: String = "State"
-  var filterValue: String = "CA"
-  var color: UIColor = .brandYellow
+  var color: UIColor = [.brandGreenDark, .brandRedDark, .brandPinkDark, .brandYellowDark].randomElement()!
   
+  private let button = UIButton()
   private let label = UILabel()
   
   override init(frame: CGRect) {
@@ -26,16 +25,32 @@ class FilterValueView: UIView {
     configure()
   }
   
+  func setText(type: String, value: String) {
+    label.text = "\(type): \(value)"
+  }
+  
   private func configure() {
     layer.cornerRadius = 24.0
     backgroundColor = color
+    configureButton()
     configureLabel()
   }
   
+  private func configureButton() {
+    button.setTitle("X", for: .normal)
+    button.setTitleColor(.white, for: .normal)
+    button.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
+    addAndAttach(view: button, height: 18, width: 18, attachingEdges: [.left(24), .centerY(0)])
+  }
+  
   private func configureLabel() {
-    label.text = "\(filterType): \(filterValue)"
-    label.textColor = .primaryText
+    label.textColor = .white
     label.contentMode = .center
-    addAndAttach(view: label, height: 48, attachingEdges: [.left(24), .right(-24), .top(0), .bottom(0)])
+    addAndAttach(view: label, height: 48, attachingEdges: [.left(8, equalTo: button.rightAnchor), .right(-24), .top(0), .bottom(0)])
+  }
+  
+  @objc
+  private func buttonTapped() {
+    
   }
 }
