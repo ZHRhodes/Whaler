@@ -1,53 +1,19 @@
 //
-//  FilterProvider.swift
+//  FilterOptionsProviding.swift
 //  Whaler
 //
-//  Created by Zachary Rhodes on 3/11/21.
+//  Created by Zachary Rhodes on 3/20/21.
 //  Copyright © 2021 Whaler. All rights reserved.
 //
 
 import Foundation
-import UIKit
-
-enum FilterGroup: String {
-  case base = "Base",
-       owner = "Owner",
-       industry = "Industry",
-       revenue = "Revenue",
-       state = "State"
-  
-  var color: UIColor {
-    switch self {
-    case .owner:
-      return .brandYellowDark
-    case .industry:
-      return .brandGreenDark
-    case .state:
-      return .brandPinkDark
-    default:
-      return .brandYellowDark
-    }
-  }
-}
-
-protocol FilterProviding {
-  var group: FilterGroup { get }
-  var name: String { get }
-  var optionsProvider: FilterOptionsProviding? { get }
-}
-
-struct FilterOption: FilterProviding {
-  let group: FilterGroup
-  let name: String
-  var optionsProvider: FilterOptionsProviding?
-}
 
 protocol FilterOptionsProviding {
-  func fetchOptions(completion: @escaping ([FilterProviding]) -> Void)
+  func fetchOptions(completion: @escaping ([FilterOption]) -> Void)
 }
 
 struct BaseOptionsProvider: FilterOptionsProviding {
-  func fetchOptions(completion: @escaping ([FilterProviding]) -> Void) {
+  func fetchOptions(completion: @escaping ([FilterOption]) -> Void) {
     let options: [FilterOption] = [
       FilterOption(group: .owner,
                    name: "Owner",
@@ -56,7 +22,10 @@ struct BaseOptionsProvider: FilterOptionsProviding {
                    name: "Industry",
                    optionsProvider: IndustryOptionsProvider()),
       FilterOption(group: .state,
-                   name: "Revenue",
+                   name: "State",
+                   optionsProvider: StateOptionsProvider()),
+      FilterOption(group: .state,
+                   name: "City",
                    optionsProvider: StateOptionsProvider())
     ]
     completion(options)
@@ -64,7 +33,7 @@ struct BaseOptionsProvider: FilterOptionsProviding {
 }
 
 struct OwnerOptionsProvider: FilterOptionsProviding {
-  func fetchOptions(completion: @escaping ([FilterProviding]) -> Void) {
+  func fetchOptions(completion: @escaping ([FilterOption]) -> Void) {
     DispatchQueue.global().async {
       let owners = SFHelper.queryPossibleOwners()
       let options = owners.map { (name) -> FilterOption in
@@ -80,7 +49,7 @@ struct OwnerOptionsProvider: FilterOptionsProviding {
 }
 
 struct IndustryOptionsProvider: FilterOptionsProviding {
-  func fetchOptions(completion: @escaping ([FilterProviding]) -> Void) {
+  func fetchOptions(completion: @escaping ([FilterOption]) -> Void) {
     DispatchQueue.global().async {
       let industries = SFHelper.queryPossibleIndustries()
       let options = industries.map { (name) -> FilterOption in
@@ -96,7 +65,23 @@ struct IndustryOptionsProvider: FilterOptionsProviding {
 }
 
 struct StateOptionsProvider: FilterOptionsProviding {
-  func fetchOptions(completion: @escaping ([FilterProviding]) -> Void) {
+  func fetchOptions(completion: @escaping ([FilterOption]) -> Void) {
+    DispatchQueue.global().async {
+      let states = SFHelper.queryPossibleBillingStates()
+      let options = states.map { (name) -> FilterOption in
+        return FilterOption(group: .state,
+                            name: name,
+                            optionsProvider: nil)
+      }
+      DispatchQueue.main.async {
+        completion(options)
+      }
+    }
+  }
+}
+
+struct CityOptionsProvider: FilterOptionsProviding {
+  func fetchOptions(completion: @escaping ([FilterOption]) -> Void) {
     DispatchQueue.global().async {
       let states = SFHelper.queryPossibleBillingStates()
       let options = states.map { (name) -> FilterOption in

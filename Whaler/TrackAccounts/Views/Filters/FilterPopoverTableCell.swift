@@ -12,7 +12,7 @@ import UIKit
 class FilterPopoverTableCell: UITableViewCell {
   static let id = "FilterPopoverTableCellId"
   
-  var filterOption: FilterProviding? {
+  var filterOption: FilterOption? {
     didSet {
       textLabel?.text = filterOption?.name
     }
