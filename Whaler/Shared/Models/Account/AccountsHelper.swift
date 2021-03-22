@@ -9,10 +9,6 @@
 import Foundation
 
 struct AccountsHelper {
-  func fetchAccountsFromSalesforce() -> [Account] {
-    return SFHelper.queryAccounts()
-  }
-  
   func fetchAccountsFromAPI(completion: @escaping ([Account]?) -> Void) {
     Graph.shared.apollo.fetch(query: AccountsQuery()) { result in
       do {

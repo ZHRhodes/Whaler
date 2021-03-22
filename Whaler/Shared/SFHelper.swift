@@ -9,11 +9,35 @@
 import Foundation
 import AuthenticationServices
 
+typealias Soql = String
+
+//struct SoqlFilter {
+//  init(filter: FilterOption) {
+//
+//  }
+//}
+
+//fileprivate extension FilterOption {
+//  var soqlFilter: String {
+//    var filterType = ""
+//    var filterValue = ""
+//    switch group {
+//    case .owner:
+//      filterType = "OwnerId"
+//    default:
+//      return ""
+//    }
+//  }
+//}
+
 class SFHelper {
   static let fullAccount = "id, name, type, industry, annualRevenue, billingCity, billingState, phone, website, numberOfEmployees, ownerId, description"
   
-  static func queryAccounts() -> [Account] {
-    let soql = "SELECT id, name, type, industry, annualRevenue, billingCity, billingState, phone, website, numberOfEmployees, ownerId, description from Account WHERE (NOT type like 'Customer%') AND OwnerId = '\(SFSession.id ?? "")'"
+  static func queryAccounts(with filters: Set<Filter>? = nil) -> [Account] {
+    var soql = "SELECT id, name, type, industry, annualRevenue, billingCity, billingState, phone, website, numberOfEmployees, ownerId, description from Account WHERE (NOT type like 'Customer%')"
+    if let filters = filters, !filters.isEmpty {
+      soql = applyFilters(filters, to: soql)
+    }
     var sfAccounts = [SF.Account]()
     do {
       sfAccounts = try SF.query(soql)
@@ -22,6 +46,10 @@ class SFHelper {
     }
 
     return sfAccounts.map(Account.init)
+  }
+  
+  static func applyFilters(_ filters: Set<Filter>, to soql: Soql) -> Soql {
+    return soql.appending(" AND \(SFFilterBuilder(filters: filters).soql)")
   }
   
   static func queryContacts(accountId: String,
@@ -62,15 +90,15 @@ class SFHelper {
     return industries.compactMap { $0.Industry }
   }
   
-  static func queryPossibleOwners() -> [String] {
-    let soql = "Select Owner.Name from Account group by Owner.Name"
-    var ownerNames = [SF.OwnerNameGroup]()
+  static func queryPossibleOwners() -> [Owner] {
+    let soql = "Select Owner.Id, Owner.Name from Account group by Owner.Id, Owner.Name"
+    var owners = [SF.Owner]()
     do {
-      ownerNames = try SF.query(soql)
+      owners = try SF.query(soql)
     } catch let error {
       Log.error(error.localizedDescription)
     }
-    return ownerNames.compactMap { $0.Name }
+    return owners.map { return Owner(id: $0.Id ?? "", name: $0.Name ?? "") }
   }
   
   static func queryPossibleBillingStates() -> [String] {

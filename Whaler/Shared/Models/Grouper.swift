@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Grouper<X: Hashable & Codable, Y: Codable>: Codable {
+struct Grouper<X: Hashable, Y> {
   private(set) var groups: [X]
   private var items: [X: [Y]]
   
@@ -62,3 +62,5 @@ extension Grouper: CustomStringConvertible {
     return ret
   }
 }
+
+extension Grouper: Codable where X: Codable, Y: Codable {}

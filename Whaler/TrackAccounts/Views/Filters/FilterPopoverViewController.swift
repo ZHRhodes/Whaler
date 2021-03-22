@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 protocol FilterPopoverViewControllerDelegate: class {
-  func selected(filter: FilterOption)
+  func selected(filterDisplayOption: FilterDisplayOption)
 }
 
 class FilterPopoverViewController: UIViewController {
@@ -27,7 +27,7 @@ class FilterPopoverViewController: UIViewController {
     }
   }
   
-  private var filters: [FilterOption]? {
+  private var filters: [FilterDisplayOption]? {
     didSet {
       hideLoadingIndicator()
       configureTableView()
@@ -107,23 +107,23 @@ extension FilterPopoverViewController: UITableViewDataSource, UITableViewDelegat
           let filters = filters else { return UITableViewCell() }
     
     let filter = filters[indexPath.row]
-    filterCell.filterOption = filter
+    filterCell.filterDisplayOption = filter
     
     return filterCell
   }
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     guard let cell = tableView.cellForRow(at: indexPath) as? FilterPopoverTableCell else { return }
-    if let optionsProvider = cell.filterOption?.optionsProvider {
+    if let optionsProvider = cell.filterDisplayOption?.optionsProvider {
       showPopover(with: optionsProvider)
-    } else if let filterOption = cell.filterOption {
-      delegate?.selected(filter: filterOption)
+    } else if let filterOption = cell.filterDisplayOption {
+      delegate?.selected(filterDisplayOption: filterOption)
     }
   }
 }
 
 extension FilterPopoverViewController: FilterPopoverViewControllerDelegate {
-  func selected(filter: FilterOption) {
-    delegate?.selected(filter: filter)
+  func selected(filterDisplayOption: FilterDisplayOption) {
+    delegate?.selected(filterDisplayOption: filterDisplayOption)
   }
 }

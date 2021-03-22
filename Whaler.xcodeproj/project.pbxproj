@@ -87,8 +87,11 @@
 		147A3CB22577625500D96637 /* Starscream in Frameworks */ = {isa = PBXBuildFile; productRef = 147A3CB12577625500D96637 /* Starscream */; };
 		147EB86B2593C950002B93D8 /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147EB86A2593C950002B93D8 /* Repository.swift */; };
 		147EB89A25A4136E002B93D8 /* RepoStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147EB89925A4136E002B93D8 /* RepoStoreTests.swift */; };
-		147F55EC2606C9AE001F139A /* FilterOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147F55EB2606C9AE001F139A /* FilterOption.swift */; };
+		147F55EC2606C9AE001F139A /* FilterDisplayOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147F55EB2606C9AE001F139A /* FilterDisplayOption.swift */; };
 		147F55F02606C9DC001F139A /* FilterOptionsProviding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147F55EF2606C9DC001F139A /* FilterOptionsProviding.swift */; };
+		147F55F42607FBEF001F139A /* SFOwner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147F55F32607FBEF001F139A /* SFOwner.swift */; };
+		147F55F92607FC6A001F139A /* Owner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147F55F82607FC6A001F139A /* Owner.swift */; };
+		147F5601260855BF001F139A /* SFFilterAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147F5600260855BF001F139A /* SFFilterAdapter.swift */; };
 		1480800924EA4AE8007EB6D1 /* Networker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1480800824EA4AE8007EB6D1 /* Networker.swift */; };
 		1480800B24EA4B32007EB6D1 /* APINetworkInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1480800A24EA4B32007EB6D1 /* APINetworkInterface.swift */; };
 		1480800E24EA4BDA007EB6D1 /* Just in Frameworks */ = {isa = PBXBuildFile; productRef = 1480800D24EA4BDA007EB6D1 /* Just */; };
@@ -162,7 +165,7 @@
 		14EF8D5D25FB1BB20065BEB3 /* FilterValueView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EF8D5C25FB1BB20065BEB3 /* FilterValueView.swift */; };
 		14EF8D6125FB1C830065BEB3 /* AddFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EF8D6025FB1C830065BEB3 /* AddFilterView.swift */; };
 		14EF8D6525FB1ECA0065BEB3 /* FilterPopoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EF8D6425FB1ECA0065BEB3 /* FilterPopoverViewController.swift */; };
-		14EF8D7025FB2EAC0065BEB3 /* FilterGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EF8D6F25FB2EAC0065BEB3 /* FilterGroup.swift */; };
+		14EF8D7025FB2EAC0065BEB3 /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EF8D6F25FB2EAC0065BEB3 /* Filter.swift */; };
 		14F4090424C6A09E00F405BC /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 14F4090324C6A09E00F405BC /* OpenSans-Regular.ttf */; };
 		14F4090624C6A0C300F405BC /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 14F4090524C6A0C300F405BC /* OpenSans-Bold.ttf */; };
 		14F4090824C6A2D100F405BC /* UIFont+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F4090724C6A2D100F405BC /* UIFont+Extensions.swift */; };
@@ -263,8 +266,11 @@
 		1473C8A72522E6D000A991DA /* AttributeTagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttributeTagView.swift; sourceTree = "<group>"; };
 		147EB86A2593C950002B93D8 /* Repository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Repository.swift; sourceTree = "<group>"; };
 		147EB89925A4136E002B93D8 /* RepoStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoStoreTests.swift; sourceTree = "<group>"; };
-		147F55EB2606C9AE001F139A /* FilterOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterOption.swift; sourceTree = "<group>"; };
+		147F55EB2606C9AE001F139A /* FilterDisplayOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterDisplayOption.swift; sourceTree = "<group>"; };
 		147F55EF2606C9DC001F139A /* FilterOptionsProviding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterOptionsProviding.swift; sourceTree = "<group>"; };
+		147F55F32607FBEF001F139A /* SFOwner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFOwner.swift; sourceTree = "<group>"; };
+		147F55F82607FC6A001F139A /* Owner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Owner.swift; sourceTree = "<group>"; };
+		147F5600260855BF001F139A /* SFFilterAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFFilterAdapter.swift; sourceTree = "<group>"; };
 		1480800824EA4AE8007EB6D1 /* Networker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networker.swift; sourceTree = "<group>"; };
 		1480800A24EA4B32007EB6D1 /* APINetworkInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APINetworkInterface.swift; sourceTree = "<group>"; };
 		1480800F24EA4BE7007EB6D1 /* JustNetworker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JustNetworker.swift; sourceTree = "<group>"; };
@@ -341,7 +347,7 @@
 		14EF8D5C25FB1BB20065BEB3 /* FilterValueView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterValueView.swift; sourceTree = "<group>"; };
 		14EF8D6025FB1C830065BEB3 /* AddFilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFilterView.swift; sourceTree = "<group>"; };
 		14EF8D6425FB1ECA0065BEB3 /* FilterPopoverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterPopoverViewController.swift; sourceTree = "<group>"; };
-		14EF8D6F25FB2EAC0065BEB3 /* FilterGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterGroup.swift; sourceTree = "<group>"; };
+		14EF8D6F25FB2EAC0065BEB3 /* Filter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filter.swift; sourceTree = "<group>"; };
 		14F4090324C6A09E00F405BC /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Regular.ttf"; sourceTree = "<group>"; };
 		14F4090524C6A0C300F405BC /* OpenSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Bold.ttf"; sourceTree = "<group>"; };
 		14F4090724C6A2D100F405BC /* UIFont+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extensions.swift"; sourceTree = "<group>"; };
@@ -416,6 +422,7 @@
 		140AE79724A9AA4B00F7705E /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				147F55F72607FC60001F139A /* Owner */,
 				141F795D25319DEA005F9295 /* Organization */,
 				14B037EC25074B1200BA488D /* User */,
 				14EF4DE624CD4F0700ED5461 /* Account */,
@@ -459,6 +466,7 @@
 				140AE79724A9AA4B00F7705E /* Models */,
 				14F7DD9D24EE526200D43055 /* Salesforce */,
 				14EED67D24F0EB7300660BD1 /* SFHelper.swift */,
+				147F5600260855BF001F139A /* SFFilterAdapter.swift */,
 				1425175425510E46006255F1 /* FilterValue.swift */,
 				1425175025510E11006255F1 /* FilterBucket.swift */,
 				14D97D7824DBEC4B00058B09 /* Keychain.swift */,
@@ -710,6 +718,14 @@
 				147EB89925A4136E002B93D8 /* RepoStoreTests.swift */,
 			);
 			path = DataLayerTests;
+			sourceTree = "<group>";
+		};
+		147F55F72607FC60001F139A /* Owner */ = {
+			isa = PBXGroup;
+			children = (
+				147F55F82607FC6A001F139A /* Owner.swift */,
+			);
+			path = Owner;
 			sourceTree = "<group>";
 		};
 		1480800724EA4AD2007EB6D1 /* NetworkLayer */ = {
@@ -980,8 +996,8 @@
 		14EF8D6E25FB2E970065BEB3 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				14EF8D6F25FB2EAC0065BEB3 /* FilterGroup.swift */,
-				147F55EB2606C9AE001F139A /* FilterOption.swift */,
+				14EF8D6F25FB2EAC0065BEB3 /* Filter.swift */,
+				147F55EB2606C9AE001F139A /* FilterDisplayOption.swift */,
 				147F55EF2606C9DC001F139A /* FilterOptionsProviding.swift */,
 			);
 			path = Models;
@@ -1011,6 +1027,7 @@
 				14251744255108F0006255F1 /* SFQuery.swift */,
 				142517482551096F006255F1 /* SFObject.swift */,
 				1425174C25510D4B006255F1 /* SFSoqlProviding.swift */,
+				147F55F32607FBEF001F139A /* SFOwner.swift */,
 			);
 			path = Salesforce;
 			sourceTree = "<group>";
@@ -1243,7 +1260,7 @@
 				14B037EB250749D000BA488D /* AuthenticationInteractor.swift in Sources */,
 				14ECDB2124CA9288006B4550 /* NoteEditor.swift in Sources */,
 				146C35DB24C56A0100DBCA23 /* ContactsTableView.swift in Sources */,
-				14EF8D7025FB2EAC0065BEB3 /* FilterGroup.swift in Sources */,
+				14EF8D7025FB2EAC0065BEB3 /* Filter.swift in Sources */,
 				14EF8D4525F93BD40065BEB3 /* CellCheckBox.swift in Sources */,
 				14861ED9249F3DE100D2FA92 /* MainViewController.swift in Sources */,
 				1488423F25086D910025C7EE /* Lifecycle.swift in Sources */,
@@ -1311,6 +1328,7 @@
 				14F4090824C6A2D100F405BC /* UIFont+Extensions.swift in Sources */,
 				144FA6BD24C2C0C500506F15 /* CompanyInfoHeaderView.swift in Sources */,
 				1454743D250D93DC00257A89 /* SFSession.swift in Sources */,
+				147F5601260855BF001F139A /* SFFilterAdapter.swift in Sources */,
 				14DACF42255BAC2A00FC0900 /* Log.swift in Sources */,
 				14B037EE25074B1E00BA488D /* User.swift in Sources */,
 				144AECDA24D26658009625BE /* ContactRowViewCell.swift in Sources */,
@@ -1341,6 +1359,7 @@
 				148A097C258700FF00811E35 /* SocketMessage.swift in Sources */,
 				14861EFC249F49DE00D2FA92 /* DocumentPickerViewController.swift in Sources */,
 				1416483225A7F4BC0008E16B /* ContactSFDataSource.swift in Sources */,
+				147F55F42607FBEF001F139A /* SFOwner.swift in Sources */,
 				14562B7725F216FD00BA9D3B /* AccountDetailsInteractor.swift in Sources */,
 				14D9CA5B24B599300030B17A /* AccountRowValuesView.swift in Sources */,
 				14EA64EF25F4CDA300F26ECE /* TrackAccountsTableCell.swift in Sources */,
@@ -1356,11 +1375,12 @@
 				14B037E525073EBA00BA488D /* Tokens.swift in Sources */,
 				1410404F25EB382400D8C793 /* AccountDetailsContentInteractor.swift in Sources */,
 				1467E95F25F7F5CE00110880 /* ToolbarContainingViewController.swift in Sources */,
-				147F55EC2606C9AE001F139A /* FilterOption.swift in Sources */,
+				147F55EC2606C9AE001F139A /* FilterDisplayOption.swift in Sources */,
 				140AE7A324A9BA6500F7705E /* MainTableSectionHeader.swift in Sources */,
 				14562B7D25F30DCC00BA9D3B /* ProgressView.swift in Sources */,
 				14DACF46255BAC9200FC0900 /* SwiftyBeaver+LoggingDestination.swift in Sources */,
 				141F796E25342974005F9295 /* TokenAddingIntercepter.swift in Sources */,
+				147F55F92607FC6A001F139A /* Owner.swift in Sources */,
 				1480801024EA4BE7007EB6D1 /* JustNetworker.swift in Sources */,
 				148A0980258705DB00811E35 /* WebSocketConn.swift in Sources */,
 				1443045F24F3356A00D2FBD2 /* SFNewAccessToken.swift in Sources */,

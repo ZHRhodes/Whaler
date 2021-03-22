@@ -15,7 +15,7 @@ enum SFError: Error {
 class SF {
   static private let networkInterface = SFNetworkInterface.self
   
-  static func query<T: Codable>(_ soql: String) throws -> [T] {
+  static func query<T: Codable>(_ soql: Soql) throws -> [T] {
     let result: NetworkResult
     do {
       result = try networkInterface.get(path: "/query", params: ["q": soql])

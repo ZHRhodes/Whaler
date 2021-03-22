@@ -15,7 +15,7 @@ protocol FilterValueViewDelegate: class {
 
 class FilterValueView: UIView {
   weak var delegate: FilterValueViewDelegate?
-  private(set) var filter: FilterOption!
+  private(set) var filterDisplayOption: FilterDisplayOption!
   
   private let button = UIButton()
   private let label = UILabel()
@@ -30,10 +30,10 @@ class FilterValueView: UIView {
     configure()
   }
   
-  func configure(with filter: FilterOption) {
-    self.filter = filter
-    label.text = "\(filter.group.rawValue): \(filter.name)"
-    backgroundColor = filter.group.color
+  func configure(with filterDisplayOption: FilterDisplayOption) {
+    self.filterDisplayOption = filterDisplayOption
+    label.text = "\(filterDisplayOption.fieldDisplayName): \(filterDisplayOption.valueDisplayName)"
+    backgroundColor = filterDisplayOption.color
   }
   
   private func configure() {

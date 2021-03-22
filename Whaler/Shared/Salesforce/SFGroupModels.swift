@@ -13,10 +13,6 @@ extension SF {
     var Industry: String?
   }
   
-  struct OwnerNameGroup: Codable {
-    var Name: String?
-  }
-  
   struct BillingStateGroup: Codable {
     var BillingState: String?
   }

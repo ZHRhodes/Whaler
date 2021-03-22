@@ -12,7 +12,7 @@ import Combine
 class TrackAccountsInteractor {
   private var fetchCancellable: AnyCancellable?
   weak var viewController: TrackAccountsViewController?
-  var appliedFilters = Set<FilterOption>()
+  var appliedFilters = Set<Filter>()
   var pageSize: Int = 12
   private(set) var numberOfPages = 0 {
     didSet {
@@ -52,7 +52,7 @@ class TrackAccountsInteractor {
   func fetchAccounts() {
     fetchCancellable = repoStore
       .accountRepository
-      .fetchAll()
+      .fetchSubset(with: appliedFilters)
       .sink(receiveCompletion: { _ in }) { [weak self] (accounts) in
         self?.accounts = accounts
         self?.viewController?.didFetchAccounts()

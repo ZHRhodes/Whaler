@@ -13,7 +13,7 @@ class AccountDataInterface: DataInterface {
   typealias Entity = Account
   
   typealias AllDataRequestType = Void
-  typealias SubsetDataRequestType = Void
+  typealias SubsetDataRequestType = Set<Filter>
   typealias SingleDataRequestType = Void
   
   typealias DataSaveType = [Account]
@@ -57,7 +57,7 @@ class AccountDataInterface: DataInterface {
   }
   
   func fetchSubset(with dataRequest: SubsetDataRequestType) -> AnyPublisher<[Entity], RepoError> {
-    fatalError()
+    return sfDataSource.fetchSubset(with: dataRequest)
   }
   
   func fetchSingle(with dataRequest: SingleDataRequestType) -> AnyPublisher<Entity?, RepoError> {
