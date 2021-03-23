@@ -12,6 +12,7 @@ import Combine
 class TrackAccountsInteractor {
   private var fetchCancellable: AnyCancellable?
   weak var viewController: TrackAccountsViewController?
+  var trackingChanges = [String: TrackingChange]()
   var appliedFilters = Set<Filter>()
   var pageSize: Int = 12
   private(set) var numberOfPages = 0 {
@@ -48,6 +49,11 @@ class TrackAccountsInteractor {
     }
   }
   private(set) var accountsTableData: [Int: [TrackAccountsTableData]] = [:]
+  
+  func account(atRow row: Int, onPage page: Int) -> Account {
+    let index = page * pageSize + row
+    return accounts[index]
+  }
   
   func fetchAccounts() {
     fetchCancellable = repoStore

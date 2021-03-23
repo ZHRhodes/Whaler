@@ -144,6 +144,7 @@
 		14DACF46255BAC9200FC0900 /* SwiftyBeaver+LoggingDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14DACF45255BAC9200FC0900 /* SwiftyBeaver+LoggingDestination.swift */; };
 		14DACF4A255BCD4C00FC0900 /* CustomError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14DACF49255BCD4C00FC0900 /* CustomError.swift */; };
 		14DEACEF260990B8007E2582 /* CurrentUserOptionsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14DEACEE260990B8007E2582 /* CurrentUserOptionsProvider.swift */; };
+		14DEACF326099B7C007E2582 /* TrackingChange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14DEACF226099B7C007E2582 /* TrackingChange.swift */; };
 		14E63ED124B9109C003EAF22 /* Whaler.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 14E63ECF24B9109C003EAF22 /* Whaler.xcdatamodeld */; };
 		14EA64E425F4CD6900F26ECE /* TrackAccountsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EA64E325F4CD6900F26ECE /* TrackAccountsViewController.swift */; };
 		14EA64EA25F4CD7700F26ECE /* TrackAccountsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EA64E925F4CD7700F26ECE /* TrackAccountsInteractor.swift */; };
@@ -327,6 +328,8 @@
 		14DACF45255BAC9200FC0900 /* SwiftyBeaver+LoggingDestination.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SwiftyBeaver+LoggingDestination.swift"; sourceTree = "<group>"; };
 		14DACF49255BCD4C00FC0900 /* CustomError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomError.swift; sourceTree = "<group>"; };
 		14DEACEE260990B8007E2582 /* CurrentUserOptionsProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentUserOptionsProvider.swift; sourceTree = "<group>"; };
+		14DEACF226099B7C007E2582 /* TrackingChange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TrackingChange.swift; path = ../../../../../../Desktop/TrackingChange.swift; sourceTree = "<group>"; };
+		14DEACF926099B84007E2582 /* TrackingChange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackingChange.swift; sourceTree = "<group>"; };
 		14E63ED024B9109C003EAF22 /* Whaler.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Whaler.xcdatamodel; sourceTree = "<group>"; };
 		14EA64E325F4CD6900F26ECE /* TrackAccountsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackAccountsViewController.swift; sourceTree = "<group>"; };
 		14EA64E925F4CD7700F26ECE /* TrackAccountsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackAccountsInteractor.swift; sourceTree = "<group>"; };
@@ -902,12 +905,23 @@
 			path = MainTableSectionHeader;
 			sourceTree = "<group>";
 		};
+		14DEACF826099B82007E2582 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				14DEACF926099B84007E2582 /* TrackingChange.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		14EA64E225F4CD4400F26ECE /* TrackAccounts */ = {
 			isa = PBXGroup;
 			children = (
+				14EF8D5B25FB1BA00065BEB3 /* Filters */,
 				14EA64ED25F4CD9200F26ECE /* Views */,
+				14DEACF826099B82007E2582 /* Models */,
 				14EA64E325F4CD6900F26ECE /* TrackAccountsViewController.swift */,
 				14EA64E925F4CD7700F26ECE /* TrackAccountsInteractor.swift */,
+				14DEACF226099B7C007E2582 /* TrackingChange.swift */,
 			);
 			path = TrackAccounts;
 			sourceTree = "<group>";
@@ -915,7 +929,6 @@
 		14EA64ED25F4CD9200F26ECE /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				14EF8D5B25FB1BA00065BEB3 /* Filters */,
 				14EF8D5625F9BCD10065BEB3 /* Table */,
 				14EF8D5725F9BCED0065BEB3 /* PageSelectorView.swift */,
 			);
@@ -1353,6 +1366,7 @@
 				14D97D7924DBEC4B00058B09 /* Keychain.swift in Sources */,
 				1416480B25A4FA270008E16B /* AccountDataInterface.swift in Sources */,
 				140AE79E24A9B50900F7705E /* UIColor+Extensions.swift in Sources */,
+				14DEACF326099B7C007E2582 /* TrackingChange.swift in Sources */,
 				1416480725A4FA020008E16B /* AccountSFDataSource.swift in Sources */,
 				14C509B8254CECD70021D9C5 /* AddAccountViewController.swift in Sources */,
 				1488DD8125F32683002A898C /* TextFinishedProgressIndicator.swift in Sources */,

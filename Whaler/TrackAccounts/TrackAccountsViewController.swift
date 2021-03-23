@@ -147,6 +147,10 @@ class TrackAccountsViewController: ToolbarContainingViewController {
   func didFetchAccounts() {
     tableView.reloadData()
   }
+  
+  private func setSaveButtonState() {
+    saveButton.isEnabled = !interactor.trackingChanges.isEmpty
+  }
 }
 
 extension TrackAccountsViewController: UITableViewDelegate, UITableViewDataSource {
@@ -183,6 +187,14 @@ extension TrackAccountsViewController: UITableViewDelegate, UITableViewDataSourc
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     guard let cell = tableView.cellForRow(at: indexPath) as? TrackAccountsTableCell else { return }
     cell.isChecked = !cell.isChecked
+    let selectedAccount = interactor.account(atRow: indexPath.row, onPage: visiblePage)
+    guard let externalId = selectedAccount.salesforceID else { return }
+    let newState: TrackingState = cell.isChecked ? .tracked : .untracked
+    let trackingChange = TrackingChange(externalId: externalId,
+                                        newTrackingState: newState)
+    //optimize to only end up with CHANGES to current state in this dict/set
+    interactor.trackingChanges[trackingChange.externalId] = trackingChange
+    setSaveButtonState()
   }
 }
 
