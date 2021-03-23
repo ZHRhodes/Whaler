@@ -11,25 +11,6 @@ import AuthenticationServices
 
 typealias Soql = String
 
-//struct SoqlFilter {
-//  init(filter: FilterOption) {
-//
-//  }
-//}
-
-//fileprivate extension FilterOption {
-//  var soqlFilter: String {
-//    var filterType = ""
-//    var filterValue = ""
-//    switch group {
-//    case .owner:
-//      filterType = "OwnerId"
-//    default:
-//      return ""
-//    }
-//  }
-//}
-
 class SFHelper {
   static let fullAccount = "id, name, type, industry, annualRevenue, billingCity, billingState, phone, website, numberOfEmployees, ownerId, description"
   

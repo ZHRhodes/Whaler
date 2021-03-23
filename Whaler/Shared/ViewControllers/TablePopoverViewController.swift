@@ -48,6 +48,7 @@ class TablePopoverViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    modalPresentationStyle = .popover
     preferredContentSize = CGSize(width: 300, height: 200)
     view.backgroundColor = .primaryBackground
     configureTableView()

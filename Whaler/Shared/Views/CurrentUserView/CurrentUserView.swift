@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class CurrentUserView: UIView {
+class CurrentUserView: UIButton {
   private let label = UILabel()
 
   var text: String? {

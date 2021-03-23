@@ -57,6 +57,7 @@ class MainViewController: UIViewController {
   private var subHelloLabel: UILabel!
   private var actionsStack: UIStackView!
   private var collectionView: UICollectionView!
+  private var userView: CurrentUserView!
   
   private var sectionHeaders = Set<WeakRef<UIView>>()
   
@@ -114,7 +115,6 @@ class MainViewController: UIViewController {
     configureSubHelloLabel()
     configureCollectionView()
     configureActionsStackView()
-    configureSignOutButton()
     configureDeleteButton()
   }
   
@@ -256,7 +256,8 @@ class MainViewController: UIViewController {
   }
   
   private func makeUserView() -> UIView {
-    let userView = CurrentUserView()
+    userView = CurrentUserView()
+    userView.addTarget(self, action: #selector(userViewTapped), for: .touchUpInside)
     userView.text = Lifecycle.currentUser?.initials
     userView.backgroundColor = .brandPurple
     let size: CGFloat = 65.0
@@ -264,6 +265,18 @@ class MainViewController: UIViewController {
     userView.widthAnchor.constraint(equalToConstant: size).isActive = true
     userView.heightAnchor.constraint(equalTo: userView.widthAnchor).isActive = true
     return userView
+  }
+  
+  @objc
+  private func userViewTapped() {
+    let viewController = TablePopoverViewController()
+    viewController.modalPresentationStyle = .popover
+    viewController.provider = CurrentUserOptionsProviding()
+    viewController.delegate = self
+    navigationController?.present(viewController, animated: true, completion: nil)
+    let popoverVC = viewController.popoverPresentationController
+    popoverVC?.permittedArrowDirections = [.up]
+    popoverVC?.sourceView = userView
   }
   
   private func makeReloadView() -> UIView {
@@ -337,24 +350,6 @@ class MainViewController: UIViewController {
     NSLayoutConstraint.activate(constraints)
   }
   
-  private func configureSignOutButton() {
-    signOutButton = UIButton()
-    signOutButton.setImage(UIImage(named: "signOutTEMP"), for: .normal)
-    signOutButton.imageView?.contentMode = .scaleAspectFit
-    signOutButton.addTarget(self, action: #selector(signOutTapped), for: .touchUpInside)
-    signOutButton.translatesAutoresizingMaskIntoConstraints = false
-    view.addSubview(signOutButton)
-    
-    let constraints = [
-      signOutButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -12),
-      signOutButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 12),
-      signOutButton.heightAnchor.constraint(equalToConstant: 25),
-      signOutButton.widthAnchor.constraint(equalToConstant: 25)
-    ]
-    
-    NSLayoutConstraint.activate(constraints)
-  }
-  
   private func configureDeleteButton() {
     deleteButton = UIButton()
     deleteButton.setImage(UIImage(named: "delete"), for: .normal)
@@ -364,18 +359,13 @@ class MainViewController: UIViewController {
     view.addSubview(deleteButton)
     
     let constraints = [
-      deleteButton.rightAnchor.constraint(equalTo: signOutButton.leftAnchor, constant: -12),
+      deleteButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -12),
       deleteButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 12),
       deleteButton.heightAnchor.constraint(equalToConstant: 25),
       deleteButton.widthAnchor.constraint(equalToConstant: 25)
     ]
     
     NSLayoutConstraint.activate(constraints)
-  }
-  
-  @objc
-  private func signOutTapped() {
-    Lifecycle.logOut()
   }
   
   @objc
@@ -504,8 +494,17 @@ struct OrgUsersProvider: SimpleItemProviding {
     
 extension MainViewController: TablePopoverViewControllerDelegate {
   func didSelectItem(_ item: SimpleItem) {
-    guard let user = item as? User,
-          let account = interactor.accountBeingAssigned else { return }
-    interactor.assign(user, to: account)
+    if let user = item as? User,
+       let account = interactor.accountBeingAssigned {
+      dismiss(animated: true) { [weak self] in
+        self?.interactor.assign(user, to: account)
+      }
+    }
+    
+    if item is LogOutOption {
+      dismiss(animated: true) {
+        NotificationCenter.default.post(name: .unauthorizedUser, object: self)
+      }
+    }
   }
 }

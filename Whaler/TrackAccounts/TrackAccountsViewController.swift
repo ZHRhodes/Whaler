@@ -17,6 +17,7 @@ class TrackAccountsViewController: ToolbarContainingViewController {
   private let pageSelector = PageSelectorView()
   private var visiblePage = 1
   private var filterPopover: FilterPopoverViewController?
+  private var saveButton: CommonButton!
   
   private let filterStack = UIStackView()
   private lazy var addFilterView: AddFilterView = {
@@ -59,6 +60,7 @@ class TrackAccountsViewController: ToolbarContainingViewController {
   
   private func configureActionsStackView() {
     actionsStack = UIStackView(arrangedSubviews: [
+      makeSaveView(),
       makeUserView(),
     ])
     actionsStack.axis = .horizontal
@@ -84,6 +86,15 @@ class TrackAccountsViewController: ToolbarContainingViewController {
   
   func setNumberOfPages(_ number: Int) {
     pageSelector.totalPages = number
+  }
+  
+  private func makeSaveView() -> UIView {
+    let container = UIView()
+    saveButton = CommonButton(style: .filled)
+    saveButton.setTitle("Save", for: .normal)
+    saveButton.widthAnchor.constraint(equalToConstant: 100).isActive = true
+    container.addAndAttach(view: saveButton, height: 48, width: 100, attachingEdges: [.left(0), .right(0), .centerY(0), .centerX(0)])
+    return container
   }
   
   private func makeUserView() -> UIView {

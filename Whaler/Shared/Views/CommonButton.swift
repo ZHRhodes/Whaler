@@ -12,18 +12,32 @@ import UIKit
 class CommonButton: UIButton {
   private let style: ButtonStyle
   
+  override var isEnabled: Bool {
+    didSet {
+      if isEnabled {
+        backgroundColor = style.fillColor
+        layer.borderColor = style.borderColor.cgColor
+      } else {
+        backgroundColor = style.disabledFillColor
+        layer.borderColor = style.disabledBorderColor.cgColor
+      }
+    }
+  }
+  
   init(style: ButtonStyle) {
     self.style = style
     super.init(frame: .zero)
     layer.borderWidth = 2
     layer.borderColor = style.borderColor.cgColor
-    layer.cornerRadius = 4.0
+    layer.cornerRadius = 6.0
     
     backgroundColor = style.fillColor
     setTitleColor(style.textColor, for: .normal)
+    setTitleColor(style.disabledTextColor, for: .disabled)
     
     let hover = UIHoverGestureRecognizer(target: self, action: #selector(hovering(_:)))
     addGestureRecognizer(hover)
+    isEnabled = false
   }
   
   required init?(coder: NSCoder) {
@@ -32,6 +46,7 @@ class CommonButton: UIButton {
   
   @objc
   func hovering(_ recognizer: UIHoverGestureRecognizer) {
+    guard isEnabled else { return }
     switch recognizer.state {
     case .began:
       UIView.animate(withDuration: 0.15) {
@@ -51,10 +66,13 @@ class CommonButton: UIButton {
 
 enum ButtonStyle {
   case outline
+  case filled
   
   var borderColor: UIColor {
     switch self {
     case .outline:
+      return .brandGreen
+    case .filled:
       return .brandGreen
     }
   }
@@ -62,7 +80,9 @@ enum ButtonStyle {
   var fillColor: UIColor {
     switch self {
     case .outline:
-      return .white
+      return .clear
+    case .filled:
+      return .brandGreen
     }
   }
   
@@ -70,12 +90,16 @@ enum ButtonStyle {
     switch self {
     case .outline:
       return .brandGreen
+    case .filled:
+      return .brandGreenDark
     }
   }
   
   var textColor: UIColor {
     switch self {
     case .outline:
+      return .primaryText
+    case .filled:
       return .black
     }
   }
@@ -83,6 +107,35 @@ enum ButtonStyle {
   var highlightTextColor: UIColor {
     switch self {
     case .outline:
+      return .primaryText
+    case .filled:
+      return .black
+    }
+  }
+  
+  var disabledBorderColor: UIColor {
+    switch self {
+    case .outline:
+      return .secondaryText
+    case .filled:
+      return .secondaryText
+    }
+  }
+  
+  var disabledFillColor: UIColor {
+    switch self {
+    case .outline:
+      return .clear
+    case .filled:
+      return .secondaryText
+    }
+  }
+  
+  var disabledTextColor: UIColor {
+    switch self {
+    case .outline:
+      return .secondaryText
+    case .filled:
       return .white
     }
   }
