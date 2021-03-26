@@ -37,7 +37,6 @@ class CommonButton: UIButton {
     
     let hover = UIHoverGestureRecognizer(target: self, action: #selector(hovering(_:)))
     addGestureRecognizer(hover)
-    isEnabled = false
   }
   
   required init?(coder: NSCoder) {

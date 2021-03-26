@@ -12,7 +12,7 @@ import Combine
 class TrackAccountsInteractor {
   private var fetchCancellable: AnyCancellable?
   weak var viewController: TrackAccountsViewController?
-  var trackingChanges = [String: TrackingChange]()
+  var trackingChanges = [String: TrackingChange<Account>]()
   var appliedFilters = Set<Filter>()
   var pageSize: Int = 12
   private(set) var numberOfPages = 0 {
@@ -63,5 +63,36 @@ class TrackAccountsInteractor {
         self?.accounts = accounts
         self?.viewController?.didFetchAccounts()
     }
+  }
+  
+  func applyTrackingChanges() {
+    //temp, move
+    let input: [AccountTrackingChange] = trackingChanges.values.map { (trackingChange) in
+      return AccountTrackingChange(account: makeNewAccount(from: trackingChange.value),
+                                   newState: trackingChange.newTrackingState.rawValue)
+    }
+
+    Graph.shared.apollo.perform(mutation: ApplyAccountTrackingChangesMutation(input: input)) { result in
+      guard let data = try? result.get().data else { return }
+      print(data.success)
+    }
+  }
+  
+  private func makeNewAccount(from account: Account) -> NewAccount {
+    return NewAccount(id: account.id,
+                      salesforceId: account.salesforceID,
+                      name: account.name,
+                      ownerId: account.ownerID,
+                      industry: account.industry,
+                      description: account.accountDescription,
+                      numberOfEmployees: account.numberOfEmployees,
+                      annualRevenue: account.annualRevenue,
+                      billingCity: account.billingCity,
+                      billingState: account.billingState,
+                      phone: account.phone,
+                      website: account.website,
+                      type: account.type,
+                      state: account.state?.rawValue,
+                      notes: account.notes)
   }
 }

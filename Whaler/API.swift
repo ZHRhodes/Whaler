@@ -4,6 +4,35 @@
 import Apollo
 import Foundation
 
+public struct AccountTrackingChange: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - account
+  ///   - newState
+  public init(account: NewAccount, newState: String) {
+    graphQLMap = ["account": account, "newState": newState]
+  }
+
+  public var account: NewAccount {
+    get {
+      return graphQLMap["account"] as! NewAccount
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "account")
+    }
+  }
+
+  public var newState: String {
+    get {
+      return graphQLMap["newState"] as! String
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "newState")
+    }
+  }
+}
+
 public struct NewAccount: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -518,6 +547,57 @@ public final class AccountsQuery: GraphQLQuery {
         set {
           resultMap.updateValue(newValue, forKey: "notes")
         }
+      }
+    }
+  }
+}
+
+public final class ApplyAccountTrackingChangesMutation: GraphQLMutation {
+  /// The raw GraphQL definition of this operation.
+  public let operationDefinition: String =
+    """
+    mutation applyAccountTrackingChanges($input: [AccountTrackingChange!]!) {
+      success: applyAccountTrackingChanges(input: $input)
+    }
+    """
+
+  public let operationName: String = "applyAccountTrackingChanges"
+
+  public var input: [AccountTrackingChange]
+
+  public init(input: [AccountTrackingChange]) {
+    self.input = input
+  }
+
+  public var variables: GraphQLMap? {
+    return ["input": input]
+  }
+
+  public struct Data: GraphQLSelectionSet {
+    public static let possibleTypes: [String] = ["Mutation"]
+
+    public static var selections: [GraphQLSelection] {
+      return [
+        GraphQLField("applyAccountTrackingChanges", alias: "success", arguments: ["input": GraphQLVariable("input")], type: .nonNull(.scalar(Bool.self))),
+      ]
+    }
+
+    public private(set) var resultMap: ResultMap
+
+    public init(unsafeResultMap: ResultMap) {
+      self.resultMap = unsafeResultMap
+    }
+
+    public init(success: Bool) {
+      self.init(unsafeResultMap: ["__typename": "Mutation", "success": success])
+    }
+
+    public var success: Bool {
+      get {
+        return resultMap["success"]! as! Bool
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "success")
       }
     }
   }

@@ -10,7 +10,7 @@ import Foundation
 import MobileCoreServices
 import CoreData
 
-final class Account: NSObject, Codable {
+final class Account: NSObject, Codable, IdProviding {
   private enum CodingKeys: String, CodingKey {
     case id, ownerID, salesforceOwnerID, name, salesforceID, industry, numberOfEmployees, annualRevenue, billingCity, billingState, phone, website, type, accountDescription, state, contactGrouper, notes
   }

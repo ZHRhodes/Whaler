@@ -1,0 +1,3 @@
+mutation applyAccountTrackingChanges($input: [AccountTrackingChange!]!) {
+  success: applyAccountTrackingChanges(input: $input)
+}

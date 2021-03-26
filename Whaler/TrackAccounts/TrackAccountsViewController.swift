@@ -91,8 +91,10 @@ class TrackAccountsViewController: ToolbarContainingViewController {
   private func makeSaveView() -> UIView {
     let container = UIView()
     saveButton = CommonButton(style: .filled)
+    saveButton.isEnabled = false
     saveButton.setTitle("Save", for: .normal)
     saveButton.widthAnchor.constraint(equalToConstant: 100).isActive = true
+    saveButton.addTarget(self, action: #selector(saveButtonTapped), for: .touchUpInside)
     container.addAndAttach(view: saveButton, height: 48, width: 100, attachingEdges: [.left(0), .right(0), .centerY(0), .centerX(0)])
     return container
   }
@@ -106,6 +108,11 @@ class TrackAccountsViewController: ToolbarContainingViewController {
     userView.widthAnchor.constraint(equalToConstant: size).isActive = true
     userView.heightAnchor.constraint(equalTo: userView.widthAnchor).isActive = true
     return userView
+  }
+  
+  @objc
+  private func saveButtonTapped() {
+    interactor.applyTrackingChanges()
   }
   
   private func configureFilterStack() {
@@ -188,12 +195,11 @@ extension TrackAccountsViewController: UITableViewDelegate, UITableViewDataSourc
     guard let cell = tableView.cellForRow(at: indexPath) as? TrackAccountsTableCell else { return }
     cell.isChecked = !cell.isChecked
     let selectedAccount = interactor.account(atRow: indexPath.row, onPage: visiblePage)
-    guard let externalId = selectedAccount.salesforceID else { return }
     let newState: TrackingState = cell.isChecked ? .tracked : .untracked
-    let trackingChange = TrackingChange(externalId: externalId,
+    let trackingChange = TrackingChange(value: selectedAccount,
                                         newTrackingState: newState)
     //optimize to only end up with CHANGES to current state in this dict/set
-    interactor.trackingChanges[trackingChange.externalId] = trackingChange
+    interactor.trackingChanges[trackingChange.value.id] = trackingChange
     setSaveButtonState()
   }
 }
