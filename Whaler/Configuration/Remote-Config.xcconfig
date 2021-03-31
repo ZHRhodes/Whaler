@@ -1,0 +1,13 @@
+//
+//  Remote-Config.xcconfig
+//  Whaler
+//
+//  Created by Zachary Rhodes on 3/31/21.
+//  Copyright © 2021 Whaler. All rights reserved.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+
+SLASH=/
+API_URL = https:$(SLASH)$(SLASH)getwhalergo.herokuapp.com

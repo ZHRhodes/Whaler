@@ -17,7 +17,7 @@ class Graph {
     let cache = InMemoryNormalizedCache()
     let store = ApolloStore(cache: cache)
     let provider = NetworkInterceptorProvider(client: client, store: store)
-    let url = URL(string: "https://getwhalergo.herokuapp.com/query")!
+    let url = Configuration.apiUrl.appendingPathComponent("query")
     let transport = RequestChainNetworkTransport(interceptorProvider: provider,
                                                  endpointURL: url)
     return ApolloClient(networkTransport: transport, store: store)

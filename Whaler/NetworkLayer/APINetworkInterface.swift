@@ -105,7 +105,7 @@ extension APINetworkInterface: APIInterface {
   @discardableResult
   func logOut() -> Response<EmptyRemote> {
     let body = [String: String]()
-    let response: Response<EmptyRemote> = post(path: "https://getwhalergo.herokuapp.com/api/user/logout",
+    let response: Response<EmptyRemote> = post(path: Configuration.apiUrl.appendingPathComponent("/api/user/logout").absoluteString,
                                                formBody: body)
     tokenContainer.accessToken = nil
     tokenContainer.refreshToken = nil
@@ -116,7 +116,7 @@ extension APINetworkInterface: APIInterface {
   func refreshTokens() -> Bool {
     guard let refreshToken = tokenContainer.refreshToken else { return false }
     let refreshRequest = NetworkRequest(method: .post,
-                                        path: "https://getwhalergo.herokuapp.com/api/user/refresh",
+                                        path: Configuration.apiUrl.appendingPathComponent("api/user/refresh").absoluteString,
                                         headers: authorizationHeader,
                                         params: [:],
                                         jsonBody: ["refreshToken": refreshToken])

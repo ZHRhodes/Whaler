@@ -13,7 +13,7 @@ struct AuthenticationInteractor {
   
   func signIn(email: String, password: String, success: @escaping VoidClosure, failure: @escaping VoidClosure) {
     let body = ["email": email, "password": password]
-    let response: Response<User> = networkInterface.post(path: "https://getwhalergo.herokuapp.com/api/user/login",
+    let response: Response<User> = networkInterface.post(path: Configuration.apiUrl.appendingPathComponent("api/user/login").absoluteString,
                                          jsonBody: body)
     switch response.result {
     case .error(let code, let message):

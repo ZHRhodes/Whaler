@@ -92,6 +92,8 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>API_URL</key>
+	<string>$(API_URL)</string>
 	<key>UTImportedTypeDeclarations</key>
 	<array>
 		<dict>
