@@ -25,7 +25,6 @@ struct AccountsHelper {
     let input = accounts.map { NewAccount(id: $0.id,
                                           salesforceId: $0.salesforceID,
                                           name: $0.name,
-                                          ownerId: $0.ownerID,
                                           industry: $0.industry,
                                           description: $0.accountDescription,
                                           numberOfEmployees: $0.numberOfEmployees,

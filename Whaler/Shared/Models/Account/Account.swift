@@ -12,11 +12,10 @@ import CoreData
 
 final class Account: NSObject, Codable, IdProviding {
   private enum CodingKeys: String, CodingKey {
-    case id, ownerID, salesforceOwnerID, name, salesforceID, industry, numberOfEmployees, annualRevenue, billingCity, billingState, phone, website, type, accountDescription, state, contactGrouper, notes
+    case id, salesforceOwnerID, name, salesforceID, industry, numberOfEmployees, annualRevenue, billingCity, billingState, phone, website, type, accountDescription, state, contactGrouper, notes
   }
   
   var id: String
-  let ownerID: String
   var salesforceOwnerID: String?
   var name: String
   var salesforceID: String?
@@ -40,7 +39,6 @@ final class Account: NSObject, Codable, IdProviding {
   
   override init() {
     id = ""
-    ownerID = ""
     salesforceOwnerID = ""
     name = ""
     salesforceID = ""
@@ -56,9 +54,8 @@ final class Account: NSObject, Codable, IdProviding {
     super.init()
   }
   
-  init(id: String, ownerID: String, salesforceOwnerID: String?, name: String, salesforceID: String?, industry: String?, numberOfEmployees: String?, annualRevenue: String?, billingCity: String?, billingState: String?, phone: String?, website: String?, type: String?, accountDescription: String?, state: WorkState?, contactGrouper: Grouper<WorkState, Contact>? = nil, notes: String?) {
+  init(id: String, salesforceOwnerID: String?, name: String, salesforceID: String?, industry: String?, numberOfEmployees: String?, annualRevenue: String?, billingCity: String?, billingState: String?, phone: String?, website: String?, type: String?, accountDescription: String?, state: WorkState?, contactGrouper: Grouper<WorkState, Contact>? = nil, notes: String?) {
     self.id = id
-    self.ownerID = ownerID
     self.salesforceOwnerID = salesforceOwnerID
     self.name = name
     self.salesforceID = salesforceID
@@ -80,7 +77,7 @@ final class Account: NSObject, Codable, IdProviding {
   init(dictionary: Dictionary<String, String>) {
     id = "" //will this mess up local caching?
     salesforceID = dictionary["Account ID"] ?? ""
-    ownerID = dictionary["Account Owner"] ?? ""
+//    ownerID = dictionary["Account Owner"] ?? ""
     name = dictionary["Account Name"] ?? ""
     industry = dictionary["Industry"]
     numberOfEmployees = dictionary["Employees"]
@@ -95,7 +92,6 @@ final class Account: NSObject, Codable, IdProviding {
   
   init(sfAccount: SF.Account) {
     id = ""
-    ownerID = ""
     salesforceID = sfAccount.Id ?? ""
     salesforceOwnerID = sfAccount.OwnerId ?? ""
     name = sfAccount.Name ?? ""
@@ -135,7 +131,6 @@ extension Account: ManagedObject {
   
   convenience init(managedObject: NSManagedObject) {
     let id = managedObject.value(forKey: CodingKeys.id.rawValue) as? String ?? ""
-    let ownerID = managedObject.value(forKey: CodingKeys.ownerID.rawValue) as? String ?? ""
     let name = managedObject.value(forKey: CodingKeys.name.rawValue) as? String ?? ""
     let salesforceID = managedObject.value(forKey: CodingKeys.salesforceID.rawValue) as? String ?? ""
     let salesforceOwnerID = managedObject.value(forKey: CodingKeys.salesforceOwnerID.rawValue) as? String ?? ""
@@ -151,12 +146,11 @@ extension Account: ManagedObject {
     let stateString = managedObject.value(forKey: CodingKeys.state.rawValue) as? String ?? ""
     let state = WorkState(rawValue: stateString) ?? .ready
     let notes = managedObject.value(forKey: CodingKeys.notes.rawValue) as? String ?? ""
-    self.init(id: id, ownerID: ownerID, salesforceOwnerID: salesforceOwnerID, name: name, salesforceID: salesforceID, industry: industry, numberOfEmployees: numberOfEmployees, annualRevenue: annualRevenue, billingCity: billingCity, billingState: billingState, phone: phone, website: website, type: type, accountDescription: accountDescription, state: state, notes: notes)
+    self.init(id: id, salesforceOwnerID: salesforceOwnerID, name: name, salesforceID: salesforceID, industry: industry, numberOfEmployees: numberOfEmployees, annualRevenue: annualRevenue, billingCity: billingCity, billingState: billingState, phone: phone, website: website, type: type, accountDescription: accountDescription, state: state, notes: notes)
   }
   
   func setProperties(in managedObject: NSManagedObject) {
     managedObject.setValue(id, forKey: CodingKeys.id.rawValue)
-    managedObject.setValue(ownerID, forKey: CodingKeys.ownerID.rawValue)
     managedObject.setValue(name, forKey: CodingKeys.name.rawValue)
     managedObject.setValue(salesforceID, forKey: CodingKeys.salesforceID.rawValue)
     managedObject.setValue(salesforceOwnerID, forKey: CodingKeys.salesforceOwnerID.rawValue)
@@ -221,7 +215,6 @@ extension Account {
   convenience init(savedAccount: SaveAccountsMutation.Data.SaveAccount) {
     let state = savedAccount.state.map(WorkState.init) ?? WorkState.ready
     self.init(id: savedAccount.id,
-              ownerID: savedAccount.ownerId,
               salesforceOwnerID: savedAccount.salesforceOwnerId,
               name: savedAccount.name,
               salesforceID: savedAccount.salesforceId,
@@ -243,7 +236,6 @@ extension Account {
 extension Account {
   convenience init(apiAccount: AccountsQuery.Data.Account) {
     self.init(id: apiAccount.id,
-              ownerID: apiAccount.ownerId,
               salesforceOwnerID: apiAccount.salesforceOwnerId,
               name: apiAccount.name,
               salesforceID: apiAccount.salesforceId,

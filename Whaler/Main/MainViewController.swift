@@ -74,7 +74,6 @@ class MainViewController: UIViewController {
     interactor.viewController = self
     
     configureViewsForContent()
-
     if interactor.hasSalesforceTokens {
       //present loading indicator
       interactor.refreshSalesforceSession { [weak self] (success) in

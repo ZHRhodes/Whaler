@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17192" systemVersion="19H2" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17709" systemVersion="20D91" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="AccountEntity" representedClassName="AccountEntity" syncable="YES" codeGenerationType="class">
         <attribute name="accountDescription" optional="YES" attributeType="String"/>
         <attribute name="annualRevenue" optional="YES" attributeType="String"/>
@@ -11,7 +11,6 @@
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="notes" optional="YES" attributeType="String"/>
         <attribute name="numberOfEmployees" optional="YES" attributeType="String"/>
-        <attribute name="ownerID" optional="YES" attributeType="String"/>
         <attribute name="ownerUserId" optional="YES" attributeType="String"/>
         <attribute name="phone" optional="YES" attributeType="String"/>
         <attribute name="salesforceID" optional="YES" attributeType="String"/>
@@ -34,7 +33,7 @@
         <attribute name="state" optional="YES" attributeType="String"/>
     </entity>
     <elements>
-        <element name="AccountEntity" positionX="-63" positionY="-18" width="128" height="313"/>
+        <element name="AccountEntity" positionX="-63" positionY="-18" width="128" height="284"/>
         <element name="ContactEntity" positionX="-63" positionY="-27" width="128" height="208"/>
     </elements>
 </model>

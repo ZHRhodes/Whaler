@@ -73,6 +73,8 @@ class TrackAccountsInteractor {
     }
 
     Graph.shared.apollo.perform(mutation: ApplyAccountTrackingChangesMutation(input: input)) { result in
+      let resultGet = try? result.get()
+      print(resultGet?.errors)
       guard let data = try? result.get().data else { return }
       print(data.success)
     }
@@ -82,7 +84,6 @@ class TrackAccountsInteractor {
     return NewAccount(id: account.id,
                       salesforceId: account.salesforceID,
                       name: account.name,
-                      ownerId: account.ownerID,
                       industry: account.industry,
                       description: account.accountDescription,
                       numberOfEmployees: account.numberOfEmployees,

@@ -1609,7 +1609,6 @@ public final class SaveAccountsMutation: GraphQLMutation {
         __typename
         id
         name
-        ownerID
         salesforceID
         salesforceOwnerID
         industry
@@ -1675,7 +1674,6 @@ public final class SaveAccountsMutation: GraphQLMutation {
           GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
           GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
           GraphQLField("name", type: .nonNull(.scalar(String.self))),
-          GraphQLField("ownerID", type: .nonNull(.scalar(String.self))),
           GraphQLField("salesforceID", type: .scalar(String.self)),
           GraphQLField("salesforceOwnerID", type: .scalar(String.self)),
           GraphQLField("industry", type: .scalar(String.self)),
@@ -1698,8 +1696,8 @@ public final class SaveAccountsMutation: GraphQLMutation {
         self.resultMap = unsafeResultMap
       }
 
-      public init(id: GraphQLID, name: String, ownerId: String, salesforceId: String? = nil, salesforceOwnerId: String? = nil, industry: String? = nil, description: String? = nil, numberOfEmployees: String? = nil, annualRevenue: String? = nil, billingCity: String? = nil, billingState: String? = nil, phone: String? = nil, website: String? = nil, type: String? = nil, state: String? = nil, notes: String? = nil) {
-        self.init(unsafeResultMap: ["__typename": "Account", "id": id, "name": name, "ownerID": ownerId, "salesforceID": salesforceId, "salesforceOwnerID": salesforceOwnerId, "industry": industry, "description": description, "numberOfEmployees": numberOfEmployees, "annualRevenue": annualRevenue, "billingCity": billingCity, "billingState": billingState, "phone": phone, "website": website, "type": type, "state": state, "notes": notes])
+      public init(id: GraphQLID, name: String, salesforceId: String? = nil, salesforceOwnerId: String? = nil, industry: String? = nil, description: String? = nil, numberOfEmployees: String? = nil, annualRevenue: String? = nil, billingCity: String? = nil, billingState: String? = nil, phone: String? = nil, website: String? = nil, type: String? = nil, state: String? = nil, notes: String? = nil) {
+        self.init(unsafeResultMap: ["__typename": "Account", "id": id, "name": name, "salesforceID": salesforceId, "salesforceOwnerID": salesforceOwnerId, "industry": industry, "description": description, "numberOfEmployees": numberOfEmployees, "annualRevenue": annualRevenue, "billingCity": billingCity, "billingState": billingState, "phone": phone, "website": website, "type": type, "state": state, "notes": notes])
       }
 
       public var __typename: String {
@@ -1726,15 +1724,6 @@ public final class SaveAccountsMutation: GraphQLMutation {
         }
         set {
           resultMap.updateValue(newValue, forKey: "name")
-        }
-      }
-
-      public var ownerId: String {
-        get {
-          return resultMap["ownerID"]! as! String
-        }
-        set {
-          resultMap.updateValue(newValue, forKey: "ownerID")
         }
       }
 
