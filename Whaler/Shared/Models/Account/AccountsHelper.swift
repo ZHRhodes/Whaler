@@ -10,7 +10,7 @@ import Foundation
 
 struct AccountsHelper {
   func fetchAccountsFromAPI(completion: @escaping ([Account]?) -> Void) {
-    Graph.shared.apollo.fetch(query: AccountsQuery()) { result in
+    Graph.shared.apollo.fetch(query: AccountsQuery(), cachePolicy: .fetchIgnoringCacheData) { result in
       do {
         guard let data = try result.get().data else { throw "Apollo account fetch data was nil" }
         completion(data.accounts.map(Account.init))

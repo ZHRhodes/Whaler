@@ -21,7 +21,11 @@ protocol MainDataManager: class {
 }
 
 class MainInteractor: MainDataManager {
-  lazy var accountGrouper = Grouper<WorkState, Account>(groups: self.accountStates)
+  lazy var accountGrouper = Grouper<WorkState, Account>(groups: self.accountStates) {
+    didSet {
+      print("__________________________\(accountGrouper)")
+    }
+  }
   var lastSelected: (state: WorkState, index: Int)?
   lazy var accountStates = WorkState.allCases
   var accountBeingAssigned: Account?

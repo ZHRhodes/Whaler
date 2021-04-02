@@ -112,7 +112,9 @@ class TrackAccountsViewController: ToolbarContainingViewController {
   
   @objc
   private func saveButtonTapped() {
-    interactor.applyTrackingChanges()
+    interactor.applyTrackingChanges() { [weak self] in
+      self?.navigationController?.popViewController(animated: false)
+    }
   }
   
   private func configureFilterStack() {
@@ -194,11 +196,13 @@ extension TrackAccountsViewController: UITableViewDelegate, UITableViewDataSourc
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     guard let cell = tableView.cellForRow(at: indexPath) as? TrackAccountsTableCell else { return }
     cell.isChecked = !cell.isChecked
-    let selectedAccount = interactor.account(atRow: indexPath.row, onPage: visiblePage)
+    let selectedAccount = interactor.account(atRow: indexPath.row, onVisiblePage: visiblePage)
     let newState: TrackingState = cell.isChecked ? .tracked : .untracked
     let trackingChange = TrackingChange(value: selectedAccount,
                                         newTrackingState: newState)
     //optimize to only end up with CHANGES to current state in this dict/set
+    
+    //if contains, remove, else add
     interactor.trackingChanges[trackingChange.value.id] = trackingChange
     setSaveButtonState()
   }

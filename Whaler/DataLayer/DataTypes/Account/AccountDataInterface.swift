@@ -36,7 +36,7 @@ class AccountDataInterface: DataInterface {
     
     cancellable = remoteDataSource
       .fetchAll()
-      .zip(sfDataSource.fetchAll()) //zip not guaranteed matching here
+      .zip(sfDataSource.fetchAll())
       .sink { (status) in
         switch status {
         case .finished:
@@ -46,9 +46,13 @@ class AccountDataInterface: DataInterface {
         }
     } receiveValue: { [weak self] (remoteAccounts, sfAccounts) in
       self?.reconcileAccountsFromSalesforce(remoteAccounts: remoteAccounts, salesforceAccounts: sfAccounts)
-      subject.send(sfAccounts)
-      guard let strongSelf = self else { return }
-//      strongSelf.saveCancellable = strongSelf.remoteDataSource.saveAll(sfAccounts)
+      subject.send(remoteAccounts)
+      
+      //this is necessary to update on our end things that have been updated in salesforce
+      //but it's causing a weird duplicating bug, so disabling for now
+      
+//      guard let strongSelf = self else { return }
+//      strongSelf.saveCancellable = strongSelf.remoteDataSource.saveAll(remoteAccounts)
 //        .sink(receiveCompletion: { subject.send(completion: $0) },
 //              receiveValue: { subject.send($0) })
     }
@@ -78,8 +82,8 @@ class AccountDataInterface: DataInterface {
   //Mark: Private Methods
   
   private func reconcileAccountsFromSalesforce(remoteAccounts: [Account], salesforceAccounts: [Account]) {
-    salesforceAccounts.forEach { account in
-      if let matchingLocalAccount = remoteAccounts.first(where: { $0.salesforceID == account.salesforceID }) {
+    remoteAccounts.forEach { account in
+      if let matchingLocalAccount = salesforceAccounts.first(where: { $0.salesforceID == account.salesforceID }) {
         account.mergeLocalProperties(with: matchingLocalAccount)
       }
     }

@@ -50,8 +50,8 @@ class TrackAccountsInteractor {
   }
   private(set) var accountsTableData: [Int: [TrackAccountsTableData]] = [:]
   
-  func account(atRow row: Int, onPage page: Int) -> Account {
-    let index = page * pageSize + row
+  func account(atRow row: Int, onVisiblePage page: Int) -> Account {
+    let index = (page - 1) * pageSize + row
     return accounts[index]
   }
   
@@ -65,7 +65,7 @@ class TrackAccountsInteractor {
     }
   }
   
-  func applyTrackingChanges() {
+  func applyTrackingChanges(completion: @escaping () -> Void) {
     //temp, move
     let input: [AccountTrackingChange] = trackingChanges.values.map { (trackingChange) in
       return AccountTrackingChange(account: makeNewAccount(from: trackingChange.value),
@@ -73,10 +73,9 @@ class TrackAccountsInteractor {
     }
 
     Graph.shared.apollo.perform(mutation: ApplyAccountTrackingChangesMutation(input: input)) { result in
-      let resultGet = try? result.get()
-      print(resultGet?.errors)
-      guard let data = try? result.get().data else { return }
-      print(data.success)
+      if let success = try? result.get().data?.success, success {
+        completion()
+      }
     }
   }
   

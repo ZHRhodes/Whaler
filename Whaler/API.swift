@@ -309,7 +309,6 @@ public final class AccountsQuery: GraphQLQuery {
       accounts {
         __typename
         id
-        ownerID
         salesforceOwnerID
         name
         salesforceID
@@ -368,7 +367,6 @@ public final class AccountsQuery: GraphQLQuery {
         return [
           GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
           GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-          GraphQLField("ownerID", type: .nonNull(.scalar(String.self))),
           GraphQLField("salesforceOwnerID", type: .scalar(String.self)),
           GraphQLField("name", type: .nonNull(.scalar(String.self))),
           GraphQLField("salesforceID", type: .scalar(String.self)),
@@ -392,8 +390,8 @@ public final class AccountsQuery: GraphQLQuery {
         self.resultMap = unsafeResultMap
       }
 
-      public init(id: GraphQLID, ownerId: String, salesforceOwnerId: String? = nil, name: String, salesforceId: String? = nil, industry: String? = nil, numberOfEmployees: String? = nil, annualRevenue: String? = nil, billingCity: String? = nil, billingState: String? = nil, phone: String? = nil, website: String? = nil, type: String? = nil, description: String? = nil, state: String? = nil, notes: String? = nil) {
-        self.init(unsafeResultMap: ["__typename": "Account", "id": id, "ownerID": ownerId, "salesforceOwnerID": salesforceOwnerId, "name": name, "salesforceID": salesforceId, "industry": industry, "numberOfEmployees": numberOfEmployees, "annualRevenue": annualRevenue, "billingCity": billingCity, "billingState": billingState, "phone": phone, "website": website, "type": type, "description": description, "state": state, "notes": notes])
+      public init(id: GraphQLID, salesforceOwnerId: String? = nil, name: String, salesforceId: String? = nil, industry: String? = nil, numberOfEmployees: String? = nil, annualRevenue: String? = nil, billingCity: String? = nil, billingState: String? = nil, phone: String? = nil, website: String? = nil, type: String? = nil, description: String? = nil, state: String? = nil, notes: String? = nil) {
+        self.init(unsafeResultMap: ["__typename": "Account", "id": id, "salesforceOwnerID": salesforceOwnerId, "name": name, "salesforceID": salesforceId, "industry": industry, "numberOfEmployees": numberOfEmployees, "annualRevenue": annualRevenue, "billingCity": billingCity, "billingState": billingState, "phone": phone, "website": website, "type": type, "description": description, "state": state, "notes": notes])
       }
 
       public var __typename: String {
@@ -411,15 +409,6 @@ public final class AccountsQuery: GraphQLQuery {
         }
         set {
           resultMap.updateValue(newValue, forKey: "id")
-        }
-      }
-
-      public var ownerId: String {
-        get {
-          return resultMap["ownerID"]! as! String
-        }
-        set {
-          resultMap.updateValue(newValue, forKey: "ownerID")
         }
       }
 
