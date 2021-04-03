@@ -16,7 +16,7 @@ class TrackAccountsInteractor {
   private let currentlyTrackingIds: Set<String>
   var trackingChanges = [String: TrackingChange<Account>]()
   var appliedFilters = Set<Filter>()
-  var currentTrackingRange: ClosedRange<Int> = 0...0
+  var currentTrackingRange: Range<Int> = 0..<0
   var pageSize: Int = 12
   private(set) var numberOfPages = 0 {
     didSet {
@@ -94,7 +94,7 @@ class TrackAccountsInteractor {
       }
     }
     
-    currentTrackingRange = 0...trackedAccounts.count
+    currentTrackingRange = 0..<trackedAccounts.count
     self.accounts = trackedAccounts + untrackedAccounts
   }
   
