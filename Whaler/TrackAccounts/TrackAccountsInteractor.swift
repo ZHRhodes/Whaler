@@ -13,8 +13,10 @@ class TrackAccountsInteractor {
   private var fetchCancellable: AnyCancellable?
   private var applyCancellable: AnyCancellable?
   weak var viewController: TrackAccountsViewController?
+  private let currentlyTrackingIds: Set<String>
   var trackingChanges = [String: TrackingChange<Account>]()
   var appliedFilters = Set<Filter>()
+  var currentTrackingRange: ClosedRange<Int> = 0...0
   var pageSize: Int = 12
   private(set) var numberOfPages = 0 {
     didSet {
@@ -51,9 +53,22 @@ class TrackAccountsInteractor {
   }
   private(set) var accountsTableData: [Int: [TrackAccountsTableData]] = [:]
   
+  init(currentlyTracking: Set<Account>) {
+    self.currentlyTrackingIds = Set(currentlyTracking.map { $0.salesforceID ?? ""})
+  }
+  
   func account(atRow row: Int, onVisiblePage page: Int) -> Account {
-    let index = (page - 1) * pageSize + row
+    let index = convertVisibleRowToAccountIndex(row: row, visiblePage: page)
     return accounts[index]
+  }
+  
+  func isTrackingAccount(atRow row: Int, onVisiblePage page: Int) -> Bool {
+    let index = convertVisibleRowToAccountIndex(row: row, visiblePage: page)
+    return currentTrackingRange.contains(index)
+  }
+  
+  private func convertVisibleRowToAccountIndex(row: Int, visiblePage: Int) -> Int {
+    return (visiblePage - 1) * pageSize + row
   }
   
   func fetchAccounts() {
@@ -62,9 +77,25 @@ class TrackAccountsInteractor {
       .ephemeral
       .fetchSubset(with: appliedFilters)
       .sink(receiveCompletion: { _ in }) { [weak self] (accounts) in
-        self?.accounts = accounts
+        self?.processFetchedAccounts(accounts)
         self?.viewController?.didFetchAccounts()
     }
+  }
+  
+  private func processFetchedAccounts(_ fetchedAccounts: [Account]) {
+    var trackedAccounts = [Account]()
+    var untrackedAccounts = [Account]()
+    
+    fetchedAccounts.forEach { (account) in
+      if currentlyTrackingIds.contains(account.salesforceID ?? "") {
+        trackedAccounts.append(account)
+      } else {
+        untrackedAccounts.append(account)
+      }
+    }
+    
+    currentTrackingRange = 0...trackedAccounts.count
+    self.accounts = trackedAccounts + untrackedAccounts
   }
   
   func applyTrackingChanges(completion: @escaping () -> Void) {

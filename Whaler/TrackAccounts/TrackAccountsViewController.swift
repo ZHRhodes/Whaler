@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 class TrackAccountsViewController: ToolbarContainingViewController {
-  private let interactor = TrackAccountsInteractor()
+  var interactor: TrackAccountsInteractor!
   private let titleLabel = UILabel()
   private var actionsStack: UIStackView!
   private let tableView = ContentSizedTableView()
@@ -154,6 +154,8 @@ class TrackAccountsViewController: ToolbarContainingViewController {
   }
   
   func didFetchAccounts() {
+    visiblePage = 1
+    pageSelector.currentPage = 1
     tableView.reloadData()
   }
   
@@ -171,6 +173,7 @@ extension TrackAccountsViewController: UITableViewDelegate, UITableViewDataSourc
     let cell = tableView.dequeueReusableCell(withIdentifier: TrackAccountsTableCell.id)
     guard let trackAccountsCell = cell as? TrackAccountsTableCell else { return UITableViewCell() }
     trackAccountsCell.dataSource = interactor.accountsTableData[visiblePage]![indexPath.row]
+    trackAccountsCell.isChecked = interactor.isTrackingAccount(atRow: indexPath.row, onVisiblePage: visiblePage)
     return trackAccountsCell
   }
   
