@@ -201,9 +201,9 @@ extension TrackAccountsViewController: UITableViewDelegate, UITableViewDataSourc
     let trackingChange = TrackingChange(value: selectedAccount,
                                         newTrackingState: newState)
     //optimize to only end up with CHANGES to current state in this dict/set
-    
     //if contains, remove, else add
-    interactor.trackingChanges[trackingChange.value.id] = trackingChange
+    guard let salesforceID = selectedAccount.salesforceID else { return }
+    interactor.trackingChanges[salesforceID] = trackingChange
     setSaveButtonState()
   }
 }

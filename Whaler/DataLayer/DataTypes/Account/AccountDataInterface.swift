@@ -52,14 +52,9 @@ class AccountDataInterface: DataInterface {
       guard let strongSelf = self else { return }
       let mergedAccounts = strongSelf.reconcileAccountsFromSalesforce(remoteAccounts: remoteAccounts, salesforceAccounts: sfAccounts)
       subject.send(mergedAccounts)
-      
-      //this is necessary to update on our end things that have been updated in salesforce
-      //but it's causing a weird duplicating bug, so disabling for now
-      
-//      guard let strongSelf = self else { return }
-//      strongSelf.saveCancellable = strongSelf.remoteDataSource.saveAll(remoteAccounts)
-//        .sink(receiveCompletion: { subject.send(completion: $0) },
-//              receiveValue: { subject.send($0) })
+      strongSelf.saveCancellable = strongSelf.remoteDataSource.saveAll(remoteAccounts)
+        .sink(receiveCompletion: { subject.send(completion: $0) },
+              receiveValue: { subject.send($0) })
     }
     
     return subject.eraseToAnyPublisher()
