@@ -9,6 +9,10 @@
 import Foundation
 import Combine
 
+enum AccountSaveType {
+  case valueChange([Account]), trackingChange([TrackingChange<Account>])
+}
+
 class AccountDataInterface: DataInterface {
   typealias Entity = Account
   
@@ -16,7 +20,7 @@ class AccountDataInterface: DataInterface {
   typealias SubsetDataRequestType = Set<Filter>
   typealias SingleDataRequestType = Void
   
-  typealias DataSaveType = [Account]
+  typealias DataSaveType = AccountSaveType
   
   private let remoteDataSource: AccountRemoteDataSource
   private let sfDataSource: AccountSFDataSource
@@ -45,8 +49,9 @@ class AccountDataInterface: DataInterface {
           subject.send(completion: status)
         }
     } receiveValue: { [weak self] (remoteAccounts, sfAccounts) in
-      self?.reconcileAccountsFromSalesforce(remoteAccounts: remoteAccounts, salesforceAccounts: sfAccounts)
-      subject.send(remoteAccounts)
+      guard let strongSelf = self else { return }
+      let mergedAccounts = strongSelf.reconcileAccountsFromSalesforce(remoteAccounts: remoteAccounts, salesforceAccounts: sfAccounts)
+      subject.send(mergedAccounts)
       
       //this is necessary to update on our end things that have been updated in salesforce
       //but it's causing a weird duplicating bug, so disabling for now
@@ -69,11 +74,31 @@ class AccountDataInterface: DataInterface {
   }
   
   func save(_ data: DataSaveType) -> AnyPublisher<[Entity], RepoError> {
+    switch data {
+    case .valueChange(let accounts):
+      return saveValueChanges(accounts)
+    case .trackingChange(let trackingChanges):
+      return saveTrackingChanges(trackingChanges)
+    }
+  }
+  
+  private func saveValueChanges(_ accounts: [Account]) -> AnyPublisher<[Entity], RepoError> {
     Future<[Entity], RepoError> { promise in
       self.saveCancellable = self.remoteDataSource
-        .saveAll(data)
+        .saveAll(accounts)
         .sink(receiveCompletion: { _ in }) { (accounts) in
-          data.forEach { ObjectManager.save($0) }
+          accounts.forEach { ObjectManager.save($0) }
+          promise(.success(accounts))
+      }
+    }.eraseToAnyPublisher()
+  }
+  
+  private func saveTrackingChanges(_ trackingChanges: [TrackingChange<Account>]) -> AnyPublisher<[Entity], RepoError> {
+    Future<[Entity], RepoError> { promise in
+      self.saveCancellable = self.remoteDataSource
+        .saveTrackingChanges(trackingChanges)
+        .sink(receiveCompletion: { _ in }) { (accounts) in
+          accounts.forEach { ObjectManager.save($0) }
           promise(.success(accounts))
       }
     }.eraseToAnyPublisher()
@@ -81,10 +106,20 @@ class AccountDataInterface: DataInterface {
 
   //Mark: Private Methods
   
-  private func reconcileAccountsFromSalesforce(remoteAccounts: [Account], salesforceAccounts: [Account]) {
-    remoteAccounts.forEach { account in
-      if let matchingLocalAccount = salesforceAccounts.first(where: { $0.salesforceID == account.salesforceID }) {
-        account.mergeLocalProperties(with: matchingLocalAccount)
+  private func reconcileAccountsFromSalesforce(remoteAccounts: [Account], salesforceAccounts: [Account]) -> [Account] {
+    var mergedAccounts = remoteAccounts
+    remoteAccounts.enumerated().forEach { (index, remoteAccount) in
+      if let matchingSalesforceAccount = salesforceAccounts.first(where: { $0.salesforceID == remoteAccount.salesforceID }) {
+        mergedAccounts[index] = mergeLocalProperties(from: remoteAccount, into: matchingSalesforceAccount)
       }
     }
-  }}
+    return mergedAccounts
+  }
+  
+  private func mergeLocalProperties(from sourceAccount: Account, into destinationAccount: Account) -> Account {
+    destinationAccount.id = sourceAccount.id
+    destinationAccount.state = sourceAccount.state
+    destinationAccount.notes = sourceAccount.notes
+    return destinationAccount
+  }
+}

@@ -11,6 +11,7 @@ import Combine
 
 class TrackAccountsInteractor {
   private var fetchCancellable: AnyCancellable?
+  private var applyCancellable: AnyCancellable?
   weak var viewController: TrackAccountsViewController?
   var trackingChanges = [String: TrackingChange<Account>]()
   var appliedFilters = Set<Filter>()
@@ -58,6 +59,7 @@ class TrackAccountsInteractor {
   func fetchAccounts() {
     fetchCancellable = repoStore
       .accountRepository
+      .ephemeral
       .fetchSubset(with: appliedFilters)
       .sink(receiveCompletion: { _ in }) { [weak self] (accounts) in
         self?.accounts = accounts
@@ -66,33 +68,12 @@ class TrackAccountsInteractor {
   }
   
   func applyTrackingChanges(completion: @escaping () -> Void) {
-    //temp, move
-    let input: [AccountTrackingChange] = trackingChanges.values.map { (trackingChange) in
-      return AccountTrackingChange(account: makeNewAccount(from: trackingChange.value),
-                                   newState: trackingChange.newTrackingState.rawValue)
-    }
-
-    Graph.shared.apollo.perform(mutation: ApplyAccountTrackingChangesMutation(input: input)) { result in
-      if let success = try? result.get().data?.success, success {
+    let changes = trackingChanges.values.map { $0 }
+    applyCancellable = repoStore
+      .accountRepository
+      .save(.trackingChange(changes))
+      .sink(receiveCompletion: { _ in }) { (_) in
         completion()
-      }
     }
-  }
-  
-  private func makeNewAccount(from account: Account) -> NewAccount {
-    return NewAccount(id: account.id,
-                      salesforceId: account.salesforceID,
-                      name: account.name,
-                      industry: account.industry,
-                      description: account.accountDescription,
-                      numberOfEmployees: account.numberOfEmployees,
-                      annualRevenue: account.annualRevenue,
-                      billingCity: account.billingCity,
-                      billingState: account.billingState,
-                      phone: account.phone,
-                      website: account.website,
-                      type: account.type,
-                      state: account.state?.rawValue,
-                      notes: account.notes)
   }
 }

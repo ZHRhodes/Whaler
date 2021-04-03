@@ -14,12 +14,14 @@ protocol RepoStorable {
 
 //kill on logout -- recreate
 class RepoStore {
+  private var ephemeralSessionManager = EphemeralSessionManager()
+  
   lazy var accountRepository: Repository<AccountDataInterface> = {
     let remoteDataSource = AccountRemoteDataSource()
     let sfDataSource = AccountSFDataSource()
     let dataInterface = AccountDataInterface(remoteDataSource: remoteDataSource,
                                              sfDataSource: sfDataSource)
-    return Repository(dataInterface: dataInterface)
+    return Repository(dataInterface: dataInterface, ephemeralSessionManager: ephemeralSessionManager)
   }()
   
   lazy var contactRepository: Repository<ContactDataInterface> = {
@@ -27,6 +29,6 @@ class RepoStore {
     let sfDataSource = ContactSFDataSource()
     let dataInterface = ContactDataInterface(remoteDataSource: remoteDataSource,
                                              sfDataSource: sfDataSource)
-    return Repository(dataInterface: dataInterface)
+    return Repository(dataInterface: dataInterface, ephemeralSessionManager: ephemeralSessionManager)
   }()
 }

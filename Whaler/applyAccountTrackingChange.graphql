@@ -1,3 +1,19 @@
 mutation applyAccountTrackingChanges($input: [AccountTrackingChange!]!) {
-  success: applyAccountTrackingChanges(input: $input)
+  trackedAccounts: applyAccountTrackingChanges(input: $input) {
+    id
+    name
+    salesforceID
+    salesforceOwnerID
+    industry
+    description
+    numberOfEmployees
+    annualRevenue
+    billingCity
+    billingState
+    phone
+    website
+    type
+    state
+    notes
+  }
 }

@@ -9,7 +9,7 @@
 import Foundation
 import Combine
 
-class Repository<Interface: DataInterface> {
+class Repository<Interface: DataInterface>: EphemeralObject {
   typealias Entity = Interface.Entity
   
   /// The Entity type managed by this Repository.
@@ -17,10 +17,9 @@ class Repository<Interface: DataInterface> {
     return Entity.self
   }
   
-  /// A toggle that determines whether fetched data "passes through" this repository without being cached.
-  ///
-  /// This is useful for highly transient datasets, where a cached dataset would only take space in memory without providing any future value. Ex: Searched flights, where the flight objects are large and the rates are only good for a short amount of time.
-  var passthroughMode: Bool
+  private let isEphemeral: Bool
+  private let ephemeralSessionManager: EphemeralSessionManager
+  lazy var id: String = UUID().uuidString
   
   private lazy var currentValueSubject = CurrentValueSubject<[Entity], RepoError>([])
   private lazy var passthroughSubject = PassthroughSubject<[Entity], RepoError>()
@@ -30,7 +29,7 @@ class Repository<Interface: DataInterface> {
   private var singleCancellable: AnyCancellable?
   private var saveCancellable: AnyCancellable?
   
-  private lazy var queue = DispatchQueue(label: "com.travelbank.\(String(describing: type.self))")
+  private lazy var queue = DispatchQueue(label: "com.whaler.\(String(describing: type.self))")
   
   /// A publisher that will publish the most comprehensive dataset received by this Repository.
   ///
@@ -40,23 +39,36 @@ class Repository<Interface: DataInterface> {
   ///
   /// Note: If passthroughMode is enabled, then only `fetchAll` will publish values to this publisher.
   var publisher: AnyPublisher<[Entity], RepoError> {
-    if passthroughMode {
+    if isEphemeral {
       return passthroughSubject.receive(on: DispatchQueue.main).eraseToAnyPublisher()
     } else {
       return currentValueSubject.receive(on: DispatchQueue.main).eraseToAnyPublisher()
     }
   }
   
-  init(dataInterface: Interface, passthroughMode: Bool = false) {
+  /// Creates an ephemeral instance of this repository type. Ephemeral instances are one-and-done; they fire one result set and deinit.
+  /// They do not cache their results, nor do they affect the cache of the regular repository.
+  ///
+  /// This is useful for highly transient datasets, where a cached dataset would only take space in memory without providing any future value. Ex: Searched flights, where the flight objects are large and the rates are only good for a short amount of time.
+  ///
+  /// It's also useful for "exploring" data of a given type, where the results should not necessarily be associated with the user or session.
+  var ephemeral: Repository<Interface> {
+    let passthroughRepo = Self.init(dataInterface: dataInterface, ephemeralSessionManager: ephemeralSessionManager, ephemeral: true)
+    ephemeralSessionManager.register(passthroughRepo)
+    return passthroughRepo
+  }
+  
+  required init(dataInterface: Interface, ephemeralSessionManager: EphemeralSessionManager, ephemeral: Bool = false) {
     self.dataInterface = dataInterface
-    self.passthroughMode = passthroughMode
+    self.ephemeralSessionManager = ephemeralSessionManager
+    self.isEphemeral = ephemeral
   }
   
   /// Sends a new set of values over the publisher determined by the passthroughMode value.
   ///
   /// - Parameter newValues: New values to be broadcasted
   func broadcast(newValues: [Entity]) {
-    if passthroughMode {
+    if isEphemeral {
       passthroughSubject.send(newValues)
     } else {
       currentValueSubject.send(newValues)
@@ -80,10 +92,12 @@ class Repository<Interface: DataInterface> {
             if case let .failure(error) = completion {
               Log.error(String(describing: error))
               promise(.failure(error))
+              strongSelf.unregisterEphemeralSessionIfNecessary()
             }
         } receiveValue: { (value) in
           strongSelf.broadcast(newValues: value)
           promise(.success(value))
+          strongSelf.unregisterEphemeralSessionIfNecessary()
         }
       }
     }.receive(on: DispatchQueue.main).eraseToAnyPublisher()
@@ -106,10 +120,12 @@ class Repository<Interface: DataInterface> {
           if case let .failure(error) = completion {
             Log.error(String(describing: error))
             promise(.failure(error))
+            strongSelf.unregisterEphemeralSessionIfNecessary()
           }
         } receiveValue: { [weak self] (value) in
           self?.processNewResults(value)
           promise(.success(value))
+          strongSelf.unregisterEphemeralSessionIfNecessary()
         }
       }
     }.receive(on: DispatchQueue.main).eraseToAnyPublisher()
@@ -131,12 +147,14 @@ class Repository<Interface: DataInterface> {
           if case let .failure(error) = completion {
             Log.error(String(describing: error))
             promise(.failure(error))
+            strongSelf.unregisterEphemeralSessionIfNecessary()
           }
         } receiveValue: { [weak self] (value) in
           if let value = value {
             self?.processNewResult(value)
           }
           promise(.success(value))
+          strongSelf.unregisterEphemeralSessionIfNecessary()
         }
       }
     }.receive(on: DispatchQueue.main).eraseToAnyPublisher()
@@ -159,10 +177,12 @@ class Repository<Interface: DataInterface> {
           if case let .failure(error) = completion {
             Log.error(String(describing: error))
             promise(.failure(error))
+            strongSelf.unregisterEphemeralSessionIfNecessary()
           }
         } receiveValue: { [weak self] (value) in
           self?.processNewResults(value)
           promise(.success(value))
+          strongSelf.unregisterEphemeralSessionIfNecessary()
         }
       }
     }.receive(on: DispatchQueue.main).eraseToAnyPublisher()
@@ -171,7 +191,7 @@ class Repository<Interface: DataInterface> {
   //MARK: Private Methods
   
   private func processNewResults(_ results: [Entity]) {
-    if !passthroughMode {
+    if !isEphemeral {
       var currentValues = currentValueSubject.value
       currentValues = update(values: currentValues, with: results)
       broadcast(newValues: currentValues)
@@ -202,5 +222,10 @@ class Repository<Interface: DataInterface> {
         
     return values
   }
+  
+  private func unregisterEphemeralSessionIfNecessary() {
+    if isEphemeral {
+      ephemeralSessionManager.unregister(self)
+    }
+  }
 }
-

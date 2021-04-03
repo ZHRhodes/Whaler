@@ -41,9 +41,9 @@ class AccountDetailsInteractor {
     account.notes = text
     noteSaveCancellable = repoStore
       .accountRepository
-      .save([account]).sink(receiveCompletion: { _ in },
-                            receiveValue: { [weak self] (accounts) in
-      self?.viewController?.didFinishSaving()
+      .save(.valueChange([account])).sink(receiveCompletion: { _ in },
+                                          receiveValue: { [weak self] (accounts) in
+                                            self?.viewController?.didFinishSaving()
     })
   }
   

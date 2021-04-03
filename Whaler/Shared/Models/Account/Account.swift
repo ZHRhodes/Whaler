@@ -109,12 +109,6 @@ final class Account: NSObject, Codable, IdProviding {
   func resetContacts() {
     contactGrouper.resetValues()
   }
-  
-  func mergeLocalProperties(with account: Account) {
-    id = account.id
-    state = account.state
-    notes = account.notes
-  }
 }
 
 protocol ManagedObject {
@@ -230,6 +224,28 @@ extension Account {
               state: state,
               contactGrouper: nil,
               notes: savedAccount.notes)
+  }
+}
+
+extension Account {
+  convenience init(trackedAccount: ApplyAccountTrackingChangesMutation.Data.TrackedAccount) {
+    let state = trackedAccount.state.map(WorkState.init) ?? WorkState.ready
+    self.init(id: trackedAccount.id,
+              salesforceOwnerID: trackedAccount.salesforceOwnerId,
+              name: trackedAccount.name,
+              salesforceID: trackedAccount.salesforceId,
+              industry: trackedAccount.industry,
+              numberOfEmployees: trackedAccount.numberOfEmployees,
+              annualRevenue: trackedAccount.annualRevenue,
+              billingCity: trackedAccount.billingCity,
+              billingState: trackedAccount.billingState,
+              phone: trackedAccount.phone,
+              website: trackedAccount.website,
+              type: trackedAccount.type,
+              accountDescription: trackedAccount.description,
+              state: state,
+              contactGrouper: nil,
+              notes: trackedAccount.notes)
   }
 }
 

@@ -25,7 +25,7 @@
 		1410404F25EB382400D8C793 /* AccountDetailsContentInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1410404E25EB382400D8C793 /* AccountDetailsContentInteractor.swift */; };
 		1410405725EB39AC00D8C793 /* DetailsGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1410405625EB39AC00D8C793 /* DetailsGrid.swift */; };
 		1410405E25EB39C600D8C793 /* DetailsGridItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1410405D25EB39C600D8C793 /* DetailsGridItem.swift */; };
-		1410406325EB594100D8C793 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 1410406225EB594100D8C793 /* SwiftPackageProductDependency */; };
+		1410406325EB594100D8C793 /* SkeletonView in Frameworks */ = {isa = PBXBuildFile; productRef = 1410406225EB594100D8C793 /* SkeletonView */; };
 		1414810B252FFD8100640946 /* TablePopoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1414810A252FFD8100640946 /* TablePopoverViewController.swift */; };
 		1416480725A4FA020008E16B /* AccountSFDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1416480625A4FA020008E16B /* AccountSFDataSource.swift */; };
 		1416480B25A4FA270008E16B /* AccountDataInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1416480A25A4FA270008E16B /* AccountDataInterface.swift */; };
@@ -49,6 +49,7 @@
 		142EC6A824D6AE01004F7A28 /* AuthenticationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142EC6A724D6AE01004F7A28 /* AuthenticationView.swift */; };
 		142ED46E26146C8900BC79A0 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142ED46D26146C8900BC79A0 /* Configuration.swift */; };
 		1430FDEC25E4F1E900BD955F /* ContactTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1430FDEB25E4F1E900BD955F /* ContactTableCell.swift */; };
+		143EC398261834F1003ADF97 /* EphemeralSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143EC397261834F0003ADF97 /* EphemeralSessionManager.swift */; };
 		1440A20424C947FA00E36853 /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1440A20324C947FA00E36853 /* Contact.swift */; };
 		1443045D24F32FD900D2FBD2 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1443045C24F32FD900D2FBD2 /* String+Extensions.swift */; };
 		1443045F24F3356A00D2FBD2 /* SFNewAccessToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1443045E24F3356A00D2FBD2 /* SFNewAccessToken.swift */; };
@@ -76,7 +77,7 @@
 		146A6DC4252C439000DA8E85 /* organization.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 146A6DC3252C439000DA8E85 /* organization.graphql */; };
 		146A6DCB252C486100DA8E85 /* schema.json in Resources */ = {isa = PBXBuildFile; fileRef = 146A6DCA252C486100DA8E85 /* schema.json */; };
 		146A6DCF252C48BE00DA8E85 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146A6DCE252C48BE00DA8E85 /* API.swift */; };
-		146A6DD6252C496100DA8E85 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 146A6DD5252C496100DA8E85 /* SwiftPackageProductDependency */; };
+		146A6DD6252C496100DA8E85 /* Apollo in Frameworks */ = {isa = PBXBuildFile; productRef = 146A6DD5252C496100DA8E85 /* Apollo */; };
 		146A6DDA252C563200DA8E85 /* SFNetworkInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146A6DD9252C563200DA8E85 /* SFNetworkInterface.swift */; };
 		146C344624EA53690009C68C /* UserDefaultsManaged.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146C344524EA53690009C68C /* UserDefaultsManaged.swift */; };
 		146C35CF24C2CA9700DBCA23 /* TitleValueView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146C35CE24C2CA9700DBCA23 /* TitleValueView.swift */; };
@@ -85,7 +86,7 @@
 		146C35D924C5689B00DBCA23 /* ContactRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146C35D824C5689B00DBCA23 /* ContactRowView.swift */; };
 		146C35DB24C56A0100DBCA23 /* ContactsTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146C35DA24C56A0100DBCA23 /* ContactsTableView.swift */; };
 		1473C8A82522E6D000A991DA /* AttributeTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1473C8A72522E6D000A991DA /* AttributeTagView.swift */; };
-		147A3CB22577625500D96637 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 147A3CB12577625500D96637 /* SwiftPackageProductDependency */; };
+		147A3CB22577625500D96637 /* Starscream in Frameworks */ = {isa = PBXBuildFile; productRef = 147A3CB12577625500D96637 /* Starscream */; };
 		147DEA77260DA0940004BF7D /* applyAccountTrackingChange.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 147DEA76260DA0940004BF7D /* applyAccountTrackingChange.graphql */; };
 		147DEA7E260DBC9A0004BF7D /* IdProviding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147DEA7D260DBC9A0004BF7D /* IdProviding.swift */; };
 		147EB86B2593C950002B93D8 /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147EB86A2593C950002B93D8 /* Repository.swift */; };
@@ -97,7 +98,7 @@
 		147F5601260855BF001F139A /* SFFilterAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147F5600260855BF001F139A /* SFFilterAdapter.swift */; };
 		1480800924EA4AE8007EB6D1 /* Networker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1480800824EA4AE8007EB6D1 /* Networker.swift */; };
 		1480800B24EA4B32007EB6D1 /* APINetworkInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1480800A24EA4B32007EB6D1 /* APINetworkInterface.swift */; };
-		1480800E24EA4BDA007EB6D1 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 1480800D24EA4BDA007EB6D1 /* SwiftPackageProductDependency */; };
+		1480800E24EA4BDA007EB6D1 /* Just in Frameworks */ = {isa = PBXBuildFile; productRef = 1480800D24EA4BDA007EB6D1 /* Just */; };
 		1480801024EA4BE7007EB6D1 /* JustNetworker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1480800F24EA4BE7007EB6D1 /* JustNetworker.swift */; };
 		14861ED5249F3DE100D2FA92 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14861ED4249F3DE100D2FA92 /* AppDelegate.swift */; };
 		14861ED7249F3DE100D2FA92 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14861ED6249F3DE100D2FA92 /* SceneDelegate.swift */; };
@@ -136,7 +137,7 @@
 		14C509C3254CF83B0021D9C5 /* RevenueBucket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C509C2254CF83B0021D9C5 /* RevenueBucket.swift */; };
 		14C509C7254CFE7A0021D9C5 /* FieldValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C509C6254CFE7A0021D9C5 /* FieldValue.swift */; };
 		14C509CB254D42800021D9C5 /* SFGroupModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C509CA254D42800021D9C5 /* SFGroupModels.swift */; };
-		14C509D0254D49CD0021D9C5 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 14C509CF254D49CD0021D9C5 /* SwiftPackageProductDependency */; };
+		14C509D0254D49CD0021D9C5 /* SwiftyBeaver in Frameworks */ = {isa = PBXBuildFile; productRef = 14C509CF254D49CD0021D9C5 /* SwiftyBeaver */; };
 		14D4A2E72574CA7E003EFF61 /* EditorToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D4A2E62574CA7E003EFF61 /* EditorToolbar.swift */; };
 		14D4A2EB2574CA94003EFF61 /* ToolbarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D4A2EA2574CA94003EFF61 /* ToolbarButton.swift */; };
 		14D4A2EF2574CAAB003EFF61 /* EditorToolbarOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D4A2EE2574CAAB003EFF61 /* EditorToolbarOption.swift */; };
@@ -237,6 +238,7 @@
 		142ED45F26146A9700BC79A0 /* Local-Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Local-Config.xcconfig"; sourceTree = "<group>"; };
 		142ED46D26146C8900BC79A0 /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 		1430FDEB25E4F1E900BD955F /* ContactTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactTableCell.swift; sourceTree = "<group>"; };
+		143EC397261834F0003ADF97 /* EphemeralSessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EphemeralSessionManager.swift; sourceTree = "<group>"; };
 		1440A20324C947FA00E36853 /* Contact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contact.swift; sourceTree = "<group>"; };
 		1443045C24F32FD900D2FBD2 /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		1443045E24F3356A00D2FBD2 /* SFNewAccessToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFNewAccessToken.swift; sourceTree = "<group>"; };
@@ -384,11 +386,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1480800E24EA4BDA007EB6D1 /* BuildFile in Frameworks */,
-				146A6DD6252C496100DA8E85 /* BuildFile in Frameworks */,
-				14C509D0254D49CD0021D9C5 /* BuildFile in Frameworks */,
-				147A3CB22577625500D96637 /* BuildFile in Frameworks */,
-				1410406325EB594100D8C793 /* BuildFile in Frameworks */,
+				1480800E24EA4BDA007EB6D1 /* Just in Frameworks */,
+				146A6DD6252C496100DA8E85 /* Apollo in Frameworks */,
+				14C509D0254D49CD0021D9C5 /* SwiftyBeaver in Frameworks */,
+				147A3CB22577625500D96637 /* Starscream in Frameworks */,
+				1410406325EB594100D8C793 /* SkeletonView in Frameworks */,
 				6EC92F4185E77A246A6185B6 /* Pods_Whaler.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -742,6 +744,7 @@
 				1416481225A4FA780008E16B /* RepoStore.swift */,
 				1416481625A4FA970008E16B /* DataInterface.swift */,
 				1467379A25D79B3B00B64735 /* RepoError.swift */,
+				143EC397261834F0003ADF97 /* EphemeralSessionManager.swift */,
 			);
 			path = DataLayer;
 			sourceTree = "<group>";
@@ -1101,11 +1104,11 @@
 			);
 			name = Whaler;
 			packageProductDependencies = (
-				1480800D24EA4BDA007EB6D1 /* SwiftPackageProductDependency */,
-				146A6DD5252C496100DA8E85 /* SwiftPackageProductDependency */,
-				14C509CF254D49CD0021D9C5 /* SwiftPackageProductDependency */,
-				147A3CB12577625500D96637 /* SwiftPackageProductDependency */,
-				1410406225EB594100D8C793 /* SwiftPackageProductDependency */,
+				1480800D24EA4BDA007EB6D1 /* Just */,
+				146A6DD5252C496100DA8E85 /* Apollo */,
+				14C509CF254D49CD0021D9C5 /* SwiftyBeaver */,
+				147A3CB12577625500D96637 /* Starscream */,
+				1410406225EB594100D8C793 /* SkeletonView */,
 			);
 			productName = Whaler;
 			productReference = 14861ED1249F3DE100D2FA92 /* Whaler.app */;
@@ -1159,11 +1162,11 @@
 			);
 			mainGroup = 14861EC8249F3DE100D2FA92;
 			packageReferences = (
-				1480800C24EA4BDA007EB6D1 /* RemoteSwiftPackageReference */,
-				146A6DD4252C496100DA8E85 /* RemoteSwiftPackageReference */,
-				14C509CE254D49CD0021D9C5 /* RemoteSwiftPackageReference */,
-				147A3CB02577625500D96637 /* RemoteSwiftPackageReference */,
-				1410406125EB594100D8C793 /* RemoteSwiftPackageReference */,
+				1480800C24EA4BDA007EB6D1 /* XCRemoteSwiftPackageReference "Just" */,
+				146A6DD4252C496100DA8E85 /* XCRemoteSwiftPackageReference "apollo-ios" */,
+				14C509CE254D49CD0021D9C5 /* XCRemoteSwiftPackageReference "SwiftyBeaver" */,
+				147A3CB02577625500D96637 /* XCRemoteSwiftPackageReference "Starscream" */,
+				1410406125EB594100D8C793 /* XCRemoteSwiftPackageReference "SkeletonView" */,
 			);
 			productRefGroup = 14861ED2249F3DE100D2FA92 /* Products */;
 			projectDirPath = "";
@@ -1347,6 +1350,7 @@
 				142EC6A824D6AE01004F7A28 /* AuthenticationView.swift in Sources */,
 				146737AF25D7A02500B64735 /* NoteEditorViewController.swift in Sources */,
 				142ED46E26146C8900BC79A0 /* Configuration.swift in Sources */,
+				143EC398261834F1003ADF97 /* EphemeralSessionManager.swift in Sources */,
 				140AE79924A9AA5C00F7705E /* Account.swift in Sources */,
 				1473C8A82522E6D000A991DA /* AttributeTagView.swift in Sources */,
 				14EF8D6525FB1ECA0065BEB3 /* FilterPopoverViewController.swift in Sources */,
@@ -1857,7 +1861,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		1410406125EB594100D8C793 /* RemoteSwiftPackageReference */ = {
+		1410406125EB594100D8C793 /* XCRemoteSwiftPackageReference "SkeletonView" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Juanpe/SkeletonView";
 			requirement = {
@@ -1865,7 +1869,7 @@
 				minimumVersion = 1.13.0;
 			};
 		};
-		146A6DD4252C496100DA8E85 /* RemoteSwiftPackageReference */ = {
+		146A6DD4252C496100DA8E85 /* XCRemoteSwiftPackageReference "apollo-ios" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/apollographql/apollo-ios.git";
 			requirement = {
@@ -1873,7 +1877,7 @@
 				minimumVersion = 0.39.0;
 			};
 		};
-		147A3CB02577625500D96637 /* RemoteSwiftPackageReference */ = {
+		147A3CB02577625500D96637 /* XCRemoteSwiftPackageReference "Starscream" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/daltoniam/Starscream";
 			requirement = {
@@ -1881,7 +1885,7 @@
 				minimumVersion = 3.1.1;
 			};
 		};
-		1480800C24EA4BDA007EB6D1 /* RemoteSwiftPackageReference */ = {
+		1480800C24EA4BDA007EB6D1 /* XCRemoteSwiftPackageReference "Just" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/dduan/Just";
 			requirement = {
@@ -1889,7 +1893,7 @@
 				minimumVersion = 0.8.0;
 			};
 		};
-		14C509CE254D49CD0021D9C5 /* RemoteSwiftPackageReference */ = {
+		14C509CE254D49CD0021D9C5 /* XCRemoteSwiftPackageReference "SwiftyBeaver" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SwiftyBeaver/SwiftyBeaver.git";
 			requirement = {
@@ -1900,29 +1904,29 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		1410406225EB594100D8C793 /* SwiftPackageProductDependency */ = {
+		1410406225EB594100D8C793 /* SkeletonView */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 1410406125EB594100D8C793 /* RemoteSwiftPackageReference */;
+			package = 1410406125EB594100D8C793 /* XCRemoteSwiftPackageReference "SkeletonView" */;
 			productName = SkeletonView;
 		};
-		146A6DD5252C496100DA8E85 /* SwiftPackageProductDependency */ = {
+		146A6DD5252C496100DA8E85 /* Apollo */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 146A6DD4252C496100DA8E85 /* RemoteSwiftPackageReference */;
+			package = 146A6DD4252C496100DA8E85 /* XCRemoteSwiftPackageReference "apollo-ios" */;
 			productName = Apollo;
 		};
-		147A3CB12577625500D96637 /* SwiftPackageProductDependency */ = {
+		147A3CB12577625500D96637 /* Starscream */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 147A3CB02577625500D96637 /* RemoteSwiftPackageReference */;
+			package = 147A3CB02577625500D96637 /* XCRemoteSwiftPackageReference "Starscream" */;
 			productName = Starscream;
 		};
-		1480800D24EA4BDA007EB6D1 /* SwiftPackageProductDependency */ = {
+		1480800D24EA4BDA007EB6D1 /* Just */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 1480800C24EA4BDA007EB6D1 /* RemoteSwiftPackageReference */;
+			package = 1480800C24EA4BDA007EB6D1 /* XCRemoteSwiftPackageReference "Just" */;
 			productName = Just;
 		};
-		14C509CF254D49CD0021D9C5 /* SwiftPackageProductDependency */ = {
+		14C509CF254D49CD0021D9C5 /* SwiftyBeaver */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 14C509CE254D49CD0021D9C5 /* RemoteSwiftPackageReference */;
+			package = 14C509CE254D49CD0021D9C5 /* XCRemoteSwiftPackageReference "SwiftyBeaver" */;
 			productName = SwiftyBeaver;
 		};
 /* End XCSwiftPackageProductDependency section */
