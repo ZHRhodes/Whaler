@@ -46,7 +46,7 @@ class Repository<Interface: DataInterface>: EphemeralObject {
     }
   }
   
-  /// Creates an ephemeral instance of this repository type. Ephemeral instances are one-and-done; they fire one result set and deinit.
+  /// Creates an ephemeral instance of this repository type. Ephemeral instances are one-and-done; they run until the completion of a single operation. Then, unless retained by the user, they are released.
   /// They do not cache their results, nor do they affect the cache of the regular repository.
   ///
   /// This is useful for highly transient datasets, where a cached dataset would only take space in memory without providing any future value. Ex: Searched flights, where the flight objects are large and the rates are only good for a short amount of time.
@@ -92,12 +92,11 @@ class Repository<Interface: DataInterface>: EphemeralObject {
             if case let .failure(error) = completion {
               Log.error(String(describing: error))
               promise(.failure(error))
-              strongSelf.unregisterEphemeralSessionIfNecessary()
             }
+            strongSelf.unregisterEphemeralSessionIfNecessary()
         } receiveValue: { (value) in
           strongSelf.broadcast(newValues: value)
           promise(.success(value))
-          strongSelf.unregisterEphemeralSessionIfNecessary()
         }
       }
     }.receive(on: DispatchQueue.main).eraseToAnyPublisher()
@@ -120,12 +119,11 @@ class Repository<Interface: DataInterface>: EphemeralObject {
           if case let .failure(error) = completion {
             Log.error(String(describing: error))
             promise(.failure(error))
-            strongSelf.unregisterEphemeralSessionIfNecessary()
           }
+          strongSelf.unregisterEphemeralSessionIfNecessary()
         } receiveValue: { [weak self] (value) in
           self?.processNewResults(value)
           promise(.success(value))
-          strongSelf.unregisterEphemeralSessionIfNecessary()
         }
       }
     }.receive(on: DispatchQueue.main).eraseToAnyPublisher()
@@ -147,14 +145,13 @@ class Repository<Interface: DataInterface>: EphemeralObject {
           if case let .failure(error) = completion {
             Log.error(String(describing: error))
             promise(.failure(error))
-            strongSelf.unregisterEphemeralSessionIfNecessary()
           }
+          strongSelf.unregisterEphemeralSessionIfNecessary()
         } receiveValue: { [weak self] (value) in
           if let value = value {
             self?.processNewResult(value)
           }
           promise(.success(value))
-          strongSelf.unregisterEphemeralSessionIfNecessary()
         }
       }
     }.receive(on: DispatchQueue.main).eraseToAnyPublisher()
@@ -178,8 +175,8 @@ class Repository<Interface: DataInterface>: EphemeralObject {
           if case let .failure(error) = completion {
             Log.error(String(describing: error))
             promise(.failure(error))
-            strongSelf.unregisterEphemeralSessionIfNecessary()
           }
+          strongSelf.unregisterEphemeralSessionIfNecessary()
         } receiveValue: { [weak self] (value) in
           switch updatePolicy {
           case .subset:
@@ -188,7 +185,6 @@ class Repository<Interface: DataInterface>: EphemeralObject {
             self?.broadcast(newValues: value)
           }
           promise(.success(value))
-          strongSelf.unregisterEphemeralSessionIfNecessary()
         }
       }
     }.receive(on: DispatchQueue.main).eraseToAnyPublisher()
