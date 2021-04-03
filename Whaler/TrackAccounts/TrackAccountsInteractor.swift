@@ -102,7 +102,7 @@ class TrackAccountsInteractor {
     let changes = trackingChanges.values.map { $0 }
     applyCancellable = repoStore
       .accountRepository
-      .save(.trackingChange(changes))
+      .save(.trackingChange(changes), updatePolicy: .all)
       .sink(receiveCompletion: { _ in }) { (_) in
         completion()
     }

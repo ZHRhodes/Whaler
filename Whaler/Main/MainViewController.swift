@@ -317,6 +317,7 @@ class MainViewController: UIViewController {
   @objc
   private func trackTapped() {
     let vc = TrackAccountsViewController()
+    vc.interactor = TrackAccountsInteractor(currentlyTracking: Set(interactor.accountGrouper.values))
     navigationController?.pushViewController(vc, animated: false)
   }
   

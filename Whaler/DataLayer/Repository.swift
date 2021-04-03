@@ -105,7 +105,7 @@ class Repository<Interface: DataInterface>: EphemeralObject {
   
   /// Fetches a subset of data via the DataInterface.
   ///
-  /// If passthroughMode is off, the fetched subset will be merged with all currently fetched data. The new current data set will be broadcast to the `Repository.publisher`.
+  /// Unless it's an ephemeral repository, the fetched subset will be merged with all currently fetched data. The new current data set will be broadcast to the `Repository.publisher`.
   ///
   /// - Parameter dataRequest: Type defined by the Interface type for this Repository instance.
   /// - Returns: A publisher that will emit the result of this fetchSubset operation.
@@ -133,7 +133,7 @@ class Repository<Interface: DataInterface>: EphemeralObject {
   
   /// Fetches a single item of data via the DataInterface.
   ///
-  /// If passthroughMode is off, the fetched single will be merged with all currently fetched data. The new current data set will be broadcast to the `Repository.publisher`.
+  /// Unless it's an ephemeral repository, the fetched single will be merged with all currently fetched data. The new current data set will be broadcast to the `Repository.publisher`.
   ///
   /// - Parameter dataRequest: Type defined by the Interface type for this Repository instance.
   /// - Returns: A publisher that will emit the result of this fetchSingle operation.
@@ -162,11 +162,12 @@ class Repository<Interface: DataInterface>: EphemeralObject {
   
   /// Saves a dataset via the DataInterface.
   ///
-  /// If passthroughMode is off, the saved data will be merged with all currently fetched data. The new current data set will be broadcast to the `Repository.publisher`.
+  /// Unless it's an ephemeral repository, the saved data will be merged with all currently fetched data. The new current data set will be broadcast to the `Repository.publisher`.
   ///
   /// - Parameter data: Type defined by the DataInterface that's used to provide the data to save as well as any necessary parameters.
+  /// - Parameter updatePolicy: Determines whether to merge the subset with the cache or two replace the cache entirely.
   /// - Returns: A publisher that will emit the result of this save operation.
-  func save(_ data: Interface.DataSaveType) -> AnyPublisher<[Entity], RepoError> {
+  func save(_ data: Interface.DataSaveType, updatePolicy: UpdatePolicy = .subset) -> AnyPublisher<[Entity], RepoError> {
     return Future<[Entity], RepoError> { [weak self] promise in
       self?.queue.async { [weak self] in
         guard let strongSelf = self else { return }
@@ -180,7 +181,12 @@ class Repository<Interface: DataInterface>: EphemeralObject {
             strongSelf.unregisterEphemeralSessionIfNecessary()
           }
         } receiveValue: { [weak self] (value) in
-          self?.processNewResults(value)
+          switch updatePolicy {
+          case .subset:
+            self?.processNewResults(value)
+          case .all:
+            self?.broadcast(newValues: value)
+          }
           promise(.success(value))
           strongSelf.unregisterEphemeralSessionIfNecessary()
         }
@@ -227,5 +233,11 @@ class Repository<Interface: DataInterface>: EphemeralObject {
     if isEphemeral {
       ephemeralSessionManager.unregister(self)
     }
+  }
+}
+
+extension Repository {
+  enum UpdatePolicy {
+    case subset, all
   }
 }
