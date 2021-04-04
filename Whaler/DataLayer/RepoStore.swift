@@ -31,4 +31,10 @@ class RepoStore {
                                              sfDataSource: sfDataSource)
     return Repository(dataInterface: dataInterface, ephemeralSessionManager: ephemeralSessionManager)
   }()
+  
+  lazy var accountAssignmentEntryRepository: Repository<AccountAssignmentEntryDataInterface> = {
+    let remoteDataSource = AccountAssignmentEntryRemoteDataSource()
+    let dataInterface = AccountAssignmentEntryDataInterface(remoteDataSource: remoteDataSource)
+    return Repository(dataInterface: dataInterface, ephemeralSessionManager: ephemeralSessionManager)
+  }()
 }

@@ -15,5 +15,6 @@ mutation applyAccountTrackingChanges($input: [AccountTrackingChange!]!) {
     type
     state
     notes
+    assignedTo
   }
 }

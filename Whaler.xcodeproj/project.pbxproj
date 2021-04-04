@@ -51,6 +51,10 @@
 		1430FDEC25E4F1E900BD955F /* ContactTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1430FDEB25E4F1E900BD955F /* ContactTableCell.swift */; };
 		143EC398261834F1003ADF97 /* EphemeralSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143EC397261834F0003ADF97 /* EphemeralSessionManager.swift */; };
 		143EC39E26183C03003ADF97 /* TrackingChange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143EC39D26183C03003ADF97 /* TrackingChange.swift */; };
+		143EC3A2261928AB003ADF97 /* createAccountAssignmentEntry.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 143EC3A1261928AA003ADF97 /* createAccountAssignmentEntry.graphql */; };
+		143EC3A926192950003ADF97 /* AccountAssignmentEntryDataInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143EC3A826192950003ADF97 /* AccountAssignmentEntryDataInterface.swift */; };
+		143EC3AD26192961003ADF97 /* AccountAssignmentEntryRemoteDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143EC3AC26192961003ADF97 /* AccountAssignmentEntryRemoteDataSource.swift */; };
+		143EC3B6261929F9003ADF97 /* AccountAssignmentEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143EC3B5261929F9003ADF97 /* AccountAssignmentEntry.swift */; };
 		1440A20424C947FA00E36853 /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1440A20324C947FA00E36853 /* Contact.swift */; };
 		1443045D24F32FD900D2FBD2 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1443045C24F32FD900D2FBD2 /* String+Extensions.swift */; };
 		1443045F24F3356A00D2FBD2 /* SFNewAccessToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1443045E24F3356A00D2FBD2 /* SFNewAccessToken.swift */; };
@@ -240,6 +244,10 @@
 		1430FDEB25E4F1E900BD955F /* ContactTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactTableCell.swift; sourceTree = "<group>"; };
 		143EC397261834F0003ADF97 /* EphemeralSessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EphemeralSessionManager.swift; sourceTree = "<group>"; };
 		143EC39D26183C03003ADF97 /* TrackingChange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackingChange.swift; sourceTree = "<group>"; };
+		143EC3A1261928AA003ADF97 /* createAccountAssignmentEntry.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = createAccountAssignmentEntry.graphql; sourceTree = "<group>"; };
+		143EC3A826192950003ADF97 /* AccountAssignmentEntryDataInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountAssignmentEntryDataInterface.swift; sourceTree = "<group>"; };
+		143EC3AC26192961003ADF97 /* AccountAssignmentEntryRemoteDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountAssignmentEntryRemoteDataSource.swift; sourceTree = "<group>"; };
+		143EC3B5261929F9003ADF97 /* AccountAssignmentEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountAssignmentEntry.swift; sourceTree = "<group>"; };
 		1440A20324C947FA00E36853 /* Contact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contact.swift; sourceTree = "<group>"; };
 		1443045C24F32FD900D2FBD2 /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		1443045E24F3356A00D2FBD2 /* SFNewAccessToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFNewAccessToken.swift; sourceTree = "<group>"; };
@@ -441,6 +449,7 @@
 		140AE79724A9AA4B00F7705E /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				143EC3B0261929AE003ADF97 /* AccountAssignmentEntry */,
 				147F55F72607FC60001F139A /* Owner */,
 				141F795D25319DEA005F9295 /* Organization */,
 				14B037EC25074B1200BA488D /* User */,
@@ -471,8 +480,8 @@
 			isa = PBXGroup;
 			children = (
 				14D9CA5724B599080030B17A /* MainTableSectionHeader */,
-				140AE7A424A9BEC300F7705E /* AccountTableCell.swift */,
 				149F3A0325206BA6001F38BF /* CollectionView */,
+				140AE7A424A9BEC300F7705E /* AccountTableCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -573,6 +582,7 @@
 		1416482A25A7ACEC0008E16B /* DataTypes */ = {
 			isa = PBXGroup;
 			children = (
+				143EC3A726192936003ADF97 /* AccountAssignmentEntry */,
 				1416480525A4F9ED0008E16B /* Account */,
 				1416482925A7ACD90008E16B /* Contact */,
 			);
@@ -627,6 +637,23 @@
 				142ED46D26146C8900BC79A0 /* Configuration.swift */,
 			);
 			path = Configuration;
+			sourceTree = "<group>";
+		};
+		143EC3A726192936003ADF97 /* AccountAssignmentEntry */ = {
+			isa = PBXGroup;
+			children = (
+				143EC3A826192950003ADF97 /* AccountAssignmentEntryDataInterface.swift */,
+				143EC3AC26192961003ADF97 /* AccountAssignmentEntryRemoteDataSource.swift */,
+			);
+			path = AccountAssignmentEntry;
+			sourceTree = "<group>";
+		};
+		143EC3B0261929AE003ADF97 /* AccountAssignmentEntry */ = {
+			isa = PBXGroup;
+			children = (
+				143EC3B5261929F9003ADF97 /* AccountAssignmentEntry.swift */,
+			);
+			path = AccountAssignmentEntry;
 			sourceTree = "<group>";
 		};
 		14446D6C25E36365008E46CD /* Contacts */ = {
@@ -811,6 +838,7 @@
 				14086912253E85DE007324A4 /* createAccount.graphql */,
 				14086916253ED084007324A4 /* createContact.graphql */,
 				146A6DC3252C439000DA8E85 /* organization.graphql */,
+				143EC3A1261928AA003ADF97 /* createAccountAssignmentEntry.graphql */,
 				141F796225326EF4005F9295 /* createContactAssignmentEntry.graphql */,
 				14EF43A92540AA5C002BE27D /* saveAccounts.graphql */,
 				14EF43AF254103A9002BE27D /* saveContacts.graphql */,
@@ -1184,6 +1212,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				14F4FE18254AA6A600C89485 /* contacts.graphql in Resources */,
+				143EC3A2261928AB003ADF97 /* createAccountAssignmentEntry.graphql in Resources */,
 				147DEA77260DA0940004BF7D /* applyAccountTrackingChange.graphql in Resources */,
 				14EF43B0254103A9002BE27D /* saveContacts.graphql in Resources */,
 				14F4090424C6A09E00F405BC /* OpenSans-Regular.ttf in Resources */,
@@ -1312,6 +1341,7 @@
 				1443045D24F32FD900D2FBD2 /* String+Extensions.swift in Sources */,
 				14B037EB250749D000BA488D /* AuthenticationInteractor.swift in Sources */,
 				14ECDB2124CA9288006B4550 /* NoteEditor.swift in Sources */,
+				143EC3A926192950003ADF97 /* AccountAssignmentEntryDataInterface.swift in Sources */,
 				146C35DB24C56A0100DBCA23 /* ContactsTableView.swift in Sources */,
 				14EF8D7025FB2EAC0065BEB3 /* Filter.swift in Sources */,
 				14EF8D4525F93BD40065BEB3 /* CellCheckBox.swift in Sources */,
@@ -1341,6 +1371,7 @@
 				14562B8225F30E3500BA9D3B /* ProgressShapeLayer.swift in Sources */,
 				14861EF7249F401300D2FA92 /* CSVParser.swift in Sources */,
 				146C344624EA53690009C68C /* UserDefaultsManaged.swift in Sources */,
+				143EC3B6261929F9003ADF97 /* AccountAssignmentEntry.swift in Sources */,
 				14FE635324C575CD00F7D30B /* TagView.swift in Sources */,
 				14C509BF254CF5DD0021D9C5 /* StandardField.swift in Sources */,
 				14D4A2EB2574CA94003EFF61 /* ToolbarButton.swift in Sources */,
@@ -1377,6 +1408,7 @@
 				140E643E25DB77AD0033AC8F /* AccountDetailsContentViewController.swift in Sources */,
 				142517492551096F006255F1 /* SFObject.swift in Sources */,
 				147F55F02606C9DC001F139A /* FilterOptionsProviding.swift in Sources */,
+				143EC3AD26192961003ADF97 /* AccountAssignmentEntryRemoteDataSource.swift in Sources */,
 				1425174D25510D4B006255F1 /* SFSoqlProviding.swift in Sources */,
 				14EA64E425F4CD6900F26ECE /* TrackAccountsViewController.swift in Sources */,
 				14EED67A24F0E48C00660BD1 /* SFContact.swift in Sources */,

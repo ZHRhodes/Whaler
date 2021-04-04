@@ -140,6 +140,10 @@ class MainInteractor: MainDataManager {
   }
   
   func assign(_ user: User, to account: Account) {
-    Log.info("Assigned account \(account.id) to user \(user.id)")
+    let newEntry = AccountAssignmentEntry(accountId: account.id,
+                                          assignedBy: Lifecycle.currentUser?.id ?? "",
+                                          assignedTo: user.id)
+    _ = repoStore.accountAssignmentEntryRepository.save(newEntry)
+    account.assignedTo = user.id
   }
 }

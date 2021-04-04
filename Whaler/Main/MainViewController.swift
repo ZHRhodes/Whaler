@@ -498,6 +498,7 @@ extension MainViewController: TablePopoverViewControllerDelegate {
        let account = interactor.accountBeingAssigned {
       dismiss(animated: true) { [weak self] in
         self?.interactor.assign(user, to: account)
+        self?.collectionView.reloadData() //inefficient
       }
     }
     

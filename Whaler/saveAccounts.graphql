@@ -15,5 +15,6 @@ mutation saveAccounts($input: [NewAccount!]!) {
     type
     state
     notes
+    assignedTo
   }
 }

@@ -26,7 +26,13 @@ extension FullNameProviding {
   }
 }
 
-struct User: Codable {
+protocol ColorProviding {
+  var color: UIColor { get }
+}
+
+typealias NameAndColorProviding = FullNameProviding & ColorProviding
+
+struct User: Codable, FullNameProviding, ColorProviding {
   let id: String
   let email: String
   let firstName: String
@@ -35,6 +41,10 @@ struct User: Codable {
   let organizationId: String
 //  let workspaces: [WorkspaceRemote]?
   let organization: Organization?
+  
+  var color: UIColor {
+    return ColorProvider.default.color(for: id)
+  }
 }
 
 extension User: SimpleItem {
@@ -49,4 +59,15 @@ extension User: SimpleItem {
 
 extension User: Equatable {}
 
-extension User: FullNameProviding {}
+class ColorProvider {
+  static let `default` = ColorProvider(colors: UIColor.brandColors)
+  private let colors: [UIColor]
+  
+  init(colors: [UIColor]) {
+    self.colors = colors
+  }
+  
+  func color(for id: String) -> UIColor {
+    return colors[abs(id.hash) % colors.count]
+  }
+}

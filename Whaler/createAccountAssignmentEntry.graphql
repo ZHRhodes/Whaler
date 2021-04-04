@@ -1,0 +1,9 @@
+mutation createAccountAssignmentEntry($accountId: ID!, $assignedBy: String!, $assignedTo: String) {
+  accountAssignmentEntry: createAccountAssignmentEntry(input:{accountId: $accountId, assignedBy: $assignedBy, assignedTo: $assignedTo}) {
+    id
+    createdAt
+    accountId
+    assignedBy
+    assignedTo
+  }
+}

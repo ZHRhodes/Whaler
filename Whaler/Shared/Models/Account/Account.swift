@@ -12,7 +12,7 @@ import CoreData
 
 final class Account: NSObject, Codable, IdProviding {
   private enum CodingKeys: String, CodingKey {
-    case id, salesforceOwnerID, name, salesforceID, industry, numberOfEmployees, annualRevenue, billingCity, billingState, phone, website, type, accountDescription, state, contactGrouper, notes
+    case id, salesforceOwnerID, name, salesforceID, industry, numberOfEmployees, annualRevenue, billingCity, billingState, phone, website, type, accountDescription, state, contactGrouper, notes, assignedTo
   }
   
   var id: String
@@ -34,6 +34,7 @@ final class Account: NSObject, Codable, IdProviding {
   
   var state: WorkState?
   var notes: String?
+  var assignedTo: String?
   
   var contactGrouper = Grouper<WorkState, Contact>(groups: WorkState.allCases)
   
@@ -54,7 +55,7 @@ final class Account: NSObject, Codable, IdProviding {
     super.init()
   }
   
-  init(id: String, salesforceOwnerID: String?, name: String, salesforceID: String?, industry: String?, numberOfEmployees: String?, annualRevenue: String?, billingCity: String?, billingState: String?, phone: String?, website: String?, type: String?, accountDescription: String?, state: WorkState?, contactGrouper: Grouper<WorkState, Contact>? = nil, notes: String?) {
+  init(id: String, salesforceOwnerID: String?, name: String, salesforceID: String?, industry: String?, numberOfEmployees: String?, annualRevenue: String?, billingCity: String?, billingState: String?, phone: String?, website: String?, type: String?, accountDescription: String?, state: WorkState?, contactGrouper: Grouper<WorkState, Contact>? = nil, notes: String?, assignedTo: String?) {
     self.id = id
     self.salesforceOwnerID = salesforceOwnerID
     self.name = name
@@ -70,6 +71,7 @@ final class Account: NSObject, Codable, IdProviding {
     self.accountDescription = accountDescription
     self.state = state
     self.notes = notes
+    self.assignedTo = assignedTo
     super.init()
     contactGrouper.map { self.contactGrouper = $0 }
   }
@@ -140,7 +142,8 @@ extension Account: ManagedObject {
     let stateString = managedObject.value(forKey: CodingKeys.state.rawValue) as? String ?? ""
     let state = WorkState(rawValue: stateString) ?? .ready
     let notes = managedObject.value(forKey: CodingKeys.notes.rawValue) as? String ?? ""
-    self.init(id: id, salesforceOwnerID: salesforceOwnerID, name: name, salesforceID: salesforceID, industry: industry, numberOfEmployees: numberOfEmployees, annualRevenue: annualRevenue, billingCity: billingCity, billingState: billingState, phone: phone, website: website, type: type, accountDescription: accountDescription, state: state, notes: notes)
+    let assignedTo = managedObject.value(forKey: CodingKeys.assignedTo.rawValue) as? String
+    self.init(id: id, salesforceOwnerID: salesforceOwnerID, name: name, salesforceID: salesforceID, industry: industry, numberOfEmployees: numberOfEmployees, annualRevenue: annualRevenue, billingCity: billingCity, billingState: billingState, phone: phone, website: website, type: type, accountDescription: accountDescription, state: state, notes: notes, assignedTo: assignedTo)
   }
   
   func setProperties(in managedObject: NSManagedObject) {
@@ -159,6 +162,7 @@ extension Account: ManagedObject {
     managedObject.setValue(accountDescription, forKey: CodingKeys.accountDescription.rawValue)
     managedObject.setValue(state?.rawValue, forKey: CodingKeys.state.rawValue)
     managedObject.setValue(notes, forKey: CodingKeys.notes.rawValue)
+    managedObject.setValue(assignedTo, forKey: CodingKeys.assignedTo.rawValue)
     if let userId = Lifecycle.currentUser?.id {
       managedObject.setValue(String(userId), forKey: "ownerUserId")
     }
@@ -223,7 +227,8 @@ extension Account {
               accountDescription: savedAccount.description,
               state: state,
               contactGrouper: nil,
-              notes: savedAccount.notes)
+              notes: savedAccount.notes,
+              assignedTo: savedAccount.assignedTo)
   }
 }
 
@@ -245,7 +250,8 @@ extension Account {
               accountDescription: trackedAccount.description,
               state: state,
               contactGrouper: nil,
-              notes: trackedAccount.notes)
+              notes: trackedAccount.notes,
+              assignedTo: trackedAccount.assignedTo)
   }
 }
 
@@ -266,7 +272,8 @@ extension Account {
               accountDescription: apiAccount.description,
               state: WorkState.init(from: apiAccount.state),
               contactGrouper: nil,
-              notes: apiAccount.notes)
+              notes: apiAccount.notes,
+              assignedTo: apiAccount.assignedTo)
   }
 }
 

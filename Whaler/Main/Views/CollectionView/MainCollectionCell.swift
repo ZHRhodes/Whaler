@@ -14,7 +14,7 @@ protocol MainCollectionTableCell: class {
   static var id: String { get }
   static var cellHeight: CGFloat { get }
   var delegate: MainTableCellDelegate? { get set }
-  func configure<T>(with object: T)
+  func configure<T>(with object: T, assignedTo: NameAndColorProviding?)
 }
 
 protocol MainCollectionCellDelegate: class {
@@ -126,7 +126,8 @@ class MainCollectionCell<TableCell: MainCollectionTableCell & UITableViewCell>: 
     }
     let state = WorkState.allCases[self.section ?? 0]
     if let account = dataSource?.accountGrouper[state][indexPath.row] {
-      cell.configure(with: account)
+      let assignedTo = Lifecycle.currentUser?.organization?.users.first(where: { $0.id == account.assignedTo })
+      cell.configure(with: account, assignedTo: assignedTo)
     }
     cell.delegate = self
     return cell

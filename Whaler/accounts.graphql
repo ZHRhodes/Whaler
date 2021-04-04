@@ -15,5 +15,6 @@ query accounts {
     description
     state
     notes
+    assignedTo
   }
 }

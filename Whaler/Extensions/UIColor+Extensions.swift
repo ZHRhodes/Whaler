@@ -44,6 +44,14 @@ extension UIColor {
 }
 
 extension UIColor {
+  static let brandColors: [UIColor] = [.brandGreenDark,
+                                       .brandPurpleDark,
+                                       .brandRedDark,
+                                       .brandYellowDark,
+                                       .brandPinkDark]
+}
+
+extension UIColor {
   public convenience init?(hex: String) {
     let r, g, b, a: CGFloat
 

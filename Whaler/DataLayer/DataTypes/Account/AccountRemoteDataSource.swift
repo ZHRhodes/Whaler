@@ -58,6 +58,7 @@ struct AccountRemoteDataSource {
                       website: account.website,
                       type: account.type,
                       state: account.state?.rawValue,
-                      notes: account.notes)
+                      notes: account.notes,
+                      assignedTo: account.assignedTo)
   }
 }

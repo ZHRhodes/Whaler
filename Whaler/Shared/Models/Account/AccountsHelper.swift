@@ -35,7 +35,8 @@ struct AccountsHelper {
                                           website: $0.website,
                                           type: $0.type,
                                           state: $0.state?.rawValue,
-                                          notes: $0.notes) }
+                                          notes: $0.notes,
+                                          assignedTo: $0.assignedTo) }
     Graph.shared.apollo.perform(mutation: SaveAccountsMutation(input: input)) { result in
       guard let data = try? result.get().data else { return }
       let accounts = data.saveAccounts.map(Account.init)

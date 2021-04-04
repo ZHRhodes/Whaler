@@ -3,6 +3,7 @@
     <entity name="AccountEntity" representedClassName="AccountEntity" syncable="YES" codeGenerationType="class">
         <attribute name="accountDescription" optional="YES" attributeType="String"/>
         <attribute name="annualRevenue" optional="YES" attributeType="String"/>
+        <attribute name="assignedTo" optional="YES" attributeType="String"/>
         <attribute name="billingCity" optional="YES" attributeType="String"/>
         <attribute name="billingState" optional="YES" attributeType="String"/>
         <attribute name="contactsCount" optional="YES" attributeType="String"/>
@@ -33,7 +34,7 @@
         <attribute name="state" optional="YES" attributeType="String"/>
     </entity>
     <elements>
-        <element name="AccountEntity" positionX="-63" positionY="-18" width="128" height="284"/>
+        <element name="AccountEntity" positionX="-63" positionY="-18" width="128" height="299"/>
         <element name="ContactEntity" positionX="-63" positionY="-27" width="128" height="208"/>
     </elements>
 </model>

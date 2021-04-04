@@ -44,7 +44,7 @@ class MainTableCell: UITableViewCell, MainCollectionTableCell {
     fatalError("init(coder:) has not been implemented")
   }
   
-  func configure<T>(with object: T) {
+  func configure<T>(with object: T, assignedTo: NameAndColorProviding?) {
     guard let account = object as? Account else {
       let message = "Fatal error! Configuring cell with wrong type."
       Log.error(message)
@@ -62,6 +62,10 @@ class MainTableCell: UITableViewCell, MainCollectionTableCell {
       attributes.append(Attribute(text: billingState, foregroundColor: .lightText, backgroundColor: .clear, borderColor: .lightText))
     }
     configureAttributeTags(attributes: attributes)
+    if let assignedTo = assignedTo {
+      assignedButton?.setTitle(assignedTo.initials, for: .normal)
+      assignedButton?.backgroundColor = assignedTo.color
+    }
   }
   
   private func configureShadowView() {
@@ -152,19 +156,12 @@ class MainTableCell: UITableViewCell, MainCollectionTableCell {
     assignedButton?.removeFromSuperview()
     assignedButton = UIButton()
     if assignedButton?.backgroundColor == nil {
-      let color: UIColor = [.brandGreenDark,
-                            .brandPurpleDark,
-                            .brandRedDark,
-                            .brandYellowDark,
-                            .brandPinkDark].randomElement()!
-      assignedButton!.backgroundColor = color
+      assignedButton!.backgroundColor = .secondaryText
     }
     assignedButton!.addTarget(self, action: #selector(assignButtonTapped), for: .touchUpInside)
     assignedButton!.layer.cornerRadius = 25
     assignedButton!.translatesAutoresizingMaskIntoConstraints = false
-    let characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-    let title = "\(characters.randomElement()!)\(characters.randomElement()!)"
-    assignedButton!.setTitle(title, for: .normal)
+    assignedButton!.setTitle("—", for: .normal)
     assignedButton!.titleLabel?.font = .openSans(weight: .bold, size: 18)
     assignedButton!.setTitleColor(.white, for: .normal)
     assignedButton!.isSkeletonable = true

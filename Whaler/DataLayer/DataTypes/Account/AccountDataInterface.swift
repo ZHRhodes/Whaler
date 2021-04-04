@@ -115,6 +115,7 @@ class AccountDataInterface: DataInterface {
     destinationAccount.id = sourceAccount.id
     destinationAccount.state = sourceAccount.state
     destinationAccount.notes = sourceAccount.notes
+    destinationAccount.assignedTo = sourceAccount.assignedTo
     return destinationAccount
   }
 }
