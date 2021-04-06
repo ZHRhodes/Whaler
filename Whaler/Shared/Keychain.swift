@@ -19,7 +19,8 @@ class Keychain {
     let attributes: [String : Any] = [
       kSecClass as String       : kSecClassGenericPassword,
       kSecAttrAccount as String : key.rawValue,
-      kSecValueData as String   : data
+      kSecValueData as String   : data,
+      kSecUseDataProtectionKeychain as String: true
     ]
 
     var status = update(key: key, data: data)
@@ -34,7 +35,8 @@ class Keychain {
   class func update(key: Key, data: Data) -> OSStatus {
     let query: [String: Any] = [
       kSecClass as String       : kSecClassGenericPassword,
-      kSecAttrAccount as String : key.rawValue
+      kSecAttrAccount as String : key.rawValue,
+      kSecUseDataProtectionKeychain as String: true
     ]
     
     let attributes: [String: Any] = [
@@ -50,7 +52,8 @@ class Keychain {
       kSecAttrAccount as String : key.rawValue,
       kSecReturnData as String  : true,
       kSecMatchLimit as String  : kSecMatchLimitOne,
-      kSecReturnAttributes as String: true
+      kSecReturnAttributes as String: true,
+      kSecUseDataProtectionKeychain as String: true
     ]
 
     var dataTypeRef: CFTypeRef?
@@ -77,7 +80,8 @@ class Keychain {
       kSecAttrAccount as String : key.rawValue,
       kSecReturnData as String  : true,
       kSecMatchLimit as String  : kSecMatchLimitOne,
-      kSecReturnAttributes as String: true
+      kSecReturnAttributes as String: true,
+      kSecUseDataProtectionKeychain as String: true
     ]
 
     let status: OSStatus = SecItemDelete(query as CFDictionary)
