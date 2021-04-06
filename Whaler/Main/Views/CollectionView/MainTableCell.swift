@@ -44,6 +44,12 @@ class MainTableCell: UITableViewCell, MainCollectionTableCell {
     fatalError("init(coder:) has not been implemented")
   }
   
+  override func prepareForReuse() {
+    super.prepareForReuse()
+    assignedButton?.backgroundColor = .secondaryText
+    assignedButton?.setTitle("—", for: .normal)
+  }
+  
   func configure<T>(with object: T, assignedTo: NameAndColorProviding?) {
     guard let account = object as? Account else {
       let message = "Fatal error! Configuring cell with wrong type."

@@ -84,7 +84,7 @@ class Repository<Interface: DataInterface>: EphemeralObject {
   @discardableResult
   func fetchAll(with dataRequest: Interface.AllDataRequestType? = nil) -> AnyPublisher<[Entity], RepoError> {
     return Future<[Entity], RepoError> { [weak self] promise in
-      self?.queue.async { [weak self] in
+      self?.queue.async {
         guard let strongSelf = self else { return }
         strongSelf.allCancellable = strongSelf.dataInterface
           .fetchAll(with: dataRequest)
@@ -110,12 +110,11 @@ class Repository<Interface: DataInterface>: EphemeralObject {
   /// - Returns: A publisher that will emit the result of this fetchSubset operation.
   func fetchSubset(with dataRequest: Interface.SubsetDataRequestType) -> AnyPublisher<[Entity], RepoError> {
     return Future<[Entity], RepoError> { [weak self] promise in
-      self?.queue.async { [weak self] in
+      self?.queue.async {
         guard let strongSelf = self else { return }
-        let publisher = strongSelf.dataInterface
+        strongSelf.subsetCancellable = strongSelf.dataInterface
           .fetchSubset(with: dataRequest)
-
-        strongSelf.subsetCancellable = publisher.sink { (completion) in
+          .sink { (completion) in
           if case let .failure(error) = completion {
             Log.error(String(describing: error))
             promise(.failure(error))
@@ -137,7 +136,7 @@ class Repository<Interface: DataInterface>: EphemeralObject {
   /// - Returns: A publisher that will emit the result of this fetchSingle operation.
   func fetchSingle(with dataRequest: Interface.SingleDataRequestType) -> AnyPublisher<Entity?, RepoError> {
     return Future<Entity?, RepoError> { [weak self] promise in
-      self?.queue.async { [weak self] in
+      self?.queue.async {
         guard let strongSelf = self else { return }
         strongSelf.singleCancellable = strongSelf.dataInterface
           .fetchSingle(with: dataRequest)
@@ -166,9 +165,8 @@ class Repository<Interface: DataInterface>: EphemeralObject {
   /// - Returns: A publisher that will emit the result of this save operation.
   func save(_ data: Interface.DataSaveType, updatePolicy: UpdatePolicy = .subset) -> AnyPublisher<[Entity], RepoError> {
     return Future<[Entity], RepoError> { [weak self] promise in
-      self?.queue.async { [weak self] in
+      self?.queue.async {
         guard let strongSelf = self else { return }
-
         strongSelf.saveCancellable = strongSelf
           .dataInterface
           .save(data).sink { (completion) in

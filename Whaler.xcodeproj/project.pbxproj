@@ -40,7 +40,7 @@
 		141F796325326EF4005F9295 /* createContactAssignmentEntry.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 141F796225326EF4005F9295 /* createContactAssignmentEntry.graphql */; };
 		141F796925327503005F9295 /* Graph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141F796825327503005F9295 /* Graph.swift */; };
 		141F796E25342974005F9295 /* TokenAddingIntercepter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141F796D25342974005F9295 /* TokenAddingIntercepter.swift */; };
-		141F797225342B0F005F9295 /* LegacyInterceptorProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141F797125342B0F005F9295 /* LegacyInterceptorProvider.swift */; };
+		141F797225342B0F005F9295 /* CustomInterceptorProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141F797125342B0F005F9295 /* CustomInterceptorProvider.swift */; };
 		14251745255108F0006255F1 /* SFQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14251744255108F0006255F1 /* SFQuery.swift */; };
 		142517492551096F006255F1 /* SFObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142517482551096F006255F1 /* SFObject.swift */; };
 		1425174D25510D4B006255F1 /* SFSoqlProviding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1425174C25510D4B006255F1 /* SFSoqlProviding.swift */; };
@@ -123,6 +123,8 @@
 		148A09782586FF6A00811E35 /* WebSocketInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148A09772586FF6A00811E35 /* WebSocketInfo.swift */; };
 		148A097C258700FF00811E35 /* SocketMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148A097B258700FF00811E35 /* SocketMessage.swift */; };
 		148A0980258705DB00811E35 /* WebSocketConn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148A097F258705DB00811E35 /* WebSocketConn.swift */; };
+		148C70DF261C1AEF002D4EAA /* UserManagementInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148C70DE261C1AEF002D4EAA /* UserManagementInterceptor.swift */; };
+		148C70E5261C1F1E002D4EAA /* CustomNetworkFetchInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148C70E4261C1F1E002D4EAA /* CustomNetworkFetchInterceptor.swift */; };
 		148D460F25AA7326003D5FA7 /* MockAccountInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148D460E25AA7326003D5FA7 /* MockAccountInterface.swift */; };
 		148D461525AAD3C7003D5FA7 /* SplitPaneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148D461425AAD3C6003D5FA7 /* SplitPaneViewController.swift */; };
 		149F3A0025206AE4001F38BF /* MainCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149F39FF25206AE4001F38BF /* MainCollectionCell.swift */; };
@@ -231,7 +233,7 @@
 		141F796225326EF4005F9295 /* createContactAssignmentEntry.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = createContactAssignmentEntry.graphql; sourceTree = "<group>"; };
 		141F796825327503005F9295 /* Graph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Graph.swift; sourceTree = "<group>"; };
 		141F796D25342974005F9295 /* TokenAddingIntercepter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenAddingIntercepter.swift; sourceTree = "<group>"; };
-		141F797125342B0F005F9295 /* LegacyInterceptorProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegacyInterceptorProvider.swift; sourceTree = "<group>"; };
+		141F797125342B0F005F9295 /* CustomInterceptorProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomInterceptorProvider.swift; sourceTree = "<group>"; };
 		14251744255108F0006255F1 /* SFQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFQuery.swift; sourceTree = "<group>"; };
 		142517482551096F006255F1 /* SFObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFObject.swift; sourceTree = "<group>"; };
 		1425174C25510D4B006255F1 /* SFSoqlProviding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFSoqlProviding.swift; sourceTree = "<group>"; };
@@ -318,6 +320,8 @@
 		148A09772586FF6A00811E35 /* WebSocketInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebSocketInfo.swift; sourceTree = "<group>"; };
 		148A097B258700FF00811E35 /* SocketMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketMessage.swift; sourceTree = "<group>"; };
 		148A097F258705DB00811E35 /* WebSocketConn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebSocketConn.swift; sourceTree = "<group>"; };
+		148C70DE261C1AEF002D4EAA /* UserManagementInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManagementInterceptor.swift; sourceTree = "<group>"; };
+		148C70E4261C1F1E002D4EAA /* CustomNetworkFetchInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNetworkFetchInterceptor.swift; sourceTree = "<group>"; };
 		148D460E25AA7326003D5FA7 /* MockAccountInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAccountInterface.swift; sourceTree = "<group>"; };
 		148D461425AAD3C6003D5FA7 /* SplitPaneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitPaneViewController.swift; sourceTree = "<group>"; };
 		149F39FF25206AE4001F38BF /* MainCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCollectionCell.swift; sourceTree = "<group>"; };
@@ -614,7 +618,9 @@
 			children = (
 				141F796825327503005F9295 /* Graph.swift */,
 				141F796D25342974005F9295 /* TokenAddingIntercepter.swift */,
-				141F797125342B0F005F9295 /* LegacyInterceptorProvider.swift */,
+				141F797125342B0F005F9295 /* CustomInterceptorProvider.swift */,
+				148C70DE261C1AEF002D4EAA /* UserManagementInterceptor.swift */,
+				148C70E4261C1F1E002D4EAA /* CustomNetworkFetchInterceptor.swift */,
 			);
 			path = GraphQL;
 			sourceTree = "<group>";
@@ -1332,8 +1338,10 @@
 				1440A20424C947FA00E36853 /* Contact.swift in Sources */,
 				14F7DDA124EE529300D43055 /* SFAccount.swift in Sources */,
 				146737A725D79D3A00B64735 /* ContactRemoteDataSource.swift in Sources */,
+				148C70E5261C1F1E002D4EAA /* CustomNetworkFetchInterceptor.swift in Sources */,
 				148A09742586FEC500811E35 /* LiteWebSocketDelegate.swift in Sources */,
 				1430FDEC25E4F1E900BD955F /* ContactTableCell.swift in Sources */,
+				148C70DF261C1AEF002D4EAA /* UserManagementInterceptor.swift in Sources */,
 				1425175525510E46006255F1 /* FilterValue.swift in Sources */,
 				1443046124F3AFFC00D2FBD2 /* Typealiases.swift in Sources */,
 				14ECDD2124CABC7D006B4550 /* RichTextEditor.swift in Sources */,
@@ -1367,7 +1375,7 @@
 				141F795F25319E60005F9295 /* Organization.swift in Sources */,
 				14EA64F525F4CF7200F26ECE /* CurrentUserView.swift in Sources */,
 				14861ED7249F3DE100D2FA92 /* SceneDelegate.swift in Sources */,
-				141F797225342B0F005F9295 /* LegacyInterceptorProvider.swift in Sources */,
+				141F797225342B0F005F9295 /* CustomInterceptorProvider.swift in Sources */,
 				14562B8225F30E3500BA9D3B /* ProgressShapeLayer.swift in Sources */,
 				14861EF7249F401300D2FA92 /* CSVParser.swift in Sources */,
 				146C344624EA53690009C68C /* UserDefaultsManaged.swift in Sources */,
