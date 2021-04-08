@@ -41,6 +41,12 @@
 		141F796925327503005F9295 /* Graph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141F796825327503005F9295 /* Graph.swift */; };
 		141F796E25342974005F9295 /* TokenAddingIntercepter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141F796D25342974005F9295 /* TokenAddingIntercepter.swift */; };
 		141F797225342B0F005F9295 /* CustomInterceptorProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141F797125342B0F005F9295 /* CustomInterceptorProvider.swift */; };
+		1424804A261EDAEA00381B83 /* note.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 14248049261EDAEA00381B83 /* note.graphql */; };
+		14248050261EDB3C00381B83 /* saveNote.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 1424804F261EDB3C00381B83 /* saveNote.graphql */; };
+		1424805E261EDE2000381B83 /* NoteDataInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1424805D261EDE2000381B83 /* NoteDataInterface.swift */; };
+		14248062261EDE2E00381B83 /* NoteRemoteDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14248061261EDE2E00381B83 /* NoteRemoteDataSource.swift */; };
+		14248066261EDE8500381B83 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14248065261EDE8500381B83 /* Note.swift */; };
+		14248071261EE47F00381B83 /* NoteEditorInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14248070261EE47F00381B83 /* NoteEditorInteractor.swift */; };
 		14251745255108F0006255F1 /* SFQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14251744255108F0006255F1 /* SFQuery.swift */; };
 		142517492551096F006255F1 /* SFObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142517482551096F006255F1 /* SFObject.swift */; };
 		1425174D25510D4B006255F1 /* SFSoqlProviding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1425174C25510D4B006255F1 /* SFSoqlProviding.swift */; };
@@ -234,6 +240,12 @@
 		141F796825327503005F9295 /* Graph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Graph.swift; sourceTree = "<group>"; };
 		141F796D25342974005F9295 /* TokenAddingIntercepter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenAddingIntercepter.swift; sourceTree = "<group>"; };
 		141F797125342B0F005F9295 /* CustomInterceptorProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomInterceptorProvider.swift; sourceTree = "<group>"; };
+		14248049261EDAEA00381B83 /* note.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = note.graphql; sourceTree = "<group>"; };
+		1424804F261EDB3C00381B83 /* saveNote.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = saveNote.graphql; sourceTree = "<group>"; };
+		1424805D261EDE2000381B83 /* NoteDataInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteDataInterface.swift; sourceTree = "<group>"; };
+		14248061261EDE2E00381B83 /* NoteRemoteDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteRemoteDataSource.swift; sourceTree = "<group>"; };
+		14248065261EDE8500381B83 /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
+		14248070261EE47F00381B83 /* NoteEditorInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteEditorInteractor.swift; sourceTree = "<group>"; };
 		14251744255108F0006255F1 /* SFQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFQuery.swift; sourceTree = "<group>"; };
 		142517482551096F006255F1 /* SFObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFObject.swift; sourceTree = "<group>"; };
 		1425174C25510D4B006255F1 /* SFSoqlProviding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFSoqlProviding.swift; sourceTree = "<group>"; };
@@ -540,6 +552,7 @@
 			isa = PBXGroup;
 			children = (
 				146737AE25D7A02500B64735 /* NoteEditorViewController.swift */,
+				14248070261EE47F00381B83 /* NoteEditorInteractor.swift */,
 			);
 			path = Notes;
 			sourceTree = "<group>";
@@ -589,6 +602,7 @@
 				143EC3A726192936003ADF97 /* AccountAssignmentEntry */,
 				1416480525A4F9ED0008E16B /* Account */,
 				1416482925A7ACD90008E16B /* Contact */,
+				1424805C261EDDFD00381B83 /* Note */,
 			);
 			path = DataTypes;
 			sourceTree = "<group>";
@@ -623,6 +637,16 @@
 				148C70E4261C1F1E002D4EAA /* CustomNetworkFetchInterceptor.swift */,
 			);
 			path = GraphQL;
+			sourceTree = "<group>";
+		};
+		1424805C261EDDFD00381B83 /* Note */ = {
+			isa = PBXGroup;
+			children = (
+				1424805D261EDE2000381B83 /* NoteDataInterface.swift */,
+				14248061261EDE2E00381B83 /* NoteRemoteDataSource.swift */,
+				14248065261EDE8500381B83 /* Note.swift */,
+			);
+			path = Note;
 			sourceTree = "<group>";
 		};
 		142EC6A624D6ADDD004F7A28 /* Authentication */ = {
@@ -849,6 +873,8 @@
 				14EF43A92540AA5C002BE27D /* saveAccounts.graphql */,
 				14EF43AF254103A9002BE27D /* saveContacts.graphql */,
 				145146E625495FC40090D3E2 /* accounts.graphql */,
+				14248049261EDAEA00381B83 /* note.graphql */,
+				1424804F261EDB3C00381B83 /* saveNote.graphql */,
 				14F4FE17254AA6A600C89485 /* contacts.graphql */,
 				14861EF8249F439600D2FA92 /* Whaler.entitlements */,
 				14861ED4249F3DE100D2FA92 /* AppDelegate.swift */,
@@ -1228,6 +1254,8 @@
 				14086913253E85DE007324A4 /* createAccount.graphql in Resources */,
 				14861EE1249F3DE400D2FA92 /* LaunchScreen.storyboard in Resources */,
 				14F4090624C6A0C300F405BC /* OpenSans-Bold.ttf in Resources */,
+				1424804A261EDAEA00381B83 /* note.graphql in Resources */,
+				14248050261EDB3C00381B83 /* saveNote.graphql in Resources */,
 				14ECDD1524CAB819006B4550 /* trix-master in Resources */,
 				140AE79B24A9B48000F7705E /* Colors.xcassets in Resources */,
 				14086917253ED084007324A4 /* createContact.graphql in Resources */,
@@ -1407,6 +1435,7 @@
 				14EF8D5D25FB1BB20065BEB3 /* FilterValueView.swift in Sources */,
 				14F4FE14254AA5C600C89485 /* ContactsHelper.swift in Sources */,
 				14EF8D6125FB1C830065BEB3 /* AddFilterView.swift in Sources */,
+				14248071261EE47F00381B83 /* NoteEditorInteractor.swift in Sources */,
 				141802AD258EF07700E38840 /* AccountDetailsViewController.swift in Sources */,
 				14DEACEF260990B8007E2582 /* CurrentUserOptionsProvider.swift in Sources */,
 				14446D6925E350BA008E46CD /* AccountDetailsContactsInteractor.swift in Sources */,
@@ -1428,6 +1457,7 @@
 				14DACF42255BAC2A00FC0900 /* Log.swift in Sources */,
 				14B037EE25074B1E00BA488D /* User.swift in Sources */,
 				144AECDA24D26658009625BE /* ContactRowViewCell.swift in Sources */,
+				1424805E261EDE2000381B83 /* NoteDataInterface.swift in Sources */,
 				145A376A24C588DF0081F9DB /* NotesView.swift in Sources */,
 				14B037E325073E8800BA488D /* Response.swift in Sources */,
 				141802B1258EF30B00E38840 /* ToolbarDelegate.swift in Sources */,
@@ -1469,9 +1499,11 @@
 				144BF56C24D7E66E00F231F0 /* RootContainerViewController.swift in Sources */,
 				14E63ED124B9109C003EAF22 /* Whaler.xcdatamodeld in Sources */,
 				14EF4DE924CD4F3100ED5461 /* ObjectManager.swift in Sources */,
+				14248062261EDE2E00381B83 /* NoteRemoteDataSource.swift in Sources */,
 				141F796925327503005F9295 /* Graph.swift in Sources */,
 				14B037E525073EBA00BA488D /* Tokens.swift in Sources */,
 				1410404F25EB382400D8C793 /* AccountDetailsContentInteractor.swift in Sources */,
+				14248066261EDE8500381B83 /* Note.swift in Sources */,
 				1467E95F25F7F5CE00110880 /* ToolbarContainingViewController.swift in Sources */,
 				147F55EC2606C9AE001F139A /* FilterDisplayOption.swift in Sources */,
 				140AE7A324A9BA6500F7705E /* MainTableSectionHeader.swift in Sources */,

@@ -301,6 +301,45 @@ public struct NewContact: GraphQLMapConvertible {
   }
 }
 
+public struct NewNote: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - id
+  ///   - accountId
+  ///   - content
+  public init(id: GraphQLID, accountId: GraphQLID, content: String) {
+    graphQLMap = ["id": id, "accountID": accountId, "content": content]
+  }
+
+  public var id: GraphQLID {
+    get {
+      return graphQLMap["id"] as! GraphQLID
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "id")
+    }
+  }
+
+  public var accountId: GraphQLID {
+    get {
+      return graphQLMap["accountID"] as! GraphQLID
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "accountID")
+    }
+  }
+
+  public var content: String {
+    get {
+      return graphQLMap["content"] as! String
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "content")
+    }
+  }
+}
+
 public final class AccountsQuery: GraphQLQuery {
   /// The raw GraphQL definition of this operation.
   public let operationDefinition: String =
@@ -1776,6 +1815,132 @@ public final class CreateContactAssignmentEntryMutation: GraphQLMutation {
   }
 }
 
+public final class NoteQuery: GraphQLQuery {
+  /// The raw GraphQL definition of this operation.
+  public let operationDefinition: String =
+    """
+    query note($accountID: ID!) {
+      note(accountID: $accountID) {
+        __typename
+        id
+        ownerID
+        accountID
+        content
+      }
+    }
+    """
+
+  public let operationName: String = "note"
+
+  public var accountID: GraphQLID
+
+  public init(accountID: GraphQLID) {
+    self.accountID = accountID
+  }
+
+  public var variables: GraphQLMap? {
+    return ["accountID": accountID]
+  }
+
+  public struct Data: GraphQLSelectionSet {
+    public static let possibleTypes: [String] = ["Query"]
+
+    public static var selections: [GraphQLSelection] {
+      return [
+        GraphQLField("note", arguments: ["accountID": GraphQLVariable("accountID")], type: .nonNull(.object(Note.selections))),
+      ]
+    }
+
+    public private(set) var resultMap: ResultMap
+
+    public init(unsafeResultMap: ResultMap) {
+      self.resultMap = unsafeResultMap
+    }
+
+    public init(note: Note) {
+      self.init(unsafeResultMap: ["__typename": "Query", "note": note.resultMap])
+    }
+
+    public var note: Note {
+      get {
+        return Note(unsafeResultMap: resultMap["note"]! as! ResultMap)
+      }
+      set {
+        resultMap.updateValue(newValue.resultMap, forKey: "note")
+      }
+    }
+
+    public struct Note: GraphQLSelectionSet {
+      public static let possibleTypes: [String] = ["Note"]
+
+      public static var selections: [GraphQLSelection] {
+        return [
+          GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+          GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
+          GraphQLField("ownerID", type: .nonNull(.scalar(GraphQLID.self))),
+          GraphQLField("accountID", type: .nonNull(.scalar(GraphQLID.self))),
+          GraphQLField("content", type: .nonNull(.scalar(String.self))),
+        ]
+      }
+
+      public private(set) var resultMap: ResultMap
+
+      public init(unsafeResultMap: ResultMap) {
+        self.resultMap = unsafeResultMap
+      }
+
+      public init(id: GraphQLID, ownerId: GraphQLID, accountId: GraphQLID, content: String) {
+        self.init(unsafeResultMap: ["__typename": "Note", "id": id, "ownerID": ownerId, "accountID": accountId, "content": content])
+      }
+
+      public var __typename: String {
+        get {
+          return resultMap["__typename"]! as! String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "__typename")
+        }
+      }
+
+      public var id: GraphQLID {
+        get {
+          return resultMap["id"]! as! GraphQLID
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "id")
+        }
+      }
+
+      public var ownerId: GraphQLID {
+        get {
+          return resultMap["ownerID"]! as! GraphQLID
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "ownerID")
+        }
+      }
+
+      public var accountId: GraphQLID {
+        get {
+          return resultMap["accountID"]! as! GraphQLID
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "accountID")
+        }
+      }
+
+      public var content: String {
+        get {
+          return resultMap["content"]! as! String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "content")
+        }
+      }
+    }
+  }
+}
+
 public final class FetchOrganizationQuery: GraphQLQuery {
   /// The raw GraphQL definition of this operation.
   public let operationDefinition: String =
@@ -2370,6 +2535,132 @@ public final class SaveContactsMutation: GraphQLMutation {
         }
         set {
           resultMap.updateValue(newValue, forKey: "state")
+        }
+      }
+    }
+  }
+}
+
+public final class SaveNoteMutation: GraphQLMutation {
+  /// The raw GraphQL definition of this operation.
+  public let operationDefinition: String =
+    """
+    mutation saveNote($input: NewNote!) {
+      saveNote(input: $input) {
+        __typename
+        id
+        ownerID
+        accountID
+        content
+      }
+    }
+    """
+
+  public let operationName: String = "saveNote"
+
+  public var input: NewNote
+
+  public init(input: NewNote) {
+    self.input = input
+  }
+
+  public var variables: GraphQLMap? {
+    return ["input": input]
+  }
+
+  public struct Data: GraphQLSelectionSet {
+    public static let possibleTypes: [String] = ["Mutation"]
+
+    public static var selections: [GraphQLSelection] {
+      return [
+        GraphQLField("saveNote", arguments: ["input": GraphQLVariable("input")], type: .nonNull(.object(SaveNote.selections))),
+      ]
+    }
+
+    public private(set) var resultMap: ResultMap
+
+    public init(unsafeResultMap: ResultMap) {
+      self.resultMap = unsafeResultMap
+    }
+
+    public init(saveNote: SaveNote) {
+      self.init(unsafeResultMap: ["__typename": "Mutation", "saveNote": saveNote.resultMap])
+    }
+
+    public var saveNote: SaveNote {
+      get {
+        return SaveNote(unsafeResultMap: resultMap["saveNote"]! as! ResultMap)
+      }
+      set {
+        resultMap.updateValue(newValue.resultMap, forKey: "saveNote")
+      }
+    }
+
+    public struct SaveNote: GraphQLSelectionSet {
+      public static let possibleTypes: [String] = ["Note"]
+
+      public static var selections: [GraphQLSelection] {
+        return [
+          GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+          GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
+          GraphQLField("ownerID", type: .nonNull(.scalar(GraphQLID.self))),
+          GraphQLField("accountID", type: .nonNull(.scalar(GraphQLID.self))),
+          GraphQLField("content", type: .nonNull(.scalar(String.self))),
+        ]
+      }
+
+      public private(set) var resultMap: ResultMap
+
+      public init(unsafeResultMap: ResultMap) {
+        self.resultMap = unsafeResultMap
+      }
+
+      public init(id: GraphQLID, ownerId: GraphQLID, accountId: GraphQLID, content: String) {
+        self.init(unsafeResultMap: ["__typename": "Note", "id": id, "ownerID": ownerId, "accountID": accountId, "content": content])
+      }
+
+      public var __typename: String {
+        get {
+          return resultMap["__typename"]! as! String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "__typename")
+        }
+      }
+
+      public var id: GraphQLID {
+        get {
+          return resultMap["id"]! as! GraphQLID
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "id")
+        }
+      }
+
+      public var ownerId: GraphQLID {
+        get {
+          return resultMap["ownerID"]! as! GraphQLID
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "ownerID")
+        }
+      }
+
+      public var accountId: GraphQLID {
+        get {
+          return resultMap["accountID"]! as! GraphQLID
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "accountID")
+        }
+      }
+
+      public var content: String {
+        get {
+          return resultMap["content"]! as! String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "content")
         }
       }
     }

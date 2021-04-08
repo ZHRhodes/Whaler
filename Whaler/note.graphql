@@ -1,0 +1,8 @@
+query note($accountID: ID!) {
+  note(accountID: $accountID) {
+    id
+    ownerID
+    accountID
+    content
+  }
+}

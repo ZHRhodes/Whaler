@@ -14,7 +14,11 @@ class AccountDetailsViewController: ToolbarContainingViewController {
   private var interactor: AccountDetailsInteractor?
   private let splitPaneViewController = SplitPaneViewController()
   private let contentVC = AccountDetailsContentViewController()
-  private let noteEditorVC = NoteEditorViewController()
+  private lazy var noteEditorVC: NoteEditorViewController = {
+    let vc = NoteEditorViewController()
+    vc.interactor = NoteEditorInteractor(accountId: interactor?.account?.id ?? "")
+    return vc
+  }()
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -40,30 +44,11 @@ class AccountDetailsViewController: ToolbarContainingViewController {
     view1.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0).isActive = true
     
     noteEditorVC.view.translatesAutoresizingMaskIntoConstraints = false
-    noteEditorVC.currentText = interactor.account.notes ?? ""
-    noteEditorVC.delegate = self
     view.addSubview(noteEditorVC.view)
     
     noteEditorVC.view.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.4).isActive = true
     noteEditorVC.view.topAnchor.constraint(equalTo: view.topAnchor, constant: 70).isActive = true
     noteEditorVC.view.rightAnchor.constraint(equalTo: view.rightAnchor, constant: 0).isActive = true
     noteEditorVC.view.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0).isActive = true
-  }
-  
-  func didBeginSaving() {
-    noteEditorVC.showProgressIndicator()
-  }
-  
-  func didFinishSaving() {
-    noteEditorVC.hideProgressIndicator()
-  }
-}
-
-extension AccountDetailsViewController: NoteEditorDelegate {
-  func willChangeText(_ text: String, replacingRange range: NSRange, with replacementText: String) {
-  }
-  
-  func changedText(newValue: String) {
-    interactor?.changedNoteText(newValue: newValue)
   }
 }

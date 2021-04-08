@@ -10,15 +10,10 @@ import Foundation
 import UIKit
 
 class NoteEditorViewController: UIViewController {
+  var interactor: NoteEditorInteractor!
   private let label = UILabel()
   private let noteEditor = NoteEditor(frame: .zero)
   private var progressView: TextFinishedProgressIndicator!
-  
-  var delegate: NoteEditorDelegate? {
-    didSet {
-      noteEditor.delegate = delegate
-    }
-  }
   
   var currentText: String {
     get {
@@ -56,6 +51,7 @@ class NoteEditorViewController: UIViewController {
   
   private func configureNotesView() {
     noteEditor.translatesAutoresizingMaskIntoConstraints = false
+    noteEditor.delegate = self
     
     view.addSubview(noteEditor)
     
@@ -81,11 +77,26 @@ class NoteEditorViewController: UIViewController {
     progressView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -64).isActive = true
   }
   
+  func noteChanged() {
+    guard let newText = interactor.note?.content else { return }
+    currentText = newText
+  }
+  
   func showProgressIndicator() {
     progressView.startAnimation()
   }
   
   func hideProgressIndicator() {
     progressView.finishAnimation()
+  }
+}
+
+extension NoteEditorViewController: NoteEditorDelegate {
+  func willChangeText(_ text: String, replacingRange range: NSRange, with replacementText: String) {
+    
+  }
+  
+  func changedText(newValue: String) {
+    interactor.save(text: newValue)
   }
 }

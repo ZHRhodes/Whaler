@@ -1,0 +1,8 @@
+mutation saveNote($input: NewNote!) {
+  saveNote(input: $input) {
+    id
+    ownerID
+    accountID
+    content
+  }
+}
