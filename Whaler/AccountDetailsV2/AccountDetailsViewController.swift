@@ -17,6 +17,7 @@ class AccountDetailsViewController: ToolbarContainingViewController {
   private lazy var noteEditorVC: NoteEditorViewController = {
     let vc = NoteEditorViewController()
     vc.interactor = NoteEditorInteractor(accountId: interactor?.account?.id ?? "")
+    vc.interactor.viewController = vc
     return vc
   }()
   

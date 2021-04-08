@@ -21,6 +21,7 @@ class NoteEditorInteractor {
   
   init(accountId: String) {
     self.accountId = accountId
+    fetchNote()
     noteChangeCancellable = noteChangePublisher
       .debounce(for: .seconds(0.75), scheduler: DispatchQueue.main)
       .sink { [weak self] (newValue) in
@@ -32,12 +33,13 @@ class NoteEditorInteractor {
     }
   }
   
-  func subscribe() {
+  func fetchNote() {
     fetchCancellable = repoStore
       .noteRepository
       .fetchSingle(with: accountId)
       .sink(receiveCompletion: {_ in},
             receiveValue: { [weak self] (note) in
+              //TODO: show loading indicator until this completes
               self?.note = note
               self?.viewController?.noteChanged()
             })
