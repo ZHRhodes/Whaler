@@ -11,14 +11,21 @@ import UIKit
 
 class AccountDetailsContactsViewController: UIViewController {
   private var interactor: AccountDetailsContactsInteractor!
+  private let layout = UICollectionViewFlowLayout()
   private var collectionView: UICollectionView!
   
   override func viewDidLoad() {
     super.viewDidLoad()
   }
+  
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
 //    collectionView.showAnimatedGradientSkeleton()
+  }
+  
+  override func viewDidLayoutSubviews() {
+    super.viewDidLayoutSubviews()
+    layout.itemSize = CGSize(width: (collectionView.frame.size.width/3) - 70, height: collectionView.frame.size.height - 13)
   }
   
   func configure(with interactor: AccountDetailsContactsInteractor) {
@@ -31,7 +38,6 @@ class AccountDetailsContactsViewController: UIViewController {
   }
   
   private func configureCollectionView() {
-    let layout = UICollectionViewFlowLayout()
     layout.scrollDirection = .horizontal
     layout.minimumLineSpacing = 50.0
     

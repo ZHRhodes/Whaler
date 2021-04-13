@@ -44,8 +44,8 @@ struct MainViewControllerRepresentable: UIViewControllerRepresentable {
 }
 
 class MainViewController: UIViewController {
-  static let minSize = CGSize(width: 2155, height: 1217)
-  static let maxSize = CGSize(width: 2155, height: 1217)
+  static let minSize = CGSize(width: 1600, height: 700)
+  static let maxSize = CGSize(width: CGFloat.infinity, height: CGFloat.infinity)
   
   private var interactor: MainInteractor!
   private var noDataStackView: UIStackView?
@@ -57,11 +57,13 @@ class MainViewController: UIViewController {
   private var subHelloLabel: UILabel!
   private var actionsStack: UIStackView!
   private var collectionView: UICollectionView!
+  private var contentView: UIView!
   private var userView: CurrentUserView!
   
   private var sectionHeaders = Set<WeakRef<UIView>>()
   
   private var didShowInitialLoad = false
+  private let collectionCellSpacing: CGFloat = 50.0
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -109,7 +111,7 @@ class MainViewController: UIViewController {
   }
   
   private func configureViewsForContent() {
-//    removeNoDataViews()
+    configureContentView()
     configureHelloLabel()
     configureSubHelloLabel()
     configureCollectionView()
@@ -187,6 +189,30 @@ class MainViewController: UIViewController {
     return containerView
   }
   
+  private func configureContentView() {
+    contentView?.removeFromSuperview()
+    contentView = UIView()
+    view.addSubview(contentView)
+    contentView.translatesAutoresizingMaskIntoConstraints = false
+    
+    let leftConstraint = contentView.leftAnchor.constraint(greaterThanOrEqualTo: view.leftAnchor, constant: 40)
+    leftConstraint.priority = .defaultLow
+    
+    let rightConstraint = contentView.rightAnchor.constraint(greaterThanOrEqualTo: view.rightAnchor, constant: -40)
+    rightConstraint.priority = .defaultLow
+    
+    let constraints = [
+      contentView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+      contentView.widthAnchor.constraint(lessThanOrEqualToConstant: 2000),
+      contentView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 25),
+      leftConstraint,
+      rightConstraint,
+      contentView.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+    ]
+    
+    NSLayoutConstraint.activate(constraints)
+  }
+  
   private func removeTableView() {
     collectionView.removeFromSuperview()
     collectionView = nil
@@ -209,11 +235,11 @@ class MainViewController: UIViewController {
     
     helloLabel.text = text
     helloLabel.translatesAutoresizingMaskIntoConstraints = false
-    view.addSubview(helloLabel)
+    contentView.addSubview(helloLabel)
     
     let constraints = [
-      helloLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 38),
-      helloLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 25),
+      helloLabel.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 38),
+      helloLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 25),
       helloLabel.heightAnchor.constraint(equalToConstant: 64)
     ]
     
@@ -226,7 +252,7 @@ class MainViewController: UIViewController {
     
     subHelloLabel.text = "Here's a look at the accounts you're tracking…"
     subHelloLabel.translatesAutoresizingMaskIntoConstraints = false
-    view.addSubview(subHelloLabel)
+    contentView.addSubview(subHelloLabel)
     
     let constraints = [
       subHelloLabel.leftAnchor.constraint(equalTo: helloLabel.leftAnchor, constant: 0),
@@ -246,7 +272,7 @@ class MainViewController: UIViewController {
     actionsStack.axis = .horizontal
     actionsStack.spacing = 20
     actionsStack.translatesAutoresizingMaskIntoConstraints = false
-    view.addSubview(actionsStack)
+    contentView.addSubview(actionsStack)
     NSLayoutConstraint.activate([
       actionsStack.rightAnchor.constraint(equalTo: collectionView.rightAnchor, constant: -15),
       actionsStack.centerYAnchor.constraint(equalTo: helloLabel.bottomAnchor, constant: -8),
@@ -324,7 +350,7 @@ class MainViewController: UIViewController {
   private func configureCollectionView() {
     let layout = UICollectionViewFlowLayout()
     layout.scrollDirection = .horizontal
-    layout.minimumLineSpacing = 50.0
+    layout.minimumLineSpacing = collectionCellSpacing
     
     collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
     collectionView.delegate = self
@@ -337,14 +363,14 @@ class MainViewController: UIViewController {
     collectionView.isSkeletonable = true
 
     collectionView.translatesAutoresizingMaskIntoConstraints = false
-    view.addSubview(collectionView)
+    contentView.addSubview(collectionView)
     
     let constraints = [
-      collectionView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 40),
-//      collectionView.topAnchor.constraint(equalTo: subHelloLabel.bottomAnchor, constant: 40),
-      collectionView.heightAnchor.constraint(equalToConstant: 993), //TODO: thiis is too static
-      collectionView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -40),
-      collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0)
+      collectionView.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 40),
+      collectionView.topAnchor.constraint(equalTo: subHelloLabel.bottomAnchor, constant: 40),
+//      collectionView.heightAnchor.constraint(equalToConstant: 993), //TODO: thiis is too static
+      collectionView.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -40),
+      collectionView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: 0)
     ]
     
     NSLayoutConstraint.activate(constraints)
@@ -449,7 +475,10 @@ extension MainViewController: UICollectionViewDelegateFlowLayout {
   func collectionView(_ collectionView: UICollectionView,
                       layout collectionViewLayout: UICollectionViewLayout,
                       sizeForItemAt indexPath: IndexPath) -> CGSize {
-    return CGSize(width: collectionView.frame.size.width * 0.23, height: collectionView.frame.size.height)
+    let insetSpacing: CGFloat = collectionCellSpacing * CGFloat(interactor.accountStates.count - 1)
+    let cellWidth = (collectionView.frame.size.width - insetSpacing)/CGFloat(interactor.accountStates.count)
+    return CGSize(width: cellWidth,
+                  height: collectionView.frame.size.height)
   }
 }
 

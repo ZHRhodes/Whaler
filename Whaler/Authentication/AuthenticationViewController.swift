@@ -15,7 +15,7 @@ protocol AuthenticationViewControllerDelegate: class {
 }
 
 class AuthenticationViewController: UIViewController {
-  static let minSize: CGSize = CGSize(width: 2136, height: 1217)
+  static let minSize: CGSize = CGSize(width: 1440, height: 900)
   static let maxSize: CGSize = minSize
   
   private let interactor = AuthenticationInteractor(networkInterface: APINetworkInterface())

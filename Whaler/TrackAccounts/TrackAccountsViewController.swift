@@ -42,7 +42,7 @@ class TrackAccountsViewController: ToolbarContainingViewController {
     configurePageSelector()
     configureFilterStack()
     interactor.viewController = self
-    interactor.fetchAccounts()
+    interactor.applySelfOwnFilter()
   }
   
   private func configurePageTitle() {

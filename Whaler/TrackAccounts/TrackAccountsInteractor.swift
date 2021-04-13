@@ -57,6 +57,22 @@ class TrackAccountsInteractor {
     self.currentlyTrackingIds = Set(currentlyTracking.map { $0.salesforceID ?? ""})
   }
   
+  func applySelfOwnFilter() {
+    OwnerOptionsProvider().fetchOptions { [weak self] (options) in
+      let selfOption = options.first { (displayOption) -> Bool in
+        switch displayOption.filter {
+        case .owner(let owner):
+          return owner.id == SFSession.id
+        default:
+          return false
+        }
+      }
+      
+      guard let option = selfOption else { return }
+      self?.viewController?.selected(filterDisplayOption: option)
+    }
+  }
+  
   func account(atRow row: Int, onVisiblePage page: Int) -> Account {
     let index = convertVisibleRowToAccountIndex(row: row, visiblePage: page)
     return accounts[index]

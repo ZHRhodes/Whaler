@@ -15,4 +15,3 @@ struct Organization: Codable {
 }
 
 extension Organization: Equatable {}
- 

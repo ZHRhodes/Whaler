@@ -16,12 +16,12 @@ struct AuthenticationView: View {
   weak var delegate: AuthenticationViewDelegate?
   weak var textFieldDelegate: TextFieldDelegate?
   @ObservedObject var viewModel: ViewModel
-  
+  //width: 2136, height: 1217)
   var body: some View {
     GeometryReader { geometry in
       HStack {
         HStack {
-          Spacer().frame(width: geometry.size.width/8)
+          Spacer().frame(width: geometry.size.width/10)
           VStack {
             ZStack {
               VStack(alignment: .leading) {
@@ -29,17 +29,17 @@ struct AuthenticationView: View {
                   Image("tinyWhale").renderingMode(.template).foregroundColor(Color(.primaryText))
                   Spacer().frame(width: 17)
                   Text("WHALER")
-                    .font(Font.custom(boldFontName, size: 32))
+                    .font(Font.custom(boldFontName, size: 29))
                 }.frame(maxWidth: .infinity, alignment: .center)
-                Spacer().frame(height: 280)
-                Text("Sign In").font(Font.custom(boldFontName, size: 36))
-                Spacer().frame(height: 30)
+                Spacer().frame(height: geometry.size.height/6)
+                Text("Sign In").font(Font.custom(boldFontName, size: 31))
+                Spacer().frame(height: geometry.size.height * 0.025)
                 VStack {
                   CommonTextFieldRepresentable(initialText: "Email", isSecureText: false, textFieldDelegate: textFieldDelegate, text: $viewModel.email).frame(height: 72)
-                  Spacer().frame(height: 50)
+                  Spacer().frame(height: geometry.size.height * 0.042)
                   CommonTextFieldRepresentable(initialText: "Password", isSecureText: true, textFieldDelegate: textFieldDelegate, text: $viewModel.password).frame(height: 72)
                 }
-                Spacer().frame(height: 60)
+                Spacer().frame(height: geometry.size.height * 0.05)
                 Button(action: {
                   delegate?.signInTapped(email: viewModel.email, password: viewModel.password)
                 }) {
@@ -56,13 +56,13 @@ struct AuthenticationView: View {
                   RoundedRectangle(cornerRadius: 4)
                     .stroke(Color(.primaryText), lineWidth: 2)
                 )
-                Spacer().frame(height: 280)
+                Spacer().frame(height: geometry.size.height * 0.23)
                 Text("Treat salespeople right.")
-                  .font(Font.custom(semiboldFontName, size: 25))
+                  .font(Font.custom(semiboldFontName, size: 21))
                   .frame(maxWidth: .infinity, alignment: .center)
               }
             }
-          }
+          }       
           Spacer().frame(width: geometry.size.width/8)
         }
         Image("loginImage")

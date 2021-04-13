@@ -133,10 +133,7 @@ class MainTableCell: UITableViewCell, MainCollectionTableCell {
     
     attributesStack!.leftAnchor.constraint(equalTo: containerView.leftAnchor, constant: 22).isActive = true
     attributesStack!.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -18).isActive = true
-    attributesStack!.rightAnchor.constraint(lessThanOrEqualTo: containerView.rightAnchor, constant: -12).isActive = true
-//    attributesStack!.rightAnchor.constraint(equalTo: containerView.rightAnchor, constant: -12).isActive = true
-//    attributesStack!.leftAnchor.constraint(equalTo: containerView.topAnchor, constant: 4).isActive = true
-    
+    attributesStack!.rightAnchor.constraint(lessThanOrEqualTo: assignedButton!.leftAnchor, constant: -12).isActive = true
     for attribute in attributes {
       let tagView = AttributeTagView(attribute: attribute)
       tagView.setContentHuggingPriority(.required, for: .horizontal)
