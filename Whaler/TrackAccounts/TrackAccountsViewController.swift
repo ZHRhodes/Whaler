@@ -18,6 +18,7 @@ class TrackAccountsViewController: ToolbarContainingViewController {
   private var visiblePage = 1
   private var filterPopover: FilterPopoverViewController?
   private var saveButton: CommonButton!
+  private var currentHeight: CGFloat = 0.0
   
   private let filterStack = UIStackView()
   private lazy var addFilterView: AddFilterView = {
@@ -43,6 +44,15 @@ class TrackAccountsViewController: ToolbarContainingViewController {
     configureFilterStack()
     interactor.viewController = self
     interactor.applySelfOwnFilter()
+  }  
+  
+  override func viewDidLayoutSubviews() {
+    super.viewDidLayoutSubviews()
+    if currentHeight != view.frame.height {
+      currentHeight = view.frame.height
+      interactor.pageSize = Int(view.frame.height / 100)
+      interactor.fetchAccounts()
+    }
   }
   
   private func configurePageTitle() {
