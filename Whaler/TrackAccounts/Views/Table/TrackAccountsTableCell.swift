@@ -24,7 +24,7 @@ struct TrackAccountsTableData {
 
 class TrackAccountsTableCell: UITableViewCell {
   static let id = "TrackAccountsTableCellId"
-  static let height: CGFloat = 70.0
+  static let height: CGFloat = 60.0
   private lazy var stackView: UIStackView = {
     let stackView = UIStackView()
     stackView.axis = .horizontal

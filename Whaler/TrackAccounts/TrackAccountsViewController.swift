@@ -44,13 +44,14 @@ class TrackAccountsViewController: ToolbarContainingViewController {
     configureFilterStack()
     interactor.viewController = self
     interactor.applySelfOwnFilter()
-  }  
+  }
   
   override func viewDidLayoutSubviews() {
     super.viewDidLayoutSubviews()
     if currentHeight != view.frame.height {
       currentHeight = view.frame.height
-      interactor.pageSize = Int(view.frame.height / 100)
+      let pageSize = (view.frame.height - 350)/TrackAccountsTableCell.height
+      interactor.pageSize = Int(pageSize)
       interactor.fetchAccounts()
     }
   }
@@ -141,7 +142,6 @@ class TrackAccountsViewController: ToolbarContainingViewController {
   private func configureTableView() {
     tableView.translatesAutoresizingMaskIntoConstraints = false
     tableView.backgroundColor = .primaryBackground
-    tableView.isScrollEnabled = false
     tableView.delegate = self
     tableView.dataSource = self
     tableView.layer.cornerRadius = 10.0
