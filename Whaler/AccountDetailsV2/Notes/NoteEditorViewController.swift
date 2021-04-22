@@ -29,6 +29,7 @@ class NoteEditorViewController: UIViewController {
     configureLabel()
     configureNotesView()
     configureProgressIndicator()
+    noteEditor.startConnection(with: interactor.accountId)
   }
   
   private func configureLabel() {

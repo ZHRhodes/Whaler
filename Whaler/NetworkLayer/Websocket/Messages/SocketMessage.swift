@@ -9,14 +9,22 @@
 import Foundation
 
 enum SocketMessageType: String, Codable {
-  case docDelta = "docDelta"
+  case docChange = "docChange"
 }
 
 struct SocketMessage: Codable {
   let type: SocketMessageType
-  let data: DocumentDelta
+  let data: DocumentChange
 }
 
-struct DocumentDelta: Codable {
+struct DocumentChange: Codable {
+  let type: DocumentChangeType
   let value: String
+  let range: Range<Int>
+}
+
+enum DocumentChangeType: String, Codable {
+  case insert = "INS",
+       format = "FMT",
+       delete = "DEL"
 }

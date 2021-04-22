@@ -537,6 +537,14 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		140C7D09262FCF11006DB111 /* Messages */ = {
+			isa = PBXGroup;
+			children = (
+				148A097B258700FF00811E35 /* SocketMessage.swift */,
+			);
+			path = Messages;
+			sourceTree = "<group>";
+		};
 		1410404A25EB380200D8C793 /* Content */ = {
 			isa = PBXGroup;
 			children = (
@@ -553,6 +561,7 @@
 			children = (
 				146737AE25D7A02500B64735 /* NoteEditorViewController.swift */,
 				14248070261EE47F00381B83 /* NoteEditorInteractor.swift */,
+				145A376824C588CB0081F9DB /* NotesEditor */,
 			);
 			path = Notes;
 			sourceTree = "<group>";
@@ -726,14 +735,14 @@
 			path = ProgressIndicator;
 			sourceTree = "<group>";
 		};
-		145A376824C588CB0081F9DB /* Notes */ = {
+		145A376824C588CB0081F9DB /* NotesEditor */ = {
 			isa = PBXGroup;
 			children = (
 				145A376924C588DF0081F9DB /* NotesView.swift */,
 				14D4A2F22574CAE6003EFF61 /* Editor */,
 				14ECDB2824CAB2D4006B4550 /* TrixEditor */,
 			);
-			path = Notes;
+			path = NotesEditor;
 			sourceTree = "<group>";
 		};
 		146834FD24DA79830075B639 /* Views */ = {
@@ -757,7 +766,6 @@
 			children = (
 				146C35D624C563DF00DBCA23 /* CompanyInfo */,
 				146C35D724C5677000DBCA23 /* Contacts */,
-				145A376824C588CB0081F9DB /* Notes */,
 				145A376B24C58D440081F9DB /* AccountDetailsView.swift */,
 			);
 			path = Views;
@@ -924,10 +932,10 @@
 		148A096C2586E0DC00811E35 /* Websocket */ = {
 			isa = PBXGroup;
 			children = (
+				140C7D09262FCF11006DB111 /* Messages */,
 				148A096D2586E0FC00811E35 /* WebSocketManager.swift */,
 				148A09732586FEC500811E35 /* LiteWebSocketDelegate.swift */,
 				148A09772586FF6A00811E35 /* WebSocketInfo.swift */,
-				148A097B258700FF00811E35 /* SocketMessage.swift */,
 				148A097F258705DB00811E35 /* WebSocketConn.swift */,
 			);
 			path = Websocket;

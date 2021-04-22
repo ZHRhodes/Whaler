@@ -42,10 +42,12 @@ class NoteEditor: UIView {
     configureContainer()
     configureToolBar()
     configureTextView()
-    
+  }
+  
+  func startConnection(with resourceId: String) {
     /* Temporary */
 //      {"type": "docDelta", "data": {"documentID": "1", "value": "Hello World!"}}
-    conn = WebSocketManager.shared.registerConnection(id: "072cf97d-ecda-41f7-adb7-a9ab538f44ec",
+    conn = WebSocketManager.shared.registerConnection(id: resourceId,
                                                       delegate: self)
   }
   
@@ -111,7 +113,8 @@ class NoteEditor: UIView {
 extension NoteEditor: LiteWebSocketDelegate {
   func didReceiveMessage(_ message: SocketMessage) {
     Log.debug("Did receive message:\n\(message)")
-    textView.text += message.data.value
+    let range = NSRange(message.data.range)
+    textView.textStorage.replaceCharacters(in: range, with: message.data.value)
   }
 }
 
@@ -119,8 +122,8 @@ extension NoteEditor: EditorToolbarDelegate {
   func didSelect(option: EditorToolbarOption) {
     switch option {
     case .header1:
-      let message = SocketMessage(type: .docDelta, data: DocumentDelta(value: textView.text))
-      conn.send(message: message)
+//      let message = SocketMessage(type: .docChange, data: DocumentChange(type: .format, value: textView.text))
+//      conn.send(message: message)
       textView.toggleHeader(.h1, range: textView.selectedRange)
     case .header2:
       textView.toggleHeader(.h2, range: textView.selectedRange)
@@ -143,6 +146,8 @@ extension NoteEditor: EditorToolbarDelegate {
 extension NoteEditor: UITextViewDelegate {
   func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
     delegate?.willChangeText(textView.text, replacingRange: range, with: text)
+    guard let range = Range(range) else { return false }
+    conn.send(message: SocketMessage(type: .docChange, data: DocumentChange(type: .insert, value: text, range: range)))
     return true
   }
   
