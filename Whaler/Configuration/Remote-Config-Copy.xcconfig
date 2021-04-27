@@ -1,8 +1,8 @@
 //
-//  Remote-Config.xcconfig
+//  Remote-Config-Copy.xcconfig
 //  Whaler
 //
-//  Created by Zachary Rhodes on 3/31/21.
+//  Created by Zachary Rhodes on 4/21/21.
 //  Copyright © 2021 Whaler. All rights reserved.
 //
 
@@ -11,4 +11,5 @@
 
 SLASH=/
 API_URL = https:$(SLASH)$(SLASH)getwhalergo.herokuapp.com
-PRODUCT_BUNDLE_IDENTIFIER = com.whaler.app
+PRODUCT_BUNDLE_IDENTIFIER = com.whaler.app.copy
+EXECUTABLE_PREFIX = "copy"

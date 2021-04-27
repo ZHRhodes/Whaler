@@ -9,12 +9,8 @@
 import Foundation
 import Starscream
 
-protocol WebSocketConn {
-  func send(message: SocketMessage)
-}
-
-extension WebSocket: WebSocketConn {
-  func send(message: SocketMessage) {
+extension WebSocketClient {
+  func send<T: Codable>(message: SocketMessage<T>) {
     do {
       let data = try JSONEncoder().encode(message)
       write(data: data)

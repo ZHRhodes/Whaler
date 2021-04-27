@@ -10,21 +10,54 @@ import Foundation
 
 enum SocketMessageType: String, Codable {
   case docChange = "docChange"
+  case resourceConnection = "resourceConnection"
+  case resourceConnectionConf = "resourceConnectionConf"
 }
 
-struct SocketMessage: Codable {
-  let type: SocketMessageType
-  let data: DocumentChange
+protocol SocketData: Codable {}
+
+protocol SocketMessageT {
+  var type: SocketMessageType { get }
+//  var data: Data { get }
 }
 
-struct DocumentChange: Codable {
-  let type: DocumentChangeType
-  let value: String
-  let range: Range<Int>
+private enum SocketMessageCodingKeys: String, CodingKey {
+  case type, data
 }
 
-enum DocumentChangeType: String, Codable {
-  case insert = "INS",
-       format = "FMT",
-       delete = "DEL"
+//extension SocketMessage {
+//  init(from decoder: Decoder) throws {
+//    let container = try decoder.container(keyedBy: SocketMessageCodingKeys.self)
+//    let type = try container.decode(SocketMessageType.self, forKey: .type)
+//    let docChange = try container.decode(DocumentChange.self, forKey: .data)
+//  }
+//
+//  func encode(to encoder: Encoder) throws {
+//    var container = encoder.container(keyedBy: SocketMessageCodingKeys.self)
+//    try container.encode(type, forKey: .type)
+//    try container.encode(data(), forKey: .data)
+//  }
+//}
+
+
+//struct SocketMessage: SocketMessageT, Codable {
+//  let type: SocketMessageType
+//  let data: SocketData
+//}
+
+
+struct ResourceConnection: Codable {
+  let resourceId: String
+}
+//
+//struct ResourceConnectionMsg: SocketMessage, Codable {
+//  var type: SocketMessageType = .resourceConnection
+//
+//  func data() -> SocketData {
+//  }
+//}
+//
+struct ResourceConnectionConf: Codable {
+  let resourceId: String
+  let initialState: String
 }

@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 import SwiftUI
 import Aztec
+import Starscream
 
 struct NoteEditorRepresentable: UIViewRepresentable {
   typealias UIViewType = NoteEditor
@@ -33,7 +34,8 @@ class NoteEditor: UIView {
   lazy var toolBar = EditorToolbar(options: EditorToolbarOption.allCases, delegate: self)
   var delegate: NoteEditorDelegate?
   var textView: Aztec.TextView!
-  var conn: WebSocketConn!
+  var socket: WebSocketClient!
+  var resourceId: String?
   
   override init(frame: CGRect) {
     super.init(frame: frame)
@@ -47,8 +49,9 @@ class NoteEditor: UIView {
   func startConnection(with resourceId: String) {
     /* Temporary */
 //      {"type": "docDelta", "data": {"documentID": "1", "value": "Hello World!"}}
-    conn = WebSocketManager.shared.registerConnection(id: resourceId,
-                                                      delegate: self)
+    self.resourceId = resourceId
+    socket = WebSocketManager.shared.registerConnection(id: resourceId,
+                                                        delegate: self)
   }
   
   private func configureView() {
@@ -111,10 +114,31 @@ class NoteEditor: UIView {
 }
 
 extension NoteEditor: LiteWebSocketDelegate {
-  func didReceiveMessage(_ message: SocketMessage) {
+  func didReceiveMessage(_ message: SocketMsg, socket: WebSocketClient) {
     Log.debug("Did receive message:\n\(message)")
-    let range = NSRange(message.data.range)
-    textView.textStorage.replaceCharacters(in: range, with: message.data.value)
+    switch message {
+    case .resourceConnectionConf(let conf):
+//      guard //let data = message.data,
+//            let connectionConf = try? JSONDecoder().decode(ResourceConnectionConf.self,
+//                                                           from: message.data) else {
+//        return
+//      }
+      textView.text = conf.initialState
+    break
+    case .docChange:
+      //    let range = NSRange(message.data.range)
+      //    textView.textStorage.replaceCharacters(in: range, with: message.data.value)
+      break
+    default:
+      break
+    }
+  }
+  
+  func connectionEstablished(socket: WebSocketClient) {
+    guard let resourceId = resourceId else { return }
+    let data = ResourceConnection(resourceId: resourceId)
+    let message = SocketMessage(type: .resourceConnection, data: data)
+    socket.send(message: message)
   }
 }
 
@@ -147,7 +171,8 @@ extension NoteEditor: UITextViewDelegate {
   func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
     delegate?.willChangeText(textView.text, replacingRange: range, with: text)
     guard let range = Range(range) else { return false }
-    conn.send(message: SocketMessage(type: .docChange, data: DocumentChange(type: .insert, value: text, range: range)))
+    let docChange = DocumentChange(type: .insert, value: text, range: range)
+//    socket.send(message: SocketMessage(type: .docChange, data: docChange))
     return true
   }
   

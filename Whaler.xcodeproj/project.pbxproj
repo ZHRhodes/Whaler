@@ -151,6 +151,7 @@
 		14C509C7254CFE7A0021D9C5 /* FieldValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C509C6254CFE7A0021D9C5 /* FieldValue.swift */; };
 		14C509CB254D42800021D9C5 /* SFGroupModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C509CA254D42800021D9C5 /* SFGroupModels.swift */; };
 		14C509D0254D49CD0021D9C5 /* SwiftyBeaver in Frameworks */ = {isa = PBXBuildFile; productRef = 14C509CF254D49CD0021D9C5 /* SwiftyBeaver */; };
+		14CCB6B32637B3630024C500 /* DocumentChangeMsg.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CCB6B22637B3630024C500 /* DocumentChangeMsg.swift */; };
 		14D4A2E72574CA7E003EFF61 /* EditorToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D4A2E62574CA7E003EFF61 /* EditorToolbar.swift */; };
 		14D4A2EB2574CA94003EFF61 /* ToolbarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D4A2EA2574CA94003EFF61 /* ToolbarButton.swift */; };
 		14D4A2EF2574CAAB003EFF61 /* EditorToolbarOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D4A2EE2574CAAB003EFF61 /* EditorToolbarOption.swift */; };
@@ -272,6 +273,7 @@
 		144BF56B24D7E66E00F231F0 /* RootContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootContainerViewController.swift; sourceTree = "<group>"; };
 		144FA6BC24C2C0C500506F15 /* CompanyInfoHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyInfoHeaderView.swift; sourceTree = "<group>"; };
 		145146E625495FC40090D3E2 /* accounts.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = accounts.graphql; sourceTree = "<group>"; };
+		14531A8426311BCA00BD55A1 /* Remote-Config-Copy.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Remote-Config-Copy.xcconfig"; sourceTree = "<group>"; };
 		1454743A250D904700257A89 /* UIViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extensions.swift"; sourceTree = "<group>"; };
 		1454743C250D93DC00257A89 /* SFSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFSession.swift; sourceTree = "<group>"; };
 		14562B7625F216FD00BA9D3B /* AccountDetailsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDetailsInteractor.swift; sourceTree = "<group>"; };
@@ -353,6 +355,7 @@
 		14C509C2254CF83B0021D9C5 /* RevenueBucket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RevenueBucket.swift; sourceTree = "<group>"; };
 		14C509C6254CFE7A0021D9C5 /* FieldValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FieldValue.swift; sourceTree = "<group>"; };
 		14C509CA254D42800021D9C5 /* SFGroupModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFGroupModels.swift; sourceTree = "<group>"; };
+		14CCB6B22637B3630024C500 /* DocumentChangeMsg.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentChangeMsg.swift; sourceTree = "<group>"; };
 		14D4A2E62574CA7E003EFF61 /* EditorToolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorToolbar.swift; sourceTree = "<group>"; };
 		14D4A2EA2574CA94003EFF61 /* ToolbarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolbarButton.swift; sourceTree = "<group>"; };
 		14D4A2EE2574CAAB003EFF61 /* EditorToolbarOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorToolbarOption.swift; sourceTree = "<group>"; };
@@ -403,6 +406,8 @@
 		A6A180E84B0CE02E7DE1D907 /* Pods-Whaler.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Whaler.release.xcconfig"; path = "Target Support Files/Pods-Whaler/Pods-Whaler.release.xcconfig"; sourceTree = "<group>"; };
 		AFB12DFA879B292F66B37334 /* Pods_Whaler.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Whaler.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B39B01D0F7BB942BF53407DA /* Pods_WhalerTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WhalerTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F28C53C24989DFAD3F693F74 /* Pods-WhalerTests.debug copy.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WhalerTests.debug copy.xcconfig"; path = "Target Support Files/Pods-WhalerTests/Pods-WhalerTests.debug copy.xcconfig"; sourceTree = "<group>"; };
+		F3E3255C5A0D36C4D04C42DD /* Pods-Whaler.debug copy.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Whaler.debug copy.xcconfig"; path = "Target Support Files/Pods-Whaler/Pods-Whaler.debug copy.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -448,6 +453,8 @@
 				8CA86D4EC912C483DCE033E5 /* Pods-WhalerTests.release.xcconfig */,
 				588FAF35C96267C85A3184CC /* Pods-Whaler.local.xcconfig */,
 				16440185E516C89487AA3636 /* Pods-WhalerTests.local.xcconfig */,
+				F3E3255C5A0D36C4D04C42DD /* Pods-Whaler.debug copy.xcconfig */,
+				F28C53C24989DFAD3F693F74 /* Pods-WhalerTests.debug copy.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -541,6 +548,7 @@
 			isa = PBXGroup;
 			children = (
 				148A097B258700FF00811E35 /* SocketMessage.swift */,
+				14CCB6B22637B3630024C500 /* DocumentChangeMsg.swift */,
 			);
 			path = Messages;
 			sourceTree = "<group>";
@@ -672,6 +680,7 @@
 			isa = PBXGroup;
 			children = (
 				142ED45D26146A6F00BC79A0 /* Remote-Config.xcconfig */,
+				14531A8426311BCA00BD55A1 /* Remote-Config-Copy.xcconfig */,
 				142ED45F26146A9700BC79A0 /* Local-Config.xcconfig */,
 				142ED46D26146C8900BC79A0 /* Configuration.swift */,
 			);
@@ -1472,6 +1481,7 @@
 				147EB86B2593C950002B93D8 /* Repository.swift in Sources */,
 				146C35CF24C2CA9700DBCA23 /* TitleValueView.swift in Sources */,
 				146C35D324C557C800DBCA23 /* CompanyInfoValuesView.swift in Sources */,
+				14CCB6B32637B3630024C500 /* DocumentChangeMsg.swift in Sources */,
 				1467379B25D79B3B00B64735 /* RepoError.swift in Sources */,
 				1414810B252FFD8100640946 /* TablePopoverViewController.swift in Sources */,
 				147DEA7E260DBC9A0004BF7D /* IdProviding.swift in Sources */,
@@ -1649,7 +1659,6 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 0.1.2;
-				PRODUCT_BUNDLE_IDENTIFIER = Whaler.catalyst.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
@@ -1682,6 +1691,119 @@
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Whaler.app/Whaler";
 			};
 			name = Local;
+		};
+		14531A8726311CD900BD55A1 /* Debug copy */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 14531A8426311BCA00BD55A1 /* Remote-Config-Copy.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = "Debug copy";
+		};
+		14531A8826311CD900BD55A1 /* Debug copy */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F3E3255C5A0D36C4D04C42DD /* Pods-Whaler.debug copy.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Whaler/Whaler.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 8H9FMTH9DY;
+				INFOPLIST_FILE = Whaler/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				"IPHONEOS_DEPLOYMENT_TARGET[sdk=macosx*]" = 14.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 0.1.2;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
+				SUPPORTS_MACCATALYST = YES;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = "Debug copy";
+		};
+		14531A8926311CD900BD55A1 /* Debug copy */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F28C53C24989DFAD3F693F74 /* Pods-WhalerTests.debug copy.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 8H9FMTH9DY;
+				INFOPLIST_FILE = WhalerTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = Whaler.WhalerTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Whaler.app/Whaler";
+			};
+			name = "Debug copy";
 		};
 		14861EEE249F3DE400D2FA92 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -1818,7 +1940,6 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 0.1.2;
-				PRODUCT_BUNDLE_IDENTIFIER = Whaler.catalyst.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
@@ -1848,7 +1969,6 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 0.1.2;
-				PRODUCT_BUNDLE_IDENTIFIER = Whaler.catalyst.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
@@ -1912,6 +2032,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				14861EEE249F3DE400D2FA92 /* Debug */,
+				14531A8726311CD900BD55A1 /* Debug copy */,
 				142ED46426146C3800BC79A0 /* Local */,
 				14861EEF249F3DE400D2FA92 /* Release */,
 			);
@@ -1922,6 +2043,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				14861EF1249F3DE400D2FA92 /* Debug */,
+				14531A8826311CD900BD55A1 /* Debug copy */,
 				142ED46526146C3800BC79A0 /* Local */,
 				14861EF2249F3DE400D2FA92 /* Release */,
 			);
@@ -1932,6 +2054,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				14861EF4249F3DE400D2FA92 /* Debug */,
+				14531A8926311CD900BD55A1 /* Debug copy */,
 				142ED46626146C3800BC79A0 /* Local */,
 				14861EF5249F3DE400D2FA92 /* Release */,
 			);

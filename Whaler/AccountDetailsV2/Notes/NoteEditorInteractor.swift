@@ -21,7 +21,7 @@ class NoteEditorInteractor {
   
   init(accountId: String) {
     self.accountId = accountId
-    fetchNote()
+    //fetchNote()
     noteChangeCancellable = noteChangePublisher
       .debounce(for: .seconds(0.75), scheduler: DispatchQueue.main)
       .sink { [weak self] (newValue) in

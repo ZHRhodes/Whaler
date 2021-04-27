@@ -11,3 +11,4 @@
 
 SLASH=/
 API_URL = http:$(SLASH)$(SLASH)127.0.0.1:8080
+PRODUCT_BUNDLE_IDENTIFIER = com.whaler.app.local

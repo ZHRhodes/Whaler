@@ -13,7 +13,7 @@ struct NoteRemoteDataSource {
   func fetchSingle(accountID: String) -> AnyPublisher<Note?, RepoError> {
     return Future<Note?, RepoError> { promise in
       let query = NoteQuery(accountID: accountID)
-      Graph.shared.apollo.fetch(query: query) { result in
+      Graph.shared.apollo.fetch(query: query, cachePolicy: .fetchIgnoringCacheData) { result in
         guard let resultNote = try? result.get().data?.note else {
           promise(.failure(RepoError(reason: "Failed to query note.",
                                                                                            
