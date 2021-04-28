@@ -133,6 +133,9 @@
 		148C70E5261C1F1E002D4EAA /* CustomNetworkFetchInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148C70E4261C1F1E002D4EAA /* CustomNetworkFetchInterceptor.swift */; };
 		148D460F25AA7326003D5FA7 /* MockAccountInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148D460E25AA7326003D5FA7 /* MockAccountInterface.swift */; };
 		148D461525AAD3C7003D5FA7 /* SplitPaneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148D461425AAD3C6003D5FA7 /* SplitPaneViewController.swift */; };
+		149A092F2639089A00AE429C /* OTDoc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149A092E2639089A00AE429C /* OTDoc.swift */; };
+		149A093326390C5600AE429C /* OTOp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149A093226390C5600AE429C /* OTOp.swift */; };
+		149A09392639194200AE429C /* OTError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149A09382639194200AE429C /* OTError.swift */; };
 		149F3A0025206AE4001F38BF /* MainCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149F39FF25206AE4001F38BF /* MainCollectionCell.swift */; };
 		149F3A0725206BB7001F38BF /* MainTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149F3A0625206BB7001F38BF /* MainTableCell.swift */; };
 		149F3A0B25209575001F38BF /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149F3A0A25209575001F38BF /* UIView+Extensions.swift */; };
@@ -152,6 +155,7 @@
 		14C509CB254D42800021D9C5 /* SFGroupModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C509CA254D42800021D9C5 /* SFGroupModels.swift */; };
 		14C509D0254D49CD0021D9C5 /* SwiftyBeaver in Frameworks */ = {isa = PBXBuildFile; productRef = 14C509CF254D49CD0021D9C5 /* SwiftyBeaver */; };
 		14CCB6B32637B3630024C500 /* DocumentChangeMsg.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CCB6B22637B3630024C500 /* DocumentChangeMsg.swift */; };
+		14CCB6B82637C8A80024C500 /* OTClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CCB6B72637C8A80024C500 /* OTClient.swift */; };
 		14D4A2E72574CA7E003EFF61 /* EditorToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D4A2E62574CA7E003EFF61 /* EditorToolbar.swift */; };
 		14D4A2EB2574CA94003EFF61 /* ToolbarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D4A2EA2574CA94003EFF61 /* ToolbarButton.swift */; };
 		14D4A2EF2574CAAB003EFF61 /* EditorToolbarOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D4A2EE2574CAAB003EFF61 /* EditorToolbarOption.swift */; };
@@ -338,6 +342,9 @@
 		148C70E4261C1F1E002D4EAA /* CustomNetworkFetchInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNetworkFetchInterceptor.swift; sourceTree = "<group>"; };
 		148D460E25AA7326003D5FA7 /* MockAccountInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAccountInterface.swift; sourceTree = "<group>"; };
 		148D461425AAD3C6003D5FA7 /* SplitPaneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitPaneViewController.swift; sourceTree = "<group>"; };
+		149A092E2639089A00AE429C /* OTDoc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTDoc.swift; sourceTree = "<group>"; };
+		149A093226390C5600AE429C /* OTOp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTOp.swift; sourceTree = "<group>"; };
+		149A09382639194200AE429C /* OTError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTError.swift; sourceTree = "<group>"; };
 		149F39FF25206AE4001F38BF /* MainCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCollectionCell.swift; sourceTree = "<group>"; };
 		149F3A0625206BB7001F38BF /* MainTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableCell.swift; sourceTree = "<group>"; };
 		149F3A0A25209575001F38BF /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
@@ -356,6 +363,7 @@
 		14C509C6254CFE7A0021D9C5 /* FieldValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FieldValue.swift; sourceTree = "<group>"; };
 		14C509CA254D42800021D9C5 /* SFGroupModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFGroupModels.swift; sourceTree = "<group>"; };
 		14CCB6B22637B3630024C500 /* DocumentChangeMsg.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentChangeMsg.swift; sourceTree = "<group>"; };
+		14CCB6B72637C8A80024C500 /* OTClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTClient.swift; sourceTree = "<group>"; };
 		14D4A2E62574CA7E003EFF61 /* EditorToolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorToolbar.swift; sourceTree = "<group>"; };
 		14D4A2EA2574CA94003EFF61 /* ToolbarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolbarButton.swift; sourceTree = "<group>"; };
 		14D4A2EE2574CAAB003EFF61 /* EditorToolbarOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorToolbarOption.swift; sourceTree = "<group>"; };
@@ -941,6 +949,7 @@
 		148A096C2586E0DC00811E35 /* Websocket */ = {
 			isa = PBXGroup;
 			children = (
+				14CCB6B62637C88F0024C500 /* OT */,
 				140C7D09262FCF11006DB111 /* Messages */,
 				148A096D2586E0FC00811E35 /* WebSocketManager.swift */,
 				148A09732586FEC500811E35 /* LiteWebSocketDelegate.swift */,
@@ -994,6 +1003,17 @@
 				14C509C6254CFE7A0021D9C5 /* FieldValue.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		14CCB6B62637C88F0024C500 /* OT */ = {
+			isa = PBXGroup;
+			children = (
+				14CCB6B72637C8A80024C500 /* OTClient.swift */,
+				149A092E2639089A00AE429C /* OTDoc.swift */,
+				149A093226390C5600AE429C /* OTOp.swift */,
+				149A09382639194200AE429C /* OTError.swift */,
+			);
+			path = OT;
 			sourceTree = "<group>";
 		};
 		14D4A2F22574CAE6003EFF61 /* Editor */ = {
@@ -1482,6 +1502,7 @@
 				146C35CF24C2CA9700DBCA23 /* TitleValueView.swift in Sources */,
 				146C35D324C557C800DBCA23 /* CompanyInfoValuesView.swift in Sources */,
 				14CCB6B32637B3630024C500 /* DocumentChangeMsg.swift in Sources */,
+				149A093326390C5600AE429C /* OTOp.swift in Sources */,
 				1467379B25D79B3B00B64735 /* RepoError.swift in Sources */,
 				1414810B252FFD8100640946 /* TablePopoverViewController.swift in Sources */,
 				147DEA7E260DBC9A0004BF7D /* IdProviding.swift in Sources */,
@@ -1500,6 +1521,7 @@
 				1480800B24EA4B32007EB6D1 /* APINetworkInterface.swift in Sources */,
 				14EA64EA25F4CD7700F26ECE /* TrackAccountsInteractor.swift in Sources */,
 				146C35D524C5635D00DBCA23 /* CompanyInfoView.swift in Sources */,
+				14CCB6B82637C8A80024C500 /* OTClient.swift in Sources */,
 				14EF8D5125F950E10065BEB3 /* ContentSizedTableView.swift in Sources */,
 				148A097C258700FF00811E35 /* SocketMessage.swift in Sources */,
 				14861EFC249F49DE00D2FA92 /* DocumentPickerViewController.swift in Sources */,
@@ -1522,6 +1544,7 @@
 				14B037E525073EBA00BA488D /* Tokens.swift in Sources */,
 				1410404F25EB382400D8C793 /* AccountDetailsContentInteractor.swift in Sources */,
 				14248066261EDE8500381B83 /* Note.swift in Sources */,
+				149A092F2639089A00AE429C /* OTDoc.swift in Sources */,
 				1467E95F25F7F5CE00110880 /* ToolbarContainingViewController.swift in Sources */,
 				147F55EC2606C9AE001F139A /* FilterDisplayOption.swift in Sources */,
 				140AE7A324A9BA6500F7705E /* MainTableSectionHeader.swift in Sources */,
@@ -1529,6 +1552,7 @@
 				14DACF46255BAC9200FC0900 /* SwiftyBeaver+LoggingDestination.swift in Sources */,
 				141F796E25342974005F9295 /* TokenAddingIntercepter.swift in Sources */,
 				147F55F92607FC6A001F139A /* Owner.swift in Sources */,
+				149A09392639194200AE429C /* OTError.swift in Sources */,
 				1480801024EA4BE7007EB6D1 /* JustNetworker.swift in Sources */,
 				148A0980258705DB00811E35 /* WebSocketConn.swift in Sources */,
 				1443045F24F3356A00D2FBD2 /* SFNewAccessToken.swift in Sources */,
