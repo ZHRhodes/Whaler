@@ -8,11 +8,17 @@
 
 import Foundation
 
+protocol OTClientDelegate: class {
+  func send(rev: Int, ops: [OTOp])
+}
+
 class OTClient {
   var doc: OTDoc
   var rev: Int
   var buf: [OTOp]
   var wait: [OTOp]
+  
+  weak var delegate: OTClientDelegate?
   
   init(doc: OTDoc, rev: Int, buf: [OTOp], wait: [OTOp]) {
     self.doc = doc
@@ -22,7 +28,7 @@ class OTClient {
   }
   
   func send(rev: Int, ops: [OTOp]) {
-    
+    delegate?.send(rev: rev, ops: ops)
   }
   
   func apply(ops: [OTOp]) throws {
@@ -47,6 +53,18 @@ class OTClient {
     } else {
       throw OTError.noPendingOperations
     }
+    rev += 1
+  }
+  
+  func recv(ops: [OTOp]) throws {
+    var ops = ops
+    if !wait.isEmpty {
+      (ops, wait) = try ops.transform(with: wait)
+    }
+    if !buf.isEmpty {
+      (ops, buf) = try ops.transform(with: buf)
+    }
+    try doc.apply(ops: ops)
     rev += 1
   }
 }

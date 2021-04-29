@@ -9,8 +9,10 @@
 import Foundation
 
 enum OTError: Error {
-  case failedToApplyOpToDoc
   case composeRequiresTwoConsecutiveOps
   case composeEncounteredAShortOpSequence
+  case transformEncounteredAShortOpSequence
   case noPendingOperations
+  case invalidDocumentIndex(Int)
+  case operationDidntOperateOnWholeDoc
 }
