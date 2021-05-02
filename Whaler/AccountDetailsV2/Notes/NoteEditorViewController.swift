@@ -98,6 +98,6 @@ extension NoteEditorViewController: NoteEditorDelegate {
   }
   
   func changedText(newValue: String) {
-    interactor.save(text: newValue)
+//    interactor.save(text: newValue)
   }
 }

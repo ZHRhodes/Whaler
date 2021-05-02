@@ -21,7 +21,9 @@ class OTDoc: Codable {
       .split { (c) -> Bool in c.isNewline }
       .map { substr -> [Int32] in
         substr.compactMap { c -> Int32? in
-          return Int32(String(c))
+          //TODO: find a better way to convert Character to Int32
+          guard c.lowercased() != "" else { return nil }
+          return Int32(c.unicodeScalars.first!.value - Unicode.Scalar("0").value) //Thread 1: Swift runtime failure: arithmetic overflow
         }
       }
     size = s.count
@@ -34,12 +36,14 @@ class OTDoc: Codable {
 //  }
   
   func toString() -> String {
-    let joinedLines: [Int32] = Array(lines.joined(separator: [Int32("\n")!]))
-    let data = Data(bytes: joinedLines, count: joinedLines.count * MemoryLayout<Int32>.stride)
-    return String(data: data, encoding: .utf32) ?? "-1"
+    let joinedLines: [Int32] = Array(lines.joined(separator: [Int32(10)]))
+    let strings: String = joinedLines.map { String(Character(UnicodeScalar($0))) }.joined()
+    return strings
+//    let data = Data(bytes: joinedLines, count: joinedLines.count * MemoryLayout<UInt32>.stride)
+//    return String(data: data, encoding: .utf32) ?? "-1"
   }
   
-  fileprivate func pos(index: Int, last: Pos) -> Pos {
+  func pos(index: Int, last: Pos) -> Pos {
     var n = index - last.index + last.offset
     for (i, l) in lines[last.line...].enumerated() {
       if l.count >= n {
@@ -117,7 +121,7 @@ fileprivate struct PosOp {
   var op: OTOp
 }
 
-fileprivate struct Pos {
+struct Pos {
   var index: Int = 0
   var line: Int = 0
   var offset: Int = 0

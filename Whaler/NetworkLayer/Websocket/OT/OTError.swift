@@ -9,7 +9,7 @@
 import Foundation
 
 enum OTError: Error {
-  case composeRequiresTwoConsecutiveOps
+  case composeRequiresConsecutiveOps
   case composeEncounteredAShortOpSequence
   case transformEncounteredAShortOpSequence
   case noPendingOperations

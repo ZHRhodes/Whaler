@@ -10,6 +10,7 @@ import Foundation
 
 enum SocketMessageType: String, Codable {
   case docChange = "docChange"
+  case docChangeReturn = "docChangeReturnOps"
   case resourceConnection = "resourceConnection"
   case resourceConnectionConf = "resourceConnectionConf"
 }
@@ -46,18 +47,3 @@ private enum SocketMessageCodingKeys: String, CodingKey {
 //}
 
 
-struct ResourceConnection: Codable {
-  let resourceId: String
-}
-//
-//struct ResourceConnectionMsg: SocketMessage, Codable {
-//  var type: SocketMessageType = .resourceConnection
-//
-//  func data() -> SocketData {
-//  }
-//}
-//
-struct ResourceConnectionConf: Codable {
-  let resourceId: String
-  let initialState: String
-}

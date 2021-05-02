@@ -12,6 +12,9 @@ import SwiftUI
 import Aztec
 import Starscream
 
+//temp placement
+
+
 struct NoteEditorRepresentable: UIViewRepresentable {
   typealias UIViewType = NoteEditor
 
@@ -129,6 +132,21 @@ extension NoteEditor: LiteWebSocketDelegate {
       //    let range = NSRange(message.data.range)
       //    textView.textStorage.replaceCharacters(in: range, with: message.data.value)
       break
+    case .docChangeReturn(let returnMsg):
+      print("did receive return message: \(returnMsg)")
+      let client = WebSocketManager.shared.otClient(resourceId ?? "",
+                                                    docString: textView.text, over: socket)
+      do {
+//        var returnOps = [OTOp]()
+//        for (i, n) in returnMsg.n.enumerated() {
+//          returnOps.append(OTOp(n: n, s: returnMsg.s[i]))
+//        }
+//        try client.recv(ops: returnOps)
+//        textView.text = client.doc.toString()
+        try client.ack()
+      } catch {
+        Log.error(error.localizedDescription)
+      }
     default:
       break
     }
@@ -170,9 +188,17 @@ extension NoteEditor: EditorToolbarDelegate {
 extension NoteEditor: UITextViewDelegate {
   func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
     delegate?.willChangeText(textView.text, replacingRange: range, with: text)
-    guard let range = Range(range) else { return false }
-    let docChange = DocumentChange(type: .insert, value: text, range: range)
-//    socket.send(message: SocketMessage(type: .docChange, data: docChange))
+    guard let resourceId = resourceId else { return false }
+    let client = WebSocketManager.shared.otClient(resourceId, docString: textView.text, over: socket) //todo: dont pass doc string like this
+    let ops = [OTOp].init(currentText:
+                            textView.text,
+                          changeRange: range,
+                          replacementText: text)
+    do {
+      try client.apply(ops: ops)
+    } catch {
+      Log.error("Failed to apply ops to client. Error: \(error)")
+    }
     return true
   }
   

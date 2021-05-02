@@ -10,6 +10,7 @@ import Foundation
 
 enum SocketMsg {
   case docChange(DocumentChange),
+       docChangeReturn(DocumentChangeReturn),
        resourceConnection(ResourceConnection),
        resourceConnectionConf(ResourceConnectionConf)
 }
@@ -19,55 +20,26 @@ struct SocketMessage<T: Codable>: Codable {
   var data: T
 }
 
-//struct SocketMessage: SocketMessageT, Codable {
-//  var type: SocketMessageType = .docChange
-//  var data: Data
-//
-//  var msg: SocketMsg {
-//    switch type {
-//    case .docChange:
-//      let docChange = try! JSONDecoder().decode(DocumentChange.self, from: data)
-//      return .docChange(docChange)
-//    case .resourceConnection:
-//      fatalError()
-//    default:
-//      fatalError()
-//    }
-//  }
-//
-////  func data() -> SocketData {
-////    return docChange
-////  }
-//
-////  init(docChange: DocumentChange) {
-////    self.docChange = docChange
-////  }
-//
-//  init(from decoder: Decoder) throws {
-//    let container = try decoder.container(keyedBy: CodingKeys.self)
-//    type = try container.decode(SocketMessageType.self, forKey: .type)
-//    data = try container.decode(Data.self, forKey: .data)
-//  }
-//
-//  func encode(to encoder: Encoder) throws {
-//    var container = encoder.container(keyedBy: CodingKeys.self)
-//    try container.encode(type, forKey: .type)
-//    try container.encode(data, forKey: .data)
-//  }
-//
-//  enum CodingKeys: String, CodingKey {
-//    case type, data
-//  }
-//}
-
 struct DocumentChange: SocketData {
-  let type: DocumentChangeType
-  let value: String
-  let range: Range<Int>
+  var resourceId: String
+  var rev: Int
+  var n: [Int]
+  var s: [String]
+  
+  init(resourceId: String, rev: Int, ops: [OTOp]) {
+    self.resourceId = resourceId
+    self.rev = rev
+    self.n = [Int]()
+    self.s = [String]()
+    for op in ops {
+      n.append(op.n)
+      s.append(op.s)
+    }
+  }
 }
 
-enum DocumentChangeType: String, Codable {
-  case insert = "INS",
-       format = "FMT",
-       delete = "DEL"
+struct DocumentChangeReturn: SocketData {
+  var resourceId: String
+  var n: [Int]
+  var s: [String]
 }

@@ -8,8 +8,6 @@
 
 import Foundation
 
-fileprivate let noop = OTOp(n: 0, s: "")
-
 struct OTOp: Codable {
   var n: Int
   var s: String
@@ -17,6 +15,20 @@ struct OTOp: Codable {
   init(n: Int = 0, s: String = "") {
     self.n = n
     self.s = s
+  }
+  
+  init(retain: Int) {
+    self.init(n: retain, s: "")
+  }
+  
+  init(delete: Int) {
+    var delete = delete
+    delete.negate()
+    self.init(n: delete, s: "")
+  }
+  
+  init(insert: String) {
+    self.init(n: 0, s: insert)
   }
   
   var isNoop: Bool {

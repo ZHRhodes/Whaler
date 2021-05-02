@@ -9,7 +9,7 @@
 import Foundation
 
 protocol OTClientDelegate: class {
-  func send(rev: Int, ops: [OTOp])
+  func send(rev: Int, ops: [OTOp], sender: OTClient)
 }
 
 class OTClient {
@@ -18,17 +18,20 @@ class OTClient {
   var buf: [OTOp]
   var wait: [OTOp]
   
+  let resourceId: String
   weak var delegate: OTClientDelegate?
   
-  init(doc: OTDoc, rev: Int, buf: [OTOp], wait: [OTOp]) {
+  
+  init(doc: OTDoc, rev: Int, buf: [OTOp], wait: [OTOp], resourceId: String) {
     self.doc = doc
     self.rev = rev
     self.buf = buf
     self.wait = wait
+    self.resourceId = resourceId
   }
   
-  func send(rev: Int, ops: [OTOp]) {
-    delegate?.send(rev: rev, ops: ops)
+  private func send(rev: Int, ops: [OTOp]) {
+    delegate?.send(rev: rev, ops: ops, sender: self)
   }
   
   func apply(ops: [OTOp]) throws {

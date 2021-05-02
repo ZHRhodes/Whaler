@@ -16,7 +16,7 @@ extension Array where Element == OTOp {
       if op.n > 0 {
         ret += op.n
       } else if op.n < 0 {
-        del += op.n
+        del += -op.n
       } else if op.n == 0 {
         ins += op.s.count
       }
@@ -31,7 +31,7 @@ extension Array where Element == OTOp {
     let (reta, _, ins) = opCount()
     let (retb, del, _) = b.opCount()
     
-    guard reta + ins == retb + del else { throw OTError.composeRequiresTwoConsecutiveOps }
+    guard reta + ins == retb + del else { throw OTError.composeRequiresConsecutiveOps }
     
     var (ia, oa) = getNextOp(from: 0)
     var (ib, ob) = b.getNextOp(from: 0)
@@ -142,7 +142,7 @@ extension Array where Element == OTOp {
       self[o] = op
     }
     
-    return [OTOp](self[...l])
+    return [OTOp](self[..<l])
   }
   
   func getNextOp(from index: Int) -> (count: Int, op: OTOp) {
@@ -165,7 +165,7 @@ extension Array where Element == OTOp {
     let (retb, delb, _) = b.opCount()
     
     guard reta + dela == retb + delb else {
-      throw OTError.composeRequiresTwoConsecutiveOps
+      throw OTError.composeRequiresConsecutiveOps
     }
     
     var (ia, oa) = getNextOp(from: 0)
@@ -257,5 +257,28 @@ extension Array where Element == OTOp {
     a1 = a1.opMerge()
     b1 = b1.opMerge()
     return (a1, b1)
+  }
+  
+  init(currentText: String, changeRange: NSRange, replacementText: String) {
+    self.init()
+    
+    if 0 < changeRange.lowerBound {
+      append(OTOp(retain: changeRange.lowerBound))
+    }
+    
+    let isDelete = replacementText.isEmpty
+    if isDelete {
+      append(OTOp(delete: changeRange.length))
+      let newEndIndex = (currentText.count - changeRange.length)
+      if changeRange.upperBound < newEndIndex {
+        append(OTOp(retain: newEndIndex - changeRange.upperBound))
+      }
+    } else {
+      append(OTOp(insert: replacementText))
+      let newEndIndex = (currentText.count + changeRange.length)
+      if changeRange.upperBound < newEndIndex {
+        append(OTOp(retain: newEndIndex - changeRange.upperBound))
+      }
+    }
   }
 }
