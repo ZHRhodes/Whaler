@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct OTOp: Codable {
+struct OTOp: Codable, Equatable {
   var n: Int
   var s: String
   

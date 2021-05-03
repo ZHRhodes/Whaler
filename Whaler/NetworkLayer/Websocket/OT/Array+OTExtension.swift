@@ -31,7 +31,9 @@ extension Array where Element == OTOp {
     let (reta, _, ins) = opCount()
     let (retb, del, _) = b.opCount()
     
-    guard reta + ins == retb + del else { throw OTError.composeRequiresConsecutiveOps }
+    guard reta + ins == retb + del else {
+      throw OTError.composeRequiresConsecutiveOps
+    }
     
     var (ia, oa) = getNextOp(from: 0)
     var (ib, ob) = b.getNextOp(from: 0)
