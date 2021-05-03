@@ -136,17 +136,20 @@ extension NoteEditor: LiteWebSocketDelegate {
       //    let range = NSRange(message.data.range)
       //    textView.textStorage.replaceCharacters(in: range, with: message.data.value)
       break
-    case .docChangeReturn(let returnMsg):
+    case .docChangeReturn(let returnMsg, let wasSender):
       print("did receive return message: \(returnMsg)")
       guard let otClient = otClient else { return }
       do {
-//        var returnOps = [OTOp]()
-//        for (i, n) in returnMsg.n.enumerated() {
-//          returnOps.append(OTOp(n: n, s: returnMsg.s[i]))
-//        }
-//        try client.recv(ops: returnOps)
-//        textView.text = client.doc.toString()
-        try otClient.ack()
+        if wasSender {
+          try otClient.ack()
+        } else {
+          var returnOps = [OTOp]()
+          for (i, n) in returnMsg.n.enumerated() {
+            returnOps.append(OTOp(n: n, s: returnMsg.s[i]))
+          }
+          try otClient.recv(ops: returnOps)
+          textView.text = otClient.doc.toString()
+        }
       } catch {
         Log.error(error.localizedDescription)
       }
@@ -158,8 +161,9 @@ extension NoteEditor: LiteWebSocketDelegate {
   func connectionEstablished(socket: WebSocketClient) {
     guard let resourceId = resourceId else { return }
     let data = ResourceConnection(resourceId: resourceId)
-    let message = SocketMessage(type: .resourceConnection, data: data)
-    socket.send(message: message)
+    let message = SocketMessage(type: .resourceConnection,
+                                data: data)
+    WebSocketManager.shared.send(message: message, over: socket)
   }
 }
 

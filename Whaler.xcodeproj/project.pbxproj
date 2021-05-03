@@ -130,7 +130,6 @@
 		148A09742586FEC500811E35 /* LiteWebSocketDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148A09732586FEC500811E35 /* LiteWebSocketDelegate.swift */; };
 		148A09782586FF6A00811E35 /* WebSocketInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148A09772586FF6A00811E35 /* WebSocketInfo.swift */; };
 		148A097C258700FF00811E35 /* SocketMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148A097B258700FF00811E35 /* SocketMessage.swift */; };
-		148A0980258705DB00811E35 /* WebSocketConn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148A097F258705DB00811E35 /* WebSocketConn.swift */; };
 		148C70DF261C1AEF002D4EAA /* UserManagementInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148C70DE261C1AEF002D4EAA /* UserManagementInterceptor.swift */; };
 		148C70E5261C1F1E002D4EAA /* CustomNetworkFetchInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148C70E4261C1F1E002D4EAA /* CustomNetworkFetchInterceptor.swift */; };
 		148D460F25AA7326003D5FA7 /* MockAccountInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148D460E25AA7326003D5FA7 /* MockAccountInterface.swift */; };
@@ -343,7 +342,6 @@
 		148A09732586FEC500811E35 /* LiteWebSocketDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiteWebSocketDelegate.swift; sourceTree = "<group>"; };
 		148A09772586FF6A00811E35 /* WebSocketInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebSocketInfo.swift; sourceTree = "<group>"; };
 		148A097B258700FF00811E35 /* SocketMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketMessage.swift; sourceTree = "<group>"; };
-		148A097F258705DB00811E35 /* WebSocketConn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebSocketConn.swift; sourceTree = "<group>"; };
 		148C70DE261C1AEF002D4EAA /* UserManagementInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManagementInterceptor.swift; sourceTree = "<group>"; };
 		148C70E4261C1F1E002D4EAA /* CustomNetworkFetchInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNetworkFetchInterceptor.swift; sourceTree = "<group>"; };
 		148D460E25AA7326003D5FA7 /* MockAccountInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAccountInterface.swift; sourceTree = "<group>"; };
@@ -981,7 +979,6 @@
 				148A096D2586E0FC00811E35 /* WebSocketManager.swift */,
 				148A09732586FEC500811E35 /* LiteWebSocketDelegate.swift */,
 				148A09772586FF6A00811E35 /* WebSocketInfo.swift */,
-				148A097F258705DB00811E35 /* WebSocketConn.swift */,
 			);
 			path = Websocket;
 			sourceTree = "<group>";
@@ -1584,7 +1581,6 @@
 				147F55F92607FC6A001F139A /* Owner.swift in Sources */,
 				149A09392639194200AE429C /* OTError.swift in Sources */,
 				1480801024EA4BE7007EB6D1 /* JustNetworker.swift in Sources */,
-				148A0980258705DB00811E35 /* WebSocketConn.swift in Sources */,
 				1443045F24F3356A00D2FBD2 /* SFNewAccessToken.swift in Sources */,
 				149F3A0725206BB7001F38BF /* MainTableCell.swift in Sources */,
 				146A6DCF252C48BE00DA8E85 /* API.swift in Sources */,

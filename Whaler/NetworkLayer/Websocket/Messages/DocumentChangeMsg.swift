@@ -10,14 +10,20 @@ import Foundation
 
 enum SocketMsg {
   case docChange(DocumentChange),
-       docChangeReturn(DocumentChangeReturn),
+       docChangeReturn(DocumentChangeReturn, wasSender: Bool),
        resourceConnection(ResourceConnection),
        resourceConnectionConf(ResourceConnectionConf)
 }
 
 struct SocketMessage<T: Codable>: Codable {
+  var messageId: String = ""
   var type: SocketMessageType
   var data: T
+  
+  init(type: SocketMessageType, data: T) {
+    self.type = type
+    self.data = data
+  }
 }
 
 struct DocumentChange: SocketData {
