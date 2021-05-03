@@ -38,6 +38,7 @@ class NoteEditor: UIView {
   var delegate: NoteEditorDelegate?
   var textView: Aztec.TextView!
   var socket: WebSocketClient!
+  var otClient: OTClient?
   var resourceId: String?
   
   override init(frame: CGRect) {
@@ -127,6 +128,9 @@ extension NoteEditor: LiteWebSocketDelegate {
 //        return
 //      }
       textView.text = conf.initialState
+      otClient = WebSocketManager.shared.makeOTClient(resourceId: resourceId!,
+                                                      docString: conf.initialState,
+                                                      over: socket)
     break
     case .docChange:
       //    let range = NSRange(message.data.range)
@@ -134,8 +138,7 @@ extension NoteEditor: LiteWebSocketDelegate {
       break
     case .docChangeReturn(let returnMsg):
       print("did receive return message: \(returnMsg)")
-      let client = WebSocketManager.shared.otClient(resourceId ?? "",
-                                                    docString: textView.text, over: socket)
+      guard let otClient = otClient else { return }
       do {
 //        var returnOps = [OTOp]()
 //        for (i, n) in returnMsg.n.enumerated() {
@@ -143,7 +146,7 @@ extension NoteEditor: LiteWebSocketDelegate {
 //        }
 //        try client.recv(ops: returnOps)
 //        textView.text = client.doc.toString()
-        try client.ack()
+        try otClient.ack()
       } catch {
         Log.error(error.localizedDescription)
       }
@@ -188,17 +191,17 @@ extension NoteEditor: EditorToolbarDelegate {
 extension NoteEditor: UITextViewDelegate {
   func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
     delegate?.willChangeText(textView.text, replacingRange: range, with: text)
-    guard let resourceId = resourceId else { return false }
-    let client = WebSocketManager.shared.otClient(resourceId, docString: textView.text, over: socket) //todo: dont pass doc string like this
+    guard let otClient = otClient else { return false }
     let ops = [OTOp].init(currentText:
                             textView.text,
                           changeRange: range,
                           replacementText: text)
     do {
-      try client.apply(ops: ops)
+      try otClient.apply(ops: ops)
     } catch {
       Log.error("Failed to apply ops to client. Error: \(error)")
     }
+    Log.debug("Successfully applied own ops to doc. Ops: \(ops)")
     return true
   }
   

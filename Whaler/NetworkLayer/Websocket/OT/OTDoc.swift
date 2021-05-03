@@ -8,25 +8,41 @@
 
 import Foundation
 
-class OTDoc: Codable {
+class OTDoc {
 //  enum CodingKeys: String, CodingKey {
 //    case lines, size
 //  }
   
-  var lines = [[Int32]]()
+  var lines = [[UnicodeScalar]]()
   var size: Int = 0
   
   init(s: String) {
-    lines = s
-      .split { (c) -> Bool in c.isNewline }
-      .map { substr -> [Int32] in
-        substr.compactMap { c -> Int32? in
-          //TODO: find a better way to convert Character to Int32
-          guard c.lowercased() != "" else { return nil }
-          return Int32(c.unicodeScalars.first!.value - Unicode.Scalar("0").value) //Thread 1: Swift runtime failure: arithmetic overflow
-        }
+//    lines = s
+//      .split { (c) -> Bool in c.isNewline }
+//      .map { substr -> [Int32] in
+//        substr.compactMap { c -> Int32? in
+//          //TODO: find a better way to convert Character to Int32
+//          guard c.lowercased() != "" else { return nil }
+//          return Int32(c.unicodeScalars.first!.value - Unicode.Scalar("0").value) //Thread 1: Swift runtime failure: arithmetic overflow
+//        }
+//      }
+    
+
+//    lines = s.unicodeScalars.split(separator: newlineScalar).map{ [UnicodeScalar]($0) }
+//    size = s.count
+    var b = s.startIndex
+    let newlineScalar = UnicodeScalar(10)!
+    for (i, r) in s.enumerated() {
+      size += 1
+      if r.unicodeScalars.first == newlineScalar {
+        let idx = s.index(s.startIndex, offsetBy: i)
+        let substr = s[b..<idx].flatMap{ $0.unicodeScalars.map{$0} }
+        lines.append(substr)
+        b = s.index(idx, offsetBy: 1)
       }
-    size = s.count
+    }
+    let substr = s[b...].flatMap{ $0.unicodeScalars.map{$0} }
+    lines.append(substr)
   }
   
 //  required init(from decoder: Decoder) throws {
@@ -36,11 +52,15 @@ class OTDoc: Codable {
 //  }
   
   func toString() -> String {
-    let joinedLines: [Int32] = Array(lines.joined(separator: [Int32(10)]))
-    let strings: String = joinedLines.map { String(Character(UnicodeScalar($0))) }.joined()
-    return strings
+//    let joinedLines: [Int32] = Array(lines.joined(separator: [Int32(10)]))
+//    let strings: String = joinedLines.map { String(Character(UnicodeScalar($0))) }.joined()
+//    return strings
+    
 //    let data = Data(bytes: joinedLines, count: joinedLines.count * MemoryLayout<UInt32>.stride)
 //    return String(data: data, encoding: .utf32) ?? "-1"
+    
+    let joinedScalars = Array(lines.joined(separator: [UnicodeScalar(10)]))
+    return String(joinedScalars.map{Character($0)})
   }
   
   func pos(index: Int, last: Pos) -> Pos {
@@ -92,11 +112,11 @@ class OTDoc: Codable {
         if pop.pos.line == end.line {
           let rest = line[end.offset...]
           d[pop.pos.line] = Array(line[..<pop.pos.offset] + rest)
-          break
+          continue
         }
         let rest = d[end.line][end.offset...]
         d[pop.pos.line] = Array(line[..<pop.pos.offset] + rest)
-        d = Array<Array<Int32>>(d[..<(pop.pos.line+1)] + d[(end.line+1)...])
+        d = Array<Array<UnicodeScalar>>(d[..<(pop.pos.line+1)] + d[(end.line+1)...])
       } else if !pop.op.s.isEmpty {
         let insd = OTDoc(s: pop.op.s)
         size += insd.size
@@ -107,12 +127,20 @@ class OTDoc: Codable {
         insl[0] = line[..<pop.pos.offset] + insl[0]
         if insl.count == 1 {
           d[pop.pos.line] = insl[0]
-          break
+          continue
         }
-        d[(pop.pos.line + insl.count)...] = d[(pop.pos.line + 1)...]
-        d[pop.pos.line...] = ArraySlice(insl)
+        let need = d.count + insl.count - 1
+        while d.count < need {
+          d.append([])
+        }
+        let needIdx = d.index(d.startIndex, offsetBy: need)
+        d[(pop.pos.line + insl.count)..<needIdx] = d[(pop.pos.line + 1)...]
+        d = Array(d[..<needIdx])
+        d[pop.pos.line..<(pop.pos.line + insl.count)] = ArraySlice(insl)
       }
     }
+    
+    lines = d
   }
 }
 
