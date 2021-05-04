@@ -73,16 +73,16 @@ class OTOpArrayTests: XCTestCase {
   
   func composeTestCases() -> [(a: [OTOp], b: [OTOp], ab: [OTOp])] {
     [
-//      (
-//        [OTOp](arrayLiteral: OTOp(n: 3), OTOp(n: -1)),
-//        [OTOp](arrayLiteral: OTOp(n: 1), OTOp(s: "tag"), OTOp(n: 2)),
-//        [OTOp](arrayLiteral: OTOp(n: 1), OTOp(s: "tag"), OTOp(n: 2), OTOp(n: -1))
-//      ),
-//      (
-//        [OTOp](arrayLiteral: OTOp(n: 1), OTOp(s: "tag"), OTOp(n: 2)),
-//        [OTOp](arrayLiteral: OTOp(n: 4), OTOp(n: -2)),
-//        [OTOp](arrayLiteral: OTOp(n: 1), OTOp(s: "tag"), OTOp(n: -2))
-//      ),
+      (
+        [OTOp](arrayLiteral: OTOp(n: 3), OTOp(n: -1)),
+        [OTOp](arrayLiteral: OTOp(n: 1), OTOp(s: "tag"), OTOp(n: 2)),
+        [OTOp](arrayLiteral: OTOp(n: 1), OTOp(s: "tag"), OTOp(n: 2), OTOp(n: -1))
+      ),
+      (
+        [OTOp](arrayLiteral: OTOp(n: 1), OTOp(s: "tag"), OTOp(n: 2)),
+        [OTOp](arrayLiteral: OTOp(n: 4), OTOp(n: -2)),
+        [OTOp](arrayLiteral: OTOp(n: 1), OTOp(s: "tag"), OTOp(n: -2))
+      ),
       (
         [OTOp](arrayLiteral: OTOp(n: 1), OTOp(s: "tag")),
         [OTOp](arrayLiteral: OTOp(n: 2), OTOp(n: -1), OTOp(n: 1)),

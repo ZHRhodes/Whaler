@@ -17,19 +17,6 @@ class OTDoc {
   var size: Int = 0
   
   init(s: String) {
-//    lines = s
-//      .split { (c) -> Bool in c.isNewline }
-//      .map { substr -> [Int32] in
-//        substr.compactMap { c -> Int32? in
-//          //TODO: find a better way to convert Character to Int32
-//          guard c.lowercased() != "" else { return nil }
-//          return Int32(c.unicodeScalars.first!.value - Unicode.Scalar("0").value) //Thread 1: Swift runtime failure: arithmetic overflow
-//        }
-//      }
-    
-
-//    lines = s.unicodeScalars.split(separator: newlineScalar).map{ [UnicodeScalar]($0) }
-//    size = s.count
     var b = s.startIndex
     let newlineScalar = UnicodeScalar(10)!
     for (i, r) in s.enumerated() {

@@ -123,7 +123,8 @@ extension Array where Element == OTOp {
     var o = -1
     var l = count
     
-    for (i, op) in enumerated() {
+    for (_, op) in enumerated() {
+      var op = op
       if op.isNoop {
         l -= 1
         continue
@@ -133,10 +134,10 @@ extension Array where Element == OTOp {
         last = self[o]
       }
       if last.n == 0 && last.s != "" && op.n == 0 {
-        self[i].s = last.s + op.s
+        op.s = last.s + op.s
         l -= 1
       } else if (last.n < 0 && op.n < 0) || (last.n > 0 && op.n > 0) {
-        self[i].n += last.n
+        op.n += last.n
         l -= 1
       } else {
         o += 1
