@@ -98,4 +98,8 @@ class OTOpArrayTests: XCTestCase {
       XCTAssertEqual(ab, testCase.ab)
     }
   }
+  
+  func transformTestCases() -> [(a: [OTOp], b: [OTOp], a1: [OTOp], a2: [OTOp])] {
+    
+  }
 }

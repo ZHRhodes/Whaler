@@ -199,6 +199,7 @@
 		14F4FE18254AA6A600C89485 /* contacts.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 14F4FE17254AA6A600C89485 /* contacts.graphql */; };
 		14F7DD9F24EE527600D43055 /* SFQueryResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F7DD9E24EE527600D43055 /* SFQueryResponse.swift */; };
 		14F7DDA124EE529300D43055 /* SFAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F7DDA024EE529300D43055 /* SFAccount.swift */; };
+		14FB6A6526411B03000EA4FC /* OTClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14FB6A6426411B03000EA4FC /* OTClientTests.swift */; };
 		14FE635324C575CD00F7D30B /* TagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14FE635224C575CD00F7D30B /* TagView.swift */; };
 		53863F9DCDB377BBC7A9A114 /* Pods_WhalerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B39B01D0F7BB942BF53407DA /* Pods_WhalerTests.framework */; };
 		6EC92F4185E77A246A6185B6 /* Pods_Whaler.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFB12DFA879B292F66B37334 /* Pods_Whaler.framework */; };
@@ -411,6 +412,7 @@
 		14F4FE17254AA6A600C89485 /* contacts.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = contacts.graphql; sourceTree = "<group>"; };
 		14F7DD9E24EE527600D43055 /* SFQueryResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFQueryResponse.swift; sourceTree = "<group>"; };
 		14F7DDA024EE529300D43055 /* SFAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFAccount.swift; sourceTree = "<group>"; };
+		14FB6A6426411B03000EA4FC /* OTClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTClientTests.swift; sourceTree = "<group>"; };
 		14FE635224C575CD00F7D30B /* TagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagView.swift; sourceTree = "<group>"; };
 		16440185E516C89487AA3636 /* Pods-WhalerTests.local.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WhalerTests.local.xcconfig"; path = "Target Support Files/Pods-WhalerTests/Pods-WhalerTests.local.xcconfig"; sourceTree = "<group>"; };
 		57110742B23D922EA5090E41 /* Pods-Whaler.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Whaler.debug.xcconfig"; path = "Target Support Files/Pods-Whaler/Pods-Whaler.debug.xcconfig"; sourceTree = "<group>"; };
@@ -882,6 +884,7 @@
 		14835380263B8778001844A4 /* OT */ = {
 			isa = PBXGroup;
 			children = (
+				14FB6A6426411B03000EA4FC /* OTClientTests.swift */,
 				14835381263B8799001844A4 /* OTDocTests.swift */,
 				147B871F263E821300C2866E /* OTOpArrayTests.swift */,
 			);
@@ -1598,6 +1601,7 @@
 				147EB89A25A4136E002B93D8 /* RepoStoreTests.swift in Sources */,
 				147B8720263E821300C2866E /* OTOpArrayTests.swift in Sources */,
 				14835382263B8799001844A4 /* OTDocTests.swift in Sources */,
+				14FB6A6526411B03000EA4FC /* OTClientTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

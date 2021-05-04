@@ -10,20 +10,6 @@ import XCTest
 @testable import Whaler
 
 class OTDocTests: XCTestCase {
-  override func setUpWithError() throws {
-    // Put setup code here. This method is called before the invocation of each test method in the class.
-  }
-  
-  override func tearDownWithError() throws {
-    // Put teardown code here. This method is called after the invocation of each test method in the class.
-  }
-
-  func testDocPos() throws {
-    let doc = OTDoc(s: "abc")
-    let off = doc.pos(index: 3, last: Pos())
-    XCTAssertTrue(off.isValid)
-  }
-  
   struct OpTest {
     var text: String
     var want: String
@@ -31,7 +17,7 @@ class OTDocTests: XCTestCase {
   }
   
   func testDocApply() throws {
-    var tests = [OpTest]([
+    let tests = [OpTest]([
       OpTest(text: "abc",
              want: "atag",
              ops: [OTOp(n: 1),
