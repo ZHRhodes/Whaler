@@ -19,6 +19,7 @@ class TrackAccountsViewController: ToolbarContainingViewController {
   private var filterPopover: FilterPopoverViewController?
   private var saveButton: CommonButton!
   private var currentHeight: CGFloat = 0.0
+  private var userView: UIView!
   
   private let filterStack = UIStackView()
   private lazy var addFilterView: AddFilterView = {
@@ -70,9 +71,10 @@ class TrackAccountsViewController: ToolbarContainingViewController {
   }
   
   private func configureActionsStackView() {
+    userView = makeUserView()
     actionsStack = UIStackView(arrangedSubviews: [
       makeSaveView(),
-      makeUserView(),
+      userView,
     ])
     actionsStack.axis = .horizontal
     actionsStack.spacing = 20
@@ -113,12 +115,25 @@ class TrackAccountsViewController: ToolbarContainingViewController {
   private func makeUserView() -> UIView {
     let userView = CurrentUserView()
     userView.text = Lifecycle.currentUser?.initials
+    userView.addTarget(self, action: #selector(userViewTapped), for: .touchUpInside)
     userView.backgroundColor = .brandPurple
     let size: CGFloat = 65.0
     userView.layer.cornerRadius = size/2
     userView.widthAnchor.constraint(equalToConstant: size).isActive = true
     userView.heightAnchor.constraint(equalTo: userView.widthAnchor).isActive = true
     return userView
+  }
+  
+  @objc
+  private func userViewTapped() {
+    let viewController = TablePopoverViewController()
+    viewController.modalPresentationStyle = .popover
+    viewController.provider = CurrentUserOptionsProviding()
+    viewController.delegate = self
+    navigationController?.present(viewController, animated: true, completion: nil)
+    let popoverVC = viewController.popoverPresentationController
+    popoverVC?.permittedArrowDirections = [.up]
+    popoverVC?.sourceView = userView
   }
   
   @objc
@@ -265,5 +280,15 @@ extension TrackAccountsViewController: FilterValueViewDelegate {
     filterStack.removeArrangedSubview(sender)
     sender.removeFromSuperview()
     interactor.fetchAccounts()
+  }
+}
+
+extension TrackAccountsViewController: TablePopoverViewControllerDelegate {
+  func didSelectItem(_ item: SimpleItem) {
+    if item is LogOutOption {
+      dismiss(animated: true) {
+        NotificationCenter.default.post(name: .unauthorizedUser, object: self)
+      }
+    }
   }
 }

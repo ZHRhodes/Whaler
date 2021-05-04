@@ -46,7 +46,7 @@ extension Array where Element == OTOp {
       }
       if ob.n == 0 && ob.s != "" { // insert b
         ab.append(ob)
-        (ib, ob) = getNextOp(from: ib)
+        (ib, ob) = b.getNextOp(from: ib)
         continue
       }
       if oa.isNoop || ob.isNoop {
@@ -58,7 +58,7 @@ extension Array where Element == OTOp {
         if sign == 1 {
           oa.n -= ob.n
           ab.append(ob)
-          (ib, ob) = getNextOp(from: ib)
+          (ib, ob) = b.getNextOp(from: ib)
         } else if sign == -1 {
           ob.n -= oa.n
           ab.append(oa)
@@ -66,20 +66,20 @@ extension Array where Element == OTOp {
         } else {
           ab.append(oa)
           (ia, oa) = getNextOp(from: ia)
-          (ib, ob) = getNextOp(from: ib)
+          (ib, ob) = b.getNextOp(from: ib)
         }
       } else if oa.n == 0 && ob.n < 0 { // insert delete
         let sign = (oa.s.count + ob.n)
         if sign == 1 {
           let idx = oa.s.index(oa.s.startIndex, offsetBy: -ob.n)
           oa = OTOp(n: 0, s: String(oa.s[idx...]))
-          (ib, ob) = getNextOp(from: ib)
+          (ib, ob) = b.getNextOp(from: ib)
         } else if sign == -1 {
           ob.n += oa.s.count
           (ia, oa) = getNextOp(from: ia)
         } else {
           (ia, oa) = getNextOp(from: ia)
-          (ib, ob) = getNextOp(from: ib)
+          (ib, ob) = b.getNextOp(from: ib)
         }
       } else if oa.n == 0 && ob.n > 0 { // insert retain
         let sign = (oa.s.count - ob.n).signum()
@@ -87,7 +87,7 @@ extension Array where Element == OTOp {
           let idx = oa.s.index(oa.s.startIndex, offsetBy: ob.n)
           ab.append(OTOp(n: 0, s: String(oa.s[..<idx])))
           oa = OTOp(n: 0, s: String(oa.s[idx...]))
-          (ib, ob) = getNextOp(from: ib)
+          (ib, ob) = b.getNextOp(from: ib)
         } else if sign == -1 {
           ob.n -= oa.s.count
           ab.append(oa)
@@ -95,14 +95,14 @@ extension Array where Element == OTOp {
         } else {
           ab.append(oa)
           (ia, oa) = getNextOp(from: ia)
-          (ib, ob) = getNextOp(from: ib)
+          (ib, ob) = b.getNextOp(from: ib)
         }
       } else if oa.n > 0 && ob.n < 0 { // retain delete
         let sign = (oa.n + ob.n).signum()
         if sign == 1 {
           oa.n += ob.n
           ab.append(ob)
-          (ib, ob) = getNextOp(from: ib)
+          (ib, ob) = b.getNextOp(from: ib)
         } else if sign == -1 {
           ob.n += oa.n
           oa.n *= -1
@@ -111,7 +111,7 @@ extension Array where Element == OTOp {
         } else {
           ab.append(ob)
           (ia, oa) = getNextOp(from: ia)
-          (ib, ob) = getNextOp(from: ib)
+          (ib, ob) = b.getNextOp(from: ib)
         }
       }
     }
