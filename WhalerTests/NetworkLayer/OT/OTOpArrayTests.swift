@@ -12,14 +12,6 @@ import XCTest
 @testable import Whaler
 
 class OTOpArrayTests: XCTestCase {
-  override func setUpWithError() throws {
-    
-  }
-  
-  override func tearDownWithError() throws {
-    
-  }
-  
   func testOpsCount() throws {
     var ops = [OTOp]()
     checkLen(ops: ops, bl: 0, tl: 0)
