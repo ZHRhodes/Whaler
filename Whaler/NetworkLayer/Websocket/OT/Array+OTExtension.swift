@@ -24,7 +24,7 @@ extension Array where Element == OTOp {
     return (ret, del, ins)
   }
   
-  mutating func compose(with b: [OTOp]) throws -> [OTOp] {
+  func compose(with b: [OTOp]) throws -> [OTOp] {
     guard !isEmpty, !b.isEmpty else { return [] }
     var ab = [OTOp]()
     
@@ -172,7 +172,7 @@ extension Array where Element == OTOp {
     }
     
     var (ia, oa) = getNextOp(from: 0)
-    var (ib, ob) = getNextOp(from: 0)
+    var (ib, ob) = b.getNextOp(from: 0)
     
     while !oa.isNoop || !ob.isNoop {
       var om = OTOp()
@@ -187,7 +187,7 @@ extension Array where Element == OTOp {
         om.n = ob.s.count
         a1.append(om)
         b1.append(ob)
-        (ib, ob) = getNextOp(from: ib)
+        (ib, ob) = b.getNextOp(from: ib)
         continue
       }
       if oa.isNoop || ob.isNoop {
@@ -199,7 +199,7 @@ extension Array where Element == OTOp {
         if sign == 1 {
           om.n = ob.n
           oa.n -= ob.n
-          (ib, ob) = getNextOp(from: ib)
+          (ib, ob) = b.getNextOp(from: ib)
         } else if sign == -1 {
           om.n = oa.n
           ob.n -= oa.n
@@ -207,7 +207,7 @@ extension Array where Element == OTOp {
         } else {
           om.n = oa.n
           (ia, oa) = getNextOp(from: ia)
-          (ib, ob) = getNextOp(from: ib)
+          (ib, ob) = b.getNextOp(from: ib)
         }
         a1.append(om)
         b1.append(om)
@@ -215,20 +215,20 @@ extension Array where Element == OTOp {
         let sign = (-oa.n + ob.n).signum()
         if sign == 1 {
           oa.n -= ob.n
-          (ib, ob) = getNextOp(from: ib)
+          (ib, ob) = b.getNextOp(from: ib)
         } else if sign == -1 {
           ob.n -= oa.n
           (ia, oa) = getNextOp(from: ia)
         } else {
           (ia, oa) = getNextOp(from: ia)
-          (ib, ob) = getNextOp(from: ib)
+          (ib, ob) = b.getNextOp(from: ib)
         }
       } else if oa.n < 0 && ob.n > 0 { // delete, retain
         let sign = (-oa.n - ob.n).signum()
         if sign == 1 {
           om.n = -ob.n
           oa.n += ob.n
-          (ib, ob) = getNextOp(from: ib)
+          (ib, ob) = b.getNextOp(from: ib)
         } else if sign == -1 {
           om.n = oa.n
           ob.n += oa.n
@@ -236,7 +236,7 @@ extension Array where Element == OTOp {
         } else {
           om.n = oa.n
           (ia, oa) = getNextOp(from: ia)
-          (ib, ob) = getNextOp(from: ib)
+          (ib, ob) = b.getNextOp(from: ib)
         }
         a1.append(om)
       } else if oa.n > 0 && ob.n < 0 { // retain, delete
@@ -244,7 +244,7 @@ extension Array where Element == OTOp {
         if sign == 1 {
           om.n = ob.n
           oa.n += ob.n
-          (ib, ob) = getNextOp(from: ib)
+          (ib, ob) = b.getNextOp(from: ib)
         } else if sign == -1 {
           om.n = -oa.n
           ob.n += oa.n
@@ -252,7 +252,7 @@ extension Array where Element == OTOp {
         } else {
           om.n = -oa.n
           (ia, oa) = getNextOp(from: ia)
-          (ib, ob) = getNextOp(from: ib)
+          (ib, ob) = b.getNextOp(from: ib)
         }
         b1.append(om)
       }

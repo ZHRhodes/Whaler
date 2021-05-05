@@ -134,11 +134,26 @@ class OTClientTests: XCTestCase {
                    "Expected tranform buf")
   }
   
-  func testApplyABCRecvAckFlushesBuffers() throws {
+  func testApplyABCRecvAckFlushesBuffer() throws {
     try applyA()
     try applyB()
     try applyC()
     try recvD()
+    try client.ack()
+    
+    let cb = [OTOp(n: 5), OTOp(n: -2), OTOp(s: " cool"), OTOp(n: 1)]
+    XCTAssertEqual(client.buf.count, 0, "Expected flushed")
+    XCTAssertEqual(client.wait, cb, "Expected flushed")
+    XCTAssertEqual(delegate.sent.count, 2, "Expected flushed")
+    XCTAssertEqual(delegate.sent[1], cb, "Expected flushed")
+  }
+  
+  func testApplyABCRecvAckAckFlushesAll() throws {
+    try applyA()
+    try applyB()
+    try applyC()
+    try recvD()
+    try client.ack()
     try client.ack()
     XCTAssertEqual(client.buf.count, 0, "Expected flushed")
     XCTAssertEqual(client.wait.count, 0, "Expected flushed")

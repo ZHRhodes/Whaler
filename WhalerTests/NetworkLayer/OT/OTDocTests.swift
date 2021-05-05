@@ -16,6 +16,12 @@ class OTDocTests: XCTestCase {
     var ops: [OTOp]
   }
   
+  func testDocPos() throws {
+    let doc = OTDoc(s: "abc")
+    let off = doc.pos(index: 3, last: Pos())
+    XCTAssertTrue(off.isValid)
+  }
+  
   func testDocApply() throws {
     let tests = [OpTest]([
       OpTest(text: "abc",

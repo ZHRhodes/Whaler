@@ -93,13 +93,45 @@ class OTOpArrayTests: XCTestCase {
   
   func testOpsCompose() throws {
     for testCase in composeTestCases() {
-      var testCase = testCase
       let ab = try testCase.a.compose(with: testCase.b)
       XCTAssertEqual(ab, testCase.ab)
     }
   }
   
-  func transformTestCases() -> [(a: [OTOp], b: [OTOp], a1: [OTOp], a2: [OTOp])] {
-    
+  func transformTestCases() -> [(a: [OTOp], b: [OTOp], a1: [OTOp], b2: [OTOp])] {
+    [
+      (
+        [OTOp](arrayLiteral: OTOp(n: 1), OTOp(s: "tag"), OTOp(n: 2)),
+        [OTOp](arrayLiteral: OTOp(n: 2), OTOp(n: -1)),
+        [OTOp](arrayLiteral: OTOp(n: 1), OTOp(s: "tag"), OTOp(n: 1)),
+        [OTOp](arrayLiteral: OTOp(n: 5), OTOp(n: -1))
+      ),
+      (
+        [OTOp](arrayLiteral: OTOp(n: 1), OTOp(s: "tag"), OTOp(n: 2)),
+        [OTOp](arrayLiteral: OTOp(n: 1), OTOp(s: "tag"), OTOp(n: 2)),
+        [OTOp](arrayLiteral: OTOp(n: 1), OTOp(s: "tag"), OTOp(n: 5)),
+        [OTOp](arrayLiteral: OTOp(n: 4), OTOp(s: "tag"), OTOp(n: 2))
+      ),
+      (
+        [OTOp](arrayLiteral: OTOp(n: 1), OTOp(n: -2)),
+        [OTOp](arrayLiteral: OTOp(n: 2), OTOp(n: -1)),
+        [OTOp](arrayLiteral: OTOp(n: 1), OTOp(n: -1)),
+        [OTOp](arrayLiteral: OTOp(n: 1))
+      ),
+      (
+        [OTOp](arrayLiteral: OTOp(n: 2), OTOp(n: -1)),
+        [OTOp](arrayLiteral: OTOp(n: 1), OTOp(n: -2)),
+        [OTOp](arrayLiteral: OTOp(n: 1)),
+        [OTOp](arrayLiteral: OTOp(n: 1), OTOp(n: -1))
+      )
+    ]
+  }
+  
+  func testOpsTransform() throws {
+    for testCase in transformTestCases() {
+      let (a1, b1) = try testCase.a.transform(with: testCase.b)
+      XCTAssertEqual(a1, testCase.a1)
+      XCTAssertEqual(b1, testCase.b2)
+    }
   }
 }
