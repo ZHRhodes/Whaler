@@ -51,8 +51,6 @@ class NoteEditor: UIView {
   }
   
   func startConnection(with resourceId: String) {
-    /* Temporary */
-//      {"type": "docDelta", "data": {"documentID": "1", "value": "Hello World!"}}
     self.resourceId = resourceId
     socket = WebSocketManager.shared.registerConnection(id: resourceId,
                                                         delegate: self)
@@ -111,10 +109,6 @@ class NoteEditor: UIView {
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
-  
-  deinit {
-//    socket.disconnect() //still have to do something about this
-  }
 }
 
 extension NoteEditor: LiteWebSocketDelegate {
@@ -122,19 +116,12 @@ extension NoteEditor: LiteWebSocketDelegate {
     Log.debug("Did receive message:\n\(message)")
     switch message {
     case .resourceConnectionConf(let conf):
-//      guard //let data = message.data,
-//            let connectionConf = try? JSONDecoder().decode(ResourceConnectionConf.self,
-//                                                           from: message.data) else {
-//        return
-//      }
       textView.text = conf.initialState
       otClient = WebSocketManager.shared.makeOTClient(resourceId: resourceId!,
                                                       docString: conf.initialState,
                                                       over: socket)
     break
     case .docChange:
-      //    let range = NSRange(message.data.range)
-      //    textView.textStorage.replaceCharacters(in: range, with: message.data.value)
       break
     case .docChangeReturn(let returnMsg, let wasSender):
       print("did receive return message: \(returnMsg)")

@@ -30,6 +30,13 @@ class AccountDetailsViewController: ToolbarContainingViewController {
 //    interactor?.save(account: interactor?.account, withNoteText: )
   }
   
+  override func backTapped() {
+    if let resourceId = interactor?.account?.id {
+      WebSocketManager.shared.disconnectClient(with: resourceId)
+    }
+    super.backTapped()
+  }
+  
   func configure(with dataManager: MainDataManager) {
     self.interactor = AccountDetailsInteractor(dataManager: dataManager)
     self.interactor?.viewController = self

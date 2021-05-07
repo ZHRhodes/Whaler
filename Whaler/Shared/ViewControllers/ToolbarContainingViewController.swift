@@ -18,8 +18,12 @@ class ToolbarContainingViewController: UIViewController {
     backCancellable = NotificationCenter.default
       .publisher(for: .back)
       .first()
-      .sink(receiveValue: { [weak self] notification in
-        self?.navigationController?.popViewController(animated: false)
+      .sink(receiveValue: { [weak self] _ in
+        self?.backTapped()
     })
+  }
+  
+  func backTapped() {
+    navigationController?.popViewController(animated: false)
   }
 }
