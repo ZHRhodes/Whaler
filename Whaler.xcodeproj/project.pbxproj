@@ -71,6 +71,7 @@
 		144BF56C24D7E66E00F231F0 /* RootContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144BF56B24D7E66E00F231F0 /* RootContainerViewController.swift */; };
 		144FA6BD24C2C0C500506F15 /* CompanyInfoHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144FA6BC24C2C0C500506F15 /* CompanyInfoHeaderView.swift */; };
 		145146E725495FC40090D3E2 /* accounts.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 145146E625495FC40090D3E2 /* accounts.graphql */; };
+		14514C1A2647B0F8002F232F /* WebSocketManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14514C192647B0F8002F232F /* WebSocketManager.swift */; };
 		1454743B250D904700257A89 /* UIViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1454743A250D904700257A89 /* UIViewController+Extensions.swift */; };
 		1454743D250D93DC00257A89 /* SFSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1454743C250D93DC00257A89 /* SFSession.swift */; };
 		14562B7725F216FD00BA9D3B /* AccountDetailsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14562B7625F216FD00BA9D3B /* AccountDetailsInteractor.swift */; };
@@ -126,7 +127,6 @@
 		1488DD7825F311B6002A898C /* ProgressStrokeAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1488DD7725F311B6002A898C /* ProgressStrokeAnimation.swift */; };
 		1488DD7C25F316E3002A898C /* ProgressStrokeColorAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1488DD7B25F316E3002A898C /* ProgressStrokeColorAnimation.swift */; };
 		1488DD8125F32683002A898C /* TextFinishedProgressIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1488DD8025F32683002A898C /* TextFinishedProgressIndicator.swift */; };
-		148A096E2586E0FC00811E35 /* WebSocketManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148A096D2586E0FC00811E35 /* WebSocketManager.swift */; };
 		148A09742586FEC500811E35 /* LiteWebSocketDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148A09732586FEC500811E35 /* LiteWebSocketDelegate.swift */; };
 		148A09782586FF6A00811E35 /* WebSocketInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148A09772586FF6A00811E35 /* WebSocketInfo.swift */; };
 		148A097C258700FF00811E35 /* SocketMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148A097B258700FF00811E35 /* SocketMessage.swift */; };
@@ -281,6 +281,7 @@
 		144BF56B24D7E66E00F231F0 /* RootContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootContainerViewController.swift; sourceTree = "<group>"; };
 		144FA6BC24C2C0C500506F15 /* CompanyInfoHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyInfoHeaderView.swift; sourceTree = "<group>"; };
 		145146E625495FC40090D3E2 /* accounts.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = accounts.graphql; sourceTree = "<group>"; };
+		14514C192647B0F8002F232F /* WebSocketManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebSocketManager.swift; sourceTree = "<group>"; };
 		14531A8426311BCA00BD55A1 /* Remote-Config-Copy.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Remote-Config-Copy.xcconfig"; sourceTree = "<group>"; };
 		1454743A250D904700257A89 /* UIViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extensions.swift"; sourceTree = "<group>"; };
 		1454743C250D93DC00257A89 /* SFSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFSession.swift; sourceTree = "<group>"; };
@@ -339,7 +340,6 @@
 		1488DD7725F311B6002A898C /* ProgressStrokeAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressStrokeAnimation.swift; sourceTree = "<group>"; };
 		1488DD7B25F316E3002A898C /* ProgressStrokeColorAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressStrokeColorAnimation.swift; sourceTree = "<group>"; };
 		1488DD8025F32683002A898C /* TextFinishedProgressIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFinishedProgressIndicator.swift; sourceTree = "<group>"; };
-		148A096D2586E0FC00811E35 /* WebSocketManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = WebSocketManager.swift; path = ../../../../../../../WebSocketManager.swift; sourceTree = "<group>"; };
 		148A09732586FEC500811E35 /* LiteWebSocketDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiteWebSocketDelegate.swift; sourceTree = "<group>"; };
 		148A09772586FF6A00811E35 /* WebSocketInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebSocketInfo.swift; sourceTree = "<group>"; };
 		148A097B258700FF00811E35 /* SocketMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketMessage.swift; sourceTree = "<group>"; };
@@ -979,9 +979,9 @@
 			children = (
 				14CCB6B62637C88F0024C500 /* OT */,
 				140C7D09262FCF11006DB111 /* Messages */,
-				148A096D2586E0FC00811E35 /* WebSocketManager.swift */,
 				148A09732586FEC500811E35 /* LiteWebSocketDelegate.swift */,
 				148A09772586FF6A00811E35 /* WebSocketInfo.swift */,
+				14514C192647B0F8002F232F /* WebSocketManager.swift */,
 			);
 			path = Websocket;
 			sourceTree = "<group>";
@@ -1540,8 +1540,8 @@
 				140E644225DB78170033AC8F /* AccountDetailsContactsViewController.swift in Sources */,
 				14018152254643AF00246BDA /* AccountsHelper.swift in Sources */,
 				14C509CB254D42800021D9C5 /* SFGroupModels.swift in Sources */,
+				14514C1A2647B0F8002F232F /* WebSocketManager.swift in Sources */,
 				1488DD7825F311B6002A898C /* ProgressStrokeAnimation.swift in Sources */,
-				148A096E2586E0FC00811E35 /* WebSocketManager.swift in Sources */,
 				14D97D7924DBEC4B00058B09 /* Keychain.swift in Sources */,
 				1416480B25A4FA270008E16B /* AccountDataInterface.swift in Sources */,
 				140AE79E24A9B50900F7705E /* UIColor+Extensions.swift in Sources */,
@@ -1705,7 +1705,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = 8H9FMTH9DY;
 				INFOPLIST_FILE = Whaler/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -1818,7 +1818,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = 8H9FMTH9DY;
 				INFOPLIST_FILE = Whaler/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -1986,7 +1986,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = 8H9FMTH9DY;
 				INFOPLIST_FILE = Whaler/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -2015,7 +2015,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = 8H9FMTH9DY;
 				INFOPLIST_FILE = Whaler/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
