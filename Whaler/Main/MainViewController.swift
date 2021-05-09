@@ -44,8 +44,8 @@ struct MainViewControllerRepresentable: UIViewControllerRepresentable {
 }
 
 class MainViewController: UIViewController {
-  static let minSize = CGSize(width: 1600, height: 700)
-  static let maxSize = CGSize(width: CGFloat.infinity, height: CGFloat.infinity)
+  static let minSize = CGSize(width: 1_600, height: 700)
+  static let maxSize = CGSize(width: 160_000, height: 70_000)
   
   private var interactor: MainInteractor!
   private var noDataStackView: UIStackView?
@@ -70,11 +70,11 @@ class MainViewController: UIViewController {
     title = "Accounts"
     view.backgroundColor = .primaryBackground
     SkeletonAppearance.default.multilineHeight = 29.0
-    
+
     Lifecycle.loadCurrentUser()
     interactor = MainInteractor()
     interactor.viewController = self
-    
+
     configureViewsForContent()
     if interactor.hasSalesforceTokens {
       //present loading indicator
