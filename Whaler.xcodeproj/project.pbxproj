@@ -1705,7 +1705,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = 8H9FMTH9DY;
 				INFOPLIST_FILE = Whaler/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -1818,7 +1818,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = 8H9FMTH9DY;
 				INFOPLIST_FILE = Whaler/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -1986,7 +1986,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = 8H9FMTH9DY;
 				INFOPLIST_FILE = Whaler/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -2015,7 +2015,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = 8H9FMTH9DY;
 				INFOPLIST_FILE = Whaler/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;

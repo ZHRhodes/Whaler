@@ -313,13 +313,17 @@ class MainViewController: UIViewController {
     reloadButton.addTarget(self, action: #selector(reloadTapped), for: .touchUpInside)
     reloadButton.translatesAutoresizingMaskIntoConstraints = false
     
+    let width: CGFloat = 53.0
     let constraints = [
       reloadButton.heightAnchor.constraint(equalToConstant: 53),
-      reloadButton.widthAnchor.constraint(equalToConstant: 53)
+      reloadButton.widthAnchor.constraint(equalToConstant: width)
     ]
     
     NSLayoutConstraint.activate(constraints)
-    return reloadButton
+    let view = UIView()
+    view.addAndAttach(view: reloadButton, attachingEdges: [.centerX(0), .centerY(0)])
+    view.widthAnchor.constraint(equalToConstant: width).isActive = true
+    return view
   }
   
   private func makeTrackView() -> UIView {
@@ -331,13 +335,17 @@ class MainViewController: UIViewController {
     trackButton.addTarget(self, action: #selector(trackTapped), for: .touchUpInside)
     trackButton.translatesAutoresizingMaskIntoConstraints = false
     
+    let width: CGFloat = 53.0
     let constraints = [
       trackButton.heightAnchor.constraint(equalToConstant: 53),
-      trackButton.widthAnchor.constraint(equalToConstant: 53)
+      trackButton.widthAnchor.constraint(equalToConstant: width)
     ]
     
     NSLayoutConstraint.activate(constraints)
-    return trackButton
+    let view = UIView()
+    view.addAndAttach(view: trackButton, attachingEdges: [.centerX(0), .centerY(0)])
+    view.widthAnchor.constraint(equalToConstant: width).isActive = true
+    return view
   }
   
   @objc

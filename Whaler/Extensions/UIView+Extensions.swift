@@ -15,8 +15,8 @@ enum EdgeConstraint {
        right(CGFloat, equalTo: NSLayoutXAxisAnchor? = nil),
        top(CGFloat, equalTo: NSLayoutYAxisAnchor? = nil),
        bottom(CGFloat, equalTo: NSLayoutYAxisAnchor? = nil),
-       centerY(CGFloat, equalTo: NSLayoutYAxisAnchor? = nil),
-       centerX(CGFloat, equalTo: NSLayoutXAxisAnchor? = nil),
+       centerY(CGFloat?, equalTo: NSLayoutYAxisAnchor? = nil),
+       centerX(CGFloat?, equalTo: NSLayoutXAxisAnchor? = nil),
        all(CGFloat)
 }
 
@@ -50,9 +50,9 @@ extension UIView {
     for edge in attachingEdges {
       switch edge {
       case .centerX(let constant, let equalTo):
-        view.centerXAnchor.constraint(equalTo: equalTo ?? centerXAnchor, constant: constant).isActive = true
+        view.centerXAnchor.constraint(equalTo: equalTo ?? centerXAnchor, constant: constant ?? 0.0).isActive = true
       case .centerY(let constant, let equalTo):
-        view.centerYAnchor.constraint(equalTo: equalTo ?? centerYAnchor, constant: constant).isActive = true
+        view.centerYAnchor.constraint(equalTo: equalTo ?? centerYAnchor, constant: constant ?? 0.0).isActive = true
       case .left(let constant, let equalTo):
         view.leftAnchor.constraint(equalTo: equalTo ?? leftAnchor, constant: constant).isActive = true
       break

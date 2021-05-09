@@ -11,8 +11,7 @@ import UIKit
 
 enum ObjectManager {
   static func save(_ object: ManagedObject, ownerUserId: String? = nil) {
-    guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
-    let managedContext = appDelegate.persistentContainer.viewContext
+    let managedContext = persistentContainer.viewContext
     
     let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: type(of: object).entityName)
     let predicate: NSPredicate
@@ -40,8 +39,8 @@ enum ObjectManager {
   }
   
   static func retrieveAll<T: ManagedObject>(ofType type: T.Type, with predicate: NSPredicate? = nil) -> [T] {
-    guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return [] }
-    let managedContext = appDelegate.persistentContainer.viewContext
+    let managedContext = persistentContainer.viewContext
+    
     let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: T.entityName)
     predicate.map { fetchRequest.predicate = $0 }
     
@@ -54,8 +53,7 @@ enum ObjectManager {
   }
   
   static func deleteAll<T: ManagedObject>(ofType type: T.Type, with predicate: NSPredicate? = nil) {
-    guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
-    let managedContext = appDelegate.persistentContainer.viewContext
+    let managedContext = persistentContainer.viewContext
     
     let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: T.entityName)
     predicate.map { fetchRequest.predicate = $0 }

@@ -31,20 +31,20 @@ class MainCollectionCellHeader: UICollectionViewCell {
     label.font = .openSans(weight: .bold, size: 26)
     label.text = text
     label.translatesAutoresizingMaskIntoConstraints = false
-    addSubview(label)
+    contentView.addSubview(label)
     label.heightAnchor.constraint(equalToConstant: 41).isActive = true
-    label.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
-    label.topAnchor.constraint(equalTo: topAnchor).isActive = true
-    label.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
+    label.leftAnchor.constraint(equalTo: contentView.leftAnchor).isActive = true
+    label.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
+    label.rightAnchor.constraint(equalTo: contentView.rightAnchor).isActive = true
   }
   
   private func configureGradient(with colors: [UIColor]) {
     let gradientView = GradientView(colors: colors)
-    addSubview(gradientView)
+    contentView.addSubview(gradientView)
     gradientView.translatesAutoresizingMaskIntoConstraints = false
     gradientView.heightAnchor.constraint(equalToConstant: 2).isActive = true
-    gradientView.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
-    gradientView.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
+    gradientView.leftAnchor.constraint(equalTo: contentView.leftAnchor).isActive = true
+    gradientView.rightAnchor.constraint(equalTo: contentView.rightAnchor).isActive = true
     gradientView.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 6).isActive = true
   }
 }
