@@ -6,6 +6,14 @@
 //  Copyright © 2021 Whaler. All rights reserved.
 //
 
+/*
+Note: If/when the server rejects my changes because the revisions are different,
+i may need to capture those new ops from the server, transform them against my buffers,
+apply to doc, and try sending to server again. I'm not sure I'm handling this case right now..
+
+https://www.aha.io/blog/text-editor
+*/
+
 import Foundation
 
 protocol OTClientDelegate: class {
