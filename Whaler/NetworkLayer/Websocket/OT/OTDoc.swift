@@ -9,12 +9,10 @@
 import Foundation
 
 class OTDoc {
-//  enum CodingKeys: String, CodingKey {
-//    case lines, size
-//  }
-  
   var lines = [[UnicodeScalar]]()
   var size: Int = 0
+  
+  var cursors: [OTCursor] = []
   
   init(s: String) {
     var b = s.startIndex
@@ -32,20 +30,9 @@ class OTDoc {
     lines.append(substr)
   }
   
-//  required init(from decoder: Decoder) throws {
-//    let container = try decoder.container(keyedBy: CodingKeys.self)
-//    lines = try container.decode([[Int32]].self, forKey: .lines)
-//    size = try container.decode(Int.self, forKey: .size)
-//  }
+  
   
   func toString() -> String {
-//    let joinedLines: [Int32] = Array(lines.joined(separator: [Int32(10)]))
-//    let strings: String = joinedLines.map { String(Character(UnicodeScalar($0))) }.joined()
-//    return strings
-    
-//    let data = Data(bytes: joinedLines, count: joinedLines.count * MemoryLayout<UInt32>.stride)
-//    return String(data: data, encoding: .utf32) ?? "-1"
-    
     let joinedScalars = Array(lines.joined(separator: [UnicodeScalar(10)]))
     return String(joinedScalars.map{Character($0)})
   }
@@ -131,7 +118,7 @@ class OTDoc {
   }
 }
 
-fileprivate struct PosOp {
+struct PosOp {
   var pos: Pos
   var op: OTOp
 }

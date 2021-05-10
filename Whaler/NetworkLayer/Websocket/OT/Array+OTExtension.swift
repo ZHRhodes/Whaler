@@ -175,19 +175,19 @@ extension Array where Element == OTOp {
     var (ib, ob) = b.getNextOp(from: 0)
     
     while !oa.isNoop || !ob.isNoop {
-      var om = OTOp()
+      var om = OTOp() //modified op
       if oa.n == 0 && oa.s != "" { // insert a
-        om.n = oa.s.count
-        a1.append(oa)
-        b1.append(om)
-        (ia, oa) = getNextOp(from: ia)
+        om.n = oa.s.count //set modified retain to op a s.count
+        a1.append(oa) //add original op a (oa) to working a
+        b1.append(om) //add modified op a (om) to working b
+        (ia, oa) = getNextOp(from: ia) //update op a and index -- skipping noops
         continue
       }
       if ob.n == 0 && ob.s != "" { // insert b
-        om.n = ob.s.count
-        a1.append(om)
-        b1.append(ob)
-        (ib, ob) = b.getNextOp(from: ib)
+        om.n = ob.s.count //now it's a b insert, so set modified op retain to b s.count
+        a1.append(om) //add modified b to working a
+        b1.append(ob) //add original b to working b
+        (ib, ob) = b.getNextOp(from: ib) //skip noops
         continue
       }
       if oa.isNoop || ob.isNoop {
@@ -196,16 +196,16 @@ extension Array where Element == OTOp {
       
       if oa.n > 0 && ob.n > 0 { // both retain
         let sign = (oa.n - ob.n).signum()
-        if sign == 1 {
-          om.n = ob.n
-          oa.n -= ob.n
-          (ib, ob) = b.getNextOp(from: ib)
-        } else if sign == -1 {
-          om.n = oa.n
-          ob.n -= oa.n
-          (ia, oa) = getNextOp(from: ia)
-        } else {
-          om.n = oa.n
+        if sign == 1 { //a is retaining more
+          om.n = ob.n //set modified n to the lesser amount (b)
+          oa.n -= ob.n //set a retain to the leftover amount, the extra
+          (ib, ob) = b.getNextOp(from: ib) //move b forward
+        } else if sign == -1 { //b is retaining more
+          om.n = oa.n //set modified amount to the lesser amount (a)
+          ob.n -= oa.n //b retain set to leftover
+          (ia, oa) = getNextOp(from: ia) //move a forward
+        } else { //a and b are retaining the same amount
+          om.n = oa.n //set modified n to the amount both are retaining
           (ia, oa) = getNextOp(from: ia)
           (ib, ob) = b.getNextOp(from: ib)
         }
@@ -213,27 +213,27 @@ extension Array where Element == OTOp {
         b1.append(om)
       } else if oa.n < 0 && ob.n < 0 { // both delete
         let sign = (-oa.n + ob.n).signum()
-        if sign == 1 {
+        if sign == 1 { //a is deleting more
           oa.n -= ob.n
           (ib, ob) = b.getNextOp(from: ib)
-        } else if sign == -1 {
+        } else if sign == -1 { //b is deleting more
           ob.n -= oa.n
           (ia, oa) = getNextOp(from: ia)
-        } else {
+        } else { //a and b are retaining the same amount
           (ia, oa) = getNextOp(from: ia)
           (ib, ob) = b.getNextOp(from: ib)
         }
       } else if oa.n < 0 && ob.n > 0 { // delete, retain
         let sign = (-oa.n - ob.n).signum()
-        if sign == 1 {
+        if sign == 1 { //a is deleting more than b is retaining
           om.n = -ob.n
           oa.n += ob.n
           (ib, ob) = b.getNextOp(from: ib)
-        } else if sign == -1 {
+        } else if sign == -1 { //a is deleting less than b is retaining
           om.n = oa.n
           ob.n += oa.n
           (ia, oa) = getNextOp(from: ia)
-        } else {
+        } else { //a is deleting the same amount that b is retaining
           om.n = oa.n
           (ia, oa) = getNextOp(from: ia)
           (ib, ob) = b.getNextOp(from: ib)
@@ -241,15 +241,15 @@ extension Array where Element == OTOp {
         a1.append(om)
       } else if oa.n > 0 && ob.n < 0 { // retain, delete
         let sign = (oa.n + ob.n)
-        if sign == 1 {
+        if sign == 1 { //a is retaining more than b is deleting
           om.n = ob.n
           oa.n += ob.n
           (ib, ob) = b.getNextOp(from: ib)
-        } else if sign == -1 {
+        } else if sign == -1 { //a is retaining less than b is deleting
           om.n = -oa.n
           ob.n += oa.n
           (ia, oa) = getNextOp(from: ia)
-        } else {
+        } else { //a is retaining the same amount that b is deleting
           om.n = -oa.n
           (ia, oa) = getNextOp(from: ia)
           (ib, ob) = b.getNextOp(from: ib)

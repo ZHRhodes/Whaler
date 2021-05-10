@@ -8,6 +8,19 @@
 
 import Foundation
 
+let cursorScalar = "\u{E000}"
+
+protocol OpProviding {
+  var n: Int { get set }
+  var s: String { get set }
+}
+
+extension OpProviding {
+  var isNoop: Bool {
+    return n == 0 && s.isEmpty
+  }
+}
+
 struct OTOp: Codable, Equatable {
   var n: Int
   var s: String
@@ -33,5 +46,19 @@ struct OTOp: Codable, Equatable {
   
   var isNoop: Bool {
     return n == 0 && s.isEmpty
+  }
+}
+
+class OTCursor {
+  var id: String
+  var position: Pos
+  
+  var posOp: PosOp {
+    return PosOp(pos: position, op: OTOp(n: 0, s: cursorScalar))
+  }
+  
+  init(id: String, position: Pos) {
+    self.id = id
+    self.position = position
   }
 }
