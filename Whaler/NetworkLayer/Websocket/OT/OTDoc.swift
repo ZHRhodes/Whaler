@@ -155,11 +155,10 @@ class OTDoc {
 		for (i, cursor) in cursors.enumerated() {
 			if cursor.id == id {
 				cursors[i].position = position
-				break
+				return
 			}
-			
-			cursors.append(OTCursor(id: id, position: position))
 		}
+    cursors.append(OTCursor(id: id, position: position))
 	}
 	
 	func removeCursor(id: String) {
