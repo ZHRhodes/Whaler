@@ -135,10 +135,10 @@ extension NoteEditor: LiteWebSocketDelegate {
             returnOps.append(OTOp(n: n, s: returnMsg.s[i]))
           }
           try otClient.recv(ops: returnOps)
-          textView.text = otClient.doc.toString()
 					guard let id = Lifecycle.currentUser?.id,
 								let cursor = otClient.doc.cursors.first(where: { $0.id == id }) else { return }
 					let range = NSRange(location: cursor.position, length: 0)
+					textView.text = otClient.doc.toString()
 					textView.selectedRange = range
         }
       } catch {
@@ -205,6 +205,5 @@ extension NoteEditor: UITextViewDelegate {
 	func textViewDidChangeSelection(_ textView: UITextView) {
 		guard let id = Lifecycle.currentUser?.id else { return }
 		otClient?.doc.setCursor(id: id, position: textView.selectedRange.location)
-		print(otClient?.doc.cursors)
 	}
 }
