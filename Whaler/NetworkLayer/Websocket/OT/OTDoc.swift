@@ -150,6 +150,21 @@ class OTDoc {
     
     return newCursors
   }
+	
+	func setCursor(id: String, position: Int) {
+		for (i, cursor) in cursors.enumerated() {
+			if cursor.id == id {
+				cursors[i].position = position
+				break
+			}
+			
+			cursors.append(OTCursor(id: id, position: position))
+		}
+	}
+	
+	func removeCursor(id: String) {
+		cursors.removeAll(where: { $0.id == id })
+	}
 }
 
 struct PosOp {

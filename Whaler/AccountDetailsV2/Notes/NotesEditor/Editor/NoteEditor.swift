@@ -136,8 +136,10 @@ extension NoteEditor: LiteWebSocketDelegate {
           }
           try otClient.recv(ops: returnOps)
           textView.text = otClient.doc.toString()
-          let selection = textView.selectedRange
-          textView.selectedRange = selection //get new cursor here
+					guard let id = Lifecycle.currentUser?.id,
+								let cursor = otClient.doc.cursors.first(where: { $0.id == id }) else { return }
+					let range = NSRange(location: cursor.position, length: 0)
+					textView.selectedRange = range
         }
       } catch {
         Log.error(error.localizedDescription)
@@ -160,8 +162,6 @@ extension NoteEditor: EditorToolbarDelegate {
   func didSelect(option: EditorToolbarOption) {
     switch option {
     case .header1:
-//      let message = SocketMessage(type: .docChange, data: DocumentChange(type: .format, value: textView.text))
-//      conn.send(message: message)
       textView.toggleHeader(.h1, range: textView.selectedRange)
     case .header2:
       textView.toggleHeader(.h2, range: textView.selectedRange)
@@ -201,4 +201,10 @@ extension NoteEditor: UITextViewDelegate {
   func textViewDidChange(_ textView: UITextView) {
     delegate?.changedText(newValue: textView.text)
   }
+	
+	func textViewDidChangeSelection(_ textView: UITextView) {
+		guard let id = Lifecycle.currentUser?.id else { return }
+		otClient?.doc.setCursor(id: id, position: textView.selectedRange.location)
+		print(otClient?.doc.cursors)
+	}
 }

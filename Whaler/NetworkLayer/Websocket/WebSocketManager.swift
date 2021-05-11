@@ -101,7 +101,7 @@ extension WebSocketManager: WebSocketDelegate {
   }
   
   func websocketDidDisconnect(socket: WebSocketClient, error: Error?) {
-    Log.debug("WebSocket did disconnect.")
+    Log.debug("WebSocket did disconnect. Error: \(error)")
   }
   
   func websocketDidReceiveMessage(socket: WebSocketClient, text: String) {
