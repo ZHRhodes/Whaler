@@ -272,15 +272,15 @@ extension Array where Element == OTOp {
     let isDelete = replacementText.isEmpty
     if isDelete {
       append(OTOp(delete: changeRange.length))
-      let newEndIndex = (currentText.count - changeRange.length)
+      let newEndIndex = (currentText.count - 1 - changeRange.length)
       if changeRange.upperBound < newEndIndex {
-        append(OTOp(retain: newEndIndex - changeRange.upperBound))
+        append(OTOp(retain: newEndIndex - changeRange.lowerBound))
       }
     } else {
       append(OTOp(insert: replacementText))
-      let newEndIndex = (currentText.count + changeRange.length)
+      let newEndIndex = (currentText.count - 1 + changeRange.length)
       if changeRange.upperBound < newEndIndex {
-        append(OTOp(retain: newEndIndex - changeRange.upperBound))
+        append(OTOp(retain: newEndIndex - changeRange.lowerBound))
       }
     }
   }
