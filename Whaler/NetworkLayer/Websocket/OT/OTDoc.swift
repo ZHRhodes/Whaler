@@ -30,8 +30,6 @@ class OTDoc {
     lines.append(substr)
   }
   
-  
-  
   func toString() -> String {
     let joinedScalars = Array(lines.joined(separator: [UnicodeScalar(10)]))
     return String(joinedScalars.map{Character($0)})
