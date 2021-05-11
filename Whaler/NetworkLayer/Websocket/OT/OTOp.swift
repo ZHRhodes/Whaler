@@ -51,7 +51,7 @@ struct OTOp: Codable, Equatable {
 
 class OTCursor {
   var id: String
-  var position: Int
+	var position: Int
   
   lazy var op: OTOp = {
     return OTOp(n: 0, s: cursorScalar)
