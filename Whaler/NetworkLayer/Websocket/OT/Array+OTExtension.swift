@@ -168,7 +168,7 @@ extension Array where Element == OTOp {
     let (retb, delb, _) = b.opCount()
     
     guard reta + dela == retb + delb else {
-      throw OTError.composeRequiresConsecutiveOps
+      throw OTError.transformRequiresConcurrentOps
     }
     
     var (ia, oa) = getNextOp(from: 0)

@@ -135,9 +135,9 @@ extension NoteEditor: LiteWebSocketDelegate {
             returnOps.append(OTOp(n: n, s: returnMsg.s[i]))
           }
           try otClient.recv(ops: returnOps)
-          let selection = textView.selectedRange
           textView.text = otClient.doc.toString()
-          textView.selectedRange = selection
+          let selection = textView.selectedRange
+          textView.selectedRange = selection //get new cursor here
         }
       } catch {
         Log.error(error.localizedDescription)

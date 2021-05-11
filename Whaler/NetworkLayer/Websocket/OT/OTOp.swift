@@ -51,13 +51,17 @@ struct OTOp: Codable, Equatable {
 
 class OTCursor {
   var id: String
-  var position: Pos
+  var position: Int
   
-  var posOp: PosOp {
-    return PosOp(pos: position, op: OTOp(n: 0, s: cursorScalar))
-  }
+  lazy var op: OTOp = {
+    return OTOp(n: 0, s: cursorScalar)
+  }()
   
-  init(id: String, position: Pos) {
+//  var posOp: PosOp {
+//    return PosOp(pos: position, op: OTOp(n: 0, s: cursorScalar))
+//  }
+  
+  init(id: String, position: Int) {
     self.id = id
     self.position = position
   }

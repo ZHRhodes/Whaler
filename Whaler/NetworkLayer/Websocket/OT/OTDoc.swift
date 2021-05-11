@@ -113,6 +113,42 @@ class OTDoc {
     }
     
     lines = d
+    cursors = try transformCursors(cursors, with: ops)
+  }
+  
+  func transformCursors(_ cursors: [OTCursor], with ops: [OTOp]) throws -> [OTCursor] {
+    var newCursors = [OTCursor]()
+    
+    for cursor in cursors {
+      guard cursor.position <= size else { continue }
+      let retainToCursor = OTOp(n: cursor.position, s: "")
+      let cursorOp = cursor.op //test edge cases, ie when before and after are zero
+      let retainAfterCursor = OTOp(n: (size - 1) - cursor.position, s: "") //check the size - 1
+      
+      var newCursorOps = [OTOp]()
+      do {
+        (newCursorOps, _) = try [retainToCursor, cursorOp, retainAfterCursor].transform(with: ops)
+      } catch {
+        throw OTError.failedToTransformCursor(error)
+      }
+      
+      var newPosition = 0
+      for op in newCursorOps {
+        if op.s == cursorScalar {
+          break
+        } else {
+          if op.n == 0 {
+            newPosition += op.s.count
+          } else {
+            newPosition += op.n
+          }
+        }
+      }
+      
+      newCursors.append(OTCursor(id: cursor.id, position: newPosition))
+    }
+    
+    return newCursors
   }
 }
 
