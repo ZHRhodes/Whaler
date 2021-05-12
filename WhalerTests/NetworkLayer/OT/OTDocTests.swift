@@ -57,10 +57,10 @@ class OTDocTests: XCTestCase {
     }
   }
   
-  func testTransformCursorMovesCursorBack() throws {
+  func testTransformCursorMovesCursorAfterForward() throws {
     let doc = OTDoc(s: "123456789")
     doc.cursors = [OTCursor(id: "1", position: 3), OTCursor(id: "2", position: 7)]
-    let ops = [OTOp(n: 4, s: ""), OTOp(n: 0, s: "a"), OTOp(n: 5, s: "")]
+    let ops = [OTOp(n: 4), OTOp(s: "a"), OTOp(n: 5)]
     try doc.apply(ops: ops)
     
     XCTAssertEqual(doc.cursors.count, 2)
@@ -70,5 +70,20 @@ class OTDocTests: XCTestCase {
     
     XCTAssertEqual(doc.cursors[1].id, "2")
     XCTAssertEqual(doc.cursors[1].position, 8)
+  }
+  
+  func testTransformCursorMovesCursorBack() throws {
+    let doc = OTDoc(s: "123456789")
+    doc.cursors = [OTCursor(id: "1", position: 3), OTCursor(id: "2", position: 7)]
+    let ops = [OTOp(n: 4), OTOp(n: -1), OTOp(n: 4)]
+    try doc.apply(ops: ops)
+    
+    XCTAssertEqual(doc.cursors.count, 2)
+    
+    XCTAssertEqual(doc.cursors[0].id, "1")
+    XCTAssertEqual(doc.cursors[0].position, 3)
+    
+    XCTAssertEqual(doc.cursors[1].id, "2")
+    XCTAssertEqual(doc.cursors[1].position, 6)
   }
 }

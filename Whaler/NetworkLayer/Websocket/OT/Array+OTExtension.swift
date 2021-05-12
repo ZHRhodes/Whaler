@@ -240,7 +240,7 @@ extension Array where Element == OTOp {
         }
         a1.append(om)
       } else if oa.n > 0 && ob.n < 0 { // retain, delete
-        let sign = (oa.n + ob.n)
+        let sign = (oa.n + ob.n).signum()
         if sign == 1 { //a is retaining more than b is deleting
           om.n = ob.n
           oa.n += ob.n
@@ -272,16 +272,13 @@ extension Array where Element == OTOp {
     let isDelete = replacementText.isEmpty
     if isDelete {
       append(OTOp(delete: changeRange.length))
-      let newEndIndex = (currentText.count - 1 - changeRange.length)
-      if changeRange.upperBound < newEndIndex {
-        append(OTOp(retain: newEndIndex - changeRange.lowerBound))
-      }
+      append(OTOp(retain: currentText.count - changeRange.length - changeRange.lowerBound))
     } else {
-      append(OTOp(insert: replacementText))
-      let newEndIndex = (currentText.count - 1 + changeRange.length)
-      if changeRange.upperBound < newEndIndex {
-        append(OTOp(retain: newEndIndex - changeRange.lowerBound))
+      if changeRange.length > 0 {
+        append(OTOp(n: -changeRange.length))
       }
+      append(OTOp(insert: replacementText))
+      append(OTOp(retain: currentText.count - changeRange.length - changeRange.lowerBound))
     }
   }
 }

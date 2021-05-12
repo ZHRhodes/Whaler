@@ -57,10 +57,6 @@ class OTCursor {
     return OTOp(n: 0, s: cursorScalar)
   }()
   
-//  var posOp: PosOp {
-//    return PosOp(pos: position, op: OTOp(n: 0, s: cursorScalar))
-//  }
-  
   init(id: String, position: Int) {
     self.id = id
     self.position = position

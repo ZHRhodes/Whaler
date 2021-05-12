@@ -126,4 +126,103 @@ class OTOpArrayTests: XCTestCase {
       XCTAssertEqual(b1, testCase.b2)
     }
   }
+  
+  func testInitWithInsertFirst() throws {
+    let current = "abcd efgh ijkl mnop qrst uvwx yz"
+    let ops = [OTOp].init(currentText: current,
+                          changeRange: NSRange(location: 0, length: 0),
+                          replacementText: "1234")
+    XCTAssertEqual(ops.count, 2)
+    XCTAssertEqual(ops[0], OTOp(s: "1234"))
+    XCTAssertEqual(ops[1], OTOp(n: 32))
+  }
+  
+  func testInitWithInsertMiddle() throws {
+    let current = "abcd efgh ijkl mnop qrst uvwx yz"
+    let ops = [OTOp].init(currentText: current,
+                          changeRange: NSRange(location: 7, length: 0),
+                          replacementText: "1234")
+    XCTAssertEqual(ops.count, 3)
+    XCTAssertEqual(ops[0], OTOp(n: 7))
+    XCTAssertEqual(ops[1], OTOp(s: "1234"))
+    XCTAssertEqual(ops[2], OTOp(n: 25))
+  }
+  
+  func testInitWithInsertLast() throws {
+    let current = "abcd efgh ijkl mnop qrst uvwx yz"
+    let ops = [OTOp].init(currentText: current,
+                          changeRange: NSRange(location: 32, length: 0),
+                          replacementText: "1234")
+    XCTAssertEqual(ops.count, 3)
+    XCTAssertEqual(ops[0], OTOp(n: 32))
+    XCTAssertEqual(ops[1], OTOp(s: "1234"))
+    XCTAssertTrue(ops[2].isNoop)
+  }
+  
+  func testInitWithDeleteMiddle() throws {
+    let current = "abcd efgh ijkl mnop qrst uvwx yz"
+    let ops = [OTOp].init(currentText: current,
+                          changeRange: NSRange(location: 7, length: 2),
+                          replacementText: "")
+    XCTAssertEqual(ops.count, 3)
+    XCTAssertEqual(ops[0], OTOp(n: 7))
+    XCTAssertEqual(ops[1], OTOp(n: -2))
+    XCTAssertEqual(ops[2], OTOp(n: 23))
+  }
+  
+  func testInitWithDeleteLast() throws {
+    let current = "abcd efgh ijkl mnop qrst uvwx yz"
+    let ops = [OTOp].init(currentText: current,
+                          changeRange: NSRange(location: 29, length: 3),
+                          replacementText: "")
+    XCTAssertEqual(ops.count, 3)
+    XCTAssertEqual(ops[0], OTOp(n: 29))
+    XCTAssertEqual(ops[1], OTOp(n: -3))
+    XCTAssertTrue(ops[2].isNoop)
+  }
+  
+  func testInitiWithDeleteFirst() throws {
+    let current = "abcd efgh ijkl mnop qrst uvwx yz"
+    let ops = [OTOp].init(currentText: current,
+                          changeRange: NSRange(location: 0, length: 5),
+                          replacementText: "")
+    XCTAssertEqual(ops.count, 2)
+    XCTAssertEqual(ops[0], OTOp(n: -5))
+    XCTAssertEqual(ops[1], OTOp(n: 27))
+  }
+  
+  func testInitWithReplaceRangeFirst() throws {
+    let current = "abcd efgh ijkl mnop qrst uvwx yz"
+    let ops = [OTOp].init(currentText: current,
+                          changeRange: NSRange(location: 0, length: 3),
+                          replacementText: "123")
+    XCTAssertEqual(ops.count, 3)
+    XCTAssertEqual(ops[0], OTOp(n: -3))
+    XCTAssertEqual(ops[1], OTOp(s: "123"))
+    XCTAssertEqual(ops[2], OTOp(n: 29))
+  }
+  
+  func testInitWithReplaceRangeMiddle() throws {
+    let current = "abcd efgh ijkl mnop qrst uvwx yz"
+    let ops = [OTOp].init(currentText: current,
+                          changeRange: NSRange(location: 7, length: 4),
+                          replacementText: "1234")
+    XCTAssertEqual(ops.count, 4)
+    XCTAssertEqual(ops[0], OTOp(n: 7))
+    XCTAssertEqual(ops[1], OTOp(n: -4))
+    XCTAssertEqual(ops[2], OTOp(s: "1234"))
+    XCTAssertEqual(ops[3], OTOp(n: 21))
+  }
+  
+  func testInitWithReplaceRangeLast() throws {
+    let current = "abcd efgh ijkl mnop qrst uvwx yz"
+    let ops = [OTOp].init(currentText: current,
+                          changeRange: NSRange(location: 29, length: 3),
+                          replacementText: "123")
+    XCTAssertEqual(ops.count, 4)
+    XCTAssertEqual(ops[0], OTOp(n: 29))
+    XCTAssertEqual(ops[1], OTOp(n: -3))
+    XCTAssertEqual(ops[2], OTOp(s: "123"))
+    XCTAssertTrue(ops[3].isNoop)
+  }
 }

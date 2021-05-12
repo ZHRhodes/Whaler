@@ -10,7 +10,11 @@ import Foundation
 
 class OTDoc {
   var lines = [[UnicodeScalar]]()
-  var size: Int = 0
+  var size: Int = 0 {
+    didSet {
+      print("Size: \(size)")
+    }
+  }
   
   var cursors: [OTCursor] = []
   
@@ -50,6 +54,12 @@ class OTDoc {
     var d = lines
     var p = Pos()
     var pops = [PosOp]()
+
+    do {
+      cursors = try transformCursors(cursors, with: ops)
+    } catch {
+      Log.error("Failed to transform cursors. Cursors: \(cursors), Ops: \(ops)")
+    }
     
     for (_, op) in ops.enumerated() {
       if op.n > 0 {
@@ -113,7 +123,6 @@ class OTDoc {
     }
     
     lines = d
-    cursors = try transformCursors(cursors, with: ops)
   }
   
   func transformCursors(_ cursors: [OTCursor], with ops: [OTOp]) throws -> [OTCursor] {
@@ -122,8 +131,8 @@ class OTDoc {
     for cursor in cursors {
       guard cursor.position <= size else { continue }
       let retainToCursor = OTOp(n: cursor.position, s: "")
-      let cursorOp = cursor.op //test edge cases, ie when before and after are zero
-      let retainAfterCursor = OTOp(n: (size - 1) - cursor.position, s: "") //check the size - 1
+      let cursorOp = cursor.op
+      let retainAfterCursor = OTOp(n: size - cursor.position, s: "")
       
       var newCursorOps = [OTOp]()
       do {
