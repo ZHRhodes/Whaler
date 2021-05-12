@@ -135,11 +135,15 @@ extension NoteEditor: LiteWebSocketDelegate {
             returnOps.append(OTOp(n: n, s: returnMsg.s[i]))
           }
           try otClient.recv(ops: returnOps)
-					guard let id = Lifecycle.currentUser?.id,
-								let cursor = otClient.doc.cursors.first(where: { $0.id == id }) else { return }
-					let range = NSRange(location: cursor.position, length: 0)
+					var range: NSRange?
+					if let id = Lifecycle.currentUser?.id,
+						 let cursor = otClient.doc.cursors.first(where: { $0.id == id }) {
+						range = NSRange(location: cursor.position, length: 0)
+					}
 					textView.text = otClient.doc.toString()
-					textView.selectedRange = range
+					/* New cursor has to be captured before text is changed.
+					Cursor will reset to end when text is changed */
+					range.map { textView.selectedRange = $0 }
         }
       } catch {
         Log.error(error.localizedDescription)
