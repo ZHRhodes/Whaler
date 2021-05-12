@@ -15,4 +15,5 @@ struct ResourceConnection: Codable {
 struct ResourceConnectionConf: Codable {
   let resourceId: String
   let initialState: String
+  let revision: Int
 }

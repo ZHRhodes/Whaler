@@ -28,9 +28,9 @@ class WebSocketManager {
     return socket
   }
   
-  func makeOTClient(resourceId: String, docString: String, over socket: WebSocketClient) -> OTClient {
+  func makeOTClient(resourceId: String, docString: String, revision: Int, over socket: WebSocketClient) -> OTClient {
     let newClient = OTClient(doc: OTDoc(s: docString),
-                             rev: 0,
+                             rev: revision,
                              buf: [],
                              wait: [],
                              resourceId: resourceId)

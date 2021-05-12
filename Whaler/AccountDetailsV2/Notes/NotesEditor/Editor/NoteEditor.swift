@@ -119,6 +119,7 @@ extension NoteEditor: LiteWebSocketDelegate {
       textView.text = conf.initialState
       otClient = WebSocketManager.shared.makeOTClient(resourceId: resourceId!,
                                                       docString: conf.initialState,
+                                                      revision: conf.revision,
                                                       over: socket)
     break
     case .docChange:
