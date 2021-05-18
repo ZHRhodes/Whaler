@@ -10,11 +10,7 @@ import Foundation
 
 class OTDoc {
   var lines = [[UnicodeScalar]]()
-  var size: Int = 0 {
-    didSet {
-      print("Size: \(size)")
-    }
-  }
+  var size: Int = 0
   
   var cursors: [OTCursor] = []
   

@@ -60,8 +60,8 @@ extension AuthenticationViewController: AuthenticationViewDelegate {
   func signInTapped(email: String, password: String) {
     interactor.signIn(email: email, password: password) { [weak self] in
       self?.delegate?.signedIn()
-    } failure: {
-      //show error
+    } failure: { [weak self] message in
+      self?.authViewModel.errorMessage = message
     }
   }
 }

@@ -11,14 +11,14 @@ import Foundation
 struct AuthenticationInteractor {
   let networkInterface: NetworkInterface
   
-  func signIn(email: String, password: String, success: @escaping VoidClosure, failure: @escaping VoidClosure) {
+  func signIn(email: String, password: String, success: @escaping VoidClosure, failure: @escaping StringClosure) {
     let body = ["email": email, "password": password]
     let response: Response<User> = networkInterface.post(path: Configuration.apiUrl.appendingPathComponent("api/user/login").absoluteString,
-                                         jsonBody: body)
+                                                         jsonBody: body)
     switch response.result {
     case .error(let code, let message):
       Log.debug("Failed to sign in. code: \(code), message: \(message)")
-      failure()
+      failure(message)
     case .value(let userResponse):
       Lifecycle.currentUser = userResponse.response
       success()

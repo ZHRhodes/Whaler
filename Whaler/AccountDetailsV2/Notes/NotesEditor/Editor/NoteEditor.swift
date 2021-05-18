@@ -12,9 +12,6 @@ import SwiftUI
 import Aztec
 import Starscream
 
-//temp placement
-
-
 struct NoteEditorRepresentable: UIViewRepresentable {
   typealias UIViewType = NoteEditor
 

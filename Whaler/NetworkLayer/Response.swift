@@ -21,7 +21,7 @@ struct Response<T: Codable>: Codable {
   
   var result: Result {
     guard !hasError else { return .error(code, message) }
-    guard let data = data else { return .error(4000, "No response data")}
+    guard let data = data else { return .error(4000, "No response data") }
     return .value(data)
   }
   
@@ -61,7 +61,7 @@ enum ResponseError {
     case .failedToDecodeResultData:
       return "Local error: failed to decode the result data as a Response"
     case .accessTokenIssue:
-      return "Local error: invalid or missing acess token"
+      return "Local error: invalid or missing access token"
     }
   }
   

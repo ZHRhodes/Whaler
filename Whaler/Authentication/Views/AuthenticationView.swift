@@ -56,6 +56,9 @@ struct AuthenticationView: View {
                   RoundedRectangle(cornerRadius: 4)
                     .stroke(Color(.primaryText), lineWidth: 2)
                 )
+                Text(viewModel.errorMessage)
+                  .font(Font.custom(regularFontName, size: 16))
+                  .foregroundColor(Color(.brandRedDark))
                 Spacer().frame(height: geometry.size.height * 0.23)
                 Text("Treat salespeople right.")
                   .font(Font.custom(semiboldFontName, size: 21))
@@ -86,5 +89,6 @@ extension AuthenticationView {
   class ViewModel: ObservableObject {
     @Published var email = ""
     @Published var password = ""
+    @Published var errorMessage = ""
   }
 }
