@@ -14,7 +14,8 @@ class RootContainerViewController: UIViewController {
   private var authenticationViewController: AuthenticationViewController?
   
   private let interactor = RootContainerInteractor()
-  private var unauthorizedUserCancellable: Cancellable!
+  private var unauthorizedUserCancellable: AnyCancellable?
+	private var disconnectSalesforeCancellable: AnyCancellable?
   
   private var state: State?
   private var shownViewController: UIViewController?
@@ -24,11 +25,12 @@ class RootContainerViewController: UIViewController {
     view.backgroundColor = .primaryBackground
     configureViewsOnLaunch()
     unauthorizedUserCancellable = interactor.unauthorizedUserPublisher.sink { [weak self] _ in
-      // TODO: deliberately not clearing SF tokens right now for my own convenience.
-      // When ready, just add the SFSession.self container below
       Lifecycle.logOut(tokenContainers: [Lifecycle.self])
       self?.transition(to: .authentication)
     }
+		disconnectSalesforeCancellable = interactor.disconnectSalesforcePublisher.sink(receiveValue: { _ in
+			Lifecycle.logOut(using: nil, tokenContainers: [SFSession.self])
+		})
   }
   
   func transition(to newState: State) {

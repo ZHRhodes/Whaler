@@ -11,11 +11,16 @@ import UIKit
 
 struct CurrentUserOptionsProviding: SimpleItemProviding {
   func getItems(success: ([SimpleItem]) -> Void, failure: (Error) -> Void) {
-    success([LogOutOption()])
+    success([DisconnectSalesforceOption(), LogOutOption()])
   }
 }
 
 struct LogOutOption: SimpleItem {
   var name: String = "Log Out"
   var icon: UIImage?
+}
+
+struct DisconnectSalesforceOption: SimpleItem {
+	var name: String = "Disconnect Salesforce"
+	var icon: UIImage?
 }

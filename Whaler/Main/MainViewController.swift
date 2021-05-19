@@ -48,7 +48,7 @@ class MainViewController: UIViewController {
   static let maxSize = CGSize(width: 160_000, height: 70_000)
   
   private var interactor: MainInteractor!
-  private var noDataStackView: UIStackView?
+  private var noDataView: UIView?
   private var reloadButton: UIButton!
   private var trackButton: UIButton!
   private var deleteButton: UIButton!
@@ -120,35 +120,44 @@ class MainViewController: UIViewController {
   }
   
   private func configureNoDataViews() {
-    noDataStackView = UIStackView(arrangedSubviews: [makeNoDataLabel(),
+		noDataView = UIView()
+		
+		//extract blur code
+		let blurEffect = UIBlurEffect(style: .systemUltraThinMaterial)
+		let blurEffectView = UIVisualEffectView(effect: blurEffect)
+		blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+		noDataView!.addAndAttachToEdges(view: blurEffectView)
+		
+		view.addAndAttachToEdges(view: noDataView!)
+    let noDataStackView = UIStackView(arrangedSubviews: [makeNoDataLabel(),
                                                      makeAddCSVButton(),
                                                      makeConnectToSalesforceButton()])
-    noDataStackView!.spacing = 37
-    noDataStackView!.axis = .vertical
-    noDataStackView!.distribution = .fillEqually
-    noDataStackView!.translatesAutoresizingMaskIntoConstraints = false
-    view.addSubview(noDataStackView!)
+    noDataStackView.spacing = 37
+    noDataStackView.axis = .vertical
+    noDataStackView.distribution = .fillEqually
+    noDataStackView.translatesAutoresizingMaskIntoConstraints = false
+		blurEffectView.contentView.addSubview(noDataStackView)
     
     let constraints = [
-      noDataStackView!.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-      noDataStackView!.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-      noDataStackView!.widthAnchor.constraint(equalToConstant: 320),
-      noDataStackView!.heightAnchor.constraint(equalToConstant: 250)
+      noDataStackView.centerXAnchor.constraint(equalTo: noDataView!.centerXAnchor),
+      noDataStackView.centerYAnchor.constraint(equalTo: noDataView!.centerYAnchor),
+      noDataStackView.widthAnchor.constraint(equalToConstant: 320),
+      noDataStackView.heightAnchor.constraint(equalToConstant: 250)
     ]
     
     NSLayoutConstraint.activate(constraints)
   }
   
   private func removeNoDataViews() {
-    noDataStackView?.removeFromSuperview()
-    noDataStackView = nil
+    noDataView?.removeFromSuperview()
+    noDataView = nil
   }
   
   private func makeNoDataLabel() -> UILabel {
     let noDataLabel = UILabel()
     noDataLabel.translatesAutoresizingMaskIntoConstraints = false
-    noDataLabel.font = UIFont.systemFont(ofSize: 22)
-    noDataLabel.textColor = .black
+		noDataLabel.font = .openSans(weight: .regular, size: 20)
+    noDataLabel.textColor = .primaryText
     noDataLabel.numberOfLines = 2
     noDataLabel.textAlignment = .center
     noDataLabel.text = "Oops! It doesn't look like there's any data here yet!"
@@ -544,5 +553,11 @@ extension MainViewController: TablePopoverViewControllerDelegate {
         NotificationCenter.default.post(name: .unauthorizedUser, object: self)
       }
     }
+		
+		if item is DisconnectSalesforceOption {
+			dismiss(animated: true) {
+				NotificationCenter.default.post(name: .disconnectSalesforce, object: self)
+			}
+		}
   }
 }

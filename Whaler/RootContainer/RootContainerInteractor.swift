@@ -11,8 +11,10 @@ import Combine
 
 struct RootContainerInteractor {
   let unauthorizedUserPublisher: NotificationCenter.Publisher
-
+	let disconnectSalesforcePublisher: NotificationCenter.Publisher
+	
   init() {
     unauthorizedUserPublisher = NotificationCenter.Publisher(center: .default, name: .unauthorizedUser)
+		disconnectSalesforcePublisher = NotificationCenter.Publisher(center: .default, name: .disconnectSalesforce)
   }
 }

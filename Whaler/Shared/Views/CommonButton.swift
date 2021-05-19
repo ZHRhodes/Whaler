@@ -32,6 +32,7 @@ class CommonButton: UIButton {
     layer.cornerRadius = 6.0
     
     backgroundColor = style.fillColor
+		titleLabel?.font = .openSans(weight: .regular, size: 18)
     setTitleColor(style.textColor, for: .normal)
     setTitleColor(style.disabledTextColor, for: .disabled)
     
