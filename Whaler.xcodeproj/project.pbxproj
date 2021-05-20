@@ -147,6 +147,7 @@
 		14B037E525073EBA00BA488D /* Tokens.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B037E425073EBA00BA488D /* Tokens.swift */; };
 		14B037EB250749D000BA488D /* AuthenticationInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B037EA250749D000BA488D /* AuthenticationInteractor.swift */; };
 		14B037EE25074B1E00BA488D /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B037ED25074B1E00BA488D /* User.swift */; };
+		14B0D2D726561034001897EE /* DetailsGridCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B0D2D626561034001897EE /* DetailsGridCell.swift */; };
 		14B8BF662536E536006CE4B5 /* MainCollectionCellHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B8BF652536E536006CE4B5 /* MainCollectionCellHeader.swift */; };
 		14B8BF7825380A01006CE4B5 /* OpenSans-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 14B8BF7725380A01006CE4B5 /* OpenSans-SemiBold.ttf */; };
 		14C509B8254CECD70021D9C5 /* AddAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C509B7254CECD70021D9C5 /* AddAccountViewController.swift */; };
@@ -173,7 +174,6 @@
 		14EA64EF25F4CDA300F26ECE /* TrackAccountsTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EA64EE25F4CDA300F26ECE /* TrackAccountsTableCell.swift */; };
 		14EA64F525F4CF7200F26ECE /* CurrentUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EA64F425F4CF7200F26ECE /* CurrentUserView.swift */; };
 		14ECDB2124CA9288006B4550 /* NoteEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14ECDB2024CA9288006B4550 /* NoteEditor.swift */; };
-		14ECDD1524CAB819006B4550 /* trix-master in Resources */ = {isa = PBXBuildFile; fileRef = 14ECDD1424CAB819006B4550 /* trix-master */; };
 		14ECDD2124CABC7D006B4550 /* RichTextEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14ECDD2024CABC7D006B4550 /* RichTextEditor.swift */; };
 		14EED67A24F0E48C00660BD1 /* SFContact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EED67924F0E48C00660BD1 /* SFContact.swift */; };
 		14EED67C24F0E5E400660BD1 /* SFLead.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EED67B24F0E5E400660BD1 /* SFLead.swift */; };
@@ -360,6 +360,7 @@
 		14B037E425073EBA00BA488D /* Tokens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tokens.swift; sourceTree = "<group>"; };
 		14B037EA250749D000BA488D /* AuthenticationInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationInteractor.swift; sourceTree = "<group>"; };
 		14B037ED25074B1E00BA488D /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		14B0D2D626561034001897EE /* DetailsGridCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsGridCell.swift; sourceTree = "<group>"; };
 		14B8BF652536E536006CE4B5 /* MainCollectionCellHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCollectionCellHeader.swift; sourceTree = "<group>"; };
 		14B8BF7725380A01006CE4B5 /* OpenSans-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-SemiBold.ttf"; sourceTree = "<group>"; };
 		14C509B7254CECD70021D9C5 /* AddAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAccountViewController.swift; sourceTree = "<group>"; };
@@ -386,7 +387,6 @@
 		14EA64EE25F4CDA300F26ECE /* TrackAccountsTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackAccountsTableCell.swift; sourceTree = "<group>"; };
 		14EA64F425F4CF7200F26ECE /* CurrentUserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentUserView.swift; sourceTree = "<group>"; };
 		14ECDB2024CA9288006B4550 /* NoteEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteEditor.swift; sourceTree = "<group>"; };
-		14ECDD1424CAB819006B4550 /* trix-master */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "trix-master"; sourceTree = "<group>"; };
 		14ECDD2024CABC7D006B4550 /* RichTextEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RichTextEditor.swift; sourceTree = "<group>"; };
 		14EED67924F0E48C00660BD1 /* SFContact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFContact.swift; sourceTree = "<group>"; };
 		14EED67B24F0E5E400660BD1 /* SFLead.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFLead.swift; sourceTree = "<group>"; };
@@ -575,7 +575,7 @@
 			children = (
 				140E643D25DB77AD0033AC8F /* AccountDetailsContentViewController.swift */,
 				1410404E25EB382400D8C793 /* AccountDetailsContentInteractor.swift */,
-				1410405A25EB39B100D8C793 /* DetailsGrid */,
+				14B0D2D526561020001897EE /* CollectionCells */,
 				14446D6C25E36365008E46CD /* Contacts */,
 			);
 			path = Content;
@@ -766,7 +766,6 @@
 			children = (
 				145A376924C588DF0081F9DB /* NotesView.swift */,
 				14D4A2F22574CAE6003EFF61 /* Editor */,
-				14ECDB2824CAB2D4006B4550 /* TrixEditor */,
 			);
 			path = NotesEditor;
 			sourceTree = "<group>";
@@ -1013,6 +1012,23 @@
 			path = User;
 			sourceTree = "<group>";
 		};
+		14B0D2D526561020001897EE /* CollectionCells */ = {
+			isa = PBXGroup;
+			children = (
+				14B0D2DA2656103A001897EE /* DetailsGridCell */,
+			);
+			path = CollectionCells;
+			sourceTree = "<group>";
+		};
+		14B0D2DA2656103A001897EE /* DetailsGridCell */ = {
+			isa = PBXGroup;
+			children = (
+				14B0D2D626561034001897EE /* DetailsGridCell.swift */,
+				1410405A25EB39B100D8C793 /* DetailsGrid */,
+			);
+			path = DetailsGridCell;
+			sourceTree = "<group>";
+		};
 		14C509B6254CEC810021D9C5 /* AddAccount */ = {
 			isa = PBXGroup;
 			children = (
@@ -1103,14 +1119,6 @@
 				14DEACEE260990B8007E2582 /* CurrentUserOptionsProvider.swift */,
 			);
 			path = CurrentUserView;
-			sourceTree = "<group>";
-		};
-		14ECDB2824CAB2D4006B4550 /* TrixEditor */ = {
-			isa = PBXGroup;
-			children = (
-				14ECDD1424CAB819006B4550 /* trix-master */,
-			);
-			path = TrixEditor;
 			sourceTree = "<group>";
 		};
 		14EF4DE624CD4F0700ED5461 /* Account */ = {
@@ -1321,7 +1329,6 @@
 				14F4090624C6A0C300F405BC /* OpenSans-Bold.ttf in Resources */,
 				1424804A261EDAEA00381B83 /* note.graphql in Resources */,
 				14248050261EDB3C00381B83 /* saveNote.graphql in Resources */,
-				14ECDD1524CAB819006B4550 /* trix-master in Resources */,
 				140AE79B24A9B48000F7705E /* Colors.xcassets in Resources */,
 				14086917253ED084007324A4 /* createContact.graphql in Resources */,
 				14861EDE249F3DE400D2FA92 /* Assets.xcassets in Resources */,
@@ -1533,6 +1540,7 @@
 				146C35D324C557C800DBCA23 /* CompanyInfoValuesView.swift in Sources */,
 				14CCB6B32637B3630024C500 /* DocumentChangeMsg.swift in Sources */,
 				149A093326390C5600AE429C /* OTOp.swift in Sources */,
+				14B0D2D726561034001897EE /* DetailsGridCell.swift in Sources */,
 				1467379B25D79B3B00B64735 /* RepoError.swift in Sources */,
 				1414810B252FFD8100640946 /* TablePopoverViewController.swift in Sources */,
 				147DEA7E260DBC9A0004BF7D /* IdProviding.swift in Sources */,

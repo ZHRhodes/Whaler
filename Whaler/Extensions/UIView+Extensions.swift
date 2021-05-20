@@ -11,13 +11,13 @@ import UIKit
 import SkeletonView
 
 enum EdgeConstraint {
-  case left(CGFloat, equalTo: NSLayoutXAxisAnchor? = nil),
-       right(CGFloat, equalTo: NSLayoutXAxisAnchor? = nil),
-       top(CGFloat, equalTo: NSLayoutYAxisAnchor? = nil),
-       bottom(CGFloat, equalTo: NSLayoutYAxisAnchor? = nil),
-       centerY(CGFloat?, equalTo: NSLayoutYAxisAnchor? = nil),
-       centerX(CGFloat?, equalTo: NSLayoutXAxisAnchor? = nil),
-       all(CGFloat)
+  case left(CGFloat = 0.0, equalTo: NSLayoutXAxisAnchor? = nil),
+       right(CGFloat = 0.0, equalTo: NSLayoutXAxisAnchor? = nil),
+       top(CGFloat = 0.0, equalTo: NSLayoutYAxisAnchor? = nil),
+       bottom(CGFloat = 0.0, equalTo: NSLayoutYAxisAnchor? = nil),
+       centerY(CGFloat = 0.0, equalTo: NSLayoutYAxisAnchor? = nil),
+       centerX(CGFloat = 0.0, equalTo: NSLayoutXAxisAnchor? = nil),
+       all(CGFloat = 0.0)
 }
 
 extension UIView {
@@ -50,9 +50,9 @@ extension UIView {
     for edge in attachingEdges {
       switch edge {
       case .centerX(let constant, let equalTo):
-        view.centerXAnchor.constraint(equalTo: equalTo ?? centerXAnchor, constant: constant ?? 0.0).isActive = true
+        view.centerXAnchor.constraint(equalTo: equalTo ?? centerXAnchor, constant: constant).isActive = true
       case .centerY(let constant, let equalTo):
-        view.centerYAnchor.constraint(equalTo: equalTo ?? centerYAnchor, constant: constant ?? 0.0).isActive = true
+        view.centerYAnchor.constraint(equalTo: equalTo ?? centerYAnchor, constant: constant).isActive = true
       case .left(let constant, let equalTo):
         view.leftAnchor.constraint(equalTo: equalTo ?? leftAnchor, constant: constant).isActive = true
       break
