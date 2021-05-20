@@ -44,24 +44,6 @@ class AccountDetailsContentViewController: UIViewController {
                                                              .top(equalTo: titleLabel.bottomAnchor)])
   }
   
-//  private func configureDetailsGrid() {
-//    detailsGrid.configure(with: [
-//      DetailItem(image: UIImage(named: "IndustryDetailIcon")!, description: "Industry", value: interactor.account.industry ?? "—"),
-//      DetailItem(image: UIImage(named: "StateDetailIcon")!, description: "State", value: interactor.account.billingState ?? "—"),
-//      DetailItem(image: UIImage(named: "CityDetailIcon")!, description: "City", value: interactor.account.billingCity ?? "—"),
-//      DetailItem(image: UIImage(named: "HeadcountDetailIcon")!, description: "Headcount", value: interactor.account.numberOfEmployees ?? "—"),
-//      DetailItem(image: UIImage(named: "RevenueDetailIcon")!, description: "Revenue", value: interactor.account.annualRevenue ?? "—"),
-//      DetailItem(image: UIImage(named: "ContactsDetailIcon")!, description: "Contacts", value: "—"),
-//    ])
-//
-//    detailsGrid.translatesAutoresizingMaskIntoConstraints = false
-//    view.addSubview(detailsGrid)
-//
-//    detailsGrid.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 40).isActive = true
-//    detailsGrid.heightAnchor.constraint(equalToConstant: 56).isActive = true
-//    detailsGrid.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -40).isActive = true
-//    detailsGrid.topAnchor.constraint(equalTo: subtitleLabel.bottomAnchor, constant: 40).isActive = true
-//  }
 //
 //  private func configureContactsSection() {
 //    let interactor = AccountDetailsContactsInteractor(dataManager: self.interactor.dataManager)

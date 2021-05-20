@@ -141,6 +141,7 @@
 		149F3A0725206BB7001F38BF /* MainTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149F3A0625206BB7001F38BF /* MainTableCell.swift */; };
 		149F3A0B25209575001F38BF /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149F3A0A25209575001F38BF /* UIView+Extensions.swift */; };
 		14A2834724DE510D0016BA82 /* SF.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A2834624DE510D0016BA82 /* SF.swift */; };
+		14A7E82A26562B990007BAFD /* AccountWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A7E82926562B990007BAFD /* AccountWidget.swift */; };
 		14AB262E24D137E800AC280D /* ContactsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14AB262D24D137E800AC280D /* ContactsTableViewController.swift */; };
 		14B037E125049CDE00BA488D /* Grouper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B037E025049CDE00BA488D /* Grouper.swift */; };
 		14B037E325073E8800BA488D /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B037E225073E8800BA488D /* Response.swift */; };
@@ -354,6 +355,7 @@
 		149F3A0625206BB7001F38BF /* MainTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableCell.swift; sourceTree = "<group>"; };
 		149F3A0A25209575001F38BF /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
 		14A2834624DE510D0016BA82 /* SF.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SF.swift; sourceTree = "<group>"; };
+		14A7E82926562B990007BAFD /* AccountWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountWidget.swift; sourceTree = "<group>"; };
 		14AB262D24D137E800AC280D /* ContactsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsTableViewController.swift; sourceTree = "<group>"; };
 		14B037E025049CDE00BA488D /* Grouper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grouper.swift; sourceTree = "<group>"; };
 		14B037E225073E8800BA488D /* Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
@@ -575,7 +577,7 @@
 			children = (
 				140E643D25DB77AD0033AC8F /* AccountDetailsContentViewController.swift */,
 				1410404E25EB382400D8C793 /* AccountDetailsContentInteractor.swift */,
-				14B0D2D526561020001897EE /* CollectionCells */,
+				14B0D2D526561020001897EE /* Widgets */,
 				14446D6C25E36365008E46CD /* Contacts */,
 			);
 			path = Content;
@@ -1012,12 +1014,13 @@
 			path = User;
 			sourceTree = "<group>";
 		};
-		14B0D2D526561020001897EE /* CollectionCells */ = {
+		14B0D2D526561020001897EE /* Widgets */ = {
 			isa = PBXGroup;
 			children = (
+				14A7E82926562B990007BAFD /* AccountWidget.swift */,
 				14B0D2DA2656103A001897EE /* DetailsGridCell */,
 			);
-			path = CollectionCells;
+			path = Widgets;
 			sourceTree = "<group>";
 		};
 		14B0D2DA2656103A001897EE /* DetailsGridCell */ = {
@@ -1583,6 +1586,7 @@
 				1410404F25EB382400D8C793 /* AccountDetailsContentInteractor.swift in Sources */,
 				14248066261EDE8500381B83 /* Note.swift in Sources */,
 				149A092F2639089A00AE429C /* OTDoc.swift in Sources */,
+				14A7E82A26562B990007BAFD /* AccountWidget.swift in Sources */,
 				1467E95F25F7F5CE00110880 /* ToolbarContainingViewController.swift in Sources */,
 				147F55EC2606C9AE001F139A /* FilterDisplayOption.swift in Sources */,
 				140AE7A324A9BA6500F7705E /* MainTableSectionHeader.swift in Sources */,

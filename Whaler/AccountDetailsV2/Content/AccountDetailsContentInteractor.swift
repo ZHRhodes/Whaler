@@ -7,9 +7,11 @@
 //
 
 import Foundation
+import Combine
 
-struct AccountDetailsContentInteractor {
+class AccountDetailsContentInteractor {
   let dataManager: MainDataManager
+	var widgets = [AccountWidget]()
 
   var account: Account {
     if let lastSelected = dataManager.lastSelected {
@@ -19,4 +21,10 @@ struct AccountDetailsContentInteractor {
       return Account()
     }
   }
+	
+	init(dataManager: MainDataManager) {
+		self.dataManager = dataManager
+		let accountSource = Just<Account>(account).eraseToAnyPublisher()
+		widgets = [.details(DefaultDetailsProvider(source: accountSource))]
+	}
 }
