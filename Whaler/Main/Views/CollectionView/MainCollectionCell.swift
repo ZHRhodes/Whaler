@@ -10,14 +10,14 @@ import Foundation
 import UIKit
 import SkeletonView
 
-protocol MainCollectionTableCell: class {
+protocol MainCollectionTableCell: AnyObject {
   static var id: String { get }
   static var cellHeight: CGFloat { get }
   var delegate: MainTableCellDelegate? { get set }
   func configure<T>(with object: T, assignedTo: NameAndColorProviding?)
 }
 
-protocol MainCollectionCellDelegate: class {
+protocol MainCollectionCellDelegate: AnyObject {
   func didSelectRowAt(section: Int, didSelectRowAt indexPath: IndexPath)
   func didClickAssignButton(_ button: UIButton, forAccount account: Account)
 }
@@ -77,10 +77,10 @@ class MainCollectionCell<TableCell: MainCollectionTableCell & UITableViewCell>: 
     headerView!.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 6).isActive = true
     headerView!.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -6).isActive = true
     headerView!.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 0).isActive = true
-    headerView!.heightAnchor.constraint(equalToConstant: MainCollectionCellHeader.height).isActive = true
+    headerView!.heightAnchor.constraint(equalToConstant: MainCollectionCellHeader.height(compact: false)).isActive = true
     
     let state = WorkState.allCases[self.section ?? 0]
-    headerView!.addAndAttachToEdges(view: MainCollectionCellHeader(text: state.rawValue, colors: [state.color, state.color]))
+    headerView!.addAndAttachToEdges(view: MainCollectionCellHeader(text: state.rawValue, colors: [state.color, state.color], compact: false))
   }
   
   private func configureTableView() {

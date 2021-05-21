@@ -96,7 +96,8 @@ extension AccountDetailsContactsViewController: UICollectionViewDelegate, UIColl
     
     let state = interactor.contactStates[indexPath.row]
     let data = interactor.contactGrouper?[state]
-    cell.configure(sectionInfo: state, dataSource: data ?? [], delegate: self, showSkeleton: data == nil)
+		let sectionInfo = SectionInfo(title: state.rawValue, color: state.color, compact: true)
+    cell.configure(sectionInfo: sectionInfo, dataSource: data ?? [], delegate: self, showSkeleton: data == nil)
     return cell
   }
 }

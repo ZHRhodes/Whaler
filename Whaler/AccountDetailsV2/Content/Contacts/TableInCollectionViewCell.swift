@@ -13,6 +13,7 @@ import SkeletonView
 protocol SectionInfoProviding {
   var title: String { get }
   var color: UIColor { get }
+	var compact: Bool { get }
 }
 
 protocol TableInCollectionViewTableCell {
@@ -118,7 +119,6 @@ class TableInCollectionViewCell<TableCell: UITableViewCell & TableInCollectionVi
     
     tableView.leftAnchor.constraint(equalTo: contentView.leftAnchor).isActive = true
     tableView.rightAnchor.constraint(equalTo: contentView.rightAnchor).isActive = true
-    tableView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: MainCollectionCellHeader.height).isActive = true
     tableView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
   }
   
@@ -131,9 +131,12 @@ class TableInCollectionViewCell<TableCell: UITableViewCell & TableInCollectionVi
     headerView!.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 8).isActive = true
     headerView!.rightAnchor.constraint(equalTo: contentView.rightAnchor).isActive = true
     headerView!.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 0).isActive = true
-    headerView!.heightAnchor.constraint(equalToConstant: MainCollectionCellHeader.height).isActive = true
+		headerView!.heightAnchor.constraint(equalToConstant: MainCollectionCellHeader.height(compact: sectionInfo.compact)).isActive = true
+		tableView.topAnchor.constraint(equalTo: contentView.topAnchor,
+																	 constant: MainCollectionCellHeader.height(compact: sectionInfo.compact)).isActive = true
+
     
-    let view = MainCollectionCellHeader(text: sectionInfo.title, colors: [sectionInfo.color, sectionInfo.color])
+		let view = MainCollectionCellHeader(text: sectionInfo.title, colors: [sectionInfo.color, sectionInfo.color], compact: sectionInfo.compact)
     headerView!.addAndAttachToEdges(view: view)
   }
   

@@ -65,8 +65,8 @@ extension WorkState: Identifiable {
   var id: String { rawValue }
 }
 
-extension WorkState: SectionInfoProviding {
-  var title: String {
-    return rawValue
-  }
+struct SectionInfo: SectionInfoProviding {
+	var title: String
+	var color: UIColor
+	var compact: Bool
 }

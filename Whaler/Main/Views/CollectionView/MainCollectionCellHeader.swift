@@ -10,24 +10,32 @@ import Foundation
 import UIKit
 
 class MainCollectionCellHeader: UICollectionViewCell {
-  static let height: CGFloat = 41.0
+	static func height(compact: Bool) -> CGFloat {
+		return compact ? 41.0 : 64.0
+	}
+	
   private let label = UILabel()
   
-  init(text: String, colors: [UIColor]) {
+	init(text: String, colors: [UIColor], compact: Bool) {
     super.init(frame: .zero)
-    configureLabel(with: text)
-//    configureGradient(with: colors)
+		configureLabel(with: text, compact: compact)
+		if !compact {
+			configureGradient(with: colors)
+		}
   }
   
   required init?(coder: NSCoder) {
     super.init(coder: coder)
-    configureLabel(with: "")
-//    configureGradient(with: [])
+    configureLabel(with: "", compact: false)
   }
   
-  private func configureLabel(with text: String) {
+	private func configureLabel(with text: String, compact: Bool) {
 		label.textColor = .primaryText
-    label.font = .openSans(weight: .semibold, size: 18)
+		if compact {
+			label.font = .openSans(weight: .semibold, size: 18)
+		} else {
+			label.font = .openSans(weight: .bold, size: 26)
+		}
     label.text = text
     label.translatesAutoresizingMaskIntoConstraints = false
     contentView.addSubview(label)
