@@ -15,6 +15,7 @@ class AccountDetailsContentViewController: UIViewController {
   private lazy var collectionView: UICollectionView = {
     let layout = UICollectionViewFlowLayout()
     layout.scrollDirection = .vertical
+    layout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
     return UICollectionView(frame: .zero, collectionViewLayout: layout)
   }()
 //  private var subtitleLabel = UILabel()
@@ -35,13 +36,14 @@ class AccountDetailsContentViewController: UIViewController {
   }
   
   private func configureCollectionView() {
-    collectionView.backgroundColor = .red //temp
+    collectionView.backgroundColor = .primaryBackground
     collectionView.delegate = self
     collectionView.dataSource = self
+    collectionView.register(AccountWidgetCell.self, forCellWithReuseIdentifier: AccountWidgetCell.id)
     view.addAndAttach(view: collectionView, attachingEdges: [.left(),
                                                              .bottom(),
                                                              .right(),
-                                                             .top(equalTo: titleLabel.bottomAnchor)])
+                                                             .top(16, equalTo: titleLabel.bottomAnchor)])
   }
   
 //
@@ -67,8 +69,8 @@ class AccountDetailsContentViewController: UIViewController {
     view.addSubview(titleLabel)
     
     let constraints = [
-      titleLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 38),
-      titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 25),
+      titleLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16),
+      titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16),
       titleLabel.heightAnchor.constraint(equalToConstant: 64)
     ]
     
@@ -95,10 +97,25 @@ class AccountDetailsContentViewController: UIViewController {
 
 extension AccountDetailsContentViewController: UICollectionViewDelegate, UICollectionViewDataSource {
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    <#code#>
+    return interactor.widgets.count
   }
   
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    <#code#>
+    let widget = interactor.widgets[indexPath.row]
+    guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AccountWidgetCell.id, for: indexPath) as? AccountWidgetCell else {
+      return UICollectionViewCell()
+    }
+    switch widget {
+    case .details(let detailsProvider):
+      let gridView = DetailsGrid()
+      gridView.configure(with: detailsProvider)
+      cell.configure(title: "Account Details", content: gridView)
+    case .tasks(let tasksProvider):
+      break
+    case .contacts(let contactsProvider):
+      break
+    }
+    
+    return cell
   }
 }

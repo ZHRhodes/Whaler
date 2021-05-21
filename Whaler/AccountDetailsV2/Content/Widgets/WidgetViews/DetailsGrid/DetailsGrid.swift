@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import Combine
 
 struct DetailItem {
   let image: UIImage
@@ -17,6 +18,7 @@ struct DetailItem {
 
 class DetailsGrid: UIView {
   private var stackView: UIStackView!
+  private var detailsCancellable: AnyCancellable?
   
   override init(frame: CGRect) {
     super.init(frame: frame)
@@ -29,7 +31,15 @@ class DetailsGrid: UIView {
     fatalError("init(coder:) has not been implemented")
   }
   
-  func configure(with details: [DetailItem]) {
+  func configure(with detailsProvider: DetailsProvider) {
+    detailsCancellable = detailsProvider
+      .publisher
+      .sink(receiveValue: { [weak self] (detailItems) in
+        self?.configureView(with: detailItems)
+      })
+  }
+  
+  private func configureView(with details: [DetailItem]) {
     var arrangedSubviews = [UIView]()
     
     for (i, detail) in details.enumerated() {

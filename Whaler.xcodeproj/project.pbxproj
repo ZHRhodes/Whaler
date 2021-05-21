@@ -98,6 +98,7 @@
 		146C35D924C5689B00DBCA23 /* ContactRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146C35D824C5689B00DBCA23 /* ContactRowView.swift */; };
 		146C35DB24C56A0100DBCA23 /* ContactsTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146C35DA24C56A0100DBCA23 /* ContactsTableView.swift */; };
 		1473C8A82522E6D000A991DA /* AttributeTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1473C8A72522E6D000A991DA /* AttributeTagView.swift */; };
+		1479A0B72657468600FF06CD /* AccountWidgetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1479A0B62657468600FF06CD /* AccountWidgetCell.swift */; };
 		147A3CB22577625500D96637 /* Starscream in Frameworks */ = {isa = PBXBuildFile; productRef = 147A3CB12577625500D96637 /* Starscream */; };
 		147B8720263E821300C2866E /* OTOpArrayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147B871F263E821300C2866E /* OTOpArrayTests.swift */; };
 		147DEA77260DA0940004BF7D /* applyAccountTrackingChange.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 147DEA76260DA0940004BF7D /* applyAccountTrackingChange.graphql */; };
@@ -148,7 +149,6 @@
 		14B037E525073EBA00BA488D /* Tokens.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B037E425073EBA00BA488D /* Tokens.swift */; };
 		14B037EB250749D000BA488D /* AuthenticationInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B037EA250749D000BA488D /* AuthenticationInteractor.swift */; };
 		14B037EE25074B1E00BA488D /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B037ED25074B1E00BA488D /* User.swift */; };
-		14B0D2D726561034001897EE /* DetailsGridCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B0D2D626561034001897EE /* DetailsGridCell.swift */; };
 		14B8BF662536E536006CE4B5 /* MainCollectionCellHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B8BF652536E536006CE4B5 /* MainCollectionCellHeader.swift */; };
 		14B8BF7825380A01006CE4B5 /* OpenSans-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 14B8BF7725380A01006CE4B5 /* OpenSans-SemiBold.ttf */; };
 		14C509B8254CECD70021D9C5 /* AddAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C509B7254CECD70021D9C5 /* AddAccountViewController.swift */; };
@@ -309,6 +309,7 @@
 		146C35D824C5689B00DBCA23 /* ContactRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactRowView.swift; sourceTree = "<group>"; };
 		146C35DA24C56A0100DBCA23 /* ContactsTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsTableView.swift; sourceTree = "<group>"; };
 		1473C8A72522E6D000A991DA /* AttributeTagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttributeTagView.swift; sourceTree = "<group>"; };
+		1479A0B62657468600FF06CD /* AccountWidgetCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountWidgetCell.swift; sourceTree = "<group>"; };
 		147B871F263E821300C2866E /* OTOpArrayTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTOpArrayTests.swift; sourceTree = "<group>"; };
 		147DEA76260DA0940004BF7D /* applyAccountTrackingChange.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = applyAccountTrackingChange.graphql; sourceTree = "<group>"; };
 		147DEA7D260DBC9A0004BF7D /* IdProviding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdProviding.swift; sourceTree = "<group>"; };
@@ -362,7 +363,6 @@
 		14B037E425073EBA00BA488D /* Tokens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tokens.swift; sourceTree = "<group>"; };
 		14B037EA250749D000BA488D /* AuthenticationInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationInteractor.swift; sourceTree = "<group>"; };
 		14B037ED25074B1E00BA488D /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		14B0D2D626561034001897EE /* DetailsGridCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsGridCell.swift; sourceTree = "<group>"; };
 		14B8BF652536E536006CE4B5 /* MainCollectionCellHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCollectionCellHeader.swift; sourceTree = "<group>"; };
 		14B8BF7725380A01006CE4B5 /* OpenSans-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-SemiBold.ttf"; sourceTree = "<group>"; };
 		14C509B7254CECD70021D9C5 /* AddAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAccountViewController.swift; sourceTree = "<group>"; };
@@ -1018,18 +1018,18 @@
 			isa = PBXGroup;
 			children = (
 				14A7E82926562B990007BAFD /* AccountWidget.swift */,
-				14B0D2DA2656103A001897EE /* DetailsGridCell */,
+				1479A0B62657468600FF06CD /* AccountWidgetCell.swift */,
+				14B0D2DA2656103A001897EE /* WidgetViews */,
 			);
 			path = Widgets;
 			sourceTree = "<group>";
 		};
-		14B0D2DA2656103A001897EE /* DetailsGridCell */ = {
+		14B0D2DA2656103A001897EE /* WidgetViews */ = {
 			isa = PBXGroup;
 			children = (
-				14B0D2D626561034001897EE /* DetailsGridCell.swift */,
 				1410405A25EB39B100D8C793 /* DetailsGrid */,
 			);
-			path = DetailsGridCell;
+			path = WidgetViews;
 			sourceTree = "<group>";
 		};
 		14C509B6254CEC810021D9C5 /* AddAccount */ = {
@@ -1543,7 +1543,6 @@
 				146C35D324C557C800DBCA23 /* CompanyInfoValuesView.swift in Sources */,
 				14CCB6B32637B3630024C500 /* DocumentChangeMsg.swift in Sources */,
 				149A093326390C5600AE429C /* OTOp.swift in Sources */,
-				14B0D2D726561034001897EE /* DetailsGridCell.swift in Sources */,
 				1467379B25D79B3B00B64735 /* RepoError.swift in Sources */,
 				1414810B252FFD8100640946 /* TablePopoverViewController.swift in Sources */,
 				147DEA7E260DBC9A0004BF7D /* IdProviding.swift in Sources */,
@@ -1580,6 +1579,7 @@
 				144BF56C24D7E66E00F231F0 /* RootContainerViewController.swift in Sources */,
 				14E63ED124B9109C003EAF22 /* Whaler.xcdatamodeld in Sources */,
 				14EF4DE924CD4F3100ED5461 /* ObjectManager.swift in Sources */,
+				1479A0B72657468600FF06CD /* AccountWidgetCell.swift in Sources */,
 				14248062261EDE2E00381B83 /* NoteRemoteDataSource.swift in Sources */,
 				141F796925327503005F9295 /* Graph.swift in Sources */,
 				14B037E525073EBA00BA488D /* Tokens.swift in Sources */,
