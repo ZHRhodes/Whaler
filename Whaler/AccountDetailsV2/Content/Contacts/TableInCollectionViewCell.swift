@@ -94,9 +94,6 @@ class TableInCollectionViewCell<TableCell: UITableViewCell & TableInCollectionVi
   }
   
   private func configure() {
-    layer.masksToBounds = true
-    layer.cornerRadius = 10.0
-    backgroundColor = .primaryBackground
     isSkeletonable = true
     configureTableView()
     tableView.showAnimatedGradientSkeleton()
@@ -106,7 +103,7 @@ class TableInCollectionViewCell<TableCell: UITableViewCell & TableInCollectionVi
     tableView.dragInteractionEnabled = true
     tableView.dragDelegate = self
     tableView.dropDelegate = self
-    tableView.backgroundColor = .primaryBackground
+    tableView.backgroundColor = .clear
     tableView.layer.cornerRadius = 10.0
     tableView.clipsToBounds = true
     tableView.delegate = self
@@ -114,13 +111,14 @@ class TableInCollectionViewCell<TableCell: UITableViewCell & TableInCollectionVi
     tableView.register(TableCell.self, forCellReuseIdentifier: TableCell.id)
     tableView.translatesAutoresizingMaskIntoConstraints = false
     tableView.tableFooterView = UIView()
+		tableView.showsVerticalScrollIndicator = false
     tableView.isSkeletonable = true
     
     contentView.addSubview(tableView)
     
     tableView.leftAnchor.constraint(equalTo: contentView.leftAnchor).isActive = true
     tableView.rightAnchor.constraint(equalTo: contentView.rightAnchor).isActive = true
-    tableView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: MainCollectionCellHeader.height + 20).isActive = true
+    tableView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: MainCollectionCellHeader.height).isActive = true
     tableView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
   }
   

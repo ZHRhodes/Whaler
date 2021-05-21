@@ -22,7 +22,7 @@ class DetailsGrid: UIView {
   
   override init(frame: CGRect) {
     super.init(frame: frame)
-    layer.borderWidth = 1.0
+		layer.borderWidth = UIConstants.boxBorderWidth
     layer.borderColor = UIColor.borderLineColor.cgColor
     layer.cornerRadius = 10.0
   }

@@ -40,7 +40,6 @@ class NoteEditor: UIView {
   
   override init(frame: CGRect) {
     super.init(frame: frame)
-    
     configureView()
     configureContainer()
     configureToolBar()
@@ -55,23 +54,14 @@ class NoteEditor: UIView {
   
   private func configureView() {
     translatesAutoresizingMaskIntoConstraints = false
-    layer.borderColor = UIColor.borderLineColor.cgColor
-    layer.borderWidth = 1.0
-    layer.cornerRadius = 10.0
   }
   
   private func configureContainer() {
-    container.translatesAutoresizingMaskIntoConstraints = false
-    container.backgroundColor = .cellBackground
-    container.clipsToBounds = true
-    container.layer.cornerRadius = 10.0
-    
     addAndAttachToEdges(view: container, inset: 0)
   }
   
   private func configureToolBar() {
     toolBar.translatesAutoresizingMaskIntoConstraints = false
-    toolBar.backgroundColor = .cellBackground
 
     container.addSubview(toolBar)
     let toolbarConstraints = [
@@ -88,10 +78,10 @@ class NoteEditor: UIView {
     textView = Aztec.TextView(defaultFont: UIFont.openSans(weight: .regular, size: 25),
                                 defaultParagraphStyle: .default,
                                 defaultMissingImage: UIImage(named: "bold")!)
-    textView.backgroundColor = .cellBackground
     textView.delegate = self
     container.addSubview(textView)
     textView.translatesAutoresizingMaskIntoConstraints = false
+		textView.backgroundColor = .primaryBackground
 
     let constraints = [
       textView.leftAnchor.constraint(equalTo: container.leftAnchor, constant: 16),

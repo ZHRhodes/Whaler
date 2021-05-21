@@ -25,6 +25,6 @@ class AccountDetailsContentInteractor {
 	init(dataManager: MainDataManager) {
 		self.dataManager = dataManager
 		let accountSource = Just<Account>(account).eraseToAnyPublisher()
-		widgets = [.details(DefaultDetailsProvider(source: accountSource))]
+		widgets = [.details(DefaultDetailsProvider(source: accountSource)), .contacts(DefaultContactsProvider())]
 	}
 }

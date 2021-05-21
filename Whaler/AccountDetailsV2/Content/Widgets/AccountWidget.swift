@@ -45,6 +45,12 @@ class DefaultDetailsProvider: DetailsProvider {
 	}
 }
 
+class DefaultContactsProvider: ContactsProvider {
+	var publisher: AnyPublisher<[Contact], Never> {
+		return Just([]).eraseToAnyPublisher()
+	}
+}
+
 enum AccountWidget {
 	case details(DetailsProvider),
 			 tasks(TasksProvider),

@@ -63,7 +63,7 @@ class DetailsGridItem: UIView {
     rightLine.translatesAutoresizingMaskIntoConstraints = false
     addSubview(rightLine)
     
-    rightLine.widthAnchor.constraint(equalToConstant: 1).isActive = true
+		rightLine.widthAnchor.constraint(equalToConstant: UIConstants.boxBorderWidth).isActive = true
     rightLine.topAnchor.constraint(equalTo: topAnchor).isActive = true
     rightLine.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
     rightLine.rightAnchor.constraint(equalTo: rightAnchor).isActive = true

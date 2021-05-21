@@ -58,5 +58,13 @@ class AccountDetailsViewController: ToolbarContainingViewController {
     noteEditorVC.view.topAnchor.constraint(equalTo: view.topAnchor, constant: 70).isActive = true
     noteEditorVC.view.rightAnchor.constraint(equalTo: view.rightAnchor, constant: 0).isActive = true
     noteEditorVC.view.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0).isActive = true
-  }
+		
+		let line = UIView()
+		line.backgroundColor = .borderLineColor
+		
+		view.addAndAttach(view: line, width: UIConstants.boxBorderWidth,
+											attachingEdges: [.top(86),
+																			 .bottom(-16),
+																			 .centerX(equalTo: noteEditorVC.view.leftAnchor)])
+	}
 }

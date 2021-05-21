@@ -15,12 +15,13 @@ class AccountDetailsContentViewController: UIViewController {
   private lazy var collectionView: UICollectionView = {
     let layout = UICollectionViewFlowLayout()
     layout.scrollDirection = .vertical
+		layout.minimumLineSpacing = 40
     layout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
     return UICollectionView(frame: .zero, collectionViewLayout: layout)
   }()
 //  private var subtitleLabel = UILabel()
 //  private let detailsGrid = DetailsGrid()
-//  private let contactsVC = AccountDetailsContactsViewController()
+  private let contactsVC = AccountDetailsContactsViewController()
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -109,12 +110,14 @@ extension AccountDetailsContentViewController: UICollectionViewDelegate, UIColle
     case .details(let detailsProvider):
       let gridView = DetailsGrid()
       gridView.configure(with: detailsProvider)
-      cell.configure(title: "Account Details", content: gridView)
+      cell.configure(title: "ACCOUNT DETAILS", content: gridView)
     case .tasks(let tasksProvider):
       break
     case .contacts(let contactsProvider):
-      break
-    }
+			let interactor = AccountDetailsContactsInteractor(dataManager: self.interactor.dataManager)
+			contactsVC.configure(with: interactor)
+			cell.configure(title: "CONTACTS", content: contactsVC.view)
+		}
     
     return cell
   }

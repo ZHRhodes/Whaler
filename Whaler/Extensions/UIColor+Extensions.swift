@@ -18,6 +18,7 @@ extension UIColor {
   static let primaryBackgroundInverted = UIColor(named: "primaryBackgroundInverted")!
   static let darkBackground = UIColor(named: "darkBackground")!
   static let borderLineColor = UIColor(named: "borderLineColor")!
+	static let accentBackground = UIColor(named: "accentBackground")!
   
   static let brandPurple = UIColor(named: "brandPurple")!
   static let brandPurpleLight = UIColor(named: "brandPurpleLight")!

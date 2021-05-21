@@ -9,9 +9,13 @@
 import Foundation
 import UIKit
 
+enum UIConstants {
+	static let boxCornerRadius: CGFloat = 10.0
+	static let boxBorderWidth: CGFloat = 1.0
+}
+
 class NoteEditorViewController: UIViewController {
   var interactor: NoteEditorInteractor!
-  private let label = UILabel()
   private let noteEditor = NoteEditor(frame: .zero)
   private var progressView: TextFinishedProgressIndicator!
   
@@ -26,57 +30,34 @@ class NoteEditorViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    configureLabel()
     configureNotesView()
-    configureProgressIndicator()
+//    configureProgressIndicator()
     noteEditor.startConnection(with: interactor.accountId)
-  }
-  
-  private func configureLabel() {
-    label.text = "Notes"
-    label.font = .openSans(weight: .regular, size: 24)
-    label.textColor = .primaryText
-    label.translatesAutoresizingMaskIntoConstraints = false
-    
-    view.addSubview(label)
-    
-    let constraints = [
-      label.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 44),
-      label.topAnchor.constraint(equalTo: view.topAnchor, constant: 84),
-      label.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -44),
-      label.heightAnchor.constraint(equalToConstant: 41)
-    ]
-    
-    NSLayoutConstraint.activate(constraints)
   }
   
   private func configureNotesView() {
     noteEditor.translatesAutoresizingMaskIntoConstraints = false
     noteEditor.delegate = self
+		noteEditor.backgroundColor = .primaryBackground
+		noteEditor.layer.borderColor = UIColor.borderLineColor.cgColor
+		noteEditor.clipsToBounds = true
+		noteEditor.layer.cornerRadius = UIConstants.boxCornerRadius
+		noteEditor.layer.borderWidth = 0//UIConstants.boxBorderWidth
     
-    view.addSubview(noteEditor)
-    
-    let constraints = [
-      noteEditor.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 44),
-      noteEditor.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 31),
-      noteEditor.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -44),
-      noteEditor.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 10)
-    ]
-    
-    NSLayoutConstraint.activate(constraints)
+		view.addAndAttachToEdges(view: noteEditor, inset: 16.0)
   }
   
-  private func configureProgressIndicator() {
-    progressView = TextFinishedProgressIndicator(text: "Saved",
-                                          textColor: .brandGreen,
-                                          progressView: ProgressView(colors: [.brandGreen, .brandPurple, .brandRed], lineWidth: 5))
-    progressView.translatesAutoresizingMaskIntoConstraints = false
-    view.addSubview(progressView)
-    progressView.widthAnchor.constraint(equalToConstant: 90).isActive = true
-    progressView.heightAnchor.constraint(equalToConstant: 41).isActive = true
-    progressView.centerYAnchor.constraint(equalTo: label.centerYAnchor, constant: 0).isActive = true
-    progressView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -64).isActive = true
-  }
+//  private func configureProgressIndicator() {
+//    progressView = TextFinishedProgressIndicator(text: "Saved",
+//                                          textColor: .brandGreen,
+//                                          progressView: ProgressView(colors: [.brandGreen, .brandPurple, .brandRed], lineWidth: 5))
+//    progressView.translatesAutoresizingMaskIntoConstraints = false
+//    view.addSubview(progressView)
+//    progressView.widthAnchor.constraint(equalToConstant: 90).isActive = true
+//    progressView.heightAnchor.constraint(equalToConstant: 41).isActive = true
+//    progressView.centerYAnchor.constraint(equalTo: label.centerYAnchor, constant: 0).isActive = true
+//    progressView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -64).isActive = true
+//  }
   
   func noteChanged() {
     guard let newText = interactor.note?.content else { return }

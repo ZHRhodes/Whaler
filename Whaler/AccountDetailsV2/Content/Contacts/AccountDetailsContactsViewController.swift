@@ -30,6 +30,8 @@ class AccountDetailsContactsViewController: UIViewController {
   
   func configure(with interactor: AccountDetailsContactsInteractor) {
     self.interactor = interactor
+		view.clipsToBounds = true
+		view.layer.cornerRadius = UIConstants.boxCornerRadius
     configureCollectionView()
     interactor.subscribeToContacts(for: interactor.dataManager) { [weak self] (contacts) in
 //      self?.collectionView.hideSkeleton()
@@ -39,19 +41,20 @@ class AccountDetailsContactsViewController: UIViewController {
   
   private func configureCollectionView() {
     layout.scrollDirection = .horizontal
-    layout.minimumLineSpacing = 50.0
+    layout.minimumLineSpacing = 33.0
     
     collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+		collectionView.backgroundColor = .accentBackground
     collectionView.delegate = self
     collectionView.dataSource = self
-    collectionView.backgroundColor = .primaryBackground
     collectionView.isSkeletonable = true
     collectionView.register(TableInCollectionViewCell<ContactTableCell, Contact>.self,
                             forCellWithReuseIdentifier: TableInCollectionViewCell<ContactTableCell, Contact>.id())
     collectionView.translatesAutoresizingMaskIntoConstraints = false
-    collectionView.contentInset = .init(top: 0, left: 40, bottom: 0, right: 40)
+    collectionView.contentInset = .init(top: 0, left: 16, bottom: 0, right: 16)
 
-    view.addAndAttachToEdges(view: collectionView)
+		view.addAndAttach(view: collectionView, attachingEdges: [.all()])
+		collectionView.heightAnchor.constraint(equalToConstant: 500).isActive = true
   }
 }
 
@@ -102,9 +105,7 @@ extension AccountDetailsContactsViewController: UICollectionViewDelegateFlowLayo
   func collectionView(_ collectionView: UICollectionView,
                       layout collectionViewLayout: UICollectionViewLayout,
                       sizeForItemAt indexPath: IndexPath) -> CGSize {
-    return CGSize(width: (collectionView.frame.size.width/3) - 70, height: collectionView.frame.size.height - 13)
-    //width: (collectionView.frame.size.width/4) - 20
-//    return CGSize(width: 500, height: 1400)
+    return CGSize(width: (collectionView.frame.size.width/3) - 36, height: collectionView.frame.size.height - 13)
   }
 }
 
