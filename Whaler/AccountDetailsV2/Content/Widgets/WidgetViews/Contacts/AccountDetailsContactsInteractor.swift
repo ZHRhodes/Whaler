@@ -57,6 +57,10 @@ class AccountDetailsContactsInteractor {
   }
   
   func assign(_ user: User, to contact: Contact) {
-    Log.info("Assigned contact \(contact.id) to user \(user.id)")
+    let newEntry = ContactAssignmentEntry(contactId: contact.id,
+                                          assignedBy: Lifecycle.currentUser?.id ?? "",
+                                          assignedTo: user.id)
+    _ = repoStore.contactAssignmentEntryRepository.save(newEntry)
+    contact.assignedTo = user.id
   }
 }

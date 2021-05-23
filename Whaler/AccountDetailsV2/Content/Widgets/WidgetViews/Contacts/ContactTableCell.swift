@@ -9,15 +9,21 @@
 import Foundation
 import UIKit
 
+protocol ContactTableCellDelegate: class {
+  func didClickAssignButton(_ button: UIButton, forContact contact: Contact)
+}
+
 class ContactTableCell: UITableViewCell, TableInCollectionViewTableCell {
   static var id: String = "ContactTableCellId"
   static let cellHeight: CGFloat = 113.0
   
+  weak var delegate: ContactTableCellDelegate?
   private let shadowView = UIView()
   private let containerView = UIView()
   private var contact: Contact!
   private let nameLabel = UILabel()
   private let jobTitleLabel = UILabel()
+  private var assignedButton = AssignedButton(frame: .zero)
   
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -30,6 +36,7 @@ class ContactTableCell: UITableViewCell, TableInCollectionViewTableCell {
     isSkeletonable = true
     configureShadowView()
     configureContainerView()
+    configureAssignedButton()
     configureNameLabel()
     configureJobTitleLabel()
   }
@@ -41,6 +48,7 @@ class ContactTableCell: UITableViewCell, TableInCollectionViewTableCell {
   override func prepareForReuse() {
     super.prepareForReuse()
     hideSkeleton()
+    assignedButton.reset()
   }
   
   private func configureShadowView() {
@@ -80,6 +88,14 @@ class ContactTableCell: UITableViewCell, TableInCollectionViewTableCell {
     self.contact = contact
     nameLabel.text = contact.fullName
     jobTitleLabel.text = contact.jobTitle
+    let assignedTo = Lifecycle.currentUser?.organization?.users.first(where: { $0.id == contact.assignedTo })
+    if let assignedTo = assignedTo {
+      assignedButton.assigned(assignedTo)
+    }
+  }
+  
+  func setDelegate<D>(_ delegate: D) {
+    self.delegate = delegate as? ContactTableCellDelegate
   }
   
   private func configureNameLabel() {
@@ -91,8 +107,8 @@ class ContactTableCell: UITableViewCell, TableInCollectionViewTableCell {
       containerView.addSubview(nameLabel)
       
       nameLabel.leftAnchor.constraint(equalTo: containerView.leftAnchor, constant: 21).isActive = true
-      nameLabel.rightAnchor.constraint(equalTo: containerView.rightAnchor, constant: -21).isActive = true
-      nameLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 13).isActive = true
+      nameLabel.rightAnchor.constraint(equalTo: assignedButton.leftAnchor, constant: -12).isActive = true
+      nameLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 12).isActive = true
       nameLabel.heightAnchor.constraint(equalToConstant: 33).isActive = true
     }
   }
@@ -112,6 +128,17 @@ class ContactTableCell: UITableViewCell, TableInCollectionViewTableCell {
       jobTitleLabel.heightAnchor.constraint(equalToConstant: 25).isActive = true
     }
   }
+  
+  private func configureAssignedButton() {
+    assignedButton.addTarget(self, action: #selector(assignButtonTapped), for: .touchUpInside)
+    assignedButton.setSize(38)
+    assignedButton.titleLabel?.font = .openSans(weight: .semibold, size: 14)
+    containerView.addAndAttach(view: assignedButton, attachingEdges: [.right(-24),
+                                                                      .centerY()])
+  }
+  
+  @objc
+  private func assignButtonTapped() {
+    delegate?.didClickAssignButton(assignedButton, forContact: contact)
+  }
 }
-
-

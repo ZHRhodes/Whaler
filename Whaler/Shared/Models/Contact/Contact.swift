@@ -12,7 +12,7 @@ import CoreData
 
 final class Contact: NSObject, Codable {
   private enum CodingKeys: String, CodingKey {
-    case id, accountID, salesforceID, salesforceAccountID, firstName, lastName, jobTitle, phone, email, state
+    case id, accountID, salesforceID, salesforceAccountID, firstName, lastName, jobTitle, phone, email, state, assignedTo
   }
   
   var id: String
@@ -27,12 +27,13 @@ final class Contact: NSObject, Codable {
   let email: String?
   
   var state: WorkState?
+  var assignedTo: String?
   
   var fullName: String {
     return firstName + " " + lastName
   }
   
-  init(id: String, accountID: String, salesforceID: String?, salesforceAccountID: String?, firstName: String, lastName: String, jobTitle: String, phone: String?, email: String?, state: WorkState) {
+  init(id: String, accountID: String, salesforceID: String?, salesforceAccountID: String?, firstName: String, lastName: String, jobTitle: String, phone: String?, email: String?, state: WorkState, assignedTo: String?) {
     self.id = id
     self.accountID = accountID
     self.salesforceID = salesforceID
@@ -43,6 +44,7 @@ final class Contact: NSObject, Codable {
     self.phone = phone
     self.email = email
     self.state = state
+    self.assignedTo = assignedTo
   }
   
   init(dictionary: Dictionary<String, String>) {
@@ -86,6 +88,7 @@ final class Contact: NSObject, Codable {
     id = contact.id
     accountID = contact.accountID
     state = contact.state
+    assignedTo = contact.assignedTo
   }
 }
 
@@ -108,7 +111,8 @@ extension Contact: ManagedObject {
     let email = managedObject.value(forKey: CodingKeys.email.rawValue) as? String
     let stateString = managedObject.value(forKey: CodingKeys.state.rawValue) as? String ?? ""
     let state = WorkState(rawValue: stateString) ?? .ready
-    self.init(id: id, accountID: accountID, salesforceID: salesforceID, salesforceAccountID: salesforceAccountID, firstName: firstName, lastName: lastName, jobTitle: jobTitle, phone: phone, email: email, state: state)
+    let assignedTo = managedObject.value(forKey: CodingKeys.assignedTo.rawValue) as? String
+    self.init(id: id, accountID: accountID, salesforceID: salesforceID, salesforceAccountID: salesforceAccountID, firstName: firstName, lastName: lastName, jobTitle: jobTitle, phone: phone, email: email, state: state, assignedTo: assignedTo)
   }
   
   func setProperties(in managedObject: NSManagedObject) {
@@ -122,6 +126,7 @@ extension Contact: ManagedObject {
     managedObject.setValue(phone, forKey: CodingKeys.phone.rawValue)
     managedObject.setValue(email, forKey: CodingKeys.email.rawValue)
     managedObject.setValue(state?.rawValue, forKey: CodingKeys.state.rawValue)
+    managedObject.setValue(assignedTo, forKey: CodingKeys.assignedTo.rawValue)
     if let userId = Lifecycle.currentUser?.id {
       managedObject.setValue(String(userId), forKey: "ownerUserId")
     }
@@ -176,7 +181,8 @@ extension Contact {
               jobTitle: savedContact.jobTitle ?? "",
               phone: savedContact.phone ?? "",
               email: savedContact.email,
-              state: state)
+              state: state,
+              assignedTo: savedContact.assignedTo)
   }
 }
 
@@ -192,7 +198,8 @@ extension Contact {
               jobTitle: apiContact.jobTitle ?? "",
               phone: apiContact.phone,
               email: apiContact.email,
-              state: state)
+              state: state,
+              assignedTo: apiContact.assignedTo)
   }
 }
 

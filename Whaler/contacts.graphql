@@ -9,5 +9,6 @@ query contacts($accountID: ID!) {
     salesforceID
     accountID
     state
+    assignedTo
   }
 }

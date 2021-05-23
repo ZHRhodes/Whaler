@@ -865,6 +865,7 @@ public final class ContactsQuery: GraphQLQuery {
         salesforceID
         accountID
         state
+        assignedTo
       }
     }
     """
@@ -924,6 +925,7 @@ public final class ContactsQuery: GraphQLQuery {
           GraphQLField("salesforceID", type: .scalar(String.self)),
           GraphQLField("accountID", type: .scalar(String.self)),
           GraphQLField("state", type: .scalar(String.self)),
+          GraphQLField("assignedTo", type: .scalar(String.self)),
         ]
       }
 
@@ -933,8 +935,8 @@ public final class ContactsQuery: GraphQLQuery {
         self.resultMap = unsafeResultMap
       }
 
-      public init(id: GraphQLID, firstName: String, lastName: String, jobTitle: String? = nil, email: String? = nil, phone: String? = nil, salesforceId: String? = nil, accountId: String? = nil, state: String? = nil) {
-        self.init(unsafeResultMap: ["__typename": "Contact", "id": id, "firstName": firstName, "lastName": lastName, "jobTitle": jobTitle, "email": email, "phone": phone, "salesforceID": salesforceId, "accountID": accountId, "state": state])
+      public init(id: GraphQLID, firstName: String, lastName: String, jobTitle: String? = nil, email: String? = nil, phone: String? = nil, salesforceId: String? = nil, accountId: String? = nil, state: String? = nil, assignedTo: String? = nil) {
+        self.init(unsafeResultMap: ["__typename": "Contact", "id": id, "firstName": firstName, "lastName": lastName, "jobTitle": jobTitle, "email": email, "phone": phone, "salesforceID": salesforceId, "accountID": accountId, "state": state, "assignedTo": assignedTo])
       }
 
       public var __typename: String {
@@ -1024,6 +1026,15 @@ public final class ContactsQuery: GraphQLQuery {
         }
         set {
           resultMap.updateValue(newValue, forKey: "state")
+        }
+      }
+
+      public var assignedTo: String? {
+        get {
+          return resultMap["assignedTo"] as? String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "assignedTo")
         }
       }
     }
@@ -1677,7 +1688,7 @@ public final class CreateContactAssignmentEntryMutation: GraphQLMutation {
   public let operationDefinition: String =
     """
     mutation createContactAssignmentEntry($contactId: ID!, $assignedBy: String!, $assignedTo: String) {
-      createContactAssignmentEntry(
+      contactAssignmentEntry: createContactAssignmentEntry(
         input: {contactId: $contactId, assignedBy: $assignedBy, assignedTo: $assignedTo}
       ) {
         __typename
@@ -1711,7 +1722,7 @@ public final class CreateContactAssignmentEntryMutation: GraphQLMutation {
 
     public static var selections: [GraphQLSelection] {
       return [
-        GraphQLField("createContactAssignmentEntry", arguments: ["input": ["contactId": GraphQLVariable("contactId"), "assignedBy": GraphQLVariable("assignedBy"), "assignedTo": GraphQLVariable("assignedTo")]], type: .nonNull(.object(CreateContactAssignmentEntry.selections))),
+        GraphQLField("createContactAssignmentEntry", alias: "contactAssignmentEntry", arguments: ["input": ["contactId": GraphQLVariable("contactId"), "assignedBy": GraphQLVariable("assignedBy"), "assignedTo": GraphQLVariable("assignedTo")]], type: .nonNull(.object(ContactAssignmentEntry.selections))),
       ]
     }
 
@@ -1721,20 +1732,20 @@ public final class CreateContactAssignmentEntryMutation: GraphQLMutation {
       self.resultMap = unsafeResultMap
     }
 
-    public init(createContactAssignmentEntry: CreateContactAssignmentEntry) {
-      self.init(unsafeResultMap: ["__typename": "Mutation", "createContactAssignmentEntry": createContactAssignmentEntry.resultMap])
+    public init(contactAssignmentEntry: ContactAssignmentEntry) {
+      self.init(unsafeResultMap: ["__typename": "Mutation", "contactAssignmentEntry": contactAssignmentEntry.resultMap])
     }
 
-    public var createContactAssignmentEntry: CreateContactAssignmentEntry {
+    public var contactAssignmentEntry: ContactAssignmentEntry {
       get {
-        return CreateContactAssignmentEntry(unsafeResultMap: resultMap["createContactAssignmentEntry"]! as! ResultMap)
+        return ContactAssignmentEntry(unsafeResultMap: resultMap["contactAssignmentEntry"]! as! ResultMap)
       }
       set {
-        resultMap.updateValue(newValue.resultMap, forKey: "createContactAssignmentEntry")
+        resultMap.updateValue(newValue.resultMap, forKey: "contactAssignmentEntry")
       }
     }
 
-    public struct CreateContactAssignmentEntry: GraphQLSelectionSet {
+    public struct ContactAssignmentEntry: GraphQLSelectionSet {
       public static let possibleTypes: [String] = ["ContactAssignmentEntry"]
 
       public static var selections: [GraphQLSelection] {
@@ -2376,6 +2387,7 @@ public final class SaveContactsMutation: GraphQLMutation {
         salesforceID
         accountID
         state
+        assignedTo
       }
     }
     """
@@ -2435,6 +2447,7 @@ public final class SaveContactsMutation: GraphQLMutation {
           GraphQLField("salesforceID", type: .scalar(String.self)),
           GraphQLField("accountID", type: .scalar(String.self)),
           GraphQLField("state", type: .scalar(String.self)),
+          GraphQLField("assignedTo", type: .scalar(String.self)),
         ]
       }
 
@@ -2444,8 +2457,8 @@ public final class SaveContactsMutation: GraphQLMutation {
         self.resultMap = unsafeResultMap
       }
 
-      public init(id: GraphQLID, firstName: String, lastName: String, jobTitle: String? = nil, email: String? = nil, phone: String? = nil, salesforceId: String? = nil, accountId: String? = nil, state: String? = nil) {
-        self.init(unsafeResultMap: ["__typename": "Contact", "id": id, "firstName": firstName, "lastName": lastName, "jobTitle": jobTitle, "email": email, "phone": phone, "salesforceID": salesforceId, "accountID": accountId, "state": state])
+      public init(id: GraphQLID, firstName: String, lastName: String, jobTitle: String? = nil, email: String? = nil, phone: String? = nil, salesforceId: String? = nil, accountId: String? = nil, state: String? = nil, assignedTo: String? = nil) {
+        self.init(unsafeResultMap: ["__typename": "Contact", "id": id, "firstName": firstName, "lastName": lastName, "jobTitle": jobTitle, "email": email, "phone": phone, "salesforceID": salesforceId, "accountID": accountId, "state": state, "assignedTo": assignedTo])
       }
 
       public var __typename: String {
@@ -2535,6 +2548,15 @@ public final class SaveContactsMutation: GraphQLMutation {
         }
         set {
           resultMap.updateValue(newValue, forKey: "state")
+        }
+      }
+
+      public var assignedTo: String? {
+        get {
+          return resultMap["assignedTo"] as? String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "assignedTo")
         }
       }
     }

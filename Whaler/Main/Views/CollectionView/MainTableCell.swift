@@ -21,7 +21,7 @@ class MainTableCell: UITableViewCell, MainCollectionTableCell {
   private let containerView = UIView()
   private let nameLabel = UILabel()
   private var attributesStack: UIStackView?
-  private var assignedButton: UIButton?
+  private var assignedButton = AssignedButton(frame: .zero)
   private var account: Account?
 
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -46,8 +46,7 @@ class MainTableCell: UITableViewCell, MainCollectionTableCell {
   
   override func prepareForReuse() {
     super.prepareForReuse()
-    assignedButton?.backgroundColor = .secondaryText
-    assignedButton?.setTitle("—", for: .normal)
+    assignedButton.reset()
   }
   
   func configure<T>(with object: T, assignedTo: NameAndColorProviding?) {
@@ -69,8 +68,7 @@ class MainTableCell: UITableViewCell, MainCollectionTableCell {
     }
     configureAttributeTags(attributes: attributes)
     if let assignedTo = assignedTo {
-      assignedButton?.setTitle(assignedTo.initials, for: .normal)
-      assignedButton?.backgroundColor = assignedTo.color
+      assignedButton.assigned(assignedTo)
     }
   }
   
@@ -126,14 +124,13 @@ class MainTableCell: UITableViewCell, MainCollectionTableCell {
     attributesStack = UIStackView()
     attributesStack!.axis = .horizontal
     attributesStack?.spacing = 6.0
-//    attributesStack?.distribution = .equalSpacing
     attributesStack?.translatesAutoresizingMaskIntoConstraints = false
     
     containerView.addSubview(attributesStack!)
     
     attributesStack!.leftAnchor.constraint(equalTo: containerView.leftAnchor, constant: 22).isActive = true
     attributesStack!.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -18).isActive = true
-    attributesStack!.rightAnchor.constraint(lessThanOrEqualTo: assignedButton!.leftAnchor, constant: -12).isActive = true
+    attributesStack!.rightAnchor.constraint(lessThanOrEqualTo: assignedButton.leftAnchor, constant: -12).isActive = true
     for attribute in attributes {
       let tagView = AttributeTagView(attribute: attribute)
       tagView.setContentHuggingPriority(.required, for: .horizontal)
@@ -156,32 +153,17 @@ class MainTableCell: UITableViewCell, MainCollectionTableCell {
   }
   
   private func configureAssignedButton() {
-    assignedButton?.removeFromSuperview()
-    assignedButton = UIButton()
-    if assignedButton?.backgroundColor == nil {
-      assignedButton!.backgroundColor = .secondaryText
-    }
-    assignedButton!.addTarget(self, action: #selector(assignButtonTapped), for: .touchUpInside)
-    assignedButton!.layer.cornerRadius = 25
-    assignedButton!.translatesAutoresizingMaskIntoConstraints = false
-    assignedButton!.setTitle("—", for: .normal)
-    assignedButton!.titleLabel?.font = .openSans(weight: .bold, size: 18)
-    assignedButton!.setTitleColor(.white, for: .normal)
-    assignedButton!.isSkeletonable = true
-    assignedButton?.skeletonCornerRadius = 25.0
+    assignedButton.addTarget(self, action: #selector(assignButtonTapped), for: .touchUpInside)
+    containerView.addSubview(assignedButton)
     
-    containerView.addSubview(assignedButton!)
-    
-    assignedButton!.rightAnchor.constraint(equalTo: containerView.rightAnchor, constant: -22).isActive = true
-    assignedButton!.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -22).isActive = true
-    assignedButton!.widthAnchor.constraint(equalToConstant: 50).isActive = true
-    assignedButton!.heightAnchor.constraint(equalToConstant: 50).isActive = true
+    assignedButton.rightAnchor.constraint(equalTo: containerView.rightAnchor, constant: -22).isActive = true
+    assignedButton.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -22).isActive = true
+    assignedButton.setSize(50)
   }
   
   @objc
   private func assignButtonTapped() {
     guard let delegate = delegate,
-          let assignedButton = assignedButton,
           let account = account else { return }
     delegate.didClickAssignButton(assignedButton, forAccount: account)
   }

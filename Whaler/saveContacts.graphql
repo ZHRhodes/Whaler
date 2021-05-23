@@ -9,5 +9,6 @@ mutation saveContacts($input: [NewContact!]!) {
     salesforceID
     accountID
     state
+    assignedTo
   }
 }

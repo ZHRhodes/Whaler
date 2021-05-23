@@ -66,18 +66,6 @@ extension AccountDetailsContactsViewController: MainCollectionCellDelegate {
   func didSelectRowAt(section: Int, didSelectRowAt indexPath: IndexPath) {
 
   }
-
-  func didClickAssignButton(_ button: UIButton, forContact contact: Contact) {
-    interactor.contactBeingAssigned = contact
-    let viewController = TablePopoverViewController()
-    viewController.modalPresentationStyle = .popover
-    viewController.provider = OrgUsersProvider()
-    viewController.delegate = self
-    navigationController?.present(viewController, animated: true, completion: nil)
-    let popoverVC = viewController.popoverPresentationController
-    popoverVC?.permittedArrowDirections = [.left, .up, .right]
-    popoverVC?.sourceView = button
-  }
 }
 
 extension AccountDetailsContactsViewController: UICollectionViewDelegate, UICollectionViewDataSource {
@@ -97,7 +85,7 @@ extension AccountDetailsContactsViewController: UICollectionViewDelegate, UIColl
     let state = interactor.contactStates[indexPath.row]
     let data = interactor.contactGrouper?[state]
 		let sectionInfo = SectionInfo(title: state.rawValue, color: state.color, compact: true)
-    cell.configure(sectionInfo: sectionInfo, dataSource: data ?? [], delegate: self, showSkeleton: data == nil)
+    cell.configure(sectionInfo: sectionInfo, dataSource: data ?? [], delegate: self, cellDelegate: self, showSkeleton: data == nil)
     return cell
   }
 }
@@ -112,9 +100,24 @@ extension AccountDetailsContactsViewController: UICollectionViewDelegateFlowLayo
 
 extension AccountDetailsContactsViewController: TablePopoverViewControllerDelegate {
   func didSelectItem(_ item: SimpleItem) {
-    guard let user = item as? User,
-          let contact = interactor.contactBeingAssigned else { return }
-    interactor.assign(user, to: contact)
+    dismiss(animated: true) { [weak self] in
+      guard let user = item as? User,
+            let contact = self?.interactor.contactBeingAssigned else { return }
+      
+      self?.interactor.assign(user, to: contact)
+      
+      guard let state = contact.state,
+            let data = self?.interactor.contactGrouper?[state],
+            let stateIndex = self?.interactor.contactStates.firstIndex(of: state),
+            let collectionCell = self?.collectionView.cellForItem(at: IndexPath(row: stateIndex, section: 0)) as? TableInCollectionViewCell<ContactTableCell, Contact> else { return }
+      
+      for (i, existingContact) in data.enumerated() {
+        if existingContact == contact {
+          collectionCell.tableView.reloadRows(at: [IndexPath(row: i, section: 0)],
+                                              with: .automatic)
+        }
+      }
+    }
   }
 }
 
@@ -141,5 +144,19 @@ extension AccountDetailsContactsViewController: TableInCollectionViewDelegate {
     if let cell = collectionView.cellForItem(at: IndexPath(row: stateIndex, section: 0)) as? TableInCollectionViewCell<ContactTableCell, Contact> {
       cell.dataSource = interactor.contactGrouper?[state] ?? []
     }
+  }
+}
+
+extension AccountDetailsContactsViewController: ContactTableCellDelegate {
+  func didClickAssignButton(_ button: UIButton, forContact contact: Contact) {
+    interactor.contactBeingAssigned = contact
+    let viewController = TablePopoverViewController()
+    viewController.modalPresentationStyle = .popover
+    viewController.provider = OrgUsersProvider()
+    viewController.delegate = self
+    present(viewController, animated: true, completion: nil)
+    let popoverVC = viewController.popoverPresentationController
+    popoverVC?.permittedArrowDirections = [.left, .up, .right]
+    popoverVC?.sourceView = button
   }
 }

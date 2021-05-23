@@ -19,6 +19,7 @@ protocol SectionInfoProviding {
 protocol TableInCollectionViewTableCell {
   static var id: String { get }
   static var cellHeight: CGFloat { get }
+  func setDelegate<D>(_ delegate: D)
   func configure<T>(with object: T)
 }
 
@@ -43,8 +44,9 @@ class TableInCollectionViewCell<TableCell: UITableViewCell & TableInCollectionVi
   }
   
   weak var delegate: TableInCollectionViewDelegate?
+  weak var cellDelegate: AnyObject?
   private var headerView: UIView?
-  private let tableView = UITableView()
+  let tableView = UITableView()
   private var didShowInitialLoad = false
   private var setNeedsHideSkeleton = false
   private var setNeedsShowSkeleton = false
@@ -83,10 +85,12 @@ class TableInCollectionViewCell<TableCell: UITableViewCell & TableInCollectionVi
     }
   }
   
-  func configure(sectionInfo: SectionInfoProviding, dataSource: [TableCellData], delegate: TableInCollectionViewDelegate, showSkeleton: Bool) {
+  func configure<D: AnyObject>(sectionInfo: SectionInfoProviding, dataSource: [TableCellData], delegate: TableInCollectionViewDelegate, cellDelegate: D, showSkeleton: Bool) {
     self.dataSource = dataSource
     self.sectionInfo = sectionInfo
     self.delegate = delegate
+    self.cellDelegate = cellDelegate
+    tableView.reloadData()
     if showSkeleton {
       setNeedsShowSkeleton = true
     } else {
@@ -160,6 +164,7 @@ class TableInCollectionViewCell<TableCell: UITableViewCell & TableInCollectionVi
     
     let item = dataSource[indexPath.row]
     cell.configure(with: item)
+    cell.setDelegate(cellDelegate)
     return cell
   }
   

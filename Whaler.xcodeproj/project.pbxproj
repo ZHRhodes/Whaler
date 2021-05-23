@@ -135,6 +135,10 @@
 		148C70E5261C1F1E002D4EAA /* CustomNetworkFetchInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148C70E4261C1F1E002D4EAA /* CustomNetworkFetchInterceptor.swift */; };
 		148D460F25AA7326003D5FA7 /* MockAccountInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148D460E25AA7326003D5FA7 /* MockAccountInterface.swift */; };
 		148D461525AAD3C7003D5FA7 /* SplitPaneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148D461425AAD3C6003D5FA7 /* SplitPaneViewController.swift */; };
+		1495EED92659DC3F006A46B9 /* AssignedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1495EED82659DC3F006A46B9 /* AssignedButton.swift */; };
+		1495EEE72659EB65006A46B9 /* ContactAssignmentEntryDataInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1495EEE62659EB65006A46B9 /* ContactAssignmentEntryDataInterface.swift */; };
+		1495EEEB2659EBA7006A46B9 /* ContactAssignmentEntryRemoteDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1495EEEA2659EBA7006A46B9 /* ContactAssignmentEntryRemoteDataSource.swift */; };
+		1495EEF02659EC19006A46B9 /* ContactAssignmentEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1495EEEF2659EC19006A46B9 /* ContactAssignmentEntry.swift */; };
 		149A092F2639089A00AE429C /* OTDoc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149A092E2639089A00AE429C /* OTDoc.swift */; };
 		149A093326390C5600AE429C /* OTOp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149A093226390C5600AE429C /* OTOp.swift */; };
 		149A09392639194200AE429C /* OTError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149A09382639194200AE429C /* OTError.swift */; };
@@ -349,6 +353,10 @@
 		148C70E4261C1F1E002D4EAA /* CustomNetworkFetchInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNetworkFetchInterceptor.swift; sourceTree = "<group>"; };
 		148D460E25AA7326003D5FA7 /* MockAccountInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAccountInterface.swift; sourceTree = "<group>"; };
 		148D461425AAD3C6003D5FA7 /* SplitPaneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitPaneViewController.swift; sourceTree = "<group>"; };
+		1495EED82659DC3F006A46B9 /* AssignedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignedButton.swift; sourceTree = "<group>"; };
+		1495EEE62659EB65006A46B9 /* ContactAssignmentEntryDataInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactAssignmentEntryDataInterface.swift; sourceTree = "<group>"; };
+		1495EEEA2659EBA7006A46B9 /* ContactAssignmentEntryRemoteDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactAssignmentEntryRemoteDataSource.swift; sourceTree = "<group>"; };
+		1495EEEF2659EC19006A46B9 /* ContactAssignmentEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactAssignmentEntry.swift; sourceTree = "<group>"; };
 		149A092E2639089A00AE429C /* OTDoc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTDoc.swift; sourceTree = "<group>"; };
 		149A093226390C5600AE429C /* OTOp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTOp.swift; sourceTree = "<group>"; };
 		149A09382639194200AE429C /* OTError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTError.swift; sourceTree = "<group>"; };
@@ -490,12 +498,13 @@
 		140AE79724A9AA4B00F7705E /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				14EF4DE624CD4F0700ED5461 /* Account */,
 				143EC3B0261929AE003ADF97 /* AccountAssignmentEntry */,
+				14EF4DE724CD4F1C00ED5461 /* Contact */,
+				1495EEEE2659EBFB006A46B9 /* ContactAssignmentEntry */,
 				147F55F72607FC60001F139A /* Owner */,
 				141F795D25319DEA005F9295 /* Organization */,
 				14B037EC25074B1200BA488D /* User */,
-				14EF4DE624CD4F0700ED5461 /* Account */,
-				14EF4DE724CD4F1C00ED5461 /* Contact */,
 				14EF4DE824CD4F3100ED5461 /* ObjectManager.swift */,
 				140AE79F24A9B58300F7705E /* WorkState.swift */,
 				14B037E025049CDE00BA488D /* Grouper.swift */,
@@ -555,6 +564,7 @@
 				140AE7A824A9DF3300F7705E /* CommonButton.swift */,
 				146834FE24DA99810075B639 /* CommonTextField.swift */,
 				14EF8D5025F950E10065BEB3 /* ContentSizedTableView.swift */,
+				1495EED72659DC2F006A46B9 /* AssignedButton */,
 				14562B8025F30E1E00BA9D3B /* ProgressIndicator */,
 				1488DD7F25F32626002A898C /* TextFinishedProgressIndicator */,
 				14EA64F825F4CF7600F26ECE /* CurrentUserView */,
@@ -634,9 +644,10 @@
 		1416482A25A7ACEC0008E16B /* DataTypes */ = {
 			isa = PBXGroup;
 			children = (
-				143EC3A726192936003ADF97 /* AccountAssignmentEntry */,
 				1416480525A4F9ED0008E16B /* Account */,
+				143EC3A726192936003ADF97 /* AccountAssignmentEntry */,
 				1416482925A7ACD90008E16B /* Contact */,
+				1495EEE52659EB3C006A46B9 /* ContactAssignmentEntry */,
 				1424805C261EDDFD00381B83 /* Note */,
 			);
 			path = DataTypes;
@@ -992,6 +1003,31 @@
 				148D460E25AA7326003D5FA7 /* MockAccountInterface.swift */,
 			);
 			path = Mocks;
+			sourceTree = "<group>";
+		};
+		1495EED72659DC2F006A46B9 /* AssignedButton */ = {
+			isa = PBXGroup;
+			children = (
+				1495EED82659DC3F006A46B9 /* AssignedButton.swift */,
+			);
+			path = AssignedButton;
+			sourceTree = "<group>";
+		};
+		1495EEE52659EB3C006A46B9 /* ContactAssignmentEntry */ = {
+			isa = PBXGroup;
+			children = (
+				1495EEE62659EB65006A46B9 /* ContactAssignmentEntryDataInterface.swift */,
+				1495EEEA2659EBA7006A46B9 /* ContactAssignmentEntryRemoteDataSource.swift */,
+			);
+			path = ContactAssignmentEntry;
+			sourceTree = "<group>";
+		};
+		1495EEEE2659EBFB006A46B9 /* ContactAssignmentEntry */ = {
+			isa = PBXGroup;
+			children = (
+				1495EEEF2659EC19006A46B9 /* ContactAssignmentEntry.swift */,
+			);
+			path = ContactAssignmentEntry;
 			sourceTree = "<group>";
 		};
 		149F3A0325206BA6001F38BF /* CollectionView */ = {
@@ -1515,6 +1551,7 @@
 				14248071261EE47F00381B83 /* NoteEditorInteractor.swift in Sources */,
 				141802AD258EF07700E38840 /* AccountDetailsViewController.swift in Sources */,
 				14DEACEF260990B8007E2582 /* CurrentUserOptionsProvider.swift in Sources */,
+				1495EEE72659EB65006A46B9 /* ContactAssignmentEntryDataInterface.swift in Sources */,
 				14446D6925E350BA008E46CD /* AccountDetailsContactsInteractor.swift in Sources */,
 				1410404525EB1C3E00D8C793 /* TableInCollectionViewCell.swift in Sources */,
 				1488DD7C25F316E3002A898C /* ProgressStrokeColorAnimation.swift in Sources */,
@@ -1530,6 +1567,7 @@
 				14F4090824C6A2D100F405BC /* UIFont+Extensions.swift in Sources */,
 				144FA6BD24C2C0C500506F15 /* CompanyInfoHeaderView.swift in Sources */,
 				1454743D250D93DC00257A89 /* SFSession.swift in Sources */,
+				1495EED92659DC3F006A46B9 /* AssignedButton.swift in Sources */,
 				147F5601260855BF001F139A /* SFFilterAdapter.swift in Sources */,
 				14DACF42255BAC2A00FC0900 /* Log.swift in Sources */,
 				14B037EE25074B1E00BA488D /* User.swift in Sources */,
@@ -1569,6 +1607,7 @@
 				147F55F42607FBEF001F139A /* SFOwner.swift in Sources */,
 				14562B7725F216FD00BA9D3B /* AccountDetailsInteractor.swift in Sources */,
 				14D9CA5B24B599300030B17A /* AccountRowValuesView.swift in Sources */,
+				1495EEF02659EC19006A46B9 /* ContactAssignmentEntry.swift in Sources */,
 				14EA64EF25F4CDA300F26ECE /* TrackAccountsTableCell.swift in Sources */,
 				14025FCA24D6BF5D00408379 /* AuthenticationViewController.swift in Sources */,
 				1410405725EB39AC00D8C793 /* DetailsGrid.swift in Sources */,
@@ -1592,6 +1631,7 @@
 				140AE7A324A9BA6500F7705E /* MainTableSectionHeader.swift in Sources */,
 				14562B7D25F30DCC00BA9D3B /* ProgressView.swift in Sources */,
 				14DACF46255BAC9200FC0900 /* SwiftyBeaver+LoggingDestination.swift in Sources */,
+				1495EEEB2659EBA7006A46B9 /* ContactAssignmentEntryRemoteDataSource.swift in Sources */,
 				141F796E25342974005F9295 /* TokenAddingIntercepter.swift in Sources */,
 				147F55F92607FC6A001F139A /* Owner.swift in Sources */,
 				149A09392639194200AE429C /* OTError.swift in Sources */,
