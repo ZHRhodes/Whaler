@@ -23,9 +23,9 @@ class AccountDetailsContactsViewController: UIViewController {
 //    collectionView.showAnimatedGradientSkeleton()
   }
   
-  override func viewDidLayoutSubviews() {
-    super.viewDidLayoutSubviews()
-    layout.itemSize = CGSize(width: (collectionView.frame.size.width/3) - 70, height: collectionView.frame.size.height - 13)
+  override func viewWillLayoutSubviews() {
+    collectionView.collectionViewLayout.invalidateLayout()
+    super.viewWillLayoutSubviews()
   }
   
   func configure(with interactor: AccountDetailsContactsInteractor) {
@@ -54,7 +54,7 @@ class AccountDetailsContactsViewController: UIViewController {
     collectionView.contentInset = .init(top: 0, left: 16, bottom: 0, right: 16)
 
 		view.addAndAttach(view: collectionView, attachingEdges: [.all()])
-		collectionView.heightAnchor.constraint(equalToConstant: 500).isActive = true
+		collectionView.heightAnchor.constraint(equalToConstant: 700).isActive = true
   }
 }
 

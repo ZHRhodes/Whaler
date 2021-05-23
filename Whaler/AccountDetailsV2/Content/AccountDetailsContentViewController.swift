@@ -15,7 +15,7 @@ class AccountDetailsContentViewController: UIViewController {
   private lazy var collectionView: UICollectionView = {
     let layout = UICollectionViewFlowLayout()
     layout.scrollDirection = .vertical
-		layout.minimumLineSpacing = 40
+		layout.minimumLineSpacing = 16
     layout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
     return UICollectionView(frame: .zero, collectionViewLayout: layout)
   }()
@@ -28,6 +28,20 @@ class AccountDetailsContentViewController: UIViewController {
     configureTitleLabel()
     configureCollectionView()
 //    configureSubtitleLabel()
+  }
+  
+  
+  //TODO: this getting called infinitely?
+  override func viewDidLayoutSubviews() {
+    let width = collectionView.bounds.width
+    if width > 0 {
+      collectionView.visibleCells.forEach { (cell) in
+        if cell.frame.width != width {
+          (cell as? AccountWidgetCell)?.setWidth(width)
+        }
+      }
+    }
+    super.viewDidLayoutSubviews()
   }
   
   func configure(with interactor: AccountDetailsContentInteractor) {
@@ -96,7 +110,7 @@ class AccountDetailsContentViewController: UIViewController {
 //  }
 }
 
-extension AccountDetailsContentViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+extension AccountDetailsContentViewController: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
     return interactor.widgets.count
   }

@@ -578,7 +578,6 @@
 				140E643D25DB77AD0033AC8F /* AccountDetailsContentViewController.swift */,
 				1410404E25EB382400D8C793 /* AccountDetailsContentInteractor.swift */,
 				14B0D2D526561020001897EE /* Widgets */,
-				14446D6C25E36365008E46CD /* Contacts */,
 			);
 			path = Content;
 			sourceTree = "<group>";
@@ -1028,6 +1027,7 @@
 			isa = PBXGroup;
 			children = (
 				1410405A25EB39B100D8C793 /* DetailsGrid */,
+				14446D6C25E36365008E46CD /* Contacts */,
 			);
 			path = WidgetViews;
 			sourceTree = "<group>";

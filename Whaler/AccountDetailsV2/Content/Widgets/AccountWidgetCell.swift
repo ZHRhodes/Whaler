@@ -13,7 +13,12 @@ class AccountWidgetCell: UICollectionViewCell {
   static let id = "AccountWidgetCellId"
   private var titleLabel: UILabel = UILabel()
   private var content: UIView?
-  private var widthConstraint: NSLayoutConstraint?
+  private lazy var widthConstraint: NSLayoutConstraint = {
+    let widthConstraint = contentView.widthAnchor.constraint(equalToConstant: 0)
+    widthConstraint.isActive = true
+    widthConstraint.priority = .required
+    return widthConstraint
+  }()
   
   override init(frame: CGRect) {
     super.init(frame: frame)
@@ -31,7 +36,6 @@ class AccountWidgetCell: UICollectionViewCell {
   }
   
   private func enableContentViewSelfSizing() {
-    widthConstraint = contentView.widthAnchor.constraint(equalToConstant: 0)
     contentView.translatesAutoresizingMaskIntoConstraints = false
     
     NSLayoutConstraint.activate([
@@ -43,10 +47,12 @@ class AccountWidgetCell: UICollectionViewCell {
   }
   
   override func updateConstraints() {
-      // Set width constraint to superview's width.
-      widthConstraint?.constant = superview?.bounds.width ?? 0
-      widthConstraint?.isActive = true
+      widthConstraint.constant = superview?.bounds.width ?? 0
       super.updateConstraints()
+  }
+  
+  func setWidth(_ newWidth: CGFloat) {
+    widthConstraint.constant = newWidth
   }
   
   private func configureTitleLabel() {
@@ -58,9 +64,11 @@ class AccountWidgetCell: UICollectionViewCell {
     titleLabel.text = title
     self.content?.removeFromSuperview()
     self.content = content
-    contentView.addAndAttach(view: content, attachingEdges: [.left(16),
-                                                             .right(-16),
-                                                             .bottom(16),
+    contentView.addAndAttach(view: content, attachingEdges: [.right(-16),
+                                                             .bottom(-16),
                                                              .top(16, equalTo: titleLabel.bottomAnchor)])
+    let leftConstraint = content.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 16)
+    leftConstraint.priority = .required
+    leftConstraint.isActive = true
   }
 }
