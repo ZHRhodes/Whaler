@@ -102,7 +102,7 @@ extension WebSocketManager: WebSocketDelegate {
   
   func websocketDidDisconnect(socket: WebSocketClient, error: Error?) {
     if let error = error {
-      socket.connect()
+//      socket.connect()
       Log.debug("WebSocket did disconnect with error: \(error)")
     }
     Log.debug("WebSocket did disconnect.")
