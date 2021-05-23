@@ -35,7 +35,7 @@ struct SFNetworkInterface { //fix up conformance later}: NetworkInterface {
     //Warning: endless loop potential in this function via recursion
     var result = networker.execute(request: request)
 
-    if result.statusCode == 403 {
+    if result.statusCode == 403 || result.statusCode == 401 {
       do {
         try refreshAccessToken()
         result = networker.execute(request: request)

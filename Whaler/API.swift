@@ -215,8 +215,9 @@ public struct NewContact: GraphQLMapConvertible {
   ///   - email
   ///   - phone
   ///   - accountId
-  public init(id: Swift.Optional<GraphQLID?> = nil, salesforceId: Swift.Optional<String?> = nil, firstName: String, lastName: String, jobTitle: Swift.Optional<String?> = nil, state: Swift.Optional<String?> = nil, email: Swift.Optional<String?> = nil, phone: Swift.Optional<String?> = nil, accountId: Swift.Optional<String?> = nil) {
-    graphQLMap = ["id": id, "salesforceID": salesforceId, "firstName": firstName, "lastName": lastName, "jobTitle": jobTitle, "state": state, "email": email, "phone": phone, "accountID": accountId]
+  ///   - assignedTo
+  public init(id: Swift.Optional<GraphQLID?> = nil, salesforceId: Swift.Optional<String?> = nil, firstName: String, lastName: String, jobTitle: Swift.Optional<String?> = nil, state: Swift.Optional<String?> = nil, email: Swift.Optional<String?> = nil, phone: Swift.Optional<String?> = nil, accountId: Swift.Optional<String?> = nil, assignedTo: Swift.Optional<String?> = nil) {
+    graphQLMap = ["id": id, "salesforceID": salesforceId, "firstName": firstName, "lastName": lastName, "jobTitle": jobTitle, "state": state, "email": email, "phone": phone, "accountID": accountId, "assignedTo": assignedTo]
   }
 
   public var id: Swift.Optional<GraphQLID?> {
@@ -297,6 +298,15 @@ public struct NewContact: GraphQLMapConvertible {
     }
     set {
       graphQLMap.updateValue(newValue, forKey: "accountID")
+    }
+  }
+
+  public var assignedTo: Swift.Optional<String?> {
+    get {
+      return graphQLMap["assignedTo"] as? Swift.Optional<String?> ?? Swift.Optional<String?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "assignedTo")
     }
   }
 }

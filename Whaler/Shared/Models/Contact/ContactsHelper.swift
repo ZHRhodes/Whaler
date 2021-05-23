@@ -37,7 +37,8 @@ struct ContactsHelper {
                                           state: $0.state?.rawValue,
                                           email: $0.email,
                                           phone: $0.phone,
-                                          accountId: $0.accountID) }
+                                          accountId: $0.accountID,
+                                          assignedTo: $0.assignedTo) }
     Graph.shared.apollo.perform(mutation: SaveContactsMutation(input: input)) { result in
       guard let data = try? result.get().data else { return }
       let contacts = data.saveContacts.map(Contact.init)
