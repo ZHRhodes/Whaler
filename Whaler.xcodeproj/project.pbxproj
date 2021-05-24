@@ -145,6 +145,10 @@
 		149AC3AF265B63F1003A8439 /* tasks.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 149AC3AE265B63F1003A8439 /* tasks.graphql */; };
 		149AC3B3265B661D003A8439 /* createTask.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 149AC3B2265B661D003A8439 /* createTask.graphql */; };
 		149AC3C9265B6799003A8439 /* saveTask.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 149AC3C8265B6799003A8439 /* saveTask.graphql */; };
+		149AC3D1265B6BAC003A8439 /* TasksTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149AC3D0265B6BAC003A8439 /* TasksTableViewController.swift */; };
+		149AC3D7265B6D28003A8439 /* TaskTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149AC3D6265B6D28003A8439 /* TaskTableCell.swift */; };
+		149AC3DB265B777B003A8439 /* TasksTableInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149AC3DA265B777B003A8439 /* TasksTableInteractor.swift */; };
+		149AC3E0265B77F5003A8439 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149AC3DF265B77F5003A8439 /* Task.swift */; };
 		149F3A0025206AE4001F38BF /* MainCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149F39FF25206AE4001F38BF /* MainCollectionCell.swift */; };
 		149F3A0725206BB7001F38BF /* MainTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149F3A0625206BB7001F38BF /* MainTableCell.swift */; };
 		149F3A0B25209575001F38BF /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149F3A0A25209575001F38BF /* UIView+Extensions.swift */; };
@@ -366,6 +370,10 @@
 		149AC3AE265B63F1003A8439 /* tasks.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = tasks.graphql; sourceTree = "<group>"; };
 		149AC3B2265B661D003A8439 /* createTask.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = createTask.graphql; sourceTree = "<group>"; };
 		149AC3C8265B6799003A8439 /* saveTask.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = saveTask.graphql; sourceTree = "<group>"; };
+		149AC3D0265B6BAC003A8439 /* TasksTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksTableViewController.swift; sourceTree = "<group>"; };
+		149AC3D6265B6D28003A8439 /* TaskTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskTableCell.swift; sourceTree = "<group>"; };
+		149AC3DA265B777B003A8439 /* TasksTableInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksTableInteractor.swift; sourceTree = "<group>"; };
+		149AC3DF265B77F5003A8439 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		149F39FF25206AE4001F38BF /* MainCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCollectionCell.swift; sourceTree = "<group>"; };
 		149F3A0625206BB7001F38BF /* MainTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableCell.swift; sourceTree = "<group>"; };
 		149F3A0A25209575001F38BF /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
@@ -510,6 +518,7 @@
 				1495EEEE2659EBFB006A46B9 /* ContactAssignmentEntry */,
 				147F55F72607FC60001F139A /* Owner */,
 				141F795D25319DEA005F9295 /* Organization */,
+				149AC3DE265B77B5003A8439 /* Task */,
 				14B037EC25074B1200BA488D /* User */,
 				14EF4DE824CD4F3100ED5461 /* ObjectManager.swift */,
 				140AE79F24A9B58300F7705E /* WorkState.swift */,
@@ -1039,6 +1048,32 @@
 			path = ContactAssignmentEntry;
 			sourceTree = "<group>";
 		};
+		149AC3CF265B6B85003A8439 /* Tasks */ = {
+			isa = PBXGroup;
+			children = (
+				149AC3D0265B6BAC003A8439 /* TasksTableViewController.swift */,
+				149AC3DA265B777B003A8439 /* TasksTableInteractor.swift */,
+				149AC3E3265B7837003A8439 /* Cell */,
+			);
+			path = Tasks;
+			sourceTree = "<group>";
+		};
+		149AC3DE265B77B5003A8439 /* Task */ = {
+			isa = PBXGroup;
+			children = (
+				149AC3DF265B77F5003A8439 /* Task.swift */,
+			);
+			path = Task;
+			sourceTree = "<group>";
+		};
+		149AC3E3265B7837003A8439 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				149AC3D6265B6D28003A8439 /* TaskTableCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
 		149F3A0325206BA6001F38BF /* CollectionView */ = {
 			isa = PBXGroup;
 			children = (
@@ -1072,6 +1107,7 @@
 			isa = PBXGroup;
 			children = (
 				1410405A25EB39B100D8C793 /* DetailsGrid */,
+				149AC3CF265B6B85003A8439 /* Tasks */,
 				14446D6C25E36365008E46CD /* Contacts */,
 			);
 			path = WidgetViews;
@@ -1488,6 +1524,7 @@
 				14251745255108F0006255F1 /* SFQuery.swift in Sources */,
 				1440A20424C947FA00E36853 /* Contact.swift in Sources */,
 				14F7DDA124EE529300D43055 /* SFAccount.swift in Sources */,
+				149AC3DB265B777B003A8439 /* TasksTableInteractor.swift in Sources */,
 				146737A725D79D3A00B64735 /* ContactRemoteDataSource.swift in Sources */,
 				148C70E5261C1F1E002D4EAA /* CustomNetworkFetchInterceptor.swift in Sources */,
 				148A09742586FEC500811E35 /* LiteWebSocketDelegate.swift in Sources */,
@@ -1524,6 +1561,7 @@
 				148A09782586FF6A00811E35 /* WebSocketInfo.swift in Sources */,
 				14B8BF662536E536006CE4B5 /* MainCollectionCellHeader.swift in Sources */,
 				1410405E25EB39C600D8C793 /* DetailsGridItem.swift in Sources */,
+				149AC3E0265B77F5003A8439 /* Task.swift in Sources */,
 				141F795F25319E60005F9295 /* Organization.swift in Sources */,
 				14EA64F525F4CF7200F26ECE /* CurrentUserView.swift in Sources */,
 				14F2E072263A720500F87C05 /* ResourceConnectionMessage.swift in Sources */,
@@ -1564,6 +1602,7 @@
 				141802AD258EF07700E38840 /* AccountDetailsViewController.swift in Sources */,
 				14DEACEF260990B8007E2582 /* CurrentUserOptionsProvider.swift in Sources */,
 				1495EEE72659EB65006A46B9 /* ContactAssignmentEntryDataInterface.swift in Sources */,
+				149AC3D7265B6D28003A8439 /* TaskTableCell.swift in Sources */,
 				14446D6925E350BA008E46CD /* AccountDetailsContactsInteractor.swift in Sources */,
 				1410404525EB1C3E00D8C793 /* TableInCollectionViewCell.swift in Sources */,
 				1488DD7C25F316E3002A898C /* ProgressStrokeColorAnimation.swift in Sources */,
@@ -1641,6 +1680,7 @@
 				1467E95F25F7F5CE00110880 /* ToolbarContainingViewController.swift in Sources */,
 				147F55EC2606C9AE001F139A /* FilterDisplayOption.swift in Sources */,
 				140AE7A324A9BA6500F7705E /* MainTableSectionHeader.swift in Sources */,
+				149AC3D1265B6BAC003A8439 /* TasksTableViewController.swift in Sources */,
 				14562B7D25F30DCC00BA9D3B /* ProgressView.swift in Sources */,
 				14DACF46255BAC9200FC0900 /* SwiftyBeaver+LoggingDestination.swift in Sources */,
 				1495EEEB2659EBA7006A46B9 /* ContactAssignmentEntryRemoteDataSource.swift in Sources */,

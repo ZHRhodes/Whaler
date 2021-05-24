@@ -10,10 +10,6 @@ import Foundation
 import Combine
 import UIKit
 
-class Task: RepoStorable {
-	var id: String = "temp"
-}
-
 protocol DetailsProvider: AnyObject {
 	var publisher: AnyPublisher<[DetailItem], Never> { get }
 }
@@ -49,6 +45,12 @@ class DefaultContactsProvider: ContactsProvider {
 	var publisher: AnyPublisher<[Contact], Never> {
 		return Just([]).eraseToAnyPublisher()
 	}
+}
+
+class DefaultTasksProvider: TasksProvider {
+  var publisher: AnyPublisher<[Task], Never> {
+    return Just([]).eraseToAnyPublisher()
+  }
 }
 
 enum AccountWidget {

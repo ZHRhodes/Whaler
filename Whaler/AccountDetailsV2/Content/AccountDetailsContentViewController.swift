@@ -22,6 +22,7 @@ class AccountDetailsContentViewController: UIViewController {
 //  private var subtitleLabel = UILabel()
 //  private let detailsGrid = DetailsGrid()
   private let contactsVC = AccountDetailsContactsViewController()
+  private let tasksVC = TasksTableViewController()
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -126,7 +127,9 @@ extension AccountDetailsContentViewController: UICollectionViewDelegateFlowLayou
       gridView.configure(with: detailsProvider)
       cell.configure(title: "ACCOUNT DETAILS", content: gridView)
     case .tasks(let tasksProvider):
-      break
+      let interactor = TasksTableInteractor()
+      tasksVC.configure(with: interactor)
+      cell.configure(title: "TASKS", content: tasksVC.view)
     case .contacts(let contactsProvider):
 			let interactor = AccountDetailsContactsInteractor(dataManager: self.interactor.dataManager)
 			contactsVC.configure(with: interactor)
