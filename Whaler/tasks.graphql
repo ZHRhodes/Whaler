@@ -1,0 +1,12 @@
+query tasks($associatedTo: ID!) {
+  tasks(associatedTo: $associatedTo) {
+    id
+    createdAt
+    associatedTo
+    description
+    done
+    type
+    dueDate
+    assignedTo
+  }
+}

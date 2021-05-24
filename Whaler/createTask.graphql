@@ -1,0 +1,12 @@
+mutation createTask($associatedTo: ID, $description: String!, $type: String, $dueDate: Time, $assignedTo: String) {
+  createTask(input: {associatedTo: $associatedTo, description: $description, type: $type, dueDate: $dueDate, assignedTo: $assignedTo}) {
+    id
+    createdAt
+    associatedTo
+    description
+    done
+    type
+    dueDate
+    assignedTo
+  }
+}
