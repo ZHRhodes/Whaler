@@ -15,6 +15,13 @@ class TaskTableCell: UITableViewCell {
   
   private let doneButton = UIButton()
   private let contentContainer = UIView()
+  private let descriptionLabel = UILabel()
+  private var typeTag: UIView?
+  private var dueDateTag: UIView?
+  private var assignedButton = AssignedButton()
+  private let dotsButton = UIButton()
+  
+  private var task: Task!
   
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -23,6 +30,11 @@ class TaskTableCell: UITableViewCell {
     isSkeletonable = true
     configureDoneButton()
     configureContentContainer()
+    configureDescriptionLabel()
+    configureTypeTagIfNecessary()
+    configureDueDateTagIfNecessary()
+    configureAssignedButton()
+    configureDotsButton()
   }
   
   required init?(coder: NSCoder) {
@@ -31,6 +43,15 @@ class TaskTableCell: UITableViewCell {
   
   override func prepareForReuse() {
     super.prepareForReuse()
+  }
+  
+  func configure(with task: Task) {
+    self.task = task
+    setValues(using: task)
+  }
+  
+  func setValues(using task: Task) {
+    descriptionLabel.text = task.description
   }
   
   private func configureDoneButton() {
@@ -52,5 +73,29 @@ class TaskTableCell: UITableViewCell {
                                                                       .top(8),
                                                                       .bottom(-8),
                                                                       .right(-20)])
+  }
+  
+  private func configureDescriptionLabel() {
+    descriptionLabel.font = .openSans(weight: .regular, size: 18)
+    
+    contentContainer.addAndAttach(view: descriptionLabel,
+                                  height: 25,
+                                  attachingEdges: [.left(20), .centerY()])
+  }
+  
+  private func configureTypeTagIfNecessary() {
+    
+  }
+  
+  private func configureDueDateTagIfNecessary() {
+    
+  }
+  
+  private func configureAssignedButton() {
+    
+  }
+  
+  private func configureDotsButton() {
+    
   }
 }

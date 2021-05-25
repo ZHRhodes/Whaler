@@ -47,6 +47,8 @@ extension TasksTableViewController: UITableViewDelegate, UITableViewDataSource {
     guard let cell = tableView.dequeueReusableCell(withIdentifier: TaskTableCell.id) as? TaskTableCell else {
       return UITableViewCell()
     }
+    let task = interactor.tasks[indexPath.row]
+    cell.configure(with: task)
     return cell
   }
 }
