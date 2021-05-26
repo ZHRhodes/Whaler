@@ -30,6 +30,7 @@ class ContactTableCell: UITableViewCell, TableInCollectionViewTableCell {
     let background = UIView()
     background.backgroundColor = .primaryBackground
     selectedBackgroundView = background
+    selectionStyle = .none
     backgroundColor = .clear
     contentView.backgroundColor = .clear
     contentView.isSkeletonable = true

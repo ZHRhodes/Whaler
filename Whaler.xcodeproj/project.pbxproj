@@ -143,7 +143,6 @@
 		149A093326390C5600AE429C /* OTOp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149A093226390C5600AE429C /* OTOp.swift */; };
 		149A09392639194200AE429C /* OTError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149A09382639194200AE429C /* OTError.swift */; };
 		149AC3AF265B63F1003A8439 /* tasks.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 149AC3AE265B63F1003A8439 /* tasks.graphql */; };
-		149AC3B3265B661D003A8439 /* createTask.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 149AC3B2265B661D003A8439 /* createTask.graphql */; };
 		149AC3C9265B6799003A8439 /* saveTask.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 149AC3C8265B6799003A8439 /* saveTask.graphql */; };
 		149AC3D1265B6BAC003A8439 /* TasksTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149AC3D0265B6BAC003A8439 /* TasksTableViewController.swift */; };
 		149AC3D7265B6D28003A8439 /* TaskTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149AC3D6265B6D28003A8439 /* TaskTableCell.swift */; };
@@ -371,7 +370,6 @@
 		149A093226390C5600AE429C /* OTOp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTOp.swift; sourceTree = "<group>"; };
 		149A09382639194200AE429C /* OTError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTError.swift; sourceTree = "<group>"; };
 		149AC3AE265B63F1003A8439 /* tasks.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = tasks.graphql; sourceTree = "<group>"; };
-		149AC3B2265B661D003A8439 /* createTask.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = createTask.graphql; sourceTree = "<group>"; };
 		149AC3C8265B6799003A8439 /* saveTask.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = saveTask.graphql; sourceTree = "<group>"; };
 		149AC3D0265B6BAC003A8439 /* TasksTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksTableViewController.swift; sourceTree = "<group>"; };
 		149AC3D6265B6D28003A8439 /* TaskTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskTableCell.swift; sourceTree = "<group>"; };
@@ -953,7 +951,6 @@
 				147DEA76260DA0940004BF7D /* applyAccountTrackingChange.graphql */,
 				14086912253E85DE007324A4 /* createAccount.graphql */,
 				14086916253ED084007324A4 /* createContact.graphql */,
-				149AC3B2265B661D003A8439 /* createTask.graphql */,
 				143EC3A1261928AA003ADF97 /* createAccountAssignmentEntry.graphql */,
 				141F796225326EF4005F9295 /* createContactAssignmentEntry.graphql */,
 				14EF43A92540AA5C002BE27D /* saveAccounts.graphql */,
@@ -1427,7 +1424,6 @@
 			files = (
 				14F4FE18254AA6A600C89485 /* contacts.graphql in Resources */,
 				143EC3A2261928AB003ADF97 /* createAccountAssignmentEntry.graphql in Resources */,
-				149AC3B3265B661D003A8439 /* createTask.graphql in Resources */,
 				147DEA77260DA0940004BF7D /* applyAccountTrackingChange.graphql in Resources */,
 				14EF43B0254103A9002BE27D /* saveContacts.graphql in Resources */,
 				14F4090424C6A09E00F405BC /* OpenSans-Regular.ttf in Resources */,
