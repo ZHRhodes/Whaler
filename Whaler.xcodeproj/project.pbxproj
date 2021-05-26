@@ -174,6 +174,8 @@
 		14D4A2EB2574CA94003EFF61 /* ToolbarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D4A2EA2574CA94003EFF61 /* ToolbarButton.swift */; };
 		14D4A2EF2574CAAB003EFF61 /* EditorToolbarOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D4A2EE2574CAAB003EFF61 /* EditorToolbarOption.swift */; };
 		14D8810E265DF6DA004556A9 /* CircleCheckbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D8810D265DF6DA004556A9 /* CircleCheckbox.swift */; };
+		14D88115265E1A78004556A9 /* TaskDataInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D88114265E1A78004556A9 /* TaskDataInterface.swift */; };
+		14D8811B265E1AE2004556A9 /* TaskRemoteDataInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D8811A265E1AE2004556A9 /* TaskRemoteDataInterface.swift */; };
 		14D97D7924DBEC4B00058B09 /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D97D7824DBEC4B00058B09 /* Keychain.swift */; };
 		14D9CA5924B599230030B17A /* AccountStateTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D9CA5824B599230030B17A /* AccountStateTagView.swift */; };
 		14D9CA5B24B599300030B17A /* AccountRowValuesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D9CA5A24B599300030B17A /* AccountRowValuesView.swift */; };
@@ -399,6 +401,8 @@
 		14D4A2EA2574CA94003EFF61 /* ToolbarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolbarButton.swift; sourceTree = "<group>"; };
 		14D4A2EE2574CAAB003EFF61 /* EditorToolbarOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorToolbarOption.swift; sourceTree = "<group>"; };
 		14D8810D265DF6DA004556A9 /* CircleCheckbox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleCheckbox.swift; sourceTree = "<group>"; };
+		14D88114265E1A78004556A9 /* TaskDataInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDataInterface.swift; sourceTree = "<group>"; };
+		14D8811A265E1AE2004556A9 /* TaskRemoteDataInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskRemoteDataInterface.swift; sourceTree = "<group>"; };
 		14D97D7824DBEC4B00058B09 /* Keychain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keychain.swift; sourceTree = "<group>"; };
 		14D9CA5824B599230030B17A /* AccountStateTagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountStateTagView.swift; sourceTree = "<group>"; };
 		14D9CA5A24B599300030B17A /* AccountRowValuesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountRowValuesView.swift; sourceTree = "<group>"; };
@@ -667,6 +671,7 @@
 				1416482925A7ACD90008E16B /* Contact */,
 				1495EEE52659EB3C006A46B9 /* ContactAssignmentEntry */,
 				1424805C261EDDFD00381B83 /* Note */,
+				14D88113265E1A55004556A9 /* Task */,
 			);
 			path = DataTypes;
 			sourceTree = "<group>";
@@ -1167,6 +1172,15 @@
 			path = CircleCheckbox;
 			sourceTree = "<group>";
 		};
+		14D88113265E1A55004556A9 /* Task */ = {
+			isa = PBXGroup;
+			children = (
+				14D88114265E1A78004556A9 /* TaskDataInterface.swift */,
+				14D8811A265E1AE2004556A9 /* TaskRemoteDataInterface.swift */,
+			);
+			path = Task;
+			sourceTree = "<group>";
+		};
 		14D9CA5724B599080030B17A /* MainTableSectionHeader */ = {
 			isa = PBXGroup;
 			children = (
@@ -1560,6 +1574,7 @@
 				14A2834724DE510D0016BA82 /* SF.swift in Sources */,
 				146834FF24DA99810075B639 /* CommonTextField.swift in Sources */,
 				146C35D924C5689B00DBCA23 /* ContactRowView.swift in Sources */,
+				14D8811B265E1AE2004556A9 /* TaskRemoteDataInterface.swift in Sources */,
 				14C509C7254CFE7A0021D9C5 /* FieldValue.swift in Sources */,
 				1416482C25A7F49C0008E16B /* ContactDataInterface.swift in Sources */,
 				14EF8D4D25F93CDA0065BEB3 /* CheckBox.swift in Sources */,
@@ -1680,6 +1695,7 @@
 				146834FC24DA76CE0075B639 /* RootContainerInteractor.swift in Sources */,
 				144BF56C24D7E66E00F231F0 /* RootContainerViewController.swift in Sources */,
 				14E63ED124B9109C003EAF22 /* Whaler.xcdatamodeld in Sources */,
+				14D88115265E1A78004556A9 /* TaskDataInterface.swift in Sources */,
 				14EF4DE924CD4F3100ED5461 /* ObjectManager.swift in Sources */,
 				1479A0B72657468600FF06CD /* AccountWidgetCell.swift in Sources */,
 				14248062261EDE2E00381B83 /* NoteRemoteDataSource.swift in Sources */,

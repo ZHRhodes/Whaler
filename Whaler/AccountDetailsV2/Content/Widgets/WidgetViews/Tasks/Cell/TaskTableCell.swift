@@ -9,7 +9,9 @@
 import Foundation
 import UIKit
 
-protocol TaskTableCellDelegate: AnyObject {}
+protocol TaskTableCellDelegate: AnyObject {
+  func changedDate(newDate: Date, forTask task: Task)
+}
 
 class TaskTableCell: UITableViewCell {
   static var id: String = "TaskTableCellId"
@@ -178,5 +180,6 @@ class TaskTableCell: UITableViewCell {
   @objc
   func dateSelected(sender: UIDatePicker, forEvent event: UIEvent) {
     setDate(sender.date)
+    delegate?.changedDate(newDate: sender.date, forTask: task)
   }
 }

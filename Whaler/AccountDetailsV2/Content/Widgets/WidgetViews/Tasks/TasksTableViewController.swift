@@ -55,4 +55,8 @@ extension TasksTableViewController: UITableViewDelegate, UITableViewDataSource {
   }
 }
 
-extension TasksTableViewController: TaskTableCellDelegate {}
+extension TasksTableViewController: TaskTableCellDelegate {
+  func changedDate(newDate: Date, forTask task: Task) {
+    interactor.setDate(newDate: newDate, forTask: task)
+  }
+}
