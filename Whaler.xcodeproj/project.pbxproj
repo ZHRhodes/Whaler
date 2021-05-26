@@ -173,6 +173,7 @@
 		14D4A2E72574CA7E003EFF61 /* EditorToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D4A2E62574CA7E003EFF61 /* EditorToolbar.swift */; };
 		14D4A2EB2574CA94003EFF61 /* ToolbarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D4A2EA2574CA94003EFF61 /* ToolbarButton.swift */; };
 		14D4A2EF2574CAAB003EFF61 /* EditorToolbarOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D4A2EE2574CAAB003EFF61 /* EditorToolbarOption.swift */; };
+		14D8810E265DF6DA004556A9 /* CircleCheckbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D8810D265DF6DA004556A9 /* CircleCheckbox.swift */; };
 		14D97D7924DBEC4B00058B09 /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D97D7824DBEC4B00058B09 /* Keychain.swift */; };
 		14D9CA5924B599230030B17A /* AccountStateTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D9CA5824B599230030B17A /* AccountStateTagView.swift */; };
 		14D9CA5B24B599300030B17A /* AccountRowValuesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D9CA5A24B599300030B17A /* AccountRowValuesView.swift */; };
@@ -397,6 +398,7 @@
 		14D4A2E62574CA7E003EFF61 /* EditorToolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorToolbar.swift; sourceTree = "<group>"; };
 		14D4A2EA2574CA94003EFF61 /* ToolbarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolbarButton.swift; sourceTree = "<group>"; };
 		14D4A2EE2574CAAB003EFF61 /* EditorToolbarOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorToolbarOption.swift; sourceTree = "<group>"; };
+		14D8810D265DF6DA004556A9 /* CircleCheckbox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleCheckbox.swift; sourceTree = "<group>"; };
 		14D97D7824DBEC4B00058B09 /* Keychain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keychain.swift; sourceTree = "<group>"; };
 		14D9CA5824B599230030B17A /* AccountStateTagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountStateTagView.swift; sourceTree = "<group>"; };
 		14D9CA5A24B599300030B17A /* AccountRowValuesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountRowValuesView.swift; sourceTree = "<group>"; };
@@ -583,6 +585,7 @@
 				14562B8025F30E1E00BA9D3B /* ProgressIndicator */,
 				1488DD7F25F32626002A898C /* TextFinishedProgressIndicator */,
 				14EA64F825F4CF7600F26ECE /* CurrentUserView */,
+				14D8810C265DF643004556A9 /* CircleCheckbox */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1156,6 +1159,14 @@
 			path = Editor;
 			sourceTree = "<group>";
 		};
+		14D8810C265DF643004556A9 /* CircleCheckbox */ = {
+			isa = PBXGroup;
+			children = (
+				14D8810D265DF6DA004556A9 /* CircleCheckbox.swift */,
+			);
+			path = CircleCheckbox;
+			sourceTree = "<group>";
+		};
 		14D9CA5724B599080030B17A /* MainTableSectionHeader */ = {
 			isa = PBXGroup;
 			children = (
@@ -1591,6 +1602,7 @@
 				149F3A0B25209575001F38BF /* UIView+Extensions.swift in Sources */,
 				14EF8D4125F93BA00065BEB3 /* CellTextBox.swift in Sources */,
 				146A6DDA252C563200DA8E85 /* SFNetworkInterface.swift in Sources */,
+				14D8810E265DF6DA004556A9 /* CircleCheckbox.swift in Sources */,
 				14EF8D5825F9BCED0065BEB3 /* PageSelectorView.swift in Sources */,
 				149F3A0025206AE4001F38BF /* MainCollectionCell.swift in Sources */,
 				1425175125510E11006255F1 /* FilterBucket.swift in Sources */,

@@ -12,6 +12,7 @@ import UIKit
 class TasksTableViewController: UIViewController {
   var interactor: TasksTableInteractor!
   private let tableView = UITableView()
+  private var datePicker: UIDatePicker?
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -49,6 +50,9 @@ extension TasksTableViewController: UITableViewDelegate, UITableViewDataSource {
     }
     let task = interactor.tasks[indexPath.row]
     cell.configure(with: task)
+    cell.delegate = self
     return cell
   }
 }
+
+extension TasksTableViewController: TaskTableCellDelegate {}
