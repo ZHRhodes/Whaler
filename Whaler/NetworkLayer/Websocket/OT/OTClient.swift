@@ -29,7 +29,6 @@ class OTClient {
   let resourceId: String
   weak var delegate: OTClientDelegate?
   
-  
   init(doc: OTDoc, rev: Int, buf: [OTOp], wait: [OTOp], resourceId: String) {
     self.doc = doc
     self.rev = rev

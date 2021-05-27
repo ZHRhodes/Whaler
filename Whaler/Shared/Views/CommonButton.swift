@@ -39,7 +39,7 @@ class CommonButton: UIButton {
     let hover = UIHoverGestureRecognizer(target: self, action: #selector(hovering(_:)))
     addGestureRecognizer(hover)
   }
-  
+    
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
