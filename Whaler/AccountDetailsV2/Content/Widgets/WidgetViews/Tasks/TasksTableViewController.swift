@@ -59,4 +59,22 @@ extension TasksTableViewController: TaskTableCellDelegate {
   func changedDate(newDate: Date, forTask task: Task) {
     interactor.setDate(newDate: newDate, forTask: task)
   }
+	
+	func didClickAssignButton(_ button: UIButton, forTask task: Task) {
+//		contactBeingAssigned = contact
+		let viewController = TablePopoverViewController()
+		viewController.modalPresentationStyle = .popover
+		viewController.provider = OrgUsersProvider()
+		viewController.delegate = self
+		present(viewController, animated: true, completion: nil)
+		let popoverVC = viewController.popoverPresentationController
+		popoverVC?.permittedArrowDirections = [.left, .up, .right]
+		popoverVC?.sourceView = button
+	}
+}
+
+extension TasksTableViewController: TablePopoverViewControllerDelegate {
+	func didSelectItem(_ item: SimpleItem) {
+		
+	}
 }

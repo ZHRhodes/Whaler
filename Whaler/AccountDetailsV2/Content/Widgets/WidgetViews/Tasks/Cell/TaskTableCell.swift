@@ -11,6 +11,7 @@ import UIKit
 
 protocol TaskTableCellDelegate: AnyObject {
   func changedDate(newDate: Date, forTask task: Task)
+	func didClickAssignButton(_ button: UIButton, forTask task: Task)
 }
 
 class TaskTableCell: UITableViewCell {
@@ -103,6 +104,7 @@ class TaskTableCell: UITableViewCell {
   }
   
   private func configureAssignedButton() {
+		assignedButton.addTarget(self, action: #selector(assignButtonTapped), for: .touchUpInside)
     assignedButton.setSize(38)
     contentContainer.addAndAttach(view: assignedButton, attachingEdges: [
       .centerY(), .right(-20, equalTo: dotsButton.leftAnchor)
@@ -182,4 +184,9 @@ class TaskTableCell: UITableViewCell {
     setDate(sender.date)
     delegate?.changedDate(newDate: sender.date, forTask: task)
   }
+	
+	@objc
+	func assignButtonTapped() {
+		delegate?.didClickAssignButton(assignedButton, forTask: task)
+	}
 }

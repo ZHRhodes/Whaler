@@ -156,7 +156,7 @@ extension ContactsTableViewController: ContactRowViewCellDelegate {
   func didClickAssignButton(_ button: UIView, forContact contact: Contact) {
     contactBeingAssigned = contact
     let viewController = TablePopoverViewController()
-    viewController.modalPresentationStyle = .popover
+		viewController.modalPresentationStyle = .popover
     viewController.provider = OrgUsersProvider()
     viewController.delegate = self
     navigationController?.present(viewController, animated: true, completion: nil)

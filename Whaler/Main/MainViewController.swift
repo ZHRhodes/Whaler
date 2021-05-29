@@ -511,7 +511,7 @@ extension MainViewController: MainCollectionCellDelegate {
   func didClickAssignButton(_ button: UIButton, forAccount account: Account) {
     interactor.accountBeingAssigned = account
     let viewController = TablePopoverViewController()
-    viewController.modalPresentationStyle = .popover
+		viewController.modalPresentationStyle = .popover
     viewController.provider = OrgUsersProvider()
     viewController.delegate = self
     navigationController?.present(viewController, animated: true, completion: nil)

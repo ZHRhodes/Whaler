@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-protocol ContactTableCellDelegate: class {
+protocol ContactTableCellDelegate: AnyObject {
   func didClickAssignButton(_ button: UIButton, forContact contact: Contact)
 }
 
