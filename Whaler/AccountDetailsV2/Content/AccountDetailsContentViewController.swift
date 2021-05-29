@@ -93,22 +93,10 @@ class AccountDetailsContentViewController: UIViewController {
     NSLayoutConstraint.activate(constraints)
   }
   
-//  private func configureSubtitleLabel() {
-//    subtitleLabel = UILabel()
-//    subtitleLabel.font = .openSans(weight: .regular, size: 24)
-//
-//    subtitleLabel.text = "Account Details"
-//    subtitleLabel.translatesAutoresizingMaskIntoConstraints = false
-//    view.addSubview(subtitleLabel)
-//
-//    let constraints = [
-//      subtitleLabel.leftAnchor.constraint(equalTo: titleLabel.leftAnchor, constant: 0),
-//      subtitleLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 0),
-//      subtitleLabel.heightAnchor.constraint(equalToConstant: 28)
-//    ]
-//
-//    NSLayoutConstraint.activate(constraints)
-//  }
+  @objc
+  private func addTask() {
+    
+  }
 }
 
 extension AccountDetailsContentViewController: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
@@ -129,11 +117,12 @@ extension AccountDetailsContentViewController: UICollectionViewDelegateFlowLayou
     case .tasks(let tasksProvider):
       let interactor = TasksTableInteractor()
       tasksVC.configure(with: interactor)
-      cell.configure(title: "TASKS", content: tasksVC.view)
+      let button = AddTaskButton(frame: .zero)
+      cell.configure(title: "TASKS", accessoryButton: button, content: tasksVC.view)
     case .contacts(let contactsProvider):
 			let interactor = AccountDetailsContactsInteractor(dataManager: self.interactor.dataManager)
 			contactsVC.configure(with: interactor)
-			cell.configure(title: "CONTACTS", content: contactsVC.view)
+      cell.configure(title: "CONTACTS", content: contactsVC.view)
 		}
     
     return cell

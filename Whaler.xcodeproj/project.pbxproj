@@ -135,6 +135,7 @@
 		148C70E5261C1F1E002D4EAA /* CustomNetworkFetchInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148C70E4261C1F1E002D4EAA /* CustomNetworkFetchInterceptor.swift */; };
 		148D460F25AA7326003D5FA7 /* MockAccountInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148D460E25AA7326003D5FA7 /* MockAccountInterface.swift */; };
 		148D461525AAD3C7003D5FA7 /* SplitPaneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148D461425AAD3C6003D5FA7 /* SplitPaneViewController.swift */; };
+		1490927E2662FF26008234BA /* AddTaskButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1490927D2662FF26008234BA /* AddTaskButton.swift */; };
 		1495EED92659DC3F006A46B9 /* AssignedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1495EED82659DC3F006A46B9 /* AssignedButton.swift */; };
 		1495EEE72659EB65006A46B9 /* ContactAssignmentEntryDataInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1495EEE62659EB65006A46B9 /* ContactAssignmentEntryDataInterface.swift */; };
 		1495EEEB2659EBA7006A46B9 /* ContactAssignmentEntryRemoteDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1495EEEA2659EBA7006A46B9 /* ContactAssignmentEntryRemoteDataSource.swift */; };
@@ -362,6 +363,7 @@
 		148C70E4261C1F1E002D4EAA /* CustomNetworkFetchInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNetworkFetchInterceptor.swift; sourceTree = "<group>"; };
 		148D460E25AA7326003D5FA7 /* MockAccountInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAccountInterface.swift; sourceTree = "<group>"; };
 		148D461425AAD3C6003D5FA7 /* SplitPaneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitPaneViewController.swift; sourceTree = "<group>"; };
+		1490927D2662FF26008234BA /* AddTaskButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaskButton.swift; sourceTree = "<group>"; };
 		1495EED82659DC3F006A46B9 /* AssignedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignedButton.swift; sourceTree = "<group>"; };
 		1495EEE62659EB65006A46B9 /* ContactAssignmentEntryDataInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactAssignmentEntryDataInterface.swift; sourceTree = "<group>"; };
 		1495EEEA2659EBA7006A46B9 /* ContactAssignmentEntryRemoteDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactAssignmentEntryRemoteDataSource.swift; sourceTree = "<group>"; };
@@ -1028,6 +1030,14 @@
 			path = Mocks;
 			sourceTree = "<group>";
 		};
+		1490927A2662FBEA008234BA /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				1490927D2662FF26008234BA /* AddTaskButton.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		1495EED72659DC2F006A46B9 /* AssignedButton */ = {
 			isa = PBXGroup;
 			children = (
@@ -1059,6 +1069,7 @@
 				149AC3D0265B6BAC003A8439 /* TasksTableViewController.swift */,
 				149AC3DA265B777B003A8439 /* TasksTableInteractor.swift */,
 				149AC3E3265B7837003A8439 /* Cell */,
+				1490927A2662FBEA008234BA /* Views */,
 			);
 			path = Tasks;
 			sourceTree = "<group>";
@@ -1628,6 +1639,7 @@
 				149AC3D7265B6D28003A8439 /* TaskTableCell.swift in Sources */,
 				14446D6925E350BA008E46CD /* AccountDetailsContactsInteractor.swift in Sources */,
 				1410404525EB1C3E00D8C793 /* TableInCollectionViewCell.swift in Sources */,
+				1490927E2662FF26008234BA /* AddTaskButton.swift in Sources */,
 				1488DD7C25F316E3002A898C /* ProgressStrokeColorAnimation.swift in Sources */,
 				1454743B250D904700257A89 /* UIViewController+Extensions.swift in Sources */,
 				140E643E25DB77AD0033AC8F /* AccountDetailsContentViewController.swift in Sources */,

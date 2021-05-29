@@ -49,4 +49,10 @@ class RepoStore {
     let dataInterface = NoteDataInterface(remoteDataSource: remoteDataSource)
     return Repository(dataInterface: dataInterface, ephemeralSessionManager: ephemeralSessionManager)
   }()
+  
+  lazy var taskRepository: Repository<TaskDataInterface> = {
+    let remoteDataSource = TaskRemoteDataSource()
+    let dataInterface = TaskDataInterface(remoteDataSource: remoteDataSource)
+    return Repository(dataInterface: dataInterface, ephemeralSessionManager: ephemeralSessionManager)
+  }()
 }

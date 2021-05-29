@@ -12,6 +12,7 @@ import UIKit
 class AccountWidgetCell: UICollectionViewCell {
   static let id = "AccountWidgetCellId"
   private var titleLabel: UILabel = UILabel()
+  private var accessoryButton: UIButton?
   private var content: UIView?
   private lazy var widthConstraint: NSLayoutConstraint = {
     let widthConstraint = contentView.widthAnchor.constraint(equalToConstant: 0)
@@ -57,11 +58,16 @@ class AccountWidgetCell: UICollectionViewCell {
   
   private func configureTitleLabel() {
     titleLabel.font = .openSans(weight: .bold, size: 18)
-    contentView.addAndAttach(view: titleLabel, height: 24.0, attachingEdges: [.top(), .left(16)])
+    contentView.addAndAttach(view: titleLabel, height: 24.0, attachingEdges: [.top(4), .left(16)])
   }
   
-  func configure(title: String, content: UIView) {
+  func configure(title: String, accessoryButton: UIButton? = nil, content: UIView) {
     titleLabel.text = title
+    configureAccessoryButtonIfNecessary(accessoryButton)
+    configureContent(content)
+  }
+  
+  private func configureContent(_ content: UIView) {
     self.content?.removeFromSuperview()
     self.content = content
     contentView.addAndAttach(view: content, attachingEdges: [.right(-16),
@@ -70,5 +76,14 @@ class AccountWidgetCell: UICollectionViewCell {
     let leftConstraint = content.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 16)
     leftConstraint.priority = .required
     leftConstraint.isActive = true
+  }
+  
+  private func configureAccessoryButtonIfNecessary(_ button: UIButton?) {
+    guard let button = button else { return }
+    self.accessoryButton?.removeFromSuperview()
+    self.accessoryButton = button
+    contentView.addAndAttach(view: button, height: 36.0, attachingEdges: [
+      .right(-16), .centerY(equalTo: titleLabel.centerYAnchor)
+    ])
   }
 }
