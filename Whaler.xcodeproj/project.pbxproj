@@ -136,6 +136,11 @@
 		148D460F25AA7326003D5FA7 /* MockAccountInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148D460E25AA7326003D5FA7 /* MockAccountInterface.swift */; };
 		148D461525AAD3C7003D5FA7 /* SplitPaneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148D461425AAD3C6003D5FA7 /* SplitPaneViewController.swift */; };
 		1490927E2662FF26008234BA /* AddTaskButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1490927D2662FF26008234BA /* AddTaskButton.swift */; };
+		149092822663216D008234BA /* DateFormatter+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149092812663216D008234BA /* DateFormatter+Extensions.swift */; };
+		14909286266329DD008234BA /* createTaskAssignmentEntry.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 14909285266329DD008234BA /* createTaskAssignmentEntry.graphql */; };
+		1490928D26632B21008234BA /* TaskAssignmentEntryDataInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1490928C26632B21008234BA /* TaskAssignmentEntryDataInterface.swift */; };
+		1490929126632B39008234BA /* TaskAssignmentEntryRemoteDataInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1490929026632B39008234BA /* TaskAssignmentEntryRemoteDataInterface.swift */; };
+		1490929626632B7F008234BA /* TaskAssignmentEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1490929526632B7F008234BA /* TaskAssignmentEntry.swift */; };
 		1495EED92659DC3F006A46B9 /* AssignedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1495EED82659DC3F006A46B9 /* AssignedButton.swift */; };
 		1495EEE72659EB65006A46B9 /* ContactAssignmentEntryDataInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1495EEE62659EB65006A46B9 /* ContactAssignmentEntryDataInterface.swift */; };
 		1495EEEB2659EBA7006A46B9 /* ContactAssignmentEntryRemoteDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1495EEEA2659EBA7006A46B9 /* ContactAssignmentEntryRemoteDataSource.swift */; };
@@ -364,6 +369,11 @@
 		148D460E25AA7326003D5FA7 /* MockAccountInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAccountInterface.swift; sourceTree = "<group>"; };
 		148D461425AAD3C6003D5FA7 /* SplitPaneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitPaneViewController.swift; sourceTree = "<group>"; };
 		1490927D2662FF26008234BA /* AddTaskButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaskButton.swift; sourceTree = "<group>"; };
+		149092812663216D008234BA /* DateFormatter+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateFormatter+Extensions.swift"; sourceTree = "<group>"; };
+		14909285266329DD008234BA /* createTaskAssignmentEntry.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = createTaskAssignmentEntry.graphql; sourceTree = "<group>"; };
+		1490928C26632B21008234BA /* TaskAssignmentEntryDataInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskAssignmentEntryDataInterface.swift; sourceTree = "<group>"; };
+		1490929026632B39008234BA /* TaskAssignmentEntryRemoteDataInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskAssignmentEntryRemoteDataInterface.swift; sourceTree = "<group>"; };
+		1490929526632B7F008234BA /* TaskAssignmentEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskAssignmentEntry.swift; sourceTree = "<group>"; };
 		1495EED82659DC3F006A46B9 /* AssignedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignedButton.swift; sourceTree = "<group>"; };
 		1495EEE62659EB65006A46B9 /* ContactAssignmentEntryDataInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactAssignmentEntryDataInterface.swift; sourceTree = "<group>"; };
 		1495EEEA2659EBA7006A46B9 /* ContactAssignmentEntryRemoteDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactAssignmentEntryRemoteDataSource.swift; sourceTree = "<group>"; };
@@ -525,6 +535,7 @@
 				147F55F72607FC60001F139A /* Owner */,
 				141F795D25319DEA005F9295 /* Organization */,
 				149AC3DE265B77B5003A8439 /* Task */,
+				1490929426632B6C008234BA /* TaskAssignmentEntry */,
 				14B037EC25074B1200BA488D /* User */,
 				14EF4DE824CD4F3100ED5461 /* ObjectManager.swift */,
 				140AE79F24A9B58300F7705E /* WorkState.swift */,
@@ -543,6 +554,7 @@
 				149F3A0A25209575001F38BF /* UIView+Extensions.swift */,
 				14DACF45255BAC9200FC0900 /* SwiftyBeaver+LoggingDestination.swift */,
 				141802B4258EF72A00E38840 /* Notification+Extensions.swift */,
+				149092812663216D008234BA /* DateFormatter+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -672,6 +684,7 @@
 				1495EEE52659EB3C006A46B9 /* ContactAssignmentEntry */,
 				1424805C261EDDFD00381B83 /* Note */,
 				14D88113265E1A55004556A9 /* Task */,
+				1490928B26632A73008234BA /* TaskAssignmentEntry */,
 			);
 			path = DataTypes;
 			sourceTree = "<group>";
@@ -955,6 +968,7 @@
 				14086916253ED084007324A4 /* createContact.graphql */,
 				143EC3A1261928AA003ADF97 /* createAccountAssignmentEntry.graphql */,
 				141F796225326EF4005F9295 /* createContactAssignmentEntry.graphql */,
+				14909285266329DD008234BA /* createTaskAssignmentEntry.graphql */,
 				14EF43A92540AA5C002BE27D /* saveAccounts.graphql */,
 				1424804F261EDB3C00381B83 /* saveNote.graphql */,
 				14EF43AF254103A9002BE27D /* saveContacts.graphql */,
@@ -1036,6 +1050,23 @@
 				1490927D2662FF26008234BA /* AddTaskButton.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		1490928B26632A73008234BA /* TaskAssignmentEntry */ = {
+			isa = PBXGroup;
+			children = (
+				1490928C26632B21008234BA /* TaskAssignmentEntryDataInterface.swift */,
+				1490929026632B39008234BA /* TaskAssignmentEntryRemoteDataInterface.swift */,
+			);
+			path = TaskAssignmentEntry;
+			sourceTree = "<group>";
+		};
+		1490929426632B6C008234BA /* TaskAssignmentEntry */ = {
+			isa = PBXGroup;
+			children = (
+				1490929526632B7F008234BA /* TaskAssignmentEntry.swift */,
+			);
+			path = TaskAssignmentEntry;
 			sourceTree = "<group>";
 		};
 		1495EED72659DC2F006A46B9 /* AssignedButton */ = {
@@ -1439,6 +1470,7 @@
 				14EF43B0254103A9002BE27D /* saveContacts.graphql in Resources */,
 				14F4090424C6A09E00F405BC /* OpenSans-Regular.ttf in Resources */,
 				146A6DCB252C486100DA8E85 /* schema.json in Resources */,
+				14909286266329DD008234BA /* createTaskAssignmentEntry.graphql in Resources */,
 				14EF43AA2540AA5C002BE27D /* saveAccounts.graphql in Resources */,
 				14B8BF7825380A01006CE4B5 /* OpenSans-SemiBold.ttf in Resources */,
 				149AC3C9265B6799003A8439 /* saveTask.graphql in Resources */,
@@ -1561,6 +1593,7 @@
 				148C70E5261C1F1E002D4EAA /* CustomNetworkFetchInterceptor.swift in Sources */,
 				148A09742586FEC500811E35 /* LiteWebSocketDelegate.swift in Sources */,
 				14F2E066263A364900F87C05 /* Array+OTExtension.swift in Sources */,
+				1490928D26632B21008234BA /* TaskAssignmentEntryDataInterface.swift in Sources */,
 				1430FDEC25E4F1E900BD955F /* ContactTableCell.swift in Sources */,
 				148C70DF261C1AEF002D4EAA /* UserManagementInterceptor.swift in Sources */,
 				1425175525510E46006255F1 /* FilterValue.swift in Sources */,
@@ -1612,6 +1645,7 @@
 				1416481325A4FA780008E16B /* RepoStore.swift in Sources */,
 				142EC6A824D6AE01004F7A28 /* AuthenticationView.swift in Sources */,
 				146737AF25D7A02500B64735 /* NoteEditorViewController.swift in Sources */,
+				1490929126632B39008234BA /* TaskAssignmentEntryRemoteDataInterface.swift in Sources */,
 				142ED46E26146C8900BC79A0 /* Configuration.swift in Sources */,
 				143EC398261834F1003ADF97 /* EphemeralSessionManager.swift in Sources */,
 				140AE79924A9AA5C00F7705E /* Account.swift in Sources */,
@@ -1633,6 +1667,7 @@
 				14F4FE14254AA5C600C89485 /* ContactsHelper.swift in Sources */,
 				14EF8D6125FB1C830065BEB3 /* AddFilterView.swift in Sources */,
 				14248071261EE47F00381B83 /* NoteEditorInteractor.swift in Sources */,
+				1490929626632B7F008234BA /* TaskAssignmentEntry.swift in Sources */,
 				141802AD258EF07700E38840 /* AccountDetailsViewController.swift in Sources */,
 				14DEACEF260990B8007E2582 /* CurrentUserOptionsProvider.swift in Sources */,
 				1495EEE72659EB65006A46B9 /* ContactAssignmentEntryDataInterface.swift in Sources */,
@@ -1729,6 +1764,7 @@
 				146A6DCF252C48BE00DA8E85 /* API.swift in Sources */,
 				1480800924EA4AE8007EB6D1 /* Networker.swift in Sources */,
 				141802B5258EF72A00E38840 /* Notification+Extensions.swift in Sources */,
+				149092822663216D008234BA /* DateFormatter+Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

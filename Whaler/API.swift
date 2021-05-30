@@ -1836,6 +1836,149 @@ public final class CreateContactAssignmentEntryMutation: GraphQLMutation {
   }
 }
 
+public final class CreateTaskAssignmentEntryMutation: GraphQLMutation {
+  /// The raw GraphQL definition of this operation.
+  public let operationDefinition: String =
+    """
+    mutation createTaskAssignmentEntry($taskId: ID!, $assignedBy: String!, $assignedTo: String) {
+      taskAssignmentEntry: createTaskAssignmentEntry(
+        input: {taskId: $taskId, assignedBy: $assignedBy, assignedTo: $assignedTo}
+      ) {
+        __typename
+        id
+        createdAt
+        taskId
+        assignedBy
+        assignedTo
+      }
+    }
+    """
+
+  public let operationName: String = "createTaskAssignmentEntry"
+
+  public var taskId: GraphQLID
+  public var assignedBy: String
+  public var assignedTo: String?
+
+  public init(taskId: GraphQLID, assignedBy: String, assignedTo: String? = nil) {
+    self.taskId = taskId
+    self.assignedBy = assignedBy
+    self.assignedTo = assignedTo
+  }
+
+  public var variables: GraphQLMap? {
+    return ["taskId": taskId, "assignedBy": assignedBy, "assignedTo": assignedTo]
+  }
+
+  public struct Data: GraphQLSelectionSet {
+    public static let possibleTypes: [String] = ["Mutation"]
+
+    public static var selections: [GraphQLSelection] {
+      return [
+        GraphQLField("createTaskAssignmentEntry", alias: "taskAssignmentEntry", arguments: ["input": ["taskId": GraphQLVariable("taskId"), "assignedBy": GraphQLVariable("assignedBy"), "assignedTo": GraphQLVariable("assignedTo")]], type: .nonNull(.object(TaskAssignmentEntry.selections))),
+      ]
+    }
+
+    public private(set) var resultMap: ResultMap
+
+    public init(unsafeResultMap: ResultMap) {
+      self.resultMap = unsafeResultMap
+    }
+
+    public init(taskAssignmentEntry: TaskAssignmentEntry) {
+      self.init(unsafeResultMap: ["__typename": "Mutation", "taskAssignmentEntry": taskAssignmentEntry.resultMap])
+    }
+
+    public var taskAssignmentEntry: TaskAssignmentEntry {
+      get {
+        return TaskAssignmentEntry(unsafeResultMap: resultMap["taskAssignmentEntry"]! as! ResultMap)
+      }
+      set {
+        resultMap.updateValue(newValue.resultMap, forKey: "taskAssignmentEntry")
+      }
+    }
+
+    public struct TaskAssignmentEntry: GraphQLSelectionSet {
+      public static let possibleTypes: [String] = ["TaskAssignmentEntry"]
+
+      public static var selections: [GraphQLSelection] {
+        return [
+          GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+          GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
+          GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
+          GraphQLField("taskId", type: .nonNull(.scalar(GraphQLID.self))),
+          GraphQLField("assignedBy", type: .nonNull(.scalar(String.self))),
+          GraphQLField("assignedTo", type: .scalar(String.self)),
+        ]
+      }
+
+      public private(set) var resultMap: ResultMap
+
+      public init(unsafeResultMap: ResultMap) {
+        self.resultMap = unsafeResultMap
+      }
+
+      public init(id: GraphQLID, createdAt: String, taskId: GraphQLID, assignedBy: String, assignedTo: String? = nil) {
+        self.init(unsafeResultMap: ["__typename": "TaskAssignmentEntry", "id": id, "createdAt": createdAt, "taskId": taskId, "assignedBy": assignedBy, "assignedTo": assignedTo])
+      }
+
+      public var __typename: String {
+        get {
+          return resultMap["__typename"]! as! String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "__typename")
+        }
+      }
+
+      public var id: GraphQLID {
+        get {
+          return resultMap["id"]! as! GraphQLID
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "id")
+        }
+      }
+
+      public var createdAt: String {
+        get {
+          return resultMap["createdAt"]! as! String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "createdAt")
+        }
+      }
+
+      public var taskId: GraphQLID {
+        get {
+          return resultMap["taskId"]! as! GraphQLID
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "taskId")
+        }
+      }
+
+      public var assignedBy: String {
+        get {
+          return resultMap["assignedBy"]! as! String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "assignedBy")
+        }
+      }
+
+      public var assignedTo: String? {
+        get {
+          return resultMap["assignedTo"] as? String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "assignedTo")
+        }
+      }
+    }
+  }
+}
+
 public final class NoteQuery: GraphQLQuery {
   /// The raw GraphQL definition of this operation.
   public let operationDefinition: String =
@@ -2703,9 +2846,9 @@ public final class SaveTaskMutation: GraphQLMutation {
   /// The raw GraphQL definition of this operation.
   public let operationDefinition: String =
     """
-    mutation saveTask($id: ID!, $associatedTo: ID, $description: String!, $done: Boolean, $type: String, $dueDate: Time, $assignedTo: String) {
+    mutation saveTask($id: ID!, $createdAt: Time!, $associatedTo: ID, $description: String!, $done: Boolean, $type: String, $dueDate: Time, $assignedTo: String) {
       saveTask(
-        input: {id: $id, associatedTo: $associatedTo, description: $description, done: $done, type: $type, dueDate: $dueDate, assignedTo: $assignedTo}
+        input: {id: $id, createdAt: $createdAt, associatedTo: $associatedTo, description: $description, done: $done, type: $type, dueDate: $dueDate, assignedTo: $assignedTo}
       ) {
         __typename
         id
@@ -2723,6 +2866,7 @@ public final class SaveTaskMutation: GraphQLMutation {
   public let operationName: String = "saveTask"
 
   public var id: GraphQLID
+  public var createdAt: String
   public var associatedTo: GraphQLID?
   public var description: String
   public var done: Bool?
@@ -2730,8 +2874,9 @@ public final class SaveTaskMutation: GraphQLMutation {
   public var dueDate: String?
   public var assignedTo: String?
 
-  public init(id: GraphQLID, associatedTo: GraphQLID? = nil, description: String, done: Bool? = nil, type: String? = nil, dueDate: String? = nil, assignedTo: String? = nil) {
+  public init(id: GraphQLID, createdAt: String, associatedTo: GraphQLID? = nil, description: String, done: Bool? = nil, type: String? = nil, dueDate: String? = nil, assignedTo: String? = nil) {
     self.id = id
+    self.createdAt = createdAt
     self.associatedTo = associatedTo
     self.description = description
     self.done = done
@@ -2741,7 +2886,7 @@ public final class SaveTaskMutation: GraphQLMutation {
   }
 
   public var variables: GraphQLMap? {
-    return ["id": id, "associatedTo": associatedTo, "description": description, "done": done, "type": type, "dueDate": dueDate, "assignedTo": assignedTo]
+    return ["id": id, "createdAt": createdAt, "associatedTo": associatedTo, "description": description, "done": done, "type": type, "dueDate": dueDate, "assignedTo": assignedTo]
   }
 
   public struct Data: GraphQLSelectionSet {
@@ -2749,7 +2894,7 @@ public final class SaveTaskMutation: GraphQLMutation {
 
     public static var selections: [GraphQLSelection] {
       return [
-        GraphQLField("saveTask", arguments: ["input": ["id": GraphQLVariable("id"), "associatedTo": GraphQLVariable("associatedTo"), "description": GraphQLVariable("description"), "done": GraphQLVariable("done"), "type": GraphQLVariable("type"), "dueDate": GraphQLVariable("dueDate"), "assignedTo": GraphQLVariable("assignedTo")]], type: .nonNull(.object(SaveTask.selections))),
+        GraphQLField("saveTask", arguments: ["input": ["id": GraphQLVariable("id"), "createdAt": GraphQLVariable("createdAt"), "associatedTo": GraphQLVariable("associatedTo"), "description": GraphQLVariable("description"), "done": GraphQLVariable("done"), "type": GraphQLVariable("type"), "dueDate": GraphQLVariable("dueDate"), "assignedTo": GraphQLVariable("assignedTo")]], type: .nonNull(.object(SaveTask.selections))),
       ]
     }
 

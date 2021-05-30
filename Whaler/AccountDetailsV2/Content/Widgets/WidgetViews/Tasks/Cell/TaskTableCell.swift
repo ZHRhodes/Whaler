@@ -8,8 +8,10 @@
 
 import Foundation
 import UIKit
+import Combine
 
 protocol TaskTableCellDelegate: AnyObject {
+  func changedDescription(new: String, forTask task: Task)
   func changedDate(newDate: Date, forTask task: Task)
 	func didClickAssignButton(_ button: UIButton, forTask task: Task)
 }
@@ -28,6 +30,9 @@ class TaskTableCell: UITableViewCell {
   private var datePicker = UIDatePicker()
   private var assignedButton = AssignedButton()
   private let dotsButton = UIButton()
+  
+  private let descriptionChangePublisher = PassthroughSubject<String, Never>()
+  private var descriptionChangeCancellable: AnyCancellable?
   
   private var task: Task!
   
@@ -63,6 +68,9 @@ class TaskTableCell: UITableViewCell {
     descriptionTextField.text = task.description
     typeTag.setTitle(task.type, for: .normal)
     setDate(task.dueDate ?? Date())
+    if let assignedTo = Lifecycle.currentUser?.organization?.users.first(where: { $0.id == task.assignedTo }) {
+      assignedButton.assigned(assignedTo)
+    }
   }
   
   func setDate(_ date: Date) {
@@ -104,6 +112,7 @@ class TaskTableCell: UITableViewCell {
   }
   
   private func configureAssignedButton() {
+    assignedButton.titleLabel?.font = .openSans(weight: .semibold, size: 14)
 		assignedButton.addTarget(self, action: #selector(assignButtonTapped), for: .touchUpInside)
     assignedButton.setSize(38)
     contentContainer.addAndAttach(view: assignedButton, attachingEdges: [
@@ -166,12 +175,24 @@ class TaskTableCell: UITableViewCell {
   
   private func configureDescriptionTextField() {
     descriptionTextField.font = .openSans(weight: .regular, size: 18)
+    descriptionTextField.addTarget(self, action: #selector(descriptionChanged), for: .editingChanged)
+    descriptionChangeCancellable = descriptionChangePublisher
+      .debounce(for: .seconds(0.75), scheduler: DispatchQueue.main)
+      .sink { [weak self] (newValue) in
+        guard let strongSelf = self else { return }
+        strongSelf.delegate?.changedDescription(new: newValue, forTask: strongSelf.task)
+    }
     
     contentContainer.addAndAttach(view: descriptionTextField,
                                   height: 25,
                                   attachingEdges: [
                                     .left(20), .right(-20, equalTo: typeTag.leftAnchor), .centerY()
                                   ])
+  }
+  
+  @objc
+  private func descriptionChanged() {
+    descriptionTextField.text.map { descriptionChangePublisher.send($0) }
   }
   
   @objc

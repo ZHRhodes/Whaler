@@ -21,7 +21,7 @@ struct AccountAssignmentEntryRemoteDataSource {
           return
         }
         let accountAssignmentEntry = AccountAssignmentEntry(id: savedEntry.id,
-                                                            createdAt: Date(),//savedEntry.createdAt, //TODO
+                                                            createdAt: DateFormatter.default.date(from: savedEntry.createdAt) ?? Date(),
                                                             accountId: savedEntry.accountId,
                                                             assignedBy: savedEntry.assignedBy,
                                                             assignedTo: savedEntry.assignedTo)

@@ -1,0 +1,9 @@
+mutation createTaskAssignmentEntry($taskId: ID!, $assignedBy: String!, $assignedTo: String) {
+    taskAssignmentEntry: createTaskAssignmentEntry(input:{taskId: $taskId, assignedBy: $assignedBy, assignedTo: $assignedTo}) {
+    id
+    createdAt
+    taskId
+    assignedBy
+    assignedTo
+  }
+}

@@ -8,11 +8,14 @@
 
 import Foundation
 import UIKit
+import Combine
 
 class TasksTableViewController: UIViewController {
   var interactor: TasksTableInteractor!
   private let tableView = UITableView()
   private var datePicker: UIDatePicker?
+  private var dataChangeCancellable: AnyCancellable?
+  private var taskBeingAssigned: Task?
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -22,6 +25,9 @@ class TasksTableViewController: UIViewController {
   
   func configure(with interactor: TasksTableInteractor) {
     self.interactor = interactor
+    dataChangeCancellable = interactor.dataChanged.sink(receiveValue: { [weak self] in
+      self?.tableView.reloadData()
+    })
   }
   
   private func configureTableView() {
@@ -56,12 +62,16 @@ extension TasksTableViewController: UITableViewDelegate, UITableViewDataSource {
 }
 
 extension TasksTableViewController: TaskTableCellDelegate {
+  func changedDescription(new: String, forTask task: Task) {
+    interactor.setDescription(new: new, forTask: task)
+  }
+  
   func changedDate(newDate: Date, forTask task: Task) {
     interactor.setDate(newDate: newDate, forTask: task)
   }
 	
 	func didClickAssignButton(_ button: UIButton, forTask task: Task) {
-//		contactBeingAssigned = contact
+    self.taskBeingAssigned = task
 		let viewController = TablePopoverViewController()
 		viewController.modalPresentationStyle = .popover
 		viewController.provider = OrgUsersProvider()
@@ -75,6 +85,12 @@ extension TasksTableViewController: TaskTableCellDelegate {
 
 extension TasksTableViewController: TablePopoverViewControllerDelegate {
 	func didSelectItem(_ item: SimpleItem) {
-		
+    dismiss(animated: true) { [weak self] in
+      guard let strongSelf = self,
+            let task = strongSelf.taskBeingAssigned,
+            let selectedUser = item as? User else { return }
+      strongSelf.interactor.assign(task: task, to: selectedUser.id)
+      strongSelf.taskBeingAssigned = nil
+    }
 	}
 }

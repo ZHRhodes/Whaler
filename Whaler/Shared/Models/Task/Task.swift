@@ -17,4 +17,22 @@ struct Task: Codable, RepoStorable {
   var type: String?
   var dueDate: Date?
   var assignedTo: String
+  
+  init(id: String = UUID().uuidString.lowercased(),
+       createdAt: Date = Date(),
+       associatedTo: String?,
+       description: String,
+       done: Bool,
+       type: String?,
+       dueDate: Date?,
+       assignedTo: String) {
+    self.id = id
+    self.createdAt = createdAt
+    self.associatedTo = associatedTo
+    self.description = description
+    self.done = done
+    self.type = type
+    self.dueDate = dueDate
+    self.assignedTo = assignedTo
+  }
 }

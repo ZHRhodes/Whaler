@@ -177,8 +177,5 @@ extension ContactsTableViewController: TablePopoverViewControllerDelegate {
     Graph.shared.apollo.perform(mutation: mutation) { result in
       Log.info(String(reflecting: result))
     }
-//    let input = CreateContactAssignmentEntryMutation
-//    let mutation = CreateContactAssignmentEntryMutation()
-//    Graph.shared.apollo.mutation(mutation)
   }
 }

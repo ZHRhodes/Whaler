@@ -20,7 +20,7 @@ struct TaskRemoteDataSource {
                                      humanReadableMessage: nil)))
           return
         }
-        let formatter = DateFormatter()
+        let formatter = DateFormatter.default
         let tasks = resultTasks.map { task -> Task in
           let createdDate = formatter.date(from: task.createdAt)
 
@@ -45,13 +45,15 @@ struct TaskRemoteDataSource {
   
   func save(task: Task) -> AnyPublisher<Task, RepoError> {
     return Future<Task, RepoError> { promise in
-      let formatter = DateFormatter()
+      let formatter = DateFormatter.default
       var dueDate: String?
       if task.dueDate != nil {
         dueDate = formatter.string(from: task.dueDate!)
       }
+      let createdAtString = formatter.string(from: task.createdAt)
 
       let mutation = SaveTaskMutation(id: task.id,
+                                      createdAt: createdAtString,
                                       associatedTo: task.associatedTo,
                                       description: task.description,
                                       done: task.done,
@@ -66,7 +68,7 @@ struct TaskRemoteDataSource {
           return
         }
         
-        let formatter = DateFormatter()
+        let formatter = DateFormatter.default
         let createdDate = formatter.date(from: task.createdAt)
 
         var dueDate: Date?

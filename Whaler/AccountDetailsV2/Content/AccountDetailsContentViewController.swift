@@ -92,11 +92,6 @@ class AccountDetailsContentViewController: UIViewController {
     
     NSLayoutConstraint.activate(constraints)
   }
-  
-  @objc
-  private func addTask() {
-    
-  }
 }
 
 extension AccountDetailsContentViewController: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
@@ -115,9 +110,10 @@ extension AccountDetailsContentViewController: UICollectionViewDelegateFlowLayou
       gridView.configure(with: detailsProvider)
       cell.configure(title: "ACCOUNT DETAILS", content: gridView)
     case .tasks(let tasksProvider):
-      let interactor = TasksTableInteractor()
+      let interactor = TasksTableInteractor(associatedObjectId: self.interactor.account.id)
       tasksVC.configure(with: interactor)
       let button = AddTaskButton(frame: .zero)
+      button.addTarget(interactor, action: #selector(interactor.addTask), for: .touchUpInside)
       cell.configure(title: "TASKS", accessoryButton: button, content: tasksVC.view)
     case .contacts(let contactsProvider):
 			let interactor = AccountDetailsContactsInteractor(dataManager: self.interactor.dataManager)
