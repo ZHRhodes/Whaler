@@ -141,6 +141,10 @@
 		1490928D26632B21008234BA /* TaskAssignmentEntryDataInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1490928C26632B21008234BA /* TaskAssignmentEntryDataInterface.swift */; };
 		1490929126632B39008234BA /* TaskAssignmentEntryRemoteDataInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1490929026632B39008234BA /* TaskAssignmentEntryRemoteDataInterface.swift */; };
 		1490929626632B7F008234BA /* TaskAssignmentEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1490929526632B7F008234BA /* TaskAssignmentEntry.swift */; };
+		1490929A266332ED008234BA /* TaskTypesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14909299266332ED008234BA /* TaskTypesProvider.swift */; };
+		1490929E26633308008234BA /* TaskType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1490929D26633308008234BA /* TaskType.swift */; };
+		149092A32663393C008234BA /* TaskOptionsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149092A22663393C008234BA /* TaskOptionsProvider.swift */; };
+		149092A926633979008234BA /* TaskOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149092A826633979008234BA /* TaskOption.swift */; };
 		1495EED92659DC3F006A46B9 /* AssignedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1495EED82659DC3F006A46B9 /* AssignedButton.swift */; };
 		1495EEE72659EB65006A46B9 /* ContactAssignmentEntryDataInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1495EEE62659EB65006A46B9 /* ContactAssignmentEntryDataInterface.swift */; };
 		1495EEEB2659EBA7006A46B9 /* ContactAssignmentEntryRemoteDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1495EEEA2659EBA7006A46B9 /* ContactAssignmentEntryRemoteDataSource.swift */; };
@@ -374,6 +378,10 @@
 		1490928C26632B21008234BA /* TaskAssignmentEntryDataInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskAssignmentEntryDataInterface.swift; sourceTree = "<group>"; };
 		1490929026632B39008234BA /* TaskAssignmentEntryRemoteDataInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskAssignmentEntryRemoteDataInterface.swift; sourceTree = "<group>"; };
 		1490929526632B7F008234BA /* TaskAssignmentEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskAssignmentEntry.swift; sourceTree = "<group>"; };
+		14909299266332ED008234BA /* TaskTypesProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskTypesProvider.swift; sourceTree = "<group>"; };
+		1490929D26633308008234BA /* TaskType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskType.swift; sourceTree = "<group>"; };
+		149092A22663393C008234BA /* TaskOptionsProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskOptionsProvider.swift; sourceTree = "<group>"; };
+		149092A826633979008234BA /* TaskOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskOption.swift; sourceTree = "<group>"; };
 		1495EED82659DC3F006A46B9 /* AssignedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignedButton.swift; sourceTree = "<group>"; };
 		1495EEE62659EB65006A46B9 /* ContactAssignmentEntryDataInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactAssignmentEntryDataInterface.swift; sourceTree = "<group>"; };
 		1495EEEA2659EBA7006A46B9 /* ContactAssignmentEntryRemoteDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactAssignmentEntryRemoteDataSource.swift; sourceTree = "<group>"; };
@@ -1069,6 +1077,15 @@
 			path = TaskAssignmentEntry;
 			sourceTree = "<group>";
 		};
+		149092A126633925008234BA /* Providers */ = {
+			isa = PBXGroup;
+			children = (
+				14909299266332ED008234BA /* TaskTypesProvider.swift */,
+				149092A22663393C008234BA /* TaskOptionsProvider.swift */,
+			);
+			path = Providers;
+			sourceTree = "<group>";
+		};
 		1495EED72659DC2F006A46B9 /* AssignedButton */ = {
 			isa = PBXGroup;
 			children = (
@@ -1109,6 +1126,9 @@
 			isa = PBXGroup;
 			children = (
 				149AC3DF265B77F5003A8439 /* Task.swift */,
+				1490929D26633308008234BA /* TaskType.swift */,
+				149092A826633979008234BA /* TaskOption.swift */,
+				149092A126633925008234BA /* Providers */,
 			);
 			path = Task;
 			sourceTree = "<group>";
@@ -1612,6 +1632,7 @@
 				1416481725A4FA970008E16B /* DataInterface.swift in Sources */,
 				14D4A2E72574CA7E003EFF61 /* EditorToolbar.swift in Sources */,
 				14A2834724DE510D0016BA82 /* SF.swift in Sources */,
+				149092A32663393C008234BA /* TaskOptionsProvider.swift in Sources */,
 				146834FF24DA99810075B639 /* CommonTextField.swift in Sources */,
 				146C35D924C5689B00DBCA23 /* ContactRowView.swift in Sources */,
 				14D8811B265E1AE2004556A9 /* TaskRemoteDataInterface.swift in Sources */,
@@ -1658,6 +1679,7 @@
 				149F3A0B25209575001F38BF /* UIView+Extensions.swift in Sources */,
 				14EF8D4125F93BA00065BEB3 /* CellTextBox.swift in Sources */,
 				146A6DDA252C563200DA8E85 /* SFNetworkInterface.swift in Sources */,
+				1490929A266332ED008234BA /* TaskTypesProvider.swift in Sources */,
 				14D8810E265DF6DA004556A9 /* CircleCheckbox.swift in Sources */,
 				14EF8D5825F9BCED0065BEB3 /* PageSelectorView.swift in Sources */,
 				149F3A0025206AE4001F38BF /* MainCollectionCell.swift in Sources */,
@@ -1700,6 +1722,7 @@
 				147EB86B2593C950002B93D8 /* Repository.swift in Sources */,
 				146C35CF24C2CA9700DBCA23 /* TitleValueView.swift in Sources */,
 				146C35D324C557C800DBCA23 /* CompanyInfoValuesView.swift in Sources */,
+				1490929E26633308008234BA /* TaskType.swift in Sources */,
 				14CCB6B32637B3630024C500 /* DocumentChangeMsg.swift in Sources */,
 				149A093326390C5600AE429C /* OTOp.swift in Sources */,
 				1467379B25D79B3B00B64735 /* RepoError.swift in Sources */,
@@ -1745,6 +1768,7 @@
 				141F796925327503005F9295 /* Graph.swift in Sources */,
 				14B037E525073EBA00BA488D /* Tokens.swift in Sources */,
 				1410404F25EB382400D8C793 /* AccountDetailsContentInteractor.swift in Sources */,
+				149092A926633979008234BA /* TaskOption.swift in Sources */,
 				14248066261EDE8500381B83 /* Note.swift in Sources */,
 				149A092F2639089A00AE429C /* OTDoc.swift in Sources */,
 				14A7E82A26562B990007BAFD /* AccountWidget.swift in Sources */,

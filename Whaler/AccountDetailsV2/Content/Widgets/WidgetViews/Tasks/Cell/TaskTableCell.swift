@@ -11,9 +11,12 @@ import UIKit
 import Combine
 
 protocol TaskTableCellDelegate: AnyObject {
+  func changedDone(new: Bool, forTask task: Task)
   func changedDescription(new: String, forTask task: Task)
-  func changedDate(newDate: Date, forTask task: Task)
+  func changedDate(new: Date, forTask task: Task)
+  func didClickTypeButton(_ button: UIButton, forTask task: Task)
 	func didClickAssignButton(_ button: UIButton, forTask task: Task)
+  func didClickOptionsButton(_ button: UIButton, forTask task: Task)
 }
 
 class TaskTableCell: UITableViewCell {
@@ -33,6 +36,8 @@ class TaskTableCell: UITableViewCell {
   
   private let descriptionChangePublisher = PassthroughSubject<String, Never>()
   private var descriptionChangeCancellable: AnyCancellable?
+  
+  private let placeholderDescription = "Enter a description…"
   
   private var task: Task!
   
@@ -65,15 +70,22 @@ class TaskTableCell: UITableViewCell {
   }
   
   func setValues(using task: Task) {
+    doneButton.setToggle(on: task.done)
     descriptionTextField.text = task.description
-    typeTag.setTitle(task.type, for: .normal)
-    setDate(task.dueDate ?? Date())
-    if let assignedTo = Lifecycle.currentUser?.organization?.users.first(where: { $0.id == task.assignedTo }) {
-      assignedButton.assigned(assignedTo)
+    if descriptionTextField.text == "" {
+      descriptionTextField.text = placeholderDescription
     }
+    typeTag.setTitle(task.type?.name ?? "—", for: .normal)
+    setDate(task.dueDate)
+    let assignedTo = Lifecycle.currentUser?.organization?.users.first(where: { $0.id == task.assignedTo })
+    assignedButton.assigned(assignedTo)
   }
   
-  func setDate(_ date: Date) {
+  func setDate(_ date: Date?) {
+    guard let date = date else {
+      dueDateTag.setTitle("—", for: .normal)
+      return
+    }
     let formatter = DateFormatter()
     formatter.dateFormat = "MMM dd"
     let formattedDate = formatter.string(from: date)
@@ -103,6 +115,7 @@ class TaskTableCell: UITableViewCell {
   }
   
   private func configureDotsButton() {
+    dotsButton.addTarget(self, action: #selector(dotsButtonTapped), for: .touchUpInside)
     dotsButton.setImage(UIImage(named: "tripleDots"), for: .normal)
     dotsButton.tintColor = .primaryText
     
@@ -164,9 +177,11 @@ class TaskTableCell: UITableViewCell {
       .top(), .bottom(), .left(10), .right(-10)
     ])
     
+    typeTag.setTitle("—", for: .normal)
     typeTag.setTitleColor(.brandPurple, for: .normal)
     typeTag.titleLabel?.font = .openSans(weight: .semibold, size: 18)
     typeTag.setContentHuggingPriority(.required, for: .horizontal)
+    typeTag.addTarget(self, action: #selector(typeClicked), for: .touchUpInside)
     
     contentContainer.addAndAttach(view: container, height: 38, attachingEdges: [
       .centerY(), .right(-34, equalTo: dueDateTag.leftAnchor)
@@ -176,6 +191,7 @@ class TaskTableCell: UITableViewCell {
   private func configureDescriptionTextField() {
     descriptionTextField.font = .openSans(weight: .regular, size: 18)
     descriptionTextField.addTarget(self, action: #selector(descriptionChanged), for: .editingChanged)
+    descriptionTextField.delegate = self
     descriptionChangeCancellable = descriptionChangePublisher
       .debounce(for: .seconds(0.75), scheduler: DispatchQueue.main)
       .sink { [weak self] (newValue) in
@@ -197,17 +213,43 @@ class TaskTableCell: UITableViewCell {
   
   @objc
   func doneToggled() {
-    doneButton.toggle()
+    let newValue = !task.done
+    delegate?.changedDone(new: newValue, forTask: task)
+    doneButton.setToggle(on: newValue)
+  }
+  
+  @objc
+  func typeClicked() {
+    delegate?.didClickTypeButton(typeTag, forTask: task)
   }
   
   @objc
   func dateSelected(sender: UIDatePicker, forEvent event: UIEvent) {
     setDate(sender.date)
-    delegate?.changedDate(newDate: sender.date, forTask: task)
+    delegate?.changedDate(new: sender.date, forTask: task)
   }
 	
 	@objc
 	func assignButtonTapped() {
 		delegate?.didClickAssignButton(assignedButton, forTask: task)
 	}
+  
+  @objc
+  func dotsButtonTapped() {
+    delegate?.didClickOptionsButton(dotsButton, forTask: task)
+  }
+}
+
+extension TaskTableCell: UITextFieldDelegate {
+  func textFieldDidBeginEditing(_ textField: UITextField) {
+    if textField.text == placeholderDescription {
+      textField.text = ""
+    }
+  }
+
+  func textFieldDidEndEditing(_ textField: UITextField) {
+    if textField.text == "" {
+      textField.text = placeholderDescription
+    }
+  }
 }

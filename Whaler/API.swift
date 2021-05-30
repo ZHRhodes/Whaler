@@ -2846,13 +2846,14 @@ public final class SaveTaskMutation: GraphQLMutation {
   /// The raw GraphQL definition of this operation.
   public let operationDefinition: String =
     """
-    mutation saveTask($id: ID!, $createdAt: Time!, $associatedTo: ID, $description: String!, $done: Boolean, $type: String, $dueDate: Time, $assignedTo: String) {
+    mutation saveTask($id: ID!, $createdAt: Time!, $deletedAt: Time, $associatedTo: ID, $description: String!, $done: Boolean, $type: String, $dueDate: Time, $assignedTo: String) {
       saveTask(
-        input: {id: $id, createdAt: $createdAt, associatedTo: $associatedTo, description: $description, done: $done, type: $type, dueDate: $dueDate, assignedTo: $assignedTo}
+        input: {id: $id, createdAt: $createdAt, deletedAt: $deletedAt, associatedTo: $associatedTo, description: $description, done: $done, type: $type, dueDate: $dueDate, assignedTo: $assignedTo}
       ) {
         __typename
         id
         createdAt
+        deletedAt
         associatedTo
         description
         done
@@ -2867,6 +2868,7 @@ public final class SaveTaskMutation: GraphQLMutation {
 
   public var id: GraphQLID
   public var createdAt: String
+  public var deletedAt: String?
   public var associatedTo: GraphQLID?
   public var description: String
   public var done: Bool?
@@ -2874,9 +2876,10 @@ public final class SaveTaskMutation: GraphQLMutation {
   public var dueDate: String?
   public var assignedTo: String?
 
-  public init(id: GraphQLID, createdAt: String, associatedTo: GraphQLID? = nil, description: String, done: Bool? = nil, type: String? = nil, dueDate: String? = nil, assignedTo: String? = nil) {
+  public init(id: GraphQLID, createdAt: String, deletedAt: String? = nil, associatedTo: GraphQLID? = nil, description: String, done: Bool? = nil, type: String? = nil, dueDate: String? = nil, assignedTo: String? = nil) {
     self.id = id
     self.createdAt = createdAt
+    self.deletedAt = deletedAt
     self.associatedTo = associatedTo
     self.description = description
     self.done = done
@@ -2886,7 +2889,7 @@ public final class SaveTaskMutation: GraphQLMutation {
   }
 
   public var variables: GraphQLMap? {
-    return ["id": id, "createdAt": createdAt, "associatedTo": associatedTo, "description": description, "done": done, "type": type, "dueDate": dueDate, "assignedTo": assignedTo]
+    return ["id": id, "createdAt": createdAt, "deletedAt": deletedAt, "associatedTo": associatedTo, "description": description, "done": done, "type": type, "dueDate": dueDate, "assignedTo": assignedTo]
   }
 
   public struct Data: GraphQLSelectionSet {
@@ -2894,7 +2897,7 @@ public final class SaveTaskMutation: GraphQLMutation {
 
     public static var selections: [GraphQLSelection] {
       return [
-        GraphQLField("saveTask", arguments: ["input": ["id": GraphQLVariable("id"), "createdAt": GraphQLVariable("createdAt"), "associatedTo": GraphQLVariable("associatedTo"), "description": GraphQLVariable("description"), "done": GraphQLVariable("done"), "type": GraphQLVariable("type"), "dueDate": GraphQLVariable("dueDate"), "assignedTo": GraphQLVariable("assignedTo")]], type: .nonNull(.object(SaveTask.selections))),
+        GraphQLField("saveTask", arguments: ["input": ["id": GraphQLVariable("id"), "createdAt": GraphQLVariable("createdAt"), "deletedAt": GraphQLVariable("deletedAt"), "associatedTo": GraphQLVariable("associatedTo"), "description": GraphQLVariable("description"), "done": GraphQLVariable("done"), "type": GraphQLVariable("type"), "dueDate": GraphQLVariable("dueDate"), "assignedTo": GraphQLVariable("assignedTo")]], type: .nonNull(.object(SaveTask.selections))),
       ]
     }
 
@@ -2925,6 +2928,7 @@ public final class SaveTaskMutation: GraphQLMutation {
           GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
           GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
           GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
+          GraphQLField("deletedAt", type: .scalar(String.self)),
           GraphQLField("associatedTo", type: .scalar(GraphQLID.self)),
           GraphQLField("description", type: .nonNull(.scalar(String.self))),
           GraphQLField("done", type: .nonNull(.scalar(Bool.self))),
@@ -2940,8 +2944,8 @@ public final class SaveTaskMutation: GraphQLMutation {
         self.resultMap = unsafeResultMap
       }
 
-      public init(id: GraphQLID, createdAt: String, associatedTo: GraphQLID? = nil, description: String, done: Bool, type: String? = nil, dueDate: String? = nil, assignedTo: String? = nil) {
-        self.init(unsafeResultMap: ["__typename": "Task", "id": id, "createdAt": createdAt, "associatedTo": associatedTo, "description": description, "done": done, "type": type, "dueDate": dueDate, "assignedTo": assignedTo])
+      public init(id: GraphQLID, createdAt: String, deletedAt: String? = nil, associatedTo: GraphQLID? = nil, description: String, done: Bool, type: String? = nil, dueDate: String? = nil, assignedTo: String? = nil) {
+        self.init(unsafeResultMap: ["__typename": "Task", "id": id, "createdAt": createdAt, "deletedAt": deletedAt, "associatedTo": associatedTo, "description": description, "done": done, "type": type, "dueDate": dueDate, "assignedTo": assignedTo])
       }
 
       public var __typename: String {
@@ -2968,6 +2972,15 @@ public final class SaveTaskMutation: GraphQLMutation {
         }
         set {
           resultMap.updateValue(newValue, forKey: "createdAt")
+        }
+      }
+
+      public var deletedAt: String? {
+        get {
+          return resultMap["deletedAt"] as? String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "deletedAt")
         }
       }
 
@@ -3037,6 +3050,7 @@ public final class TasksQuery: GraphQLQuery {
         __typename
         id
         createdAt
+        deletedAt
         associatedTo
         description
         done
@@ -3095,6 +3109,7 @@ public final class TasksQuery: GraphQLQuery {
           GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
           GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
           GraphQLField("createdAt", type: .nonNull(.scalar(String.self))),
+          GraphQLField("deletedAt", type: .scalar(String.self)),
           GraphQLField("associatedTo", type: .scalar(GraphQLID.self)),
           GraphQLField("description", type: .nonNull(.scalar(String.self))),
           GraphQLField("done", type: .nonNull(.scalar(Bool.self))),
@@ -3110,8 +3125,8 @@ public final class TasksQuery: GraphQLQuery {
         self.resultMap = unsafeResultMap
       }
 
-      public init(id: GraphQLID, createdAt: String, associatedTo: GraphQLID? = nil, description: String, done: Bool, type: String? = nil, dueDate: String? = nil, assignedTo: String? = nil) {
-        self.init(unsafeResultMap: ["__typename": "Task", "id": id, "createdAt": createdAt, "associatedTo": associatedTo, "description": description, "done": done, "type": type, "dueDate": dueDate, "assignedTo": assignedTo])
+      public init(id: GraphQLID, createdAt: String, deletedAt: String? = nil, associatedTo: GraphQLID? = nil, description: String, done: Bool, type: String? = nil, dueDate: String? = nil, assignedTo: String? = nil) {
+        self.init(unsafeResultMap: ["__typename": "Task", "id": id, "createdAt": createdAt, "deletedAt": deletedAt, "associatedTo": associatedTo, "description": description, "done": done, "type": type, "dueDate": dueDate, "assignedTo": assignedTo])
       }
 
       public var __typename: String {
@@ -3138,6 +3153,15 @@ public final class TasksQuery: GraphQLQuery {
         }
         set {
           resultMap.updateValue(newValue, forKey: "createdAt")
+        }
+      }
+
+      public var deletedAt: String? {
+        get {
+          return resultMap["deletedAt"] as? String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "deletedAt")
         }
       }
 

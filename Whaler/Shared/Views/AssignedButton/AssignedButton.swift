@@ -41,7 +41,11 @@ class AssignedButton: UIButton {
     setTitle("—", for: .normal)
   }
   
-  func assigned(_ new: NameAndColorProviding) {
+  func assigned(_ new: NameAndColorProviding?) {
+    guard let new = new else {
+      reset()
+      return
+    }
     setTitle(new.initials, for: .normal)
     backgroundColor = new.color
   }

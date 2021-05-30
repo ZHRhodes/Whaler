@@ -15,7 +15,7 @@ class TasksTableViewController: UIViewController {
   private let tableView = UITableView()
   private var datePicker: UIDatePicker?
   private var dataChangeCancellable: AnyCancellable?
-  private var taskBeingAssigned: Task?
+  private var displayingPopupForTask: Task?
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -62,16 +62,20 @@ extension TasksTableViewController: UITableViewDelegate, UITableViewDataSource {
 }
 
 extension TasksTableViewController: TaskTableCellDelegate {
+  func changedDone(new: Bool, forTask task: Task) {
+    interactor.setDone(new: new, forTask: task)
+  }
+  
   func changedDescription(new: String, forTask task: Task) {
     interactor.setDescription(new: new, forTask: task)
   }
   
-  func changedDate(newDate: Date, forTask task: Task) {
-    interactor.setDate(newDate: newDate, forTask: task)
+  func changedDate(new: Date, forTask task: Task) {
+    interactor.setDate(new: new, forTask: task)
   }
 	
 	func didClickAssignButton(_ button: UIButton, forTask task: Task) {
-    self.taskBeingAssigned = task
+    self.displayingPopupForTask = task
 		let viewController = TablePopoverViewController()
 		viewController.modalPresentationStyle = .popover
 		viewController.provider = OrgUsersProvider()
@@ -81,16 +85,50 @@ extension TasksTableViewController: TaskTableCellDelegate {
 		popoverVC?.permittedArrowDirections = [.left, .up, .right]
 		popoverVC?.sourceView = button
 	}
+  
+  func didClickTypeButton(_ button: UIButton, forTask task: Task) {
+    self.displayingPopupForTask = task
+    let viewController = TablePopoverViewController()
+    viewController.modalPresentationStyle = .popover
+    viewController.provider = TaskTypesProvider()
+    viewController.delegate = self
+    present(viewController, animated: true, completion: nil)
+    let popoverVC = viewController.popoverPresentationController
+    popoverVC?.permittedArrowDirections = [.left, .up, .right]
+    popoverVC?.sourceView = button
+  }
+  
+  func didClickOptionsButton(_ button: UIButton, forTask task: Task) {
+    self.displayingPopupForTask = task
+    let viewController = TablePopoverViewController()
+    viewController.modalPresentationStyle = .popover
+    viewController.provider = TaskOptionsProvider()
+    viewController.delegate = self
+    present(viewController, animated: true, completion: nil)
+    let popoverVC = viewController.popoverPresentationController
+    popoverVC?.permittedArrowDirections = [.left, .up, .right]
+    popoverVC?.sourceView = button
+  }
 }
 
 extension TasksTableViewController: TablePopoverViewControllerDelegate {
 	func didSelectItem(_ item: SimpleItem) {
     dismiss(animated: true) { [weak self] in
       guard let strongSelf = self,
-            let task = strongSelf.taskBeingAssigned,
-            let selectedUser = item as? User else { return }
-      strongSelf.interactor.assign(task: task, to: selectedUser.id)
-      strongSelf.taskBeingAssigned = nil
+            let task = strongSelf.displayingPopupForTask else { return }
+
+      if let selectedUser = item as? User {
+        strongSelf.interactor.assign(task: task, to: selectedUser.id)
+        strongSelf.displayingPopupForTask = nil
+      } else if let selectedType = item as? TaskType {
+        strongSelf.interactor.setType(new: selectedType, forTask: task)
+        strongSelf.displayingPopupForTask = nil
+      } else if let selectedOption = item as? TaskOption {
+        switch selectedOption {
+        case .delete:
+          strongSelf.interactor.delete(task: task)
+        }
+      }
     }
 	}
 }

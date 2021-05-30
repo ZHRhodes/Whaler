@@ -2,6 +2,7 @@ query tasks($associatedTo: ID!) {
   tasks(associatedTo: $associatedTo) {
     id
     createdAt
+    deletedAt
     associatedTo
     description
     done

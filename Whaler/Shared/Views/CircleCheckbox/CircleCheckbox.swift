@@ -45,4 +45,8 @@ class CircleCheckbox: UIButton {
   func toggle() {
     fillView.isHidden = !fillView.isHidden
   }
+  
+  func setToggle(on: Bool) {
+    fillView.isHidden = !on
+  }
 }

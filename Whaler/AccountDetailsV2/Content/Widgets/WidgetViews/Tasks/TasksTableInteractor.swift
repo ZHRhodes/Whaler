@@ -26,21 +26,33 @@ class TasksTableInteractor {
       .fetchSubset(with: associatedTo)
       .sink(receiveCompletion: { _ in },
             receiveValue: { [weak self] (tasks) in
-              self?.tasks = tasks
+              self?.setTasks(new: tasks)
               self?.dataChanged.send()
             })
       .store(in: &bag)
   }
   
-  func setDate(newDate: Date, forTask task: Task) {
+  func setDone(new: Bool, forTask task: Task) {
     var task = task
-    task.dueDate = newDate
+    task.done = new
+    save(task)
+  }
+  
+  func setDate(new: Date, forTask task: Task) {
+    var task = task
+    task.dueDate = new
     save(task)
   }
   
   func setDescription(new: String, forTask task: Task) {
     var task = task
     task.description = new
+    save(task)
+  }
+  
+  func setType(new: TaskType, forTask task: Task) {
+    var task = task
+    task.type = new
     save(task)
   }
   
@@ -54,28 +66,79 @@ class TasksTableInteractor {
       .save(taskAssignmentEntry)
       .sink(receiveCompletion: { _ in },
             receiveValue: { [weak self] (_) in
-              self?.upsert(task: task)
+              self?.updateData(with: task)
               self?.dataChanged.send()
             })
       .store(in: &bag)
   }
   
-  func save(_ task: Task) {
+  func delete(task: Task) {
+    var task = task
+    task.deletedAt = Date()
+    save(task)
+  }
+  
+  private func setTasks(new tasks: [Task]) {
+    self.tasks = orderChronologicalMovingDoneToBottom(tasks: tasks)
+  }
+  
+  private func orderChronologicalMovingDoneToBottom(tasks: [Task]) -> [Task] {
+    var notDone = [Task]()
+    var done = [Task]()
+  
+    for task in tasks {
+      if task.done {
+        done.append(task)
+      } else {
+        notDone.append(task)
+      }
+    }
+    
+    notDone.sort(by: { (a, b) -> Bool in
+      var aSortDate = a.dueDate
+      var bSortDate = b.dueDate
+      
+      if aSortDate == bSortDate {
+        aSortDate = b.createdAt
+        bSortDate = a.createdAt
+      }
+      
+      if aSortDate == nil {
+        return true
+      }
+      
+      if bSortDate == nil {
+        return false
+      }
+      
+      return aSortDate! < bSortDate!
+    })
+    
+    return notDone + done
+  }
+  
+  private func save(_ task: Task) {
     repoStore
       .taskRepository
       .save(task)
       .sink(receiveCompletion: { _ in },
             receiveValue: { [weak self] (tasks) in
-              guard let savedTask = tasks.first else { return }
-              self?.upsert(task: savedTask)
-              self?.dataChanged.send()
+              guard let strongSelf = self,
+                    let savedTask = tasks.first else { return }
+              strongSelf.updateData(with: savedTask)
+              strongSelf.setTasks(new: strongSelf.tasks)
+              strongSelf.dataChanged.send()
             })
       .store(in: &bag)
   }
   
-  private func upsert(task: Task) {
+  private func updateData(with task: Task) {
     if let existingIndex = tasks.firstIndex(where: { $0.id == task.id }) {
-      tasks[existingIndex] = task
+      if task.deletedAt != nil {
+        tasks.remove(at: existingIndex)
+      } else {
+        tasks[existingIndex] = task
+      }
     } else {
       tasks.append(task)
     }

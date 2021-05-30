@@ -23,18 +23,29 @@ struct TaskRemoteDataSource {
         let formatter = DateFormatter.default
         let tasks = resultTasks.map { task -> Task in
           let createdDate = formatter.date(from: task.createdAt)
+          
+          var deletedDate: Date?
+          if let deletedDateString = task.deletedAt {
+            deletedDate = formatter.date(from: deletedDateString)
+          }
 
           var dueDate: Date?
           if task.dueDate != nil {
             dueDate = formatter.date(from: task.dueDate!)
           }
+          
+          var type: TaskType?
+          if let typeString = task.type {
+            type = TaskType(rawValue: typeString)
+          }
 
           return Task(id: task.id,
                       createdAt: createdDate ?? Date(),
+                      deletedAt: deletedDate,
                       associatedTo: task.associatedTo,
                       description: task.description,
                       done: task.done,
-                      type: task.type,
+                      type: type,
                       dueDate: dueDate,
                       assignedTo: task.assignedTo ?? "")
         }
@@ -51,13 +62,15 @@ struct TaskRemoteDataSource {
         dueDate = formatter.string(from: task.dueDate!)
       }
       let createdAtString = formatter.string(from: task.createdAt)
+      let deletedAtString = task.deletedAt.map { formatter.string(from: $0) }
 
       let mutation = SaveTaskMutation(id: task.id,
                                       createdAt: createdAtString,
+                                      deletedAt: deletedAtString,
                                       associatedTo: task.associatedTo,
                                       description: task.description,
                                       done: task.done,
-                                      type: task.type,
+                                      type: task.type?.rawValue,
                                       dueDate: dueDate,
                                       assignedTo: task.assignedTo)
       Graph.shared.apollo.perform(mutation: mutation) { result in
@@ -69,6 +82,12 @@ struct TaskRemoteDataSource {
         }
         
         let formatter = DateFormatter.default
+        
+        var deletedDate: Date?
+        if let deletedAtString = task.deletedAt {
+          deletedDate = formatter.date(from: deletedAtString)
+        }
+        
         let createdDate = formatter.date(from: task.createdAt)
 
         var dueDate: Date?
@@ -76,13 +95,19 @@ struct TaskRemoteDataSource {
           dueDate = formatter.date(from: task.dueDate!)
         }
         
+        var type: TaskType?
+        if let typeString = task.type {
+          type = TaskType(rawValue: typeString)
+        }
+        
         promise(.success(
           Task(id: task.id,
                createdAt: createdDate ?? Date(),
+               deletedAt: deletedDate,
                associatedTo: task.associatedTo,
                description: task.description,
                done: task.done,
-               type: task.type,
+               type: type,
                dueDate: dueDate,
                assignedTo: task.assignedTo ?? ""))
         )

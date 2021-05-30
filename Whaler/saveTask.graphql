@@ -1,7 +1,8 @@
-mutation saveTask($id: ID!, $createdAt: Time!, $associatedTo: ID, $description: String!, $done: Boolean, $type: String, $dueDate: Time, $assignedTo: String) {
-  saveTask(input: {id: $id, createdAt: $createdAt, associatedTo: $associatedTo, description: $description, done: $done, type: $type, dueDate: $dueDate, assignedTo: $assignedTo}) {
+mutation saveTask($id: ID!, $createdAt: Time!, $deletedAt: Time, $associatedTo: ID, $description: String!, $done: Boolean, $type: String, $dueDate: Time, $assignedTo: String) {
+  saveTask(input: {id: $id, createdAt: $createdAt, deletedAt: $deletedAt, associatedTo: $associatedTo, description: $description, done: $done, type: $type, dueDate: $dueDate, assignedTo: $assignedTo}) {
     id
     createdAt
+    deletedAt
     associatedTo
     description
     done
