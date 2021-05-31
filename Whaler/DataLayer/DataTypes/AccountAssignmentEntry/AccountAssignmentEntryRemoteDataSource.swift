@@ -12,7 +12,8 @@ import Combine
 struct AccountAssignmentEntryRemoteDataSource {
   func save(_ entry: AccountAssignmentEntry) -> AnyPublisher<AccountAssignmentEntry, RepoError> {
     return Future<AccountAssignmentEntry, RepoError> { promise in
-      let mutation = CreateAccountAssignmentEntryMutation(accountId: entry.accountId,
+      let mutation = CreateAccountAssignmentEntryMutation(senderID: clientId,
+                                                          accountId: entry.accountId,
                                                           assignedBy: entry.assignedBy,
                                                           assignedTo: entry.assignedTo)
       Graph.shared.apollo.perform(mutation: mutation) { result in

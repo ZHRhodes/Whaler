@@ -1337,8 +1337,9 @@ public final class CreateAccountAssignmentEntryMutation: GraphQLMutation {
   /// The raw GraphQL definition of this operation.
   public let operationDefinition: String =
     """
-    mutation createAccountAssignmentEntry($accountId: ID!, $assignedBy: String!, $assignedTo: String) {
+    mutation createAccountAssignmentEntry($senderID: ID, $accountId: ID!, $assignedBy: String!, $assignedTo: String) {
       accountAssignmentEntry: createAccountAssignmentEntry(
+        senderID: $senderID
         input: {accountId: $accountId, assignedBy: $assignedBy, assignedTo: $assignedTo}
       ) {
         __typename
@@ -1353,18 +1354,20 @@ public final class CreateAccountAssignmentEntryMutation: GraphQLMutation {
 
   public let operationName: String = "createAccountAssignmentEntry"
 
+  public var senderID: GraphQLID?
   public var accountId: GraphQLID
   public var assignedBy: String
   public var assignedTo: String?
 
-  public init(accountId: GraphQLID, assignedBy: String, assignedTo: String? = nil) {
+  public init(senderID: GraphQLID? = nil, accountId: GraphQLID, assignedBy: String, assignedTo: String? = nil) {
+    self.senderID = senderID
     self.accountId = accountId
     self.assignedBy = assignedBy
     self.assignedTo = assignedTo
   }
 
   public var variables: GraphQLMap? {
-    return ["accountId": accountId, "assignedBy": assignedBy, "assignedTo": assignedTo]
+    return ["senderID": senderID, "accountId": accountId, "assignedBy": assignedBy, "assignedTo": assignedTo]
   }
 
   public struct Data: GraphQLSelectionSet {
@@ -1372,7 +1375,7 @@ public final class CreateAccountAssignmentEntryMutation: GraphQLMutation {
 
     public static var selections: [GraphQLSelection] {
       return [
-        GraphQLField("createAccountAssignmentEntry", alias: "accountAssignmentEntry", arguments: ["input": ["accountId": GraphQLVariable("accountId"), "assignedBy": GraphQLVariable("assignedBy"), "assignedTo": GraphQLVariable("assignedTo")]], type: .nonNull(.object(AccountAssignmentEntry.selections))),
+        GraphQLField("createAccountAssignmentEntry", alias: "accountAssignmentEntry", arguments: ["senderID": GraphQLVariable("senderID"), "input": ["accountId": GraphQLVariable("accountId"), "assignedBy": GraphQLVariable("assignedBy"), "assignedTo": GraphQLVariable("assignedTo")]], type: .nonNull(.object(AccountAssignmentEntry.selections))),
       ]
     }
 
@@ -1697,8 +1700,9 @@ public final class CreateContactAssignmentEntryMutation: GraphQLMutation {
   /// The raw GraphQL definition of this operation.
   public let operationDefinition: String =
     """
-    mutation createContactAssignmentEntry($contactId: ID!, $assignedBy: String!, $assignedTo: String) {
+    mutation createContactAssignmentEntry($senderID: ID, $contactId: ID!, $assignedBy: String!, $assignedTo: String) {
       contactAssignmentEntry: createContactAssignmentEntry(
+        senderID: $senderID
         input: {contactId: $contactId, assignedBy: $assignedBy, assignedTo: $assignedTo}
       ) {
         __typename
@@ -1713,18 +1717,20 @@ public final class CreateContactAssignmentEntryMutation: GraphQLMutation {
 
   public let operationName: String = "createContactAssignmentEntry"
 
+  public var senderID: GraphQLID?
   public var contactId: GraphQLID
   public var assignedBy: String
   public var assignedTo: String?
 
-  public init(contactId: GraphQLID, assignedBy: String, assignedTo: String? = nil) {
+  public init(senderID: GraphQLID? = nil, contactId: GraphQLID, assignedBy: String, assignedTo: String? = nil) {
+    self.senderID = senderID
     self.contactId = contactId
     self.assignedBy = assignedBy
     self.assignedTo = assignedTo
   }
 
   public var variables: GraphQLMap? {
-    return ["contactId": contactId, "assignedBy": assignedBy, "assignedTo": assignedTo]
+    return ["senderID": senderID, "contactId": contactId, "assignedBy": assignedBy, "assignedTo": assignedTo]
   }
 
   public struct Data: GraphQLSelectionSet {
@@ -1732,7 +1738,7 @@ public final class CreateContactAssignmentEntryMutation: GraphQLMutation {
 
     public static var selections: [GraphQLSelection] {
       return [
-        GraphQLField("createContactAssignmentEntry", alias: "contactAssignmentEntry", arguments: ["input": ["contactId": GraphQLVariable("contactId"), "assignedBy": GraphQLVariable("assignedBy"), "assignedTo": GraphQLVariable("assignedTo")]], type: .nonNull(.object(ContactAssignmentEntry.selections))),
+        GraphQLField("createContactAssignmentEntry", alias: "contactAssignmentEntry", arguments: ["senderID": GraphQLVariable("senderID"), "input": ["contactId": GraphQLVariable("contactId"), "assignedBy": GraphQLVariable("assignedBy"), "assignedTo": GraphQLVariable("assignedTo")]], type: .nonNull(.object(ContactAssignmentEntry.selections))),
       ]
     }
 

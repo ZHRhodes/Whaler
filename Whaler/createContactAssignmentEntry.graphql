@@ -1,5 +1,5 @@
-mutation createContactAssignmentEntry($contactId: ID!, $assignedBy: String!, $assignedTo: String) {
-    contactAssignmentEntry: createContactAssignmentEntry(input:{contactId: $contactId, assignedBy: $assignedBy, assignedTo: $assignedTo}) {
+mutation createContactAssignmentEntry($senderID: ID, $contactId: ID!, $assignedBy: String!, $assignedTo: String) {
+    contactAssignmentEntry: createContactAssignmentEntry(senderID: $senderID, input:{contactId: $contactId, assignedBy: $assignedBy, assignedTo: $assignedTo}) {
     id
     createdAt
     contactId

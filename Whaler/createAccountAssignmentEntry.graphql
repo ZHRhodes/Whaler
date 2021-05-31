@@ -1,5 +1,5 @@
-mutation createAccountAssignmentEntry($accountId: ID!, $assignedBy: String!, $assignedTo: String) {
-  accountAssignmentEntry: createAccountAssignmentEntry(input:{accountId: $accountId, assignedBy: $assignedBy, assignedTo: $assignedTo}) {
+mutation createAccountAssignmentEntry($senderID: ID, $accountId: ID!, $assignedBy: String!, $assignedTo: String) {
+  accountAssignmentEntry: createAccountAssignmentEntry(senderID: $senderID, input:{accountId: $accountId, assignedBy: $assignedBy, assignedTo: $assignedTo}) {
     id
     createdAt
     accountId

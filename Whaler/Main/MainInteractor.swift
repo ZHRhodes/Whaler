@@ -49,7 +49,7 @@ class MainInteractor: MainDataManager {
   
   func setupSocketForUpdates() {
     //using org id as a quick and dirty way to catch any possible account change
-    guard let orgId = Lifecycle.currentUser?.organization?.id else {
+    guard let orgId = Lifecycle.currentUser?.organizationId else {
       Log.error("Can't setup main socket without org id.")
       return
     }
@@ -167,7 +167,8 @@ extension MainInteractor: LiteWebSocketDelegate {
   func didReceiveMessage(_ message: SocketMsg, socket: WebSocketClient) {
     switch message {
     case .resourceUpdated(let update):
-      if update.resourceId == "accounts" && update.senderId != clientId {
+      guard let orgId = Lifecycle.currentUser?.organizationId else { return }
+      if update.resourceId == orgId && update.senderId != clientId {
         fetchAllAccounts()
       }
     default:
