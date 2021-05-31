@@ -2531,8 +2531,8 @@ public final class SaveContactsMutation: GraphQLMutation {
   /// The raw GraphQL definition of this operation.
   public let operationDefinition: String =
     """
-    mutation saveContacts($input: [NewContact!]!) {
-      saveContacts(input: $input) {
+    mutation saveContacts($senderID: ID, $input: [NewContact!]!) {
+      saveContacts(senderID: $senderID, input: $input) {
         __typename
         id
         firstName
@@ -2550,14 +2550,16 @@ public final class SaveContactsMutation: GraphQLMutation {
 
   public let operationName: String = "saveContacts"
 
+  public var senderID: GraphQLID?
   public var input: [NewContact]
 
-  public init(input: [NewContact]) {
+  public init(senderID: GraphQLID? = nil, input: [NewContact]) {
+    self.senderID = senderID
     self.input = input
   }
 
   public var variables: GraphQLMap? {
-    return ["input": input]
+    return ["senderID": senderID, "input": input]
   }
 
   public struct Data: GraphQLSelectionSet {
@@ -2565,7 +2567,7 @@ public final class SaveContactsMutation: GraphQLMutation {
 
     public static var selections: [GraphQLSelection] {
       return [
-        GraphQLField("saveContacts", arguments: ["input": GraphQLVariable("input")], type: .nonNull(.list(.nonNull(.object(SaveContact.selections))))),
+        GraphQLField("saveContacts", arguments: ["senderID": GraphQLVariable("senderID"), "input": GraphQLVariable("input")], type: .nonNull(.list(.nonNull(.object(SaveContact.selections))))),
       ]
     }
 

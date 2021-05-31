@@ -15,6 +15,7 @@ class AccountDetailsContactsInteractor {
   var contactGrouper: Grouper<WorkState, Contact>?
   var contactBeingAssigned: Contact?
   var contactsCancellable: AnyCancellable?
+  let dataChanged = PassthroughSubject<Void, Never>()
   
   var account: Account {
     if let lastSelected = dataManager.lastSelected {
@@ -29,7 +30,12 @@ class AccountDetailsContactsInteractor {
     self.dataManager = dataManager
   }
   
-  func subscribeToContacts(for dataManager: MainDataManager, contactsUpdated: @escaping ([Contact]) -> Void) {
+  ///Refetch all is a bit brutish, but works for now to reload on update notification.
+  func refetchContacts() {
+    subscribeToContacts(for: dataManager)
+  }
+  
+  func subscribeToContacts(for dataManager: MainDataManager) {
     let repo = repoStore.contactRepository
     let request = ContactAllDataRequest(account: account)
     contactsCancellable = repo
@@ -41,8 +47,8 @@ class AccountDetailsContactsInteractor {
               contacts.forEach { contact in
                 strongSelf.contactGrouper?.append(contact, to: contact.state ?? .ready)
               }
-              contactsUpdated(contacts)
-    })
+              self?.dataChanged.send()
+            })
   }
   
   func addContact(_ contact: Contact, state: WorkState, index: Int) {

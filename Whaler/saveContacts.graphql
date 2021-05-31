@@ -1,5 +1,5 @@
-mutation saveContacts($input: [NewContact!]!) {
-  saveContacts(input: $input) {
+mutation saveContacts($senderID: ID, $input: [NewContact!]!) {
+  saveContacts(senderID: $senderID, input: $input) {
     id
     firstName
     lastName

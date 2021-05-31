@@ -22,9 +22,10 @@ class AccountDetailsContentViewController: UIViewController {
   }()
 //  private var subtitleLabel = UILabel()
 //  private let detailsGrid = DetailsGrid()
-  private let contactsVC = AccountDetailsContactsViewController()
   private let tasksVC = TasksTableViewController()
   private lazy var tasksTableInteractor = TasksTableInteractor(associatedObjectId: self.interactor.account.id)
+  private let contactsVC = AccountDetailsContactsViewController()
+  private lazy var contactsTableInteractor = AccountDetailsContactsInteractor(dataManager: self.interactor.dataManager)
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -118,8 +119,7 @@ extension AccountDetailsContentViewController: UICollectionViewDelegateFlowLayou
       button.addTarget(tasksTableInteractor, action: #selector(tasksTableInteractor.addTask), for: .touchUpInside)
       cell.configure(title: "TASKS", accessoryButton: button, content: tasksVC.view)
     case .contacts(let contactsProvider):
-			let interactor = AccountDetailsContactsInteractor(dataManager: self.interactor.dataManager)
-			contactsVC.configure(with: interactor)
+			contactsVC.configure(with: contactsTableInteractor)
       cell.configure(title: "CONTACTS", content: contactsVC.view)
 		}
     
@@ -133,6 +133,7 @@ extension AccountDetailsContentViewController: LiteWebSocketDelegate {
     case .resourceUpdated(let update):
       if update.resourceId == interactor.account.id {
         tasksTableInteractor.refetchTasks()
+        contactsTableInteractor.refetchContacts()
       }
     default:
       break

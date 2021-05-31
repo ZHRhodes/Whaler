@@ -8,11 +8,13 @@
 
 import Foundation
 import UIKit
+import Combine
 
 class AccountDetailsContactsViewController: UIViewController {
   private var interactor: AccountDetailsContactsInteractor!
   private let layout = UICollectionViewFlowLayout()
   private var collectionView: UICollectionView!
+  private var dataChangeCancellable: AnyCancellable?
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -33,10 +35,10 @@ class AccountDetailsContactsViewController: UIViewController {
 		view.clipsToBounds = true
 		view.layer.cornerRadius = UIConstants.boxCornerRadius
     configureCollectionView()
-    interactor.subscribeToContacts(for: interactor.dataManager) { [weak self] (contacts) in
-//      self?.collectionView.hideSkeleton()
+    dataChangeCancellable = interactor.dataChanged.sink { [weak self] in
       self?.collectionView.reloadData()
     }
+    interactor.subscribeToContacts(for: interactor.dataManager)
   }
   
   private func configureCollectionView() {
