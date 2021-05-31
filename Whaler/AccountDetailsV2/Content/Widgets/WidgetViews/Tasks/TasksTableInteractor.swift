@@ -12,6 +12,7 @@ import Starscream
 
 class TasksTableInteractor {
   private var associatedTo: String
+  private var tasksCancellable: AnyCancellable?
   private var bag = Set<AnyCancellable>()
   private(set) var tasks: [Task] = []
   let dataChanged = PassthroughSubject<Void, Never>()
@@ -21,8 +22,14 @@ class TasksTableInteractor {
     subscribeToTasks()
   }
   
+  ///For now, it's necessary to pull new tasks.
+  ///Data push mechanism is not set up for subset use-case.
+  func refetchTasks() {
+    subscribeToTasks()
+  }
+  
   private func subscribeToTasks() {
-    repoStore
+    tasksCancellable = repoStore
       .taskRepository
       .fetchSubset(with: associatedTo)
       .sink(receiveCompletion: { _ in },
@@ -30,7 +37,6 @@ class TasksTableInteractor {
               self?.setTasks(new: tasks)
               self?.dataChanged.send()
             })
-      .store(in: &bag)
   }
   
   func setDone(new: Bool, forTask task: Task) {

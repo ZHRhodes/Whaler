@@ -64,7 +64,8 @@ struct TaskRemoteDataSource {
       let createdAtString = formatter.string(from: task.createdAt)
       let deletedAtString = task.deletedAt.map { formatter.string(from: $0) }
 
-      let mutation = SaveTaskMutation(id: task.id,
+      let mutation = SaveTaskMutation(senderID: clientId,
+                                      id: task.id,
                                       createdAt: createdAtString,
                                       deletedAt: deletedAtString,
                                       associatedTo: task.associatedTo,

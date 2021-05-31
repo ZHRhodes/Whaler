@@ -20,4 +20,5 @@ struct ResourceConnectionConf: Codable {
 
 struct ResourceUpdated: SocketData {
   var resourceId: String
+  var senderId: String?
 }

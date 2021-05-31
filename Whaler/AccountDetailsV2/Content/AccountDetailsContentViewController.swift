@@ -24,6 +24,7 @@ class AccountDetailsContentViewController: UIViewController {
 //  private let detailsGrid = DetailsGrid()
   private let contactsVC = AccountDetailsContactsViewController()
   private let tasksVC = TasksTableViewController()
+  private lazy var tasksTableInteractor = TasksTableInteractor(associatedObjectId: self.interactor.account.id)
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -112,10 +113,9 @@ extension AccountDetailsContentViewController: UICollectionViewDelegateFlowLayou
       gridView.configure(with: detailsProvider)
       cell.configure(title: "ACCOUNT DETAILS", content: gridView)
     case .tasks(let tasksProvider):
-      let interactor = TasksTableInteractor(associatedObjectId: self.interactor.account.id)
-      tasksVC.configure(with: interactor)
+      tasksVC.configure(with: tasksTableInteractor)
       let button = AddTaskButton(frame: .zero)
-      button.addTarget(interactor, action: #selector(interactor.addTask), for: .touchUpInside)
+      button.addTarget(interactor, action: #selector(tasksTableInteractor.addTask), for: .touchUpInside)
       cell.configure(title: "TASKS", accessoryButton: button, content: tasksVC.view)
     case .contacts(let contactsProvider):
 			let interactor = AccountDetailsContactsInteractor(dataManager: self.interactor.dataManager)
@@ -132,7 +132,7 @@ extension AccountDetailsContentViewController: LiteWebSocketDelegate {
     switch message {
     case .resourceUpdated(let update):
       if update.resourceId == interactor.account.id {
-        collectionView.reloadData()
+        tasksTableInteractor.refetchTasks()
       }
     default:
       break

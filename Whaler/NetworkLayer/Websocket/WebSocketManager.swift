@@ -154,6 +154,7 @@ extension WebSocketManager: WebSocketDelegate {
         delegates.forEach { $0.didReceiveMessage(.docChangeReturn(typedMessage.data, wasSender: wasSender), socket: socket) }
       case .resourceUpdated:
         let typedMessage = try JSONDecoder().decode(SocketMessage<ResourceUpdated>.self, from: data)
+        guard typedMessage.data.senderId != clientId else { return }
         delegates.forEach { $0.didReceiveMessage(.resourceUpdated(typedMessage.data), socket: socket) }
       }
     } catch {
