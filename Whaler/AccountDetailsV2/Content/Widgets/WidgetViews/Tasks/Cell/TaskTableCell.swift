@@ -83,6 +83,7 @@ class TaskTableCell: UITableViewCell {
   
   func setDate(_ date: Date?) {
     guard let date = date else {
+      datePicker.date = Date()
       dueDateTag.setTitle("—", for: .normal)
       return
     }
