@@ -157,7 +157,7 @@ extension WebSocketManager: WebSocketDelegate {
         delegates.forEach { $0.didReceiveMessage(.resourceUpdated(typedMessage.data), socket: socket) }
       }
     } catch {
-      Log.error("Failed to decode socket message. \(error.localizedDescription)")
+      Log.error("Failed to decode socket message. \(error)")
     }
   }
   

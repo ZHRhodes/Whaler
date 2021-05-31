@@ -13,7 +13,7 @@ enum SocketMessageType: String, Codable {
   case docChangeReturn = "docChangeReturnOps"
   case resourceConnection = "resourceConnection"
   case resourceConnectionConf = "resourceConnectionConf"
-  case resourceUpdated = "resourceUpdated"
+  case resourceUpdated = "resourceUpdate"
 }
 
 protocol SocketData: Codable {}
