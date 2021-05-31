@@ -1,5 +1,5 @@
-mutation saveAccounts($input: [NewAccount!]!) {
-  saveAccounts(input: $input) {
+mutation saveAccounts($senderID: ID, $input: [NewAccount!]!) {
+  saveAccounts(senderID: $senderID, input: $input) {
     id
     name
     salesforceID
