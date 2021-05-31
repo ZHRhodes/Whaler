@@ -115,7 +115,7 @@ extension AccountDetailsContentViewController: UICollectionViewDelegateFlowLayou
     case .tasks(let tasksProvider):
       tasksVC.configure(with: tasksTableInteractor)
       let button = AddTaskButton(frame: .zero)
-      button.addTarget(interactor, action: #selector(tasksTableInteractor.addTask), for: .touchUpInside)
+      button.addTarget(tasksTableInteractor, action: #selector(tasksTableInteractor.addTask), for: .touchUpInside)
       cell.configure(title: "TASKS", accessoryButton: button, content: tasksVC.view)
     case .contacts(let contactsProvider):
 			let interactor = AccountDetailsContactsInteractor(dataManager: self.interactor.dataManager)
