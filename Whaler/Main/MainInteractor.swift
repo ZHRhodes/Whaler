@@ -44,7 +44,7 @@ class MainInteractor: MainDataManager {
   
   init() {
     retrieveAccounts()
-
+    setupSocketForUpdates()
   }
   
   private func setupSocketForUpdates() {
