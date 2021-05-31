@@ -74,7 +74,7 @@ class NoteEditor: UIView {
   }
   
   private func configureTextView() {
-    textView = Aztec.TextView(defaultFont: UIFont.openSans(weight: .regular, size: 25),
+    textView = Aztec.TextView(defaultFont: UIFont.openSans(weight: .regular, size: 21),
                                 defaultParagraphStyle: .default,
                                 defaultMissingImage: UIImage(named: "bold")!)
     textView.delegate = self
