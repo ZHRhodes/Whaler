@@ -167,7 +167,7 @@ extension MainInteractor: LiteWebSocketDelegate {
     switch message {
     case .resourceUpdated(let update):
       if update.resourceId == "accounts" && update.senderId != clientId {
-        dataChanged.send()
+        fetchAllAccounts()
       }
     default:
       break
