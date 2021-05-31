@@ -11,14 +11,7 @@ import UIKit
 import SwiftUI
 import AuthenticationServices
 import SkeletonView
-
-class WeakRef<T> where T: AnyObject {
-  private(set) weak var value: T?
-
-  init(value: T?) {
-      self.value = value
-  }
-}
+import Combine
 
 extension WeakRef: Hashable {
   static func == (lhs: WeakRef<T>, rhs: WeakRef<T>) -> Bool {
@@ -64,6 +57,7 @@ class MainViewController: UIViewController {
   
   private var didShowInitialLoad = false
   private let collectionCellSpacing: CGFloat = 50.0
+  private var bag = Set<AnyCancellable>()
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -74,6 +68,9 @@ class MainViewController: UIViewController {
     Lifecycle.loadCurrentUser()
     interactor = MainInteractor()
     interactor.viewController = self
+    interactor.dataChanged.sink { [weak self] in
+      self?.reloadCollection()
+    }.store(in: &bag)
 
     configureViewsForContent()
     if interactor.hasSalesforceTokens {
@@ -426,7 +423,7 @@ class MainViewController: UIViewController {
     interactor.fetchAllAccounts()
   }
   
-  func reloadCollection() {
+  private func reloadCollection() {
     collectionView?.hideSkeleton()
     collectionView?.reloadData()
   }

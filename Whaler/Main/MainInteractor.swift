@@ -9,6 +9,7 @@
 import Foundation
 import AuthenticationServices
 import Combine
+import Starscream
 
 //temporary location for this -- inject for testing
 let repoStore = RepoStore()
@@ -29,6 +30,8 @@ class MainInteractor: MainDataManager {
   private let accountsHelper = AccountsHelper()
   private let contactsHelper = ContactsHelper()
   var accountsCancellable: AnyCancellable?
+  let dataChanged = PassthroughSubject<Void, Never>()
+  private var socket: WebSocketClient?
   
   func hasAccounts() -> Bool {
     return !accountGrouper.hasNoValues
@@ -41,6 +44,17 @@ class MainInteractor: MainDataManager {
   
   init() {
     retrieveAccounts()
+
+  }
+  
+  private func setupSocketForUpdates() {
+    //using org id as a quick and dirty way to catch any possible account change
+    guard let orgId = Lifecycle.currentUser?.organization?.id else {
+      Log.error("Can't setup main socket without org id.")
+      return
+    }
+    socket = WebSocketManager.shared.registerConnection(id: orgId)
+    WebSocketManager.shared.info(for: socket)?.delegates.add(delegate: self)
   }
   
   func parseAccountsAndContacts(from url: URL) {
@@ -104,7 +118,7 @@ class MainInteractor: MainDataManager {
     accountsCancellable = repo.publisher.dropFirst().sink { _ in }
       receiveValue: { (accounts) in
       self.setAccounts(accounts)
-      self.viewController?.reloadCollection()
+      self.dataChanged.send()
       Log.info(String(reflecting: self.accountGrouper))
     }
     fetchAllAccounts()
@@ -146,4 +160,19 @@ class MainInteractor: MainDataManager {
     _ = repoStore.accountAssignmentEntryRepository.save(newEntry)
     account.assignedTo = user.id
   }
+}
+
+extension MainInteractor: LiteWebSocketDelegate {
+  func didReceiveMessage(_ message: SocketMsg, socket: WebSocketClient) {
+    switch message {
+    case .resourceUpdated(let update):
+      if update.resourceId == "accounts" && update.senderId != clientId {
+        dataChanged.send()
+      }
+    default:
+      break
+    }
+  }
+  
+  func connectionEstablished(socket: WebSocketClient) {}
 }

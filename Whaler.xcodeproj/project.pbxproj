@@ -178,6 +178,7 @@
 		14C509C7254CFE7A0021D9C5 /* FieldValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C509C6254CFE7A0021D9C5 /* FieldValue.swift */; };
 		14C509CB254D42800021D9C5 /* SFGroupModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C509CA254D42800021D9C5 /* SFGroupModels.swift */; };
 		14C509D0254D49CD0021D9C5 /* SwiftyBeaver in Frameworks */ = {isa = PBXBuildFile; productRef = 14C509CF254D49CD0021D9C5 /* SwiftyBeaver */; };
+		14C84F832665990D0027E91E /* WeakRef.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C84F822665990D0027E91E /* WeakRef.swift */; };
 		14CCB6B32637B3630024C500 /* DocumentChange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CCB6B22637B3630024C500 /* DocumentChange.swift */; };
 		14CCB6B82637C8A80024C500 /* OTClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CCB6B72637C8A80024C500 /* OTClient.swift */; };
 		14D4A2E72574CA7E003EFF61 /* EditorToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D4A2E62574CA7E003EFF61 /* EditorToolbar.swift */; };
@@ -415,6 +416,7 @@
 		14C509C2254CF83B0021D9C5 /* RevenueBucket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RevenueBucket.swift; sourceTree = "<group>"; };
 		14C509C6254CFE7A0021D9C5 /* FieldValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FieldValue.swift; sourceTree = "<group>"; };
 		14C509CA254D42800021D9C5 /* SFGroupModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFGroupModels.swift; sourceTree = "<group>"; };
+		14C84F822665990D0027E91E /* WeakRef.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = WeakRef.swift; path = ../../../../../../WeakRef.swift; sourceTree = "<group>"; };
 		14CCB6B22637B3630024C500 /* DocumentChange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentChange.swift; sourceTree = "<group>"; };
 		14CCB6B72637C8A80024C500 /* OTClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTClient.swift; sourceTree = "<group>"; };
 		14D4A2E62574CA7E003EFF61 /* EditorToolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorToolbar.swift; sourceTree = "<group>"; };
@@ -598,6 +600,7 @@
 				1488423E25086D910025C7EE /* Lifecycle.swift */,
 				14DACF41255BAC2A00FC0900 /* Log.swift */,
 				14DACF49255BCD4C00FC0900 /* CustomError.swift */,
+				14C84F822665990D0027E91E /* WeakRef.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -1673,6 +1676,7 @@
 				1490929126632B39008234BA /* TaskAssignmentEntryRemoteDataInterface.swift in Sources */,
 				142ED46E26146C8900BC79A0 /* Configuration.swift in Sources */,
 				143EC398261834F1003ADF97 /* EphemeralSessionManager.swift in Sources */,
+				14C84F832665990D0027E91E /* WeakRef.swift in Sources */,
 				140AE79924A9AA5C00F7705E /* Account.swift in Sources */,
 				1473C8A82522E6D000A991DA /* AttributeTagView.swift in Sources */,
 				14EF8D6525FB1ECA0065BEB3 /* FilterPopoverViewController.swift in Sources */,
