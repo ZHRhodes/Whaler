@@ -47,12 +47,13 @@ class MainInteractor: MainDataManager {
     setupSocketForUpdates()
   }
   
-  private func setupSocketForUpdates() {
+  func setupSocketForUpdates() {
     //using org id as a quick and dirty way to catch any possible account change
     guard let orgId = Lifecycle.currentUser?.organization?.id else {
       Log.error("Can't setup main socket without org id.")
       return
     }
+    socket?.disconnect()
     socket = WebSocketManager.shared.registerConnection(id: orgId)
     WebSocketManager.shared.info(for: socket)?.delegates.add(delegate: self)
   }

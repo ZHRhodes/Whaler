@@ -108,6 +108,7 @@ class MainViewController: UIViewController {
   }
   
   private func configureViewsForContent() {
+    interactor.setupSocketForUpdates()
     configureContentView()
     configureHelloLabel()
     configureSubHelloLabel()
