@@ -16,7 +16,8 @@ class AccountDetailsViewController: ToolbarContainingViewController {
   private let contentVC = AccountDetailsContentViewController()
   private lazy var noteEditorVC: NoteEditorViewController = {
     let vc = NoteEditorViewController()
-    vc.interactor = NoteEditorInteractor(accountId: interactor?.account?.id ?? "")
+    vc.interactor = NoteEditorInteractor(accountId: interactor?.account?.id ?? "",
+                                         socket: interactor?.socket)
     vc.interactor.viewController = vc
     return vc
   }()
@@ -27,7 +28,6 @@ class AccountDetailsViewController: ToolbarContainingViewController {
   
   override func viewWillDisappear(_ animated: Bool) {
     super.viewWillDisappear(animated)
-//    interactor?.save(account: interactor?.account, withNoteText: )
   }
   
   override func backTapped() {
@@ -40,8 +40,9 @@ class AccountDetailsViewController: ToolbarContainingViewController {
   func configure(with dataManager: MainDataManager) {
     self.interactor = AccountDetailsInteractor(dataManager: dataManager)
     self.interactor?.viewController = self
-    let interactor = AccountDetailsContentInteractor(dataManager: dataManager)
-    contentVC.configure(with: interactor)
+    let contentInteractor = AccountDetailsContentInteractor(dataManager: dataManager,
+                                                            socket: interactor?.socket)
+    contentVC.configure(with: contentInteractor)
     let view1 = contentVC.view!
     view1.translatesAutoresizingMaskIntoConstraints = false
     view.addSubview(view1)

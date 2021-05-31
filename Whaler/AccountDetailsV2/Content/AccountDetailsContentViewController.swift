@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import Starscream
 
 class AccountDetailsContentViewController: UIViewController {
   private var interactor: AccountDetailsContentInteractor!
@@ -47,6 +48,7 @@ class AccountDetailsContentViewController: UIViewController {
   
   func configure(with interactor: AccountDetailsContentInteractor) {
     self.interactor = interactor
+    WebSocketManager.shared.info(for: interactor.socket)?.delegates.add(delegate: self)
 //    configureDetailsGrid()
 //    configureContactsSection()
   }
@@ -123,4 +125,19 @@ extension AccountDetailsContentViewController: UICollectionViewDelegateFlowLayou
     
     return cell
   }
+}
+
+extension AccountDetailsContentViewController: LiteWebSocketDelegate {
+  func didReceiveMessage(_ message: SocketMsg, socket: WebSocketClient) {
+    switch message {
+    case .resourceUpdated(let update):
+      if update.resourceId == interactor.account.id {
+        collectionView.reloadData()
+      }
+    default:
+      break
+    }
+  }
+  
+  func connectionEstablished(socket: WebSocketClient) {}
 }

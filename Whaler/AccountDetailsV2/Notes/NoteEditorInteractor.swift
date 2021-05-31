@@ -8,19 +8,22 @@
 
 import Foundation
 import Combine
+import Starscream
 
 class NoteEditorInteractor {
   weak var viewController: NoteEditorViewController?
   
   let accountId: String
+  var socket: WebSocketClient?
   var note: Note?
   private var fetchCancellable: AnyCancellable?
   private var saveCancellable: AnyCancellable?
   private let noteChangePublisher = PassthroughSubject<String, Never>()
   private var noteChangeCancellable: AnyCancellable?
   
-  init(accountId: String) {
+  init(accountId: String, socket: WebSocketClient?) {
     self.accountId = accountId
+    self.socket = socket
     //fetchNote()
     noteChangeCancellable = noteChangePublisher
       .debounce(for: .seconds(0.75), scheduler: DispatchQueue.main)

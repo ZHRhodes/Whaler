@@ -13,37 +13,26 @@ enum SocketMessageType: String, Codable {
   case docChangeReturn = "docChangeReturnOps"
   case resourceConnection = "resourceConnection"
   case resourceConnectionConf = "resourceConnectionConf"
+  case resourceUpdated = "resourceUpdated"
 }
 
 protocol SocketData: Codable {}
 
-protocol SocketMessageT {
-  var type: SocketMessageType { get }
-//  var data: Data { get }
+enum SocketMsg {
+  case docChange(DocumentChange),
+       docChangeReturn(DocumentChangeReturn, wasSender: Bool),
+       resourceConnection(ResourceConnection),
+       resourceConnectionConf(ResourceConnectionConf),
+       resourceUpdated(ResourceUpdated)
 }
 
-private enum SocketMessageCodingKeys: String, CodingKey {
-  case type, data
+struct SocketMessage<T: Codable>: Codable {
+  var messageId: String = ""
+  var type: SocketMessageType
+  var data: T
+  
+  init(type: SocketMessageType, data: T) {
+    self.type = type
+    self.data = data
+  }
 }
-
-//extension SocketMessage {
-//  init(from decoder: Decoder) throws {
-//    let container = try decoder.container(keyedBy: SocketMessageCodingKeys.self)
-//    let type = try container.decode(SocketMessageType.self, forKey: .type)
-//    let docChange = try container.decode(DocumentChange.self, forKey: .data)
-//  }
-//
-//  func encode(to encoder: Encoder) throws {
-//    var container = encoder.container(keyedBy: SocketMessageCodingKeys.self)
-//    try container.encode(type, forKey: .type)
-//    try container.encode(data(), forKey: .data)
-//  }
-//}
-
-
-//struct SocketMessage: SocketMessageT, Codable {
-//  let type: SocketMessageType
-//  let data: SocketData
-//}
-
-

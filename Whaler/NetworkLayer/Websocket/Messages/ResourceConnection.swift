@@ -1,5 +1,5 @@
 //
-//  ResourceConnectionMessage.swift
+//  ResourceConnection.swift
 //  Whaler
 //
 //  Created by Zachary Rhodes on 4/28/21.
@@ -16,4 +16,8 @@ struct ResourceConnectionConf: Codable {
   let resourceId: String
   let initialState: String
   let revision: Int
+}
+
+struct ResourceUpdated: SocketData {
+  var resourceId: String
 }

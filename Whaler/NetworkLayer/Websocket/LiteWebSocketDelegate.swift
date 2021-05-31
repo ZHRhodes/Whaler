@@ -9,7 +9,7 @@
 import Foundation
 import Starscream
 
-protocol LiteWebSocketDelegate: class {
+protocol LiteWebSocketDelegate: AnyObject {
   func didReceiveMessage(_ message: SocketMsg, socket: WebSocketClient)
   func connectionEstablished(socket: WebSocketClient)
 }

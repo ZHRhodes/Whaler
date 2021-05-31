@@ -13,18 +13,31 @@ import Just
 class WebSocketManager {
   static var shared: WebSocketManager!
   
-  var sockets: [WebSocket: WebSocketInfo] = [:]
+  private var sockets: [WebSocket: WebSocketInfo] = [:]
   private var otClients: [String: (OTClient, WebSocketClient)] = [:]
   private var inFlightMessageIds = Set<String>()
+  
+  ///Client must be WebSocket for now. TODO add indexing by WebSocketClient (not hashable)
+  func info(for client: WebSocketClient?) -> WebSocketInfo? {
+    guard let socket = client as? WebSocket else {
+      if client != nil {
+        Log.error("Attempted to get info for a client that wasn't a websocket.")
+      }
+      return nil
+    }
+    return sockets[socket]
+  }
 
-  func registerConnection(id: String, delegate: LiteWebSocketDelegate) -> WebSocketClient? {
+  func registerConnection(id: String, delegate: LiteWebSocketDelegate? = nil) -> WebSocketClient? {
     guard let token = Lifecycle.accessToken else { return nil }
     let request = makeRequest(url: Configuration.apiUrl.appendingPathComponent("socket"),
                               id: id,
                               accessToken: token)
     let socket = makeSocket(with: request)
     socket.connect()
-    sockets[socket] = WebSocketInfo(id: id, delegate: delegate)
+    let socketInfo = WebSocketInfo(id: id)
+    socketInfo.delegates.add(delegate: delegate)
+    sockets[socket] = socketInfo
     return socket
   }
   
@@ -87,7 +100,6 @@ extension WebSocketManager: OTClientDelegate {
       WebSocketManager.shared.send(message: message, over: socket)
       let data = try! JSONEncoder().encode(message)
       Just.post(URL(string: "https://getwhaler.herokuapp.com")!, params: [:], data: [:], json: nil, headers: [:], files: [:], auth: nil, cookies: [:], allowRedirects: true, timeout: nil, urlQuery: nil, requestBody: data, asyncProgressHandler: nil, asyncCompletionHandler: nil)
-
     }
   }
 }
@@ -96,8 +108,8 @@ extension WebSocketManager: WebSocketDelegate {
   func websocketDidConnect(socket: WebSocketClient) {
     Log.debug("WebSocket did connect.")
     guard let webSocket = socket as? WebSocket,
-          let delegate = sockets[webSocket]?.delegate else { return }
-    delegate.connectionEstablished(socket: socket)
+          let delegates = sockets[webSocket]?.delegates.all else { return }
+    delegates.forEach { $0.connectionEstablished(socket: socket) }
   }
   
   func websocketDidDisconnect(socket: WebSocketClient, error: Error?) {
@@ -111,7 +123,7 @@ extension WebSocketManager: WebSocketDelegate {
   func websocketDidReceiveMessage(socket: WebSocketClient, text: String) {
     Log.debug("WebSocket did receive message:\n\(text)")
     guard let webSocket = socket as? WebSocket,
-          let delegate = sockets[webSocket]?.delegate,
+          let delegates = sockets[webSocket]?.delegates.all,
           let data = text.data(using: .utf8) else {
       Log.warning("Failed preconditions for receiving WebSocket message")
       return
@@ -126,20 +138,23 @@ extension WebSocketManager: WebSocketDelegate {
       case .docChange:
         let typedMessage = try JSONDecoder().decode(SocketMessage<DocumentChange>.self,
                                                     from: data)
-        delegate.didReceiveMessage(.docChange(typedMessage.data), socket: socket)
+        delegates.forEach { $0.didReceiveMessage(.docChange(typedMessage.data), socket: socket) }
       case .resourceConnection:
         let typedMessage = try JSONDecoder().decode(SocketMessage<ResourceConnection>.self,
                                                     from: data)
-        delegate.didReceiveMessage(.resourceConnection(typedMessage.data),
-                                   socket: socket)
+        delegates.forEach { $0.didReceiveMessage(.resourceConnection(typedMessage.data),
+                                                 socket: socket) }
       case .resourceConnectionConf:
         let typedMessage = try JSONDecoder().decode(SocketMessage<ResourceConnectionConf>.self,
-                             from: data)
-        delegate.didReceiveMessage(.resourceConnectionConf(typedMessage.data),
-                                   socket: socket)
+                                                    from: data)
+        delegates.forEach { $0.didReceiveMessage(.resourceConnectionConf(typedMessage.data),
+                                                 socket: socket) }
       case .docChangeReturn:
         let typedMessage = try JSONDecoder().decode(SocketMessage<DocumentChangeReturn>.self, from: data)
-        delegate.didReceiveMessage(.docChangeReturn(typedMessage.data, wasSender: wasSender), socket: socket)
+        delegates.forEach { $0.didReceiveMessage(.docChangeReturn(typedMessage.data, wasSender: wasSender), socket: socket) }
+      case .resourceUpdated:
+        let typedMessage = try JSONDecoder().decode(SocketMessage<ResourceUpdated>.self, from: data)
+        delegates.forEach { $0.didReceiveMessage(.resourceUpdated(typedMessage.data), socket: socket) }
       }
     } catch {
       Log.error("Failed to decode socket message. \(error.localizedDescription)")

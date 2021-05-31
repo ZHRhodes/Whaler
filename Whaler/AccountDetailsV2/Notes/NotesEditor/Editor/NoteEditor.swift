@@ -34,7 +34,6 @@ class NoteEditor: UIView {
   lazy var toolBar = EditorToolbar(options: EditorToolbarOption.allCases, delegate: self)
   var delegate: NoteEditorDelegate?
   var textView: Aztec.TextView!
-  var socket: WebSocketClient!
   var otClient: OTClient?
   var resourceId: String?
   
@@ -46,10 +45,10 @@ class NoteEditor: UIView {
     configureTextView()
   }
   
-  func startConnection(with resourceId: String) {
+  func registerAsDelegate(resourceId: String, socket: WebSocketClient?) {
+    guard let socket = socket else { return }
     self.resourceId = resourceId
-    socket = WebSocketManager.shared.registerConnection(id: resourceId,
-                                                        delegate: self)
+    WebSocketManager.shared.info(for: socket)?.delegates.add(delegate: self)
   }
   
   private func configureView() {

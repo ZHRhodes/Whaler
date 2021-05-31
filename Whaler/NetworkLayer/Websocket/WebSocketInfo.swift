@@ -8,7 +8,24 @@
 
 import Foundation
 
-struct WebSocketInfo {
+class WebSocketInfo {
   let id: String
-  weak var delegate: LiteWebSocketDelegate?
+  var delegates: WebSocketDelegates = WebSocketDelegates()
+  
+  init(id: String) {
+    self.id = id
+  }
+}
+
+class WebSocketDelegates {
+  var delegates = NSPointerArray.weakObjects()
+  
+  var all: [LiteWebSocketDelegate] {
+    return delegates.allObjects as? [LiteWebSocketDelegate] ?? []
+  }
+
+  func add(delegate: LiteWebSocketDelegate?) {
+    guard let delegate = delegate else { return }
+    delegates.addObject(delegate)
+  }
 }

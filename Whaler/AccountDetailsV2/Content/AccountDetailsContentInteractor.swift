@@ -8,9 +8,11 @@
 
 import Foundation
 import Combine
+import Starscream
 
 class AccountDetailsContentInteractor {
   let dataManager: MainDataManager
+  var socket: WebSocketClient?
 	var widgets = [AccountWidget]()
 
   var account: Account {
@@ -22,8 +24,9 @@ class AccountDetailsContentInteractor {
     }
   }
 	
-	init(dataManager: MainDataManager) {
+  init(dataManager: MainDataManager, socket: WebSocketClient?) {
 		self.dataManager = dataManager
+    self.socket = socket
 		let accountSource = Just<Account>(account).eraseToAnyPublisher()
 		widgets = [.details(DefaultDetailsProvider(source: accountSource)),
                .tasks(DefaultTasksProvider()),

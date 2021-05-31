@@ -1,5 +1,5 @@
 //
-//  DocumentChangeMsg.swift
+//  DocumentChange.swift
 //  Whaler
 //
 //  Created by Zachary Rhodes on 4/26/21.
@@ -7,24 +7,6 @@
 //
 
 import Foundation
-
-enum SocketMsg {
-  case docChange(DocumentChange),
-       docChangeReturn(DocumentChangeReturn, wasSender: Bool),
-       resourceConnection(ResourceConnection),
-       resourceConnectionConf(ResourceConnectionConf)
-}
-
-struct SocketMessage<T: Codable>: Codable {
-  var messageId: String = ""
-  var type: SocketMessageType
-  var data: T
-  
-  init(type: SocketMessageType, data: T) {
-    self.type = type
-    self.data = data
-  }
-}
 
 struct DocumentChange: SocketData {
   var resourceId: String

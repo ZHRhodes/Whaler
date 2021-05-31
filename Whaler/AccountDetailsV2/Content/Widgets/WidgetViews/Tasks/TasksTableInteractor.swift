@@ -8,6 +8,7 @@
 
 import Foundation
 import Combine
+import Starscream
 
 class TasksTableInteractor {
   private var associatedTo: String
@@ -156,4 +157,17 @@ class TasksTableInteractor {
     tasks = newTaskCollection + tasks
     dataChanged.send()
   }
+}
+
+extension TasksTableInteractor: LiteWebSocketDelegate {
+  func didReceiveMessage(_ message: SocketMsg, socket: WebSocketClient) {
+    switch message {
+    case .resourceUpdated(let resourceIdOfUpdated):
+      //refetch
+      break
+    default: break
+    }
+  }
+  
+  func connectionEstablished(socket: WebSocketClient) {}
 }

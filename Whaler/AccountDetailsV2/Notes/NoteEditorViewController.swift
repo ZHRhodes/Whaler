@@ -32,7 +32,8 @@ class NoteEditorViewController: UIViewController {
     super.viewDidLoad()
     configureNotesView()
 //    configureProgressIndicator()
-    noteEditor.startConnection(with: interactor.accountId)
+    noteEditor.registerAsDelegate(resourceId: interactor.accountId,
+                                  socket: interactor.socket)
   }
   
   private func configureNotesView() {

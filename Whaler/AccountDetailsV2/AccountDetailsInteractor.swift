@@ -8,10 +8,12 @@
 
 import Foundation
 import Combine
+import Starscream
 
 class AccountDetailsInteractor {
   let dataManager: MainDataManager
   weak var viewController: AccountDetailsViewController?
+  var socket: WebSocketClient?
   
   var account: Account? {
     if let lastSelected = dataManager.lastSelected {
@@ -24,5 +26,7 @@ class AccountDetailsInteractor {
   
   init(dataManager: MainDataManager) {
     self.dataManager = dataManager
+    guard let resourceId = account?.id else { return }
+    socket = WebSocketManager.shared.registerConnection(id: resourceId)
   }
 }
