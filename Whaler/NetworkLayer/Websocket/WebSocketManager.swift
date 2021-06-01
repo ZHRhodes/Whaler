@@ -115,9 +115,14 @@ extension WebSocketManager: WebSocketDelegate {
   func websocketDidDisconnect(socket: WebSocketClient, error: Error?) {
     if let error = error {
 //      socket.connect()
-      Log.debug("WebSocket did disconnect with error: \(error)")
-    }
-    Log.debug("WebSocket did disconnect.")
+      Log.warning("WebSocket did disconnect with error: \(error)")
+		} else {
+			Log.debug("WebSocket did disconnect.")
+		}
+
+		guard let webSocket = socket as? WebSocket,
+					let delegates = sockets[webSocket]?.delegates.all else { return }
+		delegates.forEach { $0.socketDisconnected(socket: socket, error: error) }
   }
   
   func websocketDidReceiveMessage(socket: WebSocketClient, text: String) {

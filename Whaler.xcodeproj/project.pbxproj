@@ -164,6 +164,7 @@
 		149F3A0B25209575001F38BF /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149F3A0A25209575001F38BF /* UIView+Extensions.swift */; };
 		14A2834724DE510D0016BA82 /* SF.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A2834624DE510D0016BA82 /* SF.swift */; };
 		14A7E82A26562B990007BAFD /* AccountWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A7E82926562B990007BAFD /* AccountWidget.swift */; };
+		14A7E82D2665FC100007BAFD /* LoadingCoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A7E82C2665FC100007BAFD /* LoadingCoverView.swift */; };
 		14AB262E24D137E800AC280D /* ContactsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14AB262D24D137E800AC280D /* ContactsTableViewController.swift */; };
 		14B037E125049CDE00BA488D /* Grouper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B037E025049CDE00BA488D /* Grouper.swift */; };
 		14B037E325073E8800BA488D /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B037E225073E8800BA488D /* Response.swift */; };
@@ -403,6 +404,7 @@
 		149F3A0A25209575001F38BF /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
 		14A2834624DE510D0016BA82 /* SF.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SF.swift; sourceTree = "<group>"; };
 		14A7E82926562B990007BAFD /* AccountWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountWidget.swift; sourceTree = "<group>"; };
+		14A7E82C2665FC100007BAFD /* LoadingCoverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingCoverView.swift; sourceTree = "<group>"; };
 		14AB262D24D137E800AC280D /* ContactsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsTableViewController.swift; sourceTree = "<group>"; };
 		14B037E025049CDE00BA488D /* Grouper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grouper.swift; sourceTree = "<group>"; };
 		14B037E225073E8800BA488D /* Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
@@ -612,7 +614,8 @@
 				146834FE24DA99810075B639 /* CommonTextField.swift */,
 				14EF8D5025F950E10065BEB3 /* ContentSizedTableView.swift */,
 				1495EED72659DC2F006A46B9 /* AssignedButton */,
-				14562B8025F30E1E00BA9D3B /* ProgressIndicator */,
+				14562B8025F30E1E00BA9D3B /* ProgressView */,
+				14A7E82B2665FBF70007BAFD /* LoadingCoverView */,
 				1488DD7F25F32626002A898C /* TextFinishedProgressIndicator */,
 				14EA64F825F4CF7600F26ECE /* CurrentUserView */,
 				14D8810C265DF643004556A9 /* CircleCheckbox */,
@@ -812,7 +815,7 @@
 			path = RootContainer;
 			sourceTree = "<group>";
 		};
-		14562B8025F30E1E00BA9D3B /* ProgressIndicator */ = {
+		14562B8025F30E1E00BA9D3B /* ProgressView */ = {
 			isa = PBXGroup;
 			children = (
 				14562B7C25F30DCC00BA9D3B /* ProgressView.swift */,
@@ -820,7 +823,7 @@
 				1488DD7725F311B6002A898C /* ProgressStrokeAnimation.swift */,
 				1488DD7B25F316E3002A898C /* ProgressStrokeColorAnimation.swift */,
 			);
-			path = ProgressIndicator;
+			path = ProgressView;
 			sourceTree = "<group>";
 		};
 		145A376824C588CB0081F9DB /* NotesEditor */ = {
@@ -1156,6 +1159,14 @@
 				1473C8A72522E6D000A991DA /* AttributeTagView.swift */,
 			);
 			path = CollectionView;
+			sourceTree = "<group>";
+		};
+		14A7E82B2665FBF70007BAFD /* LoadingCoverView */ = {
+			isa = PBXGroup;
+			children = (
+				14A7E82C2665FC100007BAFD /* LoadingCoverView.swift */,
+			);
+			path = LoadingCoverView;
 			sourceTree = "<group>";
 		};
 		14B037EC25074B1200BA488D /* User */ = {
@@ -1675,6 +1686,7 @@
 				149092BB266463AF008234BA /* NSPointerArray+Extensions.swift in Sources */,
 				1490929126632B39008234BA /* TaskAssignmentEntryRemoteDataInterface.swift in Sources */,
 				142ED46E26146C8900BC79A0 /* Configuration.swift in Sources */,
+				14A7E82D2665FC100007BAFD /* LoadingCoverView.swift in Sources */,
 				143EC398261834F1003ADF97 /* EphemeralSessionManager.swift in Sources */,
 				14C84F8926659E050027E91E /* WeakRef.swift in Sources */,
 				140AE79924A9AA5C00F7705E /* Account.swift in Sources */,

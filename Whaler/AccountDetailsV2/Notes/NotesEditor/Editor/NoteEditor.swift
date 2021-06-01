@@ -31,11 +31,14 @@ protocol NoteEditorDelegate {
 
 class NoteEditor: UIView {
   private let container = UIView()
+	private var progressView: TextFinishedProgressIndicator!
+	private var loadingCover: UIView?
   lazy var toolBar = EditorToolbar(options: EditorToolbarOption.allCases, delegate: self)
   var delegate: NoteEditorDelegate?
   var textView: Aztec.TextView!
   var otClient: OTClient?
   var resourceId: String?
+	var socket: WebSocketClient?
   
   override init(frame: CGRect) {
     super.init(frame: frame)
@@ -43,9 +46,11 @@ class NoteEditor: UIView {
     configureContainer()
     configureToolBar()
     configureTextView()
+		showProgressIndicator(withCover: true)
   }
   
   func registerAsDelegate(resourceId: String, socket: WebSocketClient?) {
+		self.socket = socket
     guard let socket = socket else { return }
     self.resourceId = resourceId
     WebSocketManager.shared.info(for: socket)?.delegates.add(delegate: self)
@@ -91,6 +96,31 @@ class NoteEditor: UIView {
 
     NSLayoutConstraint.activate(constraints)
   }
+	
+	private func showProgressIndicator(withCover: Bool) {
+		progressView?.removeFromSuperview()
+		progressView = TextFinishedProgressIndicator(text: "Synced",
+																					textColor: .brandGreen,
+																					progressView: ProgressView(colors: [.brandGreen, .brandPurple, .brandRed], lineWidth: 5))
+		progressView.translatesAutoresizingMaskIntoConstraints = false
+		addSubview(progressView)
+		progressView.widthAnchor.constraint(equalToConstant: 110).isActive = true
+		progressView.heightAnchor.constraint(equalToConstant: 50).isActive = true
+		progressView.topAnchor.constraint(equalTo: container.topAnchor, constant: 8).isActive = true
+		progressView.rightAnchor.constraint(equalTo: container.rightAnchor, constant: -12).isActive = true
+		
+		if withCover {
+			textView.resignFirstResponder()
+			loadingCover = UIView()
+			container.addAndAttach(view: loadingCover!, attachingEdges: [.all()])
+		}
+		progressView.startAnimation()
+	}
+	
+	func completeProgressIndicator() {
+		loadingCover?.removeFromSuperview()
+		progressView.finishAnimation()
+	}
   
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
@@ -141,12 +171,18 @@ extension NoteEditor: LiteWebSocketDelegate {
   }
   
   func connectionEstablished(socket: WebSocketClient) {
-    guard let resourceId = resourceId else { return }
+		completeProgressIndicator()
+		guard let resourceId = resourceId else { return }
     let data = ResourceConnection(resourceId: resourceId)
     let message = SocketMessage(type: .resourceConnection,
                                 data: data)
     WebSocketManager.shared.send(message: message, over: socket)
   }
+	
+	func socketDisconnected(socket: WebSocketClient, error: Error?) {
+		showProgressIndicator(withCover: true)
+		socket.connect()
+	}
 }
 
 extension NoteEditor: EditorToolbarDelegate {

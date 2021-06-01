@@ -176,4 +176,5 @@ extension TasksTableInteractor: LiteWebSocketDelegate {
   }
   
   func connectionEstablished(socket: WebSocketClient) {}
+	func socketDisconnected(socket: WebSocketClient, error: Error?) {}
 }

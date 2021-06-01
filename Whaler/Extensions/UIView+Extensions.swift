@@ -17,6 +17,7 @@ enum EdgeConstraint {
        bottom(CGFloat = 0.0, equalTo: NSLayoutYAxisAnchor? = nil),
        centerY(CGFloat = 0.0, equalTo: NSLayoutYAxisAnchor? = nil),
        centerX(CGFloat = 0.0, equalTo: NSLayoutXAxisAnchor? = nil),
+			 center(CGFloat = 0.0),
        all(CGFloat = 0.0)
 }
 
@@ -53,6 +54,9 @@ extension UIView {
         view.centerXAnchor.constraint(equalTo: equalTo ?? centerXAnchor, constant: constant).isActive = true
       case .centerY(let constant, let equalTo):
         view.centerYAnchor.constraint(equalTo: equalTo ?? centerYAnchor, constant: constant).isActive = true
+			case .center(let constant):
+				view.centerXAnchor.constraint(equalTo: centerXAnchor, constant: constant).isActive = true
+				view.centerYAnchor.constraint(equalTo: centerYAnchor, constant: constant).isActive = true
       case .left(let constant, let equalTo):
         view.leftAnchor.constraint(equalTo: equalTo ?? leftAnchor, constant: constant).isActive = true
       break

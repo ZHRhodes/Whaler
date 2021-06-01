@@ -17,7 +17,7 @@ enum UIConstants {
 class NoteEditorViewController: UIViewController {
   var interactor: NoteEditorInteractor!
   private let noteEditor = NoteEditor(frame: .zero)
-  private var progressView: TextFinishedProgressIndicator!
+	private var loadingCover: LoadingCoverView?
   
   var currentText: String {
     get {
@@ -31,10 +31,20 @@ class NoteEditorViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     configureNotesView()
-//    configureProgressIndicator()
+//		showNotesLoadingCover()
     noteEditor.registerAsDelegate(resourceId: interactor.accountId,
                                   socket: interactor.socket)
   }
+	
+	private func showNotesLoadingCover() {
+		loadingCover = LoadingCoverView()
+		view.addAndAttach(view: loadingCover!, attachingEdges: [.all()])
+	}
+	
+	private func hideNotesLoadingCover() {
+		loadingCover?.removeFromSuperview()
+		loadingCover = nil
+	}
   
   private func configureNotesView() {
     noteEditor.translatesAutoresizingMaskIntoConstraints = false
@@ -48,29 +58,9 @@ class NoteEditorViewController: UIViewController {
 		view.addAndAttachToEdges(view: noteEditor, inset: 16.0)
   }
   
-//  private func configureProgressIndicator() {
-//    progressView = TextFinishedProgressIndicator(text: "Saved",
-//                                          textColor: .brandGreen,
-//                                          progressView: ProgressView(colors: [.brandGreen, .brandPurple, .brandRed], lineWidth: 5))
-//    progressView.translatesAutoresizingMaskIntoConstraints = false
-//    view.addSubview(progressView)
-//    progressView.widthAnchor.constraint(equalToConstant: 90).isActive = true
-//    progressView.heightAnchor.constraint(equalToConstant: 41).isActive = true
-//    progressView.centerYAnchor.constraint(equalTo: label.centerYAnchor, constant: 0).isActive = true
-//    progressView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -64).isActive = true
-//  }
-  
   func noteChanged() {
     guard let newText = interactor.note?.content else { return }
     currentText = newText
-  }
-  
-  func showProgressIndicator() {
-    progressView.startAnimation()
-  }
-  
-  func hideProgressIndicator() {
-    progressView.finishAnimation()
   }
 }
 

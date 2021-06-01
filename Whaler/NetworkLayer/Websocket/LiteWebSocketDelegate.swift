@@ -12,4 +12,5 @@ import Starscream
 protocol LiteWebSocketDelegate: AnyObject {
   func didReceiveMessage(_ message: SocketMsg, socket: WebSocketClient)
   func connectionEstablished(socket: WebSocketClient)
+	func socketDisconnected(socket: WebSocketClient, error: Error?)
 }
