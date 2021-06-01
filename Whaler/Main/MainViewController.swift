@@ -108,6 +108,7 @@ class MainViewController: UIViewController {
   }
   
   private func configureViewsForContent() {
+		noDataView?.removeFromSuperview()
     interactor.setupSocketForUpdates()
     configureContentView()
     configureHelloLabel()
@@ -553,8 +554,9 @@ extension MainViewController: TablePopoverViewControllerDelegate {
     }
 		
 		if item is DisconnectSalesforceOption {
-			dismiss(animated: true) {
+			dismiss(animated: true) { [weak self] in
 				NotificationCenter.default.post(name: .disconnectSalesforce, object: self)
+				self?.configureNoDataViews()
 			}
 		}
   }
