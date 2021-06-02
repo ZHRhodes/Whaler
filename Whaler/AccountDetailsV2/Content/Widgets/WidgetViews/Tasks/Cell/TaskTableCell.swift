@@ -104,6 +104,7 @@ class TaskTableCell: UITableViewCell {
   }
   
   private func configureContentContainer() {
+    contentContainer.isSkeletonable = true
     contentContainer.backgroundColor = .cellBackground
     contentContainer.layer.cornerRadius = UIConstants.boxCornerRadius
     contentContainer.layer.borderWidth = UIConstants.boxBorderWidth
@@ -136,6 +137,8 @@ class TaskTableCell: UITableViewCell {
   
   private func configureDueDateTag() {
     let container = UIView()
+    container.isSkeletonable = true
+    container.skeletonCornerRadius = Float(UIConstants.smallCornerRadius)
     container.backgroundColor = .accentBackground
     container.layer.cornerRadius = UIConstants.boxCornerRadius
     container.clipsToBounds = true
@@ -171,6 +174,8 @@ class TaskTableCell: UITableViewCell {
   
   private func configureTypeTag() {
     let container = UIView()
+    container.isSkeletonable = true
+    container.skeletonCornerRadius = Float(UIConstants.smallCornerRadius)
     container.backgroundColor = .accentBackground
     container.layer.cornerRadius = UIConstants.boxCornerRadius
     
@@ -190,6 +195,8 @@ class TaskTableCell: UITableViewCell {
   }
   
   private func configureDescriptionTextField() {
+    descriptionTextField.isSkeletonable = true
+    descriptionTextField.skeletonCornerRadius = Float(UIConstants.smallCornerRadius)
     descriptionTextField.font = .openSans(weight: .regular, size: 18)
     descriptionTextField.addTarget(self, action: #selector(descriptionChanged), for: .editingChanged)
     descriptionTextField.delegate = self

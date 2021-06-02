@@ -12,6 +12,7 @@ import UIKit
 enum UIConstants {
 	static let boxCornerRadius: CGFloat = 10.0
 	static let boxBorderWidth: CGFloat = 1.0
+  static let smallCornerRadius: CGFloat = 6.0
 }
 
 class NoteEditorViewController: UIViewController {

@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import Combine
+import SkeletonView
 
 class TasksTableViewController: UIViewController {
   var interactor: TasksTableInteractor!
@@ -16,21 +17,26 @@ class TasksTableViewController: UIViewController {
   private var datePicker: UIDatePicker?
   private var dataChangeCancellable: AnyCancellable?
   private var displayingPopupForTask: Task?
+  private var heightAnchor: NSLayoutConstraint!
   
   override func viewDidLoad() {
     super.viewDidLoad()
     configureTableView()
-    view.heightAnchor.constraint(equalToConstant: 300).isActive = true
+    heightAnchor = view.heightAnchor.constraint(equalToConstant: 300)
+    heightAnchor.isActive = true
+    tableView.showAnimatedGradientSkeleton()
   }
   
   func configure(with interactor: TasksTableInteractor) {
     self.interactor = interactor
     dataChangeCancellable = interactor.dataChanged.sink(receiveValue: { [weak self] in
+      self?.tableView.hideSkeleton()
       self?.tableView.reloadData()
     })
   }
   
   private func configureTableView() {
+    tableView.isSkeletonable = true
     tableView.delegate = self
     tableView.dataSource = self
     tableView.backgroundColor = .accentBackground
@@ -41,7 +47,16 @@ class TasksTableViewController: UIViewController {
   }
 }
 
-extension TasksTableViewController: UITableViewDelegate, UITableViewDataSource {
+extension TasksTableViewController: UITableViewDelegate, SkeletonTableViewDataSource {
+  
+  func collectionSkeletonView(_ skeletonView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    return 3
+  }
+  
+  func collectionSkeletonView(_ skeletonView: UITableView, cellIdentifierForRowAt indexPath: IndexPath) -> ReusableCellIdentifier {
+    return TaskTableCell.id
+  }
+  
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return interactor.tasks.count
   }

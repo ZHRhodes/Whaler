@@ -33,7 +33,7 @@ class AssignedButton: UIButton {
     widthAnchor.constraint(equalToConstant: new).isActive = true
     heightAnchor.constraint(equalToConstant: new).isActive = true
     layer.cornerRadius = new/2
-    skeletonCornerRadius = 25.0
+    skeletonCornerRadius = Float(new/2)
   }
   
   func reset() {
