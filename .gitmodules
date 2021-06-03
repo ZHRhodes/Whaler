@@ -1,0 +1,6 @@
+[submodule "Submodules/Sparkle"]
+	path = Submodules/Sparkle
+	url = https://github.com/sparkle-project/Sparkle.git
+[submodule "Submodules/CatalystSparkle"]
+	path = Submodules/CatalystSparkle
+	url = https://github.com/elegantchaos/CatalystSparkle.git
