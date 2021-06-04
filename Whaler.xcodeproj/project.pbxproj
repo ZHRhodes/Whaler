@@ -69,6 +69,11 @@
 		1444F4BC25FDE18200939F10 /* FilterPopoverTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1444F4BB25FDE18200939F10 /* FilterPopoverTableCell.swift */; };
 		144726CB2668B8A5005023C5 /* SparkleBridgeClient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 144726CA2668B877005023C5 /* SparkleBridgeClient.framework */; };
 		144726CC2668B8A5005023C5 /* SparkleBridgeClient.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 144726CA2668B877005023C5 /* SparkleBridgeClient.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		144726CF2669C680005023C5 /* CatalystSparkleDriver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144726CE2669C680005023C5 /* CatalystSparkleDriver.swift */; };
+		144726D22669F77E005023C5 /* UpdaterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144726D12669F77E005023C5 /* UpdaterViewController.swift */; };
+		144726D42669F886005023C5 /* UpdaterInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144726D32669F886005023C5 /* UpdaterInteractor.swift */; };
+		144726D62669FD6C005023C5 /* ToolbarHidingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144726D52669FD6C005023C5 /* ToolbarHidingViewController.swift */; };
+		144726D8266A0176005023C5 /* UpdaterContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144726D7266A0176005023C5 /* UpdaterContentView.swift */; };
 		144AECDA24D26658009625BE /* ContactRowViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144AECD924D26658009625BE /* ContactRowViewCell.swift */; };
 		144BF56C24D7E66E00F231F0 /* RootContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144BF56B24D7E66E00F231F0 /* RootContainerViewController.swift */; };
 		144FA6BD24C2C0C500506F15 /* CompanyInfoHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144FA6BC24C2C0C500506F15 /* CompanyInfoHeaderView.swift */; };
@@ -469,6 +474,11 @@
 		1444F4BB25FDE18200939F10 /* FilterPopoverTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterPopoverTableCell.swift; sourceTree = "<group>"; };
 		144726822668B7A3005023C5 /* Sparkle.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Sparkle.xcodeproj; path = Sparkle/Sparkle.xcodeproj; sourceTree = "<group>"; };
 		144726C22668B877005023C5 /* CatalystSparkle.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CatalystSparkle.xcodeproj; path = CatalystSparkle/CatalystSparkle.xcodeproj; sourceTree = "<group>"; };
+		144726CE2669C680005023C5 /* CatalystSparkleDriver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalystSparkleDriver.swift; sourceTree = "<group>"; };
+		144726D12669F77E005023C5 /* UpdaterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdaterViewController.swift; sourceTree = "<group>"; };
+		144726D32669F886005023C5 /* UpdaterInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdaterInteractor.swift; sourceTree = "<group>"; };
+		144726D52669FD6C005023C5 /* ToolbarHidingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolbarHidingViewController.swift; sourceTree = "<group>"; };
+		144726D7266A0176005023C5 /* UpdaterContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdaterContentView.swift; sourceTree = "<group>"; };
 		144AECD924D26658009625BE /* ContactRowViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactRowViewCell.swift; sourceTree = "<group>"; };
 		144BF56B24D7E66E00F231F0 /* RootContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootContainerViewController.swift; sourceTree = "<group>"; };
 		144FA6BC24C2C0C500506F15 /* CompanyInfoHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyInfoHeaderView.swift; sourceTree = "<group>"; };
@@ -834,6 +844,7 @@
 				1414810A252FFD8100640946 /* TablePopoverViewController.swift */,
 				148D461425AAD3C6003D5FA7 /* SplitPaneViewController.swift */,
 				1467E95E25F7F5CE00110880 /* ToolbarContainingViewController.swift */,
+				144726D52669FD6C005023C5 /* ToolbarHidingViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -1005,6 +1016,16 @@
 				144726CA2668B877005023C5 /* SparkleBridgeClient.framework */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		144726D02669F76C005023C5 /* Updater */ = {
+			isa = PBXGroup;
+			children = (
+				144726D12669F77E005023C5 /* UpdaterViewController.swift */,
+				144726D32669F886005023C5 /* UpdaterInteractor.swift */,
+				144726D7266A0176005023C5 /* UpdaterContentView.swift */,
+			);
+			path = Updater;
 			sourceTree = "<group>";
 		};
 		144AECD824D26646009625BE /* Cell */ = {
@@ -1209,9 +1230,11 @@
 				14861EF8249F439600D2FA92 /* Whaler.entitlements */,
 				14861ED4249F3DE100D2FA92 /* AppDelegate.swift */,
 				14861ED6249F3DE100D2FA92 /* SceneDelegate.swift */,
+				144726CE2669C680005023C5 /* CatalystSparkleDriver.swift */,
 				142ED45E26146A7E00BC79A0 /* Configuration */,
 				1480800724EA4AD2007EB6D1 /* NetworkLayer */,
 				147EB8672593C930002B93D8 /* DataLayer */,
+				144726D02669F76C005023C5 /* Updater */,
 				140AE7A624A9DF0B00F7705E /* Shared */,
 				144BF56A24D7E64300F231F0 /* RootContainer */,
 				142EC6A624D6ADDD004F7A28 /* Authentication */,
@@ -2012,6 +2035,7 @@
 				1443045D24F32FD900D2FBD2 /* String+Extensions.swift in Sources */,
 				14B037EB250749D000BA488D /* AuthenticationInteractor.swift in Sources */,
 				14ECDB2124CA9288006B4550 /* NoteEditor.swift in Sources */,
+				144726D42669F886005023C5 /* UpdaterInteractor.swift in Sources */,
 				143EC3A926192950003ADF97 /* AccountAssignmentEntryDataInterface.swift in Sources */,
 				146C35DB24C56A0100DBCA23 /* ContactsTableView.swift in Sources */,
 				14EF8D7025FB2EAC0065BEB3 /* Filter.swift in Sources */,
@@ -2019,6 +2043,7 @@
 				14861ED9249F3DE100D2FA92 /* MainViewController.swift in Sources */,
 				1488423F25086D910025C7EE /* Lifecycle.swift in Sources */,
 				1416481725A4FA970008E16B /* DataInterface.swift in Sources */,
+				144726D22669F77E005023C5 /* UpdaterViewController.swift in Sources */,
 				14D4A2E72574CA7E003EFF61 /* EditorToolbar.swift in Sources */,
 				14A2834724DE510D0016BA82 /* SF.swift in Sources */,
 				149092A32663393C008234BA /* TaskOptionsProvider.swift in Sources */,
@@ -2043,6 +2068,7 @@
 				14F2E072263A720500F87C05 /* ResourceConnection.swift in Sources */,
 				14861ED7249F3DE100D2FA92 /* SceneDelegate.swift in Sources */,
 				141F797225342B0F005F9295 /* CustomInterceptorProvider.swift in Sources */,
+				144726CF2669C680005023C5 /* CatalystSparkleDriver.swift in Sources */,
 				14562B8225F30E3500BA9D3B /* ProgressShapeLayer.swift in Sources */,
 				14861EF7249F401300D2FA92 /* CSVParser.swift in Sources */,
 				146C344624EA53690009C68C /* UserDefaultsManaged.swift in Sources */,
@@ -2107,6 +2133,7 @@
 				14DACF42255BAC2A00FC0900 /* Log.swift in Sources */,
 				14B037EE25074B1E00BA488D /* User.swift in Sources */,
 				144AECDA24D26658009625BE /* ContactRowViewCell.swift in Sources */,
+				144726D62669FD6C005023C5 /* ToolbarHidingViewController.swift in Sources */,
 				1424805E261EDE2000381B83 /* NoteDataInterface.swift in Sources */,
 				145A376A24C588DF0081F9DB /* NotesView.swift in Sources */,
 				14B037E325073E8800BA488D /* Response.swift in Sources */,
@@ -2180,6 +2207,7 @@
 				146A6DCF252C48BE00DA8E85 /* API.swift in Sources */,
 				1480800924EA4AE8007EB6D1 /* Networker.swift in Sources */,
 				141802B5258EF72A00E38840 /* Notification+Extensions.swift in Sources */,
+				144726D8266A0176005023C5 /* UpdaterContentView.swift in Sources */,
 				149092822663216D008234BA /* DateFormatter+Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -39,7 +39,7 @@ class NoteEditorViewController: UIViewController {
 	
 	private func showNotesLoadingCover() {
 		loadingCover = LoadingCoverView()
-		view.addAndAttach(view: loadingCover!, attachingEdges: [.all()])
+		view.addAndAttach(view: loadingCover!, attachingEdges: .all())
 	}
 	
 	private func hideNotesLoadingCover() {

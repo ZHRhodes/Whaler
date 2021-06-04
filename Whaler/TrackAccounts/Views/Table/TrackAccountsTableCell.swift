@@ -78,7 +78,7 @@ class TrackAccountsTableCell: UITableViewCell {
     bottomLine.backgroundColor = .primaryText
     bottomLine.translatesAutoresizingMaskIntoConstraints = false
     
-    contentView.addAndAttach(view: bottomLine, height: 2, attachingEdges: [.left(0), .right(0), .bottom(0)])
+    contentView.addAndAttach(view: bottomLine, height: 2, attachingEdges: .left(0), .right(0), .bottom(0))
     
     configureStackView()
   }

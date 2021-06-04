@@ -35,8 +35,15 @@ extension UIView {
     
     NSLayoutConstraint.activate(constraints)
   }
+	
+	func addAndAttach(view: UIView, height: CGFloat? = nil, width: CGFloat? = nil, attachingEdges: EdgeConstraint...) {
+		addAndAttach(view: view,
+								 height: height,
+								 width: width,
+								 attachingEdges: attachingEdges)
+	}
   
-  func addAndAttach(view: UIView, height: CGFloat? = nil, width: CGFloat? = nil, attachingEdges: [EdgeConstraint]) {
+	func addAndAttach(view: UIView, height: CGFloat? = nil, width: CGFloat? = nil, attachingEdges: [EdgeConstraint]) {
     view.translatesAutoresizingMaskIntoConstraints = false
     addSubview(view)
     

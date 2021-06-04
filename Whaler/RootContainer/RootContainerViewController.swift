@@ -8,10 +8,12 @@
 
 import Combine
 import UIKit
+import SwiftUI
 
 class RootContainerViewController: UIViewController {
   private var mainViewController: MainViewController?
   private var authenticationViewController: AuthenticationViewController?
+	private var updaterViewController: UpdaterViewController?
   
   private let interactor = RootContainerInteractor()
   private var unauthorizedUserCancellable: AnyCancellable?
@@ -47,6 +49,9 @@ class RootContainerViewController: UIViewController {
     let maxSize: CGSize
     
     switch state {
+		case .updater:
+			minSize = UpdaterViewController.minSize
+			maxSize = UpdaterViewController.maxSize
     case .authentication:
       minSize = AuthenticationViewController.minSize
       maxSize = AuthenticationViewController.maxSize
@@ -63,6 +68,12 @@ class RootContainerViewController: UIViewController {
   
   func viewController(for state: State) -> UIViewController {
     switch state {
+		case .updater:
+//			let vc = UpdaterViewController()
+//			vc.interactor =
+			let interactor = UpdaterInteractor(driver: CatalystSparkleDriver())
+			let contentView = ContentView(driver: interactor.driver, plugin: interactor.plugin)
+			return UIHostingController(rootView: contentView)
     case .authentication:
       let vc = AuthenticationViewController()
       vc.delegate = self
@@ -75,20 +86,21 @@ class RootContainerViewController: UIViewController {
   }
   
   private func configureViewsOnLaunch() {
-    Lifecycle.loadApiTokens()
-    if !Lifecycle.hasTokens() {
-      transition(to: .authentication)
-      return
-    } else {
-      transition(to: .main)
-      Lifecycle.refreshAPITokens { [weak self] (success) in
-        if !success {
-          self?.transition(to: .authentication)
-        } else {
-          self?.transition(to: .main)
-        }
-      }
-    }
+		transition(to: .updater)
+//    Lifecycle.loadApiTokens()
+//    if !Lifecycle.hasTokens() {
+//      transition(to: .authentication)
+//      return
+//    } else {
+//      transition(to: .main)
+//      Lifecycle.refreshAPITokens { [weak self] (success) in
+//        if !success {
+//          self?.transition(to: .authentication)
+//        } else {
+//          self?.transition(to: .main)
+//        }
+//      }
+//    }
   }
 }
 
@@ -100,6 +112,7 @@ extension RootContainerViewController: AuthenticationViewControllerDelegate {
 
 extension RootContainerViewController {
   enum State {
+		case updater
     case authentication
     case main
   }

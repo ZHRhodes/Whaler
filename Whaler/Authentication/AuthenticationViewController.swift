@@ -10,11 +10,11 @@ import Foundation
 import UIKit
 import SwiftUI
 
-protocol AuthenticationViewControllerDelegate: class {
+protocol AuthenticationViewControllerDelegate: AnyObject {
   func signedIn()
 }
 
-class AuthenticationViewController: UIViewController {
+class AuthenticationViewController: ToolbarHidingViewController {
   static let minSize: CGSize = CGSize(width: 1440, height: 900)
   static let maxSize: CGSize = minSize
   
@@ -23,37 +23,13 @@ class AuthenticationViewController: UIViewController {
   
   private let authViewModel = AuthenticationView.ViewModel()
   private lazy var authView = UIHostingController(rootView: AuthenticationView(delegate: self, textFieldDelegate: self, viewModel: authViewModel))
-  private var incomingToolbar: NSToolbar?
   
   override func viewDidLoad() {
     super.viewDidLoad()
     view.addSubview(authView.view)
     view.backgroundColor = .primaryBackground
-    authView.view.translatesAutoresizingMaskIntoConstraints = false
-    
-    let constraints = [
-      authView.view.leftAnchor.constraint(equalTo: view.leftAnchor),
-      authView.view.rightAnchor.constraint(equalTo: view.rightAnchor),
-      authView.view.topAnchor.constraint(equalTo: view.topAnchor),
-      authView.view.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-    ]
-    NSLayoutConstraint.activate(constraints)
-  }
-  
-  override func viewDidAppear(_ animated: Bool) {
-    super.viewDidAppear(animated)
-    let windowScene = view.window?.windowScene
-    windowScene?.titlebar?.titleVisibility = .hidden
-    incomingToolbar = windowScene?.titlebar?.toolbar
-    windowScene?.titlebar?.toolbar = nil
-  }
-  
-  override func viewWillDisappear(_ animated: Bool) {
-    super.viewWillDisappear(animated)
-    let windowScene = view.window?.windowScene
-    windowScene?.titlebar?.titleVisibility = .visible
-    windowScene?.titlebar?.toolbar = incomingToolbar
-  }
+		view.addAndAttach(view: authView.view, attachingEdges: .all())
+	}
 }
 
 extension AuthenticationViewController: AuthenticationViewDelegate {
