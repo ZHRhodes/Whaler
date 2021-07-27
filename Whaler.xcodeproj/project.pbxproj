@@ -98,6 +98,7 @@
 		146C35D924C5689B00DBCA23 /* ContactRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146C35D824C5689B00DBCA23 /* ContactRowView.swift */; };
 		146C35DB24C56A0100DBCA23 /* ContactsTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146C35DA24C56A0100DBCA23 /* ContactsTableView.swift */; };
 		1473C8A82522E6D000A991DA /* AttributeTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1473C8A72522E6D000A991DA /* AttributeTagView.swift */; };
+		1478CA8126AFAA7E0049894B /* APINetworkInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1478CA8026AFAA7E0049894B /* APINetworkInterface.swift */; };
 		1479A0B72657468600FF06CD /* AccountWidgetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1479A0B62657468600FF06CD /* AccountWidgetCell.swift */; };
 		147A3CB22577625500D96637 /* Starscream in Frameworks */ = {isa = PBXBuildFile; productRef = 147A3CB12577625500D96637 /* Starscream */; };
 		147B8720263E821300C2866E /* OTOpArrayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147B871F263E821300C2866E /* OTOpArrayTests.swift */; };
@@ -111,7 +112,7 @@
 		147F55F92607FC6A001F139A /* Owner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147F55F82607FC6A001F139A /* Owner.swift */; };
 		147F5601260855BF001F139A /* SFFilterAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147F5600260855BF001F139A /* SFFilterAdapter.swift */; };
 		1480800924EA4AE8007EB6D1 /* Networker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1480800824EA4AE8007EB6D1 /* Networker.swift */; };
-		1480800B24EA4B32007EB6D1 /* APINetworkInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1480800A24EA4B32007EB6D1 /* APINetworkInterface.swift */; };
+		1480800B24EA4B32007EB6D1 /* NetworkInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1480800A24EA4B32007EB6D1 /* NetworkInterface.swift */; };
 		1480800E24EA4BDA007EB6D1 /* Just in Frameworks */ = {isa = PBXBuildFile; productRef = 1480800D24EA4BDA007EB6D1 /* Just */; };
 		1480801024EA4BE7007EB6D1 /* JustNetworker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1480800F24EA4BE7007EB6D1 /* JustNetworker.swift */; };
 		14835382263B8799001844A4 /* OTDocTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14835381263B8799001844A4 /* OTDocTests.swift */; };
@@ -335,6 +336,7 @@
 		146C35D824C5689B00DBCA23 /* ContactRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactRowView.swift; sourceTree = "<group>"; };
 		146C35DA24C56A0100DBCA23 /* ContactsTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsTableView.swift; sourceTree = "<group>"; };
 		1473C8A72522E6D000A991DA /* AttributeTagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttributeTagView.swift; sourceTree = "<group>"; };
+		1478CA8026AFAA7E0049894B /* APINetworkInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APINetworkInterface.swift; sourceTree = "<group>"; };
 		1479A0B62657468600FF06CD /* AccountWidgetCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountWidgetCell.swift; sourceTree = "<group>"; };
 		147B871F263E821300C2866E /* OTOpArrayTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTOpArrayTests.swift; sourceTree = "<group>"; };
 		147DEA76260DA0940004BF7D /* applyAccountTrackingChange.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = applyAccountTrackingChange.graphql; sourceTree = "<group>"; };
@@ -347,7 +349,7 @@
 		147F55F82607FC6A001F139A /* Owner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Owner.swift; sourceTree = "<group>"; };
 		147F5600260855BF001F139A /* SFFilterAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFFilterAdapter.swift; sourceTree = "<group>"; };
 		1480800824EA4AE8007EB6D1 /* Networker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networker.swift; sourceTree = "<group>"; };
-		1480800A24EA4B32007EB6D1 /* APINetworkInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APINetworkInterface.swift; sourceTree = "<group>"; };
+		1480800A24EA4B32007EB6D1 /* NetworkInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkInterface.swift; sourceTree = "<group>"; };
 		1480800F24EA4BE7007EB6D1 /* JustNetworker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JustNetworker.swift; sourceTree = "<group>"; };
 		14835381263B8799001844A4 /* OTDocTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTDocTests.swift; sourceTree = "<group>"; };
 		14861ED1249F3DE100D2FA92 /* Whaler.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Whaler.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -730,10 +732,7 @@
 			isa = PBXGroup;
 			children = (
 				141F796825327503005F9295 /* Graph.swift */,
-				141F796D25342974005F9295 /* TokenAddingIntercepter.swift */,
-				141F797125342B0F005F9295 /* CustomInterceptorProvider.swift */,
-				148C70DE261C1AEF002D4EAA /* UserManagementInterceptor.swift */,
-				148C70E4261C1F1E002D4EAA /* CustomNetworkFetchInterceptor.swift */,
+				1478CA8226AFAAEE0049894B /* CustomInterceptors */,
 			);
 			path = GraphQL;
 			sourceTree = "<group>";
@@ -883,6 +882,41 @@
 			path = Contacts;
 			sourceTree = "<group>";
 		};
+		1478CA7E26AFA8960049894B /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				144BF56A24D7E64300F231F0 /* RootContainer */,
+				142EC6A624D6ADDD004F7A28 /* Authentication */,
+				140AE79424A9A9FE00F7705E /* Main */,
+				14C509B6254CEC810021D9C5 /* AddAccount */,
+				146C35D024C5575E00DBCA23 /* AccountsDetails */,
+				141802AB258EF04A00E38840 /* AccountDetailsV2 */,
+				14EA64E225F4CD4400F26ECE /* TrackAccounts */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		1478CA7F26AFAA600049894B /* NetworkInterface */ = {
+			isa = PBXGroup;
+			children = (
+				1480800A24EA4B32007EB6D1 /* NetworkInterface.swift */,
+				146A6DD9252C563200DA8E85 /* SFNetworkInterface.swift */,
+				1478CA8026AFAA7E0049894B /* APINetworkInterface.swift */,
+			);
+			path = NetworkInterface;
+			sourceTree = "<group>";
+		};
+		1478CA8226AFAAEE0049894B /* CustomInterceptors */ = {
+			isa = PBXGroup;
+			children = (
+				141F796D25342974005F9295 /* TokenAddingIntercepter.swift */,
+				141F797125342B0F005F9295 /* CustomInterceptorProvider.swift */,
+				148C70DE261C1AEF002D4EAA /* UserManagementInterceptor.swift */,
+				148C70E4261C1F1E002D4EAA /* CustomNetworkFetchInterceptor.swift */,
+			);
+			path = CustomInterceptors;
+			sourceTree = "<group>";
+		};
 		147DEA7C260DBC870004BF7D /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
@@ -928,11 +962,10 @@
 				148A096C2586E0DC00811E35 /* Websocket */,
 				141F796C2534290B005F9295 /* GraphQL */,
 				1480800824EA4AE8007EB6D1 /* Networker.swift */,
-				1480800A24EA4B32007EB6D1 /* APINetworkInterface.swift */,
+				1478CA7F26AFAA600049894B /* NetworkInterface */,
 				1480800F24EA4BE7007EB6D1 /* JustNetworker.swift */,
 				14B037E225073E8800BA488D /* Response.swift */,
 				14B037E425073EBA00BA488D /* Tokens.swift */,
-				146A6DD9252C563200DA8E85 /* SFNetworkInterface.swift */,
 			);
 			path = NetworkLayer;
 			sourceTree = "<group>";
@@ -1002,13 +1035,7 @@
 				1480800724EA4AD2007EB6D1 /* NetworkLayer */,
 				147EB8672593C930002B93D8 /* DataLayer */,
 				140AE7A624A9DF0B00F7705E /* Shared */,
-				144BF56A24D7E64300F231F0 /* RootContainer */,
-				142EC6A624D6ADDD004F7A28 /* Authentication */,
-				140AE79424A9A9FE00F7705E /* Main */,
-				14C509B6254CEC810021D9C5 /* AddAccount */,
-				146C35D024C5575E00DBCA23 /* AccountsDetails */,
-				141802AB258EF04A00E38840 /* AccountDetailsV2 */,
-				14EA64E225F4CD4400F26ECE /* TrackAccounts */,
+				1478CA7E26AFA8960049894B /* Controllers */,
 				140AE79C24A9B4F700F7705E /* Extensions */,
 				14F4090224C6A04D00F405BC /* Fonts */,
 				14861EDA249F3DE100D2FA92 /* Main.storyboard */,
@@ -1760,7 +1787,7 @@
 				1416480725A4FA020008E16B /* AccountSFDataSource.swift in Sources */,
 				14C509B8254CECD70021D9C5 /* AddAccountViewController.swift in Sources */,
 				1488DD8125F32683002A898C /* TextFinishedProgressIndicator.swift in Sources */,
-				1480800B24EA4B32007EB6D1 /* APINetworkInterface.swift in Sources */,
+				1480800B24EA4B32007EB6D1 /* NetworkInterface.swift in Sources */,
 				14EA64EA25F4CD7700F26ECE /* TrackAccountsInteractor.swift in Sources */,
 				146C35D524C5635D00DBCA23 /* CompanyInfoView.swift in Sources */,
 				14CCB6B82637C8A80024C500 /* OTClient.swift in Sources */,
@@ -1791,6 +1818,7 @@
 				149092A926633979008234BA /* TaskOption.swift in Sources */,
 				14248066261EDE8500381B83 /* Note.swift in Sources */,
 				149A092F2639089A00AE429C /* OTDoc.swift in Sources */,
+				1478CA8126AFAA7E0049894B /* APINetworkInterface.swift in Sources */,
 				14A7E82A26562B990007BAFD /* AccountWidget.swift in Sources */,
 				1467E95F25F7F5CE00110880 /* ToolbarContainingViewController.swift in Sources */,
 				147F55EC2606C9AE001F139A /* FilterDisplayOption.swift in Sources */,
