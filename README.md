@@ -3,6 +3,8 @@
 # Whaler
 
 This repo contains the native Mac client app for the Whaler platform. It's a UIKit-based native Mac app built using Catalyst.
+
+![Ultra HD (4K)](https://user-images.githubusercontent.com/12732454/127083623-79726f79-0079-47c7-95cc-ee26a9097832.jpg)
  
 ## What is Whaler? 
 
@@ -15,7 +17,37 @@ These features include:
 * Real time collaborative editor for account notes, communicating over websockets with operational transform conflict resolution
 * Real time data model updates over websockets
 
-![Ultra HD (4K)](https://user-images.githubusercontent.com/12732454/127083623-79726f79-0079-47c7-95cc-ee26a9097832.jpg)
+| ![Screen Shot 2021-07-27 at 1 17 29 AM](https://user-images.githubusercontent.com/12732454/127120882-43cc93f1-c7ee-4775-bac8-bc1bbe4c8c78.png) | 
+|:--:| 
+| Authentication • _Users belong to an organization_ |
+
+| ![Screen Shot 2021-07-27 at 1 10 26 AM](https://user-images.githubusercontent.com/12732454/127119812-c29321ae-3bee-4521-bff6-fafccee173ad.png) | 
+|:--:| 
+| Authentication • _Supports dark mode throughout_ |
+
+| ![image](https://user-images.githubusercontent.com/12732454/127121535-3e4f4be3-712b-4271-90ae-3f2ae6ba5c4b.png) | 
+|:--:| 
+| Tracked Accounts • _Accounts are dragged across the kanban as they progress_ |
+
+| ![image](https://user-images.githubusercontent.com/12732454/127121330-616ee34c-70a6-4ae8-8fb3-fa4a73632863.png) | 
+|:--:| 
+| Tracked Accounts • _Changes are synced automatically_  |
+
+| ![paste (1)](https://user-images.githubusercontent.com/12732454/127116063-4406bb84-62ed-4fb8-9335-0ff24841eb8e.png) | 
+|:--:| 
+| Account Details • _Tasks with due dates can be added to accounts_ |
+
+| ![image](https://user-images.githubusercontent.com/12732454/127120551-89ddce87-bcef-4cc4-aabc-b3c2129c1a42.png) | 
+|:--:| 
+| Account Details • _Note taking is collaborative and real-time_ |
+
+| ![image](https://user-images.githubusercontent.com/12732454/127122282-161eadcc-17a1-40d3-b2ec-04b6def0b8ab.png) | 
+|:--:| 
+| Edit Tracked Accounts • _Multiple filters can be stacked and added to the Salesforce query_|
+
+| ![image](https://user-images.githubusercontent.com/12732454/127122314-84cf889d-3329-4ebd-8a5b-e7fd880c6068.png) | 
+|:--:| 
+| Edit Tracked Accounts • _Multiple users can track the same account_ |
 
 ## Whaler Technical Overview 
 
