@@ -1,8 +1,6 @@
 ![Logo_Lock_Transparent](https://user-images.githubusercontent.com/12732454/126949778-df08d3b0-5233-42d7-9757-c4652e0bdbff.png)
 
-# Whaler
-
-This repo contains the native Mac client app for the Whaler platform. It's a UIKit-based native Mac app built using Catalyst.
+This repo contains the Mac client app for the Whaler platform, a UIKit-based native Mac app built using Catalyst.
 
 ![Ultra HD (4K)](https://user-images.githubusercontent.com/12732454/127083623-79726f79-0079-47c7-95cc-ee26a9097832.jpg)
  
@@ -70,6 +68,22 @@ Now we'll go into the interesting bits of these components to see how it all wor
 Whaler currently has two build configurations: Remote and Local. The Remote configuration sets the environment variable `API_URL` to point to the API running on Heroku. On the other hand, Local points that url to the user's own machine ([see here](https://github.com/ZHRhodes/Whaler-api/blob/master/README.md#running-locally)). `Configuration.swift` serves simply to store that environment variable string in the `Configuration.apiUrl` property. 
 
 There is a third `Remote-Copy` config that exists to make local development just a little bit easier. This configuration is the same as the Remote config except it changes the bundle identifier and adds an executable prefix. Because Whaler includes real time features between clients, there are times you need to open up multiple instances at once. Running the second one with this build config will keep them from colliding so macOS will let them both run at the same time. 
+
+### Shared
+
+![IMG_0042](https://user-images.githubusercontent.com/12732454/127230252-83386c51-c0ca-43e9-a8ac-eb2d16173ce9.jpg)
+
+The shared folder contains protocols, views, view controllers, models, and helpers that have a general use-case throughout the app. For example, `TablePopoverViewController.swift` is a configurable popover that can be used for menus. It has no knowledge of any specific feature in the app, making it a good fit for this top level folder. These components can easily be borrowed and reused in other apps as well. 
+
+It's worth mentioning one particular subdirectory: `Salesforce`. This contains a set of Swift structs that map to Salesforce objects as well as an interface for composing Salesforce Object Query Language (SOQL) requests. No objects or methods within this directory have any knowledge of our application logic or how it interacts with Salesforce. That logic can be found one level up in `SFHelper.swift`, which defines the Salesforce operations used by the app. This separation abstracts the Swift-Salesforce communication from the business logic, leaving us with a `Salesforce/` directory that could be dropped into any app that needs it. 
+
+### Controllers
+
+![IMG_0043](https://user-images.githubusercontent.com/12732454/127230281-abdd9675-9a15-4e13-b61c-f51ffb9d495c.jpg)
+
+All the pages of the app can be found here. The current architecture is a simple ViewController-Interactor pattern, primarily chosen for simplicity and quick development. There aren't currently too many pages in the app, so there isn't much presentation logic cluttering up ViewControllers. In the future, as more pages would be added, it would be a good idea to consider adding a Coordinator to the pattern to handle presentation.
+
+All layouts are done via programatic autolayout. A few simple `UIView` extensions in `UIView+Extension.swift` make setting constraints a breeze. 
 
 ### NetworkLayer
 
