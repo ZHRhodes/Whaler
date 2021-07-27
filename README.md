@@ -55,11 +55,11 @@ Looking at the whole picture, this repo consists of the right half of this diagr
 
 ![Whaler Technical Overview](https://user-images.githubusercontent.com/12732454/126923083-f529c8ba-a43b-49d5-976d-745047c1a230.png)
 
-First, let's get a visual from thirty thousand feet:
+Before we dive in, let's get a visual of this repo from thirty thousand feet:
 
 <img width="2063" alt="Mind Map 9" src="https://user-images.githubusercontent.com/12732454/127088508-209a0cc9-ae57-44dd-8c89-b768002e9453.png">
 
-Now let's dive into each piece and see how it all works together.
+Now we'll go into the interesting bits of these components to see how it all works. 
 
 ### Configuration
 
