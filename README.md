@@ -71,5 +71,38 @@ In addition to porting the implementation, I added cursor support to `OTDoc.swif
 
 These ops are not actually applied to doc. Instead, they are transformed against the incoming ops being applied to the document. The cursor struct is updated with the new position after the transformation. In this way, we leverage the existing `transform` function to do the math for us.
 
+#### GraphQL
 
+Whaler uses Apollo to manage GraphQL. Apollo uses a build phase to generate Swift code based on your `schema.json` file. This file needs to be redownloaded every time the schema is changed. Currently, that introspection request requires an access token, which means you need to generate one using the `/login` endpoint. This is a little tedius, but progress on automating has been started in the `apollodownload` script. Right now it asks for the token and then makes the download request for you.
+
+Queries and mutations are defined in `*.graphql` files placed at the top level of the project. **Note:** Apollo automatically caches requests, but I often ran into trouble with Apollo incorrectly assuming my data hadn't changed since the last request. For that reason, I usually find it safer to just use the `fetchIgnoringCacheData` cache policy. I would be wary using the Apollo cache for anything that might change at all rapidly.
+
+#### NetworkInterface
+
+Finally, there's also a lightweight networking protocol defined in `NetworkInterface.swift`. This protocol defines interacting with an external resource. There are currently two concrete implementations: `APINetworkInterface` and `SFNetworkInterface` where `SF` stands for Salesforce. My Go API works a little differently than the Salesforce API, so this abstracts those differences into their own implementations of the basic networking functions. Each `NetworkInterface` accepts a `Networker`, a protocol that provides the ability to execute any `NetworkRequest`. In that way, the logic of interacting with APIs is abstracted from the execution layer of networking. 
+
+### DataLayer
+
+Whaler consumes data from multiple sources, and that access is abstracted behind a reactive repository layer, made using Combine. For each source, a `DataSource` class implements the various operations that can be performed on it. This would be things like `fetchSingle(with id: String)`, `saveAll`, etc. 
+
+![Untitled Document - Copy](https://user-images.githubusercontent.com/12732454/127109754-937d364b-bc36-4f48-ac98-595050207e8e.png)
+
+This provides a common pattern for where to find operations for particular data types. Let’s take it another step and address how they interact with each other.
+
+The data _consumer_ should never have to worry about maintaining the different data sources. That type of work should be encapsulated within the data layer. Rather than have these data sources know anything about each other, there's an abstraction over top of them that will handle all of these types of operations. For each data type, there is one data interface.
+
+![Untitled Document - Copy-2](https://user-images.githubusercontent.com/12732454/127110947-6905291b-6739-4211-8373-5bc298ff9368.png)
+
+The data interface is where you can plug in different data sources and determine how they interact with each other. By encapsulating this type of work into this sublayer, it makes it incomparably easier to modify our data sources at any point in the future. That includes, for example, adding a different method of caching – it would just become another data source to use in the interface. The plug-and-play nature of these components allows us to be quite agile. And what's more, the data interface only outputs one single simple type, so any necessary type conversion is abstracted. This was a deliberate restriction to make certain multiple representations wouldn't leak out into the codebase. 
+
+The final touch to this repository architecture focuses on consumer ergonomics. Each data type will have its data interface wrapped in a **generic** class with the signature `Repository<Interface: DataInterface>`. The purpose of this class is to provide simple, reactive ergonomics for data consumers. A `Repository` has just a few simple functions, such as `fetchSubset`, `fetchSingle`, and `save`. These return publishers – specifically, a type-erased `AnyPublisher` – which forces all consumers to be prepared for streams of data.
+
+![Untitled Document - Copy-3](https://user-images.githubusercontent.com/12732454/127111614-f36ba73f-61f6-4b83-8c8f-2354ee43b98e.png)
+
+Because it’s the exact same class wrapping all interfaces, there will not be any differences in how data is accessed throughout the app. At the end of the day, data consumers don’t know anything about interfaces or data sources. All they need to work with is the same familiar class that’s used everywhere! All consumers interact with the same repository for each data type. That, coupled with the reactive pattern, ensure that data is always kept in sync across the app. Changes in data will be pushed out to all subscribers at once.
+
+I also leveraged a few Combine features to implement a caching system in the `Repository`. This means that, when enabled, the last fetched data will be delivered immediately while a new fetch is kicked off. The consumers, being reactive, will respond to any number of data updates coming across the pipeline. Future enhancements similar to that caching feature can be added to the `Repository` in the future, and the beauty is they will go into affect for all data types. This gives us a single point of optimization to affect data operations app-wide.
+
+
+### Future 👀
 
