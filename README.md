@@ -35,6 +35,28 @@ Whaler currently has two build configurations: Remote and Local. The Remote conf
 
 There is a third `Remote-copy` config that exists to make local development just a little bit easier. This configuration is the same as the Remote config except it changes the bundle identifier and adds an executable prefix. Because Whaler includes real time features between clients, there are times you need to open up multiple instances at once. Running the second one with this build config will keep them from colliding so macOS will let them both run at the same time. 
 
-### Network Layer
+### NetworkLayer
+
+All the networking implementations are contained in this folder. In particular, that includes websockets, GraphQL, and a plain networking interface for REST calls. 
+
+#### Websocket
+
+Websockets are currently responsible for delivering real-time document and model updates. Because a single websocket can transmit messages of various types, we have to decode them over several steps. The first is to decode every message into a `SocketMessage<T>` where `T == AnyCodable` and `struct AnyCodable: Codable {}`. This gives us the basic structure of all messages sent by our API while skipping decoding the data parameter.
+
+```  
+  var messageId: String = ""
+  var type: SocketMessageType
+  var data: T
+```
+
+The `type` property is an enum with cases like `docChange`, and `resourceUpdated`. We switch on the `type` to ultimately transform the message into an enum called `SocketMsg` (which has a renaming in its future). `SocketMsg` represents the message as `case messageType(value)`, making it easy for any delegate to just switch on the enum to handle the message they want. For clarity, here's an example of a `SocketMsg` case: `case docChange(DocumentChange)`.
+
+Currently, the client uses websockets for two purposes: real-time model updates and collaborative note editing. 
+
+##### Model Updates
+
+Clients who wish to monitor changes in a particular API resource can do so by simpling telling the `WebSocketManager` to `registerConnection` with the id for the resource. The caller provides a delegate which can respond to a new connection, receive messages, and respond to being disconnected. That's great for observing objects with a clear root; an account contains contacts and tasks, and by observing the account, we can get notified if anything changes. Currently, the only unique case is observing all Accounts, such as on the main kanban page. What is a logical root id that we can use to observe to catch changes to all accounts in the organization? At least for now, this is done by observing the organizationId itself. That will give you updates to any Account tracked by any user in the organization.
+
+For a breakdown of how the operational transform algorithm works, see the [API repo](https://github.com/ZHRhodes/Whaler-api/blob/master/README.md#ot). An instance of this app would function as a `Client`, as referred to in that write up. While for the API we could benefit from an existing Go OT implementation, there was no such luck in Swift. I had to port the Go implementation over to Swift myself. To help carry the torch, I open sourced that port here (link).
 
 
