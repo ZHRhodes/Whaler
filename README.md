@@ -17,6 +17,8 @@ These features include:
 * Real time collaborative editor for account notes, communicating over websockets with operational transform conflict resolution
 * Real time data model updates over websockets
 
+Before we get into the technical details, let's get comfortable with the user interface.
+
 | ![Screen Shot 2021-07-27 at 1 17 29 AM](https://user-images.githubusercontent.com/12732454/127120882-43cc93f1-c7ee-4775-bac8-bc1bbe4c8c78.png) | 
 |:--:| 
 | Authentication • _Users belong to an organization_ |
@@ -43,11 +45,11 @@ These features include:
 
 | ![image](https://user-images.githubusercontent.com/12732454/127122282-161eadcc-17a1-40d3-b2ec-04b6def0b8ab.png) | 
 |:--:| 
-| Edit Tracked Accounts • _Multiple filters can be stacked and added to the Salesforce query_|
+| Track/Untrack Accounts • _Multiple filters can be stacked and added to the Salesforce query_|
 
 | ![image](https://user-images.githubusercontent.com/12732454/127122314-84cf889d-3329-4ebd-8a5b-e7fd880c6068.png) | 
 |:--:| 
-| Edit Tracked Accounts • _Multiple users can track the same account_ |
+| Track/Untrack Accounts • _Multiple users can track the same account_ |
 
 ## Whaler Technical Overview 
 
@@ -55,7 +57,7 @@ Looking at the whole picture, this repo consists of the right half of this diagr
 
 ![Whaler Technical Overview](https://user-images.githubusercontent.com/12732454/126923083-f529c8ba-a43b-49d5-976d-745047c1a230.png)
 
-Before we dive in, let's get a visual of this repo from thirty thousand feet:
+Here's a thirty-thousand feet view of the app codebase:
 
 <img width="2063" alt="Mind Map 9" src="https://user-images.githubusercontent.com/12732454/127088508-209a0cc9-ae57-44dd-8c89-b768002e9453.png">
 
