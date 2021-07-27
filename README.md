@@ -57,7 +57,7 @@ Looking at the whole picture, this repo consists of the right half of this diagr
 
 ![Whaler Technical Overview](https://user-images.githubusercontent.com/12732454/126923083-f529c8ba-a43b-49d5-976d-745047c1a230.png)
 
-Here's a thirty-thousand feet view of the app codebase:
+Let's start with a thirty-thousand foot view of the app codebase:
 
 <img width="2063" alt="Mind Map 9" src="https://user-images.githubusercontent.com/12732454/127088508-209a0cc9-ae57-44dd-8c89-b768002e9453.png">
 
@@ -65,11 +65,15 @@ Now we'll go into the interesting bits of these components to see how it all wor
 
 ### Configuration
 
+![IMG_0041](https://user-images.githubusercontent.com/12732454/127229629-a086faec-1b15-464b-a787-345acfc42ab4.jpg)
+
 Whaler currently has two build configurations: Remote and Local. The Remote configuration sets the environment variable `API_URL` to point to the API running on Heroku. On the other hand, Local points that url to the user's own machine ([see here](https://github.com/ZHRhodes/Whaler-api/blob/master/README.md#running-locally)). `Configuration.swift` serves simply to store that environment variable string in the `Configuration.apiUrl` property. 
 
 There is a third `Remote-copy` config that exists to make local development just a little bit easier. This configuration is the same as the Remote config except it changes the bundle identifier and adds an executable prefix. Because Whaler includes real time features between clients, there are times you need to open up multiple instances at once. Running the second one with this build config will keep them from colliding so macOS will let them both run at the same time. 
 
 ### NetworkLayer
+
+![IMG_0040](https://user-images.githubusercontent.com/12732454/127229528-0d6c4453-f816-4043-99d9-a563ae290747.jpg)
 
 All the networking implementations are contained in this folder. In particular, that includes websockets, GraphQL, and a plain networking interface for REST calls. 
 
@@ -116,6 +120,8 @@ Queries and mutations are defined in `*.graphql` files placed at the top level o
 Finally, there's also a lightweight networking protocol defined in `NetworkInterface.swift`. This protocol defines interacting with an external resource. There are currently two concrete implementations: `APINetworkInterface` and `SFNetworkInterface` where `SF` stands for Salesforce. My Go API works a little differently than the Salesforce API, so this abstracts those differences into their own implementations of the basic networking functions. Each `NetworkInterface` accepts a `Networker`, a protocol that provides the ability to execute any `NetworkRequest`. In that way, the logic of interacting with APIs is abstracted from the execution layer of networking. 
 
 ### DataLayer
+
+ ![IMG_0040](https://user-images.githubusercontent.com/12732454/127229560-032b01b7-5432-41f6-a2e4-d0da31c2c7d3.jpg)
 
 Whaler consumes data from multiple sources, and that access is abstracted behind a reactive repository layer, made using Combine. For each source, a `DataSource` class implements the various operations that can be performed on it. This would be things like `fetchSingle(with id: String)`, `saveAll`, etc. 
 
