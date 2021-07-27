@@ -57,6 +57,19 @@ Currently, the client uses websockets for two purposes: real-time model updates 
 
 Clients who wish to monitor changes in a particular API resource can do so by simpling telling the `WebSocketManager` to `registerConnection` with the id for the resource. The caller provides a delegate which can respond to a new connection, receive messages, and respond to being disconnected. That's great for observing objects with a clear root; an account contains contacts and tasks, and by observing the account, we can get notified if anything changes. Currently, the only unique case is observing all Accounts, such as on the main kanban page. What is a logical root id that we can use to observe to catch changes to all accounts in the organization? At least for now, this is done by observing the organizationId itself. That will give you updates to any Account tracked by any user in the organization. This design decision is an MVP trade-off prioritizing simplicity and could use further refinement down the road.
 
+##### Collaborative note editing
+
 For a breakdown of how the operational transform algorithm works, see the [API repo](https://github.com/ZHRhodes/Whaler-api/blob/master/README.md#ot). An instance of this app would function as a `Client`, as referred to in that write up. While for the API we could benefit from an existing Go OT implementation, there was no such luck in Swift. I had to port the Go implementation over to Swift myself. To help carry the torch, I open sourced that port here (link).
+
+In addition to porting the implementation, I added cursor support to `OTDoc.swift`. To reuse as much as possible, cursors stored as a struct containing an id and a position. When ops are applied to the document, those same ops are also transformed against all the cursors necessary. More specifically, we create a series of ops that treat the cursor as a character:
+
+```
+   let retainToCursor = OTOp(n: cursor.position, s: "")
+   let cursorOp = cursor.op
+   let retainAfterCursor = OTOp(n: size - cursor.position, s: "")
+```
+
+These ops are not actually applied to doc. Instead, they are transformed against the incoming ops being applied to the document. The cursor struct is updated with the new position after the transformation. In this way, we leverage the existing `transform` function to do the math for us.
+
 
 
