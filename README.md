@@ -87,7 +87,7 @@ All layouts are done via programatic autolayout. A few simple `UIView` extension
 
 ### NetworkLayer
 
-![IMG_0040](https://user-images.githubusercontent.com/12732454/127229528-0d6c4453-f816-4043-99d9-a563ae290747.jpg)
+![IMG_4764136EF59D-1](https://user-images.githubusercontent.com/12732454/127233278-28dd5ddb-cef1-4e2e-8e01-5e8dc309378e.jpeg)
 
 All the networking implementations are contained in this folder. In particular, that includes websockets, GraphQL, and a plain networking interface for REST calls. 
 
@@ -159,4 +159,4 @@ I also leveraged a few Combine features to implement a caching system in the `Re
 
 
 ### Future 👀
-
+1. As described [here](https://github.com/ZHRhodes/Whaler-api#future-), the salesforce integration should eventually be moved to the backend. Then, aside from logging in and passing that token to the API, the frontend wouldn't need to know anything else about Salesforce. This would let us remove from the frontend a lot of the data juggling that exists currently. 
