@@ -65,9 +65,9 @@ Now we'll go into the interesting bits of these components to see how it all wor
 
 <img width="700" alt="IMG_DA5BD9A32359-1 copy" src="https://user-images.githubusercontent.com/12732454/127229629-a086faec-1b15-464b-a787-345acfc42ab4.jpg">
 
-Whaler currently has two build configurations: Remote and Local. The Remote configuration sets the environment variable `API_URL` to point to the API running on Heroku. On the other hand, Local points that url to the user's own machine ([see here](https://github.com/ZHRhodes/Whaler-api/blob/master/README.md#running-locally)). `Configuration.swift` serves simply to store that environment variable string in the `Configuration.apiUrl` property. 
+Whaler currently has two build configurations: `Remote` and `Local`. The `Remote` configuration sets the environment variable `API_URL` to point to the API running on Heroku. On the other hand, `Local` points that url to the user's own machine ([see here](https://github.com/ZHRhodes/Whaler-api/blob/master/README.md#running-locally)). `Configuration.swift` serves simply to store that environment variable string in the `Configuration.apiUrl` property. 
 
-There is a third `Remote-Copy` config that exists to make local development just a little bit easier. This configuration is the same as the Remote config except it changes the bundle identifier and adds an executable prefix. Because Whaler includes real time features between clients, there are times you need to open up multiple instances at once. Running the second one with this build config will keep them from colliding so macOS will let them both run at the same time. 
+There is a third `Remote-Copy` config that exists to make local development just a little bit easier. This configuration is the same as the `Remote` config except it changes the bundle identifier and adds an executable prefix. Because Whaler includes real time features between clients, there are times you need to open up multiple instances at once. Running the second one with this build config will keep them from colliding so macOS will let them both run at the same time. 
 
 ### Shared
 
@@ -75,13 +75,13 @@ There is a third `Remote-Copy` config that exists to make local development just
 
 The shared folder contains protocols, views, view controllers, models, and helpers that have a general use-case throughout the app. For example, `TablePopoverViewController.swift` is a configurable popover that can be used for menus. It has no knowledge of any specific feature in the app, making it a good fit for this top level folder. These components can easily be borrowed and reused in other apps as well. 
 
-It's worth mentioning one particular subdirectory: `Salesforce`. This contains a set of Swift structs that map to Salesforce objects as well as an interface for composing Salesforce Object Query Language (SOQL) requests. No objects or methods within this directory have any knowledge of our application logic or how it interacts with Salesforce. That logic can be found one level up in `SFHelper.swift`, which defines the Salesforce operations used by the app. This separation abstracts the Swift-Salesforce communication from the business logic, leaving us with a `Salesforce/` directory that could be dropped into any app that needs it. 
+It's worth mentioning one particular subdirectory: `Salesforce`. This contains a set of Swift structs that map to Salesforce objects as well as an interface for composing Salesforce Object Query Language (SOQL) requests. No objects or methods within this directory have any knowledge of our application logic or how it interacts with Salesforce. That logic can be found one level up in `SFHelper.swift`, which defines the Salesforce operations used by the app. This separation abstracts the Swift-Salesforce communication from the business logic, leaving us with a `Salesforce/` directory that could be dropped into any app that needs it. In the future, it would be nice to move this directory into its own package.
 
 ### Controllers
 
 <img width="700" alt="IMG_DA5BD9A32359-1 copy" src="https://user-images.githubusercontent.com/12732454/127230281-abdd9675-9a15-4e13-b61c-f51ffb9d495c.jpg">
 
-All the pages of the app can be found here. The current architecture is a simple ViewController-Interactor pattern, primarily chosen for simplicity and quick development. There aren't currently too many pages in the app, so there isn't much presentation logic cluttering up ViewControllers. In the future, as more pages would be added, it would be a good idea to consider adding a Coordinator to the pattern to handle presentation.
+All the pages of the app can be found here. The current architecture is a simple `ViewController`-`Interactor` pattern, primarily chosen for simplicity and quick development. There aren't currently too many pages in the app, so there isn't much presentation logic cluttering up `ViewControllers`. In the future, as more pages would be added, it would be a good idea to consider adding a `Coordinator` to the pattern to handle presentation.
 
 All layouts are done via programatic autolayout. A few simple `UIView` extensions in `UIView+Extension.swift` make setting constraints a breeze. 
 
@@ -96,24 +96,26 @@ All the networking implementations are contained in this folder. In particular, 
 Websockets are currently responsible for delivering real-time document and model updates. Because a single websocket can transmit messages of various types, we have to decode them over several steps. The first is to decode every message into a `SocketMessage<T>` where `T == AnyCodable` and `struct AnyCodable: Codable {}`. This gives us the basic structure of all messages sent by our API while skipping decoding the data parameter.
 
 ```  
+struct SocketMessage<T: Codable>: Codable {
   var messageId: String = ""
   var type: SocketMessageType
   var data: T
+}
 ```
 
-The `type` property is an enum with cases like `docChange`, and `resourceUpdated`. We switch on the `type` to ultimately transform the message into an enum called `SocketMsg` (which has a renaming in its future). `SocketMsg` represents the message as `case messageType(value)`, making it easy for any delegate to just switch on the enum to handle the message they want. For clarity, here's an example of a `SocketMsg` case: `case docChange(DocumentChange)`.
+The `type` property is an enum with cases like `docChange`, and `resourceUpdated`. We switch on the `type` to ultimately transform the message into an enum called `SocketMsg` (which has a renaming in its future). `SocketMsg` represents the message as an enum with format `case messageType(value)`, making it easy for any delegate to just switch on the enum to handle the message they want. For clarity, here's an example of a `SocketMsg` case: `case docChange(DocumentChange)`.
 
 Currently, the client uses websockets for two purposes: real-time model updates and collaborative note editing. 
 
 ##### Model Updates
 
-Clients who wish to monitor changes in a particular API resource can do so by simpling telling the `WebSocketManager` to `registerConnection` with the id for the resource. The caller provides a delegate which can respond to a new connection, receive messages, and respond to being disconnected. That's great for observing objects with a clear root; an account contains contacts and tasks, and by observing the account, we can get notified if anything changes. Currently, the only unique case is observing all Accounts, such as on the main kanban page. What is a logical root id that we can use to observe to catch changes to all accounts in the organization? At least for now, this is done by observing the organizationId itself. That will give you updates to any Account tracked by any user in the organization. This design decision is an MVP trade-off prioritizing simplicity and could use further refinement down the road.
+Clients who wish to monitor changes in a particular API resource can do so by simpling telling the `WebSocketManager` to `registerConnection` with the id for the resource. The caller provides a delegate which can respond to a new connection, receive messages, and respond to being disconnected. That's great for observing objects with a clear root; an account contains contacts and tasks, and by observing the account, we can get notified if anything changes. Currently, the only unique case is observing all tracked accounts, such as on the main kanban page. What is a logical root id that we can observe to catch changes to all tracked accounts in the organization? At least for now, this is done by observing the organizationId itself. That will give you updates to any account tracked by any user in the organization. This design decision is an MVP trade-off prioritizing simplicity and could use further refinement down the road.
 
 ##### Collaborative note editing
 
-For a breakdown of how the operational transform algorithm works, see the [API repo](https://github.com/ZHRhodes/Whaler-api/blob/master/README.md#ot). An instance of this app would function as a `Client`, as referred to in that write up. While for the API we could benefit from an existing Go OT implementation, there was no such luck in Swift. I had to port the Go implementation over to Swift myself. To help carry the torch, I open sourced that port [here](https://github.com/ZHRhodes/SwiftOT).
+For a breakdown of how the operational transform algorithm works, see the [API repo](https://github.com/ZHRhodes/Whaler-api/blob/master/README.md#ot). An instance of this app would function as a `client`, as referred to in that write up. While for the API we could benefit from an existing Go OT implementation, there was no such luck in Swift. I had to port the Go implementation over to Swift myself. To help carry the torch, I open sourced that port [here](https://github.com/ZHRhodes/SwiftOT).
 
-In addition to porting the implementation, I added cursor support to `OTDoc.swift`. To reuse as much as possible, cursors stored as a struct containing an id and a position. When ops are applied to the document, those same ops are also transformed against all the cursors necessary. More specifically, we create a series of ops that treat the cursor as a character:
+In addition to porting the implementation, I added cursor support to `OTDoc.swift`. To reuse as much as possible, cursors are stored as a struct containing an id and a position. When ops are applied to the document, those same ops are also transformed against all the cursors necessary. More specifically, we create a series of ops that treat the cursor as a character:
 
 ```
    let retainToCursor = OTOp(n: cursor.position, s: "")
@@ -121,17 +123,17 @@ In addition to porting the implementation, I added cursor support to `OTDoc.swif
    let retainAfterCursor = OTOp(n: size - cursor.position, s: "")
 ```
 
-These ops are not actually applied to doc. Instead, they are transformed against the incoming ops being applied to the document. The cursor struct is updated with the new position after the transformation. In this way, we leverage the existing `transform` function to do the math for us.
+These ops are not actually applied to doc. Instead, they are transformed with the incoming ops being applied to the document. The cursor struct is updated with the new position after the transformation. In this way, we leverage the existing `transform` function to do the math for us.
 
 #### GraphQL
 
 Whaler uses Apollo to manage GraphQL. Apollo uses a build phase to generate Swift code based on your `schema.json` file. This file needs to be redownloaded every time the schema is changed. Currently, that introspection request requires an access token, which means you need to generate one using the `/login` endpoint. This is a little tedius, but progress on automating has been started in the `apollodownload` script. Right now it asks for the token and then makes the download request for you.
 
-Queries and mutations are defined in `*.graphql` files placed at the top level of the project. **Note:** Apollo automatically caches requests, but I often ran into trouble with Apollo incorrectly assuming my data hadn't changed since the last request. For that reason, I usually find it safer to just use the `fetchIgnoringCacheData` cache policy. I would be wary using the Apollo cache for anything that might change at all rapidly.
+Queries and mutations are defined in `*.graphql` files placed at the top level of the project. **Note:** Apollo automatically caches requests, but I often run into trouble with Apollo incorrectly assuming my data hadn't changed since the last request. For that reason, I usually find it safer to just use the `.fetchIgnoringCacheData` cache policy. I would be wary using the Apollo cache for anything that might change at all rapidly.
 
 #### NetworkInterface
 
-Finally, there's also a lightweight networking protocol defined in `NetworkInterface.swift`. This protocol defines interacting with an external resource. There are currently two concrete implementations: `APINetworkInterface` and `SFNetworkInterface` where `SF` stands for Salesforce. My Go API works a little differently than the Salesforce API, so this abstracts those differences into their own implementations of the basic networking functions. Each `NetworkInterface` accepts a `Networker`, a protocol that provides the ability to execute any `NetworkRequest`. In that way, the logic of interacting with APIs is abstracted from the execution layer of networking. 
+Finally, there's also a lightweight networking protocol defined in `NetworkInterface.swift`. This protocol defines interacting with an external resource. There are currently two concrete implementations: `APINetworkInterface` and `SFNetworkInterface` where `SF` stands for Salesforce. My Go API works a little differently than the Salesforce API, so this abstracts those differences into their own implementations of the basic networking functions. Each `NetworkInterface` accepts a `Networker`, a protocol that provides the ability to execute any `NetworkRequest`. In that way, the logic of interacting with APIs is abstracted from the execution layer of networking. `JustNetworker` is the `Networker` implementation in use currently. 
 
 ### DataLayer
 
@@ -143,17 +145,17 @@ Whaler consumes data from multiple sources, and that access is abstracted behind
 
 This provides a common pattern for where to find operations for particular data types. Let’s take it another step and address how they interact with each other.
 
-The data _consumer_ should never have to worry about maintaining the different data sources. That type of work should be encapsulated within the data layer. Rather than have these data sources know anything about each other, there's an abstraction over top of them that will handle all of these types of operations. For each data type, there is one data interface.
+The data _consumer_ should never have to worry about maintaining the different data sources in use. For example, this includes storing fetched data into local cache, or updating our API models when their Salesforce data changes. That type of work should be encapsulated within the data layer. Rather than have these data sources know anything about each other, there's an abstraction over top of them that will handle all of these types of operations. For each data type, there is one data interface.
 
 ![Untitled Document - Copy-2](https://user-images.githubusercontent.com/12732454/127110947-6905291b-6739-4211-8373-5bc298ff9368.png)
 
-The data interface is where you can plug in different data sources and determine how they interact with each other. By encapsulating this type of work into this sublayer, it makes it incomparably easier to modify our data sources at any point in the future. That includes, for example, adding a different method of caching – it would just become another data source to use in the interface. The plug-and-play nature of these components allows us to be quite agile. And what's more, the data interface only outputs one single simple type, so any necessary type conversion is abstracted. This was a deliberate restriction to make certain multiple representations wouldn't leak out into the codebase. 
+The data interface is where you can plug in different data sources and determine how they interact with each other. By encapsulating this type of work into this sublayer, it makes it easy to modify our data sources at any point in the future. That includes, for example, adding a different method of caching – it would just become another data source to use in the interface. The plug-and-play nature of these components allows us to be quite agile. And what's more, the data interface only outputs one single simple type, so any necessary type conversion is abstracted. This was a deliberate restriction to make sure multiple representations wouldn't leak out into the codebase. 
 
-The final touch to this repository architecture focuses on consumer ergonomics. Each data type will have its data interface wrapped in a **generic** class with the signature `Repository<Interface: DataInterface>`. The purpose of this class is to provide simple, reactive ergonomics for data consumers. A `Repository` has just a few simple functions, such as `fetchSubset`, `fetchSingle`, and `save`. These return publishers – specifically, a type-erased `AnyPublisher` – which forces all consumers to be prepared for streams of data.
+The final touch to this repository architecture focuses on consumer ergonomics. Each data type will have its data interface wrapped in a **generic** class with the signature `Repository<Interface: DataInterface>`. The purpose of this class is to provide simple, reactive ergonomics for data consumers. A `Repository` has just a few simple functions, namely `fetchAll`, `fetchSubset`, `fetchSingle`, and `save`. These return publishers – specifically, a type-erased `AnyPublisher` – which forces all consumers to be prepared for streams of data.
 
 ![Untitled Document - Copy-3](https://user-images.githubusercontent.com/12732454/127111614-f36ba73f-61f6-4b83-8c8f-2354ee43b98e.png)
 
-Because it’s the exact same class wrapping all interfaces, there will not be any differences in how data is accessed throughout the app. At the end of the day, data consumers don’t know anything about interfaces or data sources. All they need to work with is the same familiar class that’s used everywhere! All consumers interact with the same repository for each data type. That, coupled with the reactive pattern, ensure that data is always kept in sync across the app. Changes in data will be pushed out to all subscribers at once.
+Because it’s the exact same class wrapping all interfaces, there will not be any differences in how data is accessed throughout the app. At the end of the day, data consumers don’t know anything about interfaces or data sources. All they need to work with is the same familiar class that’s used everywhere! All consumers interact with the same repository for each data type. That, coupled with the reactive pattern, ensures that data is always kept in sync across the app. Changes in data will be pushed out to all subscribers at once.
 
 I also leveraged a few Combine features to implement a caching system in the `Repository`. This means that, when enabled, the last fetched data will be delivered immediately while a new fetch is kicked off. The consumers, being reactive, will respond to any number of data updates coming across the pipeline.
 
@@ -162,4 +164,4 @@ I also leveraged a few Combine features to implement a caching system in the `Re
 Future enhancements similar to that caching feature can be added to the `Repository` in the future, and the beauty is they will go into affect for all data types. This gives us a single point of optimization to affect data operations app-wide.
 
 ### Future 👀
-1. As described [here](https://github.com/ZHRhodes/Whaler-api#future-), the salesforce integration should eventually be moved to the backend. Then, aside from logging in and passing that token to the API, the frontend wouldn't need to know anything else about Salesforce. This would let us relieve the frontend of a lot of the data juggling that exists currently. 
+1. As described [here](https://github.com/ZHRhodes/Whaler-api#future-), the salesforce integration should eventually be moved to the backend. Then, aside from logging in and passing that token to the API, the frontend wouldn't need to know anything else about Salesforce. This would let us relieve the frontend of a lot of the data juggling that exists currently.
