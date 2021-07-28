@@ -155,8 +155,11 @@ The final touch to this repository architecture focuses on consumer ergonomics. 
 
 Because it’s the exact same class wrapping all interfaces, there will not be any differences in how data is accessed throughout the app. At the end of the day, data consumers don’t know anything about interfaces or data sources. All they need to work with is the same familiar class that’s used everywhere! All consumers interact with the same repository for each data type. That, coupled with the reactive pattern, ensure that data is always kept in sync across the app. Changes in data will be pushed out to all subscribers at once.
 
-I also leveraged a few Combine features to implement a caching system in the `Repository`. This means that, when enabled, the last fetched data will be delivered immediately while a new fetch is kicked off. The consumers, being reactive, will respond to any number of data updates coming across the pipeline. Future enhancements similar to that caching feature can be added to the `Repository` in the future, and the beauty is they will go into affect for all data types. This gives us a single point of optimization to affect data operations app-wide.
+I also leveraged a few Combine features to implement a caching system in the `Repository`. This means that, when enabled, the last fetched data will be delivered immediately while a new fetch is kicked off. The consumers, being reactive, will respond to any number of data updates coming across the pipeline.
 
+![Repository Data Flow-4](https://user-images.githubusercontent.com/12732454/127265224-d2ca3440-b1e5-408a-b4fc-75349edb52b6.png)
+
+Future enhancements similar to that caching feature can be added to the `Repository` in the future, and the beauty is they will go into affect for all data types. This gives us a single point of optimization to affect data operations app-wide.
 
 ### Future 👀
-1. As described [here](https://github.com/ZHRhodes/Whaler-api#future-), the salesforce integration should eventually be moved to the backend. Then, aside from logging in and passing that token to the API, the frontend wouldn't need to know anything else about Salesforce. This would let us remove from the frontend a lot of the data juggling that exists currently. 
+1. As described [here](https://github.com/ZHRhodes/Whaler-api#future-), the salesforce integration should eventually be moved to the backend. Then, aside from logging in and passing that token to the API, the frontend wouldn't need to know anything else about Salesforce. This would let us relieve the frontend of a lot of the data juggling that exists currently. 
