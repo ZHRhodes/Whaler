@@ -6,16 +6,16 @@ This repo contains the Mac client app for the Whaler platform, a UIKit-based nat
  
 ## What is Whaler? 
 
-Whaler is a platform consisting of a native mac app and a [Go backend](https://github.com/ZHRhodes/Whaler-api). The goal is to enable real time sales outreach collaboration right on top of the organization's Salesforce data. This is accomplished by allowing the user to sign in to their organization's Salesforce, importing subsets of their data into the frontend app, and enhancing that data with additional constructs that power our features. 
+Whaler is a platform consisting of a native mac app and a [Go backend](https://github.com/ZHRhodes/Whaler-api). The goal is to enable real time sales outreach collaboration right on top of the organization's Salesforce data. This is accomplished by allowing the user to sign in to their organization's Salesforce, importing subsets of their data into the app, and enhancing that data with additional constructs that power our features. 
 
 These features include: 
 * Kanban-style progress tracking for accounts and contacts
-* Per-account tasks feature with ability to create, edit, set due date, and complete tasks
 * Assign accounts, contacts, and tasks to users within your organization
+* Per-account tasks feature with ability to create, edit, set due date, and complete tasks
 * Real time collaborative editor for account notes, communicating over websockets with operational transform conflict resolution
 * Real time data model updates over websockets
 
-Before we get into the technical details, let's get comfortable with the user interface.
+Before we get into the technical details, let's get familiar with the user interface.
 
 | ![Screen Shot 2021-07-27 at 1 17 29 AM](https://user-images.githubusercontent.com/12732454/127120882-43cc93f1-c7ee-4775-bac8-bc1bbe4c8c78.png) | 
 |:--:| 
@@ -63,7 +63,7 @@ Now we'll go into the interesting bits of these components to see how it all wor
 
 ### Configuration
 
-![IMG_0041](https://user-images.githubusercontent.com/12732454/127229629-a086faec-1b15-464b-a787-345acfc42ab4.jpg)
+<img width="700" alt="IMG_DA5BD9A32359-1 copy" src="https://user-images.githubusercontent.com/12732454/127229629-a086faec-1b15-464b-a787-345acfc42ab4.jpg">
 
 Whaler currently has two build configurations: Remote and Local. The Remote configuration sets the environment variable `API_URL` to point to the API running on Heroku. On the other hand, Local points that url to the user's own machine ([see here](https://github.com/ZHRhodes/Whaler-api/blob/master/README.md#running-locally)). `Configuration.swift` serves simply to store that environment variable string in the `Configuration.apiUrl` property. 
 
@@ -71,7 +71,7 @@ There is a third `Remote-Copy` config that exists to make local development just
 
 ### Shared
 
-![IMG_0042](https://user-images.githubusercontent.com/12732454/127230252-83386c51-c0ca-43e9-a8ac-eb2d16173ce9.jpg)
+<img width="700" alt="IMG_DA5BD9A32359-1 copy" src="https://user-images.githubusercontent.com/12732454/127230252-83386c51-c0ca-43e9-a8ac-eb2d16173ce9.jpg">
 
 The shared folder contains protocols, views, view controllers, models, and helpers that have a general use-case throughout the app. For example, `TablePopoverViewController.swift` is a configurable popover that can be used for menus. It has no knowledge of any specific feature in the app, making it a good fit for this top level folder. These components can easily be borrowed and reused in other apps as well. 
 
@@ -79,7 +79,7 @@ It's worth mentioning one particular subdirectory: `Salesforce`. This contains a
 
 ### Controllers
 
-![IMG_0043](https://user-images.githubusercontent.com/12732454/127230281-abdd9675-9a15-4e13-b61c-f51ffb9d495c.jpg)
+<img width="700" alt="IMG_DA5BD9A32359-1 copy" src="https://user-images.githubusercontent.com/12732454/127230281-abdd9675-9a15-4e13-b61c-f51ffb9d495c.jpg">
 
 All the pages of the app can be found here. The current architecture is a simple ViewController-Interactor pattern, primarily chosen for simplicity and quick development. There aren't currently too many pages in the app, so there isn't much presentation logic cluttering up ViewControllers. In the future, as more pages would be added, it would be a good idea to consider adding a Coordinator to the pattern to handle presentation.
 
@@ -87,7 +87,7 @@ All layouts are done via programatic autolayout. A few simple `UIView` extension
 
 ### NetworkLayer
 
-![IMG_4764136EF59D-1](https://user-images.githubusercontent.com/12732454/127233278-28dd5ddb-cef1-4e2e-8e01-5e8dc309378e.jpeg)
+<img width="700" alt="IMG_DA5BD9A32359-1 copy" src="https://user-images.githubusercontent.com/12732454/127233278-28dd5ddb-cef1-4e2e-8e01-5e8dc309378e.jpeg">
 
 All the networking implementations are contained in this folder. In particular, that includes websockets, GraphQL, and a plain networking interface for REST calls. 
 
@@ -135,7 +135,7 @@ Finally, there's also a lightweight networking protocol defined in `NetworkInter
 
 ### DataLayer
 
- ![IMG_0040](https://user-images.githubusercontent.com/12732454/127229560-032b01b7-5432-41f6-a2e4-d0da31c2c7d3.jpg)
+ <img width="700" alt="IMG_DA5BD9A32359-1 copy" src="https://user-images.githubusercontent.com/12732454/127229560-032b01b7-5432-41f6-a2e4-d0da31c2c7d3.jpg">
 
 Whaler consumes data from multiple sources, and that access is abstracted behind a reactive repository layer, made using Combine. For each source, a `DataSource` class implements the various operations that can be performed on it. This would be things like `fetchSingle(with id: String)`, `saveAll`, etc. 
 
