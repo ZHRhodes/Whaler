@@ -111,7 +111,7 @@ Clients who wish to monitor changes in a particular API resource can do so by si
 
 ##### Collaborative note editing
 
-For a breakdown of how the operational transform algorithm works, see the [API repo](https://github.com/ZHRhodes/Whaler-api/blob/master/README.md#ot). An instance of this app would function as a `Client`, as referred to in that write up. While for the API we could benefit from an existing Go OT implementation, there was no such luck in Swift. I had to port the Go implementation over to Swift myself. To help carry the torch, I open sourced that port here (link).
+For a breakdown of how the operational transform algorithm works, see the [API repo](https://github.com/ZHRhodes/Whaler-api/blob/master/README.md#ot). An instance of this app would function as a `Client`, as referred to in that write up. While for the API we could benefit from an existing Go OT implementation, there was no such luck in Swift. I had to port the Go implementation over to Swift myself. To help carry the torch, I open sourced that port [here](https://github.com/ZHRhodes/SwiftOT).
 
 In addition to porting the implementation, I added cursor support to `OTDoc.swift`. To reuse as much as possible, cursors stored as a struct containing an id and a position. When ops are applied to the document, those same ops are also transformed against all the cursors necessary. More specifically, we create a series of ops that treat the cursor as a character:
 
